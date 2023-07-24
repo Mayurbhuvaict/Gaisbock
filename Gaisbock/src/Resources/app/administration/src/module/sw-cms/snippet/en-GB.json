@@ -1,0 +1,54 @@
+{
+  "sw-cms": {
+    "component": {
+      "detail": {
+        "label": {
+          "ictElement": "Theme Option"
+        }
+      }
+    },
+    "blocks": {
+      "ictCustomCategoryExtension": {
+        "label": "Custom Category Navigation"
+      },
+      "ictCategoryImageText": {
+        "label": "Category Image Text"
+      },
+      "ictImageText": {
+        "label": "ICT Image Bubble"
+      },
+      "IctText": {
+        "label": "ICT Text"
+      },
+      "ictTextImage": {
+        "ictSwitchImageTextBubble": {
+          "label": "Text with Left or Right Image"
+        }
+      }
+    },
+    "elements": {
+      "ictImages": {
+        "label": "ICT Image"
+      },
+      "ictText": {
+        "label": "ICT-Texts"
+      },
+       "ictTab": {
+        "label": "Open link in new tab"
+      },
+      "ictImage": {
+        "label": "Open link in new tab"
+      },
+      "ictSwitchImageText": {
+        "config": {
+          "label": {
+            "ictTextImage": "Image Position",
+            "imageLeft": "Left",
+            "imageRight": "Right"
+          },
+          "disabledConfigInfoTextKey": "This element's navigation data is automatically loaded by the category associated with this layout. The content just shows a sample preview."
+        }
+      }
+    }
+  }
+}

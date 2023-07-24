@@ -1,0 +1,27 @@
+{
+  "footer": {
+    "newsletter" : {
+      "titleOne": "Lorem ipsum",
+      "titleTwo": "PREMIUM-MEMBER WARDEN",
+      "descriptionText" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et <a href=\"#\">dolore magna aliqua.</a>"
+    },
+    "tryIt": {
+      "tryItItext": "WANT TO TRY IT?",
+      "tryItDescription": "Lorem ipsum dolor sit amet, consectetur adipiscing elit"
+    },
+    "handler": {
+      "handlerTitleOne": "BECOME A GAISBOCK-",
+      "handlerTitleTwo":  "HANDLAR NOW",
+      "handlerTitleDescription": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+    },
+    "hotline": {
+      "hotlineOne": "Gaisbock GmbH",
+      "hotlineTwo": "Bahnhafasse 10",
+      "hotlineThree": "CH-6065 kagiswill",
+      "hotlineMobile": "+41 41 6620 89 88",
+      "hotlineEmail": "info@gaisbock.ch",
+      "hotlineOpeningInfo": "Offnungzeiten Showroom",
+      "hotlineOpenTiming": "Mo-fr 08-12h/13.30-17.00"
+    }
+  }
+}

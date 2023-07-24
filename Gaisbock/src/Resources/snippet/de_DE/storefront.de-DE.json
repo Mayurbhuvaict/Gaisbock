@@ -1,0 +1,18 @@
+{
+  "footer": {
+    "newsletter" : {
+      "titleOne": "Lorem ipsum",
+      "titleTwo": "PREMIUM-MEMBER WARDEN",
+      "descriptionText" : "Es ist wichtig, sich um den Patienten zu kümmern und ihm zu folgen, aber das geschieht zu einem Zeitpunkt, an dem es viel Arbeit und Schmerzen gibt."
+    },
+    "tryIt": {
+      "tryItItext": "BOCK AUF AUSPROBIEREN?",
+      "tryItDescription": "Der Kunde ist sehr wichtig, dem Kunden wird der Kunde folgen"
+    },
+    "handler": {
+      "handlerTitleOne": "JETZT GAISBOCK-",
+      "handlerTitleTwo":  "HANDLAR WERDEN",
+      "handlerTitleDescription": "Es ist wichtig, sich um den Patienten zu kümmern und ihm zu folgen, aber das geschieht zu einem Zeitpunkt, an dem es viel Arbeit und Schmerzen gibt."
+    }
+  }
+}

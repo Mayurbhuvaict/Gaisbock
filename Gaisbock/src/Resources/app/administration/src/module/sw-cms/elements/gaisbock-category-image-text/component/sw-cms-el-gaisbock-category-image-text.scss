@@ -1,0 +1,15 @@
+.sw-cms-element-ict-category-image-text {
+  .sw-cms-element-ict-category-image-text__images {
+    display: flex;
+    justify-content: center;
+    img {
+      width: 100%;
+    }
+    span {
+      position: absolute;
+      top: 50%;
+      margin: 0 50px;
+      transform: translate(-50%, -50%);
+    }
+  }
+}

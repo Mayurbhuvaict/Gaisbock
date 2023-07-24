@@ -1,0 +1,1 @@
+(this.webpackJsonpPlugingaisbock=this.webpackJsonpPlugingaisbock||[]).push([[13],{V4d2:function(s,t,o){"use strict";o.r(t);t.default={template:'{% block sw_cms_block_ict_theme_custom_category_extension %}\n    <div class="sw-cms-block-custom-category-extension">\n        <slot name="ictCustomCategoryExtension"></slot>\n    </div>\n{% endblock %}'}}}]);

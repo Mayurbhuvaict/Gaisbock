@@ -1,0 +1,8 @@
+{% sw_extends '@Storefront/storefront/layout/header/search.html.twig' %}
+{% set searchWidgetOptions = {
+    searchWidgetMinChars: page.header.activeLanguage.productSearchConfig.minSearchLength ?: 3
+} %}
+
+{% block layout_header_search %}
+    {{ parent() }}
+{% endblock %}

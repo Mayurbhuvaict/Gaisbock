@@ -1,0 +1,135 @@
+{% block layout_footer_social_media_icon %}
+    <div class="text-center social-icons footer-column js-footer-column mt-3">
+        {% block layout_footer_whatsapp_logo_image_default %}
+            {% if theme_config('gaisbock-social-whats-app-logo') %}
+                <a href="{{ theme_config('gaisbock-social-whats-app-logo') }}"
+                   class="social-icon"
+                   target="_blank" rel="noopener"
+                   aria-label="Whats App">
+                    {% sw_icon 'whatsapp' style {'pack': 'gaisbock'} %}
+                </a>
+            {% endif %}
+        {% endblock %}
+
+        {% block layout_footer_facebook_logo_image_default %}
+            {% if theme_config('sw-facebook-link') %}
+                <a href="{{ theme_config('sw-facebook-link') }}"
+                   class="social-icon"
+                   target="_blank" rel="noopener"
+                   aria-label="Facebook">
+                    {% sw_icon 'facebook' style {'pack': 'gaisbock'} %}
+                </a>
+            {% endif %}
+        {% endblock %}
+
+        {% block layout_footer_tiktok_logo_image_default %}
+            {% if theme_config('sw-tiktok-link') %}
+                <a href="{{ theme_config('sw-tiktok-link') }}"
+                   class="social-icon"
+                   target="_blank" rel="noopener"
+                   aria-label="Tiktok">
+                    {% sw_icon 'tiktok' style {'pack': 'gaisbock'} %}
+                </a>
+            {% endif %}
+        {% endblock %}
+
+        {% block layout_footer_youtube_logo_image_default %}
+            {% if theme_config('sw-youtube-link') %}
+                <a href="{{ theme_config('sw-youtube-link') }}"
+                   class="social-icon"
+                   target="_blank" rel="noopener"
+                   aria-label="Tiktok">
+                    {% sw_icon 'youtube' style {'pack': 'gaisbock'} %}
+                </a>
+            {% endif %}
+        {% endblock %}
+
+        {% block layout_footer_intsagram_logo_image_default %}
+            {% if theme_config('sw-instagram-link') %}
+                <a href="{{ theme_config('sw-instagram-link') }}"
+                   class="social-icon"
+                   target="_blank" rel="noopener"
+                   aria-label="Instagram">
+                    {% sw_icon 'instagram' style {'pack': 'gaisbock'} %}
+                </a>
+            {% endif %}
+        {% endblock %}
+
+        {% block layout_footer_linkedin_logo_image_default %}
+            {% if theme_config('gaisbock-social-linkedin-logo') %}
+                <a href="{{ theme_config('gaisbock-social-linkedin-logo') }}"
+                   class="social-icon"
+                   target="_blank" rel="noopener"
+                   aria-label="LinkedIn">
+                    {% sw_icon 'linkedin' style {'pack': 'gaisbock'} %}
+                </a>
+            {% endif %}
+        {% endblock %}
+
+        {% block layout_footer_pinterest_logo_image_default %}
+            {% if theme_config('gaisbock-social-Pinterest-logo') %}
+                <a href="{{ theme_config('gaisbock-social-Pinterest-logo') }}"
+                   class="social-icon"
+                   target="_blank" rel="noopener"
+                   aria-label="Pinterest">
+                    {% sw_icon 'pinterest' style {'pack': 'gaisbock'} %}
+                </a>
+            {% endif %}
+        {% endblock %}
+
+        {% block layout_footer_amazon_logo_image_default %}
+            {% if theme_config('gaisbock-social-Amazon-logo') %}
+                <a href="{{ theme_config('gaisbock-social-Amazon-logo') }}"
+                   class="social-icon"
+                   target="_blank" rel="noopener"
+                   aria-label="LinkedIn">
+                    {% sw_icon 'amazon' style {'pack': 'gaisbock'} %}
+                </a>
+            {% endif %}
+        {% endblock %}
+
+        {% block layout_footer_vimo_logo_image_default %}
+            {% if theme_config('gaisbock-social-Vimeo-logo') %}
+                <a href="{{ theme_config('gaisbock-social-Vimeo-logo') }}"
+                   class="social-icon"
+                   target="_blank" rel="noopener"
+                   aria-label="LinkedIn">
+                    {% sw_icon 'vimeo' style {'pack': 'gaisbock'} %}
+                </a>
+            {% endif %}
+        {% endblock %}
+
+        {% block layout_footer_flickr_logo_image_default %}
+            {% if theme_config('gaisbock-social-flickr-logo') %}
+                <a href="{{ theme_config('gaisbock-social-flickr-logo') }}"
+                   class="social-icon"
+                   target="_blank" rel="noopener"
+                   aria-label="LinkedIn">
+                    {% sw_icon 'flickr' style {'pack': 'gaisbock'} %}
+                </a>
+            {% endif %}
+        {% endblock %}
+
+        {% block layout_footer_xing_logo_image_default %}
+            {% if theme_config('gaisbock-social-xing-logo') %}
+                <a href="{{ theme_config('gaisbock-social-xing-logo') }}"
+                   class="social-icon"
+                   target="_blank" rel="noopener"
+                   aria-label="LinkedIn">
+                    {% sw_icon 'xing' style {'pack': 'gaisbock'} %}
+                </a>
+            {% endif %}
+        {% endblock %}
+
+        {% block layout_footer_twitter_logo_image_default %}
+            {% if theme_config('sw-twitter-link') %}
+                <a href="{{ theme_config('sw-twitter-link') }}"
+                   class="social-icon"
+                   target="_blank" rel="noopener"
+                   aria-label="LinkedIn">
+                    {% sw_icon 'twitter' style {'pack': 'gaisbock'} %}
+                </a>
+            {% endif %}
+        {% endblock %}
+    </div>
+{% endblock %}

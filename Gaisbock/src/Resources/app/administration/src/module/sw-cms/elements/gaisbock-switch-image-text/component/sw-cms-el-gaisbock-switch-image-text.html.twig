@@ -1,0 +1,30 @@
+{% block sw_cms_element_image %}
+    <div class="ict-image-text-position">
+        <div class="ict-image-text-position-el--inner">
+            <div class="img-text" :class="`${element.config.position.value}`">
+                <div class="sw-cms-el-image" :class="displayModeClass" :style="styles">
+                    {% block sw_cms_element_image_content %}
+                        <img :src="mediaUrl" :style="imgStyles" alt="">
+                    {% endblock %}
+                    {% block sw_cms_element_text %}
+                        <div class="sw-cms-el-text">
+                            <div v-if="element.config.content.source === 'mapped'" class="sw-cms-el-text__mapping-preview content-editor" v-html="$sanitize(demoValue)"></div>
+                            <sw-text-editor
+                                    v-else
+                                    v-model="element.config.content.value"
+                                    :disabled="disabled"
+                                    :vertical-align="element.config.verticalAlign.value"
+                                    :allow-inline-data-mapping="true"
+                                    :is-inline-edit="true"
+                                    sanitize-input
+                                    enable-transparent-background
+                                    @blur="onBlur"
+                                    @input="onInput"
+                            />
+                        </div>
+                    {% endblock %}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
