@@ -1,0 +1,45 @@
+{
+  "sw-cms": {
+    "component": {
+      "label": {
+        "gaisBockCategory": "GaisBock Option"
+      }
+    },
+    "blocks":{
+      "gaisBockTextImageSlider": {
+        "label": "Slider texte-image"
+      }
+    },
+    "elements": {
+      "general": {
+        "config": {
+          "tab": {
+            "content": "contenu",
+            "settings": "paramètres",
+            "imageSetting": "Réglage de l'image"
+          },
+          "label":{
+            "linkTo": "Lien vers l'image",
+            "ImageText": "Texte de l'image",
+            "buttonTitle": "Titre du bouton"
+          }
+        }
+      }
+    },
+      "general": {
+        "config": {
+          "tab": {
+            "content": "contenu",
+            "settings": "paramètres",
+            "imageSetting": "Réglage de l'image"
+          },
+          "label":{
+            "linkTo": "Lien vers l'image",
+            "ImageText": "Texte de l'image",
+            "buttonTitle": "Titre du bouton"
+          }
+        }
+      }
+    }
+  }
+}
