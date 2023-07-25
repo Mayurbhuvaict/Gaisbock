@@ -47,11 +47,9 @@
                                         {% if root.category.type == 'folder' %}
                                             {{ root.category.translated.name }}
                                         {% else %}
-                                            <a href="{{ category_url(root.category) }}"
-                                               {% if category_linknewtab(root.category) %}target="_blank"{% endif %}
-                                               title="{{ root.category.translated.name }}">
+                                            <h3>
                                                 {{ root.category.translated.name }}
-                                            </a>
+                                            </h3>
                                         {% endif %}
                                         {% block layout_footer_navigation_information_icons %}
                                             <div class="footer-column-toggle">
@@ -106,11 +104,8 @@
 
                 {% block footer_layout_handler %}
                     <div class="col-md-3 text-center mt-5 handler-section">
-                        <h3 class="handler-section-title-one">
-                            {{ "footer.handler.handlerTitleOne"|trans|sw_sanitize }}
-                        </h3>
-                        <h3 class="handler-section-title-two">
-                            {{ "footer.handler.handlerTitleTwo"|trans|sw_sanitize }}
+                        <h3 class="handler-section-title">
+                            {{ "footer.handler.handlerTitle"|trans|sw_sanitize }}
                         </h3>
                         <p class="handler-section-description">
                             {{ "footer.handler.handlerTitleDescription"|trans|sw_sanitize }}
@@ -142,6 +137,8 @@
                                 <p>{{ "footer.hotline.hotlineMobile"|trans|sw_sanitize }}</p>
                                 <p>{{ "footer.hotline.hotlineEmail"|trans|sw_sanitize }}</p>
                             </div>
+                        </div>
+                        <div class="footer-contact-hotline-information">
                             <div class="footer-contact-hotline-information">
                                 <p>{{ "footer.hotline.hotlineOpeningInfo"|trans|sw_sanitize }}</p>
                                 <p>{{ "footer.hotline.hotlineOpenTiming"|trans|sw_sanitize }}</p>

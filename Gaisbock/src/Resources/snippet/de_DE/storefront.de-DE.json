@@ -1,18 +1,26 @@
 {
   "footer": {
     "newsletter" : {
-      "titleOne": "Lorem ipsum",
-      "titleTwo": "PREMIUM-MEMBER WARDEN",
-      "descriptionText" : "Es ist wichtig, sich um den Patienten zu kümmern und ihm zu folgen, aber das geschieht zu einem Zeitpunkt, an dem es viel Arbeit und Schmerzen gibt."
+      "titleOne": "GAISBOCK",
+      "titleTwo": "PREMIUM-MEMBER WERDEN",
+      "descriptionText" : "Die ersten 300 erhalten gratis Socken, Profitiere von exklusiven Angeboten und Rabatten"
     },
     "tryIt": {
       "tryItItext": "BOCK AUF AUSPROBIEREN?",
-      "tryItDescription": "Der Kunde ist sehr wichtig, dem Kunden wird der Kunde folgen"
+      "tryItDescription": "Hier gehts zu den Gaisbock-Händlern in Deiner Nähe."
     },
     "handler": {
-      "handlerTitleOne": "JETZT GAISBOCK-",
-      "handlerTitleTwo":  "HANDLAR WERDEN",
-      "handlerTitleDescription": "Es ist wichtig, sich um den Patienten zu kümmern und ihm zu folgen, aber das geschieht zu einem Zeitpunkt, an dem es viel Arbeit und Schmerzen gibt."
+      "handlerTitle": "JETZT GAISBOCK- HÄNDLER WERDEN",
+      "handlerTitleDescription": "Händler Login Anfragen consectetuer adipisci lorem ipsuam dolor esang elit<a href=\"#\"> Aenean massa. Cum sociis.</a>"
+    },
+    "hotline": {
+      "hotlineOne": "Gaisbock GmbH",
+      "hotlineTwo": "Bahnhafasse 10",
+      "hotlineThree": "CH-6065 kagiswill",
+      "hotlineMobile": "+41 41 6620 89 88",
+      "hotlineEmail": "info@gaisbock.ch",
+      "hotlineOpeningInfo": "Offnungzeiten Showroom",
+      "hotlineOpenTiming": "Mo-fr 08-12h/13.30-17.00"
     }
   }
 }

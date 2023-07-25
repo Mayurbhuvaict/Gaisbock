@@ -216,6 +216,46 @@
         },
         "type": "color",
         "value": "#f7f7f7",
+        "custom": {
+          "componentName": "sw-single-select",
+          "options": [
+            {
+              "value": "400",
+              "label": {
+                "en-GB": "Regular - 400",
+                "de-DE": "Regular - 400"
+              }
+            },
+            {
+              "value": "500",
+              "label": {
+                "en-GB": "Medium - 500",
+                "de-DE": "Medium - 500"
+              }
+            },
+            {
+              "value": "600",
+              "label": {
+                "en-GB": "Semi-bold - 600",
+                "de-DE": "Semi-Bold - 600"
+              }
+            },
+            {
+              "value": "700",
+              "label": {
+                "en-GB": "Bold - 700",
+                "de-DE": "Bold - 700"
+              }
+            },
+            {
+              "value": "800",
+              "label": {
+                "en-GB": "Extra Bold - 800",
+                "de-DE": "Extra Bold - 800"
+              }
+            }
+          ]
+        },
         "editable": true,
         "tab": "header",
         "block": "header",
@@ -245,65 +285,43 @@
         "block": "header",
         "order": 300
       },
-      "sw-top-header-usp-text-one": {
-        "label": {
-          "en-GB": "USP text one",
-          "de-DE": "USP-Text eins"
-        },
-        "type": "text",
-        "value": "",
-        "editable": true,
-        "tab": "header",
-        "block": "header",
-        "order": 100
-      },
-      "sw-top-header-usp-text-two": {
-        "label": {
-          "en-GB": "USP text two",
-          "de-DE": "USP-Text zwei"
-        },
-        "type": "text",
-        "value": "",
-        "editable": true,
-        "tab": "header",
-        "block": "header",
-        "order": 100
-      },
-      "sw-top-header-usp-text-three": {
-        "label": {
-          "en-GB": "USP text three",
-          "de-DE": "USP-Text zwei"
-        },
-        "type": "text",
-        "value": "",
-        "editable": true,
-        "tab": "header",
-        "block": "header",
-        "order": 100
-      },
-      "sw-top-header-usp-text-four": {
-        "label": {
-          "en-GB": "USP text four",
-          "de-DE": "USP-Text four"
-        },
-        "type": "text",
-        "value": "",
-        "editable": true,
-        "tab": "header",
-        "block": "header",
-        "order": 100
-      },
-      "sw-top-header-align": {
+      "sw-header-navigation-align": {
         "label": {
           "en-GB": "Header align",
-          "de-DE": "Kopfzeile ausrichten"
+          "de-DE": "Header align"
         },
         "type": "text",
-        "value": "",
+        "value": "left",
+        "custom": {
+          "componentName": "sw-single-select",
+          "options": [
+            {
+              "value": "left",
+              "label": {
+                "en-GB": "Left",
+                "de-DE": "Left"
+              }
+            },
+            {
+              "value": "right",
+              "label": {
+                "en-GB": "Right",
+                "de-DE": "Right"
+              }
+            },
+            {
+              "value": "center",
+              "label": {
+                "en-GB": "Center",
+                "de-DE": "Center"
+              }
+            }
+          ]
+        },
         "editable": true,
         "tab": "header",
         "block": "header",
-        "order": 100
+        "order": 300
       },
       "sw-footer-background": {
         "label": {
