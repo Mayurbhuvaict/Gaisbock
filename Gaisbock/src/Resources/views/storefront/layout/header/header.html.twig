@@ -1,21 +1,26 @@
 {% sw_extends '@Storefront/storefront/layout/header/header.html.twig' %}
 {% block layout_header_navigation %}
     <div class="row align-items-center header-row justify-content-between m-auto position-relative">
-        {% block layout_header_extra_text %}
-            <div class="extra-text">
-               {% if theme_config('sw-top-header-marketing-text-one') %}
-                    <span>{{ theme_config('sw-top-header-marketing-text-one') }}</span>
-                    <span>{{ theme_config('sw-top-header-marketing-text-two') }}</span>
-                    <img src="{{ theme_config('sw-top-header-marketing-media') |sw_encode_url }}" alt="{{ 'header.marketing.marketingText'|trans|striptags }}">
-               {% endif %}
-            </div>
-        {% endblock %}
+
 
         {% block layout_header_logo %}
             <div class="col-12 col-lg-auto header-logo-col w-auto">
                 {% sw_include '@Storefront/storefront/layout/header/logo.html.twig' %}
             </div>
         {% endblock %}
+
+        {% block base_navigation %}
+            <div class="nav-main">
+                {% block base_navigation_inner %}
+                    {% sw_include '@Storefront/storefront/layout/navigation/navigation.html.twig' %}
+                {% endblock %}
+            </div>
+        {% endblock %}
+
+
+        {#        {% block layout_header_main_navigation %}#}
+{#            {% sw_include '@Storefront/storefront/layout/navigation/navigation.html.twig' %}#}
+{#        {% endblock %}#}
 
         {% block layout_header_search %}
         {% endblock %}
