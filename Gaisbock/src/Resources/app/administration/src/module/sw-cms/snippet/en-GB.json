@@ -1,6 +1,9 @@
 {
   "sw-cms": {
     "component": {
+      "label": {
+        "gaisbockCategory": "GaisBock Option"
+      },
       "detail": {
         "label": {
           "ictElement": "Theme Option"
@@ -8,6 +11,9 @@
       }
     },
     "blocks": {
+      "gaisbockTextImageSlider": {
+        "label": "Text Image Slider"
+      },
       "ictCustomCategoryExtension": {
         "label": "Custom Category Navigation"
       },
@@ -27,6 +33,20 @@
       }
     },
     "elements": {
+      "general": {
+        "config": {
+          "tab": {
+            "content": "content",
+            "settings": "settings",
+            "imageSetting": "Image Setting"
+          },
+          "label":{
+            "linkTo": "Image link",
+            "ImageText": "Image Text",
+            "buttonTitle": "Button Title"
+          }
+        }
+      },
       "ictImages": {
         "label": "ICT Image"
       },
