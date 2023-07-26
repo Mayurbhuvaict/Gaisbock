@@ -1,11 +1,11 @@
 <!-- eslint-disable-next-line sw-deprecation-rules/no-twigjs-blocks -->
-{% block sw_cms_element_ict_image_config %}
-<div class="sw-cms-el-config-ict-image">
+{% block sw_cms_element_gaisbock_image_config %}
+<div class="sw-cms-el-config-gaisbock-image">
     <!-- eslint-disable-next-line sw-deprecation-rules/no-twigjs-blocks -->
-    {% block sw_cms_element_ict_image_config_media_upload %}
+    {% block sw_cms_element_gaisbock_image_config_media_upload %}
     <sw-cms-mapping-field
         v-model="element.config.media"
-        :label="$tc('sw-cms.elements.ictImages.label')"
+        :label="$tc('sw-cms.elements.gaisbockImages.label')"
         value-types="entity"
         entity="media"
     >
@@ -23,7 +23,7 @@
         <div
             slot="preview"
             slot-scope="{ demoValue }"
-            class="sw-cms-el-config-ict-image__mapping-preview"
+            class="sw-cms-el-config-gaisbock-image__mapping-preview"
         >
             <img
                 v-if="demoValue.url"
@@ -32,7 +32,7 @@
             >
             <sw-alert
                 v-else
-                class="sw-cms-el-config-ict-image__preview-info"
+                class="sw-cms-el-config-gaisbock-image__preview-info"
                 variant="info"
             >
                 {{ $tc('sw-cms.detail.label.mappingEmptyPreview') }}
@@ -48,10 +48,10 @@
     {% endblock %}
 
     <!-- eslint-disable-next-line sw-deprecation-rules/no-twigjs-blocks -->
-    {% block sw_cms_element_ict_image_config_display_mode %}
+    {% block sw_cms_element_gaisbock_image_config_display_mode %}
     <sw-select-field
         v-model="element.config.displayMode.value"
-        class="sw-cms-el-config-ict-image__display-mode"
+        class="sw-cms-el-config-gaisbock-image__display-mode"
         :label="$tc('sw-cms.elements.general.config.label.displayMode')"
         @change="onChangeDisplayMode"
     >
@@ -69,7 +69,7 @@
 
     <template v-if="element.config.displayMode.value === 'cover'">
         <!-- eslint-disable-next-line sw-deprecation-rules/no-twigjs-blocks -->
-        {% block sw_cms_element_ict_image_config_min_height %}
+        {% block sw_cms_element_gaisbock_image_config_min_height %}
         <sw-text-field
             v-model="element.config.minHeight.value"
             :label="$tc('sw-cms.elements.image.config.label.minHeight')"
@@ -80,7 +80,7 @@
     </template>
 
     <!-- eslint-disable-next-line sw-deprecation-rules/no-twigjs-blocks -->
-    {% block sw_cms_element_ict_image_config_vertical_align %}
+    {% block sw_cms_element_gaisbock_image_config_vertical_align %}
     <sw-select-field
         v-model="element.config.verticalAlign.value"
         :label="$tc('sw-cms.elements.general.config.label.verticalAlign')"
@@ -100,22 +100,22 @@
     {% endblock %}
 
     <!-- eslint-disable-next-line sw-deprecation-rules/no-twigjs-blocks -->
-    {% block sw_cms_element_ict_image_config_link %}
-    <div class="sw-cms-el-config-ict-image__link">
+    {% block sw_cms_element_gaisbock_image_config_link %}
+    <div class="sw-cms-el-config-gaisbock-image__link">
         <sw-dynamic-url-field
             v-model="element.config.url.value"
         />
         <sw-field
             v-model="element.config.newTab.value"
-            class="sw-cms-el-config-ict-image__link-tab"
+            class="sw-cms-el-config-gaisbock-image__link-tab"
             type="switch"
-            :label="$tc('sw-cms.elements.ictImage.label')"
+            :label="$tc('sw-cms.elements.gaisbockImage.label')"
         />
     </div>
     {% endblock %}
 
     <!-- eslint-disable-next-line sw-deprecation-rules/no-twigjs-blocks -->
-    {% block sw_cms_element_ict_image_config_media_modal %}
+    {% block sw_cms_element_gaisbock_image_config_media_modal %}
     <sw-media-modal-v2
         v-if="mediaModalIsOpen"
         variant="regular"

@@ -1,0 +1,25 @@
+{% block cms_element_category_image_text %}
+    {% set category = page.extensions.categoryData.subCategoryData %}
+    {% set activePath = page.header.navigation.active.path %}
+    {{ dump(category) }}
+    {% if category %}
+        {% for key,item in category %}
+            {% if item %}
+                {% for subCategory in item %}
+                    {% if key == page.header.navigation.active.id or key in activePath %}
+                        <div class="cms-element-gaisbock-category-image-text">
+                            <div class="cms-element-gaisbock-category-image-text__images">
+                                <div class="cms-element-gaisbock-category-image-text__inner-images-text-one">
+                                    {% if subCategory.media %}
+                                        <span class="cms-element-gaisbock-category-image-text__category-name">{{ subCategory.translated.name }}</span>
+                                        <img class="cms-element-gaisbock-category-image-text__image-name" src="{{ subCategory.media.url }}">
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                    {% endif %}
+                {% endfor %}
+            {% endif %}
+        {% endfor %}
+    {% endif %}
+{% endblock %}

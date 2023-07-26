@@ -3,31 +3,26 @@
     "component": {
       "label": {
         "gaisbockCategory": "GaisBock Option"
-      },
-      "detail": {
-        "label": {
-          "ictElement": "Theme Option"
-        }
       }
     },
     "blocks": {
-      "gaisbockTextImageSlider": {
+      "gaisBockTextImageSlider": {
         "label": "Text Image Slider"
       },
-      "ictCustomCategoryExtension": {
+      "gaisbockCustomCategoryExtension": {
         "label": "Custom Category Navigation"
       },
-      "ictCategoryImageText": {
+      "gaisbockCategoryImageText": {
         "label": "Category Image Text"
       },
-      "ictImageText": {
-        "label": "ICT Image Bubble"
+      "gaisbockImageText": {
+        "label": "Gaisbock Image Bubble"
       },
-      "IctText": {
-        "label": "ICT Text"
+      "GaisbockText": {
+        "label": "Gaisbock Text"
       },
-      "ictTextImage": {
-        "ictSwitchImageTextBubble": {
+      "gaisbockTextImage": {
+        "gaisbockSwitchImageTextBubble": {
           "label": "Text with Left or Right Image"
         }
       }
@@ -47,22 +42,22 @@
           }
         }
       },
-      "ictImages": {
-        "label": "ICT Image"
+      "gaisbockImages": {
+        "label": "Gaisbock Image"
       },
-      "ictText": {
-        "label": "ICT-Texts"
+      "gaisbockText": {
+        "label": "Gaisbock-Texts"
       },
-       "ictTab": {
+       "gaisbockTab": {
         "label": "Open link in new tab"
       },
-      "ictImage": {
+      "gaisbockImage": {
         "label": "Open link in new tab"
       },
-      "ictSwitchImageText": {
+      "gaisbockSwitchImageText": {
         "config": {
           "label": {
-            "ictTextImage": "Image Position",
+            "gaisbockTextImage": "Image Position",
             "imageLeft": "Left",
             "imageRight": "Right"
           },

@@ -5,9 +5,26 @@
         "gaisBockCategory": "GaisBock Option"
       }
     },
-    "blocks":{
+    "blocks": {
       "gaisBockTextImageSlider": {
         "label": "Slider texte-image"
+      },
+      "gaisbockCustomCategoryExtension": {
+        "label": "Custom Category Navigation"
+      },
+      "gaisbockCategoryImageText": {
+        "label": "Category Image Text"
+      },
+      "gaisbockImageText": {
+        "label": "Gaisbock Image Bubble"
+      },
+      "GaisbockText": {
+        "label": "Gaisbock Text"
+      },
+      "gaisbockTextImage": {
+        "gaisbockSwitchImageTextBubble": {
+          "label": "Text with Left or Right Image"
+        }
       }
     },
     "elements": {
@@ -18,26 +35,47 @@
             "settings": "paramètres",
             "imageSetting": "Réglage de l'image"
           },
-          "label":{
+          "label": {
             "linkTo": "Lien vers l'image",
             "ImageText": "Texte de l'image",
             "buttonTitle": "Titre du bouton"
           }
         }
+      },
+      "gaisbockImages": {
+        "label": "Gaisbock Image"
+      },
+      "gaisbockText": {
+        "label": "Textes de Gaisbock"
+      },
+      "gaisbockTab": {
+        "label": "Ouvrir le lien dans un nouvel onglet"
+      },
+      "gaisbockImage": {
+        "label": "Ouvrir le lien dans un nouvel onglet"
+      },
+      "gaisbockSwitchImageText": {
+        "config": {
+          "label": {
+            "gaisbockTextImage": "Position de l'image",
+            "imageLeft": "Gauche",
+            "imageRight": "Droit"
+          },
+          "disabledConfigInfoTextKey": "Les données de navigation de cet élément sont automatiquement chargées par la catégorie associée à cette mise en page. Le contenu n'est qu'un exemple de prévisualisation."
+        }
       }
     },
-      "general": {
-        "config": {
-          "tab": {
-            "content": "contenu",
-            "settings": "paramètres",
-            "imageSetting": "Réglage de l'image"
-          },
-          "label":{
-            "linkTo": "Lien vers l'image",
-            "ImageText": "Texte de l'image",
-            "buttonTitle": "Titre du bouton"
-          }
+    "general": {
+      "config": {
+        "tab": {
+          "content": "contenu",
+          "settings": "paramètres",
+          "imageSetting": "Réglage de l'image"
+        },
+        "label": {
+          "linkTo": "Lien vers l'image",
+          "ImageText": "Texte de l'image",
+          "buttonTitle": "Titre du bouton"
         }
       }
     }

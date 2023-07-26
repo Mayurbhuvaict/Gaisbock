@@ -1,12 +1,12 @@
 
 import { shallowMount } from '@vue/test-utils';
 import 'src/module/sw-cms/mixin/sw-cms-element.mixin';
-import 'src/module/sw-cms/elements/ict-image/config';
+import 'src/module/sw-cms/elements/gaisbock-image/config';
 import 'src/module/sw-cms/component/sw-cms-mapping-field';
 import 'src/app/component/form/sw-dynamic-url-field';
 
 async function createWrapper() {
-    return shallowMount(await Shopware.Component.build('sw-cms-el-config-ict-image'), {
+    return shallowMount(await Shopware.Component.build('sw-cms-el-config-gaisbock-image'), {
         provide: {
             cmsService: {
                 getCmsBlockRegistry: () => {
@@ -84,7 +84,7 @@ async function createWrapper() {
     });
 }
 
-describe('src/module/sw-cms/elements/ict-image/config', () => {
+describe('src/module/sw-cms/elements/gaisbock-image/config', () => {
     beforeAll(() => {
         Shopware.State.registerModule('cmsPageState', {
             namespaced: true,
@@ -108,7 +108,7 @@ describe('src/module/sw-cms/elements/ict-image/config', () => {
 
     it('should keep minHeight value when changing display mode', async () => {
         const wrapper = await createWrapper('settings');
-        const displayModeSelect = wrapper.find('.sw-cms-el-config-ict-image__display-mode');
+        const displayModeSelect = wrapper.find('.sw-cms-el-config-gaisbock-image__display-mode');
 
         await displayModeSelect.setValue('cover');
 

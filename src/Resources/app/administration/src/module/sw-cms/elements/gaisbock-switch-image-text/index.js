@@ -4,7 +4,7 @@ Shopware.Component.register('sw-cms-el-gaisbock-switch-image-text', () => import
 
 Shopware.Service('cmsService').registerCmsElement({
     name: 'gaisbock-switch-image-text',
-    label: 'sw-cms.elements.ictSwitchImageText.config.label.ictTextImage',
+    label: 'sw-cms.elements.gaisbockSwitchImageText.config.label.gaisbockTextImage',
     component: 'sw-cms-el-gaisbock-switch-image-text',
     configComponent: 'sw-cms-el-config-gaisbock-switch-image-text',
     previewComponent: 'sw-cms-el-preview-gaisbock-switch-image-text',
