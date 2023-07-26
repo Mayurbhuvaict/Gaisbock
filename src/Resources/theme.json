@@ -151,6 +151,13 @@
                 "en-GB": "Extra Bold - 800",
                 "de-DE": "Extra Bold - 800"
               }
+            },
+            {
+              "value": "900",
+              "label": {
+                "en-GB": "Extra Bold - 900",
+                "de-DE": "Extra Bold - 900"
+              }
             }
           ]
         },
@@ -201,6 +208,13 @@
               "label": {
                 "en-GB": "Extra Bold - 800",
                 "de-DE": "Extra Bold - 800"
+              }
+            },
+            {
+              "value": "900",
+              "label": {
+                "en-GB": "Extra Bold - 900",
+                "de-DE": "Extra Bold - 900"
               }
             }
           ]

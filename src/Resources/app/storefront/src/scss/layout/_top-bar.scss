@@ -1,0 +1,26 @@
+.header-main {
+    z-index: 9;
+    > .container {
+        width: 100%;
+        max-width: 100%;
+        padding: 0;
+    }
+    .top-bar {
+        .top-bar-nav {
+            background: $sw-color-brand-primary;
+            padding: 5px 0;
+            .navbar {
+                padding: 0;
+            }
+            .gaisbock-theme-ups-text {
+                color: #fff;
+                text-align: center;
+                font-family: $sw-font-family-base;
+                font-weight: $fontWeight600;
+                margin-bottom: 0;
+                font-size: 15px;
+                letter-spacing: 1.05px;
+            }
+        }
+    }
+}

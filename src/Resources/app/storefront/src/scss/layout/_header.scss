@@ -1,0 +1,104 @@
+.header-row {
+    padding: 5px 20px;
+    max-width: 1440px;
+    .header-logo-col {
+        position: absolute;
+        left: 0;
+        padding: 0;
+        top: 15px;
+        width: auto;
+        .header-logo-main {
+            text-align: left;
+            .header-logo-picture {
+                margin: 0;
+            }
+        }
+    }
+    .nav-main {
+        @media(min-width:768px) {
+            width: auto;
+            margin: 0 auto;
+            display: flex;
+            justify-content: center;
+            position: absolute;
+            left: 50%;
+            transform: translate(-50%,0);
+            flex-grow: 1;
+            top: 6px;
+        }
+    }
+    .header-actions-col {
+        padding: 0;
+        display: flex;
+        justify-content: flex-end;
+        width: 100%;
+        .gaisbock-custom-theme {
+            justify-content: flex-end;
+        }
+        .icon {
+            color: #fff;
+        }
+        .btn {
+            --bs-btn-padding-x: 9px;
+        }
+        .top-bar-language {
+            margin-right: 0;
+            padding-right: 60px;
+            @media(max-width:1199px) {
+                padding-right: 15px;
+            }
+            .top-bar-list-item {
+                color: #fff;
+                padding: 0 10px;
+                .top-bar-list-label {
+                    border-radius: 100%;
+                    width: 20px;
+                    text-align: center;
+                    height: 20px;
+                    line-height: 18px;
+                    font-size: 12px;
+                    letter-spacing: 0.84px;
+                    font-family: $sw-font-family-base;
+                    font-weight: $fontWeight600;
+                    color: #fff;
+                }
+            }
+            .top-bar-list-item.item-checked .top-bar-list-label{
+                border: 1px solid #DE1010;
+            }
+        }
+    }
+}
+.nav-main {
+    .main-navigation-menu {
+        .main-navigation-link {
+            @media(max-width:1199px) {
+                padding-right: 15px;
+                padding-left: 15px;
+            }
+        }
+    }
+}
+
+@include media-breakpoint-up(md) {
+    .nav-main {
+        .main-navigation-menu {
+            .main-navigation-link {
+                color: #fff;
+                font-family: $sw-font-family-base;
+                padding-right: 25px;
+                padding-left: 25px;
+                font-weight: $fontWeight700;
+                font-size: 15px;
+                letter-spacing: 1.2px;
+                text-transform: uppercase;
+                &.active {
+                    .main-navigation-link-text {
+                        border-bottom: 4px solid #DE1010;
+                    }
+                }
+            }
+        }
+    }
+
+}
