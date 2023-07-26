@@ -6,6 +6,9 @@
       }
     },
     "blocks": {
+      "gaisBockListingpageHeadingimage": {
+        "label": "Titre et image"
+      },
       "gaisBockTextImageSlider": {
         "label": "Slider texte-image"
       },
