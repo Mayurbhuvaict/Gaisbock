@@ -5,6 +5,14 @@
       "titleTwo": "PREMIUM-MEMBER WARDEN",
       "descriptionText" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et <a href=\"#\">dolore magna aliqua.</a>"
     },
+    "customText": {
+      "customTextOne": "347",
+      "customTextTwo": "Number of resellers",
+      "customTextThree": "<1000",
+      "customTextFour": "Number of customers",
+      "customTextFive": "XXX",
+      "customTextSix": "Lorem Sipdum dol"
+    },
     "tryIt": {
       "tryItItext": "WANT TO TRY IT?",
       "tryItDescription": "Lorem ipsum dolor sit amet, consectetur adipiscing elit"
