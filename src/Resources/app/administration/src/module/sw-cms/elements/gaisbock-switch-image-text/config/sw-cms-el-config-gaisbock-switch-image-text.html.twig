@@ -1,5 +1,5 @@
-{% block sw_cms_element_ict_switch_image_text_config %}
-    <div class="ict-switch-image-text">
+{% block sw_cms_element_gaisbock_switch_image_text_config %}
+    <div class="gaisbock-switch-image-text">
         <div class="sw-cms-el-config-image">
             {% block sw_cms_element_image_config_media_upload %}
                 <sw-cms-mapping-field
@@ -62,15 +62,15 @@
             {% block sw_cms_element_image_config_image_position_align %}
                 <sw-select-field
                         v-model="element.config.position.value"
-                        :label="$tc('sw-cms.elements.ictSwitchImageText.config.label.ictTextImage')"
-                        :placeholder="$tc('sw-cms.elements.ictSwitchImageText.config.label.ictTextImage')"
+                        :label="$tc('sw-cms.elements.gaisbockSwitchImageText.config.label.gaisbockTextImage')"
+                        :placeholder="$tc('sw-cms.elements.gaisbockSwitchImageText.config.label.gaisbockTextImage')"
                         :disabled="element.config.displayMode.value === 'cover'"
                 >
                     <option value="left">
-                        {{ $tc('sw-cms.elements.ictSwitchImageText.config.label.imageLeft') }}
+                        {{ $tc('sw-cms.elements.gaisbockSwitchImageText.config.label.imageLeft') }}
                     </option>
                     <option value="right">
-                        {{ $tc('sw-cms.elements.ictSwitchImageText.config.label.imageRight') }}
+                        {{ $tc('sw-cms.elements.gaisbockSwitchImageText.config.label.imageRight') }}
                     </option>
                 </sw-select-field>
             {% endblock %}

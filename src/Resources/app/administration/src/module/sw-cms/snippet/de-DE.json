@@ -3,30 +3,25 @@
     "component": {
       "label": {
         "gaisbockCategory": "GaisBock Option"
-      },
-      "detail": {
-        "label": {
-          "ictElement": "Thema Option"
-        }
       }
     },
     "blocks": {
-      "gaisbockTextImageSlider": {
+      "gaisBockTextImageSlider": {
         "label": "Text-Bild-Schieberegler"
       },
-      "ictCustomCategoryExtension": {
+      "gaisbockCustomCategoryExtension": {
         "label": "Benutzerdefinierte Kategorie-Navigation"
       },
-      "ictTextImage": {
-        "ictSwitchImageTextBubble": {
+      "gaisbockTextImage": {
+        "gaisbockSwitchImageTextBubble": {
           "label": "Text mit linkem oder rechtem Bild"
         }
       },
-      "ictCategoryImageText": {
+      "gaisbockCategoryImageText": {
         "label": "Kategorie Bild Text"
       },
-      "IctText": {
-        "label": "ICT Text"
+      "GaisbockText": {
+        "label": "Gaisbock Text"
       }
     },
     "elements": {
@@ -44,16 +39,16 @@
           }
         }
       },
-      "ictImages": {
-        "label": "ICT Image"
+      "gaisbockImages": {
+        "label": "Gaisbock Image"
       },
-      "ictText": {
-        "label": "ICT-Texte"
+      "gaisbockText": {
+        "label": "Gaisbock-Texte"
       },
-      "ictSwitchImageText": {
+      "gaisbockSwitchImageText": {
         "config": {
           "label": {
-            "ictTextImage": "Bild Position",
+            "gaisbockTextImage": "Bild Position",
             "imageLeft": "Links",
             "imageRight": "Rechts"
           },

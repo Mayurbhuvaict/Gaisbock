@@ -1,7 +1,24 @@
 {% sw_extends '@Storefront/storefront/layout/footer/footer.html.twig' %}
 {% block layout_footer_inner_container %}
     <div class="container">
-        {% sw_include '@Storefront/storefront/component/footer/gaisbock-custom-image-text.html.twig' %}
+
+        {% block layout_footer_custom_text %}
+            <div class="custom-texts d-flex">
+                <div class="custom-text-one">
+                    <div>{{ 'footer.customText.customTextOne'|trans|sw_sanitize }}</div>
+                    <div>{{ 'footer.customText.customTextTwo'|trans|sw_sanitize }}</div>
+                </div>
+                <div class="custom-text-two">
+                    <div>{{ 'footer.customText.customTextThree'|trans|sw_sanitize }}</div>
+                    <div>{{ 'footer.customText.customTextFour'|trans|sw_sanitize }}</div>
+                </div>
+                <div class="custom-text-one">
+                    <div>{{ 'footer.customText.customTextFive'|trans|sw_sanitize }}</div>
+                    <div>{{ 'footer.customText.customTextSix'|trans|sw_sanitize }}</div>
+                </div>
+            </div>
+        {% endblock %}
+
         {% block layout_footer_navigation %}
             <div
                     id="footerColumns"

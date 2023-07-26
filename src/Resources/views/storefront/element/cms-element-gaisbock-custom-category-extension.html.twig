@@ -1,0 +1,18 @@
+{% block cms_element_gaisbock_custom_category_extension %}
+    <div class="sw-cms-element-gaisbock-custom-category-extension">
+        <div class="sw-cms-element-gaisbock-custom-category-extension__images">
+            <ul>
+                {% set activePath = page.header.navigation.active.path %}
+                {% for item in page.extensions.categoryData.data %}
+                    {% set id = item.id %}
+                    <li class="nav-item">
+                        <a href="{{ category_url(item) }}" class="sw-cms-element-gaisbock-custom-category-line{% if category.id == page.header.navigation.active.id or category.id in activePath %} active{% endif %}">
+                            {{ item.translated.name }}
+                        </a>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+    </div>
+{% endblock %}

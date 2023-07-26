@@ -20,7 +20,7 @@ Shopware.Component.register('sw-cms-el-gaisbock-text', () => import('./component
  */
 Shopware.Service('cmsService').registerCmsElement({
     name: 'gaisbock-text',
-    label: 'sw-cms.elements.ictText.label',
+    label: 'sw-cms.elements.gaisbockText.label',
     component: 'sw-cms-el-gaisbock-text',
     configComponent: 'sw-cms-el-config-gaisbock-text',
     previewComponent: 'sw-cms-el-preview-gaisbock-text',

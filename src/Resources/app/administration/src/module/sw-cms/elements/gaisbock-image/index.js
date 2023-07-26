@@ -4,7 +4,7 @@ import './preview';
 
 Shopware.Service('cmsService').registerCmsElement({
     name: 'gaisbock-image',
-    label: 'sw-cms.elements.ictImages.label',
+    label: 'sw-cms.elements.gaisbockImages.label',
     component: 'sw-cms-el-gaisbock-image',
     configComponent: 'sw-cms-el-config-gaisbock-image',
     previewComponent: 'sw-cms-el-preview-gaisbock-image',
