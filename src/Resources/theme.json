@@ -52,6 +52,28 @@
       }
     },
     "fields": {
+      "gaisbock-black-logo": {
+        "label": {
+          "en-GB": "Gaisbock black logo",
+          "de-DE": "Gaisbock black logo"
+        },
+        "type": "media",
+        "value": "",
+        "editable": true,
+        "block": "media",
+        "order": 500
+      },
+      "gaisbock-text-logo": {
+        "label": {
+          "en-GB": "Gaisbock text logo",
+          "de-DE": "Gaisbock text logo"
+        },
+        "type": "media",
+        "value": "",
+        "editable": true,
+        "block": "media",
+        "order": 500
+      },
       "sw-font-secondary": {
         "label": {
           "en-GB": "Secondary font",
@@ -151,13 +173,6 @@
                 "en-GB": "Extra Bold - 800",
                 "de-DE": "Extra Bold - 800"
               }
-            },
-            {
-              "value": "900",
-              "label": {
-                "en-GB": "Extra Bold - 900",
-                "de-DE": "Extra Bold - 900"
-              }
             }
           ]
         },
@@ -208,13 +223,6 @@
               "label": {
                 "en-GB": "Extra Bold - 800",
                 "de-DE": "Extra Bold - 800"
-              }
-            },
-            {
-              "value": "900",
-              "label": {
-                "en-GB": "Extra Bold - 900",
-                "de-DE": "Extra Bold - 900"
               }
             }
           ]
@@ -487,78 +495,6 @@
           "de-DE": "Footer logo mobile"
         },
         "type": "media",
-        "value": "",
-        "editable": true,
-        "tab": "footer",
-        "block": "footer",
-        "order": 100
-      },
-      "gaisbock-footer-image-one": {
-        "label": {
-          "en-GB": "Footer image one",
-          "de-DE": "Footer image one"
-        },
-        "type": "media",
-        "value": "",
-        "editable": true,
-        "tab": "footer",
-        "block": "footer",
-        "order": 100
-      },
-      "gaisbock-footer-image-two": {
-        "label": {
-          "en-GB": "Footer image two",
-          "de-DE": "Footer image two"
-        },
-        "type": "media",
-        "value": "",
-        "editable": true,
-        "tab": "footer",
-        "block": "footer",
-        "order": 100
-      },
-      "gaisbock-footer-image-three": {
-        "label": {
-          "en-GB": "Footer image three",
-          "de-DE": "Footer image three"
-        },
-        "type": "media",
-        "value": "",
-        "editable": true,
-        "tab": "footer",
-        "block": "footer",
-        "order": 100
-      },
-      "gaisbock-footer-text-one": {
-        "label": {
-          "en-GB": "Footer text one",
-          "de-DE": "Footer text one"
-        },
-        "type": "text",
-        "value": "",
-        "editable": true,
-        "tab": "footer",
-        "block": "footer",
-        "order": 100
-      },
-      "gaisbock-footer-text-two": {
-        "label": {
-          "en-GB": "Footer text two",
-          "de-DE": "Footer text two"
-        },
-        "type": "text",
-        "value": "",
-        "editable": true,
-        "tab": "footer",
-        "block": "footer",
-        "order": 100
-      },
-      "gaisbock-footer-text-three": {
-        "label": {
-          "en-GB": "Footer text three",
-          "de-DE": "Footer text three"
-        },
-        "type": "text",
         "value": "",
         "editable": true,
         "tab": "footer",
