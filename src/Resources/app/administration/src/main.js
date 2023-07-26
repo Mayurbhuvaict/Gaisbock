@@ -1,9 +1,9 @@
 //blocks
-import './module/sw-cms/blocks/themeOption/gaisbock-custom-category-extension';
-import './module/sw-cms/blocks/themeOption/gaisbock-switch-image-text';
-import './module/sw-cms/blocks/themeOption/gaisbock-text'
-import './module/sw-cms/blocks/themeOption/gaisbock-image-text-bubble';
-import './module/sw-cms/blocks/themeOption/gaisbock-category-image-text';
+import './module/sw-cms/blocks/gaisbockOption/gaisbock-custom-category-extension';
+import './module/sw-cms/blocks/gaisbockOption/gaisbock-switch-image-text';
+import './module/sw-cms/blocks/gaisbockOption/gaisbock-text'
+import './module/sw-cms/blocks/gaisbockOption/gaisbock-image-text-bubble';
+import './module/sw-cms/blocks/gaisbockOption/gaisbock-category-image-text';
 import './module/sw-cms/blocks/gaisbockOption/gaisbock-text-image-slider';
 
 

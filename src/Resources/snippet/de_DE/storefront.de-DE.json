@@ -5,6 +5,14 @@
       "titleTwo": "PREMIUM-MEMBER WERDEN",
       "descriptionText" : "Die ersten 300 erhalten gratis Socken, Profitiere von exklusiven Angeboten und Rabatten"
     },
+    "customText": {
+      "customTextOne": "347",
+      "customTextTwo": "Anzahl Wiederverkäufer",
+      "customTextThree": "<1000",
+      "customTextFour": "Anzahl Kunden",
+      "customTextFive": "XXX",
+      "customTextSix": "Lorem Sipdum dol"
+    },
     "tryIt": {
       "tryItItext": "BOCK AUF AUSPROBIEREN?",
       "tryItDescription": "Hier gehts zu den Gaisbock-Händlern in Deiner Nähe."
