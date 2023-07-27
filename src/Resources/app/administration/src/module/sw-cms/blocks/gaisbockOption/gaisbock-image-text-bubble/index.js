@@ -16,7 +16,7 @@ Shopware.Component.register('sw-cms-block-gaisbock-image-text-bubble', () => imp
  */
 Shopware.Service('cmsService').registerCmsBlock({
     name: 'gaisbock-image-text-bubble',
-    label: 'sw-cms.blocks.ictImageText.label',
+    label: 'sw-cms.blocks.gaisbockImageText.label',
     category: 'gaisbock-cms-elements',
     component: 'sw-cms-block-gaisbock-image-text-bubble',
     previewComponent: 'sw-cms-preview-gaisbock-image-text-bubble',

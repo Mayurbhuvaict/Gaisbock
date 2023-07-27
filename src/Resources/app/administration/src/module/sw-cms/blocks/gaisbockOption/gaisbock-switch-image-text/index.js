@@ -3,7 +3,7 @@ Shopware.Component.register('sw-cms-preview-gaisbock-switch-image-text', () => i
 Shopware.Component.register('sw-cms-block-gaisbock-switch-image-text', () => import('./component'));
 Shopware.Service('cmsService').registerCmsBlock({
     name: 'gaisbock-switch-image-text',
-    label: 'sw-cms.blocks.ictTextImage.ictSwitchImageTextBubble.label',
+    label: 'sw-cms.blocks.gaisbockTextImage.gaisbockSwitchImageTextBubble.label',
     category: 'gaisbock-cms-elements',
     component: 'sw-cms-block-gaisbock-switch-image-text',
     previewComponent: 'sw-cms-preview-gaisbock-switch-image-text',

@@ -17,25 +17,20 @@ use Shopware\Core\Framework\DataAbstractionLayer\Search\Criteria;
 use Shopware\Core\Framework\Log\Package;
 
 #[Package('content')]
-class gaisbockListingPageImageTextCmsElementResolver extends AbstractCmsElementResolver
+class gaisbockTitleTextImageElementResolver extends AbstractCmsElementResolver
 {
-
-    /**
-     * @internal
-     */
     public function __construct(private readonly AbstractDefaultMediaResolver $mediaResolver)
     {
     }
 
     public function getType(): string
     {
-        return 'gaisbock-listpage-text-image';
+        return 'gaisbock-title-text-image';
     }
 
     public function collect(CmsSlotEntity $slot, ResolverContext $resolverContext): ?CriteriaCollection
     {
         $mediaConfig = $slot->getFieldConfig()->get('media');
-
         if (
             $mediaConfig === null
             || $mediaConfig->isMapped()
@@ -49,7 +44,6 @@ class gaisbockListingPageImageTextCmsElementResolver extends AbstractCmsElementR
 
         $criteriaCollection = new CriteriaCollection();
         $criteriaCollection->add('media_' . $slot->getUniqueIdentifier(), MediaDefinition::class, $criteria);
-
         return $criteriaCollection;
     }
 
@@ -71,19 +65,16 @@ class gaisbockListingPageImageTextCmsElementResolver extends AbstractCmsElementR
                     $image->setUrl($url);
                 }
             }
-
             $newTabConfig = $config->get('newTab');
             if ($newTabConfig !== null) {
                 $image->setNewTab($newTabConfig->getBoolValue());
             }
         }
-
         $mediaConfig = $config->get('media');
         if ($mediaConfig && $mediaConfig->getValue()) {
             $this->addMediaEntity($slot, $image, $result, $mediaConfig, $resolverContext);
         }
     }
-
     private function addMediaEntity(
         CmsSlotEntity $slot,
         ImageStruct $image,
@@ -98,7 +89,6 @@ class gaisbockListingPageImageTextCmsElementResolver extends AbstractCmsElementR
                 $image->setMedia($media);
             }
         }
-
         if ($config->isMapped() && $resolverContext instanceof EntityResolverContext) {
             $media = $this->resolveEntityValue($resolverContext->getEntity(), $config->getStringValue());
 
@@ -107,7 +97,6 @@ class gaisbockListingPageImageTextCmsElementResolver extends AbstractCmsElementR
                 $image->setMedia($media);
             }
         }
-
         if ($config->isStatic()) {
             $image->setMediaId($config->getStringValue());
 

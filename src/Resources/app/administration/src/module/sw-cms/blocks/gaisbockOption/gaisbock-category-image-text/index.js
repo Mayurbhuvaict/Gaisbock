@@ -4,7 +4,7 @@ Shopware.Component.register('sw-cms-preview-gaisbock-category-image-text',()=>im
 
 Shopware.Service('cmsService').registerCmsBlock({
     name:'gaisbock-category-image-text',
-    label:'sw-cms.blocks.ictCategoryImageText.label',
+    label:'sw-cms.blocks.gaisbockCategoryImageText.label',
     category:'gaisbock-cms-elements',
     component:'sw-cms-block-gaisbock-category-image-text',
     previewComponent:'sw-cms-preview-gaisbock-category-image-text',

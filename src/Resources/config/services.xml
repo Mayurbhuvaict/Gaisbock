@@ -13,7 +13,7 @@
             <tag name="shopware.cms.data_resolver" />
             <argument type="service" id="Shopware\Core\Content\Media\Cms\DefaultMediaResolver"/>
         </service>
-        <service id="Gaisbock\Core\Content\Media\Cms\gaisbockListingPageImageTextCmsElementResolver">
+        <service id="Gaisbock\Core\Content\Media\Cms\gaisbockTitleTextImageElementResolver">
             <tag name="shopware.cms.data_resolver" />
             <argument type="service" id="Shopware\Core\Content\Media\Cms\DefaultMediaResolver"/>
         </service>

@@ -24,6 +24,12 @@
       "GaisbockText": {
         "label": "Gaisbock Text"
       },
+      "gaisbockTitleTextImageMain":{
+        "label": "Titre Texte Image"
+      },
+      "gaisbockTitleTextImage": {
+        "label": "Titre Texte Image"
+      },
       "gaisbockTextImage": {
         "gaisbockSwitchImageTextBubble": {
           "label": "Text with Left or Right Image"

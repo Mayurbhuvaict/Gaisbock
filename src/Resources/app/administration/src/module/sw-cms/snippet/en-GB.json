@@ -18,6 +18,9 @@
       "gaisbockCategoryImageText": {
         "label": "Category Image Text"
       },
+      "gaisbockTitleTextImageMain":{
+        "label": "Title Text Image"
+      },
       "gaisbockImageText": {
         "label": "Gaisbock Image Bubble"
       },
