@@ -34,6 +34,11 @@
         "gaisbockSwitchImageTextBubble": {
           "label": "Text with Left or Right Image"
         }
+      },
+      "gaisbockTextImageButton": {
+        "gaisbockImageTitlesButtons": {
+          "label": "Image de fond avec titre, image, texte et bouton"
+        }
       }
     },
     "elements": {
@@ -48,6 +53,17 @@
             "linkTo": "Lien vers l'image",
             "ImageText": "Texte de l'image",
             "buttonTitle": "Titre du bouton"
+          }
+        }
+      },
+      "buttonTitle": "Bouton Titre",
+      "gaisbockImageTitlesButton": {
+        "config": {
+          "label": {
+            "gaisbockTextImageTwo": "Position de l'élément",
+            "imageButtonLeft": "Gauche",
+            "imageButtonRight": "Droit",
+            "imageButtonCenter": "Centre"
           }
         }
       },

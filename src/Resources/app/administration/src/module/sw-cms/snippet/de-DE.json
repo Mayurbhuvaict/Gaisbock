@@ -29,6 +29,11 @@
       "GaisbockText": {
         "label": "Gaisbock Text"
       },
+      "gaisbockTextImageButton": {
+        "gaisbockImageTitlesButtons": {
+          "label": "Hintergrundbild mit Titel, Bild, Text und Schaltfläche"
+        }
+      },
       "gaisbockTitleTextImage": {
         "label": "Title Text Image"
       }
@@ -45,6 +50,17 @@
             "linkTo": "Bild-Link",
             "ImageText": "Bild Text",
             "buttonTitle": "Schaltfläche Titel"
+          }
+        }
+      },
+      "buttonTitle": "Button Title",
+      "gaisbockImageTitlesButton": {
+        "config": {
+          "label": {
+            "gaisbockTextImageTwo": "Element Position",
+            "imageButtonLeft": "Links",
+            "imageButtonRight": "Rechts",
+            "imageButtonCenter": "Zentrum"
           }
         }
       },
