@@ -15,7 +15,7 @@ Shopware.Component.register('sw-cms-block-gaisbock-text', () => import('./compon
  */
 Shopware.Service('cmsService').registerCmsBlock({
     name: 'gaisbock-text',
-    label: 'sw-cms.blocks.IctText.label',
+    label: 'sw-cms.blocks.GaisbockText.label',
     category: 'gaisbock-cms-elements',
     component: 'sw-cms-block-gaisbock-text',
     previewComponent: 'sw-cms-preview-gaisbock-text',

@@ -15,6 +15,9 @@
       "gaisbockCustomCategoryExtension": {
         "label": "Benutzerdefinierte Kategorie-Navigation"
       },
+      "gaisbockTitleTextImageMain":{
+        "label": "Title Text Image"
+      },
       "gaisbockTextImage": {
         "gaisbockSwitchImageTextBubble": {
           "label": "Text mit linkem oder rechtem Bild"
@@ -25,6 +28,9 @@
       },
       "GaisbockText": {
         "label": "Gaisbock Text"
+      },
+      "gaisbockTitleTextImage": {
+        "label": "Title Text Image"
       }
     },
     "elements": {
