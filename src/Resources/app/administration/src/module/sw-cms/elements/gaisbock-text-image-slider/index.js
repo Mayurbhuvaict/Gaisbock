@@ -4,7 +4,7 @@ Shopware.Component.register('sw-cms-el-config-gaisbock-text-image-slider',()=>im
 
 Shopware.Service('cmsService').registerCmsElement({
     name:'gaisbock-text-image-slider',
-    label:'sw-cms.blocks.gaisbockTextImageSlider.label',
+    label:'sw-cms.blocks.gaisBockTextImageSlider.label',
     component:'sw-cms-el-gaisbock-text-image-slider',
     previewComponent:'sw-cms-preview-gaisbock-text-image-slider',
     configComponent:'sw-cms-el-config-gaisbock-text-image-slider',
