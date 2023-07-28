@@ -30,5 +30,12 @@
       "hotlineOpeningInfo": "Offnungzeiten Showroom",
       "hotlineOpenTiming": "Mo-fr 08-12h/13.30-17.00"
     }
+  },
+  "listingPage": {
+    "product": {
+      "card": {
+        "saleBadges": "sale"
+      }
+    }
   }
 }

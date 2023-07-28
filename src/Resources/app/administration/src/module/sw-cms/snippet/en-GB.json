@@ -6,6 +6,9 @@
       }
     },
     "blocks": {
+      "gaisbockImageAddMoreText": {
+        "label": "Add more section With images"
+      },
       "gaisBockListingpageHeadingimage": {
         "label": "Heading & image"
       },
@@ -59,12 +62,14 @@
           "tab": {
             "content": "content",
             "settings": "settings",
-            "imageSetting": "Image Setting"
+            "imageSetting": "Image Setting",
+            "addmore": "Add more section"
           },
           "label":{
             "linkTo": "Image link",
             "ImageText": "Image Text",
-            "buttonTitle": "Button Title"
+            "buttonTitle": "Button Title",
+            "title": "Title"
           }
         }
       },
