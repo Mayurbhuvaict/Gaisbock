@@ -1,6 +1,173 @@
 .home-banner {
-    margin-top: -91px;
+    margin-top: -138px;
     img {
         width: 100%;
     }
+}
+
+.Gaisbock-category-images {
+    background: $sw-color-brand-primary;
+    .gaisbock-title{
+        padding-top: 46px;
+        padding-bottom: 25px;
+        margin: 0 auto;
+        h2 {
+            color: #FFFFFF;
+            letter-spacing: 0.17px;
+            font-family: $sw-font-family-headline;
+            font-weight: $sw-headings-font-weight;
+            font-size: 34px;
+            line-height: 42px;
+        }
+    }
+    .gaisbock-images {
+        text-align: center;
+        width: 16.667%;
+        .cms-element-gaisbock-text{
+            margin-top: 11px;
+            margin-bottom: 46px;
+            h2 {
+                letter-spacing: 0.9px;
+                color: $sw-color-brand-secondary;                ;
+                font-size: 15px;
+                font-family: $sw-font-family-base;
+                line-height: 17px;
+            }
+        }
+        .cms-element-gaisbock-image{
+            border: 4px solid $sw-color-brand-secondary;
+            background: #FFFFFF 0% 0% no-repeat padding-box;
+            opacity: 1;
+            border-radius: 50%;
+            width: 106px;
+            height: 106px;
+            margin: 0 auto;
+            .cms-image-container {
+                height: 100%;
+                display: flex;
+                align-items: center;
+                width: 100%;
+                position: relative;
+                padding-top: 100%;
+                display: block;
+                img {
+                    width: 100%;
+                    height: 100%;
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    padding: 10px;
+                    object-fit: contain;
+                }
+            }
+        }
+    }
+    
+}
+
+
+.gailbock-faq-section{
+    color: #FFFFFF;
+    padding: 100px 0;
+    .gaisbock-element-switch-image-text {
+        margin: 0 auto;
+        text-align: center;
+    }
+    .Faq-title {
+        border-bottom: 2px solid $sw-border-color;
+        display: inline-block;
+        font-family: 'Rama-Slab';
+        font-size: 47px;
+        color: $sw-color-brand-primary;
+        text-transform: uppercase;
+        width: 73px;
+        letter-spacing: 3.29px;
+        line-height: 55px;
+        padding-bottom: 5px;
+    }
+    h2 {
+        line-height: 42px;
+        letter-spacing: 0.17px;
+        color: #000000;
+        padding-top: 35px;
+        font-family: $sw-font-family-headline;
+        font-weight: $sw-headings-font-weight;
+        margin-bottom: 0px;
+    }
+    p{
+        color: $sw-color-brand-primary;
+        font-size: 24px;
+        letter-spacing: 0px;
+        line-height: 29px;
+        text-align: center;
+        font-family: $sw-font-family-base;
+        font-weight: $fontWeight500;
+        margin-top: 5px;
+        margin-bottom: 8px;
+        a {
+            text-decoration: underline;
+            text-decoration-color: $sw-border-color;
+            text-decoration-thickness: 1.2px;
+        }
+    }
+    img {
+        max-width: 158px;
+        width: 100%;
+        height: auto;
+        margin-top: 15px;
+    }
+}
+
+@include media-breakpoint-down(md){
+    .Gaisbock-category-images{
+        padding-bottom: 20px;
+        .gaisbock-title{
+            padding-bottom: 5px;
+            h2 {
+                font-size: 21px;
+                line-height: 25px;
+            }
+        }
+        .gaisbock-images{
+            width: 33.33%;
+            .cms-element-gaisbock-text{
+                margin-bottom: 0;
+                padding-bottom: 6px;
+            }
+            .cms-element-gaisbock-text{
+                h2 {
+                    font-size: $sw-font-size-xs;
+                    line-height: 13px;
+                }
+            }
+            .cms-element-gaisbock-image{
+                width: 59px;
+                height: 59px;
+            }
+        }
+    }
+    .gailbock-faq-section{
+        .Faq-title{
+            font-size: 42px;
+            line-height: 46px;
+            letter-spacing: 2.94px;
+            padding-bottom: 5px;
+        }
+        h2{
+            letter-spacing: 0.14px;
+            font-size: 29px;
+            line-height: 32px;
+            padding-top: 12px;
+        }
+        p{
+            font-size: $sw-font-size-heading;
+            line-height: 19px;
+        }
+        img {
+            max-width: 109px;
+            width: 100%;
+            height: auto;
+            margin-top: 10px;
+        }
+    } 
 }
