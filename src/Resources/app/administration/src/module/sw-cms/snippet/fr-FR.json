@@ -6,6 +6,9 @@
       }
     },
     "blocks": {
+      "gaisbockImageAddMoreText": {
+        "label": "Ajouter une section supplémentaire Avec des images"
+      },
       "gaisBockListingpageHeadingimage": {
         "label": "Titre et image"
       },

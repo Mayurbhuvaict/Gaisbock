@@ -6,6 +6,9 @@
       }
     },
     "blocks": {
+      "gaisbockImageAddMoreText": {
+        "label": "Weitere Abschnitte hinzufügen Mit Bildern"
+      },
       "gaisBockListingpageHeadingimage": {
         "label": "Überschrift & Bild"
       },
@@ -56,7 +59,8 @@
           "tab": {
             "content": "Inhalt",
             "settings": "Einstellungen",
-            "imageSetting": "Bildeinstellung"
+            "imageSetting": "Bildeinstellung",
+            "addmore": "Weiteren Abschnitt hinzufügen"
           },
           "label": {
             "linkTo": "Bild-Link",
