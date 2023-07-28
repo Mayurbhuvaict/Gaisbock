@@ -92,6 +92,43 @@
       }
   }
 }
+.product-badges{
+    left: 30px;
+    top: 40px;
+    .badge-discount {
+        height: 60px;
+        width: 60px;
+        transform: matrix(0.97, -0.26, 0.26, 0.97, 0, 0);
+        letter-spacing: 1.08px;
+        color: #FFFFFF;
+        text-transform: uppercase;
+        line-height: 25px;
+        font-size: 18px;
+        padding: 0;
+        font-family: $sw-font-family-base;
+        border-radius: 50%;
+        background: #de1010;
+        text-align: center;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-weight: $sw-headings-font-weight;
+    }
+}
+
+.product-wishlist{
+    .icon-wishlist {
+        color: $sw-color-brand-secondary;
+        width: 24px;
+        height: 22px;
+    }
+    .product-wishlist-action-circle {
+        position: absolute;
+        top: 24px;
+        background: transparent;
+        padding: 0;
+    }
+}
 
 @include media-breakpoint-down(md){
   .gaisbock-product-slider{
@@ -166,6 +203,21 @@
           }
       } 
   }
+  .product-badges{
+        left: 15px;
+        top: 20px;
+        .badge-discount {
+            height: 50px;
+            width: 50px;
+            font-size: 14px;
+        }
+    }
+    .product-wishlist{
+        .product-wishlist-action-circle{
+            top: 15px;
+            right: 9px;
+        }
+    }
 }
 
 
