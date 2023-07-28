@@ -1,7 +1,12 @@
 import template from './sw-cms-el-config-gaisbock-image-titles-button.html.twig';
 
+
 const { Mixin } = Shopware;
 
+/**
+ * @private
+ * @package content
+ */
 export default {
     template,
 
@@ -14,9 +19,11 @@ export default {
     data() {
         return {
             mediaModalIsOpen: false,
+            mediaModalTwoIsOpen: false,
             initialFolderId: null,
         };
     },
+
     computed: {
         mediaRepository() {
             return this.repositoryFactory.create('media');
@@ -30,13 +37,12 @@ export default {
         },
 
         previewSource() {
-            if (this.element?.data?.media?.id) {
+            if (this.element.data && this.element.data.media && this.element.data.media.id) {
                 return this.element.data.media;
             }
 
             return this.element.config.media.value;
         },
-
         previewSourceTwo() {
             if (this.element.data && this.element.data.mediaTwo && this.element.data.mediaTwo.id) {
                 return this.element.data.mediaTwo;
@@ -45,25 +51,30 @@ export default {
             return this.element.config.mediaTwo.value;
         },
     },
+
     created() {
         this.createdComponent();
     },
+
     methods: {
         createdComponent() {
             this.initElementConfig('gaisbock-image-titles-button');
         },
+
         async onImageUpload({ targetId }) {
             const mediaEntity = await this.mediaRepository.get(targetId);
+
             this.element.config.media.value = mediaEntity.id;
             this.element.config.url.value = mediaEntity.url;
+
             this.updateElementData(mediaEntity);
 
             this.$emit('element-update', this.element);
         },
-
         async onImageUploadTwo({ targetId }) {
             const mediaEntity = await this.mediaRepository.get(targetId);
-            this.element.config.mediaTwo.value = mediaEntity.id;
+
+            this.element.config.two.value = mediaEntity.id;
             this.element.config.urlTwo.value = mediaEntity.url;
             this.updateElementDataTwo(mediaEntity);
 
@@ -71,26 +82,32 @@ export default {
         },
         onImageRemove() {
             this.element.config.media.value = null;
-            this.element.config.url.value = null;
+
             this.updateElementData();
+
             this.$emit('element-update', this.element);
         },
-
         onImageRemoveTwo() {
-            this.element.config.mediaTwo.value = null;
-            this.element.config.urlTwo.value = null;
+            this.element.config.two.value = null;
 
-            this.updateElementData();
+            this.updateElementDataTwo();
 
             this.$emit('element-update', this.element);
         },
+
         onCloseModal() {
             this.mediaModalIsOpen = false;
         },
+        onCloseModalTwo() {
+            this.mediaModalTwoIsOpen = false;
+        },
+
         onSelectionChanges(mediaEntity) {
             const media = mediaEntity[0];
             this.element.config.media.value = media.id;
-            this.element.config.url.value = mediaEntity.url;
+            this.element.config.media.source = 'static';
+            this.element.config.url.value = media.url;
+
             this.updateElementData(media);
 
             this.$emit('element-update', this.element);
@@ -98,36 +115,37 @@ export default {
         onSelectionChangesTwo(mediaEntity) {
             const media = mediaEntity[0];
             this.element.config.mediaTwo.value = media.id;
-            this.element.config.urlTwo.value = mediaEntity.url;
-            this.updateElementData(media);
+            this.element.config.mediaTwo.source = 'static';
+            this.element.config.urlTwo.value = media.url;
+            this.updateElementDataTwo(media);
 
             this.$emit('element-update', this.element);
         },
+
         updateElementData(media = null) {
             const mediaId = media === null ? null : media.id;
-
             if (!this.element.data) {
-                this.$set(this.element, 'data', { mediaId });
-                this.$set(this.element, 'data', { media });
+                this.$set(this.element, 'data', { mediaId, media });
             } else {
                 this.$set(this.element.data, 'mediaId', mediaId);
                 this.$set(this.element.data, 'media', media);
             }
         },
-
-        updateElementDataTwo(mediaTwo = null) {
-            const mediaTwoId = mediaTwo === null ? null : mediaTwo.id;
-
+        updateElementDataTwo(media = null) {
+            const mediaId = media === null ? null : media.id;
             if (!this.element.data) {
-                this.$set(this.element, 'data', { mediaTwoId });
-                this.$set(this.element, 'data', { mediaTwo });
+                this.$set(this.element, 'data', { mediaId, media });
             } else {
-                this.$set(this.element.data, 'mediaTwoId', mediaTwoId);
-                this.$set(this.element.data, 'mediaTwo', mediaTwo);
+                this.$set(this.element.data, 'twoId', mediaId);
+                this.$set(this.element.data, 'two', media);
             }
         },
+
         onOpenMediaModal() {
             this.mediaModalIsOpen = true;
+        },
+        onOpenMediaModalTwo() {
+            this.mediaModalTwoIsOpen = true;
         },
 
         onChangeMinHeight(value) {
@@ -135,6 +153,19 @@ export default {
 
             this.$emit('element-update', this.element);
         },
+
+        onChangeMainTitle(value) {
+            this.element.config.mainTitle.value = value === null ? '' : value;
+
+            this.$emit('element-update', this.element);
+        },
+
+        onChangeSubTitle(value) {
+            this.element.config.subTitle.value = value === null ? '' : value;
+
+            this.$emit('element-update', this.element);
+        },
+
         onChangeDisplayMode(value) {
             if (value === 'cover') {
                 this.element.config.verticalAlign.value = null;
@@ -142,12 +173,15 @@ export default {
 
             this.$emit('element-update', this.element);
         },
+
         onBlur(content) {
             this.emitChanges(content);
         },
+
         onInput(content) {
             this.emitChanges(content);
         },
+
         emitChanges(content) {
             if (content !== this.element.config.content.value) {
                 this.element.config.content.value = content;

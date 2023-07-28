@@ -8,7 +8,7 @@
         <div class="image-text-container">
             {% block element_image %}
                 {% set config = element.fieldConfig.elements %}
-                <div class="cms-element-{{ element.type }}{% if config.verticalAlign.value %} has-vertical-alignment{% endif %}">
+                <div class="cms-element-{{ element.type }}{% if config.verticalAlign.value %} has-vertical-alignment{% endif %} {{ active }}">
                     {% block element_product_slider_alignment %}
                         {% if config.verticalAlign.value %}
                             <div class="cms-element-alignment{% if config.verticalAlign.value == 'center' %} align-self-center{% elseif config.verticalAlign.value == 'flex-end' %} align-self-end{% else %} align-self-start{% endif %}">
@@ -55,6 +55,9 @@
                         {% endif %}
                     {% endblock %}
 
+
+                </div>
+                <div class="text-image">
                     {% block element_text %}
                         {% set config = element.fieldConfig.elements %}
                         <div class="cms-element-text-container">

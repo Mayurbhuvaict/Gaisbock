@@ -7,6 +7,28 @@
         {% else %}
             {% set active = 'center' %}
         {% endif %}
+
+        <div class="title-image-button-section {{ active }}">
+            {% block cms_element_main_title %}
+                {{ element.config.subTitle.value }}
+                {{ element.config.mainTitle.value }}
+            {% endblock %}
+
+            {% block element_text %}
+            {% set config = element.fieldConfig.elements %}
+            <div class="cms-element-text-container">
+                {{config.content.value|raw }}
+            </div>
+            {% block second_image %}
+            <div class="cms-image-container" >
+                <img src="{{ element.translated.config.urlTwo.value }}" class="cms-image" alt="">
+                {% endblock%}
+                <div class="gaisbock-image-button">
+                    <a href="{{ element.config.buttonOneText.value }}" >{{  element.config.buttonOneText.value|raw }}</a>
+                </div>
+                {% endblock %}
+        </div>
+            
         <div class="image-text-container">
             {% block element_image %}
                 {% set config = element.fieldConfig.elements %}
@@ -60,19 +82,7 @@
                 </div>
             {% endblock %}
 
-            {% block element_text %}
-                {% set config = element.fieldConfig.elements %}
-                <div class="cms-element-text-container">
-                    {{config.content.value|raw }}
-                </div>
-            {% block second_image %}
-            <div class="cms-image-container" >
-                <img src="{{ element.translated.config.urlTwo.value }}" class="cms-image" alt="">
-                {% endblock%}
-                <div class="gaisbock-image-button">
-                    <a href="{{ element.config.buttonOneText.value }}" >{{  element.config.buttonOneText.value|raw }}</a>
-                </div>
-            {% endblock %}
+
         </div>
     </div>
 {% endblock %}
