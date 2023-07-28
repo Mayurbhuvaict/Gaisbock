@@ -41,7 +41,6 @@ Shopware.Service('cmsService').registerCmsElement({
             source: 'static',
             value: null,
         },
-
         urlTwo: {
             source: 'static',
             value: null,
@@ -49,6 +48,14 @@ Shopware.Service('cmsService').registerCmsElement({
         newTab: {
             source: 'static',
             value: false,
+        },
+        mainTitle:{
+          source: 'static',
+          value: null
+        },
+        subTitle:{
+          source: 'static',
+          value: null
         },
         minHeight: {
             source: 'static',
@@ -60,7 +67,7 @@ Shopware.Service('cmsService').registerCmsElement({
         },
         buttonOneUrl:{
             source: 'static',
-            value: '#',
+            value: null,
         },
         buttonOneNewTab: {
             source:'static',

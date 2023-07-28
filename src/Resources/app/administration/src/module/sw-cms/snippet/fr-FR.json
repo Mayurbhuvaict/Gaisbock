@@ -42,6 +42,18 @@
       }
     },
     "elements": {
+      "image": {
+        "config": {
+          "label": {
+            "mainTitle": "Titre",
+            "subTitle": "Sub title"
+          },
+          "placeholder": {
+            "enterMainTitle": "Saisir le titre principal ici",
+            "enterSubtitle" : "Saisir le sous-titre ici"
+          }
+        }
+      },
       "general": {
         "config": {
           "tab": {
