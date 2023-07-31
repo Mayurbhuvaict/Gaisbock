@@ -9,9 +9,22 @@
         {% endif %}
 
         <div class="title-image-button-section {{ active }}">
-            {% block cms_element_main_title %}
-                {{ element.config.subTitle.value }}
-                {{ element.config.mainTitle.value }}
+            {% block cms_element_sub_title %}
+                <div class="sub-title">
+                    {{ element.config.subTitle.value }}
+                </div>
+            {% endblock %}
+            {% block cms_element_main_titile %}
+                <div class="main-title">
+                    {{ element.config.mainTitle.value }}
+                </div>
+            {% endblock %}
+
+            {% block second_image %}
+                <div class="cms-image-container" >
+                    <img src="{{ element.translated.config.urlTwo.value }}" class="cms-image" alt="">
+                    {% endblock%}
+                </div>
             {% endblock %}
 
             {% block element_text %}
@@ -19,17 +32,14 @@
             <div class="cms-element-text-container">
                 {{config.content.value|raw }}
             </div>
-            {% block second_image %}
-            <div class="cms-image-container" >
-                <img src="{{ element.translated.config.urlTwo.value }}" class="cms-image" alt="">
-                {% endblock%}
-                <div class="gaisbock-image-button">
-                    <a href="{{ element.config.buttonOneText.value }}" >{{  element.config.buttonOneText.value|raw }}</a>
-                </div>
-                {% endblock %}
+            <div class="gaisbock-image-button">
+                <a href="{{ element.config.buttonOneText.value }}" >
+                    {{  element.config.buttonOneText.value|raw }}
+                </a>
+            </div>
         </div>
             
-        <div class="image-text-container">
+        <div class="image-text-container" style="background-image: url('http://localhost/shopware6533/public/thumbnail/94/af/89/1690793048/image%20%286%29_1920x1920.png')">
             {% block element_image %}
                 {% set config = element.fieldConfig.elements %}
                 <div class="cms-element-{{ element.type }}{% if config.verticalAlign.value %} has-vertical-alignment{% endif %}">
@@ -81,8 +91,6 @@
                     {% endblock %}
                 </div>
             {% endblock %}
-
-
         </div>
     </div>
 {% endblock %}
