@@ -5,16 +5,16 @@
         {% block layout_footer_custom_text %}
             <div class="custom-texts d-flex">
                 <div class="custom-text-one">
-                    <div>{{ 'footer.customText.customTextOne'|trans|sw_sanitize }}</div>
-                    <div>{{ 'footer.customText.customTextTwo'|trans|sw_sanitize }}</div>
+                    <div class="customer-count">{{ 'footer.customText.customTextOne'|trans|sw_sanitize }}</div>
+                    <div class="cuustomer-content">{{ 'footer.customText.customTextTwo'|trans|sw_sanitize }}</div>
                 </div>
                 <div class="custom-text-two">
-                    <div>{{ 'footer.customText.customTextThree'|trans|sw_sanitize }}</div>
-                    <div>{{ 'footer.customText.customTextFour'|trans|sw_sanitize }}</div>
+                    <div class="customer-count">{{ 'footer.customText.customTextThree'|trans|sw_sanitize }}</div>
+                    <div class="cuustomer-content">{{ 'footer.customText.customTextFour'|trans|sw_sanitize }}</div>
                 </div>
                 <div class="custom-text-one">
-                    <div>{{ 'footer.customText.customTextFive'|trans|sw_sanitize }}</div>
-                    <div>{{ 'footer.customText.customTextSix'|trans|sw_sanitize }}</div>
+                    <div class="customer-count">{{ 'footer.customText.customTextFive'|trans|sw_sanitize }}</div>
+                    <div class="cuustomer-content">{{ 'footer.customText.customTextSix'|trans|sw_sanitize }}</div>
                 </div>
             </div>
         {% endblock %}
@@ -45,8 +45,8 @@
                 {% block footer_layout_try_it %}
                     <div class="col-md-3 text-center mt-5 try-it footer-column">
                         <div class="try-it-section">
-                            <h3>{{ "footer.tryIt.tryItItext"|trans|sw_sanitize }}</h3>
-                            <p>{{ "footer.tryIt.tryItDescription"|trans|sw_sanitize }}</p>
+                            <p class="footer__title">{{ "footer.tryIt.tryItItext"|trans|sw_sanitize }}</p>
+                            <p class="footer__content">{{ "footer.tryIt.tryItDescription"|trans|sw_sanitize }}</p>
                         </div>
                     </div>
                 {% endblock %}
@@ -54,7 +54,7 @@
                 {% block layout_footer_navigation_columns %}
                     {% for root in page.footer.navigation.tree %}
                         {% block layout_footer_navigation_column %}
-                            <div class="col-md-3 footer-column js-footer-column">
+                            <div class="col-md-3 footer-column js-footer-column text-center">
                                 {% block layout_footer_navigation_information_headline %}
                                     <div class="footer-column-headline footer-headline js-collapse-footer-column-trigger"
                                          data-bs-target="#collapseFooterTitle{{ loop.index }}"
@@ -64,9 +64,9 @@
                                         {% if root.category.type == 'folder' %}
                                             {{ root.category.translated.name }}
                                         {% else %}
-                                            <h3>
+                                            <p class="footer__title third-column-text">
                                                 {{ root.category.translated.name }}
-                                            </h3>
+                                            </p>
                                         {% endif %}
                                         {% block layout_footer_navigation_information_icons %}
                                             <div class="footer-column-toggle">
@@ -121,10 +121,10 @@
 
                 {% block footer_layout_handler %}
                     <div class="col-md-3 text-center mt-5 handler-section">
-                        <h3 class="handler-section-title">
+                        <p class="handler-section-title footer__title">
                             {{ "footer.handler.handlerTitle"|trans|sw_sanitize }}
-                        </h3>
-                        <p class="handler-section-description">
+                        </p>
+                        <p class="handler-section-description footer__content">
                             {{ "footer.handler.handlerTitleDescription"|trans|sw_sanitize }}
                         </p>
                     </div>
@@ -168,6 +168,8 @@
                 {% endblock %}
             </div>
         {% endblock %}
+
+        {% sw_include '@Storefront/storefront/component/footer/gaisbock-social-media.html.twig' %}
 
         {% block layout_footer_payment_shipping_logos %}
             <div class="footer-logos">
@@ -217,7 +219,7 @@
             </div>
         {% endblock %}
 
-        {% sw_include '@Storefront/storefront/component/footer/gaisbock-social-media.html.twig' %}
+        
     </div>
 
     {% block layout_footer_bottom %}
@@ -250,6 +252,7 @@
             {% endblock %}
 
             {% block layout_footer_copyright %}
+            <div class="container">
                 <div class="footer-copyright">
                     {% if theme_config('gaisbock-copyright-text') %}
                         <div class="footer-copyright-custom">
@@ -259,6 +262,7 @@
                         {% sw_icon 'shopware' style {'size':'xs'} %}
                         {{ "footer.copyrightInfo"|trans|sw_sanitize }}
                     {% endif %}
+                </div>
                 </div>
             {% endblock %}
         </div>
