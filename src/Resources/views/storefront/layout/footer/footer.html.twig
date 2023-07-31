@@ -32,21 +32,52 @@
                     role="list"
             >
                 {% block footer_newsletter %}
-                    <div class="col-md-3 footer-column">
-                        <div class=" newsletter mt-5">
+                    <div class="col-md-3 footer-column js-footer-column">
+                        <div class=" newsletter">
                             {% sw_include '@Storefront/storefront/component/footer/gaisbock-footer-newsletter.html.twig' with {
                                 action: 'frontend.form.newsletter.register.handle',
                                 submitText: 'newsletter.formSubmit'
-                            }  %}
+                            } %}
                         </div>
                     </div>
                 {% endblock %}
 
                 {% block footer_layout_try_it %}
-                    <div class="col-md-3 text-center mt-5 try-it footer-column">
-                        <div class="try-it-section">
-                            <p class="footer__title">{{ "footer.tryIt.tryItItext"|trans|sw_sanitize }}</p>
-                            <p class="footer__content">{{ "footer.tryIt.tryItDescription"|trans|sw_sanitize }}</p>
+                    <div class="col-md-3 text-center try-it footer-column js-footer-column">
+                        <div class="footer-column-headline footer-headline js-footer-column-headline js-collapse-footer-column-trigger"
+                             id="collapseFooterTryItTitle"
+                             data-bs-target="#collapseFooterTryIt"
+                             aria-expanded="true"
+                             aria-controls="collapseFooterTryIt"
+                             role="listitem">
+                            <div class="try-it-section">
+                                <p class="footer__title">{{ "footer.tryIt.tryItItext"|trans|sw_sanitize }}</p>
+                            </div>
+                            {% block layout_footer_navigation_hotline_icons %}
+                                <div class="footer-column-toggle">
+                                        <span class="footer-plus-icon">
+                                            {% sw_icon 'ic-chevron-right-dark' style {
+                                                'pack': 'gaisbock',
+                                                'size': 'sm',
+                                            } %}
+                                        </span>
+                                    <span class="footer-minus-icon">
+                                            {% sw_icon 'chevron-down' style {
+                                                'pack': 'gaisbock',
+                                                'size': 'sm',
+                                            } %}
+                                        </span>
+                                </div>
+                            {% endblock %}
+                        </div>
+
+                        <div id="collapseFooterTryIt"
+                             class="footer-column-content collapse js-footer-column-content footer-contact"
+                             aria-labelledby="collapseFooterTryIt">
+                            <div class="try-it-section">
+                                {#                                <p class="footer__title">{{ "footer.tryIt.tryItItext"|trans|sw_sanitize }}</p> #}
+                                <p class="footer__content ">{{ "footer.tryIt.tryItDescription"|trans|sw_sanitize }}</p>
+                            </div>
                         </div>
                     </div>
                 {% endblock %}
@@ -71,10 +102,16 @@
                                         {% block layout_footer_navigation_information_icons %}
                                             <div class="footer-column-toggle">
                                                 <span class="footer-plus-icon">
-                                                    {% sw_icon 'plus' %}
+                                                    {% sw_icon 'ic-chevron-right-dark' style {
+                                                        'pack': 'gaisbock',
+                                                        'size': 'sm',
+                                                    } %}
                                                 </span>
                                                 <span class="footer-minus-icon">
-                                                    {% sw_icon 'minus' %}
+                                                    {% sw_icon 'chevron-down' style {
+                                                        'pack': 'gaisbock',
+                                                        'size': 'sm',
+                                                    } %}
                                                 </span>
                                             </div>
                                         {% endblock %}
@@ -120,13 +157,44 @@
                 {% endblock %}
 
                 {% block footer_layout_handler %}
-                    <div class="col-md-3 text-center mt-5 handler-section">
-                        <p class="handler-section-title footer__title">
-                            {{ "footer.handler.handlerTitle"|trans|sw_sanitize }}
-                        </p>
-                        <p class="handler-section-description footer__content">
-                            {{ "footer.handler.handlerTitleDescription"|trans|sw_sanitize }}
-                        </p>
+
+
+                    <div class="col-md-3 text-center handler-section footer-column js-footer-column">
+
+                        <div class="footer-column-headline footer-headline js-footer-column-headline js-collapse-footer-column-trigger"
+                             id="collapseFooterHandlerSectionTitle"
+                             data-bs-target="#collapseFooterHandlerSection"
+                             aria-expanded="true"
+                             aria-controls="collapseFooterHandlerSection"
+                             role="listitem">
+                            <div class="handler-section-title footer__title">
+                                {{ "footer.handler.handlerTitle"|trans|sw_sanitize }}
+                            </div>
+                            {% block layout_footer_navigation_handler_icons %}
+                                <div class="footer-column-toggle">
+                                        <span class="footer-plus-icon">
+                                            {% sw_icon 'ic-chevron-right-dark' style {
+                                                'pack': 'gaisbock',
+                                                'size': 'sm',
+                                            } %}
+                                        </span>
+                                    <span class="footer-minus-icon">
+                                            {% sw_icon 'chevron-down' style {
+                                                'pack': 'gaisbock',
+                                                'size': 'sm',
+                                            } %}
+                                        </span>
+                                </div>
+                            {% endblock %}
+                        </div>
+
+                        <div id="collapseFooterHandlerSection"
+                             class="footer-column-content collapse js-footer-column-content footer-contact"
+                             aria-labelledby="collapseFooterHandlerSection">
+                            <p class="handler-section-description footer__content">
+                                {{ "footer.handler.handlerTitleDescription"|trans|sw_sanitize }}
+                            </p>
+                        </div>
                     </div>
                 {% endblock %}
             </div>
@@ -135,14 +203,14 @@
         {% sw_include '@Storefront/storefront/component/footer/gaisbock-footer-logo.html.twig' %}
 
         {% block layout_footer_navigation_hotline %}
-            <div class="text-center footer-column js-footer-column mt-3">
+            <div class="text-center mt-3">
                 {% block layout_footer_navigation_hotline_headline %}
 
                 {% endblock %}
 
                 {% block layout_footer_navigation_hotline_content %}
                     <div id="collapseFooterHotline"
-                         class="footer-column-content collapse js-footer-column-content footer-contact"
+                         class="footer-column-content js-footer-column-content footer-contact"
                          aria-labelledby="collapseFooterHotlineTitle">
                         <div class="footer-column-content-inner">
                             <div class="footer-contact-hotline d-flex justify-content-center    ">
@@ -218,8 +286,6 @@
                 {% endblock %}
             </div>
         {% endblock %}
-
-        
     </div>
 
     {% block layout_footer_bottom %}
@@ -252,17 +318,17 @@
             {% endblock %}
 
             {% block layout_footer_copyright %}
-            <div class="container">
-                <div class="footer-copyright">
-                    {% if theme_config('gaisbock-copyright-text') %}
-                        <div class="footer-copyright-custom">
-                            {{ theme_config('gaisbock-copyright-text')|trans|sw_sanitize }}
-                        </div>
-                    {% else %}
-                        {% sw_icon 'shopware' style {'size':'xs'} %}
-                        {{ "footer.copyrightInfo"|trans|sw_sanitize }}
-                    {% endif %}
-                </div>
+                <div class="container">
+                    <div class="footer-copyright">
+                        {% if theme_config('gaisbock-copyright-text') %}
+                            <div class="footer-copyright-custom">
+                                {{ theme_config('gaisbock-copyright-text')|trans|sw_sanitize }}
+                            </div>
+                        {% else %}
+                            {% sw_icon 'shopware' style {'size':'xs'} %}
+                            {{ "footer.copyrightInfo"|trans|sw_sanitize }}
+                        {% endif %}
+                    </div>
                 </div>
             {% endblock %}
         </div>

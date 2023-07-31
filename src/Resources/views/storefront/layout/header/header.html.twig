@@ -87,7 +87,11 @@
                                             aria-expanded="false"
                                             aria-controls="searchCollapse"
                                             aria-label="{{ "header.searchButton"|trans|striptags }}">
-                                        {% sw_icon 'search' %}
+                                        {% if activeRoute == 'frontend.home.page' %}
+                                            {% sw_icon 'SEARCH_white' style {'pack': 'gaisbock','class':'gaisbock-header-search'} %}
+                                        {% else %}
+                                            {% sw_icon 'SEARCH_black' style {'pack': 'gaisbock','class':'gaisbock-header-search'} %}
+                                        {% endif %}
                                     </button>
                                     <div class="collapse"
                                          id="searchCollapse">

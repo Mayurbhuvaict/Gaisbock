@@ -10,35 +10,64 @@
                 {% block cms_form_newsletter_input_email %}
                     <div class="newsletter-form">
                         <div class="newsletter-content">
-                            <p class="newsletter-title-one text-center footer__title">
-                                {{ 'footer.newsletter.titleOne'|trans|sw_sanitize }}
-                            </p>
-                            <p class="newsletter-description text-center footer__content">
-                                {{ 'footer.newsletter.descriptionText'|trans|sw_sanitize }}
-                            </p>
-                            <div class="newsletter-form">
-                            {% sw_include '@Storefront/storefront/element/cms-element-form/form-components/cms-element-form-input.html.twig'
-                                with {
-                                fieldName: 'email',
-                                type: 'email',
-                                additionalClass: 'col-12',
-                                placeholder: 'newsletter.placeholderMail'
-                            }
-                            %}
-                            {% block cms_form_submit %}
-                                <button type="submit" aria-label="Submit" class="btn btn-primary">
-                                <svg width="15px" height="15px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <g id="Arrow / Chevron_Right">
-                                    <path id="Vector" d="M9 5L16 12L9 19" stroke="#C5AB74" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                                    </g>
-                                    </svg>
-                                    {% sw_icon 'ic-chevron-right-dark' style {
-                                        'pack': 'ict',
-                                        'class':'footer-submit',
-                                        'size': 'sm',
+                            <div class="footer-column-headline footer-headline js-footer-column-headline js-collapse-footer-column-trigger"
+                                 id="collapseFooterNewsletterTitle"
+                                 data-bs-target="#collapseFooterNewsletter"
+                                 aria-expanded="true"
+                                 aria-controls="collapseFooterNewsletter"
+                                 role="listitem">
+                                <p class="newsletter-title-one text-center footer__title">
+                                    {{ 'footer.newsletter.titleOne'|trans|sw_sanitize }}
+                                </p>
+                                {% block layout_footer_navigation_newsletter_icons %}
+                                    <div class="footer-column-toggle">
+                                        <span class="footer-plus-icon">
+                                            {% sw_icon 'ic-chevron-right-dark' style {
+                                                'pack': 'gaisbock',
+                                                'size': 'sm',
+                                            } %}
+                                        </span>
+                                        <span class="footer-minus-icon">
+                                            {% sw_icon 'chevron-down' style {
+                                                'pack': 'gaisbock',
+                                                'size': 'sm',
+                                            } %}
+                                        </span>
+                                    </div>
+                                {% endblock %}
+                            </div>
+
+                            <div id="collapseFooterNewsletter"
+                                 class="footer-column-content collapse js-footer-column-content footer-contact"
+                                 aria-labelledby="collapseFooterNewsletter">
+                                <p class="newsletter-description text-center footer__content">
+                                    {{ 'footer.newsletter.descriptionText'|trans|sw_sanitize }}
+                                </p>
+                                <div class="newsletter-form">
+                                    {% sw_include '@Storefront/storefront/element/cms-element-form/form-components/cms-element-form-input.html.twig'
+                                        with {
+                                        fieldName: 'email',
+                                        type: 'email',
+                                        additionalClass: 'col-12',
+                                        placeholder: 'newsletter.placeholderMail'
                                     } %}
-                                </button>
-                            {% endblock %}
+                                    {% block cms_form_submit %}
+                                        <button type="submit" aria-label="Submit" class="btn btn-primary">
+                                            <svg width="15px" height="15px" viewBox="0 0 24 24" fill="none"
+                                                 xmlns="http://www.w3.org/2000/svg">
+                                                <g id="Arrow / Chevron_Right">
+                                                    <path id="Vector" d="M9 5L16 12L9 19" stroke="#C5AB74" stroke-width="2"
+                                                          stroke-linecap="round" stroke-linejoin="round"/>
+                                                </g>
+                                            </svg>
+                                            {% sw_icon 'ic-chevron-right-dark' style {
+                                                'pack': 'gaisbock',
+                                                'class':'footer-submit',
+                                                'size': 'sm',
+                                            } %}
+                                        </button>
+                                    {% endblock %}
+                                </div>
                             </div>
                         </div>
                     </div>
