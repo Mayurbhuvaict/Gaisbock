@@ -21,6 +21,18 @@
                                 @blur="onBlur"
                                 @input="onInput"
                         />
+                        <div v-if="element.config.subContent.source === 'mapped'" class="sw-cms-el-text__mapping-preview content-editor" v-html="$sanitize(demoValue)"></div>
+                        <sw-text-editor
+                                v-else
+                                v-model="element.config.subContent.value"
+                                :disabled="disabled"
+                                :allow-inline-data-mapping="true"
+                                :is-inline-edit="true"
+                                sanitize-input
+                                enable-transparent-background
+                                @blur="onBlurOne"
+                                @input="onInputOne"
+                        />
                     </div>
                 {% endblock %}
                 <div class="sw-cms-preview-gaisbock-image-addmore-text__images">

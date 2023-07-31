@@ -1,5 +1,5 @@
 {% sw_extends '@Storefront/storefront/base.html.twig' %}
-{# Set variable to "true" to enable HMR (hot page reloading) mode #}
+{# Set variable to "true" to enable HMR (hot page reloading) mode#}
 {% set isHMRMode = app.request.headers.get('hot-reload-mode') and app.environment == 'dev' %}
 
 {% block base_doctype %}
@@ -86,7 +86,7 @@
                     <div class="product-detail-tabs product-detail-cross-selling nolten-theme-cross-selling">
                         {% sw_include '@Storefront/storefront/page/product-detail/cross-selling/tabs.html.twig' with {
                             crossSellings: page.extensions.productCrossSelling.crossSellings,
-                            extraKeys:'nolten-cross-selling'
+                            extraKes:'nolten-cross-selling'
                         } %}
                     </div>
                 {% endif %}
