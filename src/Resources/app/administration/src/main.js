@@ -8,6 +8,7 @@ import './module/sw-cms/blocks/gaisbockOption/gaisbock-text-image-slider';
 import './module/sw-cms/blocks/gaisbockOption/gaisbock-title-text-image';
 import './module/sw-cms/blocks/gaisbockOption/gaisbock-listpage-text-image';
 import './module/sw-cms/blocks/gaisbockOption/gaisbock-image-titles-button';
+import './module/sw-cms/blocks/gaisbockOption/gaisbock-image-add-more-text';
 
 
 import './module/sw-cms/component';
@@ -22,4 +23,5 @@ import './module/sw-cms/elements/gaisbock-text-image-slider';
 import './module/sw-cms/elements/gaisbock-title-text-image';
 import './module/sw-cms/elements/gaisbock-listpage-text-image';
 import './module/sw-cms/elements/gaisbock-image-titles-button';
+import './module/sw-cms/elements/gaisbock-image-add-more-text';
 
