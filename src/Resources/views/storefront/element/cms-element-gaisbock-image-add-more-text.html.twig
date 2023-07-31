@@ -1,6 +1,6 @@
 {% block element_gaisbock_image_addmore_text %}
     {% set config = element.fieldConfig.elements %}
-    <div class="element-gaisbock-image-add-more-text">
+    <div class="element-gaisbock-image-add-more-text" data-gaisbock-addmore-section>
         <div class="element-gaisbock-image-add-more-text--inner">
             {% block sw_cms_element_image_content %}
                 <div class="cms-element-{{ element.type }}{% if config.verticalAlign.value %} has-vertical-alignment{% endif %}">
@@ -16,42 +16,8 @@
                 </div>
             {% endblock %}
             {% block sw_cms_element_text %}
-                <div class="element-gaisbock-image-add-more-text__text content" id="content" data-gaisbock-addMore>
+                <div class="element-gaisbock-image-add-more-text__text">
                     {{ element.config.content.value|raw }}
-                </div>
-                <div class="element-gaisbock-image-addmore-text__images">
-                    <div class="gaisbock-image-line">
-                        <img src="{{ element.config.urlOne.value }}" alt="">
-                        <p>{{ element.config.titleOne.value }}</p>
-                        <img src="{{ element.config.urlTwo.value }}" alt="">
-                        <p>{{ element.config.titleTwo.value }}</p>
-                        <img src="{{ element.config.urlThree.value }}" alt="">
-                        <p>{{ element.config.titleThree.value }}</p>
-                    </div>
-                    <div class="gaisbock-image-line">
-                        <img src="{{ element.config.urlFour.value }}" alt="">
-                        <p>{{ element.config.titleFour.value }}</p>
-                        <img src="{{ element.config.urlFive.value }}" alt="">
-                        <p>{{ element.config.titleFive.value }}</p>
-                        <img src="{{ element.config.urlSix.value }}" alt="">
-                        <p>{{ element.config.titleSix.value }}</p>
-                    </div>
-                    <div class="gaisbock-image-line">
-                        <img src="{{ element.config.urlSeven.value }}" alt="">
-                        <p>{{ element.config.titleSeven.value }}</p>
-                        <img src="{{ element.config.urlEight.value }}" alt="">
-                        <p>{{ element.config.titleEight.value }}</p>
-                        <img src="{{ element.config.urlNine.value }}" alt="">
-                        <p>{{ element.config.titleNine.value }}</p>
-                    </div>
-                    <div class="gaisbock-image-line">
-                        <img src="{{ element.config.urlTen.value }}" alt="">
-                        <p>{{ element.config.titleTen.value }}</p>
-                        <img src="{{ element.config.urlEleven.value }}" alt="">
-                        <p>{{ element.config.titleEleven.value }}</p>
-                        <img src="{{ element.config.urlTwelve.value }}" alt="">
-                        <p>{{ element.config.titleTwelve.value }}</p>
-                    </div>
                 </div>
                 {% if app.request.locale === 'de-DE' %}
                     <a href="javascript:void(0)" id="readMore" data-language-value="{{ app.request.locale }}">Mehr
@@ -60,46 +26,73 @@
                     <a href="javascript:void(0)" id="readMore" data-language-value="{{ app.request.locale }}">Read
                         More</a>
                 {% endif %}
+                <div id="gaisbock-addmore-section" style="display:none;">
+                    <div class="element-gaisbock-image-addmore-text__images">
+                        <div class="gaisbock-text-line">
+                            {{ element.config.subContent.value|raw }}
+                        </div>
+                        <div class="gaisbock-image-line">
+                            <img src="{{ element.config.urlOne.value }}" alt="">
+                            {% if element.config.urlOne.value %}
+                                <p>{{ element.config.titleOne.value }}</p>
+                            {% endif %}
+                            <img src="{{ element.config.urlTwo.value }}" alt="">
+                            {% if element.config.urlTwo.value %}
+                                <p>{{ element.config.titleTwo.value }}</p>
+                            {% endif %}
+                            <img src="{{ element.config.urlThree.value }}" alt="">
+                            {% if element.config.urlThree.value %}
+                                <p>{{ element.config.titleThree.value }}</p>
+                            {% endif %}
+                        </div>
+                        <div class="gaisbock-image-line">
+                            <img src="{{ element.config.urlFour.value }}" alt="">
+                            {% if element.config.urlFour.value %}
+                                <p>{{ element.config.titleFour.value }}</p>
+                            {% endif %}
+                            <img src="{{ element.config.urlFive.value }}" alt="">
+                            {% if element.config.urlFive.value %}
+                                <p>{{ element.config.titleFive.value }}</p>
+                            {% endif %}
+                            <img src="{{ element.config.urlSix.value }}" alt="">
+                            {% if element.config.urlSix.value %}
+                                <p>{{ element.config.titleSix.value }}</p>
+                            {% endif %}
+                        </div>
+                        <div class="gaisbock-image-line">
+                            <img src="{{ element.config.urlSeven.value }}" alt="">
+                            {% if lement.config.urlSeven.value %}
+                                <p>{{ element.config.titleSeven.value }}</p>
+                            {% endif %}
+                            <img src="{{ element.config.urlEight.value }}" alt="">
+                            {% if lement.config.urlEight.value %}
+                                <p>{{ element.config.titleEight.value }}</p>
+                            {% endif %}
+                            <img src="{{ element.config.urlNine.value }}" alt="">
+                            {% if lement.config.urlNine.value %}
+                                <p>{{ element.config.titleNine.value }}</p>
+                            {% endif %}
+                        </div>
+                        <div class="gaisbock-image-line">
+                            <img src="{{ element.config.urlTen.value }}" alt="">
+                            {% if lement.config.urlTen.value %}
+                                <p>{{ element.config.titleTen.value }}</p>
+                            {% endif %}
+                            <img src="{{ element.config.urlEleven.value }}" alt="">
+                            {% if lement.config.urlEleven.value %}
+                                <p>{{ element.config.titleEleven.value }}</p>
+                            {% endif %}
+                            <img src="{{ element.config.urlTwelve.value }}" alt="">
+                            {% if lement.config.urlTwelve.value %}
+                                <p>{{ element.config.titleTwelve.value }}</p>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
             {% endblock %}
-
         </div>
     </div>
-    <style>
-        .gaisboick-more{
-            display:block;
-        }
-        .hide{
-            display:none;
-        }
-    </style>
     <script>
-        let noOfCharac = 600;
-        let contents = document.querySelectorAll(".content");
-        console.log(contents)
-        contents.forEach(content => {
-            //If text length is less that noOfCharac... then hide the read more button
-            if(content.length <= noOfCharac){
-                content.nextElementSibling.style.display = "none";
-            }
-            else{
-                console.log(content,"hy")
-                let displayText = content.textContent.slice(0,noOfCharac);
-                let moreText = content.textContent.slice(noOfCharac);
-                console.log(moreText)
-                content.innerHTML = `${displayText}<div class="dots">...</div><div class="hide gaisboick-more">${moreText}</div>`;
-            }
-        });
-        let language = document.querySelector('#readMore').getAttribute('data-language-value');
-        document.querySelector('#readMore').addEventListener("click", function() {
-            const btn = document.getElementById("readMore");
-            let post = btn.parentElement;
-            post.querySelector(".dots").classList.toggle("hide");
-            post.querySelector(".gaisboick-more").classList.toggle("hide");
-            if (language === 'de-DE'){
-                btn.textContent === "Mehr lesen" ? btn.textContent = "Weniger lesen" : btn.textContent = "Mehr lesen";
-            }else{
-                btn.textContent === "Read More" ? btn.textContent = "Read Less" : btn.textContent = "Read More";
-            }
-        });
+
     </script>
 {% endblock %}

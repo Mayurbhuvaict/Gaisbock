@@ -169,6 +169,14 @@
                                 @input="onInput"
                                 @blur="onBlur"
                         />
+                        <sw-text-editor
+                                :value="element.config.subContent.value"
+                                :allow-inline-data-mapping="true"
+                                sanitize-input
+                                enable-transparent-background
+                                @input="onInputOne"
+                                @blur="onBlurOne"
+                        />
                     </div>
                 {% endblock %}
             </sw-container>
@@ -770,13 +778,13 @@
                         @media-modal-selection-change="onTwelveSelectionChanges"
                         @modal-close="onTwelveCloseModal"
                 />
+                <sw-field
+                        v-model="element.config.titleTwelve.value"
+                        type="text"
+                        :label="$tc('sw-cms.elements.general.config.label.title')"
+                        :placeholder="$tc('sw-cms.elements.general.config.label.title')"
+                />
             </sw-container>
-            <sw-field
-                    v-model="element.config.titleTwelve.value"
-                    type="text"
-                    :label="$tc('sw-cms.elements.general.config.label.title')"
-                    :placeholder="$tc('sw-cms.elements.general.config.label.title')"
-            />
         </template>
     </sw-tabs>
 {% endblock %}

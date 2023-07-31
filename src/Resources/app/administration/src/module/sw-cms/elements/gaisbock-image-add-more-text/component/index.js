@@ -298,5 +298,19 @@ export default {
                 this.$emit('element-update', this.element);
             }
         },
+        onBlurOne(content) {
+            this.emitChanges(content);
+        },
+
+        onInputOne(content) {
+            this.emitChangesOne(content);
+        },
+
+        emitChangesOne(content) {
+            if (content !== this.element.config.subContent.value) {
+                this.element.config.subContent.value = content;
+                this.$emit('element-update', this.element);
+            }
+        },
     },
 }
