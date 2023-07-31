@@ -27,7 +27,7 @@
 
                         {% for image in sliderConfig.sliderItems.value %}
                             {% set imageElement %}
-                                <div class="image-slider-item{% if loop.first != true %} is-not-first{% endif %} is-{{ sliderConfig.displayMode.value }}"{% if sliderConfig.minHeight.value and  sliderConfig.displayMode.value == "cover" %} style="min-height: {{ sliderConfig.minHeight.value|trim|replace({' ':''}) }}"{% endif %}>
+                                <div style="background-image:url('{{ image.mediaUrl }}')" class="image-slider-item{% if loop.first != true %} is-not-first{% endif %} is-{{ sliderConfig.displayMode.value }}"{% if sliderConfig.minHeight.value and  sliderConfig.displayMode.value == "cover" %} style="min-height: {{ sliderConfig.minHeight.value|trim|replace({' ':''}) }}"{% endif %}>
                                     <div class="gaisbock-image-hover-text">
                                         {{ image.text|raw }}
                                     </div>
