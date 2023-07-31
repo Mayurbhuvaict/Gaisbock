@@ -1,7 +1,6 @@
 {% block cms_element_category_image_text %}
     {% set category = page.extensions.categoryData.subCategoryData %}
     {% set activePath = page.header.navigation.active.path %}
-    {{ dump(category) }}
     {% if category %}
         {% for key,item in category %}
             {% if item %}
