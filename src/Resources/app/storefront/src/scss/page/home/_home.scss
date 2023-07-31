@@ -3,10 +3,102 @@
     img {
         width: 100%;
     }
+    .base-slider.has-nav-outside,
+    .image-slider.has-nav-outside .image-slider-item-container {
+        padding: 0;
+    }
+    .banner-conext {
+        position: absolute;
+        top: 50%;
+        transform: translate(0%,-50%);
+        left: 190px;
+        max-width: 355px;
+        @media(max-width:1299px) {
+            top: 63%;
+        }
+        @media(max-width:1024px) {
+
+        }
+        h2 {
+            font-size: 70px;
+            letter-spacing: 0.35px;
+            line-height: 76px;
+            text-shadow: 0px 0px 40px #00000029;
+            color: #fff;
+            font-weight: 900;
+            @media(max-width:1024px) {
+                font-size: 50px;
+                line-height: 56px;
+            }
+            @media(max-width:992px) {
+                font-size: 40px;
+                line-height: 43px;
+                letter-spacing: 0.2px;
+            }
+        }
+        p {
+            font-size: 18px;
+            letter-spacing: 1.08px;
+            line-height: 25px;
+            text-shadow: 0px 0px 15px #00000029;
+            text-transform: uppercase;
+            max-width: 219px;
+            color: #fff;
+            font-weight: $fontWeight700;
+            margin-bottom: 25px;
+            margin-top: 15px;
+            @media(max-width:1024px) {
+                font-size: 15px;
+                line-height: 22px;
+            }
+            @media(max-width:992px) {
+                font-size: 13px;
+                line-height: 17px;
+                letter-spacing: 0.91px;
+            }
+        }
+        a {
+            background: #DE1010;
+            color: #fff;
+            border-radius: 15px;
+            font-size: 13px;
+            display: inline-block;
+            letter-spacing: 0.78px;
+            text-transform: uppercase;
+            font-weight: $fontWeight700;
+            height: 30px;
+            padding: 0 12px;
+            line-height: 30px;
+            text-decoration: none;
+        }
+    }
+    .image-slider-item {
+        @media(min-width:768px){
+            background-image: none !important;
+        }
+    }
+    .tns-nav {
+        bottom: 23px !important;
+        button {
+            background: #E8E8E8;
+            padding: 4px;
+            margin: 0 10px;
+        }
+        .tns-nav-active {
+            background-color: #C9AC77 !important;
+            
+        }
+    }
+}
+.is-act-home {
+    .breadcrumb {
+        margin: 0;
+    }
 }
 
 .Gaisbock-category-images {
     background: $sw-color-brand-primary;
+    margin-top: -1px;
     .gaisbock-title{
         padding-top: 46px;
         padding-bottom: 25px;
@@ -23,6 +115,9 @@
     .gaisbock-images {
         text-align: center;
         width: 16.667%;
+        @media(max-width:992px) {
+            width: 33.33%;
+        }
         .cms-element-gaisbock-text{
             margin-top: 11px;
             margin-bottom: 46px;
@@ -170,4 +265,38 @@
             margin-top: 10px;
         }
     } 
+    .home-banner .image-slider-container .image-slider-image {
+        display: none;
+    }
+    .home-banner {
+        .image-slider-item {
+            background-position: center;
+            background-size: cover;
+            background-repeat: no-repeat;
+            width: 100%;
+            height: 652px;
+        }
+    }
+    .home-banner .banner-conext {
+        left: 16px;
+        max-width: 203px;
+    }
+    .home-banner .banner-conext p {
+        max-width: 131px;
+        margin-bottom: 13px;
+        margin-top: 5px;
+    }
+    .home-banner .banner-conext a {
+        font-size: 10px;
+        height: 23px;
+        padding: 0 10px;
+        line-height: 23px;
+            font-size: 10px;
+    }
+    .home-banner .tns-nav {
+        bottom: 8px !important;
+    }
+    .home-banner .tns-nav button {
+        margin: 0 7px;
+    }
 }
