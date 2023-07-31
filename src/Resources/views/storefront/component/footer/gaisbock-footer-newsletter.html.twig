@@ -10,15 +10,13 @@
                 {% block cms_form_newsletter_input_email %}
                     <div class="newsletter-form">
                         <div class="newsletter-content">
-                            <h3 class="newsletter-title-one text-center">
+                            <p class="newsletter-title-one text-center footer__title">
                                 {{ 'footer.newsletter.titleOne'|trans|sw_sanitize }}
-                            </h3>
-                            <h4 class="newsletter-title-two text-center">
-                                {{ 'footer.newsletter.titleTwo'|trans|sw_sanitize }}
-                            </h4>
-                            <p class="newsletter-description text-center">
+                            </p>
+                            <p class="newsletter-description text-center footer__content">
                                 {{ 'footer.newsletter.descriptionText'|trans|sw_sanitize }}
                             </p>
+                            <div class="newsletter-form">
                             {% sw_include '@Storefront/storefront/element/cms-element-form/form-components/cms-element-form-input.html.twig'
                                 with {
                                 fieldName: 'email',
@@ -29,6 +27,11 @@
                             %}
                             {% block cms_form_submit %}
                                 <button type="submit" aria-label="Submit" class="btn btn-primary">
+                                <svg width="15px" height="15px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <g id="Arrow / Chevron_Right">
+                                    <path id="Vector" d="M9 5L16 12L9 19" stroke="#C5AB74" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                    </g>
+                                    </svg>
                                     {% sw_icon 'ic-chevron-right-dark' style {
                                         'pack': 'ict',
                                         'class':'footer-submit',
@@ -36,6 +39,7 @@
                                     } %}
                                 </button>
                             {% endblock %}
+                            </div>
                         </div>
                     </div>
                 {% endblock %}

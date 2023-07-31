@@ -1,24 +1,23 @@
 {
   "footer": {
     "newsletter" : {
-      "titleOne": "GAISBOCK",
-      "titleTwo": "PREMIUM-MEMBER WERDEN",
+      "titleOne": "GAISBOCK <br>PREMIUM-MEMBER WERDEN",
       "descriptionText" : "Die ersten 300 erhalten gratis Socken, Profitiere von exklusiven Angeboten und Rabatten"
     },
     "customText": {
       "customTextOne": "347",
-      "customTextTwo": "Anzahl Wiederverkäufer",
+      "customTextTwo": "Anzahl <br> Wiederverkäufer",
       "customTextThree": "<1000",
-      "customTextFour": "Anzahl Kunden",
+      "customTextFour": "Anzahl <br> Kunden",
       "customTextFive": "XXX",
-      "customTextSix": "Lorem Sipdum dol"
+      "customTextSix": "Lorem <br>Sipdum dol"
     },
     "tryIt": {
-      "tryItItext": "BOCK AUF AUSPROBIEREN?",
+      "tryItItext": "BOCK AUF <br>AUSPROBIEREN?",
       "tryItDescription": "Hier gehts zu den Gaisbock-Händlern in Deiner Nähe."
     },
     "handler": {
-      "handlerTitle": "JETZT GAISBOCK- HÄNDLER WERDEN",
+      "handlerTitle": "JETZT GAISBOCK-<br> HÄNDLER WERDEN",
       "handlerTitleDescription": "Händler Login Anfragen consectetuer adipisci lorem ipsuam dolor esang elit<a href=\"#\"> Aenean massa. Cum sociis.</a>"
     },
     "hotline": {

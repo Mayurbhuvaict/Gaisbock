@@ -9,6 +9,10 @@ https://getbootstrap.com/docs/4.0/getting-started/theming/#variable-defaults
 $fontWeight700:700;
 $fontWeight600:600;
 $fontWeight500:500;
+body {
+	font-family: $sw-font-family-base;
+	font-weight: $fontWeight500;
+}
 
 @font-face {
 	font-family: 'Blacker-display';
@@ -80,4 +84,16 @@ $fontWeight500:500;
 	url('../../../bundles/gaisbock/storefront/assets/fonts/Rama-Slab/Rama-Slab-Semi-Bold/Rama-Slab-SemiBold.woff') format('woff'), /* Modern Browsers */
 	url('../../../bundles/gaisbock/storefront/assets/fonts/Rama-Slab/Rama-Slab-Semi-Bold/Rama-Slab-SemiBold.ttf') format('truetype'), /* Safari, Android, iOS */
 	url('../../../bundles/gaisbock/storefront/assets/fonts/Rama-Slab/Rama-Slab-Semi-Bold/Rama-Slab-SemiBold.otf') format('otf'); /* Legacy iOS */
+}
+
+@font-face {
+	font-family: 'national-test';
+	font-style: normal;
+	font-weight: 600;
+	src: local(''),
+	url('../../../bundles/gaisbock/storefront/assets/fonts/national-test/National-Medium/National2-Medium.eot') format('embedded-opentype'), /* IE6-IE8 */
+	url('../../../bundles/gaisbock/storefront/assets/fonts/national-test/National-Medium/National2-Medium.woff2') format('woff2'), /* Super Modern Browsers */
+	url('../../../bundles/gaisbock/storefront/assets/fonts/national-test/National-Medium/National2-Medium.woff') format('woff'), /* Modern Browsers */
+	url('../../../bundles/gaisbock/storefront/assets/fonts/national-test/National-Medium/National2-Medium.ttf') format('truetype'), /* Safari, Android, iOS */
+	url('../../../bundles/gaisbock/storefront/assets/fonts/national-test/National-Medium/National2-Medium.otf') format('otf'); /* Legacy iOS */
 }

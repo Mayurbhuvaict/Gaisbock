@@ -1,24 +1,23 @@
 {
   "footer": {
     "newsletter" : {
-      "titleOne": "Lorem ipsum",
-      "titleTwo": "PREMIUM-MEMBER WARDEN",
+      "titleOne": "Lorem ipsum <br>PREMIUM-MEMBER WERDEN",
       "descriptionText" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et <a href=\"#\">dolore magna aliqua.</a>"
     },
     "customText": {
       "customTextOne": "347",
-      "customTextTwo": "Number of resellers",
+      "customTextTwo": "Number <br>of resellers",
       "customTextThree": "<1000",
-      "customTextFour": "Number of customers",
+      "customTextFour": "Number of<br> customers",
       "customTextFive": "XXX",
-      "customTextSix": "Lorem Sipdum dol"
+      "customTextSix": "Lorem<br> Sipdum dol"
     },
     "tryIt": {
-      "tryItItext": "WANT TO TRY IT?",
+      "tryItItext": "WANT TO <br> TRY IT?",
       "tryItDescription": "Lorem ipsum dolor sit amet, consectetur adipiscing elit"
     },
     "handler": {
-      "handlerTitle": "BECOME A GAISBOCK- HANDLAR NOW",
+      "handlerTitle": "BECOME A GAISBOCK- <br>HANDLAR NOW",
       "handlerTitleDescription": "Händler Login Anfragen consectetuer adipisci lorem ipsuam dolor esang elit<a href=\"#\"> Aenean massa. Cum sociis.</a>"
     },
     "hotline": {
