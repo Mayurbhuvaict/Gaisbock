@@ -10,13 +10,15 @@ use Shopware\Core\Framework\Log\Package;
 use Shopware\Core\Framework\Struct\ArrayStruct;
 use Shopware\Core\System\SalesChannel\Entity\SalesChannelRepository;
 use Shopware\Storefront\Page\Navigation\NavigationPageLoadedEvent;
+use Shopware\Storefront\Page\Product\ProductPageLoadedEvent;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 #[Package('core')]
 class gaisbockCategoryNavigationSubscriber implements EventSubscriberInterface
 {
     public function __construct(
-        private EntityRepository $categoryRepository
+        private EntityRepository $categoryRepository,
+        private EntityRepository $mediaRepository
     )
     {
     }
@@ -24,7 +26,8 @@ class gaisbockCategoryNavigationSubscriber implements EventSubscriberInterface
     public static function getSubscribedEvents()
     {
         return [
-            NavigationPageLoadedEvent::class => 'NavigationPageLoaded'
+            NavigationPageLoadedEvent::class => 'NavigationPageLoaded',
+            ProductPageLoadedEvent::class => 'productPageLoaded'
         ];
     }
 
@@ -68,5 +71,57 @@ class gaisbockCategoryNavigationSubscriber implements EventSubscriberInterface
             'subCategoryData'=> $subCategory
         ];
         $event->getPage()->addExtension('categoryData',new ArrayStruct($data));
+    }
+
+    public function productPageLoaded(ProductPageLoadedEvent $event):void
+    {
+        $image1 = '';
+        $image2 = '';
+        $image3 = '';
+        $image4 = '';
+        $image5 = '';
+        $image6 = '';
+        $image7 = '';
+        $image8 = '';
+
+        $getProductCustomImages = $event->getPage()->getProduct()->getTranslated();
+        if ($getProductCustomImages['customFields'])
+        {
+            if (array_key_exists('gaisbock_product_detail_description_set_image1',$getProductCustomImages['customFields']))
+            {
+                $image1 = $getProductCustomImages['customFields']['gaisbock_product_detail_description_set_image1'];
+
+            }
+            if (array_key_exists('gaisbock_product_detail_description_set_image2',$getProductCustomImages['customFields']))
+            {
+                $image2 = $getProductCustomImages['customFields']['gaisbock_product_detail_description_set_image2'];
+            }
+            if (array_key_exists('gaisbock_product_detail_description_set_image3',$getProductCustomImages['customFields']))
+            {
+                $image3 = $getProductCustomImages['customFields']['gaisbock_product_detail_description_set_image3'];
+            }
+            if (array_key_exists('gaisbock_product_detail_description_set_image4',$getProductCustomImages['customFields']))
+            {
+                $image4 = $getProductCustomImages['customFields']['gaisbock_product_detail_description_set_image4'];
+            }
+            if (array_key_exists('gaisbock_product_detail_description_set_image5',$getProductCustomImages['customFields']))
+            {
+                $image5 = $getProductCustomImages['customFields']['gaisbock_product_detail_description_set_image5'];
+            }
+            if (array_key_exists('gaisbock_product_detail_description_set_image6',$getProductCustomImages['customFields']))
+            {
+                $image6 = $getProductCustomImages['customFields']['gaisbock_product_detail_description_set_image6'];
+            }
+            if (array_key_exists('gaisbock_product_detail_description_set_image7',$getProductCustomImages['customFields']))
+            {
+                $image7 = $getProductCustomImages['customFields']['gaisbock_product_detail_description_set_image7'];
+            }
+            if (array_key_exists('gaisbock_product_detail_description_set_image8',$getProductCustomImages['customFields']))
+            {
+                $image8 = $getProductCustomImages['customFields']['gaisbock_product_detail_description_set_image8'];
+            }
+
+        }
+
     }
 }
