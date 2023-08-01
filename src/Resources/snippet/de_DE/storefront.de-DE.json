@@ -36,5 +36,8 @@
         "saleBadges": "Verkauf"
       }
     }
+  },
+  "productDetailPage": {
+    "contents": "INHALT"
   }
 }
