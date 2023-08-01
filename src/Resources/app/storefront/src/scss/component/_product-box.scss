@@ -1,7 +1,10 @@
 .gaisbock-product-box{
   padding: 0;
   .product-image-wrapper{
-      height: 526px;
+      height: 429px;
+      @media(min-width:1024px) {
+        height: 526px;
+      }
   }
 }
 
@@ -76,12 +79,12 @@
       .product-action{
           margin-top: 7px;
           .btn{
-              line-height: 14px;
+              line-height: 30px;
               background: $sw-color-brand-primary 0% 0% no-repeat padding-box;
               border-radius: 15px;
               font-size: 13px;
               display: flex;
-              padding: 6px 20px;
+              padding: 0px 20px;
               margin: 0 auto;
               letter-spacing: 0.78px;
               color: #FFFFFF;
@@ -161,8 +164,13 @@
               height: 6px;
               padding: 3px 2px;
               margin: 0 6px;
+              .icon {
+                width: 13px;
+                height: 13px;
+                color: $sw-color-brand-primary;
+              }
           }
-          .base-slider .tns-nav button.tns-nav-active{
+          .tns-nav button.tns-nav-active{
               background: $sw-color-brand-secondary 0% 0% no-repeat padding-box;
           } 
       }
@@ -197,7 +205,7 @@
           .product-action{
               .btn{
                   font-size: 10px;
-                  line-height: 10px;
+                  line-height: 23px;
                   letter-spacing: 0.6px;
                   height: 23px;
               }

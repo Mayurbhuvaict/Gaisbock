@@ -12,6 +12,7 @@ $fontWeight500:500;
 body {
 	font-family: $sw-font-family-base;
 	font-weight: $fontWeight500;
+	color: $sw-color-brand-primary;
 }
 
 @font-face {

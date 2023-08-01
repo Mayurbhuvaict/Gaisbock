@@ -28,12 +28,14 @@
                         {% for image in sliderConfig.sliderItems.value %}
                             {% set imageElement %}
                                 <div style="background-image:url('{{ image.mediaUrl }}')" class="image-slider-item{% if loop.first != true %} is-not-first{% endif %} is-{{ sliderConfig.displayMode.value }}"{% if sliderConfig.minHeight.value and  sliderConfig.displayMode.value == "cover" %} style="min-height: {{ sliderConfig.minHeight.value|trim|replace({' ':''}) }}"{% endif %}>
-                                    <div class="gaisbock-image-hover-text">
+                                <div class="banner-conext">   
+                                <div class="gaisbock-image-hover-text">
                                         {{ image.text|raw }}
                                     </div>
                                     <div class="gaisbock-image-button">
                                         <a href="{{ image.buttonUrl }}" {% if image.buttonNewTab %}target="_blank"{% endif %}>{{ image.buttonText|raw }}</a>
                                     </div>
+    </div>
                                     {% set attributes = {
                                         'class': 'img-fluid image-slider-image',
                                         'alt': (image.media.translated.alt ?: ''),
