@@ -1,5 +1,13 @@
+@keyframes slideDown {
+    from {
+      transform: translateY(-100%);
+    }
+    to {
+      transform: translateY(0);
+    }
+  }
 .header-row {
-    padding: 5px 20px;
+    padding: 5px 20px 0;
     max-width: 1440px;
     .header-logo-col {
         position: static;
@@ -92,7 +100,34 @@
         }
     }
 }
-
+.is-sticky .header-logo-main .gaisbock-text-sticky-logo {
+    @media(max-wdith:9992px) {
+        padding-left: 43px;
+    }
+}
+.gaisbock-text-sticky-logo,
+.gaisbock-header-mobile-text-logo {
+    display: none;
+}
+.is-sticky {
+    position: fixed;
+    background: $sw-top-header-background;
+    padding: 8px 0 0;
+    z-index: 99;
+    animation: slideDown 0.35s ease-out;
+    width:100%;
+    .header-logo-main {
+        a.header-logo-main-link {
+            display: none;
+        }
+        .gaisbock-text-sticky-logo {
+            display: block;
+        }
+    }
+  }
+  .is-sticky .header-logo-picture img {
+      max-width: 50%;
+  }
 @include media-breakpoint-up(md) {
     .nav-main {
         .main-navigation-menu {
@@ -105,6 +140,7 @@
                 font-size: 15px;
                 letter-spacing: 1.2px;
                 text-transform: uppercase;
+                padding-bottom: 0;
                 &.active {
                     .main-navigation-link-text {
                         border-bottom: 4px solid #DE1010;
@@ -179,4 +215,4 @@
         position: absolute;
         transform: translate(-50%,0%);
     }
-}
+}   
