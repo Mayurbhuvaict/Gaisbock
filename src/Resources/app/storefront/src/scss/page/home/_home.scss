@@ -1,5 +1,5 @@
 .home-banner {
-    margin-top: -138px;
+    margin-top: -190px;
     img {
         width: 100%;
     }
@@ -451,6 +451,44 @@
         }
     }
 }
+.instagram-feed-section {
+    margin-top: 60px;
+    .insta-heading {
+        text-align: center;
+        .insta-svg {
+            position: relative;
+            &:after {
+                content:'';
+                position: static;
+                background-image: url('../../../bundles/gaisbock/storefront/assets/icon-pack/gaisbock/instagram.svg');
+                width: 31px;
+                height: 30px;
+                background-repeat: no-repeat;
+                display: block;
+                text-align: center;
+                margin: 0 auto 25px;
+            }
+        }
+        .hr {
+            background: #707070;
+            height: 2px;
+            width: 100%;
+            max-width: 73px;
+            margin: 0 auto 40px;
+        }
+        h2 {
+            font-size: 48px;
+            line-height: 61px;
+            letter-spacing: 0.24px;
+            color: $sw-color-brand-primary;
+        }
+        p {
+            color: $sw-color-brand-primary;
+            font-size: 24px;
+            line-height: 29px;
+        }
+    }
+}
 
 @include media-breakpoint-down(md){
     .Gaisbock-category-images{
@@ -655,6 +693,32 @@
             font-size: 14px;
             line-height: 18px;
             padding-top: 22px;
+        }
+    }
+    .instagram-feed-section {
+        margin-top: 45px;
+        .insta-heading {
+            .insta-svg {
+                &:after {
+                    content:'';
+                    width: 19px;
+                    height: 18px;
+                }
+            }
+            .hr {
+                max-width: 46px;
+                margin: 0 auto 25px;
+            }
+            h2 {
+                font-size: 29px;
+                line-height: 32px;
+                letter-spacing: 0.14px;
+            }
+            p {
+                color: $sw-color-brand-primary;
+                font-size: 16px;
+                line-height: 19px;
+            }
         }
     }
 }
