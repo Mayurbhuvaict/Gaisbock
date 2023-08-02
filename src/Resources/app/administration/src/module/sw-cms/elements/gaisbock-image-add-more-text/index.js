@@ -9,6 +9,10 @@ Shopware.Service('cmsService').registerCmsElement({
     configComponent: 'sw-cms-el-config-gaisbock-image-add-more-text',
     previewComponent: 'sw-cms-el-preview-gaisbock-image-add-more-text',
     defaultConfig: {
+        position:{
+            source: 'static',
+            value: null
+        },
         heading:{
             source: 'static',
             value: 'This is the heading'
