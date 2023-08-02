@@ -25,6 +25,10 @@
             <tag name="shopware.cms.data_resolver" />
             <argument type="service" id="Shopware\Core\Content\Media\Cms\DefaultMediaResolver"/>
         </service>
+        <service id="Gaisbock\Core\Content\Media\Cms\gaisbockCategoryThreeCustomImageResolver">
+            <tag name="shopware.cms.data_resolver" />
+            <argument type="service" id="Shopware\Core\Content\Media\Cms\DefaultMediaResolver"/>
+        </service>
         <!-- Resolver -->
         <!-- subscriber  -->
         <service id="Gaisbock\Storefront\Page\gaisbockCategoryNavigationSubscriber">
