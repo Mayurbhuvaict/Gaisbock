@@ -17,7 +17,7 @@ Shopware.Service('cmsService').registerCmsBlock({
         sizingMode: 'boxed',
     },
     slots: {
-        gaisbockCategoryImage: {
+        left: {
             type: 'gaisbock-category-image-text',
             default: {
                 config: {
@@ -25,11 +25,39 @@ Shopware.Service('cmsService').registerCmsBlock({
                 },
                 data: {
                     media: {
-                        value: CMS.MEDIA.SMALL.previewCamera,
+                        value: CMS.MEDIA.previewCamera,
                         source: 'default',
                     },
                 },
             },
-        }
+        },
+        center: {
+            type: 'gaisbock-category-image-text',
+            default: {
+                config: {
+                    displayMode: { source: 'static', value: 'cover' },
+                },
+                data: {
+                    media: {
+                        value: CMS.MEDIA.previewPlant,
+                        source: 'default',
+                    },
+                },
+            },
+        },
+        right: {
+            type: 'gaisbock-category-image-text',
+            default: {
+                config: {
+                    displayMode: { source: 'static', value: 'cover' },
+                },
+                data: {
+                    media: {
+                        value: CMS.MEDIA.previewGlasses,
+                        source: 'default',
+                    },
+                },
+            },
+        },
     }
 })
