@@ -17,5 +17,7 @@ export default class gaisbockAddRemoveClass extends Plugin {
                 header.classList.remove(toggleClass);
             }
         });
+
+        
     }
 }
