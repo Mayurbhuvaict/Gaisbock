@@ -1,5 +1,5 @@
 {% sw_extends '@Storefront/storefront/base.html.twig' %}
-{# Set variable to "true" to enable HMR (hot page reloading) mode#}
+{# Set variable to "true" to enable HMR (hot page reloading) mode #}
 {% set isHMRMode = app.request.headers.get('hot-reload-mode') and app.environment == 'dev' %}
 
 {% block base_doctype %}
@@ -31,7 +31,7 @@
     {% endblock %}
 
     {% block base_header %}
-        <header class="header-main">
+        <header class="header-main gaisbock-header-main" id="navigationId" data-gaisbock-add-remove-class>
             {% block base_header_inner %}
                 <div class="container">
                     {% sw_include '@Storefront/storefront/layout/header/header.html.twig' %}
@@ -80,18 +80,6 @@
     {% endblock %}
 
     {% block base_footer %}
-        <div class="nolten-footer-cross-selling-slider">
-            {% if activeRoute == "frontend.detail.page" %}
-                {% if page.extensions.productCrossSelling.crossSellings is defined and page.extensions.productCrossSelling.crossSellings|filter(item => item.total > 0)|length > 0 %}
-                    <div class="product-detail-tabs product-detail-cross-selling nolten-theme-cross-selling">
-                        {% sw_include '@Storefront/storefront/page/product-detail/cross-selling/tabs.html.twig' with {
-                            crossSellings: page.extensions.productCrossSelling.crossSellings,
-                            extraKes:'nolten-cross-selling'
-                        } %}
-                    </div>
-                {% endif %}
-            {% endif %}
-        </div>
         <footer class="footer-main">
             {% block base_footer_inner %}
                 {% sw_include '@Storefront/storefront/layout/footer/footer.html.twig' %}
@@ -114,6 +102,7 @@
 
 {% block base_body_script %}
 {% endblock %}
+
 </body>
 </html>
 {% endblock %}
