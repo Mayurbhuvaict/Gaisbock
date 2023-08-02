@@ -38,7 +38,7 @@
                                             aria-label="{{ "general.menuLink"|trans|striptags }}"
                                     >
                                         {% block layout_header_navigation_toggle_button_icon %}
-                                        {% sw_icon 'stack' %}
+                                            {% sw_icon 'stack' %}
                                         {% endblock %}
                                     </button>
                                 {% endblock %}
@@ -93,7 +93,7 @@
                                             {% sw_icon 'SEARCH_black' style {'pack': 'gaisbock','class':'gaisbock-header-search'} %}
                                         {% endif %}
                                     </button>
-                                    <div class="collapse"
+                                    <div class="collapse {% if activeRoute == 'frontend.search.page' %}show {% endif %}"
                                          id="searchCollapse">
                                         <div class="header-search">
                                             <form action="{{ path('frontend.search.page') }}"
