@@ -9,10 +9,13 @@ Shopware.Service('cmsService').registerCmsElement({
     configComponent: 'sw-cms-el-config-gaisbock-image-add-more-text',
     previewComponent: 'sw-cms-el-preview-gaisbock-image-add-more-text',
     defaultConfig: {
+        heading:{
+            source: 'static',
+            value: 'This is the heading'
+        },
         content: {
             source: 'static',
             value: `
-                <h2>Lorem Ipsum dolor sit amet</h2>
                 <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, 
                 sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, 
                 sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. 
@@ -23,10 +26,26 @@ Shopware.Service('cmsService').registerCmsElement({
                 Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</p>
             `.trim(),
         },
+        subHeading:{
+            source: 'static',
+            value: 'This is the sub heading'
+        },
         subContent:{
             source: 'static',
             value: `
-                <h2>Lorem Ipsum dolor sit amet</h2>
+                <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, 
+                sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, 
+                sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. 
+                Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. 
+                Lorem ipsum dolor sit amet, consetetur sadipscing elitr, 
+                sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. 
+                At vero eos et accusam et justo duo dolores et ea rebum. 
+                Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</p>
+            `.trim(),
+        },
+        subContentTwo:{
+            source: 'static',
+            value: `
                 <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, 
                 sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, 
                 sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. 

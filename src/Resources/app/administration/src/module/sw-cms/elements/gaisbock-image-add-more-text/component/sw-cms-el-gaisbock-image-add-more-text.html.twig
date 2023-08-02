@@ -9,6 +9,7 @@
                 {% endblock %}
                 {% block sw_cms_element_text %}
                     <div class="sw-cms-el-gaisbock-image-add-more-text__text">
+                        <h1>{{ element.config.heading.value }}</h1>
                         <div v-if="element.config.content.source === 'mapped'" class="sw-cms-el-text__mapping-preview content-editor" v-html="$sanitize(demoValue)"></div>
                         <sw-text-editor
                                 v-else
@@ -32,6 +33,17 @@
                                 enable-transparent-background
                                 @blur="onBlurOne"
                                 @input="onInputOne"
+                        />
+                        <h1>{{ element.config.subHeading.value }}</h1>
+                        <sw-text-editor
+                                v-model="element.config.subContentTwo.value"
+                                :disabled="disabled"
+                                :allow-inline-data-mapping="true"
+                                :is-inline-edit="true"
+                                sanitize-input
+                                enable-transparent-background
+                                @blur="onBlurTwo"
+                                @input="onInputTwo"
                         />
                     </div>
                 {% endblock %}

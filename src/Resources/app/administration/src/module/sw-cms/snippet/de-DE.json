@@ -46,7 +46,9 @@
         "config": {
           "label": {
             "mainTitle": "Title",
-            "subTitle": "Sub title"
+            "subTitle": "Sub title",
+            "Heading": "Überschrift",
+            "subHeading": "Unterüberschrift"
           },
           "placeholder": {
               "enterMainTitle": "Haupttitel hier eingeben",

@@ -299,7 +299,7 @@ export default {
             }
         },
         onBlurOne(content) {
-            this.emitChanges(content);
+            this.emitChangesOne(content);
         },
 
         onInputOne(content) {
@@ -309,6 +309,20 @@ export default {
         emitChangesOne(content) {
             if (content !== this.element.config.subContent.value) {
                 this.element.config.subContent.value = content;
+                this.$emit('element-update', this.element);
+            }
+        },
+        onBlurTwo(content) {
+            this.emitChanges(content);
+        },
+
+        onInputTwo(content) {
+            this.emitChangesOne(content);
+        },
+
+        emitChangesTwo(content) {
+            if (content !== this.element.config.subContentTwo.value) {
+                this.element.config.subContentTwo.value = content;
                 this.$emit('element-update', this.element);
             }
         },

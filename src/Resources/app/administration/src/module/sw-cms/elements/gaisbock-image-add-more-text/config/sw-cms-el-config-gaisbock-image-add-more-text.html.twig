@@ -142,7 +142,7 @@
                                         v-model="element.config.newTab.value"
                                         class="sw-cms-el-config-image__link-tab"
                                         type="switch"
-                                        :label="$tc('sw-cms.elements.image.config.label.linkNewTab')"
+                                        :label="$tc('sw-cms.elements.image.config.label.Heading')"
                                 />
                             </div>
                         {% endblock %}
@@ -161,6 +161,12 @@
                                     @modal-close="onCloseModal"
                             />
                         {% endblock %}
+                        <sw-field
+                                v-model="element.config.heading.value"
+                                class="sw-cms-el-config-button__link-tab"
+                                type="text"
+                                :label="$tc('sw-cms.elements.image.config.label.subHeading')"
+                        />
                         <sw-text-editor
                                 :value="element.config.content.value"
                                 :allow-inline-data-mapping="true"
@@ -176,6 +182,20 @@
                                 enable-transparent-background
                                 @input="onInputOne"
                                 @blur="onBlurOne"
+                        />
+                        <sw-field
+                                v-model="element.config.heading.value"
+                                class="sw-cms-el-config-button__link-tab"
+                                type="text"
+                                :label="$tc('sw-cms.elements.image.config.label.linkNewTab')"
+                        />
+                        <sw-text-editor
+                                :value="element.config.subContentTwo.value"
+                                :allow-inline-data-mapping="true"
+                                sanitize-input
+                                enable-transparent-background
+                                @input="onInputTwo"
+                                @blur="onBlurTwo"
                         />
                     </div>
                 {% endblock %}
