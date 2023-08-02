@@ -4,7 +4,7 @@ Shopware.Component.register('sw-cms-el-preview-gaisbock-listpage-text-image',()=
 
 Shopware.Service('cmsService').registerCmsElement({
     name:'gaisbock-listpage-text-image',
-    label:'sw-cms.blocks.ictCategoryImageText.label',
+    label:'sw-cms.blocks.gaisBockListingpageHeadingimage.label',
     component:'sw-cms-el-gaisbock-listpage-text-image',
     configComponent:'sw-cms-el-config-gaisbock-listpage-text-image',
     previewComponent:'sw-cms-el-preview-gaisbock-listpage-text-image',

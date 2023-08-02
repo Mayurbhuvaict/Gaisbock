@@ -49,7 +49,9 @@
         "config": {
           "label": {
             "mainTitle": "Titre",
-            "subTitle": "Sub title"
+            "subTitle": "Sub title",
+            "Heading": "Titre",
+            "subHeading": "Sous-titre"
           },
           "placeholder": {
             "enterMainTitle": "Saisir le titre principal ici",

@@ -4,7 +4,7 @@ Shopware.Component.register('sw-cms-el-gaisbock-image-titles-button', () => impo
 
 Shopware.Service('cmsService').registerCmsElement({
     name: 'gaisbock-image-titles-button',
-    label: 'sw-cms.elements.gaisbockSwitchImageText.config.label.gaisbockTextImageButton',
+    label: 'sw-cms.blocks.gaisbockTextImageButton.gaisbockImageTitlesButtons.label',
     component: 'sw-cms-el-gaisbock-image-titles-button',
     configComponent: 'sw-cms-el-config-gaisbock-image-titles-button',
     previewComponent: 'sw-cms-el-preview-gaisbock-image-titles-button',
