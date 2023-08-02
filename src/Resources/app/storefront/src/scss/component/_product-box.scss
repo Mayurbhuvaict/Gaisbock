@@ -134,6 +134,88 @@
     }
 }
 
+//  Lisitng Page navigation
+
+.sw-cms-element-gaisbock-custom-category-extension__images{
+    ul {
+        display: flex;
+        justify-content: center;
+        list-style: none;
+        padding-bottom: 5px;
+        text-align: center;
+    }
+    .nav-item {
+        padding: 0 30px;
+        a{
+            letter-spacing: 1.2px;
+            color: $sw-color-brand-primary;
+            text-transform: uppercase;
+            font-family: $sw-font-family-base;
+            font-weight: $sw-headings-font-weight;
+            font-size: 15px;
+            line-height: 18px;
+            &:hover{
+                text-decoration: none;
+            }
+            &.active{
+                border-bottom: 4px solid #DE1010;
+                padding-bottom: 3px;
+            }
+        }
+    }
+}
+
+
+//  Listing Image Section
+
+.cms-block-gaisbock-category-image-text{
+    width: 100%;
+    display: flex;
+    .cms-block-container {
+        width: 100%;
+    }
+    .cms-row{
+        >div{
+            display: flex;
+            padding: 0;
+        }
+    }
+    .cms-element-gaisbock-category-image-text{
+        width: 33.33%;
+        padding: 0 12px;
+        position: relative;
+        &:hover{
+            .cms-element-gaisbock-category-image-text__image-name {
+                filter: brightness(0.7);
+            }
+            .cms-element-gaisbock-category-image-text__category-name{
+                color: #F4F4F4;
+            }
+        }
+        &__image-name {
+            max-width: 439px;
+            height: auto;
+            width: 100%;
+            transition: all .4s linear;
+        }
+        &__category-name{
+            position: absolute;
+            left:  50%;
+            bottom: 50%;
+            text-align: center;
+            transform: translate(-50%,50%);
+            margin: 0 auto;
+            letter-spacing: 0.17px;
+            color: $sw-color-brand-primary;
+            font-size: 34px;
+            font-family: $sw-font-family-headline;
+            font-weight: $sw-headings-font-weight;
+            transition: all .4s linear;
+            z-index: 999;
+        }
+    }
+}
+
 @include media-breakpoint-down(md){
   .gaisbock-product-slider{
       .product-slider{
