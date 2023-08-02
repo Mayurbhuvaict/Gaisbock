@@ -2,16 +2,8 @@
 <div class="sw-cms-element-gaisbock-category-image-text">
     <div class="sw-cms-element-gaisbock-category-image-text__images">
         <div class="sw-cms-element-gaisbock-category-image-text__inner-images-text-one">
-            <span>Text Here</span>
-            <img :src="'/administration/static/img/cms/preview_camera_small.jpg' | asset">
-        </div>
-        <div class="sw-cms-element-gaisbock-category-image-text__inner-images-text-two">
-            <span>Text Here</span>
-            <img :src="'/administration/static/img/cms/preview_glasses_small.jpg' | asset" alt="">
-        </div>
-        <div class="sw-cms-element-gaisbock-category-image-text__inner-images-text-two">
-            <span>Text Here</span>
-            <img :src="'/administration/static/img/cms/preview_plant_small.jpg' | asset" alt="">
+            <span>{{ element.config.newTitle.value }}</span>
+            <img :src="mediaUrl">
         </div>
     </div>
 </div>
