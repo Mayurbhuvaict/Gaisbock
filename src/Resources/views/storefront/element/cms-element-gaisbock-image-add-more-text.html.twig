@@ -17,19 +17,20 @@
             {% endblock %}
             {% block sw_cms_element_text %}
                 <div class="element-gaisbock-image-add-more-text__text">
-                    {{ element.config.content.value|raw }}
+                    <h1>{{ element.config.heading.value }}</h1>
+                    <p>{{ element.config.content.value|raw }}</p>
                 </div>
                 {% if app.request.locale === 'de-DE' %}
-                    <a href="javascript:void(0)" id="readMore" data-language-value="{{ app.request.locale }}">Mehr
-                        lesen</a>
+                    <a href="javascript:void(0)" id="readMore" data-language-value="{{ app.request.locale }}">Mehr lesen</a>
                 {% else %}
-                    <a href="javascript:void(0)" id="readMore" data-language-value="{{ app.request.locale }}">Read
-                        More</a>
+                    <a href="javascript:void(0)" id="readMore" data-language-value="{{ app.request.locale }}">Read More</a>
                 {% endif %}
                 <div id="gaisbock-addmore-section" style="display:none;">
                     <div class="element-gaisbock-image-addmore-text__images">
                         <div class="gaisbock-text-line">
-                            {{ element.config.subContent.value|raw }}
+                            <p>{{ element.config.subContent.value|raw }}</p>
+                            <h1>{{ element.config.subHeading.value }}</h1>
+                            <p>{{ element.config.subContent.value|raw }}</p>
                         </div>
                         <div class="gaisbock-image-line">
                             <img src="{{ element.config.urlOne.value }}" alt="">
