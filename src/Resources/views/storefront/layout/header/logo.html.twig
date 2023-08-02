@@ -4,34 +4,52 @@
         {% block layout_header_logo_link %}
             {% if activeRoute == 'frontend.home.page' %}
                 <a class="header-logo-main-link"
-               href="{{ path('frontend.home.page') }}"
-               title="{{ "header.logoLink"|trans|striptags }}">
-                {% block layout_header_logo_image %}
-                    <picture class="header-logo-picture">
+                   href="{{ path('frontend.home.page') }}"
+                   title="{{ "header.logoLink"|trans|striptags }}">
+                    {% block layout_header_logo_image %}
+                        <picture class="header-logo-picture">
                             {% block layout_header_logo_image_tablet %}
-                            {% if theme_config('sw-logo-tablet') and theme_config('sw-logo-tablet') != theme_config('sw-logo-desktop') %}
-                                <source srcset="{{ theme_config('sw-logo-tablet') |sw_encode_url }}"
-                                        media="(min-width: {{ theme_config('breakpoint.md') }}px) and (max-width: {{ theme_config('breakpoint.lg') - 1 }}px)">
-                            {% endif %}
-                        {% endblock %}
+                                {% if theme_config('sw-logo-tablet') and theme_config('sw-logo-tablet') != theme_config('sw-logo-desktop') %}
+                                    <source srcset="{{ theme_config('sw-logo-tablet') |sw_encode_url }}"
+                                            media="(min-width: {{ theme_config('breakpoint.md') }}px) and (max-width: {{ theme_config('breakpoint.lg') - 1 }}px)">
+                                {% endif %}
+                            {% endblock %}
 
-                        {% block layout_header_logo_image_mobile %}
-                            {% if theme_config('sw-logo-mobile') and theme_config('sw-logo-mobile') != theme_config('sw-logo-desktop') %}
-                                <source srcset="{{ theme_config('sw-logo-mobile') |sw_encode_url }}"
-                                        media="(max-width: {{ theme_config('breakpoint.md') - 1 }}px)">
-                            {% endif %}
-                        {% endblock %}
+                            {% block layout_header_logo_image_mobile %}
+                                {% if theme_config('sw-logo-mobile') and theme_config('sw-logo-mobile') != theme_config('sw-logo-desktop') %}
+                                    <source srcset="{{ theme_config('sw-logo-mobile') |sw_encode_url }}"
+                                            media="(max-width: {{ theme_config('breakpoint.md') - 1 }}px)">
+                                {% endif %}
+                            {% endblock %}
 
-                        {% block layout_header_logo_image_default %}
-                            {% if theme_config('sw-logo-desktop') %}
-                                <img src="{{ theme_config('sw-logo-desktop') |sw_encode_url }}"
-                                     alt="{{ "header.logoLink"|trans|striptags }}"
-                                     class="img-fluid header-logo-main-img"/>
-                            {% endif %}
-                        {% endblock %}
-                    </picture>
-                {% endblock %}
-            </a>
+                            {% block layout_header_logo_image_default %}
+                                {% if theme_config('sw-logo-desktop') %}
+                                    <img src="{{ theme_config('sw-logo-desktop') |sw_encode_url }}"
+                                         alt="{{ "header.logoLink"|trans|striptags }}"
+                                         class="img-fluid header-logo-main-img"/>
+                                {% endif %}
+                            {% endblock %}
+
+                            {% block layout_header_mobile_text_sticky_logo %}
+                                <a class="header-text-logo-main-link gaisbock-text-sticky-logo"
+                                   href="{{ path('frontend.home.page') }}"
+                                   title="{{ "header.logoLink"|trans|striptags }}">
+                                    {% block layout_header_mobile_sticky_logo_image %}
+                                        <picture class="header-moblie-logo-picture">
+                                            {% block layout_header_mobilr_sticky_logo_image_default %}
+                                                {% if theme_config('gaisbock-text-logo') %}
+                                                    <img src="{{ theme_config('gaisbock-text-logo') |sw_encode_url }}"
+                                                         alt="{{ "header.logoLink"|trans|striptags }}"
+                                                         class="img-fluid header-text-logo-main-img"/>
+                                                {% endif %}
+                                            {% endblock %}
+                                        </picture>
+                                    {% endblock %}
+                                </a>
+                            {% endblock %}
+                        </picture>
+                    {% endblock %}
+                </a>
             {% else %}
                 <a class="header-black-logo-main-link"
                    href="{{ path('frontend.home.page') }}"
@@ -51,7 +69,7 @@
             {% endif %}
 
             {% block layout_header_mobile_text_logo %}
-                <a class="header-text-logo-main-link"
+                <a class="header-text-logo-main-link gaisbock-header-mobile-text-logo"
                    href="{{ path('frontend.home.page') }}"
                    title="{{ "header.logoLink"|trans|striptags }}">
                     {% block layout_header_mobile_logo_image %}
