@@ -6,6 +6,17 @@
       transform: translateY(0);
     }
   }
+  body .header-row .header-actions-col .top-bar-language .top-bar-list-item .top-bar-list-label,
+  body .header-row .header-actions-col .icon {
+    color: $sw-header-text-color;
+  }
+  body.is-act-home .header-row .header-actions-col .top-bar-language .top-bar-list-item .top-bar-list-label,
+  body.is-act-home .header-row .header-actions-col .icon {
+    color: #fff;
+  }
+.hovered {
+    background: $sw-color-brand-primary;
+}
 .header-row {
     padding: 5px 20px 0;
     max-width: 1440px;
@@ -14,6 +25,7 @@
         left: 15px;
         padding: 0;
         top: 15px;
+        z-index: 999;
         @media(min-wdith:992px) {
             left:0;
         }
@@ -129,10 +141,32 @@
       max-width: 50%;
   }
 @include media-breakpoint-up(md) {
+    .is-act-home {
+        .nav-main {
+            .main-navigation-menu {
+                .main-navigation-link {
+                    color: #fff;
+                    font-family: $sw-font-family-base;
+                    padding-right: 25px;
+                    padding-left: 25px;
+                    font-weight: $fontWeight700;
+                    font-size: 15px;
+                    letter-spacing: 1.2px;
+                    text-transform: uppercase;
+                    padding-bottom: 0;
+                    &.active {
+                        .main-navigation-link-text {
+                            border-bottom: 4px solid #DE1010;
+                        }
+                    }
+                }
+            }
+        }
+    }
     .nav-main {
         .main-navigation-menu {
             .main-navigation-link {
-                color: #fff;
+                color: $sw-header-text-color;
                 font-family: $sw-font-family-base;
                 padding-right: 25px;
                 padding-left: 25px;
@@ -162,6 +196,7 @@
         left: 50%;
         margin: 0;
         top:7px;
+        z-index: 0;
         .header-logo-main-img {
             width: 108px;
             margin: 0 auto;
