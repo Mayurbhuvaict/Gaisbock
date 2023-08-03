@@ -1,13 +1,34 @@
 .gaisbock-product-box{
   padding: 0;
-  .product-image-wrapper{
-      height: 429px;
-      @media(min-width:1024px) {
-        height: 526px;
-      }
-  }
 }
-
+.p-0 {
+    .cms-section-default {
+        padding: 0;
+    }
+}
+.cms-listing-col .product-box {
+    margin-bottom: 80px;
+}
+body {
+    .cms-block-product-listing{
+        .cms-listing-col,
+        .cms-block-container {
+            padding: 0 !important;
+        }
+        .cms-element-product-listing-actions {
+            margin: 0;
+        }
+        .product-box .card-body {
+            padding-top: 0;
+            padding-bottom: 0;
+        }
+    }
+    .cms-block-gaisbock-custom-category-extension {
+        .cms-block-container {
+            padding: 0 !important;
+        }
+    }
+}
 .product-box{
   border: 0;
   .card-body {
@@ -36,6 +57,12 @@
               }
           }
       }
+      .product-image-wrapper{
+        height: 429px;
+        @media(min-width:1024px) {
+          height: 526px;
+        }
+    }
       .product-info{
           .product-name {
               font-family: 'Rama-Slab';
