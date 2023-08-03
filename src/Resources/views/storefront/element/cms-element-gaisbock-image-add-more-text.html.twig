@@ -1,5 +1,6 @@
 {% block element_gaisbock_image_addmore_text %}
     {% set config = element.fieldConfig.elements %}
+    
     {% set active = '' %}
     <div class="element-gaisbock-image-add-more-text" data-gaisbock-addmore-section>
         {% if element.fieldConfig.elements.position.value == true %}
@@ -24,9 +25,11 @@
                     <h1>{{ element.config.heading.value }}</h1>
                     <p>{{ element.config.content.value|raw }}</p>
                     {% if app.request.locale === 'de-DE' %}
-                        <a href="javascript:void(0)" id="readMore" data-language-value="{{ app.request.locale }}">Mehr lesen</a>
+                        <a href="javascript:void(0)" id="readMore" class="readmore-btn"
+                           data-language-value="{{ app.request.locale }}">Mehr lesen</a>
                     {% else %}
-                        <a href="javascript:void(0)" id="readMore" data-language-value="{{ app.request.locale }}">Read More</a>
+                        <a href="javascript:void(0)" id="readMore" class="readmore-btn"
+                           data-language-value="{{ app.request.locale }}">Read More</a>
                     {% endif %}
                     <div id="gaisbock-addmore-section" style="display:none;">
                         <div class="element-gaisbock-image-addmore-text__images">
@@ -37,61 +40,79 @@
                             </div>
                             <div class="element-gaisbock-image-addmore-text__images_main">
                                 <div class="gaisbock-image-line">
-                                    <img src="{{ element.config.urlOne.value }}" alt="">
-                                    {% if element.config.urlOne.value %}
-                                        <p>{{ element.config.titleOne.value }}</p>
-                                    {% endif %}
-                                    <img src="{{ element.config.urlTwo.value }}" alt="">
-                                    {% if element.config.urlTwo.value %}
-                                        <p>{{ element.config.titleTwo.value }}</p>
-                                    {% endif %}
-                                    <img src="{{ element.config.urlThree.value }}" alt="">
-                                    {% if element.config.urlThree.value %}
-                                        <p>{{ element.config.titleThree.value }}</p>
-                                    {% endif %}
+                                    <div class="gaisbock-image-inner">
+                                        <img src="{{ element.config.urlOne.value }}" alt="">
+                                        {% if element.config.urlOne.value %}
+                                            <p>{{ element.config.titleOne.value }}</p>
+                                        {% endif %}
+                                    </div>
+                                    <div class="gaisbock-image-inner">
+                                        <img src="{{ element.config.urlTwo.value }}" alt="">
+                                        {% if element.config.urlTwo.value %}
+                                            <p>{{ element.config.titleTwo.value }}</p>
+                                        {% endif %}
+                                    </div>
+                                    <div class="gaisbock-image-inner">
+                                        <img src="{{ element.config.urlThree.value }}" alt="">
+                                        {% if element.config.urlThree.value %}
+                                            <p>{{ element.config.titleThree.value }}</p>
+                                        {% endif %}
+                                    </div>
+                                    <div class="gaisbock-image-inner">
+                                        <img src="{{ element.config.urlFour.value }}" alt="">
+                                        {% if element.config.urlFour.value %}
+                                            <p>{{ element.config.titleFour.value }}</p>
+                                        {% endif %}
+                                    </div>
+                                    <div class="gaisbock-image-inner">
+                                        <img src="{{ element.config.urlFive.value }}" alt="">
+                                        {% if element.config.urlFive.value %}
+                                            <p>{{ element.config.titleFive.value }}</p>
+                                        {% endif %}
+                                    </div>
+                                    <div class="gaisbock-image-inner">
+                                        <img src="{{ element.config.urlSix.value }}" alt="">
+                                        {% if element.config.urlSix.value %}
+                                            <p>{{ element.config.titleSix.value }}</p>
+                                        {% endif %}
+                                    </div>
+                                    <div class="gaisbock-image-inner">
+                                        <img src="{{ element.config.urlSeven.value }}" alt="">
+                                        {% if element.config.urlSeven.value %}
+                                            <p>{{ element.config.titleSeven.value }}</p>
+                                        {% endif %}
+                                    </div>
+                                    <div class="gaisbock-image-inner">
+                                        <img src="{{ element.config.urlEight.value }}" alt="">
+                                        {% if element.config.urlEight.value %}
+                                            <p>{{ element.config.titleEight.value }}</p>
+                                        {% endif %}
+                                    </div>
+                                    <div class="gaisbock-image-inner">
+                                        <img src="{{ element.config.urlNine.value }}" alt="">
+                                        {% if element.config.urlNine.value %}
+                                            <p>{{ element.config.titleNine.value }}</p>
+                                        {% endif %}
+                                    </div>
+                                    <div class="gaisbock-image-inner">
+                                        <img src="{{ element.config.urlTen.value }}" alt="">
+                                        {% if element.config.urlTen.value %}
+                                            <p>{{ element.config.titleTen.value }}</p>
+                                        {% endif %}
+                                    </div>
+                                    <div class="gaisbock-image-inner">
+                                        <img src="{{ element.config.urlEleven.value }}" alt="">
+                                        {% if element.config.urlEleven.value %}
+                                            <p>{{ element.config.titleEleven.value }}</p>
+                                        {% endif %}
+                                    </div>
+                                    <div class="gaisbock-image-inner">
+                                        <img src="{{ element.config.urlTwelve.value }}" alt="">
+                                        {% if element.config.urlTwelve.value %}
+                                            <p>{{ element.config.titleTwelve.value }}</p>
+                                        {% endif %}
+                                    </div>
                                 </div>
-                                <div class="gaisbock-image-line">
-                                    <img src="{{ element.config.urlFour.value }}" alt="">
-                                    {% if element.config.urlFour.value %}
-                                        <p>{{ element.config.titleFour.value }}</p>
-                                    {% endif %}
-                                    <img src="{{ element.config.urlFive.value }}" alt="">
-                                    {% if element.config.urlFive.value %}
-                                        <p>{{ element.config.titleFive.value }}</p>
-                                    {% endif %}
-                                    <img src="{{ element.config.urlSix.value }}" alt="">
-                                    {% if element.config.urlSix.value %}
-                                        <p>{{ element.config.titleSix.value }}</p>
-                                    {% endif %}
-                                </div>
-                                <div class="gaisbock-image-line">
-                                    <img src="{{ element.config.urlSeven.value }}" alt="">
-                                    {% if lement.config.urlSeven.value %}
-                                        <p>{{ element.config.titleSeven.value }}</p>
-                                    {% endif %}
-                                    <img src="{{ element.config.urlEight.value }}" alt="">
-                                    {% if lement.config.urlEight.value %}
-                                        <p>{{ element.config.titleEight.value }}</p>
-                                    {% endif %}
-                                    <img src="{{ element.config.urlNine.value }}" alt="">
-                                    {% if lement.config.urlNine.value %}
-                                        <p>{{ element.config.titleNine.value }}</p>
-                                    {% endif %}
-                                </div>
-                                <div class="gaisbock-image-line">
-                                <img src="{{ element.config.urlTen.value }}" alt="">
-                                {% if lement.config.urlTen.value %}
-                                    <p>{{ element.config.titleTen.value }}</p>
-                                {% endif %}
-                                <img src="{{ element.config.urlEleven.value }}" alt="">
-                                {% if lement.config.urlEleven.value %}
-                                    <p>{{ element.config.titleEleven.value }}</p>
-                                {% endif %}
-                                <img src="{{ element.config.urlTwelve.value }}" alt="">
-                                {% if lement.config.urlTwelve.value %}
-                                    <p>{{ element.config.titleTwelve.value }}</p>
-                                {% endif %}
-                            </div>
                             </div>
                         </div>
                     </div>
