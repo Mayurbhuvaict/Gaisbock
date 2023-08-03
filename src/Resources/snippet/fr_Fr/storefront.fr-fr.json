@@ -38,6 +38,11 @@
     }
   },
   "productDetailPage": {
-    "contents": "SOMMAIRE"
+    "contents": "SOMMAIRE",
+    "benefits": "nutzen",
+    "effect": "Effet",
+    "application": "application",
+    "integral": "INGRÉDIENTS",
+    "shipping": "EXPÉDITION"
   }
 }
