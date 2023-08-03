@@ -38,6 +38,11 @@
     }
   },
   "productDetailPage": {
-    "contents": "INHALT"
+    "contents": "INHALT",
+    "benefits": "nutzen",
+    "effect": "Wirkung",
+    "application": "anwendung",
+    "integral": "INHALTSSTOFFE",
+    "shipping": "VERSAND"
   }
 }

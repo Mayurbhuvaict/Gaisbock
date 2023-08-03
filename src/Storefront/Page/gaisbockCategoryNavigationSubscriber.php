@@ -57,24 +57,15 @@ class gaisbockCategoryNavigationSubscriber implements EventSubscriberInterface
             $categoryDataCriteria->addAssociation('media');
             $categoryData = $this->categoryRepository->search($categoryDataCriteria, $event->getContext())->getElements();
         }
-
-        // Get child categories
-        foreach ($categoryData as $value) {
-
-            $subCategoryCriteria = new Criteria();
-            $subCategoryCriteria->addFilter(new EqualsFilter('parentId',$value->getId()));
-            $subCategoryCriteria->addAssociation('media');
-            $subCategory[$value->getId()] = $this->categoryRepository->search($subCategoryCriteria, $event->getContext())->getElements();
-        }
         $data = [
             'data' => $categoryData,
-            'subCategoryData'=> $subCategory
         ];
         $event->getPage()->addExtension('categoryData',new ArrayStruct($data));
     }
 
     public function productPageLoaded(ProductPageLoadedEvent $event):void
     {
+        $images = [];
         $image1 = '';
         $image2 = '';
         $image3 = '';
@@ -87,41 +78,58 @@ class gaisbockCategoryNavigationSubscriber implements EventSubscriberInterface
         $getProductCustomImages = $event->getPage()->getProduct()->getTranslated();
         if ($getProductCustomImages['customFields'])
         {
+
             if (array_key_exists('gaisbock_product_detail_description_set_image1',$getProductCustomImages['customFields']))
             {
                 $image1 = $getProductCustomImages['customFields']['gaisbock_product_detail_description_set_image1'];
+                $images['1'] = $this->findMedia($image1,$event->getContext());
 
             }
             if (array_key_exists('gaisbock_product_detail_description_set_image2',$getProductCustomImages['customFields']))
             {
                 $image2 = $getProductCustomImages['customFields']['gaisbock_product_detail_description_set_image2'];
+                $images['2'] = $this->findMedia($image2,$event->getContext());
             }
             if (array_key_exists('gaisbock_product_detail_description_set_image3',$getProductCustomImages['customFields']))
             {
                 $image3 = $getProductCustomImages['customFields']['gaisbock_product_detail_description_set_image3'];
+                $images['3'] = $this->findMedia($image3,$event->getContext());
             }
             if (array_key_exists('gaisbock_product_detail_description_set_image4',$getProductCustomImages['customFields']))
             {
                 $image4 = $getProductCustomImages['customFields']['gaisbock_product_detail_description_set_image4'];
+                $images['4'] = $this->findMedia($image4,$event->getContext());
             }
             if (array_key_exists('gaisbock_product_detail_description_set_image5',$getProductCustomImages['customFields']))
             {
                 $image5 = $getProductCustomImages['customFields']['gaisbock_product_detail_description_set_image5'];
+                $images['5'] = $this->findMedia($image5,$event->getContext());
             }
             if (array_key_exists('gaisbock_product_detail_description_set_image6',$getProductCustomImages['customFields']))
             {
                 $image6 = $getProductCustomImages['customFields']['gaisbock_product_detail_description_set_image6'];
+                $images['6'] = $this->findMedia($image6,$event->getContext());
             }
             if (array_key_exists('gaisbock_product_detail_description_set_image7',$getProductCustomImages['customFields']))
             {
                 $image7 = $getProductCustomImages['customFields']['gaisbock_product_detail_description_set_image7'];
+                $images['7'] = $this->findMedia($image7,$event->getContext());
             }
             if (array_key_exists('gaisbock_product_detail_description_set_image8',$getProductCustomImages['customFields']))
             {
                 $image8 = $getProductCustomImages['customFields']['gaisbock_product_detail_description_set_image8'];
+                $images['8'] = $this->findMedia($image8,$event->getContext());
             }
-
+            $event->getPage()->getProduct()->addArrayExtension('images',['customImage'=>$images]);
         }
 
+    }
+
+    private function findMedia($mediaId,$context)
+    {
+        $criteria = new Criteria();
+        $criteria->addFilter(new EqualsFilter('id', $mediaId));
+        $getImage = $this->mediaRepository->search($criteria, $context)->first();
+        return $getImage;
     }
 }

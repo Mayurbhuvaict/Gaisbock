@@ -38,6 +38,11 @@
     }
   },
   "productDetailPage": {
-    "contents": "CONTENTS"
+    "contents": "contents",
+    "benefits": "benefits",
+    "effect": "effect",
+    "application": "application",
+    "integral": "integral",
+    "shipping": "shipping"
   }
 }

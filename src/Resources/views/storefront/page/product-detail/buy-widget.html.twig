@@ -207,30 +207,195 @@
         {% endblock %}
 
         {% block gaisbock_extra_info %}
-            <div class="accordion" id="accordionExampleTwo">
-                <div class="dutch-drop-nolten-delivery-and-returns">
-                    <div class="h3 notlten-title-tab dutch-drop-nolten-delivery-and-returns-title accordion-header"
-                         id="headingTwo">
-                        <h3 class="accordion-header" id="headingTwo">
-                            <span type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo"
-                                aria-expanded="true" aria-controls="collapseTwo">
-                                {{ "productDetailPage.contents"|trans|sw_sanitize }}
-                            </span>
-                        </h3>
-                    </div>
-
-                    {% block page_product_detail_description_content_text %}
-                        <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo"
-                             data-bs-parent="#accordionExampleTwo">
-                            <div class="dutch-drop-nolten-delivery-and-returns-title-description"
-                                 itemprop="description">
-                                {{ dump(page.product.translated.gaisbock_product_detail_description_set_image1) }}
-                                {% sw_icon 'gaisbock-plus' style {'pack': 'gaisbock','class':'gaisbock-header'} %}
-                            </div>
+            {% if page.product.translated.customFields.gaisbock_product_detail_description_set_image1_text %}
+                <div class="accordion" id="accordionExampleOne">
+                    <div class="gaisbock-description-contain">
+                        <div class="h3 gaisbock-title-tab gaisbock-description-contain-title accordion-header"
+                             id="headingOne">
+                            <h3 class="accordion-header" id="headingOne">
+                                <span type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne"
+                                      aria-expanded="true" aria-controls="collapseTwo">
+                                    {{ "productDetailPage.contents"|trans|sw_sanitize }}
+                                    {% sw_icon 'gaisbock-plus' style {'pack': 'gaisbock','class':'gaisbock-header'} %}
+                                </span>
+                            </h3>
                         </div>
-                    {% endblock %}
+
+                        {% block page_product_detail_description_content_text %}
+                            <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne"
+                                 data-bs-parent="#accordionExampleOne">
+                                <div class="gaisbock-description-contain-title-description" itemprop="description">
+                                    {% if page.product.extensions.images.customImage.1 %}
+                                        <img src="{{ page.product.extensions.images.customImage.1.url }}" alt="">
+                                        <p class="gaisbock-product-image-text">{{ page.product.translated.customFields.gaisbock_product_detail_description_set_image1_text }}</p>
+                                    {% endif %}
+                                    {% if page.product.extensions.images.customImage.2 %}
+                                        {% sw_icon 'gaisbock-plus' style {'pack': 'gaisbock','class':'gaisbock-header'} %}
+                                        <img src="{{ page.product.extensions.images.customImage.2.url }}" alt="">
+                                        <p class="gaisbock-product-image-text">{{ page.product.translated.customFields.gaisbock_product_detail_description_set_image2_text }}</p>
+                                    {% endif %}
+                                    {% if page.product.extensions.images.customImage.3 %}
+                                        {% sw_icon 'gaisbock-plus' style {'pack': 'gaisbock','class':'gaisbock-header'} %}
+                                        <img src="{{ page.product.extensions.images.customImage.3.url }}" alt="">
+                                        <p class="gaisbock-product-image-text">{{ page.product.translated.customFields.gaisbock_product_detail_description_set_image3_text }}</p>
+                                    {% endif %}
+                                    {% if page.product.extensions.images.customImage.4 %}
+                                        {% sw_icon 'gaisbock-plus' style {'pack': 'gaisbock','class':'gaisbock-header'} %}
+                                        <img src="{{ page.product.extensions.images.customImage.4.url }}" alt="">
+                                        <p class="gaisbock-product-image-text">{{ page.product.translated.customFields.gaisbock_product_detail_description_set_image4_text }}</p>
+                                    {% endif %}
+                                    {% if page.product.extensions.images.customImage.5 %}
+                                        {% sw_icon 'gaisbock-plus' style {'pack': 'gaisbock','class':'gaisbock-header'} %}
+                                        <img src="{{ page.product.extensions.images.customImage.5.url }}" alt="">
+                                        <p class="gaisbock-product-image-text">{{ page.product.translated.customFields.gaisbock_product_detail_description_set_image5_text }}</p>
+                                    {% endif %}
+                                    {% if page.product.extensions.images.customImage.6 %}
+                                        {% sw_icon 'gaisbock-plus' style {'pack': 'gaisbock','class':'gaisbock-header'} %}
+                                        <img src="{{ page.product.extensions.images.customImage.6.url }}" alt="">
+                                        <p class="gaisbock-product-image-text">{{ page.product.translated.customFields.gaisbock_product_detail_description_set_image6_text }}</p>
+                                    {% endif %}
+                                    {% if page.product.extensions.images.customImage.7 %}
+                                        {% sw_icon 'gaisbock-plus' style {'pack': 'gaisbock','class':'gaisbock-header'} %}
+                                        <img src="{{ page.product.extensions.images.customImage.7.url }}" alt="">
+                                        <p class="gaisbock-product-image-text">{{ page.product.translated.customFields.gaisbock_product_detail_description_set_image7_text }}</p>
+                                    {% endif %}
+                                    {% if page.product.extensions.images.customImage.8 %}
+                                        {% sw_icon 'gaisbock-plus' style {'pack': 'gaisbock','class':'gaisbock-header'} %}
+                                        <img src="{{ page.product.extensions.images.customImage.8.url }}" alt="">
+                                        <p class="gaisbock-product-image-text">{{ page.product.translated.customFields.gaisbock_product_detail_description_set_image8_text }}</p>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        {% endblock %}
+                    </div>
                 </div>
-            </div>
+            {% endif %}
+            {% if page.product.translated.customFields.gaisbock_product_detail_extra_details_benefits %}
+                <div class="accordion" id="accordionExampleTwo">
+                    <div class="gaisbock-description-contain">
+                        <div class="h3 gaisbock-title-tab gaisbock-description-contain-title accordion-header"
+                             id="headingTwo">
+                            <h3 class="accordion-header" id="headingTwo">
+                                <span type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo"
+                                      aria-expanded="true" aria-controls="collapseTwo">
+                                    {{ "productDetailPage.benefits"|trans|sw_sanitize }}
+                                    {% sw_icon 'gaisbock-plus' style {'pack': 'gaisbock','class':'gaisbock-header'} %}
+                                </span>
+                            </h3>
+                        </div>
+
+                        {% block page_product_detail_description_content_text_benfits %}
+                            <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo"
+                                 data-bs-parent="#accordionExampleTwo">
+                                <div class="gaisbock-description-contain-title-description" itemprop="description">
+                                    {{ page.product.translated.customFields.gaisbock_product_detail_extra_details_benefits|raw }}
+                                </div>
+                            </div>
+                        {% endblock %}
+                    </div>
+                </div>
+            {% endif %}
+            {% if page.product.translated.customFields.gaisbock_product_detail_extra_details_effect %}
+                <div class="accordion" id="accordionExampleThree">
+                    <div class="gaisbock-description-contain">
+                        <div class="h3 gaisbock-title-tab gaisbock-description-contain-title accordion-header"
+                             id="headingThree">
+                            <h3 class="accordion-header" id="headingThree">
+                                <span type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree"
+                                      aria-expanded="true" aria-controls="collapseThree">
+                                    {{ "productDetailPage.effect"|trans|sw_sanitize }}
+                                    {% sw_icon 'gaisbock-plus' style {'pack': 'gaisbock','class':'gaisbock-header'} %}
+                                </span>
+                            </h3>
+                        </div>
+
+                        {% block gaisbock_product_detail_extra_details_effect %}
+                            <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree"
+                                 data-bs-parent="#accordionExampleThree">
+                                <div class="gaisbock-description-contain-title-description" itemprop="description">
+                                    {{ page.product.translated.customFields.gaisbock_product_detail_extra_details_effect|raw }}
+                                </div>
+                            </div>
+                        {% endblock %}
+                    </div>
+                </div>
+            {% endif %}
+            {% if page.product.translated.customFields.gaisbock_product_detail_extra_details_application %}
+                <div class="accordion" id="accordionExampleFour">
+                    <div class="gaisbock-description-contain">
+                        <div class="h3 gaisbock-title-tab gaisbock-description-contain-title accordion-header"
+                             id="headingFour">
+                            <h3 class="accordion-header" id="headingFour">
+                                <span type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour"
+                                      aria-expanded="true" aria-controls="collapseFour">
+                                    {{ "productDetailPage.application"|trans|sw_sanitize }}
+                                    {% sw_icon 'gaisbock-plus' style {'pack': 'gaisbock','class':'gaisbock-header'} %}
+                                </span>
+                            </h3>
+                        </div>
+
+                        {% block gaisbock_product_detail_extra_details_application %}
+                            <div id="collapseFour" class="accordion-collapse collapse" aria-labelledby="headingFour"
+                                 data-bs-parent="#accordionExampleFour">
+                                <div class="gaisbock-description-contain-title-description" itemprop="description">
+                                    {{ page.product.translated.customFields.gaisbock_product_detail_extra_details_application|raw }}
+                                </div>
+                            </div>
+                        {% endblock %}
+                    </div>
+                </div>
+            {% endif %}
+            {% if page.product.translated.customFields.gaisbock_product_detail_extra_details_integral %}
+                <div class="accordion" id="accordionExampleFive">
+                    <div class="gaisbock-description-contain">
+                        <div class="h3 gaisbock-title-tab gaisbock-description-contain-title accordion-header"
+                             id="headingFive">
+                            <h3 class="accordion-header" id="headingFive">
+                                <span type="button" data-bs-toggle="collapse" data-bs-target="#collapseFive"
+                                      aria-expanded="true" aria-controls="collapseFive">
+                                    {{ "productDetailPage.integral"|trans|sw_sanitize }}
+                                    {% sw_icon 'gaisbock-plus' style {'pack': 'gaisbock','class':'gaisbock-header'} %}
+                                </span>
+                            </h3>
+                        </div>
+
+                        {% block gaisbock_product_detail_extra_details_integral %}
+                            <div id="collapseFive" class="accordion-collapse collapse" aria-labelledby="headingFive"
+                                 data-bs-parent="#accordionExampleFive">
+                                <div class="gaisbock-description-contain-title-description" itemprop="description">
+                                    {{ page.product.translated.customFields.gaisbock_product_detail_extra_details_integral|raw }}
+                                </div>
+                            </div>
+                        {% endblock %}
+                    </div>
+                </div>
+            {% endif %}
+            {% if page.product.translated.customFields.gaisbock_product_detail_extra_details_shipping %}
+                <div class="accordion" id="accordionExampleSix">
+                    <div class="gaisbock-description-contain">
+                        <div class="h3 gaisbock-title-tab gaisbock-description-contain-title accordion-header"
+                             id="headingSix">
+                            <h3 class="accordion-header" id="headingSix">
+                                <span type="button" data-bs-toggle="collapse" data-bs-target="#collapseSix"
+                                      aria-expanded="true" aria-controls="collapseSix">
+                                    {{ "productDetailPage.shipping"|trans|sw_sanitize }}
+                                    {% sw_icon 'gaisbock-plus' style {'pack': 'gaisbock','class':'gaisbock-header'} %}
+                                </span>
+                            </h3>
+                        </div>
+
+                        {% block gaisbock_product_detail_extra_details_shipping %}
+                            <div id="collapseSix" class="accordion-collapse collapse" aria-labelledby="headingSix"
+                                 data-bs-parent="#accordionExampleSix">
+                                <div class="gaisbock-description-contain-title-description" itemprop="description">
+                                    {{ page.product.translated.customFields.gaisbock_product_detail_extra_details_shipping|raw }}
+                                </div>
+                            </div>
+                        {% endblock %}
+                    </div>
+                </div>
+            {% endif %}
+
         {% endblock %}
     </div>
 {% endblock %}
