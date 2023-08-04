@@ -1,27 +1,30 @@
 {% sw_extends '@Storefront/storefront/layout/navigation/offcanvas/item-link.html.twig' %}
 {% block layout_navigation_offcanvas_navigation_categories_list_category_item_link %}
-    {% set mediaUrl = item.category.media.url %}
-    <a class="navigation-offcanvas-link nav-item nav-link{% if isActive %} active{% endif %}{% if hasChildren %} js-navigation-offcanvas-link{% endif %}"
-       href="{{ url }}"
-            {% if hasChildren %}
-                data-href="{{ path('frontend.menu.offcanvas', {'navigationId': item.category.id}) }}"
-            {% endif %}
-       itemprop="url"
-            {% if category_linknewtab(item.category) %}target="_blank"{% endif %}
-       title="{{ name }}">
-        {% block layout_navigation_offcanvas_navigation_categories_list_category_item_link_text %}
-            <span itemprop="name">{{ name }}</span>
-            {% if mediaUrl %}
-                <img src="{{ mediaUrl }}" alt="Category image">
-            {% endif %}
-            {% if hasChildren %}
-                {% block layout_navigation_offcanvas_navigation_categories_list_category_item_link_icon %}
-                    <span
-                            class="navigation-offcanvas-link-icon js-navigation-offcanvas-loading-icon">
-                            {% sw_icon 'arrow-medium-right' style { 'pack':'solid', 'size': 'sm' } %}
-                        </span>
-                {% endblock %}
-            {% endif %}
-        {% endblock %}
-    </a>
+    {% set url = category_url(item.category) %}
+    <div class="gaisbock-category-accordion accordion accordion-flush" id="gaisbockAccordion">
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="gaisbock-heading">
+                <div class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                     data-bs-target="#gaisbockCollapse{{ item.category.id }}" aria-expanded="false"
+                     aria-controls="gaisbockCollapse{{ item.category.id }}">
+                    <a href="{{ url }}" itemprop="url">{{ item.category.name }}</a>
+                </div>
+            </h2>
+            <div id="gaisbockCollapse{{ item.category.id }}" class="accordion-collapse collapse"
+                 aria-labelledby="gaisbock-heading" data-bs-parent="#gaisbockAccordion">
+                <div class="accordion-body">
+                    {% for children in item.children %}
+                        <div class="gaisbock-accordion-content">
+                            <a href="{{ category_url(children.category) }}" class="d-flex gaisbock-sub-category">
+                                {% if children.category.media.url %}
+                                    <img src="{{ children.category.media.url }}" alt="category image">
+                                {% endif %}
+                                <div>{{ children.category.name }}</div>
+                            </a>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
 {% endblock %}

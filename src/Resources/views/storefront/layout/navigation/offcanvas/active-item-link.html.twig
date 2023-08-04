@@ -6,6 +6,7 @@
         {% block layout_navigation_offcanvas_navigation_category_headline_text %}
             <span itemprop="name">
                 {{ item.translated.name }}
+                {% sw_icon 'chevron-down' style {'pack': 'gaisbock'} %}
             </span>
         {% endblock %}
     </a>
