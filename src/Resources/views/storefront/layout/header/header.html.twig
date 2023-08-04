@@ -123,6 +123,17 @@
                                                         {% endblock %}
                                                         {% block layout_header_search_button %}
                                                         {% endblock %}
+                                                        <button class="btn header-actions-btn search-toggle-btn js-search-toggle-btn collapsed gaisbock-search-button-for-css-close"
+                                                                id="closeToggle"
+                                                                type="button"
+                                                                data-bs-toggle="collapse"
+                                                                data-bs-target="#searchCollapse"
+                                                                aria-expanded="false"
+                                                                aria-controls="searchCollapse"
+                                                                aria-label="{{ "header.searchButton"|trans|striptags }}">
+                                                            {% sw_icon 'close' style {'pack': 'gaisbock','class':'gaisbock-header-search-close'} %}
+                                                        </button>
+
                                                     </div>
                                                 {% endblock %}
                                             </form>

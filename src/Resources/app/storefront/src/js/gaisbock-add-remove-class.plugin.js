@@ -28,6 +28,21 @@ export default class gaisbockAddRemoveClass extends Plugin {
             }
 
         });
+        const searchButton = document.querySelector('.gaisbock-search-button-for-css');
+
+        searchButton.addEventListener('click',()=>{
+            if(parentDiv.classList.contains('search-click') === false){
+                parentDiv.classList.add('search-click');
+            }else{
+                parentDiv.classList.remove('search-click');
+            }
+        });
+
+        const closeButton = document.querySelector('.gaisbock-search-button-for-css-close');
+
+        closeButton.addEventListener('click',()=>{
+            parentDiv.classList.remove('search-click');
+        });
         // let stockOpen = document.getElementsByClassName('main-navigation-link');
         // stockOpen.addEventListener('mouseenter', toggleHoverClass);
         // stockOpen.addEventListener('mouseleave', toggleHoverClass);
