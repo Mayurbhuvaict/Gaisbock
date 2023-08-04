@@ -49,5 +49,6 @@ export default class gaisbockAddRemoveClass extends Plugin {
                 getClass.classList.remove("gaisbock-hover");
             }
         }
+        
     }
 }
