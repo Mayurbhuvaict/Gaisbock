@@ -3,7 +3,7 @@
         <div class="cms-element-gaisbock-category-image-text__images">
             <div class="cms-element-gaisbock-category-image-text__inner-images-text-one">
                 <h2 class="cms-element-gaisbock-category-image-text__category-name">{{ element.translated.config.newTitle.value }}</h2>
-                <div class="cms-element-{{ element.type }}{% if config.verticalAlign.value %} has-vertical-alignment{% endif %}">
+                <div class="cms-element-{{ element.type }}-inner {% if config.verticalAlign.value %} has-vertical-alignment{% endif %}">
                     {% block element_product_slider_alignment %}
                         {% if config.verticalAlign.value %}
                             <div class="cms-element-alignment{% if config.verticalAlign.value == "center" %} align-self-center{% elseif config.verticalAlign.value == "flex-end" %} align-self-end{% else %} align-self-start{% endif %}">
