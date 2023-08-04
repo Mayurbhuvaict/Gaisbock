@@ -2,7 +2,6 @@
 {% block layout_header_logo_inner %}
     <div class="header-logo-main">
         {% block layout_header_logo_link %}
-            {% if activeRoute == 'frontend.home.page' %}
                 <a class="header-logo-main-link"
                    href="{{ path('frontend.home.page') }}"
                    title="{{ "header.logoLink"|trans|striptags }}">
@@ -50,7 +49,6 @@
                         </picture>
                     {% endblock %}
                 </a>
-            {% else %}
                 <a class="header-black-logo-main-link"
                    href="{{ path('frontend.home.page') }}"
                    title="{{ "header.logoLink"|trans|striptags }}">
@@ -66,7 +64,6 @@
                         </picture>
                     {% endblock %}
                 </a>
-            {% endif %}
 
             {% block layout_header_mobile_text_logo %}
                 <a class="header-text-logo-main-link gaisbock-header-mobile-text-logo"

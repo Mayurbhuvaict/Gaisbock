@@ -6,6 +6,12 @@
       transform: translateY(0);
     }
   }
+  .header-main {
+    padding-bottom: 20px;
+  }
+  .is-act-home .header-main {
+    padding-bottom: 0;
+}
   body .header-row .header-actions-col .top-bar-language .top-bar-list-item .top-bar-list-label,
   body .header-row .header-actions-col .icon {
     color: $sw-header-text-color;
@@ -16,6 +22,56 @@
   }
 .hovered {
     background: $sw-color-brand-primary;
+}
+.hovered a.header-black-logo-main-link,
+.is-act-home a.header-black-logo-main-link,
+a.header-logo-main-link,
+.is-sticky a.header-text-logo-main-link.gaisbock-text-sticky-logo {
+    display: none;
+}
+.is-act-home a.header-logo-main-link,
+.hovered a.header-logo-main-link {
+    display: block;
+}
+.is-sticky .nav-main .main-navigation-menu .main-navigation-link,
+body .is-sticky .header-row .header-actions-col .top-bar-language .top-bar-list-item .top-bar-list-label,
+body .is-sticky .header-row .header-actions-col .icon,
+.hovered .nav-main .main-navigation-menu .main-navigation-link,
+body .hovered .header-row .header-actions-col .top-bar-language .top-bar-list-item .top-bar-list-label,
+body .hovered .header-row .header-actions-col .icon {
+    color: #fff;
+}
+.is-act-home .gaisbock-header-mobile-text-logo-white,
+.is-act-home .is-sticky .gaisbock-header-mobile-text-logo {
+    display: none;
+}
+.gaisbock-header-mobile-text-logo-white,
+.is-sticky a.header-black-logo-main-link {
+    display: none;
+}
+body .hovered .header-actions-mobile .icon {
+    color: #fff;
+}
+.is-act-home .is-sticky .gaisbock-header-mobile-text-logo-white,
+.is-sticky .gaisbock-header-mobile-text-logo-white {
+    display: block;
+    @media(max-width:992px){
+        padding-left: 40px;
+    }
+}
+.is-sticky  a.header-text-logo-main-link.gaisbock-header-mobile-text-logo {
+    @media(max-width:992px) {
+        display: none;
+    }
+}
+a.header-black-logo-main-link,
+.is-sticky .gaisbock-header-mobile-text-logo-white {
+    @media(max-width:992px){
+        padding-left: 40px;
+    }
+}
+.is-act-home .is-sticky .header-logo-main .gaisbock-text-sticky-logo {
+    display: none;
 }
 .header-row {
     padding: 5px 20px 0;
@@ -186,6 +242,23 @@
 }
 
 @include media-breakpoint-down(lg) {
+    body .header-actions-mobile .icon {
+        color:$sw-color-brand-primary;
+    }
+    body.is-act-home .header-actions-mobile .icon {
+        color:#fff;
+    }
+    body .is-sticky .header-actions-mobile .icon,
+    body .is-sticky .header-row .header-actions-col .top-bar-language .top-bar-list-item .top-bar-list-label,
+    body .is-sticky .header-row .header-actions-col .icon {
+        color: #fff;
+    }
+    .is-sticky .gaisbock-header-mobile-text-logo {
+        display: block;
+    }
+    .is-sticky  a.header-black-logo-main-link {
+        display: none;
+    }
     body {
         .header-main .top-bar .top-bar-nav {
             padding: 0;
@@ -230,7 +303,7 @@
         }
     }
     .search-toggle {
-        padding-right: 27px;
+        padding-right: 17px;
     }
     .header-actions-mobile {
         position: static;
@@ -250,4 +323,37 @@
         position: absolute;
         transform: translate(-50%,0%);
     }
+    .header-logo-main {
+        a.header-black-logo-main-link {
+            display: none;
+        }
+        a.header-text-logo-main-link.gaisbock-header-mobile-text-logo {
+            display: block;
+        }
+    }
+    .is-act-home .header-logo-main a.header-text-logo-main-link.gaisbock-header-mobile-text-logo {
+        display: none;
+    }
+    .is-sticky {
+        a.header-text-logo-main-link.gaisbock-header-mobile-text-logo {
+            display: none;
+        }
+    }
+    .hovered {
+        z-index: 99;
+    }
+    .gaisbock-header-mobile-text-logo img,
+    .gaisbock-header-mobile-text-logo-white img {
+        width: 140px;
+        padding-top: 6px;
+    }
+    a.header-black-logo-main-link, .is-sticky .gaisbock-header-mobile-text-logo-white{
+        padding-left: 0 !important;
+    }
 }   
+@media(max-width: 375px) {
+    .gaisbock-header-mobile-text-logo img,
+    .gaisbock-header-mobile-text-logo-white img {
+        width: 110px;
+    }
+}
