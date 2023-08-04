@@ -29,6 +29,19 @@ export default class gaisbockAddRemoveClass extends Plugin {
 
         });
 
+        const closeButton = document.querySelector('.gaisbock-search-button-for-css-close');
+
+        closeButton.addEventListener('click',()=>{
+            parentDiv.classList.remove('search-click');
+        });
+
+
+        
+        let getEleId = document.getElementById('navigationId');
+        let getClass = document.querySelector('.gaisbock-header-main');
+        getEleId.addEventListener('mouseenter', toggleHoverClass);
+        getEleId.addEventListener('mouseleave', toggleHoverClass);
+
         function toggleHoverClass(event) {
             if (event.type === 'mouseenter') {
                 // Add the class "gaisbock-hover" when the mouse enters the element
@@ -38,5 +51,6 @@ export default class gaisbockAddRemoveClass extends Plugin {
                 getClass.classList.remove("gaisbock-hover");
             }
         }
+
     }
 }
