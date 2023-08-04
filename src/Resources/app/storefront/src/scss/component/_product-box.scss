@@ -177,9 +177,15 @@ body {
         list-style: none;
         padding-bottom: 5px;
         text-align: center;
+        @media(min-width:768px) {
+            margin-top: 20px;
+        }
     }
     .nav-item {
         padding: 0 30px;
+        @media(max-width:767px) {
+            padding: 0 16px;
+        }
         a{
             letter-spacing: 1.2px;
             color: $sw-color-brand-primary;
@@ -188,12 +194,20 @@ body {
             font-weight: $sw-headings-font-weight;
             font-size: 15px;
             line-height: 18px;
+            @media(max-width:767px) {
+                font-size: 10px;
+                line-height: 11px;
+                letter-spacing: 0.7px;
+            }
             &:hover{
                 text-decoration: none;
             }
             &.active{
                 border-bottom: 4px solid #DE1010;
                 padding-bottom: 3px;
+                @media(max-width:767px) {
+                    border-bottom: 2px solid #DE1010;
+                }
             }
         }
     }
@@ -342,6 +356,9 @@ body {
             top: 15px;
             right: 9px;
         }
+    }
+    .cms-listing-col .product-box {
+        margin-bottom: 40px;
     }
 }
 
