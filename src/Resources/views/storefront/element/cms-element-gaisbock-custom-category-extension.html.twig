@@ -6,7 +6,7 @@
                 {% for item in page.extensions.categoryData.data %}
                     {% set id = item.id %}
                     <li class="nav-item">
-                        <a href="{{ category_url(item) }}" class="sw-cms-element-gaisbock-custom-category-line{% if category.id == page.header.navigation.active.id or category.id in activePath %} active{% endif %}">
+                        <a href="{{ category_url(item) }}" class="sw-cms-element-gaisbock-custom-category-line{% if item.id == page.header.navigation.active.id or item.id in activePath %} active{% endif %}">
                             {{ item.translated.name }}
                         </a>
                     </li>

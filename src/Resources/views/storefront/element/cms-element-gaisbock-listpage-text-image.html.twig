@@ -4,7 +4,7 @@
 
         <div class="cms-element-gaisbock-text">
             {% block element_text_alignment %}
-              <h1>{{ config.heading.value }}</h1>
+              <h1>{{ config.heading.value | raw }}</h1>
             {% endblock %}
         </div>
         <div class="cms-element-gaisbock-listing-image{% if config.verticalAlign.value %} has-vertical-alignment{% endif %}">

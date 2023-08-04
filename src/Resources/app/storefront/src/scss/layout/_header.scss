@@ -162,8 +162,8 @@ a.header-black-logo-main-link,
     .main-navigation-menu {
         .main-navigation-link {
             @media(max-width:1199px) {
-                padding-right: 15px;
-                padding-left: 15px;
+                padding-right: 15px !important;
+                padding-left: 15px !important;
             }
         }
     }
@@ -349,6 +349,11 @@ a.header-black-logo-main-link,
     }
     a.header-black-logo-main-link, .is-sticky .gaisbock-header-mobile-text-logo-white{
         padding-left: 0 !important;
+    }
+    body {
+        .header-main {
+            padding-bottom: 0;
+        }
     }
 }   
 @media(max-width: 375px) {
