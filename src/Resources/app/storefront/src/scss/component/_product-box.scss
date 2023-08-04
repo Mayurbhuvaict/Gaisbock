@@ -3,11 +3,18 @@
 }
 .p-0 {
     .cms-section-default {
-        padding: 0;
+        padding: 0 !important;
     }
 }
 .cms-listing-col .product-box {
     margin-bottom: 80px;
+}
+.is-act-index {
+    .content-main {
+        @media(max-width:1440px) {
+            padding: 0 20px;
+        }
+    }
 }
 body {
     .cms-block-product-listing{

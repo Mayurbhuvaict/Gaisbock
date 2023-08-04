@@ -1,0 +1,77 @@
+.hovered {
+    .header-logo-col {
+        @media(max-width:767px) {
+            opacity: 0;
+            z-index: -1;
+        }
+    }
+}
+.header-actions-col {
+    .search-toggle {
+        position: static;
+        div#searchCollapse {
+            position: absolute;
+            width: 100%;
+            right: 186px;
+            max-width: 1059px;
+            top: 60px;
+            @media(max-width:1450px) {
+                max-width: 992px;
+                right: 40px;
+            }
+            @media(max-width:1199px) {
+                max-width: 768px;
+            }
+            @media(max-width:992px) {
+                top:45px;
+                max-width: 530px;
+            }
+            @media(max-width:767px) {
+                position: fixed;
+                background: $sw-color-brand-primary;
+                width: 100%;
+                max-width: 100%;
+                right: 0;
+                top:73px;
+                height: 100%;
+            }
+            .header-search {
+                max-width: 100%;
+                input {
+                    background: transparent;
+                    border: 0;
+                    border-bottom: 1px solid #fff;
+                    color: $sw-color-brand-secondary;
+                    font-size: 34px;
+                    letter-spacing: 0.17px;
+                    line-height: 42px;
+                    font-family: $sw-font-family-headline;
+                    font-weight: 900;
+                    text-shadow: 0px 0px 40px #00000029;
+                    @media(max-width:992px) {
+                        font-size: 24px;
+                        line-height: 26px;
+                        letter-spacing: 0.12px;
+                    }
+                    @media(max-wdith:767px) {
+                        margin-top: 60px;
+                    }
+                    &::placeholder {
+                        color: $sw-color-brand-secondary;
+                        font-size: 34px;
+                        letter-spacing: 0.17px;
+                        line-height: 42px;
+                        font-family: $sw-font-family-headline;
+                        font-weight: 900;
+                        text-shadow: 0px 0px 40px #00000029;
+                        @media(max-width:992px) {
+                            font-size: 24px;
+                            line-height: 26px;
+                            letter-spacing: 0.12px;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
