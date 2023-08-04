@@ -35,6 +35,8 @@ export default class gaisbockAddRemoveClass extends Plugin {
             parentDiv.classList.remove('search-click');
         });
 
+
+        
         let getEleId = document.getElementById('navigationId');
         let getClass = document.querySelector('.gaisbock-header-main');
         getEleId.addEventListener('mouseenter', toggleHoverClass);
@@ -49,6 +51,6 @@ export default class gaisbockAddRemoveClass extends Plugin {
                 getClass.classList.remove("gaisbock-hover");
             }
         }
-        
+
     }
 }
