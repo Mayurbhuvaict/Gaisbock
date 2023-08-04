@@ -17,7 +17,32 @@ export default class gaisbockAddRemoveClass extends Plugin {
                 header.classList.remove(toggleClass);
             }
         });
+        const parentDiv = document.querySelector('.header-main');
+        const searchButton = document.querySelector('.gaisbock-search-button-for-css');
 
+        searchButton.addEventListener('click',()=>{
+            if(parentDiv.classList.contains('search-click') === false){
+                parentDiv.classList.add('search-click');
+            }else{
+                parentDiv.classList.remove('search-click');
+            }
+
+        });
+        const searchButton = document.querySelector('.gaisbock-search-button-for-css');
+
+        searchButton.addEventListener('click',()=>{
+            if(parentDiv.classList.contains('search-click') === false){
+                parentDiv.classList.add('search-click');
+            }else{
+                parentDiv.classList.remove('search-click');
+            }
+        });
+
+        const closeButton = document.querySelector('.gaisbock-search-button-for-css-close');
+
+        closeButton.addEventListener('click',()=>{
+            parentDiv.classList.remove('search-click');
+        });
 
         let getEleId = document.getElementById('navigationId');
         let getClass = document.querySelector('.gaisbock-header-main');
@@ -33,5 +58,7 @@ export default class gaisbockAddRemoveClass extends Plugin {
                 getClass.classList.remove("gaisbock-hover");
             }
         }
+
+        
     }
 }
