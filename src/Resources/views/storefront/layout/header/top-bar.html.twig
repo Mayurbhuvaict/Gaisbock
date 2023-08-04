@@ -1,6 +1,6 @@
 {% sw_extends '@Storefront/storefront/layout/header/top-bar.html.twig' %}
 {% block layout_header_top_bar %}
-    <div class="top-bar d-lg-block">
+    <div class="top-bar d-none d-lg-block">
         <nav class="top-bar-nav">
             {% block layout_header_top_bar_language %}
 
@@ -8,110 +8,110 @@
 
             {% if(context.salesChannel.customFields != null) %}
                 {% block layout_header_top_bar_usp %}
-                <nav class="navbar navbar-light align-items-start flex-nowrap" id="gaisbock-theme-navbar">
-                    {% set upsOption = {
-                        slider: {
-                            autoplay: true,
-                            autoplayButton: false,
-                            autoplayButtonOutput: false,
-                            controls: false,
-                            nav: false,
-                            gutter: 200,
-                            touch: true,
-                            item:1,
-                            slidesPerView: 1,
-                            loop: true
-                        }
-                    } %}
-                    <div class="base-slider" data-product-slider=true
-                         data-product-slider-options='{{ upsOption|json_encode }}'>
-                        <div class="gaisbock-theme-container" data-product-slider-container="true">
-                            <div class="gaisbock-theme-item-container">
-                                {% block gaisbock_slider_card_slide_one %}
-                                    <div class="card gaisbock-theme-card">
-                                        {% block gaisbock_slider_body_slide_one %}
-                                            <div class="card-body">
-                                                {% block gaisbock_slider_blockquote_slide_one %}
-                                                    <div class="gaisbock-theme-ups">
-                                                        {% block gaisbock_slider_comment_slide_one %}
-                                                            <p class="gaisbock-theme-ups-text">{{ context.salesChannel.customFields.gaisbock_usp_text_one }}</p>
-                                                        {% endblock %}
-                                                    </div>
-                                                {% endblock %}
-                                            </div>
-                                        {% endblock %}
-                                    </div>
-                                {% endblock %}
-                            </div>
-                            <div class="gaisbock-theme-item-container">
-                                {% block gaisbock_slider_card_slide_two %}
-                                    <div class="card gaisbock-theme-card">
-                                        {% block gaisbock_slider_body_slide_two %}
-                                            <div class="card-body">
-                                                {% block gaisbock_slider_blockquote_slide_two %}
-                                                    <div class="gaisbock-theme-ups">
-                                                        {% block gaisbock_slider_comment_slide_two %}
-                                                            <p class="gaisbock-theme-ups-text">{{ context.salesChannel.customFields.gaisbock_usp_text_two }}</p>
-                                                        {% endblock %}
-                                                    </div>
-                                                {% endblock %}
-                                            </div>
-                                        {% endblock %}
-                                    </div>
-                                {% endblock %}
-                            </div>
-                            <div class="gaisbock-theme-item-container">
-                                {% block gaisbock_slider_card_slide_three %}
-                                    <div class="card gaisbock-theme-card">
-                                        {% block gaisbock_slider_body_slide_three %}
-                                            <div class="card-body">
-                                                {% block gaisbock_slider_blockquote_slide_three %}
-                                                    <div class="gaisbock-theme-ups">
-                                                        {% block gaisbock_slider_comment_slide_three %}
-                                                            <p class="gaisbock-theme-ups-text">{{ context.salesChannel.customFields.gaisbock_usp_text_three }}</p>
-                                                        {% endblock %}
-                                                    </div>
-                                                {% endblock %}
-                                            </div>
-                                        {% endblock %}
-                                    </div>
-                                {% endblock %}
-                            </div>
-                            <div class="gaisbock-theme-item-container">
-                                {% block gaisbock_slider_card_slide_four %}
-                                    <div class="card gaisbock-theme-card">
-                                        {% block gaisbock_slider_body_slide_four %}
-                                            <div class="card-body">
-                                                {% block gaisbock_slider_blockquote_slide_four %}
-                                                    <div class="gaisbock-theme-ups">
-                                                        {% block gaisbock_slider_comment_slide_four %}
-                                                            <p class="gaisbock-theme-ups-text">{{ context.salesChannel.customFields.gaisbock_usp_text_four }}</p>
-                                                        {% endblock %}
-                                                    </div>
-                                                {% endblock %}
-                                            </div>
-                                        {% endblock %}
-                                    </div>
-                                {% endblock %}
-                            </div>
-                        </div>
-                        {% if element.config.showControls.value %}
-                            <div class="product-slider-controls-container">
-                                <div class="base-slider-controls" data-product-slider-controls="true">
-                                    <button class="base-slider-controls-prev product-slider-controls-prev"
-                                            name="review-slider-control-prev">
-                                        {% sw_icon 'arrow-head-left' %}
-                                    </button>
-                                    <button class="base-slider-controls-next product-slider-controls-next"
-                                            name="review-slider-control-next">
-                                        {% sw_icon 'arrow-head-right' %}
-                                    </button>
+                    <nav class="navbar navbar-light align-items-start flex-nowrap" id="gaisbock-theme-navbar">
+                        {% set upsOption = {
+                            slider: {
+                                autoplay: true,
+                                autoplayButton: false,
+                                autoplayButtonOutput: false,
+                                controls: false,
+                                nav: false,
+                                gutter: 200,
+                                touch: true,
+                                item:1,
+                                slidesPerView: 1,
+                                loop: true
+                            }
+                        } %}
+                        <div class="base-slider" data-product-slider=true
+                             data-product-slider-options='{{ upsOption|json_encode }}'>
+                            <div class="gaisbock-theme-container" data-product-slider-container="true">
+                                <div class="gaisbock-theme-item-container">
+                                    {% block gaisbock_slider_card_slide_one %}
+                                        <div class="card gaisbock-theme-card">
+                                            {% block gaisbock_slider_body_slide_one %}
+                                                <div class="card-body">
+                                                    {% block gaisbock_slider_blockquote_slide_one %}
+                                                        <div class="gaisbock-theme-ups">
+                                                            {% block gaisbock_slider_comment_slide_one %}
+                                                                <p class="gaisbock-theme-ups-text">{{ context.salesChannel.customFields.gaisbock_usp_text_one|raw }}</p>
+                                                            {% endblock %}
+                                                        </div>
+                                                    {% endblock %}
+                                                </div>
+                                            {% endblock %}
+                                        </div>
+                                    {% endblock %}
+                                </div>
+                                <div class="gaisbock-theme-item-container">
+                                    {% block gaisbock_slider_card_slide_two %}
+                                        <div class="card gaisbock-theme-card">
+                                            {% block gaisbock_slider_body_slide_two %}
+                                                <div class="card-body">
+                                                    {% block gaisbock_slider_blockquote_slide_two %}
+                                                        <div class="gaisbock-theme-ups">
+                                                            {% block gaisbock_slider_comment_slide_two %}
+                                                                <p class="gaisbock-theme-ups-text">{{ context.salesChannel.customFields.gaisbock_usp_text_two|raw }}</p>
+                                                            {% endblock %}
+                                                        </div>
+                                                    {% endblock %}
+                                                </div>
+                                            {% endblock %}
+                                        </div>
+                                    {% endblock %}
+                                </div>
+                                <div class="gaisbock-theme-item-container">
+                                    {% block gaisbock_slider_card_slide_three %}
+                                        <div class="card gaisbock-theme-card">
+                                            {% block gaisbock_slider_body_slide_three %}
+                                                <div class="card-body">
+                                                    {% block gaisbock_slider_blockquote_slide_three %}
+                                                        <div class="gaisbock-theme-ups">
+                                                            {% block gaisbock_slider_comment_slide_three %}
+                                                                <p class="gaisbock-theme-ups-text">{{ context.salesChannel.customFields.gaisbock_usp_text_three|raw }}</p>
+                                                            {% endblock %}
+                                                        </div>
+                                                    {% endblock %}
+                                                </div>
+                                            {% endblock %}
+                                        </div>
+                                    {% endblock %}
+                                </div>
+                                <div class="gaisbock-theme-item-container">
+                                    {% block gaisbock_slider_card_slide_four %}
+                                        <div class="card gaisbock-theme-card">
+                                            {% block gaisbock_slider_body_slide_four %}
+                                                <div class="card-body">
+                                                    {% block gaisbock_slider_blockquote_slide_four %}
+                                                        <div class="gaisbock-theme-ups">
+                                                            {% block gaisbock_slider_comment_slide_four %}
+                                                                <p class="gaisbock-theme-ups-text">{{ context.salesChannel.customFields.gaisbock_usp_text_four|raw }}</p>
+                                                            {% endblock %}
+                                                        </div>
+                                                    {% endblock %}
+                                                </div>
+                                            {% endblock %}
+                                        </div>
+                                    {% endblock %}
                                 </div>
                             </div>
-                        {% endif %}
-                    </div>
-                </nav>
-            {% endblock %}
+                            {% if element.config.showControls.value %}
+                                <div class="product-slider-controls-container">
+                                    <div class="base-slider-controls" data-product-slider-controls="true">
+                                        <button class="base-slider-controls-prev product-slider-controls-prev"
+                                                name="review-slider-control-prev">
+                                            {% sw_icon 'arrow-head-left' %}
+                                        </button>
+                                        <button class="base-slider-controls-next product-slider-controls-next"
+                                                name="review-slider-control-next">
+                                            {% sw_icon 'arrow-head-right' %}
+                                        </button>
+                                    </div>
+                                </div>
+                            {% endif %}
+                        </div>
+                    </nav>
+                {% endblock %}
             {% endif %}
             {{ parent() }}
         </nav>

@@ -4,11 +4,117 @@
     {% block layout_navigation_offcanvas_navigation_actions %}
         <nav class="nav navigation-offcanvas-actions">
             {% block layout_navigation_offcanvas_navigation_action_language %}
-                {% sw_include '@Storefront/storefront/layout/header/actions/language-widget.html.twig' with {position: 'offcanvas'} %}
+
             {% endblock %}
 
             {% block layout_navigation_offcanvas_navigation_action_currency %}
-                {% sw_include '@Storefront/storefront/layout/header/actions/currency-widget.html.twig' with {position: 'offcanvas'} %}
+
+            {% endblock %}
+
+            {% block layout_navigatin_offcanvas_action_cart %}
+                <div class="gaisbock-offcanvas-header-action d-flex">
+                    <div class="d-flex gaisbock-offcanvas-header-action-one">
+                        <div class="col-auto">
+                            <div class="search-toggle">
+                                <button class="btn header-actions-btn search-toggle-btn js-search-toggle-btn collapsed"
+                                        id="closeToggle"
+                                        type="button"
+                                        data-bs-toggle="collapse"
+                                        data-bs-target="#searchCollapse"
+                                        aria-expanded="false"
+                                        aria-controls="searchCollapse"
+                                        aria-label="{{ "header.searchButton"|trans|striptags }}">
+                                    {% if activeRoute == 'frontend.home.page' %}
+                                        {% sw_icon 'SEARCH_white' style {'pack': 'gaisbock','class':'gaisbock-header-search'} %}
+                                    {% else %}
+                                        {% sw_icon 'SEARCH_black' style {'pack': 'gaisbock','class':'gaisbock-header-search'} %}
+                                    {% endif %}
+                                </button>
+                                <div class="collapse {% if activeRoute == 'frontend.search.page' %}show {% endif %}"
+                                     id="searchCollapse">
+                                    <div class="header-search">
+                                        <form action="{{ path('frontend.search.page') }}"
+                                              method="get"
+                                                {# @deprecated tag:v6.6.0 - Registering plugin on selector "data-search-form" is deprecated. Use "data-search-widget" instead #}
+                                                {% if feature('v6.6.0.0') %}
+                                                    data-search-widget="true"
+                                                {% else %}
+                                                    data-search-form="true"
+                                                {% endif %}
+                                              data-search-widget-options='{{ searchWidgetOptions|json_encode }}'
+                                              data-url="{{ path('frontend.search.suggest') }}?search="
+                                              class="header-search-form">
+                                            {% block layout_header_search_input_group %}
+                                                <div class="input-group">
+                                                    {% block layout_header_search_input %}
+                                                        <input type="search"
+                                                               name="search"
+                                                               id="gaisbock-search-bar"
+                                                               class="form-control header-search-input"
+                                                               autocomplete="off"
+                                                               autocapitalize="off"
+                                                               placeholder="{{ "header.searchPlaceholder"|trans|striptags }}"
+                                                               aria-label="{{ "header.searchPlaceholder"|trans|striptags }}"
+                                                               value="{{ page.searchTerm }}"
+                                                        >
+                                                    {% endblock %}
+                                                    {% block layout_header_search_button %}
+                                                    {% endblock %}
+                                                </div>
+                                            {% endblock %}
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        {% if config('core.cart.wishlistEnabled') %}
+                            {% block layout_header_actions_wishlist %}
+                                <div class="col-auto">
+                                    <div class="header-wishlist">
+                                        <a class="btn header-wishlist-btn header-actions-btn"
+                                           href="{{ path('frontend.wishlist.page') }}"
+                                           title="{{ 'header.wishlist'|trans|striptags }}"
+                                           aria-label="{{ 'header.wishlist'|trans|striptags }}">
+                                            {% sw_include '@Storefront/storefront/layout/header/actions/wishlist-widget.html.twig' %}
+                                        </a>
+                                    </div>
+                                </div>
+                            {% endblock %}
+                        {% endif %}
+                    </div>
+                    <div class="d-flex gaisbock-offcanvas-header-action-two">
+                        {% block utilities_offcanvas_close %}
+                            <button class="btn btn-light offcanvas-close js-offcanvas-close order-2">
+                                {% block utilities_offcanvas_close_icon %}
+                                    {% sw_icon 'x' style { 'size': 'sm' } %}
+                                {% endblock %}
+                            </button>
+                        {% endblock %}
+
+                        {% block layout_header_actions_cart_mobile %}
+                            <div class="col-auto gaisbock-header-cart-mobile order-1" data-get-swag-form-info>
+                                <div
+                                        class="header-cart gaisbock-header-cart"
+                                        {# @deprecated tag:v6.6.0 - Registering plugin on selector "data-offcanvas-cart" is deprecated. Use "data-off-canvas-cart" instead #}
+                                        {% if feature('v6.6.0.0') %}
+                                            data-off-canvas-cart="true"
+                                        {% else %}
+                                            data-offcanvas-cart="true"
+                                        {% endif %}
+                                >
+                                    <a class="btn header-cart-btn header-actions-btn-mobile"
+                                       href="{{ path('frontend.checkout.cart.page') }}"
+                                       data-cart-widget="true"
+                                       title="{{ 'checkout.cartTitle'|trans|striptags }}"
+                                       aria-label="{{ 'checkout.cartTitle'|trans|striptags }}">
+                                        {% sw_include '@Storefront/storefront/layout/header/actions/cart-widget.html.twig' %}
+                                    </a>
+                                </div>
+                            </div>
+                        {% endblock %}
+                    </div>
+                </div>
             {% endblock %}
         </nav>
     {% endblock %}
