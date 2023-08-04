@@ -9,7 +9,7 @@
                     <nav class="nav main-navigation-menu"
                          itemscope="itemscope"
                          itemtype="http://schema.org/SiteNavigationElement"
-                         data-gaisbock-add-remove-class>
+                         >
                         {% set homeLabel = context.salesChannel.translated.homeName|default("general.homeLink"|trans) %}
 
                         {% block layout_main_navigation_menu_home %}
@@ -94,7 +94,6 @@
                     </div>
                 {% endblock %}
             {% endif %}
-            
         {% endblock %}
     </div>
 

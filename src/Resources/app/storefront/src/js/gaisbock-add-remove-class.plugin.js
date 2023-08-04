@@ -2,7 +2,10 @@ import Plugin from 'src/plugin-system/plugin.class';
 
 export default class gaisbockAddRemoveClass extends Plugin {
     init() {
+        this.navClassChangeHeader = document.getElementById("mainNavigationHover");
+        this.navClassChangeMainDiv = document.getElementById("mainNavigationHoverMainClass");
         this._gaisbockAddRemoveClass();
+        this._classRemoveAdd();
     }
 
     _gaisbockAddRemoveClass() {
@@ -21,36 +24,53 @@ export default class gaisbockAddRemoveClass extends Plugin {
         const searchButton = document.querySelector('.gaisbock-search-button-for-css');
 
         searchButton.addEventListener('click',()=>{
-            if(parentDiv.classList.contains('hovered') === false){
-                parentDiv.classList.add('hovered');
+            if(parentDiv.classList.contains('search-click') === false){
+                parentDiv.classList.add('search-click');
             }else{
-                parentDiv.classList.remove('hovered');
+                parentDiv.classList.remove('search-click');
+            }
+        });
+    }
+
+    _classRemoveAdd(){
+
+        this.navClassChangeHeader.addEventListener('mousemove', event =>{
+            var navigationIdElement = document.getElementsByClassName("navigation-flyout");
+            let isMain_files = navigationIdElement[0].classList.contains("is-open");
+            console.log(isMain_files);
+            if (isMain_files) {
+                let headerMainElement = document.getElementsByClassName("gaisbock-header-main");
+                console.log(headerMainElement);
+                headerMainElement[0].classList.add("gaisbock-hover");
+            } else {
+            }
+        });
+
+        this.navClassChangeHeader.addEventListener('mouseout', event =>{
+
+            var navigationIdElement = document.getElementsByClassName("navigation-flyout");
+            let isMain_files = navigationIdElement[0].classList.contains("is-open");
+            if (isMain_files) {
+
+            } else {
+                let headerMainElement = document.getElementsByClassName("gaisbock-header-main");
+                headerMainElement[0].classList.remove("gaisbock-hover");
             }
 
         });
 
-        const closeButton = document.querySelector('.gaisbock-search-button-for-css-close');
+        this.navClassChangeMainDiv.addEventListener('mouseout', event =>{
 
-        closeButton.addEventListener('click',()=>{
-            parentDiv.classList.remove('hovered');
-        });
+            var navigationIdElement = document.getElementsByClassName("navigation-flyout");
+            let isMain_files = navigationIdElement[0].classList.contains("is-open");
 
+            if (isMain_files) {
 
-        
-        let getEleId = document.getElementById('navigationId');
-        let getClass = document.querySelector('.gaisbock-header-main');
-        getEleId.addEventListener('mouseenter', toggleHoverClass);
-        getEleId.addEventListener('mouseleave', toggleHoverClass);
-
-        function toggleHoverClass(event) {
-            if (event.type === 'mouseenter') {
-                // Add the class "gaisbock-hover" when the mouse enters the element
-                getClass.classList.add("gaisbock-hover");
-            } else if (event.type === 'mouseleave') {
-                // Remove the class "gaisbock-hover" when the mouse leaves the element
-                getClass.classList.remove("gaisbock-hover");
+            } else {
+                let headerMainElement = document.getElementsByClassName("gaisbock-header-main");
+                headerMainElement[0].classList.remove("gaisbock-hover");
             }
-        }
 
+        });
     }
 }
