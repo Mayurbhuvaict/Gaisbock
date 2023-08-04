@@ -21,10 +21,10 @@ export default class gaisbockAddRemoveClass extends Plugin {
         const searchButton = document.querySelector('.gaisbock-search-button-for-css');
 
         searchButton.addEventListener('click',()=>{
-            if(parentDiv.classList.contains('search-click') === false){
-                parentDiv.classList.add('search-click');
+            if(parentDiv.classList.contains('hovered') === false){
+                parentDiv.classList.add('hovered');
             }else{
-                parentDiv.classList.remove('search-click');
+                parentDiv.classList.remove('hovered');
             }
 
         });
@@ -32,7 +32,7 @@ export default class gaisbockAddRemoveClass extends Plugin {
         const closeButton = document.querySelector('.gaisbock-search-button-for-css-close');
 
         closeButton.addEventListener('click',()=>{
-            parentDiv.classList.remove('search-click');
+            parentDiv.classList.remove('hovered');
         });
 
 
