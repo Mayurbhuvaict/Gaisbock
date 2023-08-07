@@ -6,6 +6,9 @@
       }
     },
     "blocks": {
+      "gaisbockAboutTitleTextImage" : {
+        "label": "A propos du titre texte Image"
+      },
       "gaisbockImageAddMoreText": {
         "label": "Ajouter une section supplémentaire Avec des images"
       },

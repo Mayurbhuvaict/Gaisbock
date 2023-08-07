@@ -6,6 +6,9 @@
       }
     },
     "blocks": {
+      "gaisbockAboutTitleTextImage" : {
+        "label": "Über Titeltext Bild"
+      },
       "gaisbockImageAddMoreText": {
         "label": "Weitere Abschnitte hinzufügen Mit Bildern"
       },
@@ -42,6 +45,19 @@
       }
     },
     "elements": {
+      "gaisbockAboutTitleTextImage": {
+        "config": {
+          "label" : {
+            "titleLabel": "Titel",
+            "titleImage": "Bild",
+            "descriptionLabel": "Beschreibung",
+            "aboutImage": "Über Bild",
+            "imagePosition": "Bildposition",
+            "imageLeft": "Links",
+            "imageRight": "Rechts"
+          }
+        }
+      },
       "image": {
         "config": {
           "label": {

@@ -6,6 +6,9 @@
       }
     },
     "blocks": {
+      "gaisbockAboutTitleTextImage" : {
+        "label": "About title text Image"
+      },
       "gaisbockImageAddMoreText": {
         "label": "Add more section With images"
       },
@@ -45,6 +48,20 @@
       }
     },
     "elements": {
+      "gaisbockAboutTitleTextImage": {
+        "config": {
+          "label" : {
+            "titleLabel": "Title",
+            "titleImage": "Image",
+            "descriptionLabel": "Description",
+            "aboutImage": "About image",
+            "imagePosition": "Image Position",
+            "imageLeft": "Left",
+            "imageRight": "Right",
+            "uploadMediaCaption": "Upload Media"
+          }
+        }
+      },
       "image": {
         "config": {
           "label": {
