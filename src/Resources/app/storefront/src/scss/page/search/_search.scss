@@ -6,7 +6,7 @@
         }
     }
 }
-.header-actions-col {
+
     .search-toggle {
         position: static;
         div#searchCollapse {
@@ -32,8 +32,9 @@
                 width: 100%;
                 max-width: 100%;
                 right: 0;
-                top:73px;
+                top:42px;
                 height: 100%;
+                z-index: 9;
             }
             .header-search {
                 max-width: 100%;
@@ -74,4 +75,3 @@
             }
         }
     }
-}

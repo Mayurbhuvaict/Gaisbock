@@ -702,13 +702,6 @@
     .instagram-feed-section {
         margin-top: 45px;
         .insta-heading {
-            .insta-svg {
-                &:after {
-                    content:'';
-                    width: 19px;
-                    height: 18px;
-                }
-            }
             .hr {
                 max-width: 46px;
                 margin: 0 auto 25px;

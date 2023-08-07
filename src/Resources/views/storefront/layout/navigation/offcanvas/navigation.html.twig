@@ -13,7 +13,7 @@
 
             {% block layout_navigatin_offcanvas_action_cart %}
                 <div class="gaisbock-offcanvas-header-action d-flex">
-                    <div class="d-flex gaisbock-offcanvas-header-action-one">
+                    <!-- <div class="d-flex gaisbock-offcanvas-header-action-one">
                         <div class="col-auto">
                             <div class="search-toggle">
                                 <button class="btn header-actions-btn search-toggle-btn js-search-toggle-btn collapsed"
@@ -82,17 +82,17 @@
                                 </div>
                             {% endblock %}
                         {% endif %}
-                    </div>
+                    </div> -->
                     <div class="d-flex gaisbock-offcanvas-header-action-two">
                         {% block utilities_offcanvas_close %}
-                            <button class="btn btn-light offcanvas-close js-offcanvas-close order-2">
+                            <button class="btn btn-light offcanvas-close js-offcanvas-close order-2 gaisbock-close-offcanvas">
                                 {% block utilities_offcanvas_close_icon %}
                                     {% sw_icon 'x' style { 'size': 'sm' } %}
                                 {% endblock %}
                             </button>
                         {% endblock %}
 
-                        {% block layout_header_actions_cart_mobile %}
+                        <!-- {% block layout_header_actions_cart_mobile %}
                             <div class="col-auto gaisbock-header-cart-mobile order-1" data-get-swag-form-info>
                                 <div
                                         class="header-cart gaisbock-header-cart"
@@ -112,7 +112,7 @@
                                     </a>
                                 </div>
                             </div>
-                        {% endblock %}
+                        {% endblock %} -->
                     </div>
                 </div>
             {% endblock %}
