@@ -18,7 +18,7 @@
     {% block utilities_offcanvas_header %}
         <div class="offcanvas-header p-0">
             
-            {% if config('core.cart.wishlistEnabled') %}
+            <!-- {% if config('core.cart.wishlistEnabled') %}
                 {% block layout_header_actions_wishlist %}
                     <div class="col-auto order-4">
                         <div class="header-wishlist">
@@ -31,10 +31,10 @@
                         </div>
                     </div>
                 {% endblock %}
-            {% endif %}
+            {% endif %} -->
 
             {% block layout_header_actions_cart_mobile %}
-                <div class="col-auto gaisbock-header-cart-mobile">
+                <!-- <div class="col-auto gaisbock-header-cart-mobile">
                     <div
                             class="header-cart gaisbock-header-cart"
                             {# @deprecated tag:v6.6.0 - Registering plugin on selector "data-offcanvas-cart" is deprecated. Use "data-off-canvas-cart" instead #}
@@ -52,7 +52,7 @@
                             {% sw_include '@Storefront/storefront/layout/header/actions/cart-widget.html.twig' %}
                         </a>
                     </div>
-                </div>
+                </div> -->
             {% endblock %}
             {% block utilities_offcanvas_close %}
                 <button class="btn btn-light offcanvas-close js-offcanvas-close">
