@@ -9,6 +9,9 @@
       "gaisbockAboutTitleTextImage" : {
         "label": "A propos du titre texte Image"
       },
+      "gaisbockCustomTextOnImage": {
+        "label": "Texte sur l'image"
+      },
       "gaisbockImageAddMoreText": {
         "label": "Ajouter une section supplémentaire Avec des images"
       },
@@ -48,6 +51,12 @@
       }
     },
     "elements": {
+      "gaisbockCustomTextOnImage": {
+        "config": {
+          "uploadMediaCaption": "Télécharger les médias",
+          "label": "Ajouter une image de fond"
+        }
+      },
       "image": {
         "config": {
           "label": {
