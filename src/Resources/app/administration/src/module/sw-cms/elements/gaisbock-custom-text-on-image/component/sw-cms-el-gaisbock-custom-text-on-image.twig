@@ -1,0 +1,20 @@
+{% block sw_cms_element_ict_custom_text_on_image %}
+    <div class="sw-cms-el-custom-text-on-image text-center">
+        <sw-text-editor
+                v-model="element.config.content.value"
+                :disabled="disabled"
+                :vertical-align="element.config.verticalAlign.value"
+                :is-inline-edit="true"
+                sanitize-input
+                enable-transparent-background
+                @blur="onBlur"
+                @input="onInput"
+        />
+        <sw-icon
+                class="sw-cms-preview-custom-text-on-image__icon"
+                name="regular-chevron-down"
+                size="24"
+                color="#52667a"
+        />
+    </div>
+{% endblock %}

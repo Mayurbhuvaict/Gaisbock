@@ -6,6 +6,9 @@
       }
     },
     "blocks": {
+      "gaisbockCustomTextOnImage": {
+        "label": "Text on Image"
+      },
       "gaisbockAboutTitleTextImage" : {
         "label": "About title text Image"
       },
@@ -48,6 +51,12 @@
       }
     },
     "elements": {
+      "gaisbockCustomTextOnImage": {
+        "config": {
+          "uploadMediaCaption": "Upload Media",
+          "label": "Add background image"
+        }
+      },
       "gaisbockAboutTitleTextImage": {
         "config": {
           "label" : {
