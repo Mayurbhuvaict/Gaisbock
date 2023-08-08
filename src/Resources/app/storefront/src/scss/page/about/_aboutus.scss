@@ -57,6 +57,207 @@
     }
 }
 
+.static-page .cms-block-gaisbock-listpage-text-image h1 {
+    @media(min-width:1024px){
+        letter-spacing: 0.35px;
+        font-size: 70px;
+        line-height: 76px;
+    }
+}
+.static-page .cms-element-gaisbock-listing-image {
+    display: none;
+}
+.static-banner-section {
+    .block-ict-custom-text-on-image-banner {
+        height: 605px;
+        width: 100%;
+        position: relative;
+        @media(max-width:767px) {
+            background-position: center;
+            height: 553px;
+        }
+        .cms-element-gaisbock-custom-text-on-image {
+            position: absolute;
+            bottom: 95px;
+            left: 50%;
+            transform: translate(-50%,-50%);
+            text-align: center;
+            h2 {
+                font-size: 25px;
+                letter-spacing: 0.13px;
+                line-height: 31px;
+                color: #fff;
+                margin-bottom: 0;
+                @media(max-width:767px) {
+                    font-size: 13px;
+                    letter-spacing: 0.07px;
+                    line-height: 25px;
+
+                }
+            }
+            a .icon {
+                color:#fff;
+                @media(max-wdith:767px) {
+                    width: 9px;
+                    height: 5px;
+                }
+            }
+        }
+    }
+}
+
+.element-gaisbock-image-add-more-text--inner{
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    margin: 0 auto;
+    justify-content: space-evenly;
+    align-items: start;
+    flex-direction: unset;
+    max-width: 950px;
+    &.active{
+        flex-direction: row-reverse;
+        .cms-element-gaisbock-image-add-more-text{
+            text-align: start;
+        }
+    }
+    .cms-element-gaisbock-image-add-more-text{
+        width: 50%;
+        text-align: right;
+        padding: 0 25px;
+        img{
+            width: 100%;
+            height: auto;
+            max-width: 327px;
+            margin: 0 auto;
+            text-align: center;
+            display: block;
+        }
+    }
+    .element-gaisbock-image-add-more-text__text{
+        width: 50%;
+        padding: 0 16px;
+        margin-top: 40px;
+        h1 {
+            font-size: 70px;
+            line-height: 76px;
+            letter-spacing: 0.35px;
+            margin-bottom: 15px;
+        }
+        p {
+            letter-spacing: 0px;
+            color: $sw-color-brand-primary;
+            font-size: 18px;
+            line-height: 23px;
+            font-family: $sw-font-family-base;
+        }
+        .readmore-btn{
+            letter-spacing: 0.78px;
+            color: $sw-color-brand-primary;
+            text-transform: uppercase;
+            font-family: $sw-font-family-base;
+            font-weight: $sw-headings-font-weight;
+            font-size: 13px;
+            line-height: 14px;
+            margin-bottom: 23px;
+            position: relative;
+            width: auto;
+            display: inline-block;
+            transition: transform 0.35s ease;
+            &:hover{
+                text-decoration: none;
+            }
+            &::after{
+                width: 6px;
+                height: 4px;
+                position:absolute;
+                content: url("data:image/svg+xml,%3Csvg width='13' height='9' viewBox='0 0 13 9' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11.09 8.20508L6.5 3.62508L1.91 8.20508L0.5 6.79508L6.5 0.795078L12.5 6.79508L11.09 8.20508Z' fill='%23000000'/%3E%3C/svg%3E");
+                transform: rotate(180deg);
+                right: -20px;
+                top: 11px;
+            }
+        }
+        .element-gaisbock-image-addmore-text__images{
+            .gaisbock-text-line{
+                h1{
+                    line-height: 31px;
+                    letter-spacing: 0.13px;
+                    color: #000000;
+                    font-size: 25px;
+                    font-family: $sw-font-family-headline;
+                    padding: 20px 0 0;
+                    margin-bottom: 0;
+                }
+            }
+            .gaisbock-image-line {
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: space-around;
+                align-items: flex-end;
+                width: 100%;
+                .gaisbock-image-inner {
+                    width: 25%;
+                    text-align: center;
+                    p {
+                        font-size: $sw-font-size-sm;
+                        padding-top: 10px;
+                        color: $sw-color-brand-primary;
+                        line-height: 15px;
+                        letter-spacing: 0.12px;
+                        font-family: $sw-font-family-base;
+                        text-align: center;
+                        font-weight: $fontWeight600;
+                    }
+                    img {
+                        max-width: 100px;
+                        height: auto;
+                    }
+                }
+            }
+        }
+    }
+}
+
+.About-page-section .cms-block-gaisbock-listpage-text-image {
+    position: static;
+    width: 100%;
+    text-align: center;
+    transform: revert;
+    h1 {
+        font-size: 26px;
+        line-height: 35px;
+        font-weight: 500;
+        max-width: 1052px;
+        margin: 0 auto 45px;
+        @media(max-width:767px) {
+            font-size: 14px;
+            line-height: 18px;
+            margin: 0 auto 20px;
+        }
+    }
+    img {
+        @media(max-width:767px) {
+            display: block;
+            margin: 0 auto;
+        }
+    }
+    .cms-block-container {
+        @media(max-width:767px) {
+            padding-top: 0 !important;
+        }
+    }
+}
+
+.natural-product-title {
+    font-size: 18px;
+    letter-spacing: 1.08px;
+    text-transform: uppercase;
+    line-height: 25px;
+    font-weight: 700;
+    margin-bottom: 30px;
+    display: block;
+}
+
 @include media-breakpoint-down(md) {
     .cms-block-gaisbock-about-title-text-image .cms-block-container {
         padding: 0 !important;
@@ -67,5 +268,72 @@
     }
     .about-section .cms-section-default {
         padding: 0 !important;
+    }
+    .static-banner-section .cms-block-container {
+        padding-top: 0 !important;
+    }
+    .static-banner-section {
+        margin: 0 -20px;
+    }
+    .cms-element-gaisbock-custom-text-on-image {
+        bottom: 75px;
+    }
+    .element-gaisbock-image-add-more-text--inner{
+        &.active{
+            flex-direction: unset;
+            .cms-element-gaisbock-image-add-more-text{
+                text-align: center;
+            }
+        }
+        .cms-element-gaisbock-image-add-more-text{
+            width: 100%;
+            text-align: center;
+            padding: 0;
+            img{
+                width: 100%;
+                height: auto;
+                max-width: 198px;
+            }
+        }
+        .element-gaisbock-image-add-more-text__text{
+            margin: 0;
+            width: 100%;
+            padding: 20px 0;
+            h1{
+                letter-spacing: 0.2px;
+                font-size: 40px;
+                line-height: 43px;
+            }
+            p{
+                letter-spacing: 0px;
+                text-align: start;
+                font-size: $sw-font-size-heading;
+                line-height: 19px;
+            }
+            .readmore-btn{
+                letter-spacing: 0.6px;
+                font-size: 10px;
+                line-height: 14px;
+                margin-bottom: 15px;
+            }
+            .element-gaisbock-image-addmore-text__images{
+                .gaisbock-image-line{
+                    .gaisbock-image-inner{
+                        width: 33.33%;
+                    }
+                }
+            }
+        }
+    }
+    .About-page-section .cms-block-gaisbock-listpage-text-image .cms-block-container {
+        padding-top: 0 !important;
+    }
+    .natural-product-title {
+        line-height: 18px;
+        font-size: 13px;
+        letter-spacing: 0.91px;
+    }
+    .element-gaisbock-image-add-more-text--inner .element-gaisbock-image-add-more-text__text .readmore-btn::after {
+        top: 9px;
     }
 }
