@@ -1,1 +1,1 @@
-(this.webpackJsonpPlugingaisbock=this.webpackJsonpPlugingaisbock||[]).push([[37],{o3ye:function(e,s,i){"use strict";i.r(s);s.default={template:"{% block sw_cms_el_preview_gaisbock_image_add_more_text %}\n{% endblock %}"}}}]);
+(this.webpackJsonpPlugingaisbock=this.webpackJsonpPlugingaisbock||[]).push([[37],{"5lkZ":function(s,i,a){"use strict";a.r(i);i.default={template:'{% block sw_cms_block_gaisbock_listpage_image_text %}\n    <div class="sw-cms-block-image">\n        <slot name="gaisbockListpageImageText">\n        </slot>\n    </div>\n{% endblock %}'}}}]);

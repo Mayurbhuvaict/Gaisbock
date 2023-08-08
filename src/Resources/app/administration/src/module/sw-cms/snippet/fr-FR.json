@@ -9,6 +9,9 @@
       "gaisbockAboutTitleTextImage" : {
         "label": "A propos du titre texte Image"
       },
+      "gaisbockCustomTextOnImage": {
+        "label": "Texte sur l'image"
+      },
       "gaisbockImageAddMoreText": {
         "label": "Ajouter une section supplémentaire Avec des images"
       },
@@ -48,6 +51,37 @@
       }
     },
     "elements": {
+      "gaisbockCustomTextImageSlider": {
+        "learnMore": "En savoir plus...",
+        "config": {
+          "tab": {
+            "settings": "Paramètres",
+            "images": "Images"
+          },
+          "textFields": {
+            "afterSliderText": "Après le texte du curseur",
+            "hidecontent": "Après plus de contenu de section",
+            "contentTitle": "Titre",
+            "subTitle": "Sous-titre",
+            "detailTitle": "Détail",
+            "TextImagePosition": "Text Image Position",
+            "TextBeforeImage": "Texte avant l'image",
+            "TextAfterImage": "Texte après l'image",
+            "TextImagePositionPlaceholder": "Veuillez sélectionner",
+            "coverImage": "Image de couverture",
+            "description": "Description"
+          },
+          "mediaFields": {
+            "bgTitle": "Images"
+          }
+        }
+      },
+      "gaisbockCustomTextOnImage": {
+        "config": {
+          "uploadMediaCaption": "Télécharger les médias",
+          "label": "Ajouter une image de fond"
+        }
+      },
       "image": {
         "config": {
           "label": {

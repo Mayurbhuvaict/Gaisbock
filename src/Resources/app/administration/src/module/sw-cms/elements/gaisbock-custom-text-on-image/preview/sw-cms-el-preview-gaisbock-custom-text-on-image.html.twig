@@ -1,0 +1,20 @@
+{% block sw_cms_element_ict_custom_text_on_image_preview %}
+    <div class="sw-cms-el-preview-ict-custom-text-on-image">
+        <div class="sw-cms-el-preview-ict-custom-text-on-image__content">
+            <div class="sw-cms-el-preview-ict-custom-text-on-image__image">
+                <img
+                        :src="'/administration/static/img/cms/preview_mountain_small.jpg' | asset"
+                        alt=""
+                >
+            </div>
+            <div class="sw-cms-el-preview-ict-custom-text-on-image__text">
+                <h2>Lorem ipsum dolor</h2>
+                <sw-icon
+                        class="sw-cms-preview-custom-text-on-image__icon"
+                        name="regular-chevron-down"
+                        size="24"
+                />
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -6,6 +6,9 @@
       }
     },
     "blocks": {
+      "gaisbockCustomTextOnImage": {
+        "label": "Text auf Bild"
+      },
       "gaisbockAboutTitleTextImage" : {
         "label": "Über Titeltext Bild"
       },
@@ -45,6 +48,37 @@
       }
     },
     "elements": {
+      "gaisbockCustomTextImageSlider": {
+        "learnMore": "Erfahren Sie mehr...",
+        "config": {
+          "tab": {
+            "settings": "Einstellungen",
+            "images": "Bilder"
+          },
+          "textFields": {
+            "afterSliderText": "Nach dem Schieberegler Text",
+            "hidecontent": "Nach weiteren Abschnittsinhalten",
+            "contentTitle": "Titel",
+            "subTitle": "Untertitel",
+            "detailTitle": "Detail",
+            "TextImagePosition": "Textbildposition",
+            "TextBeforeImage": "Text vor Bild",
+            "TextAfterImage": "Text nach Bild",
+            "TextImagePositionPlaceholder": "Bitte auswählen",
+            "coverImage": "Titelbild",
+            "description": "Beschreibung"
+          },
+          "mediaFields": {
+            "bgTitle": "Bilder"
+          }
+        }
+      },
+      "gaisbockCustomTextOnImage": {
+        "config": {
+          "uploadMediaCaption": "Medien hochladen",
+          "label": "Hintergrundbild hinzufügen"
+        }
+      },
       "gaisbockAboutTitleTextImage": {
         "config": {
           "label" : {
