@@ -1,0 +1,50 @@
+{% block sw_cms_el_preview_ict_custom_text_image_slider %}
+    <div class="sw-cms-el-preview-ict-custom-text-image-slider-main" :class="displayImageTextModeClass">
+        <div class="sw-cms-el-preview-ict-custom-text-image-slider-image">
+            <div class="custom_image_config_product_image">
+                <img
+                        :src="coverMedia"
+                        alt=""
+                >
+            </div>
+        </div>
+        <div class="sw-cms-el-preview-ict-custom-text-image-slider-text-fields">
+            <div class="sw-cms-el-preview-ict-custom-text-image-slider-title-header">
+                <h3 v-if="element.config.contentTitle">
+                    <b>{{ contentTitle }}</b>
+                </h3>
+                <h3 v-else>
+                    <b>Lorem ipsum dolor</b>
+                </h3>
+            </div>
+
+            <div class="sw-cms-el-preview-ict-custom-text-image-slider-title-sub-header">
+                <p v-if="element.config.subTitle">
+                    <b>{{ subTitle }}</b>
+                </p>
+                <p v-else>
+                    <b>Lorem ipsum dolor sit amet</b>
+                </p>
+            </div>
+
+            <br/>
+            <div class="sw-cms-el-preview-ict-custom-text-image-slider-description">
+                <p v-if="element.config.detailTitle">
+                    {{ detailTitle }}
+                </p>
+                <p v-else>
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
+                    labore et dolore magna aliqua.
+                </p>
+            </div>
+
+            <br/>
+            <div class="sw-cms-el-preview-ict-custom-text-image-slider-learn-more">
+                <p>
+                    {{ $tc('sw-cms.elements.gaisbockCustomTextImageSlider.learnMore') }}
+                </p>
+            </div>
+
+        </div>
+    </div>
+{% endblock %}
