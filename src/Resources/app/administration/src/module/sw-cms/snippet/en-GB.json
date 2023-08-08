@@ -57,6 +57,31 @@
           "label": "Add background image"
         }
       },
+      "gaisbockCustomTextImageSlider": {
+        "learnMore": "Learn More...",
+        "config": {
+          "tab": {
+            "settings": "Settings",
+            "images": "Images"
+          },
+          "textFields": {
+            "afterSliderText": "After slider text",
+            "hidecontent": "After more section content",
+            "contentTitle": "Title",
+            "subTitle": "Sub Title",
+            "detailTitle": "Detail",
+            "TextImagePosition": "Text Image Position",
+            "TextBeforeImage": "Text Before Image",
+            "TextAfterImage": "Text After Image",
+            "TextImagePositionPlaceholder": "Please Select",
+            "coverImage": "Cover Image",
+            "description": "Description"
+          },
+          "mediaFields": {
+            "bgTitle": "Images"
+          }
+        }
+      },
       "gaisbockAboutTitleTextImage": {
         "config": {
           "label" : {

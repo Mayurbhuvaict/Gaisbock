@@ -24,13 +24,13 @@
                     <h1>{{ element.config.heading.value }}</h1>
                     <p>{{ element.config.content.value|raw }}</p>
                     {% if app.request.locale === 'de-DE' %}
-                        <a href="javascript:void(0)" id="readMore" class="readmore-btn"
-                           data-language-value="{{ app.request.locale }}">Mehr lesen</a>
+                        <a href="javascript:void(0)" id="readMore" class="readmore-btn" data-language-value="{{ app.request.locale }}" data-diffrent = "{{ element.id }}">Mehr lesen</a>
+                    {% elseif app.request.locale === 'fr-FR' %}
+                        <a href="javascript:void(0)" id="readMore" class="readmore-btn" data-language-value="{{ app.request.locale }}" data-diffrent = "{{ element.id }}">Lire la suite</a>
                     {% else %}
-                        <a href="javascript:void(0)" id="readMore" class="readmore-btn"
-                           data-language-value="{{ app.request.locale }}">Read More</a>
+                        <a href="javascript:void(0)" id="readMore" class="readmore-btn" data-language-value="{{ app.request.locale }}" data-diffrent = "{{ element.id }}">Read More</a>
                     {% endif %}
-                    <div id="gaisbock-addmore-section" style="display:none;">
+                    <div id="gaisbock-addmore-section-{{ element.id }}" style="display:none;">
                         <div class="element-gaisbock-image-addmore-text__images">
                             <div class="gaisbock-text-line">
                                 <p>{{ element.config.subContent.value|raw }}</p>

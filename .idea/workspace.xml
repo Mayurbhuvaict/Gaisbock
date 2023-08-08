@@ -5,11 +5,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="7d543835-e49c-4d09-af1b-506b20a4e90d" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Resources/app/administration/src/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Resources/app/administration/src/main.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Resources/app/administration/src/module/sw-cms/snippet/de-DE.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/Resources/app/administration/src/module/sw-cms/snippet/de-DE.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Resources/app/administration/src/module/sw-cms/snippet/en-GB.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/Resources/app/administration/src/module/sw-cms/snippet/en-GB.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Resources/app/administration/src/module/sw-cms/snippet/fr-FR.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/Resources/app/administration/src/module/sw-cms/snippet/fr-FR.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Resources/app/storefront/src/js/gaisbock-addmore-section.plugin.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Resources/app/storefront/src/js/gaisbock-addmore-section.plugin.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Resources/app/storefront/src/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Resources/app/storefront/src/main.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Resources/views/storefront/element/cms-element-gaisbock-image-add-more-text.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/src/Resources/views/storefront/element/cms-element-gaisbock-image-add-more-text.html.twig" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -34,7 +37,7 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "/var/www/html/Gaisbock Git/Gaisbock/src/Resources/app/storefront/src/js",
+    "last_opened_file_path": "/var/www/html/Gaisbock Git/Gaisbock/src/Resources/views/storefront/block",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -45,11 +48,11 @@
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/src/Resources/app/storefront/src/js" />
-      <recent name="$PROJECT_DIR$/src/Resources/views/storefront/element" />
       <recent name="$PROJECT_DIR$/src/Resources/views/storefront/block" />
-      <recent name="$PROJECT_DIR$/src/Resources/app/administration/src/module/sw-cms/snippet" />
+      <recent name="$PROJECT_DIR$/src/Resources/app/storefront/src/js" />
+      <recent name="$PROJECT_DIR$/src/Resources/app/administration/src/module/sw-cms" />
       <recent name="$PROJECT_DIR$/src/Resources/app/administration/src/module/sw-cms/elements" />
+      <recent name="$PROJECT_DIR$/src/Resources/app/administration/src/module/sw-cms/blocks/gaisbockOption" />
     </key>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
@@ -63,6 +66,8 @@
       <workItem from="1691408020749" duration="1017000" />
       <workItem from="1691414036308" duration="16000" />
       <workItem from="1691414427071" duration="707000" />
+      <workItem from="1691468599976" duration="19000" />
+      <workItem from="1691492249535" duration="998000" />
     </task>
     <servers />
   </component>
