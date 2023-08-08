@@ -24,14 +24,14 @@ export default class gaisbockAddRemoveClass extends Plugin {
 
     _classRemoveAdd(){
 
-        this.navClassChangeHeader.addEventListener('mousemove', event =>{
+        this.navClassChangeHeader.addEventListener('mouseover', event =>{
             var navigationIdElement = document.getElementsByClassName("navigation-flyout");
             let isMain_files = navigationIdElement[0].classList.contains("is-open");
             console.log(isMain_files);
             if (isMain_files) {
                 let headerMainElement = document.getElementsByClassName("gaisbock-header-main");
                 console.log(headerMainElement);
-                headerMainElement[0].classList.add("gaisbock-hover");
+                headerMainElement[0].classList.add("hovered");
             } else {
             }
         });
@@ -39,12 +39,12 @@ export default class gaisbockAddRemoveClass extends Plugin {
         this.navClassChangeHeader.addEventListener('mouseout', event =>{
 
             var navigationIdElement = document.getElementsByClassName("navigation-flyout");
-            let isMain_files = navigationIdElement[0].classList.contains("is-open");
+            let isMain_files = navigationIdElement[0].classList.contains("main-navigation-link");
             if (isMain_files) {
 
             } else {
                 let headerMainElement = document.getElementsByClassName("gaisbock-header-main");
-                headerMainElement[0].classList.remove("gaisbock-hover");
+                headerMainElement[0].classList.remove("hovered");
             }
 
         });
@@ -52,13 +52,13 @@ export default class gaisbockAddRemoveClass extends Plugin {
         this.navClassChangeMainDiv.addEventListener('mouseout', event =>{
 
             var navigationIdElement = document.getElementsByClassName("navigation-flyout");
-            let isMain_files = navigationIdElement[0].classList.contains("is-open");
+            let isMain_files = navigationIdElement[0].classList.contains("main-navigation-link");
 
             if (isMain_files) {
 
             } else {
                 let headerMainElement = document.getElementsByClassName("gaisbock-header-main");
-                headerMainElement[0].classList.remove("gaisbock-hover");
+                headerMainElement[0].classList.remove("hovered");
             }
 
         });

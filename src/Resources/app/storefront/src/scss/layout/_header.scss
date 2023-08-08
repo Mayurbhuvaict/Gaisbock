@@ -20,25 +20,33 @@
   body.is-act-home .header-row .header-actions-col .icon {
     color: #fff;
   }
-.hovered {
+.hovered,
+.hovered-header {
     background: $sw-color-brand-primary;
 }
+.hovered-header a.header-logo-main-link {
+    display: block;
+}
 .hovered a.header-black-logo-main-link,
+.hovered-header a.header-black-logo-main-link,
 .is-act-home a.header-black-logo-main-link,
 a.header-logo-main-link,
 .is-sticky a.header-text-logo-main-link.gaisbock-text-sticky-logo {
     display: none;
 }
 .is-act-home a.header-logo-main-link,
-.hovered a.header-logo-main-link {
+.hovered a.header-logo-main-link{
     display: block;
 }
 .is-sticky .nav-main .main-navigation-menu .main-navigation-link,
 body .is-sticky .header-row .header-actions-col .top-bar-language .top-bar-list-item .top-bar-list-label,
 body .is-sticky .header-row .header-actions-col .icon,
 .hovered .nav-main .main-navigation-menu .main-navigation-link,
+.hovered-header .nav-main .main-navigation-menu .main-navigation-link,
 body .hovered .header-row .header-actions-col .top-bar-language .top-bar-list-item .top-bar-list-label,
-body .hovered .header-row .header-actions-col .icon {
+body .hovered .header-row .header-actions-col .icon,
+body .hovered-header .header-row .header-actions-col .top-bar-language .top-bar-list-item .top-bar-list-label,
+body .hovered-header .header-row .header-actions-col .icon {
     color: #fff;
 }
 .is-act-home .gaisbock-header-mobile-text-logo-white,
@@ -49,7 +57,8 @@ body .hovered .header-row .header-actions-col .icon {
 .is-sticky a.header-black-logo-main-link {
     display: none;
 }
-body .hovered .header-actions-mobile .icon {
+body .hovered .header-actions-mobile .icon,
+body .hovered-header .header-actions-mobile .icon {
     color: #fff;
 }
 .is-act-home .is-sticky .gaisbock-header-mobile-text-logo-white,
@@ -63,6 +72,16 @@ body .hovered .header-actions-mobile .icon {
     @media(max-width:992px) {
         display: none;
     }
+}
+.is-sticky.hovered .search-toggle div#searchCollapse,
+.is-sticky.hovered-header .search-toggle div#searchCollapse {
+    position: fixed;
+    background: #151515;
+    width: 100%;
+    max-width: 100%;
+    right: 0;
+    padding: 0px 0;
+    top: 85px;
 }
 a.header-black-logo-main-link,
 .is-sticky .gaisbock-header-mobile-text-logo-white {
@@ -242,6 +261,9 @@ a.header-black-logo-main-link,
 }
 
 @include media-breakpoint-down(lg) {
+    .hovered-header .gaisbock-header-mobile-text-logo-white, .is-act-home .hovered-header .gaisbock-header-mobile-text-logo-white {
+        padding-left: 40px;
+    }
     body .header-actions-mobile .icon {
         color:$sw-color-brand-primary;
     }
@@ -293,6 +315,10 @@ a.header-black-logo-main-link,
     }
 }
 @include media-breakpoint-down(md) { 
+    .hovered-header .gaisbock-header-mobile-text-logo-white,
+    .is-act-home .hovered-header .gaisbock-header-mobile-text-logo-white {
+        padding-left: 0px;
+    }
     .header-row .header-actions-col {
         width: auto;
         order: 1;
@@ -344,7 +370,8 @@ a.header-black-logo-main-link,
             display: none;
         }
     }
-    .hovered {
+    .hovered,
+    .hovered-header {
         z-index: 99;
     }
     .gaisbock-header-mobile-text-logo img,
@@ -360,6 +387,34 @@ a.header-black-logo-main-link,
             padding-bottom: 0;
         }
     }
+    .is-act-index .hovered a.header-logo-main-link,
+    .is-act-index .hovered a.header-text-logo-main-link.gaisbock-text-sticky-logo,
+    .is-act-index .hovered a.header-text-logo-main-link.gaisbock-header-mobile-text-logo,
+    .is-act-index .hovered-header a.header-logo-main-link,
+    .is-act-index .hovered-header a.header-text-logo-main-link.gaisbock-text-sticky-logo,
+    .is-act-index .hovered-header a.header-text-logo-main-link.gaisbock-header-mobile-text-logo {
+        display: none;
+    }
+    .is-act-index .hovered .header-logo-col,
+    .is-act-index .hovered-header .header-logo-col  {
+        opacity: 1;
+        z-index: 0;
+    }
+    .is-act-index .hovered a.header-text-logo-main-link.gaisbock-header-mobile-text-logo-white,
+    .is-act-index .hovered-header a.header-text-logo-main-link.gaisbock-header-mobile-text-logo-white  {
+        display: block;
+    }
+    .is-sticky.hovered .search-toggle div#searchCollapse,
+    .is-sticky.hovered-header .search-toggle div#searchCollapse {
+        top: 42px;
+    }
+    .is-act-home .hovered-header a.header-logo-main-link {
+        display: none;
+    }
+    .is-act-home .hovered-header .gaisbock-header-mobile-text-logo-white {
+        display: block;
+    }
+    
 }   
 @media(max-width: 375px) {
     .gaisbock-header-mobile-text-logo img,
