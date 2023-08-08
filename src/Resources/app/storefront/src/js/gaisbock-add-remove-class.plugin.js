@@ -6,8 +6,6 @@ export default class gaisbockAddRemoveClass extends Plugin {
         this.navClassChangeMainDiv = document.getElementById("mainNavigationHoverMainClass");
         this._gaisbockAddRemoveClass();
         this._classRemoveAdd();
-        const searchButton = document.querySelector('.gaisbock-search-button-for-css');
-        console.log(searchButton)
     }
 
     _gaisbockAddRemoveClass() {
