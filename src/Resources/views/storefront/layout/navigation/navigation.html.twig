@@ -14,7 +14,7 @@
 
                         {% block layout_main_navigation_menu_home %}
                             {% if context.salesChannel.translated.homeEnabled %}
-                                <a class="nav-link main-navigation-link{% if controllerAction is same as('home') %} active{% endif %} home-link"
+                                <li class="hover-menu"><a class="nav-link main-navigation-link{% if controllerAction is same as('home') %} active{% endif %} home-link"
                                    href="{{ path('frontend.home.page') }}"
                                    itemprop="url"
                                    title="{{ homeLabel|striptags }}">
@@ -22,6 +22,7 @@
                                         <span itemprop="name">{{ homeLabel|sw_sanitize }}</span>
                                     </div>
                                 </a>
+                                </li>
                             {% endif %}
                         {% endblock %}
 
@@ -44,7 +45,7 @@
                                             </div>
                                         </div>
                                     {% else %}
-                                        <a class="nav-link main-navigation-link{% if category.id == page.header.navigation.active.id or category.id in activePath %} active{% endif %}"
+                                        <li class="hover-menu"><a class="nav-link main-navigation-link{% if category.id == page.header.navigation.active.id or category.id in activePath %} active{% endif %}"
                                            href="{{ category_url(category) }}"
                                            itemprop="url"
                                            id="navigationId"
@@ -55,6 +56,7 @@
                                                 <span itemprop="name">{{ name }}</span>
                                             </div>
                                         </a>
+                                        </li>
                                     {% endif %}
                                 {% endblock %}
                             {% endfor %}
