@@ -1,6 +1,18 @@
 {% block cms_element_gaisbock_custom_text_image_slider %}
     {% set sliderConfig = element.fieldConfig.elements %}
-<div class="cms-element-{{ element.type }} has-vertical-alignment">
+    {% set baseSliderOptions = {
+        slider: {
+            navPosition: 'bottom',
+            speed: 300,
+            autoplayTimeout: 5000,
+            autoplay: false,
+            autoplayButtonOutput: false,
+            nav: true,
+            controls: true,
+            autoHeight: true
+        }
+    } %}
+<div class="cms-element-{{ element.type }} has-vertical-alignment" data-gaisbock-searchbar>
     <div class="col gaisbock-custom-text-image-slider-component-cover-image-block">
         <div class="col gaisbock-custom-text-image-slider-component-cover-image-block-media">
             <img src="{{ element.config.coverUrl.value }}" alt="coverImage"/>
@@ -35,7 +47,6 @@
             <div class="gaisbock-hideContent-contain">
                 {{ element.config.hideContent.value|raw }}
             </div>
-
             {% block cms_element_gaisbock_custom_text_image_slider_alignment %}
                 <div class="base-slider image-slider has-dots-inside" id="gaisbock-slider"
                      data-base-slider="true"
