@@ -27,10 +27,8 @@ export default class gaisbockAddRemoveClass extends Plugin {
         this.navClassChangeHeader.addEventListener('mouseover', event =>{
             var navigationIdElement = document.getElementsByClassName("navigation-flyout");
             let isMain_files = navigationIdElement[0].classList.contains("is-open");
-            console.log(isMain_files);
             if (isMain_files) {
                 let headerMainElement = document.getElementsByClassName("gaisbock-header-main");
-                console.log(headerMainElement);
                 headerMainElement[0].classList.add("hovered");
             } else {
             }

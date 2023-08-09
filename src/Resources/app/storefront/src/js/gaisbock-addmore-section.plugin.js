@@ -15,8 +15,6 @@ export default class gaisbockAddmoreSection extends Plugin {
                 const id = button.getAttribute("data-diffrent");
                 var textDiv = document.getElementById("gaisbock-addmore-section-"+id);
                 button.addEventListener("click", function () {
-                    console.log(button);
-                    console.log(textDiv);
                     if (language === "de-DE") {
                         button.textContent = button.textContent === "Mehr lesen" ? "Weniger lesen" : "Mehr lesen";
                         textDiv.style.display = textDiv.style.display === "block" ? "none" : "block";
@@ -34,15 +32,13 @@ export default class gaisbockAddmoreSection extends Plugin {
 
     _gaisbockAddMoreWithSlider(){
         let language = document.querySelector("#readMoreSlider") ? document.querySelector("#readMoreSlider").getAttribute("data-language-value") : null;
-        var toggleButton = document.getElementById("readMoreSlider");
+        var toggleButton = document.querySelectorAll(".readmore-btn-slider");
 
         if(toggleButton !== null) {
             toggleButton.forEach((button) => {
                 const id = button.getAttribute("data-diffrent");
                 var textDiv = document.getElementById("gaisbock-custom-text-image-slider-"+id);
                 button.addEventListener("click", function () {
-                    console.log(button);
-                    console.log(textDiv);
                     if (language === "de-DE") {
                         button.textContent = button.textContent === "Mehr lesen" ? "Weniger lesen" : "Mehr lesen";
                         textDiv.style.display = textDiv.style.display === "block" ? "none" : "block";
