@@ -29,7 +29,7 @@
                 {% block component_product_box_price_reference_unit %}
                     {% if referencePrice is not null %}
                         <span class="price-unit-reference">
-                            {{ referencePrice.referenceUnit }} {{ referencePrice.unitName }}
+                            {{ product.customFields['gaisbock_product_detail_extra_details_contain'] }}
                         </span>
                     {% endif %}
                 {% endblock %}

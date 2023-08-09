@@ -43,6 +43,7 @@
     "effect": "Effet",
     "application": "application",
     "integral": "INGRÉDIENTS",
-    "shipping": "EXPÉDITION"
+    "shipping": "EXPÉDITION",
+    "ratings": "avis"
   }
 }

@@ -98,7 +98,8 @@
             "mainTitle": "Title",
             "subTitle": "Sub title",
             "Heading": "Überschrift",
-            "subHeading": "Unterüberschrift"
+            "subHeading": "Unterüberschrift",
+            "position": "position"
           },
           "placeholder": {
               "enterMainTitle": "Haupttitel hier eingeben",
