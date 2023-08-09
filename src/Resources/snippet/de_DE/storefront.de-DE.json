@@ -43,6 +43,7 @@
     "effect": "Wirkung",
     "application": "anwendung",
     "integral": "INHALTSSTOFFE",
-    "shipping": "VERSAND"
+    "shipping": "VERSAND",
+    "ratings": "bewertungen"
   }
 }

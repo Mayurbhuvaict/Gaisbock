@@ -43,6 +43,7 @@
     "effect": "effect",
     "application": "application",
     "integral": "integral",
-    "shipping": "shipping"
+    "shipping": "shipping",
+    "ratings": "ratings"
   }
 }

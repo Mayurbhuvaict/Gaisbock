@@ -88,7 +88,8 @@
             "mainTitle": "Titre",
             "subTitle": "Sub title",
             "Heading": "Titre",
-            "subHeading": "Sous-titre"
+            "subHeading": "Sous-titre",
+            "position": "position"
           },
           "placeholder": {
             "enterMainTitle": "Saisir le titre principal ici",
