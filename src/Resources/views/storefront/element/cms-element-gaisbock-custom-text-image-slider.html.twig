@@ -1,17 +1,5 @@
 {% block cms_element_gaisbock_custom_text_image_slider %}
     {% set sliderConfig = element.fieldConfig.elements %}
-    {% set baseSliderOptions = {
-        slider: {
-            navPosition: 'bottom',
-            speed: 300,
-            autoplayTimeout: 5000,
-            autoplay: false,
-            autoplayButtonOutput: false,
-            nav: true,
-            controls: true,
-            autoHeight: true
-        }
-    } %}
 <div class="cms-element-{{ element.type }} has-vertical-alignment">
     <div class="col gaisbock-custom-text-image-slider-component-cover-image-block">
         <div class="col gaisbock-custom-text-image-slider-component-cover-image-block-media">
@@ -32,13 +20,13 @@
         </div>
         <div class="gaisbock-custom-text-image-slider-component-text-block-readMore">
             {% if app.request.locale === 'de-DE' %}
-                <a href="javascript:void(0)" id="readMoreSlider" class="readmore-btn"
+                <a href="javascript:void(0)" id="readMoreSlider" class="readmore-btn-slider"
                    data-language-value="{{ app.request.locale }}" data-diffrent = "{{ element.id }}">Mehr lesen</a>
             {% elseif app.request.locale === 'fr-FR' %}
-                <a href="javascript:void(0)" id="readMoreSlider" class="readmore-btn"
+                <a href="javascript:void(0)" id="readMoreSlider" class="readmore-btn-slider"
                    data-language-value="{{ app.request.locale }}" data-diffrent = "{{ element.id }}">Lire la suite</a>
             {% else %}
-                <a href="javascript:void(0)" id="readMoreSlider" class="readmore-btn"
+                <a href="javascript:void(0)" id="readMoreSlider" class="readmore-btn-slider"
                    data-language-value="{{ app.request.locale }}" data-diffrent = "{{ element.id }}">Read More</a>
             {% endif %}
 
