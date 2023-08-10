@@ -258,6 +258,11 @@
     display: block;
 }
 
+.gaisbock-custom-text-image-slider-component-media-slider,
+.gaisbock-custom-text-image-slider-component-image-text-separate-grid {
+    padding: 0;
+}
+
 @include media-breakpoint-down(md) {
     .cms-block-gaisbock-about-title-text-image .cms-block-container {
         padding: 0 !important;

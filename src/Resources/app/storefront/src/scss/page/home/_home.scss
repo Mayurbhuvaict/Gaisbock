@@ -432,9 +432,12 @@
 .gaisbock-benefits.founder-section {
     height: 728px;
     .title-image-button-section {
-        right: auto;
-        left: 0;
-        max-width: 320px;
+        
+            right: auto;
+            left: 0;
+            @media(max-wdith:767px){
+                max-width: 320px;
+            }
         .main-title {
             font-size: 48px;
             line-height: 61px;
