@@ -44,6 +44,7 @@
     "application": "anwendung",
     "integral": "INHALTSSTOFFE",
     "shipping": "VERSAND",
-    "ratings": "bewertungen"
+    "ratings": "bewertungen",
+    "viewRatings": "Bewertungen anschauen"
   }
 }

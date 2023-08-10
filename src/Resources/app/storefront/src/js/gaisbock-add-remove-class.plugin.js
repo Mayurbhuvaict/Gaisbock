@@ -34,4 +34,15 @@ export default class gaisbockAddRemoveClass extends Plugin {
         });
 
     }
+
+    _gaisbockCloseOfcanvasRemoveClass(){
+        const closeBotton = document.querySelector('.gaisbock-close');
+        const mainNavClass = document.querySelector('.hovered');
+        document.addEventListener('DOMContentLoaded', function() {
+            closeBotton.addEventListener('click',function() {
+                console.log('hellooooo');
+                mainNavClass.classList.remove('hovered');
+            });
+        });
+    }
 }

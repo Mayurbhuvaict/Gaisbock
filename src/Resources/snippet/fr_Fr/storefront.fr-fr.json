@@ -44,6 +44,7 @@
     "application": "application",
     "integral": "INGRÉDIENTS",
     "shipping": "EXPÉDITION",
-    "ratings": "avis"
+    "ratings": "avis",
+    "viewRatings": "Voir les évaluations"
   }
 }
