@@ -3,6 +3,7 @@ import gaisbockAddRemoveClass from './js/gaisbock-add-remove-class.plugin';
 import gaisbockThemeScrollSection from './js/gaisbock-theme-scroll-section-plugin';
 import gaisbockimageslider from "./js/gaisbock-image-slider.plugin";
 import gaisbcksearchbar from './js/gaisbock-searchbar.plugin';
+import gaisbockHeaderHoverAddClass from './js/gaisbock-header-hover-add-class.plugin';
 
 const PluginManager = window.PluginManager;
 PluginManager.register('gaisbockAddmoreSection',gaisbockAddmoreSection,'[data-gaisbock-addmore-section]');
@@ -10,3 +11,4 @@ PluginManager.register('gaisbockAddRemoveClass',gaisbockAddRemoveClass,'[data-ga
 PluginManager.register('gaisbockThemeScrollSection',gaisbockThemeScrollSection,'[data-gaisbock-scroll-section]');
 PluginManager.register('gaisbockimageslider',gaisbockimageslider,'[data-gaisbock-image-slider]');
 PluginManager.register('gaisbcksearchbar',gaisbcksearchbar,'[data-gaisbock-searchbar]');
+PluginManager.override('FlyoutMenu',gaisbockHeaderHoverAddClass,'[data-flyout-menu]')

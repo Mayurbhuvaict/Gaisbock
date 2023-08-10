@@ -4,12 +4,14 @@ export default class gaisbockAddRemoveClass extends Plugin {
     init() {
         this.navClassChangeHeader = document.getElementById("mainNavigationHover");
         this.navClassChangeMainDiv = document.getElementById("mainNavigationHoverMainClass");
+        this.navigationFlyout = document.getElementById("navigationFlyoutId");
         this._gaisbockAddRemoveClass();
-        this._classRemoveAdd();
+        this._gaisbockCloseOfcanvasRemoveClass();
     }
 
     _gaisbockAddRemoveClass() {
         const header = document.querySelector(".gaisbock-header-main");
+        const extraDiv = document.querySelector(".main-navigation-menu");
         const toggleClass = "is-sticky";
 
         window.addEventListener("scroll", () => {
@@ -20,45 +22,16 @@ export default class gaisbockAddRemoveClass extends Plugin {
                 header.classList.remove(toggleClass);
             }
         });
-    }
+        const parentDiv = document.querySelector('.header-main');
+        const searchButton = document.querySelector('.gaisbock-search-button-for-css');
 
-    _classRemoveAdd(){
-
-        this.navClassChangeHeader.addEventListener('mouseover', event =>{
-            var navigationIdElement = document.getElementsByClassName("navigation-flyout");
-            let isMain_files = navigationIdElement[0].classList.contains("is-open");
-            if (isMain_files) {
-                let headerMainElement = document.getElementsByClassName("gaisbock-header-main");
-                headerMainElement[0].classList.add("hovered");
-            } else {
+        searchButton.addEventListener('click',()=>{
+            if(parentDiv.classList.contains('search-click') === false){
+                parentDiv.classList.add('search-click');
+            }else{
+                parentDiv.classList.remove('search-click');
             }
         });
 
-        this.navClassChangeHeader.addEventListener('mouseout', event =>{
-
-            var navigationIdElement = document.getElementsByClassName("navigation-flyout");
-            let isMain_files = navigationIdElement[0].classList.contains("main-navigation-link");
-            if (isMain_files) {
-
-            } else {
-                let headerMainElement = document.getElementsByClassName("gaisbock-header-main");
-                headerMainElement[0].classList.remove("hovered");
-            }
-
-        });
-
-        this.navClassChangeMainDiv.addEventListener('mouseout', event =>{
-
-            var navigationIdElement = document.getElementsByClassName("navigation-flyout");
-            let isMain_files = navigationIdElement[0].classList.contains("main-navigation-link");
-
-            if (isMain_files) {
-
-            } else {
-                let headerMainElement = document.getElementsByClassName("gaisbock-header-main");
-                headerMainElement[0].classList.remove("hovered");
-            }
-
-        });
     }
 }

@@ -17,7 +17,7 @@
 {% endblock %}
 
 {% block base_body %}
-<body class="{% block base_body_classes %}is-ctl-{% if controllerName is not empty %}{{ controllerName|lower }}{% endif %} is-act-{% if controllerAction is not empty %}{{ controllerAction|lower }}{% endif %}{% endblock %}">
+<body class="header-hover {% block base_body_classes %}is-ctl-{% if controllerName is not empty %}{{ controllerName|lower }}{% endif %} is-act-{% if controllerAction is not empty %}{{ controllerAction|lower }}{% endif %}{% endblock %}">
 
 {% block base_body_inner %}
     {% block base_noscript %}
@@ -31,13 +31,15 @@
     {% endblock %}
 
     {% block base_header %}
-        <header class="header-main gaisbock-header-main" id="mainNavigationHover" data-gaisbock-add-remove-class data-gaisbock-searchbar>
+        <header class="header-main gaisbock-header-main" id="mainNavigationHover" style="background: black;">
             {% block base_header_inner %}
-                <div class="container">
+                <div class="container" data-flyout-menu>
                     {% sw_include '@Storefront/storefront/layout/header/header.html.twig' %}
                 </div>
             {% endblock %}
         </header>
+
+
     {% endblock %}
 
     {% block base_offcanvas_navigation %}
@@ -51,7 +53,7 @@
     {% endblock %}
 
     {% block base_main %}
-        <main class="content-main" id="mainNavigationHoverMainClass" data-gaisbock-add-remove-class>
+        <main class="content-main" id="mainNavigationHoverMainClass">
             {% block base_flashbags %}
                 <div class="flashbags container">
                     {% for type, messages in app.flashes %}
@@ -63,7 +65,7 @@
             {% block base_main_inner %}
                 <div class="container">
                     {% block base_main_container %}
-                        <div class="container-main">
+                        <div class="container-main" data-gaisbock-header-hover-add-class>
                             {% block base_breadcrumb %}
                                 {% sw_include '@Storefront/storefront/layout/breadcrumb.html.twig' with {
                                     context: context,
