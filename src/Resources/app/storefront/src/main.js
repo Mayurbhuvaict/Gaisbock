@@ -11,4 +11,4 @@ PluginManager.register('gaisbockAddRemoveClass',gaisbockAddRemoveClass,'[data-ga
 PluginManager.register('gaisbockThemeScrollSection',gaisbockThemeScrollSection,'[data-gaisbock-scroll-section]');
 PluginManager.register('gaisbockimageslider',gaisbockimageslider,'[data-gaisbock-image-slider]');
 PluginManager.register('gaisbcksearchbar',gaisbcksearchbar,'[data-gaisbock-searchbar]');
-PluginManager.override('FlyoutMenu',gaisbockHeaderHoverAddClass,'[data-flyout-menu]')
+PluginManager.override('FlyoutMenu',gaisbockHeaderHoverAddClass,'[data-flyout-menu]');

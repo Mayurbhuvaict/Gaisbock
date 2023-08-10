@@ -41,7 +41,7 @@
             {% endblock %}
 
             {% if productReviewCount > 0 %}
-                <hr>
+
             {% endif %}
 
             {% set formAjaxSubmitOptions = {
@@ -83,7 +83,7 @@
                                                             <small>{{ matrix.points }}</small>
                                                             <div class="point-container">
                                                                 <div class="point-rating point-full">
-                                                                    {% sw_icon 'star' style { 'color': '#C9AC77', 'size': 'xs', 'pack': 'solid' } %}
+                                                                    {% sw_icon 'star' style { 'size': 'xs', 'pack': 'solid' } %}
                                                                 </div>
                                                             </div>
                                                         </label>
@@ -117,7 +117,7 @@
                     </div>
 
                     {% block component_review_filter_divider %}
-                        <hr/>
+
                     {% endblock %}
                 {% endif %}
             {% endblock %}
@@ -127,37 +127,25 @@
             <div class="product-detail-review-teaser js-review-teaser">
 
                 {% block component_review_form_teaser_header %}
-                    <p class="h4">
-                        {% if not reviews.customerReview %}
-                            {{ "detail.reviewTeaserTitle"|trans|sw_sanitize }}
-                        {% else %}
-                            {{ "detail.reviewExistsTeaserTitle"|trans|sw_sanitize }}
-                        {% endif %}
-                    </p>
+
                 {% endblock %}
 
                 {% block component_review_form_teaser_text %}
-                    <p>
-                        {% if not page.customerReview %}
-                            {{ "detail.reviewTeaserText"|trans|sw_sanitize }}
-                        {% else %}
-                            {{ "detail.reviewExistsTeaserText"|trans|sw_sanitize }}
-                        {% endif %}
-                    </p>
+
                 {% endblock %}
 
                 {% block component_review_form_teaser_button %}
                     <!-- Button trigger modal -->
 
                     <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                        Launch demo modal
+                        {{ "productDetailPage.viewRatings"|trans }}
                     </button>
 
                     <!-- Modal -->
                     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
                          aria-hidden="true">
                         <div class="modal-dialog">
-                            <div class="modal-content" style="top: 194px;">
+                            <div class="modal-content" style="top:149px">
                                 <div class="modal-header">
                                     <h5 class="modal-title" id="exampleModalLabel"></h5>
                                     <button type="button" class="btn-close" data-bs-dismiss="modal"
@@ -217,6 +205,116 @@
                                             {{ "detail.reviewTeaserButtonHide"|trans|sw_sanitize }}
                                         </span>
                                     </button>
+                                    {% block component_review_info1 %}
+                                        <div class="product-detail-review-info js-review-info">
+
+                                            {% block component_review_title1 %}
+
+                                                <div class="product-detail-review-rating"
+                                                        {% if productReviewCount > 0 %}
+                                                    itemprop="aggregateRating" itemscope itemtype="https://schema.org/AggregateRating"
+                                                        {% endif %}>
+                                                    <p class="product-detail-review-title h5">
+                                                        {{ "productDetailPage.ratings"|trans }}({{ reviews.totalReviews }})
+                                                    </p>
+                                                    {% if productReviewCount > 0 %}
+                                                        <meta itemprop="bestRating" content="5">
+                                                        <meta itemprop="ratingCount" content="{{ productReviewCount }}">
+                                                        <meta itemprop="ratingValue" content="{{ productAvgRating }}">
+                                                    {% endif %}
+
+                                                    {% sw_include '@Storefront/storefront/component/review/rating.html.twig' with {
+                                                        points: productAvgRating,
+                                                        style: 'text-primary'
+                                                    } %}
+                                                </div>
+                                            {% endblock %}
+
+                                            {% block component_review_overview1 %}
+
+
+                                                {% if productReviewCount > 0 %}
+                                                    <p class="h6">
+                                                        {{ productAvgRating }} / {{ reviews.matrix.maxPoints }}
+                                                    </p>
+                                                {% endif %}
+                                            {% endblock %}
+                                            {% set formAjaxSubmitOptions = {
+                                                replaceSelectors: [".js-review-container"],
+                                                submitOnChange: true
+                                            } %}
+
+                                            {% block component_review_filter1 %}
+                                                {% if productReviewCount > 0 %}
+                                                    <div class="js-review-filter">
+                                                        <form class="review-filter-form"
+                                                              action="{{ path('frontend.product.reviews', { productId: product.id, parentId: product.parentId }) }}"
+                                                              method="post"
+                                                              data-form-ajax-submit="true"
+                                                              data-form-ajax-submit-options='{{ formAjaxSubmitOptions|json_encode }}'>
+
+                                                            {% if app.request.get('limit') %}
+                                                                <input type="hidden" name="limit" value="{{ app.request.get('limit') }}">
+                                                            {% endif %}
+
+                                                            {% if app.request.get('language') %}
+                                                                <input type="hidden" name="language" value="{{ app.request.get('language') }}">
+                                                            {% endif %}
+
+                                                            {% if app.request.get('sort') %}
+                                                                <input type="hidden" name="sort" value="{{ app.request.get('sort') }}">
+                                                            {% endif %}
+
+                                                            {% for matrix in reviews.matrix.matrix %}
+                                                                {% block component_review_filter_box1 %}
+                                                                    <div class="row product-detail-review-filter">
+
+                                                                        {% block component_review_filter_checkbox1 %}
+                                                                            <div class="col-md-8 col-lg-5 product-detail-review-checkbox">
+                                                                                <div class="form-check">
+                                                                                    {% block component_review_filter_checkbox_label1 %}
+                                                                                        <label class="custom-control-label text-nowrap"
+                                                                                               for="reviewRating{{ matrix.points }}">
+                                                                                            <small>{{ matrix.points }}</small>
+                                                                                            <div class="point-container">
+                                                                                                <div class="point-rating point-full">
+                                                                                                    {% sw_icon 'star' style { 'size': 'xs', 'pack': 'solid' } %}
+                                                                                                </div>
+                                                                                            </div>
+                                                                                        </label>
+                                                                                    {% endblock %}
+                                                                                </div>
+                                                                            </div>
+                                                                        {% endblock %}
+
+                                                                        {% block component_review_filter_progressbar1 %}
+                                                                            <div class="col d-none d-lg-block product-detail-review-progressbar-col">
+                                                                                <div class="progress product-detail-review-progressbar-container">
+                                                                                    <div class="progress-bar product-detail-review-progressbar-bar"
+                                                                                         role="progressbar"
+                                                                                         style="width: {{ matrix.percent }}%;"
+                                                                                         aria-valuenow="{{ matrix.percent }}"
+                                                                                         aria-valuemin="0"
+                                                                                         aria-valuemax="100"></div>
+                                                                                </div>
+                                                                            </div>
+                                                                        {% endblock %}
+
+                                                                        {% block component_review_filter_share1 %}
+                                                                            <div class="col-12 col-md-3 product-detail-review-share">
+                                                                                <p><small>{{ matrix.count }}</small></p>
+                                                                            </div>
+                                                                        {% endblock %}
+                                                                    </div>
+                                                                {% endblock %}
+                                                            {% endfor %}
+                                                        </form>
+                                                    </div>
+
+                                                {% endif %}
+                                            {% endblock %}
+                                        </div>
+                                    {% endblock %}
 
                                     {% block component_review_form_container %}
                                         <div class="collapse multi-collapse{% if ratingSuccess == -1 %} show{% endif %}"
