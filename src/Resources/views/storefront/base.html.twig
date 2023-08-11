@@ -31,15 +31,13 @@
     {% endblock %}
 
     {% block base_header %}
-        <header class="header-main gaisbock-header-main" id="mainNavigationHover">
+        <header class="header-main gaisbock-header-main" id="mainNavigationHover" data-gaisbock-add-remove-class>
             {% block base_header_inner %}
                 <div class="container" data-flyout-menu>
                     {% sw_include '@Storefront/storefront/layout/header/header.html.twig' %}
                 </div>
             {% endblock %}
         </header>
-
-
     {% endblock %}
 
     {% block base_offcanvas_navigation %}
