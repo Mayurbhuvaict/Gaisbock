@@ -258,6 +258,213 @@
     display: block;
 }
 
+.gaisbock-custom-text-image-slider-component-media-slider,
+.gaisbock-custom-text-image-slider-component-image-text-separate-grid {
+    padding: 0;
+    margin: 0;
+}
+.about-left-right-section {
+    margin-top: 90px;
+    .cms-section {
+        padding: 0;
+    }
+    .TextBeforeImage {
+        .cms-element-gaisbock-custom-text-image-slider {
+            flex-direction: row-reverse;
+        }
+    }
+    .cms-block-gaisbock-custom-text-image-slider {
+        overflow: visible;
+        .cms-element-gaisbock-custom-text-image-slider {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+        .gaisbock-custom-text-image-slider-component-cover-image-block {
+            width: 32%;
+            flex: revert;
+            @media(max-width:1199px) {
+                width:45%;
+            }
+            @media(max-width:992px) {
+                width:100%;
+            }
+            img {
+                width: 100%;
+            }
+        }
+        .gaisbock-custom-text-image-slider-component-text-block {
+            width: 68%;
+            max-width: 640px;
+            margin: 0 auto;
+            @media(max-width:1199px) {
+                width:55%;
+                padding-left: 30px;
+                padding-right: 30px;
+            }
+            @media(max-width:992px) {
+                width:100%;
+                padding: 0;
+                max-width: 100%;
+                margin-top: 24px;
+            }
+            .gaisbock-custom-text-image-slider-component-text-block-contentTitle {
+                font-size: 34px;
+                line-height: 42px;
+                font-family: $sw-font-family-headline;
+                letter-spacing: 0.17px;
+                margin-bottom: 10px;
+            }
+            .gaisbock-custom-text-image-slider-component-text-block-subTitle {
+                font-size: 18px;
+                letter-spacing: 1.08px;
+                line-height: 25px;
+                margin-bottom: 20px;
+            }
+        }
+    }
+    .gaisbock-custom-text-image-slider-component-text-block-readMore {
+        margin-top: 20px;
+    }
+    .readmore-btn-slider {
+        letter-spacing: 0.78px;
+        color: #151515;
+        text-transform: uppercase;
+        font-family: $sw-font-family-base;
+        font-weight: $fontWeight700;
+        font-size: 13px;
+        line-height: 14px;
+        margin-bottom: 23px;
+        position: relative;
+        width: auto;
+        display: inline-block;
+        transition: transform 0.35s ease;
+        &:after {
+            width: 6px;
+            height: 4px;
+            position: absolute;
+            content: url("data:image/svg+xml,%3Csvg width='13' height='9' viewBox='0 0 13 9' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11.09 8.20508L6.5 3.62508L1.91 8.20508L0.5 6.79508L6.5 0.795078L12.5 6.79508L11.09 8.20508Z' fill='%23000000'/%3E%3C/svg%3E");
+            transform: rotate(180deg);
+            right: -20px;
+            top: 11px;
+        }
+    }
+    .gaisbock-hideContent-contain,
+    .gaisbock-custom-text-image-slider-component-text-block-detailTitle,
+    .gaisbock-after-slider-text {
+        font-size: 18px;
+        line-height: 23px;
+        h2 {
+            font-size: 25px;
+            letter-spacing: 0.13px;
+            line-height: 31px;
+            margin-top: 40px;
+            margin-bottom: 20px;
+        }
+    }
+}
+
+.gaisbock-benefits.founder-section.store-section {
+    margin-top: 130px;
+    .title-image-button-section .main-title {
+        font-size: 70px;
+        line-height: 76px;
+        letter-spacing: 0.35px;
+        max-width: 344px;
+        @media(max-width: 992px) {
+            font-size: 40px;
+            line-height: 43px;
+            letter-spacing: 0.2px;
+        }
+    }
+    .title-image-button-section .cms-image-container {
+        padding-top: 17px;
+        width: 100%;
+        padding-bottom: 10px;
+    }
+}
+.static-faq-section.gailbock-faq-section .Faq-title {
+    position: relative;
+    border: 0;
+    padding-bottom: 23px;
+    margin-bottom: 20px;
+    @media(max-width:992px) {
+        padding-bottom: 17px;
+        margin-bottom: 3px;
+    }
+    &:after {
+        content: '';
+        position: absolute;
+        background: #707070;
+        height: 2px;
+        width: 73px;
+        bottom: 0;
+        left: 50%;
+        transform: translate(-50%,0);
+        @media(max-width:992px) {
+            width: 46px;
+        }
+    }
+}
+@include media-breakpoint-down(lg) { 
+    .about-section .cms-block-container,
+    .about-section .cms-section-default,
+    .about-left-right-section .cms-section-defaul {
+        padding: 0 !important;
+    }
+    .about-left-right-section .cms-block-gaisbock-custom-text-image-slider .gaisbock-custom-text-image-slider-component-cover-image-block img {
+        width: 100%;
+        max-width: 206px;
+        margin-top: 0px;
+    }
+    .about-left-right-section .readmore-btn-slider {
+        font-size: 10px;
+        line-height: 14px;
+        letter-spacing: 0.6px;
+    }
+    .about-left-right-section .cms-block-gaisbock-custom-text-image-slider .gaisbock-custom-text-image-slider-component-text-block .gaisbock-custom-text-image-slider-component-text-block-contentTitle {
+        font-size: 21px;
+        line-height: 25px;
+        letter-spacing: 0.1px;
+    }
+    .about-left-right-section {
+        margin-top: 0;
+    }
+    .about-left-right-section .readmore-btn-slider:after {
+        top: 9px;
+    }
+    .about-left-right-section .cms-block-gaisbock-custom-text-image-slider .gaisbock-custom-text-image-slider-component-text-block .gaisbock-custom-text-image-slider-component-text-block-subTitle {
+        font-size: 13px;
+        letter-spacing: .91px;
+        line-height: 17px;
+        margin-bottom: 15px;
+    }
+    .about-left-right-section .gaisbock-hideContent-contain, .about-left-right-section .gaisbock-custom-text-image-slider-component-text-block-detailTitle, .about-left-right-section .gaisbock-after-slider-text {
+        font-size: 16px;
+        line-height: 19px;
+    }
+    .about-left-right-section .gaisbock-custom-text-image-slider-component-text-block-readMore {
+        margin-top: 10px;
+    }
+    .about-left-right-section .cms-block-gaisbock-custom-text-image-slider .cms-element-gaisbock-custom-text-image-slider {
+        margin-bottom: 0;
+    }
+    .gaisbock-benefits.founder-section.store-section {
+        margin-top: 60px;
+    }
+    .gaisbock-benefits.founder-section.store-section .title-image-button-section {
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        right: auto;
+    }
+    .static-faq-section.gailbock-faq-section {
+        padding: 80px 0;
+    }
+}
 @include media-breakpoint-down(md) {
     .cms-block-gaisbock-about-title-text-image .cms-block-container {
         padding: 0 !important;

@@ -28,7 +28,7 @@
         </div>
 
         <div class="gaisbock-custom-text-image-slider-component-text-block-detailTitle">
-            {{ element.config.detailTitle.value }}
+            {{ element.config.detailTitle.value|raw }}
         </div>
         <div class="gaisbock-custom-text-image-slider-component-text-block-readMore">
             {% if app.request.locale === 'de-DE' %}

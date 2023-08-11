@@ -24,7 +24,7 @@ export default class gaisbockHeaderHoverAddClass extends FlyoutMenuPlugin {
 
             // add custom code for add class
             let headerMainElement = document.getElementsByClassName("gaisbock-header-main");
-            headerMainElement[0].classList.add("gaisbock-hover");
+            headerMainElement[0].classList.add("hovered");
         }
 
         this.$emitter.publish('openFlyout');
@@ -44,7 +44,7 @@ export default class gaisbockHeaderHoverAddClass extends FlyoutMenuPlugin {
 
             // add custom code for remove class
             let headerMainElement = document.getElementsByClassName("gaisbock-header-main");
-            headerMainElement[0].classList.remove("gaisbock-hover");
+            headerMainElement[0].classList.remove("hovered");
         }
 
         this.$emitter.publish('closeFlyout');
