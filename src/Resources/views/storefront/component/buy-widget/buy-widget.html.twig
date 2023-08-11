@@ -84,18 +84,8 @@
                         style: 'text-primary'
                     } %}
                     <a
-                            data-bs-toggle="tab"
                             class="product-detail-reviews-link"
-                            {# @deprecated tag:v6.6.0 - Registering plugin on selector "data-offcanvas-tabs" is deprecated. Use "data-off-canvas-tabs" instead #}
-                            {% if feature('v6.6.0.0') %}
-                                data-off-canvas-tabs="true"
-                            {% else %}
-                                data-offcanvas-tabs="true"
-                            {% endif %}
-                            data-remote-click="true"
-                            data-remote-click-options='{{ remoteClickOptions|json_encode }}'
-                            href="{{ reviewTabHref }}"
-                            aria-controls="review-tab-pane"
+                            data-bs-toggle="modal" data-bs-target="#exampleModal"
                     >
                         {{ totalReviews }}
                         {{ "detail.reviewLinkText"|trans({'%count%': totalReviews})|sw_sanitize }}
@@ -146,9 +136,9 @@
                     {% endblock %}
 
                     {% block gaisbock_product_description %}
-                        <div class="gaisbock-product-description">
-                            {{ page.product.translated.description|raw }}
-                        </div>
+{#                        <div class="gaisbock-product-description">#}
+{#                            {{ page.product.translated.description|raw }}#}
+{#                        </div>#}
                     {% endblock %}
                     {% block buy_widget_tax %}
                         <div class="product-detail-tax-container">
@@ -158,17 +148,6 @@
                                 {% set taxText = "general.netTaxInformation"|trans|sw_sanitize %}
                             {% endif %}
 
-{#                            <p class="product-detail-tax">#}
-{#                                {% block buy_widget_tax_link %}#}
-{#                                    <a class="product-detail-tax-link"#}
-{#                                       href="{{ path('frontend.cms.page',{ id: config('core.basicInformation.shippingPaymentInfoPage') }) }}"#}
-{#                                       title="{{ taxText }}"#}
-{#                                       data-bs-toggle="modal"#}
-{#                                       data-url="{{ path('frontend.cms.page',{ id: config('core.basicInformation.shippingPaymentInfoPage') }) }}">#}
-{#                                        {{ taxText }}#}
-{#                                    </a>#}
-{#                                {% endblock %}#}
-{#                            </p>#}
                         </div>
                     {% endblock %}
 
@@ -238,7 +217,7 @@
                                 <span type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne"
                                       aria-expanded="true" aria-controls="collapseTwo">
                                     {{ "productDetailPage.contents"|trans|sw_sanitize }}
-                                    {% sw_icon 'gaisbock-plus' style {'pack': 'gaisbock','class':'gaisbock-header'} %}
+                                    {% sw_icon 'gaisbock-chevron-down' style {'pack': 'gaisbock','class':'gaisbock-header'} %}
                                 </span>
                             </h3>
                         </div>
@@ -301,7 +280,7 @@
                                 <span type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo"
                                       aria-expanded="true" aria-controls="collapseTwo">
                                     {{ "productDetailPage.benefits"|trans|sw_sanitize }}
-                                    {% sw_icon 'gaisbock-plus' style {'pack': 'gaisbock','class':'gaisbock-header'} %}
+                                    {% sw_icon 'gaisbock-chevron-down' style {'pack': 'gaisbock','class':'gaisbock-header'} %}
                                 </span>
                             </h3>
                         </div>
@@ -326,7 +305,7 @@
                                 <span type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree"
                                       aria-expanded="true" aria-controls="collapseThree">
                                     {{ "productDetailPage.effect"|trans|sw_sanitize }}
-                                    {% sw_icon 'gaisbock-plus' style {'pack': 'gaisbock','class':'gaisbock-header'} %}
+                                    {% sw_icon 'gaisbock-chevron-down' style {'pack': 'gaisbock','class':'gaisbock-header'} %}
                                 </span>
                             </h3>
                         </div>
@@ -351,7 +330,7 @@
                                 <span type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour"
                                       aria-expanded="true" aria-controls="collapseFour">
                                     {{ "productDetailPage.application"|trans|sw_sanitize }}
-                                    {% sw_icon 'gaisbock-plus' style {'pack': 'gaisbock','class':'gaisbock-header'} %}
+                                    {% sw_icon 'gaisbock-chevron-down' style {'pack': 'gaisbock','class':'gaisbock-header'} %}
                                 </span>
                             </h3>
                         </div>
@@ -376,7 +355,7 @@
                                 <span type="button" data-bs-toggle="collapse" data-bs-target="#collapseFive"
                                       aria-expanded="true" aria-controls="collapseFive">
                                     {{ "productDetailPage.integral"|trans|sw_sanitize }}
-                                    {% sw_icon 'gaisbock-plus' style {'pack': 'gaisbock','class':'gaisbock-header'} %}
+                                    {% sw_icon 'gaisbock-chevron-down' style {'pack': 'gaisbock','class':'gaisbock-header'} %}
                                 </span>
                             </h3>
                         </div>
@@ -401,7 +380,7 @@
                                 <span type="button" data-bs-toggle="collapse" data-bs-target="#collapseSix"
                                       aria-expanded="true" aria-controls="collapseSix">
                                     {{ "productDetailPage.shipping"|trans|sw_sanitize }}
-                                    {% sw_icon 'gaisbock-plus' style {'pack': 'gaisbock','class':'gaisbock-header'} %}
+                                    {% sw_icon 'gaisbock-chevron-down' style {'pack': 'gaisbock','class':'gaisbock-header'} %}
                                 </span>
                             </h3>
                         </div>
