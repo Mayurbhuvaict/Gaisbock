@@ -4,8 +4,9 @@ export default class gaisbcksearchbar extends Plugin{
     init(){
         const parentDiv = document.querySelector('.header-main');
         const searchButton = document.querySelector('.gaisbock-search-button-for-css');
-
+        console.log(searchButton);
         searchButton.addEventListener('click',()=>{
+
             if(parentDiv.classList.contains('hovered-header') === false){
                 parentDiv.classList.add('hovered-header');
             }else{
