@@ -1,6 +1,6 @@
 {% sw_extends '@Storefront/storefront/layout/header/header.html.twig' %}
 {% block layout_header_navigation %}
-    <div class="row align-items-start header-row justify-content-between m-auto position-relative">
+    <div class="row align-items-start header-row justify-content-between m-auto position-relative" data-gaisbock-searchbar>
 
         {% block layout_header_logo %}
             <div class="header-logo-col">
@@ -79,8 +79,8 @@
 
                             <div class="col-auto order-2">
                                 <div class="search-toggle">
-                                    <button class="btn header-actions-btn search-toggle-btn js-search-toggle-btn collapsed gaisbock-search-button-for-css"
-                                            id="closeToggle"
+                                    <button class="btn header-actions-btn search-toggle-btn js-search-toggle-btn collapsed "
+                                            id="closeToggle gaisbock-search-button-for-css"
                                             type="button"
                                             data-bs-toggle="collapse"
                                             data-bs-target="#searchCollapse"
