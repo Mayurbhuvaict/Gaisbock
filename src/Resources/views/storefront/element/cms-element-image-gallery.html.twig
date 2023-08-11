@@ -9,5 +9,28 @@
     {% block element_image_gallery_inner_thumbnails_col %}
 
     {% endblock %}
+    {% for review in section.blocks.elements %}
+        {% if review.type == "product-description-reviews" %}
+            {% set element = review.slots.getSlot('content') %}
+                {% set config = element.fieldConfig.elements %}
+                {% set product = element.data.product %}
+                {% set descriptionTabId = "description-tab-" ~ product.id %}
+                {% set descriptionTabHref = "#description-tab-" ~ product.id ~ "-pane" %}
+                {% set descriptionTabContent = "description-tab-" ~ product.id ~ "-pane" %}
+                {% set reviewTabId = "review-tab-" ~ product.id %}
+                {% set reviewTabHref = "#review-tab-" ~ product.id ~ "-pane" %}
+                {% set reviewTabContent = "review-tab-" ~ product.id ~ "-pane" %}
+
+                {% if element.data.product %}
+                    <div class="product-detail-tabs cms-element-{{ element.type }}{% if config.alignment.value %} has-vertical-alignment{% endif %}">
+                        {% sw_include '@Storefront/storefront/component/review/review.html.twig' with {
+                            reviews: element.data.reviews,
+                            product: element.data.product
+                        } %}
+                    </div>
+                {% endif %}
+        {% endif %}
+    {% endfor %}
+
 {% endblock %}
 

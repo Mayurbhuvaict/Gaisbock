@@ -71,19 +71,10 @@
                         points: page.product.ratingAverage,
                         style: 'text-primary'
                     } %}
+
                     <a
-                            data-bs-toggle="tab"
                             class="product-detail-reviews-link"
-                            {# @deprecated tag:v6.6.0 - Registering plugin on selector "data-offcanvas-tabs" is deprecated. Use "data-off-canvas-tabs" instead #}
-                            {% if feature('v6.6.0.0') %}
-                                data-off-canvas-tabs="true"
-                            {% else %}
-                                data-offcanvas-tabs="true"
-                            {% endif %}
-                            data-remote-click="true"
-                            data-remote-click-options='{{ remoteClickOptions|json_encode }}'
-                            href="#review-tab-pane"
-                            aria-controls="review-tab-pane"
+                            data-bs-toggle="modal" data-bs-target="#exampleModal1"
                     >
                         {{ page.reviews.totalReviews }}
                         {{ "detail.reviewLinkText"|trans({'%count%': page.reviews.totalReviews})|sw_sanitize }}
@@ -216,7 +207,7 @@
                                 <span type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne"
                                       aria-expanded="true" aria-controls="collapseTwo">
                                     {{ "productDetailPage.contents"|trans|sw_sanitize }}
-                                    {% sw_icon 'gaisbock-plus' style {'pack': 'gaisbock','class':'gaisbock-header'} %}
+                                    {% sw_icon 'gaisbock-image-text-middle' style {'pack': 'gaisbock','class':'gaisbock-extra-detail'} %}
                                 </span>
                             </h3>
                         </div>
@@ -230,37 +221,37 @@
                                         <p class="gaisbock-product-image-text">{{ page.product.translated.customFields.gaisbock_product_detail_description_set_image1_text }}</p>
                                     {% endif %}
                                     {% if page.product.extensions.images.customImage.2 %}
-                                        {% sw_icon 'gaisbock-plus' style {'pack': 'gaisbock','class':'gaisbock-header'} %}
+                                        {% sw_icon 'gaisbock-plus' style {'pack': 'gaisbock','class':'gaisbock-image-text-middle'} %}
                                         <img src="{{ page.product.extensions.images.customImage.2.url }}" alt="">
                                         <p class="gaisbock-product-image-text">{{ page.product.translated.customFields.gaisbock_product_detail_description_set_image2_text }}</p>
                                     {% endif %}
                                     {% if page.product.extensions.images.customImage.3 %}
-                                        {% sw_icon 'gaisbock-plus' style {'pack': 'gaisbock','class':'gaisbock-header'} %}
+                                        {% sw_icon 'gaisbock-plus' style {'pack': 'gaisbock','class':'gaisbock-image-text-middle'} %}
                                         <img src="{{ page.product.extensions.images.customImage.3.url }}" alt="">
                                         <p class="gaisbock-product-image-text">{{ page.product.translated.customFields.gaisbock_product_detail_description_set_image3_text }}</p>
                                     {% endif %}
                                     {% if page.product.extensions.images.customImage.4 %}
-                                        {% sw_icon 'gaisbock-plus' style {'pack': 'gaisbock','class':'gaisbock-header'} %}
+                                        {% sw_icon 'gaisbock-plus' style {'pack': 'gaisbock','class':'gaisbock-image-text-middle'} %}
                                         <img src="{{ page.product.extensions.images.customImage.4.url }}" alt="">
                                         <p class="gaisbock-product-image-text">{{ page.product.translated.customFields.gaisbock_product_detail_description_set_image4_text }}</p>
                                     {% endif %}
                                     {% if page.product.extensions.images.customImage.5 %}
-                                        {% sw_icon 'gaisbock-plus' style {'pack': 'gaisbock','class':'gaisbock-header'} %}
+                                        {% sw_icon 'gaisbock-plus' style {'pack': 'gaisbock','class':'gaisbock-image-text-middle'} %}
                                         <img src="{{ page.product.extensions.images.customImage.5.url }}" alt="">
                                         <p class="gaisbock-product-image-text">{{ page.product.translated.customFields.gaisbock_product_detail_description_set_image5_text }}</p>
                                     {% endif %}
                                     {% if page.product.extensions.images.customImage.6 %}
-                                        {% sw_icon 'gaisbock-plus' style {'pack': 'gaisbock','class':'gaisbock-header'} %}
+                                        {% sw_icon 'gaisbock-plus' style {'pack': 'gaisbock','class':'gaisbock-image-text-middle'} %}
                                         <img src="{{ page.product.extensions.images.customImage.6.url }}" alt="">
                                         <p class="gaisbock-product-image-text">{{ page.product.translated.customFields.gaisbock_product_detail_description_set_image6_text }}</p>
                                     {% endif %}
                                     {% if page.product.extensions.images.customImage.7 %}
-                                        {% sw_icon 'gaisbock-plus' style {'pack': 'gaisbock','class':'gaisbock-header'} %}
+                                        {% sw_icon 'gaisbock-plus' style {'pack': 'gaisbock','class':'gaisbock-image-text-middle'} %}
                                         <img src="{{ page.product.extensions.images.customImage.7.url }}" alt="">
                                         <p class="gaisbock-product-image-text">{{ page.product.translated.customFields.gaisbock_product_detail_description_set_image7_text }}</p>
                                     {% endif %}
                                     {% if page.product.extensions.images.customImage.8 %}
-                                        {% sw_icon 'gaisbock-plus' style {'pack': 'gaisbock','class':'gaisbock-header'} %}
+                                        {% sw_icon 'gaisbock-plus' style {'pack': 'gaisbock','class':'gaisbock-image-text-middle'} %}
                                         <img src="{{ page.product.extensions.images.customImage.8.url }}" alt="">
                                         <p class="gaisbock-product-image-text">{{ page.product.translated.customFields.gaisbock_product_detail_description_set_image8_text }}</p>
                                     {% endif %}
@@ -279,7 +270,7 @@
                                 <span type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo"
                                       aria-expanded="true" aria-controls="collapseTwo">
                                     {{ "productDetailPage.benefits"|trans|sw_sanitize }}
-                                    {% sw_icon 'gaisbock-plus' style {'pack': 'gaisbock','class':'gaisbock-header'} %}
+                                    {% sw_icon 'gaisbock-image-text-middle' style {'pack': 'gaisbock','class':'gaisbock-extra-detail'} %}
                                 </span>
                             </h3>
                         </div>
@@ -304,7 +295,7 @@
                                 <span type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree"
                                       aria-expanded="true" aria-controls="collapseThree">
                                     {{ "productDetailPage.effect"|trans|sw_sanitize }}
-                                    {% sw_icon 'gaisbock-plus' style {'pack': 'gaisbock','class':'gaisbock-header'} %}
+                                    {% sw_icon 'gaisbock-image-text-middle' style {'pack': 'gaisbock','class':'gaisbock-extra-detail'} %}
                                 </span>
                             </h3>
                         </div>
@@ -329,7 +320,7 @@
                                 <span type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour"
                                       aria-expanded="true" aria-controls="collapseFour">
                                     {{ "productDetailPage.application"|trans|sw_sanitize }}
-                                    {% sw_icon 'gaisbock-plus' style {'pack': 'gaisbock','class':'gaisbock-header'} %}
+                                    {% sw_icon 'gaisbock-image-text-middle' style {'pack': 'gaisbock','class':'gaisbock-extra-detail'} %}
                                 </span>
                             </h3>
                         </div>
@@ -354,7 +345,7 @@
                                 <span type="button" data-bs-toggle="collapse" data-bs-target="#collapseFive"
                                       aria-expanded="true" aria-controls="collapseFive">
                                     {{ "productDetailPage.integral"|trans|sw_sanitize }}
-                                    {% sw_icon 'gaisbock-plus' style {'pack': 'gaisbock','class':'gaisbock-header'} %}
+                                    {% sw_icon 'gaisbock-image-text-middle' style {'pack': 'gaisbock','class':'gaisbock-extra-detail'} %}
                                 </span>
                             </h3>
                         </div>
@@ -379,7 +370,7 @@
                                 <span type="button" data-bs-toggle="collapse" data-bs-target="#collapseSix"
                                       aria-expanded="true" aria-controls="collapseSix">
                                     {{ "productDetailPage.shipping"|trans|sw_sanitize }}
-                                    {% sw_icon 'gaisbock-plus' style {'pack': 'gaisbock','class':'gaisbock-header'} %}
+                                    {% sw_icon 'gaisbock-image-text-middle' style {'pack': 'gaisbock','class':'gaisbock-extra-detail'} %}
                                 </span>
                             </h3>
                         </div>
