@@ -1,0 +1,96 @@
+button.btn.btn-primary {
+    height: 30px;
+    line-height: 30px;
+    padding-top: 0;
+    padding-bottom: 0;
+    border-radius: 15px;
+    background: $sw-color-brand-primary;
+    border-color: $sw-color-brand-primary;
+}
+.account-register {
+    max-width: 1024px;
+    margin: 0 auto;
+    margin-bottom: 50px;
+    .row {
+        > div {
+            flex: 0 0 50%;
+            max-width: 50%;
+            @media(max-width:1024px) {
+                flex: 0 0 100%;
+                max-width: 100%;
+            }
+        }
+    }
+    .login-card,
+    .register-card {
+        max-width: 326px;
+        @media(max-width:1024px) {
+            max-width: 100%;
+        }
+    }
+
+    .form-group {
+        width: 100%;
+        margin-bottom: 15px;
+        flex: 0 0 100% !important;
+        max-width: 100% !important;
+    }
+    .form-label {
+        display: none;
+    }
+    .form-control {
+        height: 30px;
+        border-radius: 15px;
+        border: 1px solid #707070;
+        font-size: 13px;
+        letter-spacing: 0.78px;
+        font-weight: 700;
+        color: #C9AC77;
+        font-family: $sw-font-family-base;
+        &::placeholder {
+            color: #C9AC77;
+        }
+    }
+    .login-password-recover a {
+        font-size: 12px;
+        line-height: 15px;
+        letter-spacing: 0.12px;
+        color: $sw-color-brand-primary;
+    }
+    .card-title {
+        font-size: 25px;
+        line-height: 31px;
+        letter-spacing: 0.13px;
+        font-family: $sw-font-family-headline;
+        border-bottom: 1px solid #707070;
+    }
+    .register-form {
+        margin-top: 25px;
+        border-bottom: 1px solid #707070;
+        padding-bottom: 25px;
+        .g-2, .gy-2 {
+            --bs-gutter-y: 0;
+        }
+        .form-text.js-validation-message {
+            font-size: 12px;
+            line-height: 15px;
+            letter-spacing: 0.12px;
+            margin-top: 6px;
+            display: block;
+        }
+    }   
+    .register-personal {
+        margin-bottom: 0;
+    }
+    .register-address .card-title {
+        margin-bottom: 25px;
+    }
+    .register-submit {
+        margin: 0;
+        width: auto;
+        display: inline-block !important;
+    }
+    .register-address {
+        margin-bottom: 1rem;
+    }
+}
