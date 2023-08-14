@@ -18,7 +18,8 @@ class gaisbockCategoryNavigationSubscriber implements EventSubscriberInterface
 {
     public function __construct(
         private EntityRepository $categoryRepository,
-        private EntityRepository $mediaRepository
+        private EntityRepository $mediaRepository,
+        private EntityRepository $productRepository
     )
     {
     }
@@ -123,6 +124,17 @@ class gaisbockCategoryNavigationSubscriber implements EventSubscriberInterface
             $event->getPage()->getProduct()->addArrayExtension('images',['customImage'=>$images]);
         }
 
+        $variantProducts = $this->variantProductImages($event,$event->getContext());
+        $event->getPage()->addArrayExtension('products',['variants'=>$variantProducts]);
+    }
+
+    private function variantProductImages($event,$context)
+    {
+        $getVariant = $event->getPage()->getProduct()->getParentId();
+        $criteria = new Criteria();
+        $criteria->addFilter(new EqualsFilter('parentId',$getVariant));
+        $products = $this->productRepository->search($criteria,$context)->getElements();
+        return $products;
     }
 
     private function findMedia($mediaId,$context)

@@ -3,7 +3,6 @@ import Plugin from 'src/plugin-system/plugin.class';
 export default class gaisbockimageslider extends Plugin {
     init() {
         var classname = document.getElementById("gaisbock-slider");
-        console.log(classname)
         if (classname !== null) {
             var slider = {
                 slider: {

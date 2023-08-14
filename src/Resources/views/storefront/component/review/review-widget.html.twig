@@ -31,11 +31,11 @@
                     {% block component_review_overview %}
 
 
-                            {% if productReviewCount > 0 %}
-                                <p class="h6">
-                                    {{ productAvgRating }} / {{ reviews.matrix.maxPoints }}
-                                </p>
-                            {% endif %}
+                        {% if productReviewCount > 0 %}
+                            <p class="h6">
+                                {{ productAvgRating }} / {{ reviews.matrix.maxPoints }}
+                            </p>
+                        {% endif %}
                     {% endblock %}
                 </div>
             {% endblock %}
@@ -215,7 +215,8 @@
                                                     itemprop="aggregateRating" itemscope itemtype="https://schema.org/AggregateRating"
                                                         {% endif %}>
                                                     <p class="product-detail-review-title h5">
-                                                        {{ "productDetailPage.ratings"|trans }}({{ reviews.totalReviews }})
+                                                        {{ "productDetailPage.ratings"|trans }}
+                                                        ({{ reviews.totalReviews }})
                                                     </p>
                                                     {% if productReviewCount > 0 %}
                                                         <meta itemprop="bestRating" content="5">
@@ -254,15 +255,18 @@
                                                               data-form-ajax-submit-options='{{ formAjaxSubmitOptions|json_encode }}'>
 
                                                             {% if app.request.get('limit') %}
-                                                                <input type="hidden" name="limit" value="{{ app.request.get('limit') }}">
+                                                                <input type="hidden" name="limit"
+                                                                       value="{{ app.request.get('limit') }}">
                                                             {% endif %}
 
                                                             {% if app.request.get('language') %}
-                                                                <input type="hidden" name="language" value="{{ app.request.get('language') }}">
+                                                                <input type="hidden" name="language"
+                                                                       value="{{ app.request.get('language') }}">
                                                             {% endif %}
 
                                                             {% if app.request.get('sort') %}
-                                                                <input type="hidden" name="sort" value="{{ app.request.get('sort') }}">
+                                                                <input type="hidden" name="sort"
+                                                                       value="{{ app.request.get('sort') }}">
                                                             {% endif %}
 
                                                             {% for matrix in reviews.matrix.matrix %}
@@ -365,9 +369,97 @@
 
                                                 {% block component_review_list_content %}
                                                     {% for review in reviews %}
+                                                        {% set reviewVerifcation = 0 %}
                                                         <div class="product-detail-review-list-content">
-                                                            {% sw_include '@Storefront/storefront/component/review/review-item.html.twig' %}
+                                                            <div class="product-detail-review-item"
+                                                                 itemprop="review"
+                                                                 itemscope
+                                                                 itemtype="https://schema.org/Review">
+                                                                {% block page_product_detail_review_item_meta_published %}
+                                                                    <meta itemprop="datePublished"
+                                                                          content="{{ review.createdAt|date }}">
+                                                                {% endblock %}
+
+                                                                {% block page_product_detail_review_item_meta_title %}
+                                                                    <meta itemprop="name" content="{{ review.title }}">
+                                                                {% endblock %}
+
+                                                                {% block page_product_detail_review_item_meta_author %}
+                                                                    <div itemprop="author"
+                                                                         itemtype="https://schema.org/Person" itemscope>
+                                                                        <meta itemprop="name"
+                                                                              content="{{ review.externalUser }}"/>
+                                                                    </div>
+                                                                {% endblock %}
+
+                                                                {% block page_product_detail_review_item_info %}
+                                                                    <div class="row product-detail-review-item-info">
+
+                                                                        {% block page_product_detail_review_item_info_date %}
+                                                                            <div class="col-12 product-detail-review-item-date">
+                                                                                <p>
+                                                                                    <small>{{ review.createdAt|date("d.m.Y") }}</small>
+                                                                                </p>
+                                                                            </div>
+                                                                        {% endblock %}
+
+                                                                        {% block page_product_detail_review_item_info_points %}
+                                                                            <div class="col-md-auto product-detail-review-item-points">
+                                                                                <p>{{ review.externalUser }}</p>
+                                                                                {% sw_include '@Storefront/storefront/component/review/rating.html.twig' with {
+                                                                                    points: review.points
+                                                                                } %}
+                                                                            </div>
+                                                                        {% endblock %}
+
+                                                                        {% block page_product_detail_review_item_title %}
+                                                                            <div class="col-md-auto product-detail-review-item-title">
+                                                                                <p class="h5">
+                                                                                    {{ review.title|striptags|sw_sanitize }}
+                                                                                </p>
+                                                                            </div>
+                                                                        {% endblock %}
+
+                                                                        {% block page_product_detail_review_item_info_verify %}
+                                                                            <div class="col product-detail-review-item-verify">
+                                                                                {% if reviewVerifcation == 1 %}
+                                                                                    <a data-bs-toggle="tooltip"
+                                                                                       data-placement="bottom"
+                                                                                       title="{{ "detail.reviewVerifiedItemTooltip"|trans|striptags }}">
+                                                                                        {% sw_icon 'checkmark-circle' style {
+                                                                                            'color': 'primary',
+                                                                                            'size': 'sm'
+                                                                                        } %}
+                                                                                    </a>
+                                                                                {% endif %}
+                                                                            </div>
+                                                                        {% endblock %}
+                                                                    </div>
+                                                                {% endblock %}
+
+                                                                {% block page_product_detail_review_item_content %}
+                                                                    <p class="product-detail-review-item-content"
+                                                                       itemprop="description">
+                                                                        {{ review.content|sw_sanitize }}
+                                                                    </p>
+                                                                {% endblock %}
+
+                                                                {% block page_product_detail_review_item_comment %}
+                                                                    {% if review.comment %}
+                                                                        <div class="product-detail-review-item-comment">
+                                                                            <blockquote class="blockquote">
+                                                                                <footer class="blockquote-footer">
+                                                                                    {{ "detail.reviewCommentLabel"|trans|sw_sanitize }}{{ review.comment }}
+                                                                                </footer>
+                                                                            </blockquote>
+                                                                        </div>
+                                                                    {% endif %}
+                                                                {% endblock %}
+                                                            </div>
                                                         </div>
+
+
+
                                                     {% endfor %}
                                                 {% endblock %}
 

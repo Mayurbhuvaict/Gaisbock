@@ -29,7 +29,6 @@ export default class gaisbockAddRemoveClass extends Plugin {
         const mainNavClass = document.querySelector('.hovered');
         document.addEventListener('DOMContentLoaded', function() {
             closeBotton.addEventListener('click',function() {
-                console.log('hellooooo');
                 mainNavClass.classList.remove('hovered');
             });
         });
