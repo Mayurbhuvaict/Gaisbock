@@ -13,6 +13,7 @@ export default class gaisbockAddmoreSection extends Plugin {
         if(toggleButton !== null) {
             toggleButton.forEach((button) => {
                 const id = button.getAttribute("data-diffrent");
+                console.log(id);
                 var textDiv = document.getElementById("gaisbock-addmore-section-"+id);
                 button.addEventListener("click", function () {
                     if (language === "de-DE") {

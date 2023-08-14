@@ -42,6 +42,7 @@
         <service id="Gaisbock\Storefront\Page\gaisbockCategoryNavigationSubscriber">
             <argument type="service" id="category.repository"/>
             <argument type="service" id="media.repository"/>
+            <argument type="service" id="product.repository"/>
             <tag name="kernel.event_subscriber"/>
         </service>
         <!--  subscriber  -->

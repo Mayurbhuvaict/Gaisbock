@@ -1,35 +1,35 @@
 {% sw_extends '@Storefront/storefront/component/review/review.html.twig' %}
 
 {% block utilities_offcanvas_content %}
-	{% block component_review_container %}
-		{% set reviewsPerListPage = 10 %}
+    {% block component_review_container %}
+        {% set reviewsPerListPage = 10 %}
 
-		{% set currentListPage = reviews.page + 1 %}
+        {% set currentListPage = reviews.page + 1 %}
 
-		{% set productReviewCount = reviews.totalReviews %}
+        {% set productReviewCount = reviews.totalReviews %}
 
-		{% if productReviewCount > 0 %}
-            {% set productAvgRating = reviews.matrix.averageRating|round(2, 'common')  %}
-		{% endif %}
+        {% if productReviewCount > 0 %}
+            {% set productAvgRating = reviews.matrix.averageRating|round(2, 'common') %}
+        {% endif %}
 
-		{% set foreignReviewsCount = 150 %}
+        {% set foreignReviewsCount = 150 %}
 
-		{% set ratingSuccess = element.data.ratingSuccess %}
+        {% set ratingSuccess = element.data.ratingSuccess %}
 
-		<div class="product-detail-review tab-pane-container">
-			{% block component_review_tab_pane %}
-					{% block component_review_aside %}
-						<div class="col-sm-4">
-							{% block component_review_widget_container %}
-								{% sw_include '@Storefront/storefront/component/review/review-widget.html.twig' %}
-							{% endblock %}
-						</div>
-					{% endblock %}
+        <div class="product-detail-review tab-pane-container">
+            {% block component_review_tab_pane %}
+                {% block component_review_aside %}
+                    <div class="col-sm-4">
+                        {% block component_review_widget_container %}
+                            {% sw_include '@Storefront/storefront/component/review/review-widget.html.twig' %}
+                        {% endblock %}
+                    </div>
+                {% endblock %}
 
-					{% block component_review_main %}
+                {% block component_review_main %}
 
-					{% endblock %}
-			{% endblock %}
-		</div>
-	{% endblock %}
+                {% endblock %}
+            {% endblock %}
+        </div>
+    {% endblock %}
 {% endblock %}
