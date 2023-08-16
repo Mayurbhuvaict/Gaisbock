@@ -21,33 +21,20 @@
                 <div class="row g-2 buy-widget-container">
                     {% block page_product_detail_buy_quantity_container %}
                         {% if showQuantitySelect %}
-                            <div class="col-4 d-flex justify-content-end">
+
                                 {% set selectQuantityThreshold = 100 %}
                                 {% block page_product_detail_buy_quantity %}
                                     {% block page_product_detail_buy_quantity_input_group %}
-                                        <div class="input-group product-detail-quantity-group quantity-selector-group">
+
                                             {% block page_product_detail_buy_quantity_input %}
                                                 <input
-                                                    type="number"
+                                                    type="hidden"
                                                     name="lineItems[{{ product.id }}][quantity]"
                                                     value="1"
                                                 />
                                             {% endblock %}
-                                            {% block page_product_detail_buy_quantity_input_unit %}
-                                                {% if product.translated.packUnit %}
-                                                    <span class="input-group-text">
-                                                        {% if product.minPurchase > 1 and product.translated.packUnitPlural %}
-                                                            {{ product.translated.packUnitPlural }}
-                                                        {% elseif product.translated.packUnit %}
-                                                            {{ product.translated.packUnit }}
-                                                        {% endif %}
-                                                    </span>
-                                                {% endif %}
-                                            {% endblock %}
-                                        </div>
                                     {% endblock %}
                                 {% endblock %}
-                            </div>
                         {% endif %}
                     {% endblock %}
 

@@ -46,5 +46,10 @@
     "shipping": "VERSAND",
     "ratings": "bewertungen",
     "viewRatings": "Bewertungen anschauen"
+  },
+  "account": {
+    "header": {
+      "name": "Registrierte Kunden"
+    }
   }
 }

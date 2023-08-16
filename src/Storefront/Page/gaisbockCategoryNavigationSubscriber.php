@@ -199,7 +199,11 @@ class gaisbockCategoryNavigationSubscriber implements EventSubscriberInterface
         $criteria->addFilter(new EqualsFilter('id',$getProductId));
         $criteria->addAssociation('configuratorSettings');
         $criteria->addAssociation('configuratorSettings.option');
-        return $this->salesChannelProductRepository->search($criteria,$context)->first()->getProductNumber();
+        if ($this->salesChannelProductRepository->search($criteria,$context)->first()) {
+            return $this->salesChannelProductRepository->search($criteria, $context)->first()->getProductNumber();
+        }else{
+            return null;
+        }
     }
 
     private function findMedia($mediaId, $context)
