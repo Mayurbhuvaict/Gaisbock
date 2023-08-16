@@ -1,6 +1,27 @@
-{% sw_extends '@Storefront/storefront/page/product-detail/tabs.html.twig' %}
 {% block page_product_detail_tabs_inner %}
     <div class="card card-tabs">
-        {% sw_include '@Storefront/storefront/page/product-detail/review/review.html.twig' with {'reviews': page.reviews} %}
+        {% block page_product_detail_tabs_navigation %}
+
+        {% endblock %}
+
+        {% block page_product_detail_tabs_content %}
+            <div class="product-detail-tabs-content card-body">
+                {% block page_product_detail_tabs_content_container %}
+                    <div class="tab-content">
+                        {% block page_product_detail_tabs_content_description %}
+
+                        {% endblock %}
+
+                        {% block page_product_detail_tabs_content_review %}
+                            {% if config('core.listing.showReview') %}
+
+                                    {% sw_include '@Storefront/storefront/page/product-detail/review/review.html.twig' with {'reviews': page.reviews} %}
+
+                            {% endif %}
+                        {% endblock %}
+                    </div>
+                {% endblock %}
+            </div>
+        {% endblock %}
     </div>
 {% endblock %}
