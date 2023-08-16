@@ -1,0 +1,29 @@
+.gallery-slider-container {
+    .gallery-slider-item {
+        position: relative;
+        padding-top: 100%;
+        display: block;
+        min-height: auto !important;
+    }
+    .gallery-slider-image {
+        width: 100%;
+        object-fit: cover !important;
+    }
+}
+.cms-block-gallery-buybox {
+    .base-slider-dots {
+        display: flex;
+        justify-content: center;
+        position: static;
+        transform: revert;
+        margin: 15px 0;
+        .base-slider-dot {
+            margin: 0 6px;
+            padding: 4px;
+            background-color: #E8E8E8;
+        }
+        .tns-nav-active {
+            background-color: $sw-color-brand-secondary !important;
+        }
+    }
+}
