@@ -182,6 +182,7 @@
             {% block buy_widget_delivery_informations %}
                 <div class="product-detail-delivery-information">
                     {% sw_include '@Storefront/storefront/component/delivery-information.html.twig' %}
+
                     {% block buy_widget_ordernumber_label %}
                         <span class="product-detail-ordernumber-label">
                             {{ "detail.productNumberLabel"|trans|sw_sanitize }}
