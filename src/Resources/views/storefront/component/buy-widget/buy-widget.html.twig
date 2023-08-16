@@ -174,11 +174,7 @@
 
         {% if config('core.cart.wishlistEnabled') %}
             {% block buy_widget_wishlist %}
-                {% sw_include '@Storefront/storefront/component/product/card/wishlist.html.twig' with {
-                    showText: true,
-                    size: 'md',
-                    productId: product.id
-                } %}
+
             {% endblock %}
         {% endif %}
 
