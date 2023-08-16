@@ -138,8 +138,6 @@
                         selector: "#review-tab",
                         scrollToElement: true
                     } %}
-
-
                 {% endblock %}
 
                 {% block page_product_detail_configurator_include %}
@@ -163,11 +161,6 @@
 
         {% if config('core.cart.wishlistEnabled') %}
             {% block page_product_detail_wishlist %}
-                {% sw_include '@Storefront/storefront/component/product/card/wishlist.html.twig' with {
-                    showText: true,
-                    size: 'md',
-                    productId: page.product.id
-                } %}
             {% endblock %}
         {% endif %}
 
@@ -175,10 +168,6 @@
             {% block page_product_detail_delivery_informations %}
                 <div class="product-detail-delivery-information">
                     {% sw_include '@Storefront/storefront/component/delivery-information.html.twig' %}
-                </div>
-            {% endblock %}
-            {% if page.product.productNumber %}
-                <div class="product-detail-ordernumber-container">
                     {% block page_product_detail_ordernumber_label %}
                         <span class="product-detail-ordernumber-label">
                             {{ "detail.productNumberLabel"|trans|sw_sanitize }}
@@ -190,9 +179,18 @@
                               content="{{ page.product.id }}"/>
                         <span class="product-detail-ordernumber"
                               itemprop="sku">
-                            {{ page.extensions.products.productNumber }}
+                            {% if page.extensions.products.productNumber %}
+                                {{ page.extensions.products.productNumber }}
+                            {% else %}
+                                {{ page.product.productNumber }}
+                            {% endif %}
                         </span>
                     {% endblock %}
+                </div>
+            {% endblock %}
+            {% if page.product.productNumber %}
+                <div class="product-detail-ordernumber-container">
+
                 </div>
             {% endif %}
         {% endblock %}
