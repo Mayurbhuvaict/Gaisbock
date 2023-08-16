@@ -190,7 +190,7 @@
                               content="{{ page.product.id }}"/>
                         <span class="product-detail-ordernumber"
                               itemprop="sku">
-                            {{ page.product.productNumber }}
+                            {{ page.extensions.products.productNumber }}
                         </span>
                     {% endblock %}
                 </div>
@@ -270,7 +270,7 @@
                                 <span type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo"
                                       aria-expanded="true" aria-controls="collapseTwo">
                                     {{ "productDetailPage.benefits"|trans|sw_sanitize }}
-                                    {% sw_icon 'gaisbock-image-text-middle' style {'pack': 'gaisbock','class':'gaisbock-extra-detail'} %}
+                                    {% sw_icon 'gaisbock-chevron-down' style {'pack': 'gaisbock','class':'gaisbock-extra-detail'} %}
                                 </span>
                             </h3>
                         </div>
@@ -295,7 +295,7 @@
                                 <span type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree"
                                       aria-expanded="true" aria-controls="collapseThree">
                                     {{ "productDetailPage.effect"|trans|sw_sanitize }}
-                                    {% sw_icon 'gaisbock-image-text-middle' style {'pack': 'gaisbock','class':'gaisbock-extra-detail'} %}
+                                    {% sw_icon 'gaisbock-chevron-down' style {'pack': 'gaisbock','class':'gaisbock-extra-detail'} %}
                                 </span>
                             </h3>
                         </div>
@@ -320,7 +320,7 @@
                                 <span type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour"
                                       aria-expanded="true" aria-controls="collapseFour">
                                     {{ "productDetailPage.application"|trans|sw_sanitize }}
-                                    {% sw_icon 'gaisbock-image-text-middle' style {'pack': 'gaisbock','class':'gaisbock-extra-detail'} %}
+                                    {% sw_icon 'gaisbock-chevron-down' style {'pack': 'gaisbock','class':'gaisbock-extra-detail'} %}
                                 </span>
                             </h3>
                         </div>
@@ -345,7 +345,7 @@
                                 <span type="button" data-bs-toggle="collapse" data-bs-target="#collapseFive"
                                       aria-expanded="true" aria-controls="collapseFive">
                                     {{ "productDetailPage.integral"|trans|sw_sanitize }}
-                                    {% sw_icon 'gaisbock-image-text-middle' style {'pack': 'gaisbock','class':'gaisbock-extra-detail'} %}
+                                    {% sw_icon 'gaisbock-chevron-down' style {'pack': 'gaisbock','class':'gaisbock-extra-detail'} %}
                                 </span>
                             </h3>
                         </div>
@@ -370,7 +370,7 @@
                                 <span type="button" data-bs-toggle="collapse" data-bs-target="#collapseSix"
                                       aria-expanded="true" aria-controls="collapseSix">
                                     {{ "productDetailPage.shipping"|trans|sw_sanitize }}
-                                    {% sw_icon 'gaisbock-image-text-middle' style {'pack': 'gaisbock','class':'gaisbock-extra-detail'} %}
+                                    {% sw_icon 'gaisbock-chevron-down' style {'pack': 'gaisbock','class':'gaisbock-extra-detail'} %}
                                 </span>
                             </h3>
                         </div>

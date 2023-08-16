@@ -8,6 +8,7 @@
         {% block page_product_detail_configurator_form %}
             {% block page_product_detail_configurator_option_radio_label_text %}
                 {% for variantProducts in page.extensions.products.variants %}
+                    <hr>
                     <a href="{{ seoUrl('frontend.detail.page', { 'productId': variantProducts.id }) }}"
                        title="{{ variantProducts.translated.name }}">
                         <input type="radio"
@@ -19,12 +20,118 @@
 
                         <label class=""
                                title="{{ variantProducts.translated.name }}"
-                               for="{{ parentId.id  }}">
-
-                            {{ variantProducts.translated.name }}
-
+                               for="{{ parentId.id }}">
+                            {% set varinatName = variantProducts.options|first %}
+                            {{ variantProducts.translated.name }} {{ varinatName.translated.name }}
                         </label>
                     </a>
+                    <div class="gaisbock-price-view-section">
+                        {% set price = variantProducts.calculatedPrice %}
+
+                        {% if variantProducts.calculatedPrices|length == 1 %}
+                            {% set price = variantProducts.calculatedPrices.first %}
+                        {% endif %}
+
+                        <meta itemprop="price"
+                              content="{{ price.unitPrice }}">
+
+                        {% block page_product_detail_price_content %}
+                            {% set listPrice = price.listPrice %}
+                            {% set isListPrice = listPrice.percentage > 0 %}
+                            {% set isRegulationPrice = price.regulationPrice != null %}
+
+                            <p class="product-detail-price{% if isListPrice %} with-list-price{% endif %}{% if isRegulationPrice %} with-regulation-price{% endif %}">
+                                {{ price.unitPrice|currency }}{{ "general.star"|trans|sw_sanitize }}
+                            </p>
+
+                            {% if isListPrice %}
+                                {% block page_product_detail_was_price %}
+
+                                    {% block page_product_detail_was_price_badge %}
+                                        <span class="list-price-badge">&#37;</span>
+                                    {% endblock %}
+
+                                    {% set afterListPriceSnippetExists = "listing.afterListPrice"|trans|length > 0 %}
+                                    {% set beforeListPriceSnippetExists = "listing.beforeListPrice"|trans|length > 0 %}
+
+                                    {% block page_product_detail_was_price_wrapper %}
+                                        <span class="product-detail-list-price-wrapper">
+                        {% if beforeListPriceSnippetExists %}{{ "listing.beforeListPrice"|trans|trim }}{% endif %}
+
+                        <span{% if not (afterListPriceSnippetExists or beforeListPriceSnippetExists) %} class="list-price-price"{% endif %}>{{ listPrice.price|currency }}{{ "general.star"|trans|sw_sanitize }}</span>
+
+                        {% if afterListPriceSnippetExists %}
+                            {{ "listing.afterListPrice"|trans|trim }}
+                        {% endif %}
+
+                            <span class="list-price-percentage">{{ "detail.listPricePercentage"|trans({'%price%': listPrice.percentage })|sw_sanitize }}</span>
+                        </span>
+                                    {% endblock %}
+                                {% endblock %}
+                            {% endif %}
+                            {% if isRegulationPrice %}
+                                <span class="product-detail-list-price-wrapper">
+                                <span class="regulation-price">{{ "general.listPricePreviously"|trans({'%price%': price.regulationPrice.price|currency }) }}{{ "general.star"|trans|sw_sanitize }}</span>
+                            </span>
+                            {% endif %}
+                        {% endblock %}
+                    </div>
+                    <div class="gaisbock-variant-selection-price-number">
+                        <meta itemprop="productID"
+                              content="{{ variantProducts.id }}"/>
+                        <span class="gaisbock-variant-product-detail-ordernumber-label">
+                            {{ "detail.productNumberLabel"|trans|sw_sanitize }}
+                        </span>
+                        <span class="gaisbock-variant-product-detail-ordernumber"
+                              itemprop="sku">
+                            {{ variantProducts.productNumber }}
+                        </span>
+                    </div>
+                    <div class="gaisbock-variant-selection-images">
+                        {% for key,variantImage in page.extensions.products.VariantImage %}
+                            {% if key == variantProducts.id %}
+                                {% if variantImage.1.image %}
+                                    <img src="{{ variantImage.1.image.url }}" alt="">
+                                    <p class="gaisbock-product-image-text">{{ variantImage.1.text }}</p>
+                                {% endif %}
+                                {% if variantImage.2.image %}
+                                    {% sw_icon 'gaisbock-plus' style {'pack': 'gaisbock','class':'gaisbock-image-text-middle'} %}
+                                    <img src="{{ variantImage.2.image.url }}" alt="">
+                                    <p class="gaisbock-product-image-text">{{ variantImage.2.text }}</p>
+                                {% endif %}
+                                {% if variantImage.3.image %}
+                                    {% sw_icon 'gaisbock-plus' style {'pack': 'gaisbock','class':'gaisbock-image-text-middle'} %}
+                                    <img src="{{ variantImage.3.image.url }}" alt="">
+                                    <p class="gaisbock-product-image-text">{{ variantImage.3.text }}</p>
+                                {% endif %}
+                                {% if variantImage.4.image %}
+                                    {% sw_icon 'gaisbock-plus' style {'pack': 'gaisbock','class':'gaisbock-image-text-middle'} %}
+                                    <img src="{{ variantImage.4.image.url }}" alt="">
+                                    <p class="gaisbock-product-image-text">{{ variantImage.4.text }}</p>
+                                {% endif %}
+                                {% if variantImage.5.image %}
+                                    {% sw_icon 'gaisbock-plus' style {'pack': 'gaisbock','class':'gaisbock-image-text-middle'} %}
+                                    <img src="{{ variantImage.5.image.url }}" alt="">
+                                    <p class="gaisbock-product-image-text">{{ variantImage.5.text }}</p>
+                                {% endif %}
+                                {% if variantImage.6.image %}
+                                    {% sw_icon 'gaisbock-plus' style {'pack': 'gaisbock','class':'gaisbock-image-text-middle'} %}
+                                    <img src="{{ variantImage.6.image.url }}" alt="">
+                                    <p class="gaisbock-product-image-text">{{ variantImage.6.text }}</p>
+                                {% endif %}
+                                {% if variantImage.7.image %}
+                                    {% sw_icon 'gaisbock-plus' style {'pack': 'gaisbock','class':'gaisbock-image-text-middle'} %}
+                                    <img src="{{ variantImage.7.image.url }}" alt="">
+                                    <p class="gaisbock-product-image-text">{{ variantImage.7.text }}</p>
+                                {% endif %}
+                                {% if variantImage.8.image %}
+                                    {% sw_icon 'gaisbock-plus' style {'pack': 'gaisbock','class':'gaisbock-image-text-middle'} %}
+                                    <img src="{{ variantImage.8.image.url }}" alt="">
+                                    <p class="gaisbock-product-image-text">{{ variantImage.8.text }}</p>
+                                {% endif %}
+                            {% endif %}
+                        {% endfor %}
+                    </div>
                 {% endfor %}
             {% endblock %}
             <form data-variant-switch="true" data-variant-switch-options="{{ config|json_encode }}">
@@ -32,70 +139,7 @@
                     {% for group in page.configuratorSettings %}
                         {% block page_product_detail_configurator_group %}
                             <div class="product-detail-configurator-group">
-                                {% if group.displayType == 'select' %}
-                                    {% sw_include '@Storefront/storefront/page/product-detail/configurator/select.html.twig' %}
-                                {% else %}
-                                    {% block page_product_detail_configurator_group_title %}
-                                        <div class="product-detail-configurator-group-title">
-                                            {% block page_product_detail_configurator_group_title_text %}
-                                                {{ group.translated.name }}
-                                            {% endblock %}
-                                        </div>
-                                    {% endblock %}
 
-                                    {% block page_product_detail_configurator_options %}
-                                        <div class="product-detail-configurator-options">
-{#                                            {% for option in group.options %}#}
-
-{#                                                {% set optionIdentifier = [group.id, option.id]|join('-') %}#}
-{#                                                {% set isActive = false %}#}
-{#                                                {% set isCombinableCls = 'is-combinable' %}#}
-
-{#                                                {% if option.id in page.product.optionIds %}#}
-{#                                                    {% set isActive = true %}#}
-{#                                                {% endif %}#}
-
-{#                                                {% if not option.combinable %}#}
-{#                                                    {% set isCombinableCls = false %}#}
-{#                                                {% endif %}#}
-
-{#                                                {% if option.configuratorSetting.media %}#}
-{#                                                    {% set displayType = 'media' %}#}
-{#                                                    {% set media = option.configuratorSetting.media %}#}
-{#                                                {% else %}#}
-{#                                                    {% set displayType = group.displayType %}#}
-{#                                                    {% if option.media %}#}
-{#                                                        {% set media = option.media %}#}
-{#                                                    {% else %}#}
-{#                                                        {% set media = false %}#}
-{#                                                    {% endif %}#}
-{#                                                {% endif %}#}
-
-{#                                                {% block page_product_detail_configurator_option %}#}
-{#                                                    <div class="product-detail-configurator-option">#}
-{#                                                        <input type="radio"#}
-{#                                                               name="{{ group.id }}"#}
-{#                                                               value="{{ option.id }}"#}
-{#                                                               class="product-detail-configurator-option-input{% if isCombinableCls %} {{ isCombinableCls }}{% endif %}"#}
-{#                                                               title="{{ optionIdentifier }}"#}
-{#                                                               id="{{ optionIdentifier }}"#}
-{#                                                               {% if isActive %}checked="checked"{% endif %}>#}
-
-{#                                                        <label class=""#}
-{#                                                               title="{{ option.translated.name }}"#}
-{#                                                               for="{{ optionIdentifier }}">#}
-
-
-{#                                                            #}
-{#                                                        </label>#}
-{#                                                    </div>#}
-{#                                                {% endblock %}#}
-{#                                            {% endfor %}#}
-
-                                        </div>
-
-                                    {% endblock %}
-                                {% endif %}
                             </div>
                         {% endblock %}
                     {% endfor %}
