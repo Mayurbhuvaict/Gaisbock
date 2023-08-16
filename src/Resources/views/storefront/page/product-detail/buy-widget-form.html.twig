@@ -78,9 +78,9 @@
                     {% endblock %}
 
                     {% block page_product_detail_buy_button_container %}
-                        <div class="{% if showQuantitySelect %}col-8{% else %}col-12{% endif %}">
+                        <div class="gaisbock-addToCart-button">
                             {% block page_product_detail_buy_button %}
-                                <div class="d-grid">
+                                <div class="gaisbock-addToCart-button__inner">
                                     <button class="btn btn-primary btn-buy"
                                             title="{{ "detail.addProduct"|trans|striptags }}"
                                             aria-label="{{ "detail.addProduct"|trans|striptags }}">
