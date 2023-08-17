@@ -58,6 +58,7 @@
             {% endblock %}
         {% endblock %}
         {% block gaisbock_product_name %}
+        <div class="product-main-title d-flex align-items-center justify-content-between">
             <h1 class="product-detail-name"
                 itemprop="name">
                 {{ page.product.translated.name }}
@@ -69,6 +70,7 @@
                     productId: product.id
                 } %}
             {% endif %}
+            </div>
         {% endblock %}
         {% block buy_widget_reviews %}
             {% if product.ratingAverage > 0 and totalReviews > 0 and config('core.listing.showReview') %}
@@ -423,7 +425,7 @@
             {% endif %}
 
         {% endblock %}
-
+<div class="accordian-review">
         {% for review in section.blocks.elements %}
             {% if review.type == "product-description-reviews" %}
                 {% set element = review.slots.getSlot('content') %}
@@ -446,6 +448,6 @@
                 {% endif %}
             {% endif %}
         {% endfor %}
-
+        </div>
     </div>
 {% endblock %}
