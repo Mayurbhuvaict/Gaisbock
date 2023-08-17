@@ -1,3 +1,18 @@
+.accordian-review {
+    @media(min-width:768px){
+        display: none;
+    }
+    .offcanvas-body .product-detail-review {
+        @media(max-width:767px){
+            display: block;
+        }
+    }
+}
+.offcanvas-body .product-detail-review {
+    @media(max-width:767px){
+        display: none;
+    }
+}
 .product-detail-tabs {
     .product-detail-review {
         margin-top: 35px;
@@ -172,6 +187,11 @@
 .product-detail-buy {
     padding-left: 65px;
     max-width: 600px;
+    @media(max-width:992px) {
+        padding-left: 20px;
+        max-width: 100%;
+        margin-top: 25px;
+    }
     .product-detail-name {
         font-size: 47px;
         line-height: 55px;
@@ -216,6 +236,7 @@
         letter-spacing: 1.4px;
         line-height: 27px;
         font-weight: 700;
+        color:$sw-color-brand-secondary;
     }
     .gaisbock-product-description {
         margin-top: 10px;
@@ -302,6 +323,27 @@
         }
         &:last-child {
             border-bottom: 1px solid #707070;
+        }
+    }
+    .gaisbock-description-contain-title-description {
+        display: flex;
+        flex-wrap: wrap;
+        margin: 10px 0;
+        .gasibook-variant-img {
+            img {
+                height: 100px;
+                object-fit: contain;
+            }
+        }
+        .icon {
+            margin: 0 18px;
+        }
+        .gaisbock-product-image-text {
+            font-size: 12px;
+            line-height: 15px;
+            letter-spacing: 0.12px;
+            margin-top: 5px;
+            text-align: center;
         }
     }
 }
