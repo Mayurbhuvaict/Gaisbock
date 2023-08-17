@@ -29,12 +29,13 @@
                                 style: 'text-primary'
                             } %}
 
-                            {% if productReviewCount > 0 %}
+                            
+                        </div>
+                        {% if productReviewCount > 0 %}
                                 <p class="h6">
                                     {{ productAvgRating }} / {{ reviews.matrix.maxPoints }}
                                 </p>
                             {% endif %}
-                        </div>
                     {% endblock %}
                 </div>
             {% endblock %}
