@@ -91,43 +91,58 @@
                         {% for key,variantImage in page.extensions.products.VariantImage %}
                             {% if key == variantProducts.id %}
                                 {% if variantImage.1.image %}
+                                <div class="gasibook-variant-img">
                                     <img src="{{ variantImage.1.image.url }}" alt="">
                                     <p class="gaisbock-product-image-text">{{ variantImage.1.text }}</p>
                                 {% endif %}
                                 {% if variantImage.2.image %}
+                                <div class="gasibook-variant-img">
                                     {% sw_icon 'gaisbock-plus' style {'pack': 'gaisbock','class':'gaisbock-image-text-middle'} %}
                                     <img src="{{ variantImage.2.image.url }}" alt="">
                                     <p class="gaisbock-product-image-text">{{ variantImage.2.text }}</p>
+                                </div>
                                 {% endif %}
                                 {% if variantImage.3.image %}
+                                <div class="gasibook-variant-img">
                                     {% sw_icon 'gaisbock-plus' style {'pack': 'gaisbock','class':'gaisbock-image-text-middle'} %}
                                     <img src="{{ variantImage.3.image.url }}" alt="">
                                     <p class="gaisbock-product-image-text">{{ variantImage.3.text }}</p>
+                                    </div>
                                 {% endif %}
                                 {% if variantImage.4.image %}
+                                <div class="gasibook-variant-img">
                                     {% sw_icon 'gaisbock-plus' style {'pack': 'gaisbock','class':'gaisbock-image-text-middle'} %}
                                     <img src="{{ variantImage.4.image.url }}" alt="">
                                     <p class="gaisbock-product-image-text">{{ variantImage.4.text }}</p>
+                                    </div>
                                 {% endif %}
                                 {% if variantImage.5.image %}
+                                <div class="gasibook-variant-img">
                                     {% sw_icon 'gaisbock-plus' style {'pack': 'gaisbock','class':'gaisbock-image-text-middle'} %}
                                     <img src="{{ variantImage.5.image.url }}" alt="">
                                     <p class="gaisbock-product-image-text">{{ variantImage.5.text }}</p>
+                                    </div>
                                 {% endif %}
                                 {% if variantImage.6.image %}
+                                <div class="gasibook-variant-img">
                                     {% sw_icon 'gaisbock-plus' style {'pack': 'gaisbock','class':'gaisbock-image-text-middle'} %}
                                     <img src="{{ variantImage.6.image.url }}" alt="">
                                     <p class="gaisbock-product-image-text">{{ variantImage.6.text }}</p>
+                                    </div>
                                 {% endif %}
                                 {% if variantImage.7.image %}
+                                <div class="gasibook-variant-img">
                                     {% sw_icon 'gaisbock-plus' style {'pack': 'gaisbock','class':'gaisbock-image-text-middle'} %}
                                     <img src="{{ variantImage.7.image.url }}" alt="">
                                     <p class="gaisbock-product-image-text">{{ variantImage.7.text }}</p>
+                                    </div>
                                 {% endif %}
                                 {% if variantImage.8.image %}
+                                <div class="gasibook-variant-img">
                                     {% sw_icon 'gaisbock-plus' style {'pack': 'gaisbock','class':'gaisbock-image-text-middle'} %}
                                     <img src="{{ variantImage.8.image.url }}" alt="">
                                     <p class="gaisbock-product-image-text">{{ variantImage.8.text }}</p>
+                                    </div>
                                 {% endif %}
                             {% endif %}
                         {% endfor %}
