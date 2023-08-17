@@ -49,7 +49,8 @@
   },
   "account": {
     "header": {
-      "name": "Registered Customers"
+      "name": "Registered Customers",
+      "customerGroup": "Partner werden<br> ipsum dolor sit ametin"
     }
   }
 }

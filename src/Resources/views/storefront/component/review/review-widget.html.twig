@@ -93,7 +93,7 @@
                                         {% endblock %}
 
                                         {% block component_review_filter_progressbar %}
-                                            <div class="col d-none d-lg-block product-detail-review-progressbar-col">
+                                            <div class="col d-lg-block product-detail-review-progressbar-col">
                                                 <div class="progress product-detail-review-progressbar-container">
                                                     <div class="progress-bar product-detail-review-progressbar-bar"
                                                          role="progressbar"
@@ -171,7 +171,7 @@
               action="{{ path('frontend.detail.review.save', { productId: reviews.productId }) }}"
               method="post"
               data-form-validation="true"
-              data-form-ajax-submit="true">
+              data-form-ajax-submit="true" data-refresh-page>
 
             {% block component_review_form_forward %}
                 <input type="hidden"
@@ -314,7 +314,7 @@
 
                         {% block component_review_form_submit %}
                             <button type="submit"
-                                    class="btn btn-primary btn-review-submit">
+                                    class="btn btn-primary btn-review-submit" id="gaisbock-submit">
                                 {{ "detail.reviewFormSubmitText"|trans|sw_sanitize }}
                             </button>
                         {% endblock %}
@@ -376,7 +376,6 @@
 
                                             {% block component_review_overview1 %}
 
-
                                                 {% if productReviewCount > 0 %}
                                                     <p class="h6">
                                                         {{ productAvgRating }} / {{ reviews.matrix.maxPoints }}
@@ -435,7 +434,7 @@
                                                                         {% endblock %}
 
                                                                         {% block component_review_filter_progressbar1 %}
-                                                                            <div class="col d-none d-lg-block product-detail-review-progressbar-col">
+                                                                            <div class="col d-lg-block product-detail-review-progressbar-col">
                                                                                 <div class="progress product-detail-review-progressbar-container">
                                                                                     <div class="progress-bar product-detail-review-progressbar-bar"
                                                                                          role="progressbar"
