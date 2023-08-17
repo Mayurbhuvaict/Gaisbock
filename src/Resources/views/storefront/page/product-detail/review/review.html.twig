@@ -18,10 +18,10 @@
         {# TODO NEXT-16994 - replace language flag #}
         {% set foreignReviewsCount = 150 %}
 
-        <div class="product-detail-review tab-pane-container">
+        <div class="product-detail-review">
             {% block page_product_detail_review_tab_pane %}
                 {% block page_product_detail_review_aside %}
-                    <div class="col-sm-4">
+                    <div class="col-sm-6">
                         {% block page_product_detail_review_widget_container %}
                             {% sw_include '@Storefront/storefront/page/product-detail/review/review-widget.html.twig' %}
                         {% endblock %}

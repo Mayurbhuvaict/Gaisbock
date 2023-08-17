@@ -58,10 +58,19 @@
             {% endblock %}
         {% endblock %}
         {% block gaisbock_product_name %}
-            <h1 class="product-detail-name"
-                itemprop="name">
-                {{ page.product.translated.name }}
-            </h1>
+            <div class="product-main-title d-flex align-items-center justify-content-between">
+                <h1 class="product-detail-name"
+                    itemprop="name">
+                    {{ page.product.translated.name }}
+                </h1>
+                {% if config('core.cart.wishlistEnabled') %}
+                    {% sw_include '@Storefront/storefront/component/product/card/wishlist.html.twig' with {
+                        showText: false,
+                        size: 'md',
+                        productId: page.product.id
+                    } %}
+                {% endif %}
+            </div>
         {% endblock %}
         {% block page_product_detail_reviews %}
             {% if page.product.ratingAverage > 0 and page.reviews.totalReviews > 0 and config('core.listing.showReview') %}
@@ -202,7 +211,8 @@
                         <div class="h3 gaisbock-title-tab gaisbock-description-contain-title accordion-header"
                              id="headingOne">
                             <h3 class="accordion-header" id="headingOne">
-                                <span class="gaisbock-accordion collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne"
+                                <span class="gaisbock-accordion collapsed" type="button" data-bs-toggle="collapse"
+                                      data-bs-target="#collapseOne"
                                       aria-expanded="true" aria-controls="collapseTwo">
                                     {{ "productDetailPage.contents"|trans|sw_sanitize }}
                                     {% sw_icon 'gaisbock-chevron-down' style {'pack': 'gaisbock','class':'gaisbock-extra-detail'} %}
@@ -265,7 +275,8 @@
                         <div class="h3 gaisbock-title-tab gaisbock-description-contain-title accordion-header"
                              id="headingTwo">
                             <h3 class="accordion-header" id="headingTwo">
-                                <span class="gaisbock-accordion collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo"
+                                <span class="gaisbock-accordion collapsed" type="button" data-bs-toggle="collapse"
+                                      data-bs-target="#collapseTwo"
                                       aria-expanded="true" aria-controls="collapseTwo">
                                     {{ "productDetailPage.benefits"|trans|sw_sanitize }}
                                     {% sw_icon 'gaisbock-chevron-down' style {'pack': 'gaisbock','class':'gaisbock-extra-detail'} %}
@@ -290,7 +301,8 @@
                         <div class="h3 gaisbock-title-tab gaisbock-description-contain-title accordion-header"
                              id="headingThree">
                             <h3 class="accordion-header" id="headingThree">
-                                <span class="gaisbock-accordion collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree"
+                                <span class="gaisbock-accordion collapsed" type="button" data-bs-toggle="collapse"
+                                      data-bs-target="#collapseThree"
                                       aria-expanded="true" aria-controls="collapseThree">
                                     {{ "productDetailPage.effect"|trans|sw_sanitize }}
                                     {% sw_icon 'gaisbock-chevron-down' style {'pack': 'gaisbock','class':'gaisbock-extra-detail'} %}
@@ -315,7 +327,8 @@
                         <div class="h3 gaisbock-title-tab gaisbock-description-contain-title accordion-header"
                              id="headingFour">
                             <h3 class="accordion-header" id="headingFour">
-                                <span class="gaisbock-accordion collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour"
+                                <span class="gaisbock-accordion collapsed" type="button" data-bs-toggle="collapse"
+                                      data-bs-target="#collapseFour"
                                       aria-expanded="true" aria-controls="collapseFour">
                                     {{ "productDetailPage.application"|trans|sw_sanitize }}
                                     {% sw_icon 'gaisbock-chevron-down' style {'pack': 'gaisbock','class':'gaisbock-extra-detail'} %}
@@ -340,7 +353,8 @@
                         <div class="h3 gaisbock-title-tab gaisbock-description-contain-title accordion-header"
                              id="headingFive">
                             <h3 class="accordion-header" id="headingFive">
-                                <span class="gaisbock-accordion collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFive"
+                                <span class="gaisbock-accordion collapsed" type="button" data-bs-toggle="collapse"
+                                      data-bs-target="#collapseFive"
                                       aria-expanded="true" aria-controls="collapseFive">
                                     {{ "productDetailPage.integral"|trans|sw_sanitize }}
                                     {% sw_icon 'gaisbock-chevron-down' style {'pack': 'gaisbock','class':'gaisbock-extra-detail'} %}
@@ -365,7 +379,8 @@
                         <div class="h3 gaisbock-title-tab gaisbock-description-contain-title accordion-header"
                              id="headingSix">
                             <h3 class="accordion-header" id="headingSix">
-                                <span class="gaisbock-accordion collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSix"
+                                <span class="gaisbock-accordion collapsed" type="button" data-bs-toggle="collapse"
+                                      data-bs-target="#collapseSix"
                                       aria-expanded="true" aria-controls="collapseSix">
                                     {{ "productDetailPage.shipping"|trans|sw_sanitize }}
                                     {% sw_icon 'gaisbock-chevron-down' style {'pack': 'gaisbock','class':'gaisbock-extra-detail'} %}
@@ -384,7 +399,13 @@
                     </div>
                 </div>
             {% endif %}
-
         {% endblock %}
+        <div class="accordian-review">
+            <div class="product-detail-tabs">
+                <div class="product-detail-review">
+                    {% sw_include '@Storefront/storefront/page/product-detail/tabs.html.twig' %}
+                </div>
+            </div>
+        </div>
     </div>
 {% endblock %}
