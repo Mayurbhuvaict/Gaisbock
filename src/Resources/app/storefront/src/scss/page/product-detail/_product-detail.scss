@@ -1,6 +1,93 @@
-.accordian-review {
-    @media(min-width:768px){
+.modal {
+    .modal-body {
+        padding: 0 38px;
+    }
+    .gaisbock-customer-review {
+        .product-detail-review-form-rating {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            div#review-form-rating {
+                .product-detail-review-form-star.is-active .icon {
+                    color: $sw-color-brand-secondary;
+                }
+            }
+            > label {
+                font-size: 15px;
+                letter-spacing: 1.2px;
+                font-family: $sw-font-family-base;
+                font-weight: 700;
+                line-height: 18px;
+                margin-left: 0;
+                padding-right: 15px;
+                margin-bottom: 0;
+            }
+            .h6.product-detail-review-form-rating-text {
+                font-size: 15px;
+                letter-spacing: 1.2px;
+                font-family: $sw-font-family-base;
+                font-weight: 700;
+                line-height: 18px;
+                margin-left: 0;
+                padding-right: 15px;
+                margin-bottom: 0;
+            }
+        }
+        .modal-header button {
+            right: 20px;
+            top: 46px;
+            position: absolute;
+        }
+    }
+    .form-group.product-detail-review-form-content label {
         display: none;
+    }
+    .product-detail-review-form-title,
+    .form-group.product-detail-review-form-content {
+        margin: 0;
+        label.form-label {
+            display: none;
+        }
+        input {
+            height: 30px;
+            border-radius: 15px;
+            font-size: 13px;
+            letter-spacing: 0.78px;
+            padding: 0 17px;
+            border-color: #707070;
+            color: $sw-color-brand-secondary;
+        }
+        textarea {
+            border-radius: 15px;
+            margin-top: 16px;
+            border-color: #707070;
+            color: $sw-color-brand-secondary;
+            font-size: 13px;
+            letter-spacing: 0.78px;
+            padding: 0 17px;
+        }
+    }
+    .product-detail-review-form-footer {
+        flex-wrap: wrap;
+        flex-direction: column-reverse;
+        .required-fields {
+            margin-top: 15px;
+            font-size: 12px;
+            letter-spacing: 0.12px;
+            line-height: 15px;
+        }
+    }
+    .product-detail-review-form-actions {
+        margin-left: 0 !important;
+        margin-top: 15px;
+    }
+}
+.accordian-review {
+    border-top: 1px solid #707070;
+    .product-detail-tabs{
+        @media(min-width:768px){
+            display: none;
+        }
     }
     .offcanvas-body .product-detail-review {
         @media(max-width:767px){
@@ -93,6 +180,7 @@
                 background: rgba(0,0,0,0.3);
                 .btn {
                     margin-top: 0;
+                    color: #fff;
                 }
             }
             .modal-dialog {
@@ -204,6 +292,7 @@
         display: flex;
         align-items: center;
         justify-content: space-between;
+        margin-top: 7px;
         .product-detail-price-unit {
             width: 50%;
             text-align: center;
@@ -246,6 +335,11 @@
             font-size: 34px;
             line-height: 42px;
             letter-spacing: 0.17px;
+            @media(max-width:767px) {
+                font-size: 27px;
+                line-height: 30px;
+                letter-spacing: 0.14px;
+            }
         }
     }
     .product-detail-form-container {
@@ -364,4 +458,112 @@
 }
 .modal-open {
     overflow-y: auto !important;
+}
+
+@include media-breakpoint-down(md){  
+    body {
+        .product-detail-buy {
+            margin-top: 0;
+        }
+        .product-main-title .product-wishlist {
+            display: none;
+        }
+        .product-main-title h1.product-detail-name {
+            width: 100%;
+            text-align: center;
+        }
+        .gallery-slider-row {
+            margin-bottom: 0;
+        }
+        .product-detail-buy .product-detail-name {
+            font-size: 42px;
+            line-height: 46px;
+            letter-spacing: 2.94px;
+        }
+        .product-detail-buy .product-detail-reviews {
+            flex-wrap: wrap;
+        }
+        .product-detail-buy .product-detail-reviews .product-review-rating {
+            padding-right: 0;
+            margin-right: 0;
+        }
+        .product-detail-buy .product-detail-reviews a.product-detail-reviews-link {
+            width: 100%;
+            font-size: 11px;
+            letter-spacing: 0.33px;
+            line-height: 16px;
+            text-decoration: underline;
+        }
+        .product-detail-buy .product-detail-reviews .product-review-rating .icon {
+            width: 12px;
+            height: 12px;
+        }
+        .product-detail-buy .product-detail-price-container {
+            flex-wrap: wrap;
+            justify-content: end;
+            margin-top: -42px;
+            flex-wrap: wrap;
+        }
+        .product-detail-buy .product-detail-price-container .product-detail-price-unit {
+            width: 100%;
+            text-align: right;
+        }
+        .product-detail-buy .product-detail-price {
+            font-size: 17px;
+            letter-spacing: 1.19px;
+            line-height: 22px;
+        }
+        .product-detail-buy .product-detail-price-container .product-detail-price-unit .price-unit-label {
+            font-size: 16px;
+            line-height: 19px;
+        }
+        .product-detail-buy .gaisbock-product-description {
+            line-height: 19px;
+            font-size: 16px;
+            margin-bottom: 20px;
+        }
+        .product-detail-buy .product-detail-form-container .btn {
+            letter-spacing: 0.6px;
+            font-size: 10px;
+            line-height: 22px;
+            height: 23px;
+        }
+        .product-detail-buy .product-detail-delivery-information .product-delivery-information {
+            width: 100%;
+        }
+        .product-detail-buy .accordion .gaisbock-title-tab span {
+            font-size: 14px;
+            letter-spacing: 1.12px;
+        }
+        .product-detail-tabs .product-detail-review {
+            margin-top: 15px;
+        }
+        .accordian-review .offcanvas-body .product-detail-review > div {
+            width: 100%;
+        }
+        .product-detail-tabs .product-detail-review .product-detail-review-rating .product-detail-review-title {
+            line-height: 17px;
+            font-size: 13px;
+            letter-spacing: 0.91px;
+            margin-bottom: 0;
+        }
+        .product-detail-review-rating {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .product-review-rating {
+            margin-right: 0;
+        }
+        .product-detail-tabs .product-detail-review .point-full .icon-review {
+            width: 13px;
+            height: 13px;
+        }
+        .product-detail-tabs .product-detail-review .h6 {
+            font-size: 42px;
+            letter-spacing: 2.94px;
+            line-height: 46px;
+            margin-bottom: 5px;
+        }
+    }
 }
