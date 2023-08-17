@@ -76,6 +76,9 @@
             }
             .modal {
                 background: rgba(0,0,0,0.3);
+                .btn {
+                    margin-top: 0;
+                }
             }
             .modal-dialog {
                 left: 50%;
@@ -168,7 +171,7 @@
 }
 .product-detail-buy {
     padding-left: 65px;
-    max-width: 533px;
+    max-width: 600px;
     .product-detail-name {
         font-size: 47px;
         line-height: 55px;
@@ -225,11 +228,80 @@
         }
     }
     .product-detail-form-container {
+        margin-bottom: 0.5em;
         .btn {
             text-transform: uppercase;
             letter-spacing: 0.78px;
             font-size: 13px;
             line-height: 29px;
+        }
+    }
+    .product-detail-delivery-information {
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap;
+        margin-bottom: 42px;
+        .product-delivery-information {
+            p {
+                font-size: 12px;
+                line-height: 17px;
+                letter-spacing: 0.36px;
+                color: #3AB12B;
+                margin-bottom: 0;
+                padding-right: 30px;
+                font-weight: 600;
+            }
+            .delivery-status-indicator {
+                display: none;
+            }
+        }
+        .product-detail-ordernumber-label,
+        .product-detail-ordernumber {
+            font-size: 12px;
+            letter-spacing: 0.12px;
+            line-height: 15px;
+            font-weight: 600;
+        }
+        .product-detail-ordernumber {
+            padding-left: 2px;
+        }
+    }
+    .accordion {
+        border-top: 1px solid #707070;
+        padding: 0px 0;
+        .gaisbock-title-tab {
+            position: relative;
+            margin-bottom: 0;
+            span {
+                font-size: 15px;
+                letter-spacing: 1.2px;
+                line-height: 18px;
+                font-family: 'Brandon-text';
+                text-transform: uppercase;
+                display: block;
+                height: 100%;
+                padding: 17px 0;
+            }
+            .collapsed {
+                .icon {
+                    position: absolute;
+                    right: 20px;
+                    top: 0px;
+                    color: $sw-color-brand-primary;
+                    width: 14px;
+                    transform: rotate(-90deg);
+                }
+            }
+            .icon {
+                position: absolute;
+                right: 20px;
+                top: 0px;
+                color: $sw-color-brand-primary;
+                width: 14px;
+            }
+        }
+        &:last-child {
+            border-bottom: 1px solid #707070;
         }
     }
 }
