@@ -1,27 +1,37 @@
 {% block page_product_detail_tabs_inner %}
-    <div class="card card-tabs">
-        {% block page_product_detail_tabs_navigation %}
+    {% block page_product_detail_tabs_navigation %}
 
-        {% endblock %}
+    {% endblock %}
 
-        {% block page_product_detail_tabs_content %}
-            <div class="product-detail-tabs-content card-body">
-                {% block page_product_detail_tabs_content_container %}
-                    <div class="tab-content">
-                        {% block page_product_detail_tabs_content_description %}
+    {% block page_product_detail_tabs_content %}
+        {% block page_product_detail_tabs_content_container %}
+            {% block page_product_detail_tabs_content_description %}
 
-                        {% endblock %}
+            {% endblock %}
 
-                        {% block page_product_detail_tabs_content_review %}
-                            {% if config('core.listing.showReview') %}
+            {% block page_product_detail_tabs_content_review %}
+                {% if config('core.listing.showReview') %}
+                    {% set reviews = page.reviews %}
+                    {% set reviewsPerListPage = 10 %}
 
-                                    {% sw_include '@Storefront/storefront/page/product-detail/review/review.html.twig' with {'reviews': page.reviews} %}
+                    {# TODO NEXT-16994 - replace current list page value #}
+                    {% set currentListPage = 1 %}
 
-                            {% endif %}
-                        {% endblock %}
+                    {% set productReviewCount = reviews.totalReviews %}
+
+                    {% if productReviewCount > 0 %}
+                        {% set productAvgRating = reviews.matrix.averageRating|round(2, 'common') %}
+                    {% endif %}
+
+                    {# TODO NEXT-16994 - replace language flag #}
+                    {% set foreignReviewsCount = 150 %}
+                    <div class="product-detail-review product-detail-review-widget">
+                        <div class="col-sm-6">
+                            {% sw_include '@Storefront/storefront/page/product-detail/review/review-widget.html.twig' %}
+                        </div>
                     </div>
-                {% endblock %}
-            </div>
+                {% endif %}
+            {% endblock %}
         {% endblock %}
-    </div>
+    {% endblock %}
 {% endblock %}
