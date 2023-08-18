@@ -18,23 +18,7 @@
 
 {% block base_body %}
 <body class="header-hover {% block base_body_classes %}is-ctl-{% if controllerName is not empty %}{{ controllerName|lower }}{% endif %} is-act-{% if controllerAction is not empty %}{{ controllerAction|lower }}{% endif %}{% endblock %}" data-gaisbock-animation>
-
-{% block base_body_inner %}
-    {% block base_noscript %}
-        <noscript class="noscript-main">
-            {% sw_include '@Storefront/storefront/utilities/alert.html.twig' with {
-                type: 'info',
-                content: 'general.noscriptNotice'|trans|sw_sanitize,
-                iconCache: false
-            } %}
-        </noscript>
-    {% endblock %}
-
-    {% block base_header %}
-        <header class="header-main gaisbock-header-main" id="mainNavigationHover" data-gaisbock-add-remove-class>
-            {% block base_header_inner %}
-                <div class="container" data-flyout-menu>
-                        <div class="gaisbock-sticky-language-switcher">
+<div class="gaisbock-sticky-language-switcher">
                             <form method="post"
                                   action="{{ path('frontend.checkout.switch-language') }}"
                                   class="language-form"
@@ -89,6 +73,22 @@
 
                             </form>
                         </div>
+{% block base_body_inner %}
+    {% block base_noscript %}
+        <noscript class="noscript-main">
+            {% sw_include '@Storefront/storefront/utilities/alert.html.twig' with {
+                type: 'info',
+                content: 'general.noscriptNotice'|trans|sw_sanitize,
+                iconCache: false
+            } %}
+        </noscript>
+    {% endblock %}
+
+    {% block base_header %}
+        <header class="header-main gaisbock-header-main" id="mainNavigationHover" data-gaisbock-add-remove-class>
+            {% block base_header_inner %}
+                <div class="container" data-flyout-menu>
+                        
                     {% sw_include '@Storefront/storefront/layout/header/header.html.twig' %}
                 </div>
             {% endblock %}
