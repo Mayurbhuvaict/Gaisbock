@@ -6,9 +6,15 @@
 
 {% block base_content %}
     {% block page_account_register %}
-        <div class="gasibock-register-page">
-            <h1>{{  "account.header.name"|trans|sw_sanitize }}</h1>
-            {% sw_icon 'register-page-icon' style {'pack': 'gaisbock','class':'gaisbock-register-page-icon'} %}
+        <div class="cms-element-gaisbock-listing-heading-image">
+            <div class="cms-element-gaisbock-text">
+                <h1>{{  "account.header.name"|trans|sw_sanitize }}</h1>
+            </div>
+            <div class="cms-element-gaisbock-listing-image">
+                <div class="cms-image-container is-standard">
+                    {% sw_icon 'register-page-icon' style {'pack': 'gaisbock','class':'gaisbock-register-page-icon'} %}
+                </div>
+            </div>
         </div>
         <div class="account-register">
             {% block page_account_register_inner %}

@@ -1,9 +1,15 @@
 {% sw_extends '@Storefront/storefront/base.html.twig' %}
 
 {% block base_content %}
-    <div class="gasibock-register-page">
-        <h1>{{  "account.header.customerGroup"|trans|sw_sanitize|raw }}</h1>
-        {% sw_icon 'register-page-icon' style {'pack': 'gaisbock','class':'gaisbock-register-page-icon'} %}
+    <div class="cms-element-gaisbock-listing-heading-image">
+        <div class="cms-element-gaisbock-text">
+            <h1>{{  "account.header.customerGroup"|trans|sw_sanitize|raw }}</h1>
+        </div>
+        <div class="cms-element-gaisbock-listing-image">
+            <div class="cms-image-container is-standard">
+                {% sw_icon 'register-page-icon' style {'pack': 'gaisbock','class':'gaisbock-register-page-icon'} %}
+            </div>
+        </div>
     </div>
     {% block page_account_customer_group_register %}
         <div class="account-register">
