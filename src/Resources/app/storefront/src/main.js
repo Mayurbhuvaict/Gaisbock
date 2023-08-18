@@ -6,6 +6,7 @@ import gaisbcksearchbar from './js/gaisbock-searchbar.plugin';
 import gaisbockHeaderHoverAddClass from './js/gaisbock-header-hover-add-class.plugin';
 import gaisbockRefreshPage from './js/gaisbock-refresh-page.plugin';
 import gaisbockMenuButtonClass from './js/gaisbock-menu-button-class.plugin';
+import gaisbockAnimaion from './js/gaisbock-animation.plugin';
 
 const PluginManager = window.PluginManager;
 PluginManager.register('gaisbockAddmoreSection',gaisbockAddmoreSection,'[data-gaisbock-addmore-section]');
@@ -16,3 +17,4 @@ PluginManager.register('gaisbcksearchbar',gaisbcksearchbar,'[data-gaisbock-searc
 PluginManager.override('FlyoutMenu',gaisbockHeaderHoverAddClass,'[data-flyout-menu]');
 PluginManager.register('gaisbockRefreshPage',gaisbockRefreshPage,'[data-refresh-page]');
 PluginManager.override('OffcanvasMenu',gaisbockMenuButtonClass,'[data-offcanvas-menu]');
+PluginManager.register('gaisbockAnimaion',gaisbockAnimaion,'[data-gaisbock-animation]');
