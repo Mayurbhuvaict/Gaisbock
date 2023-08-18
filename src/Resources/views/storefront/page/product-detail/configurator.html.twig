@@ -9,6 +9,7 @@
             {% block page_product_detail_configurator_option_radio_label_text %}
                 {% for variantProducts in page.extensions.products.variants %}
                     <hr>
+                    <div class="gaisbock-variant-header-section d-flex flex-wrap align-items-center">
                     <a href="{{ seoUrl('frontend.detail.page', { 'productId': variantProducts.id }) }}"
                        title="{{ variantProducts.translated.name }}">
                         <input type="radio"
@@ -87,6 +88,7 @@
                             {{ variantProducts.productNumber }}
                         </span>
                     </div>
+                    </div>
                     <div class="gaisbock-variant-selection-images">
                         {% for key,variantImage in page.extensions.products.VariantImage %}
                             {% if key == variantProducts.id %}
@@ -148,6 +150,7 @@
                             {% endif %}
                         {% endfor %}
                     </div>
+                    
                 {% endfor %}
             {% endblock %}
             <form data-variant-switch="true" data-variant-switch-options="{{ config|json_encode }}">

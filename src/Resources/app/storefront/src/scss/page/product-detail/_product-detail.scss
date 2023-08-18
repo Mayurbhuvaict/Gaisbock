@@ -1,3 +1,6 @@
+hr {
+    border-color: #707070;
+}
 .modal {
     .modal-body {
         padding: 0 38px;
@@ -330,7 +333,7 @@
     .gaisbock-product-description {
         margin-top: 10px;
         font-size: 18px;
-        margin-bottom: 50px;
+        margin-bottom: 30px;
         h3 {
             font-size: 34px;
             line-height: 42px;
@@ -440,6 +443,110 @@
             margin-top: 5px;
             text-align: center;
         }
+    }
+    .product-detail-configurator {
+        label {
+            font-size: 15px;
+            letter-spacing: 1.2px;
+            font-weight: 700;
+            text-transform: uppercase;
+            line-height: 18px;
+            @media(max-width:767px) {
+                font-size: 14px;
+                letter-spacing: 1.12px;
+            }
+        }
+        a {
+            display: block;
+            margin-top: 15px;
+            [type="radio"]:checked,
+            [type="radio"]:not(:checked) {
+                position: absolute;
+                left: -9999px;
+            }
+            [type="radio"]:checked + label,
+            [type="radio"]:not(:checked) + label
+            {
+                position: relative;
+                padding-left: 28px;
+                cursor: pointer;
+                display: inline-block;
+                color: $sw-color-brand-primary;
+            }
+            [type="radio"]:checked + label:before,
+            [type="radio"]:not(:checked) + label:before {
+                content: '';
+                position: absolute;
+                left: 0;
+                top: 0;
+                width: 18px;
+                height: 18px;
+                border: 1px solid $sw-color-brand-primary;
+                border-radius: 100%;
+                background: #fff;
+                @media(max-width:767px) {
+                    width: 16px;
+                    height: 16px;
+                }
+            }
+            [type="radio"]:checked + label:after,
+            [type="radio"]:not(:checked) + label:after {
+                content: '';
+                width: 10px;
+                height: 10px;
+                background: $sw-color-brand-secondary;
+                position: absolute;
+                top: 4px;
+                left: 4px;
+                border-radius: 100%;
+                -webkit-transition: all 0.2s ease;
+                transition: all 0.2s ease;
+                @media(max-width:767px) {
+                    width: 8px;
+                    height: 8px;
+                }
+            }
+            [type="radio"]:not(:checked) + label:after {
+                opacity: 0;
+                -webkit-transform: scale(0);
+                transform: scale(0);
+            }
+            [type="radio"]:checked + label:after {
+                opacity: 1;
+                -webkit-transform: scale(1);
+                transform: scale(1);
+            }
+        }
+    }
+    .gaisbock-variant-header-section {
+        margin-bottom: 25px;
+        a {
+            margin-top: 0 !important;
+        }
+        .gaisbock-price-view-section {
+            padding-left: 35px;
+            flex-grow: 1;
+            .product-detail-price  {
+                font-size: 15px;
+                letter-spacing: 1.2px;
+                line-height: 18px;
+                @media(max-width:767px) {
+                    font-size: 14px;
+                    letter-spacing: 1.12px;
+                }
+            }
+        }
+        .gaisbock-variant-selection-price-number {
+            span {
+                font-size: 12px;
+                letter-spacing: 0.12px;
+                line-height: 15px;
+            }
+        }
+    }
+    .product-detail-configurator-container {
+        margin-bottom: 25px;
+        display: block;
     }
 }
 .product-detail-media,

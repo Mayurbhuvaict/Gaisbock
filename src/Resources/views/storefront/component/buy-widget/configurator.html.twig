@@ -14,6 +14,7 @@
         {% endif %}
         {% for variantProducts in page.extensions.products.variants %}
             <hr>
+            <div class="gaisbock-variant-header-section d-flex flex-wrap align-items-center">
             <a href="{{ seoUrl('frontend.detail.page', { 'productId': variantProducts.id }) }}"
                title="{{ variantProducts.translated.name }}">
                 <input type="radio"
@@ -91,6 +92,7 @@
                       itemprop="sku">
                             {{ variantProducts.productNumber }}
                         </span>
+            </div>
             </div>
             <div class="gaisbock-variant-selection-images">
             {% for key,variantImage in page.extensions.products.VariantImage %}
