@@ -347,11 +347,15 @@ a.header-black-logo-main-link,
     .is-act-home .hovered-header .gaisbock-header-mobile-text-logo-white {
         padding-left: 0px;
     }
+    .hovered-header .header-logo-main {
+        display: none;
+    }
     .header-row .header-actions-col {
         width: auto;
         order: 1;
         .header-cart{
-            margin-left: 190px;
+            position: absolute;
+            right: 56px;
         }
         .top-bar-nav-item.top-bar-language,
         .account-menu, {
