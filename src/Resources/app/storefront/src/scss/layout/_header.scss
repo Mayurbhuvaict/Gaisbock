@@ -350,9 +350,11 @@ a.header-black-logo-main-link,
     .header-row .header-actions-col {
         width: auto;
         order: 1;
+        .header-cart{
+            margin-left: 190px;
+        }
         .top-bar-nav-item.top-bar-language,
-        .account-menu,
-        .header-cart {
+        .account-menu, {
             display: none;
         }
     }
