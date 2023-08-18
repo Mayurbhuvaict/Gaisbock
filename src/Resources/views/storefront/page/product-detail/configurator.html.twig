@@ -151,7 +151,7 @@
                 {% endfor %}
             {% endblock %}
             <div class="gaisbock-variant-comment">
-                {{ dump(page) }}
+                {{ page.product.translated.customFields.gaisbock_product_detail_extra_details_comment|raw }}
             </div>
             <form data-variant-switch="true" data-variant-switch-options="{{ config|json_encode }}">
                 {% block page_product_detail_configurator_groups %}
