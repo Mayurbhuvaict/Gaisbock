@@ -55,6 +55,7 @@ class gaisbockCategoryNavigationSubscriber implements EventSubscriberInterface
             $categoryDataCriteria = new Criteria();
             $categoryDataCriteria->addFilter(new EqualsFilter('parentId', $getActiveCategory));
             $categoryCriteria->addFilter(new EqualsFilter('level', 3));
+            $categoryCriteria->addFilter(new EqualsFilter('active',1));
             $categoryDataCriteria->addAssociation('media');
             $categoryData = $this->categoryRepository->search($categoryDataCriteria, $event->getContext())->getElements();
         }
