@@ -17,7 +17,7 @@
 {% endblock %}
 
 {% block base_body %}
-<body class="header-hover {% block base_body_classes %}is-ctl-{% if controllerName is not empty %}{{ controllerName|lower }}{% endif %} is-act-{% if controllerAction is not empty %}{{ controllerAction|lower }}{% endif %}{% endblock %}">
+<body class="header-hover {% block base_body_classes %}is-ctl-{% if controllerName is not empty %}{{ controllerName|lower }}{% endif %} is-act-{% if controllerAction is not empty %}{{ controllerAction|lower }}{% endif %}{% endblock %}" data-gaisbock-animation>
 
 {% block base_body_inner %}
     {% block base_noscript %}
