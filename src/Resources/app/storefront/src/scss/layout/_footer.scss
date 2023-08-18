@@ -215,7 +215,7 @@ footer.footer-main {
         letter-spacing: 0.91px;
         line-height: 17px;
         text-transform: uppercase;
-        width: 100%;
+        width: auto;
         margin-bottom: 0;
     }
     footer.footer-main .footer__title br,
@@ -224,7 +224,8 @@ footer.footer-main {
         display: none;
     }
     footer.footer-main .footer__title.third-column-text {
-        max-width: 100%;
+        max-width: initial;
+        margin: 0;
     }
     footer.footer-main .newsletter-form .icon {
         display: block;
@@ -232,8 +233,15 @@ footer.footer-main {
     .try-it-section {
         width: 100%;
     }
+    .footer-column-content {
+        padding: 0 20px;
+    }
     .footer-column-headline {
         padding: 6px 0;
+        justify-content: center;
+    }
+    footer.footer-main .try-it-section {
+        width: auto;
     }
     footer.footer-main .footer__content {
         font-size: 12px;

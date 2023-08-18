@@ -110,14 +110,23 @@ hr {
     .product-detail-review-progressbar-col {
         @media(max-width:767px){
             flex: revert;
-            width: 77%;
+            width: 80%;
+            padding-left: 0;
         }
     }
     .product-detail-tabs .product-detail-review .product-detail-review-checkbox {
         @media(max-width:767px){
-            width: 18%;
+            width: 15%;
             flex-shrink: revert;
             margin: 0;
+            padding: 0;
+        }
+    }
+    .row.product-detail-review-filter {
+        @media(max-width:767px){
+            margin: 0;
+        }
+        .form-check {
             padding: 0;
         }
     }
