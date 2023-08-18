@@ -39,16 +39,10 @@
                             {% set listPrice = price.listPrice %}
                             {% set isListPrice = listPrice.percentage > 0 %}
                             {% set isRegulationPrice = price.regulationPrice != null %}
-
-                            <p class="product-detail-price{% if isListPrice %} with-list-price{% endif %}{% if isRegulationPrice %} with-regulation-price{% endif %}">
-                                {{ price.unitPrice|currency }}{{ "general.star"|trans|sw_sanitize }}
-                            </p>
-
                             {% if isListPrice %}
                                 {% block page_product_detail_was_price %}
 
                                     {% block page_product_detail_was_price_badge %}
-                                        <span class="list-price-badge">&#37;</span>
                                     {% endblock %}
 
                                     {% set afterListPriceSnippetExists = "listing.afterListPrice"|trans|length > 0 %}
@@ -63,12 +57,15 @@
                         {% if afterListPriceSnippetExists %}
                             {{ "listing.afterListPrice"|trans|trim }}
                         {% endif %}
-
-                            <span class="list-price-percentage">{{ "detail.listPricePercentage"|trans({'%price%': listPrice.percentage })|sw_sanitize }}</span>
                         </span>
                                     {% endblock %}
                                 {% endblock %}
                             {% endif %}
+                            <p class="product-detail-price{% if isListPrice %} with-list-price{% endif %}{% if isRegulationPrice %} with-regulation-price{% endif %}">
+                                {{ price.unitPrice|currency }}{{ "general.star"|trans|sw_sanitize }}
+                            </p>
+
+
                             {% if isRegulationPrice %}
                                 <span class="product-detail-list-price-wrapper">
                                 <span class="regulation-price">{{ "general.listPricePreviously"|trans({'%price%': price.regulationPrice.price|currency }) }}{{ "general.star"|trans|sw_sanitize }}</span>
@@ -91,58 +88,58 @@
                         {% for key,variantImage in page.extensions.products.VariantImage %}
                             {% if key == variantProducts.id %}
                                 {% if variantImage.1.image %}
-                                <div class="gasibook-variant-img">
-                                    <img src="{{ variantImage.1.image.url }}" alt="">
-                                    <p class="gaisbock-product-image-text">{{ variantImage.1.text }}</p>
-                                </div>
+                                    <div class="gasibook-variant-img">
+                                        <img src="{{ variantImage.1.image.url }}" alt="">
+                                        <p class="gaisbock-product-image-text">{{ variantImage.1.text }}</p>
+                                    </div>
                                 {% endif %}
                                 {% if variantImage.2.image %}
-                                <div class="gasibook-variant-img">
-                                    {% sw_icon 'gaisbock-plus' style {'pack': 'gaisbock','class':'gaisbock-image-text-middle'} %}
-                                    <img src="{{ variantImage.2.image.url }}" alt="">
-                                    <p class="gaisbock-product-image-text">{{ variantImage.2.text }}</p>
-                                </div>
+                                    <div class="gasibook-variant-img">
+                                        {% sw_icon 'gaisbock-plus' style {'pack': 'gaisbock','class':'gaisbock-image-text-middle'} %}
+                                        <img src="{{ variantImage.2.image.url }}" alt="">
+                                        <p class="gaisbock-product-image-text">{{ variantImage.2.text }}</p>
+                                    </div>
                                 {% endif %}
                                 {% if variantImage.3.image %}
-                                <div class="gasibook-variant-img">
-                                    {% sw_icon 'gaisbock-plus' style {'pack': 'gaisbock','class':'gaisbock-image-text-middle'} %}
-                                    <img src="{{ variantImage.3.image.url }}" alt="">
-                                    <p class="gaisbock-product-image-text">{{ variantImage.3.text }}</p>
+                                    <div class="gasibook-variant-img">
+                                        {% sw_icon 'gaisbock-plus' style {'pack': 'gaisbock','class':'gaisbock-image-text-middle'} %}
+                                        <img src="{{ variantImage.3.image.url }}" alt="">
+                                        <p class="gaisbock-product-image-text">{{ variantImage.3.text }}</p>
                                     </div>
                                 {% endif %}
                                 {% if variantImage.4.image %}
-                                <div class="gasibook-variant-img">
-                                    {% sw_icon 'gaisbock-plus' style {'pack': 'gaisbock','class':'gaisbock-image-text-middle'} %}
-                                    <img src="{{ variantImage.4.image.url }}" alt="">
-                                    <p class="gaisbock-product-image-text">{{ variantImage.4.text }}</p>
+                                    <div class="gasibook-variant-img">
+                                        {% sw_icon 'gaisbock-plus' style {'pack': 'gaisbock','class':'gaisbock-image-text-middle'} %}
+                                        <img src="{{ variantImage.4.image.url }}" alt="">
+                                        <p class="gaisbock-product-image-text">{{ variantImage.4.text }}</p>
                                     </div>
                                 {% endif %}
                                 {% if variantImage.5.image %}
-                                <div class="gasibook-variant-img">
-                                    {% sw_icon 'gaisbock-plus' style {'pack': 'gaisbock','class':'gaisbock-image-text-middle'} %}
-                                    <img src="{{ variantImage.5.image.url }}" alt="">
-                                    <p class="gaisbock-product-image-text">{{ variantImage.5.text }}</p>
+                                    <div class="gasibook-variant-img">
+                                        {% sw_icon 'gaisbock-plus' style {'pack': 'gaisbock','class':'gaisbock-image-text-middle'} %}
+                                        <img src="{{ variantImage.5.image.url }}" alt="">
+                                        <p class="gaisbock-product-image-text">{{ variantImage.5.text }}</p>
                                     </div>
                                 {% endif %}
                                 {% if variantImage.6.image %}
-                                <div class="gasibook-variant-img">
-                                    {% sw_icon 'gaisbock-plus' style {'pack': 'gaisbock','class':'gaisbock-image-text-middle'} %}
-                                    <img src="{{ variantImage.6.image.url }}" alt="">
-                                    <p class="gaisbock-product-image-text">{{ variantImage.6.text }}</p>
+                                    <div class="gasibook-variant-img">
+                                        {% sw_icon 'gaisbock-plus' style {'pack': 'gaisbock','class':'gaisbock-image-text-middle'} %}
+                                        <img src="{{ variantImage.6.image.url }}" alt="">
+                                        <p class="gaisbock-product-image-text">{{ variantImage.6.text }}</p>
                                     </div>
                                 {% endif %}
                                 {% if variantImage.7.image %}
-                                <div class="gasibook-variant-img">
-                                    {% sw_icon 'gaisbock-plus' style {'pack': 'gaisbock','class':'gaisbock-image-text-middle'} %}
-                                    <img src="{{ variantImage.7.image.url }}" alt="">
-                                    <p class="gaisbock-product-image-text">{{ variantImage.7.text }}</p>
+                                    <div class="gasibook-variant-img">
+                                        {% sw_icon 'gaisbock-plus' style {'pack': 'gaisbock','class':'gaisbock-image-text-middle'} %}
+                                        <img src="{{ variantImage.7.image.url }}" alt="">
+                                        <p class="gaisbock-product-image-text">{{ variantImage.7.text }}</p>
                                     </div>
                                 {% endif %}
                                 {% if variantImage.8.image %}
-                                <div class="gasibook-variant-img">
-                                    {% sw_icon 'gaisbock-plus' style {'pack': 'gaisbock','class':'gaisbock-image-text-middle'} %}
-                                    <img src="{{ variantImage.8.image.url }}" alt="">
-                                    <p class="gaisbock-product-image-text">{{ variantImage.8.text }}</p>
+                                    <div class="gasibook-variant-img">
+                                        {% sw_icon 'gaisbock-plus' style {'pack': 'gaisbock','class':'gaisbock-image-text-middle'} %}
+                                        <img src="{{ variantImage.8.image.url }}" alt="">
+                                        <p class="gaisbock-product-image-text">{{ variantImage.8.text }}</p>
                                     </div>
                                 {% endif %}
                             {% endif %}
