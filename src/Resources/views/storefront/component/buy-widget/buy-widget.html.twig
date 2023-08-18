@@ -73,20 +73,20 @@
             </div>
         {% endblock %}
         {% block buy_widget_reviews %}
-            {% if product.ratingAverage > 0 and totalReviews > 0 and config('core.listing.showReview') %}
 
-                {% if remoteClickOptions is not defined %}
-                    {% set remoteClickOptions = {
-                        selector: "#review-tab-" ~ product.id,
-                        scrollToElement: true
-                    } %}
-                {% endif %}
+            <div class="product-detail-reviews">
+                {% if product.ratingAverage > 0 and totalReviews > 0 and config('core.listing.showReview') %}
 
-                {% if reviewTabHref is not defined %}
-                    {% set reviewTabHref = "#review-tab-" ~ product.id ~ "-pane" %}
-                {% endif %}
+                    {% if remoteClickOptions is not defined %}
+                        {% set remoteClickOptions = {
+                            selector: "#review-tab-" ~ product.id,
+                            scrollToElement: true
+                        } %}
+                    {% endif %}
 
-                <div class="product-detail-reviews">
+                    {% if reviewTabHref is not defined %}
+                        {% set reviewTabHref = "#review-tab-" ~ product.id ~ "-pane" %}
+                    {% endif %}
 
                     {% sw_include '@Storefront/storefront/component/review/rating.html.twig' with {
                         points: product.ratingAverage,
@@ -99,8 +99,9 @@
                         {{ totalReviews }}
                         {{ "detail.reviewLinkText"|trans({'%count%': totalReviews})|sw_sanitize }}
                     </a>
-                </div>
-            {% endif %}
+                {% endif %}
+            </div>
+
         {% endblock %}
 
         {% block buy_widget_buy_container %}
@@ -446,10 +447,10 @@
 
                     {% if element.data.product %}
                         <div class="product-detail-tabs cms-element-{{ element.type }}{% if config.alignment.value %} has-vertical-alignment{% endif %}">
-{#                            {% sw_include '@Storefront/storefront/component/review/review.html.twig' with {#}
-{#                                reviews: element.data.reviews,#}
-{#                                product: element.data.product#}
-{#                            } %}#}
+                            {#                            {% sw_include '@Storefront/storefront/component/review/review.html.twig' with { #}
+                            {#                                reviews: element.data.reviews, #}
+                            {#                                product: element.data.product #}
+                            {#                            } %} #}
                             {% set reviewsPerListPage = 10 %}
 
                             {% set currentListPage = element.data.reviews.page + 1 %}
