@@ -416,7 +416,18 @@
         <div class="accordian-review">
             <div class="product-detail-tabs">
                 <div class="product-detail-review">
-                    {% sw_include '@Storefront/storefront/page/product-detail/review/review-widget.html.twig' %}
+                    {% set reviews = page.reviews %}
+                    {% set reviewsPerListPage = 10 %}
+
+                    {% set currentListPage = 1 %}
+
+                    {% set productReviewCount = reviews.totalReviews %}
+
+                    {% if productReviewCount > 0 %}
+                        {% set productAvgRating = reviews.matrix.averageRating|round(2, 'common') %}
+                    {% endif %}
+                    {% set foreignReviewsCount = 150 %}
+                    {% sw_include '@Storefront/storefront/page/product-detail/review/review-widget.html.twig' with {'reviews': page.reviews} %}
                 </div>
             </div>
         </div>
