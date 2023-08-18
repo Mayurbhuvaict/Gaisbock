@@ -6,31 +6,37 @@ export default class gaisbockThemeScrollSection extends Plugin {
     }
 
     _gaisbockThemeScroll() {
-        const anchorLinks = document.getElementById('gaisbock-down-arrow');
+        var anchorLinks = document.querySelector('#gaisbock-down-arrow');
+        anchorLinks.addEventListener('click', function (e) {
+            e.preventDefault();
 
-        anchorLinks.addEventListener('click', function (event) {
-            event.preventDefault();
-            const targetTop = anchorLinks.getBoundingClientRect().top;
-            const startingY = window.pageYOffset;
-            const duration = 500;
-            let startTime = null;
+            var targetPosition = 500; // Adjust this value for the target scroll position
+            var scrollSpeed = 10; // Adjust this value for the scrolling speed
+            var currentPosition = window.pageYOffset;
+            var scrolling = true;
 
-            function scrollAnimation(currentTime) {
-                if (!startTime) startTime = currentTime;
-                const timeElapsed = currentTime - startTime;
-                const progress = Math.min(timeElapsed / duration, 1);
-                const easeFunction = function (t) {
-                    return t * (2 - t);
-                };
-                const easedProgress = easeFunction(progress);
-                const distance = targetTop - startingY;
-                window.scrollTo(0, startingY + distance * easedProgress);
+            function scrollStep(timestamp) {
+                if (!scrolling) return;
 
-                if (timeElapsed < duration) {
-                    requestAnimationFrame(scrollAnimation);
+                var progress = (timestamp - startTime) / scrollDuration;
+                var newPosition = currentPosition + (targetPosition - currentPosition) * progress;
+
+                if (progress < 1) {
+                    window.scrollTo(0, newPosition);
+                    requestAnimationFrame(scrollStep);
+                } else {
+                    window.scrollTo(0, targetPosition);
+                    scrolling = false;
                 }
             }
-            requestAnimationFrame(scrollAnimation);
+
+            var scrollDuration = Math.abs(targetPosition - currentPosition) / scrollSpeed;
+            var startTime = performance.now();
+
+            if (scrollDuration > 0) {
+                scrolling = true;
+                requestAnimationFrame(scrollStep);
+            }
         });
     }
 
