@@ -1,17 +1,25 @@
 {% sw_extends '@Storefront/storefront/element/cms-element-image-gallery.html.twig' %}
 
 {% block element_image_gallery %}
-    {{ parent() }}
-    {% block element_image_gallery_inner_controls %}
+    <div class="gaisbock-image-gallery">
+        {{ parent() }}
+        {% block element_image_gallery_inner_controls %}
 
-    {% endblock %}
+        {% endblock %}
 
-    {% block element_image_gallery_inner_thumbnails_col %}
+        {% block element_image_gallery_inner_thumbnails_col %}
 
-    {% endblock %}
-    {% for review in section.blocks.elements %}
-        {% if review.type == "product-description-reviews" %}
-            {% set element = review.slots.getSlot('content') %}
+        {% endblock %}
+        {% if config('core.cart.wishlistEnabled') %}
+            {% sw_include '@Storefront/storefront/component/product/card/wishlist.html.twig' with {
+                showText: false,
+                size: 'md',
+                productId: page.product.id
+            } %}
+        {% endif %}
+        {% for review in section.blocks.elements %}
+            {% if review.type == "product-description-reviews" %}
+                {% set element = review.slots.getSlot('content') %}
                 {% set config = element.fieldConfig.elements %}
                 {% set product = element.data.product %}
                 {% set descriptionTabId = "description-tab-" ~ product.id %}
@@ -22,15 +30,38 @@
                 {% set reviewTabContent = "review-tab-" ~ product.id ~ "-pane" %}
 
                 {% if element.data.product %}
-                    <div class="product-detail-tabs cms-element-{{ element.type }}{% if config.alignment.value %} has-vertical-alignment{% endif %}">
-                        {% sw_include '@Storefront/storefront/component/review/review.html.twig' with {
-                            reviews: element.data.reviews,
-                            product: element.data.product
-                        } %}
-                    </div>
-                {% endif %}
-        {% endif %}
-    {% endfor %}
+                    {% if config('core.listing.showReview') %}
+                        {% set reviews = element.data.reviews %}
+                        {% set reviewsPerListPage = 10 %}
 
+                        {% set currentListPage = 1 %}
+
+                        {% set productReviewCount = reviews.totalReviews %}
+
+                        {% if productReviewCount > 0 %}
+                            {% set productAvgRating = reviews.matrix.averageRating|round(2, 'common') %}
+                        {% endif %}
+                        {% set foreignReviewsCount = 150 %}
+                        <div class="product-detail-tabs cms-element-{{ element.type }}{% if config.alignment.value %} has-vertical-alignment{% endif %}">
+                            <div class="product-detail-review product-detail-review-widget">
+                                <div class="col-sm-6">
+                                    {% sw_include '@Storefront/storefront/page/product-detail/review/review-widget.html.twig' with {
+                                        reviews: element.data.reviews,
+                                        product: element.data.product
+                                    } %}
+                                </div>
+                            </div>
+                        </div>
+
+                        {#                            {% sw_include '@Storefront/storefront/component/review/review.html.twig' with { #}
+                        {#                                reviews: element.data.reviews, #}
+                        {#                                product: element.data.product #}
+                        {#                            } %} #}
+                        {#                        </div> #}
+                    {% endif %}
+                {% endif %}
+            {% endif %}
+        {% endfor %}
+    </div>
 {% endblock %}
 
