@@ -153,6 +153,10 @@
                         {% endfor %}
             </div>
         {% endfor %}
+        <hr>
+        <div class="gaisbock-variant-comment">
+            {{ page.product.translated.customFields.gaisbock_product_detail_extra_details_comment|raw }}
+        </div>
         {% block buy_widget_configurator_form %}
             <form data-variant-switch="true" data-variant-switch-options="{{ config|json_encode }}">
 
