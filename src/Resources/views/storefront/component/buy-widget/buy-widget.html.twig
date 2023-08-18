@@ -446,10 +446,41 @@
 
                     {% if element.data.product %}
                         <div class="product-detail-tabs cms-element-{{ element.type }}{% if config.alignment.value %} has-vertical-alignment{% endif %}">
-                            {% sw_include '@Storefront/storefront/component/review/review.html.twig' with {
-                                reviews: element.data.reviews,
-                                product: element.data.product
-                            } %}
+{#                            {% sw_include '@Storefront/storefront/component/review/review.html.twig' with {#}
+{#                                reviews: element.data.reviews,#}
+{#                                product: element.data.product#}
+{#                            } %}#}
+                            {% set reviewsPerListPage = 10 %}
+
+                            {% set currentListPage = element.data.reviews.page + 1 %}
+
+                            {% set productReviewCount = element.data.reviews.totalReviews %}
+
+                            {% if productReviewCount > 0 %}
+                                {% set productAvgRating = element.data.reviews.matrix.averageRating|round(2, 'common') %}
+                            {% endif %}
+
+                            {% set foreignReviewsCount = 150 %}
+
+                            {% set ratingSuccess = element.data.ratingSuccess %}
+                            <div class="product-detail-review">
+                                {% block component_review_tab_pane %}
+                                    {% block component_review_aside %}
+                                        <div class="col-sm-6">
+                                            {% block component_review_widget_container %}
+                                                {% sw_include '@Storefront/storefront/component/review/review-widget.html.twig'with {
+                                                    reviews: element.data.reviews,
+                                                    product: element.data.product
+                                                } %}
+                                            {% endblock %}
+                                        </div>
+                                    {% endblock %}
+
+                                    {% block component_review_main %}
+
+                                    {% endblock %}
+                                {% endblock %}
+                            </div>
                         </div>
                     {% endif %}
                 {% endif %}
