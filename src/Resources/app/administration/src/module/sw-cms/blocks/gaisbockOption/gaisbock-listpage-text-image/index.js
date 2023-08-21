@@ -9,7 +9,6 @@ Shopware.Service('cmsService').registerCmsBlock({
     category: 'gaisbock-cms-elements',
     component: 'sw-cms-block-gaisbock-listpage-text-image',
     previewComponent: 'sw-cms-preview-gaisbock-listpage-text-image',
-    allowedPageTypes:['product_list'],
     defaultConfig: {
         marginBottom: '20px',
         marginTop: '20px',

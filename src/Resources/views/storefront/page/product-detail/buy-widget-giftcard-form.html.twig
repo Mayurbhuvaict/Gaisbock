@@ -1,0 +1,27 @@
+{% sw_extends '@LaenenGiftcard/storefront/page/product-detail/buy-widget-giftcard-form.html.twig' %}
+
+{% block page_product_detail_buy_quantity_container %}
+    <div class="product-detail-giftcard-form col-8">
+        <div class="product-detail-configurator-group">
+            <div class="product-detail-configurator-group-title">
+                {{ 'detail.giftcardAmountLabel'|trans|sw_sanitize }}
+            </div>
+            <div class="product-detail-configurator-options">
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">{{ context.currency.isoCode }}</span>
+                    </div>
+
+                    <input type="number"
+                           class="form-control"
+                           min="{{ product.customFields.laeGiftcardMinValue ?? 0 }}"
+                           max="{{ product.customFields.laeGiftcardMaxValue ?? 100 }}"
+                           step="1"
+                           value="{{ product.customFields.laeGiftcardDefaultValue ?? product.customFields.laeGiftcardMinValue ?? 25 }}"
+                           name="lineItems[{{ product.id }}][giftcardAmount]"
+                    title="{{ 'detail.giftcardAmountLabel'|trans|sw_sanitize }}"/>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
