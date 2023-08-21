@@ -17,12 +17,13 @@
   overflow: hidden;
 }
 
-.sw-cms-el-image img {
-  max-width: 50%;
-  height: auto;
-  border-radius: 5px;
+.gaisbock-image-titles-button-position {
+  .sw-cms-el-image img {
+    max-width: 50%;
+    height: 100px;
+    border-radius: 5px;
+  }
 }
-
 
 h1 {
   font-size: 24px;
