@@ -6,6 +6,7 @@ use JetBrains\PhpStorm\NoReturn;
 use Shopware\Core\Framework\DataAbstractionLayer\EntityRepository;
 use Shopware\Core\Framework\DataAbstractionLayer\Search\Criteria;
 use Shopware\Core\Framework\DataAbstractionLayer\Search\Filter\EqualsFilter;
+use Shopware\Core\Framework\DataAbstractionLayer\Search\Filter\MultiFilter;
 use Shopware\Core\Framework\Log\Package;
 use Shopware\Core\Framework\Struct\ArrayStruct;
 use Shopware\Core\System\SalesChannel\Entity\SalesChannelRepository;
@@ -53,9 +54,14 @@ class gaisbockCategoryNavigationSubscriber implements EventSubscriberInterface
         // get child category of level 2 active category...
         if ($getActiveCategory) {
             $categoryDataCriteria = new Criteria();
-            $categoryDataCriteria->addFilter(new EqualsFilter('parentId', $getActiveCategory));
-            $categoryCriteria->addFilter(new EqualsFilter('level', 3));
-            $categoryCriteria->addFilter(new EqualsFilter('active',1));
+            $categoryDataCriteria->addFilter(new MultiFilter(
+                MultiFilter::CONNECTION_AND,
+                [
+                    new EqualsFilter('parentId', $getActiveCategory),
+                    new EqualsFilter('level', 3),
+                    new EqualsFilter('active',true)
+                ])
+            );
             $categoryDataCriteria->addAssociation('media');
             $categoryData = $this->categoryRepository->search($categoryDataCriteria, $event->getContext())->getElements();
         }
