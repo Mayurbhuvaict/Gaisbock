@@ -243,7 +243,7 @@
                                 >
                                 <!-- eslint-disable-next-line sw-deprecation-rules/no-twigjs-blocks -->
                                 {% block sw_cms_element_image_slider_config_settings_links %}
-                                    <div class="sw-cms-el-config-image-slider__settings-links sw-cms-el-config-image-slider__setting-option">
+                                    <div class="sw-cms-el-config-image-slider__settings-links">
                                         <div
                                                 v-for="(sliderItem, index) in items"
                                                 :key="index"
@@ -306,7 +306,9 @@
                                                     />
                                                 </div>
                                             {% endblock %}
+                                            <hr>
                                         </div>
+
                                     </div>
                                 {% endblock %}
                         </sw-container>
