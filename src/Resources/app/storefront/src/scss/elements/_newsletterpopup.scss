@@ -3,6 +3,7 @@ $newsletterPopupBG: #2b2217;
 
 .nme-newsletter-popup.has-background-image {
     background-color: $newsletterPopupBG;
+    z-index: 99999;
     @media(max-wdith:767px) {
         min-height: 391px;
         background-position: right 82px;
