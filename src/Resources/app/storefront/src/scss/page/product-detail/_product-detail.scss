@@ -734,6 +734,15 @@ span.product-detail-list-price-wrapper span.list-price-price {
             height: 23px;
             margin-top: 10px;
         }
+        .product-detail-buy .product-detail-reviews {
+            min-height: 37px;
+        }
+        span.product-detail-list-price-wrapper span.list-price-price {
+            font-size: 17px;
+            letter-spacing: 1.19px;
+            line-height: 22px;
+            padding-right: 13px;
+        }
     }
     .is-ctl-product .container {
         padding: 0;
