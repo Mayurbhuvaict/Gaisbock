@@ -248,6 +248,12 @@ a.header-black-logo-main-link,
   .is-sticky .header-logo-picture img {
       max-width: 50%;
   }
+
+.gaisbock-header-main{
+    button.offcanvas-close {
+      display:none;
+    }
+}
 @include media-breakpoint-up(md) {
     .is-act-home {
         .nav-main {
