@@ -8,7 +8,8 @@
             </div>
             <div class="cms-element-gaisbock-listing-image">
                 <div class="cms-image-container is-standard">
-                    {% sw_icon 'register-page-icon' style {'pack': 'gaisbock','class':'gaisbock-register-page-icon'} %}
+                    <img src="{{ asset('bundles/gaisbock/Registerpage.png','asset') }}">
+                    {{ 'customer-group-register.data'|trans|sw_sanitize|raw }}
                 </div>
             </div>
         </div>
