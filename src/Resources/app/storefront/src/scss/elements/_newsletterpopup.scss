@@ -10,6 +10,9 @@ $newsletterPopupBG: #2b2217;
 }
 
 body {
+    .nme-newsletter-popup--captcha-container {
+        margin-bottom: 0;
+    }
     .nme-newsletter-popup {
         max-width: 600px;
         @media(max-width:767px) {
@@ -75,7 +78,7 @@ body {
         font-size: 12px;
         letter-spacing: 0.6px;
         font-weight: 700;
-        margin-bottom: 30px;
+        margin-bottom: 0px;
     }
     form.nme-newsletter-popup--form {
         margin: 0;
@@ -87,6 +90,27 @@ body {
         @media(max-width:767px) {
             left:23px;
             max-width: 208px;
+        }
+        button.nme-newsletter-popup--submit-btn {
+            background: transparent;
+            position: absolute;
+            bottom: 27px;
+            height: auto;
+            width: auto;
+            margin: 0;
+            right: 0;
+            @media(max-width:767px)    {
+                bottom: 29px;
+            } 
+            .icon {
+                color: transparent;
+                width: 13px;
+                height: 13px;    
+                @media(max-width:767px)    {
+                    width: 10px;
+                    height: 10px;
+                }    
+            }
         }
     }
 }
