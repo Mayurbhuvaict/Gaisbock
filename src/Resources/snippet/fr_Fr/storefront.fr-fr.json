@@ -52,5 +52,8 @@
       "name": "Clients enregistrés",
       "customerGroup": "Partner werden<br> ipsum dolor sit ametin"
     }
+  },
+  "search": {
+    "headline": "Correspondances de produits:"
   }
 }
