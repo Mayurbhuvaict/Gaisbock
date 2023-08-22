@@ -349,6 +349,9 @@ a.header-black-logo-main-link,
     }
 }
 @include media-breakpoint-down(md) { 
+    .hovered .header-logo-col {
+        display: none;
+    }
     .languages-menu.dropdown span.top-bar-nav-text {
         display: block;
         color: #fff;

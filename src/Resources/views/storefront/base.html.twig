@@ -17,62 +17,72 @@
 {% endblock %}
 
 {% block base_body %}
-<body class="header-hover {% block base_body_classes %}is-ctl-{% if controllerName is not empty %}{{ controllerName|lower }}{% endif %} is-act-{% if controllerAction is not empty %}{{ controllerAction|lower }}{% endif %}{% endblock %}" data-gaisbock-animation>
+{% if nmeConfig.freeShippingBarPosition == 'top' %}
+    {% sw_include '@Storefront/storefront/custom/nme-free-shipping-bar.html.twig' %}
+{% endif %}
+{% sw_include '@Storefront/storefront/custom/nme-conversion-bar.html.twig' %}
+{% if nmeConfig.freeShippingBarPosition == 'bottom' %}
+    {% sw_include '@Storefront/storefront/custom/nme-free-shipping-bar.html.twig' %}
+{% endif %}
+{% sw_include '@Storefront/storefront/custom/nme-newsletter-popup.html.twig' %}
+{% sw_include '@Storefront/storefront/custom/nme-register-popup.html.twig' %}
+<body class="header-hover {% block base_body_classes %}{{ parent() }}{% set TanmarNgInfiniteScrollingData = context.context.extensions.TanmarNgInfiniteScrolling %}{% if TanmarNgInfiniteScrollingData.active %} is-tanmar-infinite-scrolling {% endif %}{% endblock %}"
+      data-gaisbock-animation>
 <div class="gaisbock-sticky-language-switcher">
-                            <form method="post"
-                                  action="{{ path('frontend.checkout.switch-language') }}"
-                                  class="language-form"
-                                  data-form-auto-submit="true">
+    <form method="post"
+          action="{{ path('frontend.checkout.switch-language') }}"
+          class="language-form"
+          data-form-auto-submit="true">
 
 
-                                    {% set isoCode = page.header.activeLanguage.translationCode.code|lower|split('-') %}
-                                    {% set language = isoCode[0] %}
-                                    {% set country = isoCode[1] %}
+        {% set isoCode = page.header.activeLanguage.translationCode.code|lower|split('-') %}
+        {% set language = isoCode[0] %}
+        {% set country = isoCode[1] %}
 
-                                    <div class="languages-menu dropdown">
-                                        <button class="btn dropdown-toggle top-bar-nav-btn"
-                                                type="button"
-                                                id="languagesDropdown-{{ position }}"
-                                                data-bs-toggle="dropdown"
-                                                aria-haspopup="true"
-                                                aria-expanded="false">
-                                            <span class="top-bar-nav-text">{{ page.header.activeLanguage.name|capitalize|slice(0,1) }}</span>
-                                        </button>
+        <div class="languages-menu dropdown">
+            <button class="btn dropdown-toggle top-bar-nav-btn"
+                    type="button"
+                    id="languagesDropdown-{{ position }}"
+                    data-bs-toggle="dropdown"
+                    aria-haspopup="true"
+                    aria-expanded="false">
+                <span class="top-bar-nav-text">{{ page.header.activeLanguage.name|capitalize|slice(0,1) }}</span>
+            </button>
 
-                                            <div class="top-bar-list dropdown-menu dropdown-menu-right"
-                                                 aria-labelledby="languagesDropdown-{{ position }}">
-                                                {% for language in  page.header.languages %}
-                                                    <div class="top-bar-list-item dropdown-item{% if language.id is same as(page.header.activeLanguage.id) %} item-checked{% endif %}"
-                                                         title="{{ language.translated.name }}">
+            <div class="top-bar-list dropdown-menu dropdown-menu-right"
+                 aria-labelledby="languagesDropdown-{{ position }}">
+                {% for language in  page.header.languages %}
+                    <div class="top-bar-list-item dropdown-item{% if language.id is same as(page.header.activeLanguage.id) %} item-checked{% endif %}"
+                         title="{{ language.translated.name }}">
 
 
-                                                            {% set isoCode = language.translationCode.code|lower|split('-') %}
-                                                            {% set flagLanguage = isoCode[0] %}
-                                                            {% set flagCountry = isoCode[1] %}
+                        {% set isoCode = language.translationCode.code|lower|split('-') %}
+                        {% set flagLanguage = isoCode[0] %}
+                        {% set flagCountry = isoCode[1] %}
 
-                                                            <label class="top-bar-list-label"
-                                                                   for="{{ position }}-{{ language.id }}">
-                                                                <input id="{{ position }}-{{ language.id }}"
-                                                                       class="top-bar-list-radio"
-                                                                       value="{{ language.id }}"
-                                                                       name="languageId"
-                                                                       type="radio"
-                                                                        {% if language.id is same as(page.header.activeLanguage.id) %} checked{% endif %}>
-                                                                {{ language.translationCode.code|capitalize|slice(0,1) }}
-                                                            </label>
-                                                    </div>
-                                                {% endfor %}
-                                            </div>
-                                    </div>
+                        <label class="top-bar-list-label"
+                               for="{{ position }}-{{ language.id }}">
+                            <input id="{{ position }}-{{ language.id }}"
+                                   class="top-bar-list-radio"
+                                   value="{{ language.id }}"
+                                   name="languageId"
+                                   type="radio"
+                                    {% if language.id is same as(page.header.activeLanguage.id) %} checked{% endif %}>
+                            {{ language.translationCode.code|capitalize|slice(0,1) }}
+                        </label>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
 
-                                    <input name="redirectTo" type="hidden" value="{{ app.request.get('_route') }}"/>
+        <input name="redirectTo" type="hidden" value="{{ app.request.get('_route') }}"/>
 
-                                    {% for key, value in app.request.attributes.get('_route_params') %}
-                                        <input name="redirectParameters[{{ key }}]" type="hidden" value="{{ value }}">
-                                    {% endfor %}
+        {% for key, value in app.request.attributes.get('_route_params') %}
+            <input name="redirectParameters[{{ key }}]" type="hidden" value="{{ value }}">
+        {% endfor %}
 
-                            </form>
-                        </div>
+    </form>
+</div>
 {% block base_body_inner %}
     {% block base_noscript %}
         <noscript class="noscript-main">
@@ -88,7 +98,7 @@
         <header class="header-main gaisbock-header-main" id="mainNavigationHover" data-gaisbock-add-remove-class>
             {% block base_header_inner %}
                 <div class="container" data-flyout-menu>
-                        
+
                     {% sw_include '@Storefront/storefront/layout/header/header.html.twig' %}
                 </div>
             {% endblock %}
@@ -156,6 +166,40 @@
 {% endblock %}
 
 {% block base_body_script %}
+    {% set TanmarNgInfiniteScrollingData = context.context.extensions.TanmarNgInfiniteScrolling %}
+    {{ dump(context) }}
+    {% if TanmarNgInfiniteScrollingData.active %}
+        <script>
+            ;(function(){
+                var _pages = parseInt('{{ TanmarNgInfiniteScrollingData.pages }}',10);
+
+                window._tanmarInfiniteScrolling = {
+                    version: '1.5.1',
+                    pages: isNaN(_pages) ? 0 : _pages,
+                    snippets: {
+                        prev: {
+                            btn: '{{ "tanmar-infinite-scrolling.prev.btn"|trans }}',
+                            navi: '{{ "tanmar-infinite-scrolling.prev.navi"|trans }}'
+                        },
+                        next: {
+                            btn: '{{ "tanmar-infinite-scrolling.next.btn"|trans }}',
+                            navi: '{{ "tanmar-infinite-scrolling.next.navi"|trans }}'
+                        }
+                    },
+                    customProduct: '{{ TanmarNgInfiniteScrollingData.customProduct }}',
+                    customPrepend: '{{ TanmarNgInfiniteScrollingData.customPrepend }}',
+                    customAppend: '{{ TanmarNgInfiniteScrollingData.customAppend }}',
+                    rootMargin: '{{ TanmarNgInfiniteScrollingData.rootMargin }}',
+                    threshold: '{{ TanmarNgInfiniteScrollingData.threshold }}',
+                    debug: {% if TanmarNgInfiniteScrollingData.debug %}true{% else %}false{% endif %},
+                    triggerAfterRenderResponseEvent: {% if TanmarNgInfiniteScrollingData.triggerAfterRenderResponseEvent %}true{% else %}false{% endif %},
+                    onlyObserveWithinListingWrapper: {% if TanmarNgInfiniteScrollingData.onlyObserveWithinListingWrapper %}true{% else %}false{% endif %},
+                    customPaginationSelector: '{{ TanmarNgInfiniteScrollingData.customPaginationSelector }}'
+                };
+
+            })();
+        </script>
+    {% endif %}
 {% endblock %}
 
 </body>

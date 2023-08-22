@@ -10,6 +10,8 @@
 @import "component/offcanvas";
 @import "page/content/breadcrumb";
 
+@import "elements/newsletterpopup";
+
 @import "page/home/home";
 @import "page/account/register";
 @import "page/about/aboutus";
@@ -19,4 +21,5 @@
 @import 'page/product-detail/review';
 
 @import "page/search/search";
-
+@import 'page/cms/faq';
+@import 'page/cms/store-locater';
