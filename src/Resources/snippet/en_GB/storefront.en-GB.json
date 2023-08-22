@@ -52,5 +52,8 @@
       "name": "Registered Customers",
       "customerGroup": "Partner werden<br> ipsum dolor sit ametin"
     }
+  },
+  "search": {
+    "headline": "Product Matches:"
   }
 }
