@@ -386,3 +386,38 @@ body {
 }
 
 
+.cms-page.search-page {
+    .row {
+        align-items: center;
+        .search-left {
+            .search-headline {
+                margin: 0;
+                font-size: 25px;
+                line-height: 31px;
+                letter-spacing: 0.13px;
+                max-width: 131px;
+                @media(max-width:992px) {
+                    max-width: 100%;
+                }
+            }
+        }
+    }
+    .product-box .card-body .product-image-wrapper {
+        height: 339px;
+    }
+    .product-box .card-body .product-image-wrapper .product-image-link {
+        padding: 45px;
+    }
+}
+
+@include media-breakpoint-down(lg){ 
+    .is-ctl-search  {
+        .search-toggle div#searchCollapse {
+            height: auto;
+            top: 73px !important;
+        }
+        .cms-page.search-page {
+            margin-top: 50px;
+        }
+    }
+}

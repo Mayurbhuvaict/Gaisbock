@@ -4,7 +4,7 @@
     {% block page_search %}
         <div class="cms-page search-page">
             <div class="row">
-                <div class="col-md-3">
+                <div class="col-md-2 search-left">
                     {% block page_search_headline %}
                         <h1 class="search-headline mt-5">
                             {% block page_search_headline_text %}
@@ -15,7 +15,7 @@
                         </h1>
                     {% endblock %}
                 </div>
-                <div class="col-md-9">
+                <div class="col-md-10 search-right">
                     {% sw_include '@Storefront/storefront/page/search/search-pagelet.html.twig' with { page: page } %}
                 </div>
             </div>
