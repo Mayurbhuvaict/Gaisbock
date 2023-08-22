@@ -59,9 +59,9 @@ body {
               height: auto;
               max-height: 100%;
               transition: all .5s ease-in-out;
-              &:hover{
-                  transform: scale(1.2) rotate(0deg);
-              }
+            //   &:hover{
+            //       transform: scale(1.2) rotate(0deg);
+            //   }
           }
       }
       .product-image-wrapper{
@@ -128,6 +128,21 @@ body {
               font-weight: $sw-headings-font-weight;
           }
       }
+      .btn{
+        line-height: 30px;
+        background: $sw-color-brand-primary 0% 0% no-repeat padding-box;
+        border-radius: 15px;
+        font-size: 13px;
+        display: flex;
+        padding: 0px 20px;
+        margin: 0 auto;
+        letter-spacing: 0.78px;
+        color: #FFFFFF;
+        text-transform: uppercase;
+        border: 0;
+        height: 30px;
+        font-weight: $sw-headings-font-weight;
+    }
   }
 }
 .product-badges{
@@ -259,7 +274,6 @@ body {
             font-family: $sw-font-family-headline;
             font-weight: $sw-headings-font-weight;
             transition: all .4s linear;
-            z-index: 999;
         }
         img {
             width: 100%;
@@ -343,6 +357,12 @@ body {
                   height: 23px;
               }
           }
+          .btn{
+            font-size: 10px;
+            line-height: 23px;
+            letter-spacing: 0.6px;
+            height: 23px;
+        }
       } 
   }
   .product-badges{
