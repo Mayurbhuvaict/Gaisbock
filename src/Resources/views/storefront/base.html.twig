@@ -27,7 +27,7 @@
 {% sw_include '@Storefront/storefront/custom/nme-newsletter-popup.html.twig' %}
 {% sw_include '@Storefront/storefront/custom/nme-register-popup.html.twig' %}
 <body class="header-hover {% block base_body_classes %}{{ parent() }}{% set TanmarNgInfiniteScrollingData = context.context.extensions.TanmarNgInfiniteScrolling %}{% if TanmarNgInfiniteScrollingData.active %} is-tanmar-infinite-scrolling {% endif %}{% endblock %}"
-      data-gaisbock-animation>
+      data-gaisbock-animation data-gaisbock-addmore-section data-gaisbock-image-with-addmore-slider>
 <div class="gaisbock-sticky-language-switcher">
     <form method="post"
           action="{{ path('frontend.checkout.switch-language') }}"

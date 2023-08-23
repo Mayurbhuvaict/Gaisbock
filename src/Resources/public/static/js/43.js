@@ -1,1 +1,0 @@
-(this.webpackJsonpPlugingaisbock=this.webpackJsonpPlugingaisbock||[]).push([[43],{kIYR:function(s,i,e){"use strict";e.r(i);i.default={template:'{% block sw_cms_block_gaisbock_text_image_slider %}\n    <div class="sw-cms-block-gaisbock-text-image-slider">\n        <slot name="gaisbockTextImageSlider"></slot>\n    </div>\n{% endblock %}'}}}]);

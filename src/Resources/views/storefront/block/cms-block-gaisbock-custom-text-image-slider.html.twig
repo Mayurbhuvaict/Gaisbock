@@ -1,7 +1,7 @@
 {% block cms_block_gaisbock_custom_text_image_slider %}
     {% set element = block.slots.getSlot('gaisbockCustomTextImageSlider') %}
 
-    <div class="row gaisbock-custom-text-image-slider-component-image-text-separate-grid {{ element.config.TextImagePosition.value != null ? element.config.TextImagePosition.value : 'TextBeforeImage' }}" data-gaisbock-addmore-section>
+    <div class="row gaisbock-custom-text-image-slider-component-image-text-separate-grid {{ element.config.TextImagePosition.value != null ? element.config.TextImagePosition.value : 'TextBeforeImage' }}">
 
         <div class="gaisbock-custom-text-image-slider-component-media-slider" >
             <div class="col-12" data-cms-element-id="{{ element.id }}">
