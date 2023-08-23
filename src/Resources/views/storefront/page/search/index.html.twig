@@ -11,9 +11,13 @@
                     {% block page_search_headline %}
                         <h1 class="search-headline mt-5">
                             {% block page_search_headline_text %}
-                                {{ "search.headline"|trans({
-                                    '%searchTerm%': page.searchTerm,
-                                }) }}
+                                {% if page.listing.total == 0 %}
+                                    {{ "search.noCount"|trans }}
+                                {% else %}
+                                    {{ "search.headline"|trans({
+                                        '%searchTerm%': page.searchTerm,
+                                    }) }}
+                                {% endif %}
                             {% endblock %}
                         </h1>
                     {% endblock %}
