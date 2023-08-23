@@ -188,6 +188,12 @@
         font-family: $sw-font-family-headline;
         font-weight: $sw-headings-font-weight;
         margin-bottom: 0px;
+        font-size: 34px;
+        @media(max-width:767px) {
+            font-size: 29px; 
+            line-height: 32px;
+            letter-spacing: 0.14px;
+        }
     }
     p{
         color: $sw-color-brand-primary;
@@ -293,6 +299,8 @@
             font-size: 24px;
             line-height: 32px;
             color: $sw-color-brand-primary;
+            font-family: $sw-font-family-headline;
+            font-weight: 500;
         }
         .gaisbock-image-button{
             margin: 30px auto 0;
@@ -459,7 +467,7 @@
     }
 }
 .instagram-feed-section {
-    margin-top: 60px;
+    margin-top: 70px;
     .insta-heading {
         text-align: center;
         .insta-svg {
