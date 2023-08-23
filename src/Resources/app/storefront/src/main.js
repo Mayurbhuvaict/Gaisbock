@@ -7,6 +7,7 @@ import gaisbockHeaderHoverAddClass from './js/gaisbock-header-hover-add-class.pl
 import gaisbockRefreshPage from './js/gaisbock-refresh-page.plugin';
 import gaisbockMenuButtonClass from './js/gaisbock-menu-button-class.plugin';
 import gaisbockAnimaion from './js/gaisbock-animation.plugin';
+import gaisbockImageWithAddmoreSlider from './js/gaisbock-Image-with-addmore-slider.plugin';
 
 const PluginManager = window.PluginManager;
 PluginManager.register('gaisbockAddmoreSection',gaisbockAddmoreSection,'[data-gaisbock-addmore-section]');
@@ -18,3 +19,4 @@ PluginManager.override('FlyoutMenu',gaisbockHeaderHoverAddClass,'[data-flyout-me
 PluginManager.register('gaisbockRefreshPage',gaisbockRefreshPage,'[data-refresh-page]');
 PluginManager.override('OffcanvasMenu',gaisbockMenuButtonClass,'[data-offcanvas-menu]');
 PluginManager.register('gaisbockAnimaion',gaisbockAnimaion,'[data-gaisbock-animation]');
+PluginManager.register('gaisbockImageWithAddmoreSlider',gaisbockImageWithAddmoreSlider,'[data-gaisbock-image-with-addmore-slider]');

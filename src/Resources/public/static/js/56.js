@@ -1,1 +1,0 @@
-(this.webpackJsonpPlugingaisbock=this.webpackJsonpPlugingaisbock||[]).push([[56],{ku8b:function(i,s,e){"use strict";e.r(s);s.default={template:'{% block sw_cms_block_gaisbock_listpage_text_image %}\n    <div class="sw-cms-preview-gaisbock-image-text">\n        <div>\n            <h1>Lorem ipsum dolor</h1>\n        </div>\n    </div>\n{% endblock %}'}}}]);

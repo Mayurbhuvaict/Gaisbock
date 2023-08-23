@@ -1,19 +1,17 @@
 import Plugin from 'src/plugin-system/plugin.class';
 
-export default class gaisbockAddmoreSection extends Plugin {
+export default class gaisbockImageWithAddmoreSlider extends Plugin {
     init() {
-        this._gaisbockAddMore();
+        this._gaisbockAddMoreWithSlider();
     }
 
-    _gaisbockAddMore() {
-
-        let language = document.querySelector(".readmore-btn") ? document.querySelector(".readmore-btn").getAttribute("data-language-value") : null;
-        var toggleButton = document.querySelectorAll(".readmore-btn");
-
+    _gaisbockAddMoreWithSlider(){
+        let language = document.querySelector("#readMoreSlider") ? document.querySelector("#readMoreSlider").getAttribute("data-language-value") : null;
+        var toggleButton = document.querySelectorAll(".readmore-btn-slider");
         if(toggleButton !== null) {
             toggleButton.forEach((button) => {
                 const id = button.getAttribute("data-diffrent");
-                var textDiv = document.getElementById("gaisbock-addmore-section-"+id);
+                var textDiv = document.getElementById("gaisbock-custom-text-image-slider-"+id);
                 button.addEventListener("click", function () {
                     if (language === "de-DE") {
                         button.textContent = button.textContent === "Mehr lesen" ? "Weniger lesen" : "Mehr lesen";
