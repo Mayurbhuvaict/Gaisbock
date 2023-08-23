@@ -1,4 +1,7 @@
 {
+  "header": {
+    "searchPlaceholder": "Suchbegriff eingeben"
+  },
   "footer": {
     "newsletter" : {
       "titleOne": "GAISBOCK <br>PREMIUM-MEMBER WERDEN",
@@ -54,7 +57,8 @@
     }
   },
   "search": {
-    "headline": "Keine Produktübereinstimmungen gefunden | Produktübereinstimmungen:"
+    "headline": "Produktübereinstimmungen:",
+    "noCount": "Keine Produktübereinstimmungen gefunden"
   },
   "customer-group-register": {
     "data": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit.<br> Aenean commodo ligula eget dolor."

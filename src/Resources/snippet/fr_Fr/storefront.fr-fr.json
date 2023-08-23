@@ -1,4 +1,7 @@
 {
+  "header": {
+    "searchPlaceholder": "Saisir le terme de recherche"
+  },
   "footer": {
     "newsletter" : {
       "titleOne": "Lorem ipsum <br>PREMIUM-MEMBER WERDEN",
@@ -54,7 +57,8 @@
     }
   },
   "search": {
-    "headline": "Aucune correspondance de produit trouvée | Correspondances de produits:"
+    "headline": "Correspondances de produits:",
+    "noCount": "Aucune correspondance de produit trouvée"
   },
   "customer-group-register": {
     "data": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit.<br> Aenean commodo ligula eget dolor."
