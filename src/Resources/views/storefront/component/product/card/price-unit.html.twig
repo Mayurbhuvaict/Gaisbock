@@ -20,17 +20,16 @@
     <div class="product-price-info">
         {% block component_product_box_price_unit %}
             <p class="product-price-unit">
+
                 {# Price is based on the purchase unit #}
                 {% block component_product_box_price_purchase_unit %}
 
                 {% endblock %}
                 {# Item price is based on a reference unit #}
                 {% block component_product_box_price_reference_unit %}
-                    {% if referencePrice is not null %}
                         <span class="price-unit-reference">
                             {{ product.customFields['gaisbock_product_detail_extra_details_contain'] }}
                         </span>
-                    {% endif %}
                 {% endblock %}
             </p>
         {% endblock %}

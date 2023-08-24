@@ -11,80 +11,6 @@
                     <div class="cms-element-alignment{% if sliderConfig.verticalAlign.value == "center" %} align-self-center{% elseif sliderConfig.verticalAlign.value == "flex-end" %} align-self-end{% else %} align-self-start{% endif %}">
                 {% endif %}
 
-                {% set productSliderOptions = {
-
-                    slider: {
-                        gutter: 0,
-                        autoplayButtonOutput: false,
-                        nav: true,
-                        items: 3,
-                        mouseDrag: sliderConfig.navigation.value ? false : true,
-                        controls: sliderConfig.navigation.value ? true : false,
-                        autoplay: sliderConfig.rotate.value ? true : false,
-                    }
-                } %}
-
-{#                {% block element_product_slider_slider %}#}
-{#                    <div#}
-{#                        class="base-slider product-slider{% if sliderConfig.border.value %} has-border{% endif %}{% if sliderConfig.navigation.value %} has-nav{% endif %}"#}
-{#                        data-product-slider="true"#}
-{#                        data-product-slider-options="{{ productSliderOptions|json_encode }}">#}
-
-{#                        {% block element_product_slider_title %}#}
-{#                            {% if sliderConfig.title.value %}#}
-{#                                <div class="cms-element-title">#}
-{#                                    <p class="cms-element-title-paragraph">{{ sliderConfig.title.value }}</p>#}
-{#                                </div>#}
-{#                            {% endif %}#}
-{#                        {% endblock %}#}
-
-{#                        {% block element_product_slider_inner %}#}
-{#                            {% block element_product_slider_element %}#}
-{#                                <div class="product-slider-container"#}
-{#                                     data-product-slider-container="true">#}
-{#                                    {% for product in element.data.products.elements %}#}
-{#                                        {% block element_product_slider_inner_item %}#}
-{#                                            <div class="product-slider-item">#}
-{#                                                {% sw_include '@Storefront/storefront/component/product/card/box.html.twig' with {#}
-{#                                                    'layout': sliderConfig.boxLayout.value,#}
-{#                                                    'displayMode': sliderConfig.displayMode.value#}
-{#                                                } %}#}
-{#                                            </div>#}
-{#                                        {% endblock %}#}
-{#                                    {% endfor %}#}
-{#                                </div>#}
-{#                            {% endblock %}#}
-
-{#                            {% block element_product_slider_controls %}#}
-{#                                {% if sliderConfig.navigation.value %}#}
-{#                                    <div class="product-slider-controls-container">#}
-{#                                        <div class="base-slider-controls"#}
-{#                                             data-product-slider-controls="true">#}
-{#                                            {% block element_product_slider_controls_items %}#}
-{#                                                <button#}
-{#                                                    class="base-slider-controls-prev product-slider-controls-prev{% if sliderConfig.border.value %} has-border{% endif %}">#}
-{#                                                    {% block element_product_slider_controls_items_prev_icon %}#}
-{#                                                        {% sw_icon 'arrow-head-left' %}#}
-{#                                                    {% endblock %}#}
-{#                                                </button>#}
-{#                                                <button#}
-{#                                                    class="base-slider-controls-next product-slider-controls-next{% if sliderConfig.border.value %} has-border{% endif %}">#}
-{#                                                    {% block element_product_slider_controls_items_next_icon %}#}
-{#                                                        {% sw_icon 'arrow-head-right' %}#}
-{#                                                    {% endblock %}#}
-{#                                                </button>#}
-{#                                            {% endblock %}#}
-{#                                        </div>#}
-{#                                    </div>#}
-{#                                {% endif %}#}
-{#                            {% endblock %}#}
-{#                        {% endblock %}#}
-{#                    </div>#}
-{#                {% endblock %}#}
-{#                {% if config.verticalAlign.value %}#}
-{#                    </div>#}
-{#                {% endif %}#}
-
                 {% block element_product_slider_slider %}
                     <div
                             class="base-slider product-slider{% if sliderConfig.border.value %} has-border{% endif %}{% if sliderConfig.navigation.value %} has-nav{% endif %}">
@@ -98,9 +24,8 @@
                         {% endblock %}
                         {% block element_product_slider_inner %}
                             {% block element_product_slider_element %}
-                                <div class="product-slider-container"
-                                     data-product-slider-container="true">
-                                    <div class="gaisbock-product-sliders-{{ element.data.products.elements|first.id }}">
+                                <div class="product-slider-container">
+                                    <div class="gaisbock-product-sliders">
                                         {% for product in element.data.products.elements %}
                                             {% block element_product_slider_inner_item %}
                                                 <div class="product-slider-item">
@@ -131,18 +56,20 @@
     {% endif %}
     <script>
             var slider = tns({
-                container: '.gaisbock-product-sliders-{{ element.data.products.elements|first.id }}',
+                container: '.product-detail-cross-selling .gaisbock-product-sliders',
                 items: 3,
                 autoplay: true,
                 autoplayButtonOutput:false,
-                controlsContainer:'#gaisbock-controls-{{ element.data.products.elements|first.id }}',
-                prevButton:'.gaisbock-button-previous-{{ element.data.products.elements|first.id }}',
-                nextButton:'.gaisbock-property-button-next-{{ element.data.products.elements|first.id }}',
                 nav: false,
                 controls:true,
                 responsive: {
                     320: {
                         items: 2
+                    },
+                    767: {
+                        controlsContainer:'div#cs-recentlyViewed-tab-pane #gaisbock-controls',
+                        prevButton:'div#cs-recentlyViewed-tab-pane .gaisbock-button-previous',
+                        nextButton:'div#cs-recentlyViewed-tab-pane .gaisbock-property-button-next',
                     },
                     992: {
                         items: 3
@@ -152,6 +79,83 @@
                     }
                 }
             });
-        // }
+    </script>
+    <script>
+        var slider = tns({
+            container: 'div#cs-productsSameCategory-tab-pane .gaisbock-product-sliders',
+            items: 3,
+            autoplay: true,
+            autoplayButtonOutput:false,
+            nav: false,
+            controls:true,
+            responsive: {
+                320: {
+                    items: 2
+                },
+                767: {
+                    controlsContainer:'div#cs-recentlyViewed-tab-pane #gaisbock-controls',
+                    prevButton:'div#cs-recentlyViewed-tab-pane .gaisbock-button-previous',
+                    nextButton:'div#cs-recentlyViewed-tab-pane .gaisbock-property-button-next',
+                },
+                992: {
+                    items: 3
+                },
+                1023: {
+                    items: 3
+                }
+            }
+        });
+    </script>
+    <script>
+        var slider = tns({
+            container: 'div#cs-recentlyViewed-tab-pane .gaisbock-product-sliders',
+            items: 3,
+            autoplay: true,
+            autoplayButtonOutput:false,
+            nav: false,
+            controls:true,
+            responsive: {
+                320: {
+                    items: 2
+                },
+                767: {
+                    controlsContainer:'div#cs-recentlyViewed-tab-pane #gaisbock-controls',
+                    prevButton:'div#cs-recentlyViewed-tab-pane .gaisbock-button-previous',
+                    nextButton:'div#cs-recentlyViewed-tab-pane .gaisbock-property-button-next',
+                },
+                992: {
+                    items: 3
+                },
+                1023: {
+                    items: 3
+                }
+            }
+        });
+    </script>
+    <script>
+        var slider = tns({
+            container: 'div#cs-customersAlsoViewed-tab-pane .gaisbock-product-sliders',
+            items: 3,
+            autoplay: true,
+            autoplayButtonOutput:false,
+            nav: false,
+            controls:true,
+            responsive: {
+                320: {
+                    items: 2
+                },
+                767: {
+                    controlsContainer:'div#cs-recentlyViewed-tab-pane #gaisbock-controls',
+                    prevButton:'div#cs-recentlyViewed-tab-pane .gaisbock-button-previous',
+                    nextButton:'div#cs-recentlyViewed-tab-pane .gaisbock-property-button-next',
+                },
+                992: {
+                    items: 3
+                },
+                1023: {
+                    items: 3
+                }
+            }
+        });
     </script>
 {% endblock %}
