@@ -301,6 +301,9 @@ a.header-black-logo-main-link,
 }
 
 @include media-breakpoint-down(lg) {
+    .cart-offcanvas {
+        z-index: 99999 !important;
+    }
     .hovered-header .gaisbock-header-mobile-text-logo-white, .is-act-home .hovered-header .gaisbock-header-mobile-text-logo-white {
         padding-left: 40px;
     }
