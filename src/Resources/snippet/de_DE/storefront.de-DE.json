@@ -64,12 +64,8 @@
     }
   },
   "search": {
-<<<<<<< HEAD
-    "headline": "Produkt passt zu:"
-=======
-    "headline": "Produktübereinstimmungen:",
+    "headline": "Produkt passt zu:",
     "noCount": "Keine Produktübereinstimmungen gefunden"
->>>>>>> 6bf40cd7e840c99c60c55f95a2579329bbe95f4b
   },
   "customer-group-register": {
     "data": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit.<br> Aenean commodo ligula eget dolor."
