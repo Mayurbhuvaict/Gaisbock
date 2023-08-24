@@ -26,6 +26,7 @@
 }
 .breadcrumb.cms-breadcrumb {
     padding: 0;
+    margin-bottom: 0;
 }
 .cms-block-gaisbock-listpage-text-image{
     position: absolute;
@@ -77,5 +78,8 @@
     }
     .page-title-name .cms-block-container {
         padding-top: 0 !important;
+    }
+    body .breadcrumb.cms-breadcrumb {
+        padding-top: 10px;
     }
 }

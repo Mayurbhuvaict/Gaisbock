@@ -23,7 +23,7 @@
                 max-width: 768px;
             }
             @media(max-width:992px) {
-                top:42px !important;
+                top:73px !important;
                 max-width: 530px;
             }
             @media(max-width:767px) {
@@ -32,12 +32,17 @@
                 width: 100%;
                 max-width: 100%;
                 right: 0;
-                top:42px;
+                top:73px;
                 height: 100%;
                 z-index: 9;
             }
             .header-search {
                 max-width: 100%;
+                .input-group {
+                    @media(max-width:767px) {
+                        width: 91%;
+                    }
+                }
                 input {
                     background: transparent;
                     border: 0;
@@ -56,8 +61,12 @@
                         font-size: 24px;
                         line-height: 26px;
                         letter-spacing: 0.12px;
+                        border-radius: 0;
+                        box-shadow: none;
+                        text-shadow: none;
+                        width:100%;
                     }
-                    @media(max-wdith:767px) {
+                    @media(max-width:767px) {
                         margin-top: 60px;
                     }
                     &::placeholder {
