@@ -54,128 +54,128 @@
             {% endblock %}
         </div>
     {% endif %}
-    <script>
-        var slider = document.querySelector('.product-detail-cross-selling');
-        if (slider) {
-            var slider = tns({
-                container: '.product-detail-cross-selling .gaisbock-product-sliders',
-                items: 3,
-                autoplay: true,
-                autoplayButtonOutput: false,
-                controlsContainer: '.product-detail-cross-selling #gaisbock-controls',
-                prevButton: '.product-detail-cross-selling .gaisbock-button-previous',
-                nextButton: '.product-detail-cross-selling .gaisbock-property-button-next',
-                nav: false,
-                controls: false,
-                responsive: {
-                    320: {
-                        items: 2,
-                        controls: true,
-                    },
-                    767: {
-                        controls: true,
-                    },
-                    992: {
-                        items: 3
-                    },
-                    1023: {
-                        items: 3
-                    }
-                }
-            });
-        }
-    </script>
-    <script>
-        var slider = document.querySelector('div#cs-productsSameCategory-tab-pane');
-        if (slider) {
-            var slider = tns({
-                container: 'div#cs-productsSameCategory-tab-pane .gaisbock-product-sliders',
-                items: 3,
-                autoplay: true,
-                autoplayButtonOutput: false,
-                controlsContainer: 'div#cs-productsSameCategory-tab-pane  #gaisbock-controls',
-                prevButton: 'div#cs-productsSameCategory-tab-pane .gaisbock-button-previous',
-                nextButton: 'div#cs-productsSameCategory-tab-pane .gaisbock-property-button-next',
-                nav: false,
-                controls: false,
-                responsive: {
-                    320: {
-                        items: 2,
-                        controls: true,
-                    },
-                    767: {
-                        controls: true,
-                    },
-                    992: {
-                        items: 3
-                    },
-                    1023: {
-                        items: 3
-                    }
-                }
-            });
-        }
-    </script>
-    <script>
-        var slider = document.querySelector('div#cs-recentlyViewed-tab-pane');
-        if (slider) {
-            var slider = tns({
-                container: 'div#cs-recentlyViewed-tab-pane .gaisbock-product-sliders',
-                items: 3,
-                autoplay: true,
-                autoplayButtonOutput: false,
-                controlsContainer: 'div#cs-recentlyViewed-tab-pane #gaisbock-controls',
-                prevButton: 'div#cs-recentlyViewed-tab-pane .gaisbock-button-previous',
-                nextButton: 'div#cs-recentlyViewed-tab-pane .gaisbock-property-button-next',
-                nav: false,
-                controls: false,
-                responsive: {
-                    320: {
-                        items: 2,
-                        controls: true,
-                    },
-                    767: {
-                        controls: true,
-                    },
-                    992: {
-                        items: 3
-                    },
-                    1023: {
-                        items: 3
-                    }
-                }
-            });
-        }
-    </script>
-    <script>
-        var slider = document.querySelector('div#cs-customersAlsoViewed-tab-pane');
-        if (slider) {
-            var slider = tns({
-                container: 'div#cs-customersAlsoViewed-tab-pane .gaisbock-product-sliders',
-                items: 3,
-                autoplay: true,
-                autoplayButtonOutput: false,
-                controlsContainer: 'div#cs-customersAlsoViewed-tab-pane #gaisbock-controls',
-                prevButton: 'div#cs-customersAlsoViewed-tab-pane .gaisbock-button-previous',
-                nextButton: 'div#cs-customersAlsoViewed-tab-pane .gaisbock-property-button-next',
-                nav: false,
-                controls: false,
-                responsive: {
-                    320: {
-                        items: 2,
-                        controls: true,
-                    },
-                    767: {
-                        controls: true,
-                    },
-                    992: {
-                        items: 3
-                    },
-                    1023: {
-                        items: 3
-                    }
-                }
-            });
-        }
-    </script>
+{#    <script>#}
+{#        var slider = document.querySelector('.product-detail-cross-selling');#}
+{#        if (slider) {#}
+{#            var slider = tns({#}
+{#                container: '.product-detail-cross-selling .gaisbock-product-sliders',#}
+{#                items: 3,#}
+{#                autoplay: true,#}
+{#                autoplayButtonOutput: false,#}
+{#                controlsContainer: '.product-detail-cross-selling #gaisbock-controls',#}
+{#                prevButton: '.product-detail-cross-selling .gaisbock-button-previous',#}
+{#                nextButton: '.product-detail-cross-selling .gaisbock-property-button-next',#}
+{#                nav: false,#}
+{#                controls: false,#}
+{#                responsive: {#}
+{#                    320: {#}
+{#                        items: 2,#}
+{#                        controls: true,#}
+{#                    },#}
+{#                    767: {#}
+{#                        controls: true,#}
+{#                    },#}
+{#                    992: {#}
+{#                        items: 3#}
+{#                    },#}
+{#                    1023: {#}
+{#                        items: 3#}
+{#                    }#}
+{#                }#}
+{#            });#}
+{#        }#}
+{#    </script>#}
+{#    <script>#}
+{#        var slider = document.querySelector('div#cs-productsSameCategory-tab-pane');#}
+{#        if (slider) {#}
+{#            var slider = tns({#}
+{#                container: 'div#cs-productsSameCategory-tab-pane .gaisbock-product-sliders',#}
+{#                items: 3,#}
+{#                autoplay: true,#}
+{#                autoplayButtonOutput: false,#}
+{#                controlsContainer: 'div#cs-productsSameCategory-tab-pane  #gaisbock-controls',#}
+{#                prevButton: 'div#cs-productsSameCategory-tab-pane .gaisbock-button-previous',#}
+{#                nextButton: 'div#cs-productsSameCategory-tab-pane .gaisbock-property-button-next',#}
+{#                nav: false,#}
+{#                controls: false,#}
+{#                responsive: {#}
+{#                    320: {#}
+{#                        items: 2,#}
+{#                        controls: true,#}
+{#                    },#}
+{#                    767: {#}
+{#                        controls: true,#}
+{#                    },#}
+{#                    992: {#}
+{#                        items: 3#}
+{#                    },#}
+{#                    1023: {#}
+{#                        items: 3#}
+{#                    }#}
+{#                }#}
+{#            });#}
+{#        }#}
+{#    </script>#}
+{#    <script>#}
+{#        var slider = document.querySelector('div#cs-recentlyViewed-tab-pane');#}
+{#        if (slider) {#}
+{#            var slider = tns({#}
+{#                container: 'div#cs-recentlyViewed-tab-pane .gaisbock-product-sliders',#}
+{#                items: 3,#}
+{#                autoplay: true,#}
+{#                autoplayButtonOutput: false,#}
+{#                controlsContainer: 'div#cs-recentlyViewed-tab-pane #gaisbock-controls',#}
+{#                prevButton: 'div#cs-recentlyViewed-tab-pane .gaisbock-button-previous',#}
+{#                nextButton: 'div#cs-recentlyViewed-tab-pane .gaisbock-property-button-next',#}
+{#                nav: false,#}
+{#                controls: false,#}
+{#                responsive: {#}
+{#                    320: {#}
+{#                        items: 2,#}
+{#                        controls: true,#}
+{#                    },#}
+{#                    767: {#}
+{#                        controls: true,#}
+{#                    },#}
+{#                    992: {#}
+{#                        items: 3#}
+{#                    },#}
+{#                    1023: {#}
+{#                        items: 3#}
+{#                    }#}
+{#                }#}
+{#            });#}
+{#        }#}
+{#    </script>#}
+{#    <script>#}
+{#        var slider = document.querySelector('div#cs-customersAlsoViewed-tab-pane');#}
+{#        if (slider) {#}
+{#            var slider = tns({#}
+{#                container: 'div#cs-customersAlsoViewed-tab-pane .gaisbock-product-sliders',#}
+{#                items: 3,#}
+{#                autoplay: true,#}
+{#                autoplayButtonOutput: false,#}
+{#                controlsContainer: 'div#cs-customersAlsoViewed-tab-pane #gaisbock-controls',#}
+{#                prevButton: 'div#cs-customersAlsoViewed-tab-pane .gaisbock-button-previous',#}
+{#                nextButton: 'div#cs-customersAlsoViewed-tab-pane .gaisbock-property-button-next',#}
+{#                nav: false,#}
+{#                controls: false,#}
+{#                responsive: {#}
+{#                    320: {#}
+{#                        items: 2,#}
+{#                        controls: true,#}
+{#                    },#}
+{#                    767: {#}
+{#                        controls: true,#}
+{#                    },#}
+{#                    992: {#}
+{#                        items: 3#}
+{#                    },#}
+{#                    1023: {#}
+{#                        items: 3#}
+{#                    }#}
+{#                }#}
+{#            });#}
+{#        }#}
+{#    </script>#}
 {% endblock %}
