@@ -40,9 +40,9 @@
                                     </div>
                                 </div>
                             {% endblock %}
-                            <div id="gaisbock-controls-{{ element.data.products.elements|first.id }}" class="">
-                                <span class="gaisbock-button-previous-{{ element.data.products.elements|first.id }}">{% sw_icon 'ic-chevron-right-dark' style {'pack': 'gaisbock','class':'gaisbock-left'} %}</span>
-                                <span class="gaisbock-property-button-next-{{ element.data.products.elements|first.id }}">{% sw_icon 'ic-chevron-right-dark' style {'pack': 'gaisbock','class':'gaisbock-right'} %}</span>
+                            <div id="gaisbock-controls" class="">
+                                <span class="gaisbock-button-previous">{% sw_icon 'ic-chevron-right-dark' style {'pack': 'gaisbock','class':'gaisbock-left'} %}</span>
+                                <span class="gaisbock-property-button-next">{% sw_icon 'ic-chevron-right-dark' style {'pack': 'gaisbock','class':'gaisbock-right'} %}</span>
                             </div>
                         {% endblock %}
 
@@ -55,21 +55,25 @@
         </div>
     {% endif %}
     <script>
+        var slider = document.querySelector('.product-detail-cross-selling');
+        if (slider) {
             var slider = tns({
                 container: '.product-detail-cross-selling .gaisbock-product-sliders',
                 items: 3,
                 autoplay: true,
-                autoplayButtonOutput:false,
+                autoplayButtonOutput: false,
+                controlsContainer: '.product-detail-cross-selling #gaisbock-controls',
+                prevButton: '.product-detail-cross-selling .gaisbock-button-previous',
+                nextButton: '.product-detail-cross-selling .gaisbock-property-button-next',
                 nav: false,
-                controls:true,
+                controls: false,
                 responsive: {
                     320: {
-                        items: 2
+                        items: 2,
+                        controls: true,
                     },
                     767: {
-                        controlsContainer:'div#cs-recentlyViewed-tab-pane #gaisbock-controls',
-                        prevButton:'div#cs-recentlyViewed-tab-pane .gaisbock-button-previous',
-                        nextButton:'div#cs-recentlyViewed-tab-pane .gaisbock-property-button-next',
+                        controls: true,
                     },
                     992: {
                         items: 3
@@ -79,83 +83,99 @@
                     }
                 }
             });
+        }
     </script>
     <script>
-        var slider = tns({
-            container: 'div#cs-productsSameCategory-tab-pane .gaisbock-product-sliders',
-            items: 3,
-            autoplay: true,
-            autoplayButtonOutput:false,
-            nav: false,
-            controls:true,
-            responsive: {
-                320: {
-                    items: 2
-                },
-                767: {
-                    controlsContainer:'div#cs-recentlyViewed-tab-pane #gaisbock-controls',
-                    prevButton:'div#cs-recentlyViewed-tab-pane .gaisbock-button-previous',
-                    nextButton:'div#cs-recentlyViewed-tab-pane .gaisbock-property-button-next',
-                },
-                992: {
-                    items: 3
-                },
-                1023: {
-                    items: 3
+        var slider = document.querySelector('div#cs-productsSameCategory-tab-pane');
+        if (slider) {
+            var slider = tns({
+                container: 'div#cs-productsSameCategory-tab-pane .gaisbock-product-sliders',
+                items: 3,
+                autoplay: true,
+                autoplayButtonOutput: false,
+                controlsContainer: 'div#cs-productsSameCategory-tab-pane  #gaisbock-controls',
+                prevButton: 'div#cs-productsSameCategory-tab-pane .gaisbock-button-previous',
+                nextButton: 'div#cs-productsSameCategory-tab-pane .gaisbock-property-button-next',
+                nav: false,
+                controls: false,
+                responsive: {
+                    320: {
+                        items: 2,
+                        controls: true,
+                    },
+                    767: {
+                        controls: true,
+                    },
+                    992: {
+                        items: 3
+                    },
+                    1023: {
+                        items: 3
+                    }
                 }
-            }
-        });
+            });
+        }
     </script>
     <script>
-        var slider = tns({
-            container: 'div#cs-recentlyViewed-tab-pane .gaisbock-product-sliders',
-            items: 3,
-            autoplay: true,
-            autoplayButtonOutput:false,
-            nav: false,
-            controls:true,
-            responsive: {
-                320: {
-                    items: 2
-                },
-                767: {
-                    controlsContainer:'div#cs-recentlyViewed-tab-pane #gaisbock-controls',
-                    prevButton:'div#cs-recentlyViewed-tab-pane .gaisbock-button-previous',
-                    nextButton:'div#cs-recentlyViewed-tab-pane .gaisbock-property-button-next',
-                },
-                992: {
-                    items: 3
-                },
-                1023: {
-                    items: 3
+        var slider = document.querySelector('div#cs-recentlyViewed-tab-pane');
+        if (slider) {
+            var slider = tns({
+                container: 'div#cs-recentlyViewed-tab-pane .gaisbock-product-sliders',
+                items: 3,
+                autoplay: true,
+                autoplayButtonOutput: false,
+                controlsContainer: 'div#cs-recentlyViewed-tab-pane #gaisbock-controls',
+                prevButton: 'div#cs-recentlyViewed-tab-pane .gaisbock-button-previous',
+                nextButton: 'div#cs-recentlyViewed-tab-pane .gaisbock-property-button-next',
+                nav: false,
+                controls: false,
+                responsive: {
+                    320: {
+                        items: 2,
+                        controls: true,
+                    },
+                    767: {
+                        controls: true,
+                    },
+                    992: {
+                        items: 3
+                    },
+                    1023: {
+                        items: 3
+                    }
                 }
-            }
-        });
+            });
+        }
     </script>
     <script>
-        var slider = tns({
-            container: 'div#cs-customersAlsoViewed-tab-pane .gaisbock-product-sliders',
-            items: 3,
-            autoplay: true,
-            autoplayButtonOutput:false,
-            nav: false,
-            controls:true,
-            responsive: {
-                320: {
-                    items: 2
-                },
-                767: {
-                    controlsContainer:'div#cs-recentlyViewed-tab-pane #gaisbock-controls',
-                    prevButton:'div#cs-recentlyViewed-tab-pane .gaisbock-button-previous',
-                    nextButton:'div#cs-recentlyViewed-tab-pane .gaisbock-property-button-next',
-                },
-                992: {
-                    items: 3
-                },
-                1023: {
-                    items: 3
+        var slider = document.querySelector('div#cs-customersAlsoViewed-tab-pane');
+        if (slider) {
+            var slider = tns({
+                container: 'div#cs-customersAlsoViewed-tab-pane .gaisbock-product-sliders',
+                items: 3,
+                autoplay: true,
+                autoplayButtonOutput: false,
+                controlsContainer: 'div#cs-customersAlsoViewed-tab-pane #gaisbock-controls',
+                prevButton: 'div#cs-customersAlsoViewed-tab-pane .gaisbock-button-previous',
+                nextButton: 'div#cs-customersAlsoViewed-tab-pane .gaisbock-property-button-next',
+                nav: false,
+                controls: false,
+                responsive: {
+                    320: {
+                        items: 2,
+                        controls: true,
+                    },
+                    767: {
+                        controls: true,
+                    },
+                    992: {
+                        items: 3
+                    },
+                    1023: {
+                        items: 3
+                    }
                 }
-            }
-        });
+            });
+        }
     </script>
 {% endblock %}
