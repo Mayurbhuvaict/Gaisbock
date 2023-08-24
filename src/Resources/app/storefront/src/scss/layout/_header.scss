@@ -379,12 +379,31 @@ a.header-black-logo-main-link,
     .languages-menu.dropdown span.top-bar-nav-text {
         display: block;
         color: #fff;
+        font-weight: 700;
     }
     .languages-menu {
         position: fixed;
         right: 8px;
         top: 50%;
         z-index: 99;
+        .top-bar-list {
+            min-width: 19px;
+            width: 19px;
+            top: -2px !important;
+            padding: 0;
+            background: $sw-color-brand-primary;
+            border: 0;
+            .top-bar-list-item {
+                color: #fff;
+                padding: 0;
+                label {
+                    letter-spacing: 0.77px;
+                    font-size: 11px;
+                    line-height: 11px;
+                    text-align: center;
+                }
+            }
+        }
     }
     .languages-menu .btn, .languages-menu .btn:hover, .languages-menu .btn:active{
         background:$sw-color-brand-primary;
