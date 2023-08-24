@@ -129,6 +129,25 @@
                 <div class="container">
                     {% block base_main_container %}
                         <div class="container-main" data-gaisbock-header-hover-add-class>
+
+                            {% if app.request.get('_route') === 'frontend.account.login.page' %}
+                            <nav aria-label="breadcrumb">
+                                <ol class="breadcrumb">
+                                    <li class="breadcrumb-item">
+                                        <a href="{{ app.request.server.get('APP_URL') }}" class="breadcrumb-link">{{ 'account.home.title'|trans|sw_sanitize }}</a> / {{ 'account.registrationTitle'|trans|sw_sanitize }}
+                                    </li>
+                                </ol>
+                            </nav>
+                            {% endif %}
+                            {% if app.request.get('_route') === 'frontend.account.customer-group-registration.page' %}
+                                <nav aria-label="breadcrumb">
+                                    <ol class="breadcrumb">
+                                        <li class="breadcrumb-item">
+                                            <a href="{{ app.request.server.get('APP_URL') }}" class="breadcrumb-link">{{ 'account.home.title'|trans|sw_sanitize }}</a> / {{ 'account.patner'|trans|sw_sanitize }}
+                                        </li>
+                                    </ol>
+                                </nav>
+                            {% endif %}
                             {% block base_breadcrumb %}
                                 {% sw_include '@Storefront/storefront/layout/breadcrumb.html.twig' with {
                                     context: context,
