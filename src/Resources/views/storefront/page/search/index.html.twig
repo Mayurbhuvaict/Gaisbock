@@ -11,7 +11,17 @@
                     {% block page_search_headline %}
                         <h1 class="search-headline mt-5">
                             {% block page_search_headline_text %}
+<<<<<<< HEAD
                                 {{ "search.headline"|trans|sw_sanitize }}
+=======
+                                {% if page.listing.total == 0 %}
+                                    {{ "search.noCount"|trans }}
+                                {% else %}
+                                    {{ "search.headline"|trans({
+                                        '%searchTerm%': page.searchTerm,
+                                    }) }}
+                                {% endif %}
+>>>>>>> 6bf40cd7e840c99c60c55f95a2579329bbe95f4b
                             {% endblock %}
                         </h1>
                     {% endblock %}

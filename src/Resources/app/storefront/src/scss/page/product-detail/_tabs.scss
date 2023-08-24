@@ -1,0 +1,26 @@
+.acris-suggested-products-tab {
+    .card-tabs {
+        .product-detail-tab-navigation {
+            display: none;
+        }
+        .product-detail-tabs-content {
+            .tab-pane {
+                display: block !important;
+                opacity: 1 !important;
+                .cms-element-title {
+                    display: block;
+                    p {
+                        text-align: center;
+                        font-size: 25px;
+                        line-height: 31px;
+                        letter-spacing: 0.13px;
+                        font-family: $sw-font-family-headline;
+                        margin-bottom: 4px;
+                    }
+                }
+            }
+        }
+    }
+}
+
+
