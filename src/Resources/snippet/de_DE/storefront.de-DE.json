@@ -51,6 +51,13 @@
     "viewRatings": "Bewertungen anschauen"
   },
   "account": {
+    "loginTitle": "Anmelden",
+    "registerTitle": "Registrieren",
+    "registrationTitle": "Registrierung",
+    "patner": "Partner werden",
+    "home": {
+      "title": "Home"
+    },
     "header": {
       "name": "Registrierte Kunden",
       "customerGroup": "Partner werden<br> ipsum dolor sit ametin"

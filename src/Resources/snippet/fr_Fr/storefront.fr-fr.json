@@ -51,6 +51,13 @@
     "viewRatings": "Voir les évaluations"
   },
   "account": {
+    "loginTitle": "Connexion",
+    "registerTitle": "S'inscrire",
+    "registrationTitle": "Inscription",
+    "patner": "Devenir partenaire",
+    "home": {
+      "title": "Home"
+    },
     "header": {
       "name": "Clients enregistrés",
       "customerGroup": "Partner werden<br> ipsum dolor sit ametin"

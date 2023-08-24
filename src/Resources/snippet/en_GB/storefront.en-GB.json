@@ -51,6 +51,16 @@
     "viewRatings": "View ratings"
   },
   "account": {
+    "loginTitle": "Login",
+    "registerTitle": "Register",
+    "registrationTitle": "Registration",
+    "patner": "Become partner",
+    "loginMail":"EMAIL",
+    "loginPassword": "PASSWORD",
+    "loginRecover": "Password forgotten?",
+    "home": {
+      "title": "Home"
+    },
     "header": {
       "name": "Registered Customers",
       "customerGroup": "Partner werden<br> ipsum dolor sit ametin"
