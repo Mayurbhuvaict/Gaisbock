@@ -23,7 +23,7 @@
                 max-width: 768px;
             }
             @media(max-width:992px) {
-                top:73px !important;
+                top:72px !important;
                 max-width: 530px;
             }
             @media(max-width:767px) {
@@ -32,7 +32,7 @@
                 width: 100%;
                 max-width: 100%;
                 right: 0;
-                top:73px;
+                top:72px;
                 height: 100%;
                 z-index: 9;
             }
@@ -41,6 +41,7 @@
                 .input-group {
                     @media(max-width:767px) {
                         width: 91%;
+                        margin: 0 auto;
                     }
                 }
                 input {
@@ -84,6 +85,91 @@
                         }
                     }
                 }
+            }
+        }
+    }
+
+    @include media-breakpoint-down(md){  
+
+        .is-ctl-search {
+            background: $sw-color-brand-primary;
+            .cms-listing-row {
+                padding: 0 10px;
+                .cms-listing-col {
+                    width: 50%;
+                    margin-bottom: 0;
+                    padding: 0;
+                    .product-box  {
+                        background: transparent;
+                        margin-bottom: 18px;
+                        .card-body {
+                            text-align: center;
+                            padding-left: 6px;
+                            padding-right: 6px;
+                            .product-info {
+                                .product-name {
+                                    font-size: 30px;
+                                    line-height: 35px;
+                                    letter-spacing: 2.1px;
+                                    margin-top: 6px;
+                                    margin-bottom: 2px;
+                                    height: 35px;
+                                    color: #fff;
+                                }
+                                .product-description {
+                                    font-size: 11px;
+                                    line-height: 15px;
+                                    margin-top: 0;
+                                    color: #fff;
+                                }
+                                .product-price {
+                                    letter-spacing: 0.77px;
+                                    font-size: 11px;
+                                    line-height: 17px;
+                                }
+                                .product-price-wrapper {
+                                    font-size: 11px;
+                                    min-height: 37px;
+                                }
+                                .product-price-info {
+                                    margin-top: 0px;
+                                    margin-bottom: 0;
+                                }
+                                .product-action {
+                                    margin-top: 5px;
+                                    .btn {
+                                        font-size: 9px;
+                                        line-height: 20px;
+                                        letter-spacing: 0.54px;
+                                        height: 20px;
+                                        background: $sw-color-brand-secondary;
+                                        padding: 0 9px;
+                                    }
+                                }
+                                span.product-price.with-list-price {
+                                    color: #DE1010 !important;
+                                }
+                                .product-price .list-price {
+                                    font-size: 11px;
+                                    span.list-price-price,
+                                    span.list-price-percentage {
+                                        color: #C9AC77;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            .cms-page.search-page .product-box .card-body .product-image-wrapper {
+                height: 150px;
+            }
+            .cms-page.search-page .product-box .card-body .product-image-wrapper .product-image-link {
+                padding: 17px;
+            }
+            .product-wishlist .product-wishlist-action-circle {
+                top: 9px;
+                right: 10px;
             }
         }
     }
