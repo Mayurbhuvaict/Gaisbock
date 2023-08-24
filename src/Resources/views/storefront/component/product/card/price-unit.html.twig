@@ -16,7 +16,6 @@
         {% set displayFromVariants = displayParent and real.unitPrice !== cheapest.unitPrice %}
         {% set real = cheapest %}
     {% endif %}
-{#    {{ dump(product.customFields['gaisbock_product_detail_extra_details_contain']) }}#}
     <div class="product-price-info">
         {% block component_product_box_price_unit %}
             <p class="product-price-unit">
@@ -28,7 +27,9 @@
                 {# Item price is based on a reference unit #}
                 {% block component_product_box_price_reference_unit %}
                         <span class="price-unit-reference">
-                            {{ product.customFields['gaisbock_product_detail_extra_details_contain'] }}
+                            {% if product.customFields['gaisbock_product_detail_extra_details_contain'] is defined %}
+                                {{ product.customFields['gaisbock_product_detail_extra_details_contain'] }}
+                            {% endif %}
                         </span>
                 {% endblock %}
             </p>
