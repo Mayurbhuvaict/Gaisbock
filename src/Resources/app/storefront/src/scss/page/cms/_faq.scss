@@ -1,5 +1,5 @@
 .faq-contents{
-    padding-top: 15px;
+    padding-top: 35px;
     .hueb-seo-faq__box-element {
         background: $sw-background-color;
         border-top: 1px solid $sw-border-color;
@@ -54,6 +54,17 @@
         padding-bottom: 10px;
         padding-top: 4px;
     }
+}
+
+.cms-section.gailbock-faq-section.faq-list{
+    h2 {
+        font-size: 48px;
+        margin-top: 15px;
+        margin-bottom: 0 !important;
+        @media (max-width:767px){
+            font-size: 32px;
+        }
+    }   
 }
 
 @include media-breakpoint-down(lg){

@@ -40,6 +40,15 @@ z-index: -1;
   .is-act-home .header-main {
     padding-bottom: 0;
 }
+.cookie-permission-container + .js-pseudo-modal-template + .offcanvas.offcanvas-start {
+    z-index: 99999;
+}
+.offcanvas-cookie{
+    .js-offcanvas-cookie-accept-all , 
+    .js-offcanvas-cookie-submit  {
+        margin-bottom: 10px;
+    }
+}
 .gaisbock-sticky-language-switcher {
     @media(min-width: 768px) {
         display: none;

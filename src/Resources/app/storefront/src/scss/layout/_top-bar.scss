@@ -5,8 +5,14 @@
         max-width: 100%;
         padding: 0;
     }
+    .top-bar.d-none.d-lg-block {
+        display: none !important;
+    }
+    
     .top-bar {
         .top-bar-nav {
+            display: block;
+            width: 100%;
             background: $sw-top-header-background;
             padding: 5px 0;
             .navbar {

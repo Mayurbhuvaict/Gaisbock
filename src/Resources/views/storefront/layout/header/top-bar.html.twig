@@ -8,8 +8,11 @@
 
             {% if(context.salesChannel.customFields != null) %}
                 {% block layout_header_top_bar_usp %}
-                    <nav class="navbar navbar-light align-items-start flex-nowrap" id="gaisbock-theme-navbar">
-                        <div class="base-slider" >
+
+  
+                        <div class="base-slider w-100">
+
+                   
                             <div class="gaisbock-theme-container">
                                 <div class="gaisbock-theme-item-container">
                                     {% block gaisbock_slider_card_slide_one %}
@@ -80,26 +83,26 @@
                                     {% endblock %}
                                 </div>
                             </div>
-                            {% if element.config.showControls.value %}
-                                <div class="product-slider-controls-container">
-                                    <div class="base-slider-controls" data-product-slider-controls="true">
-                                        <button class="base-slider-controls-prev product-slider-controls-prev"
-                                                name="review-slider-control-prev">
-                                            {% sw_icon 'arrow-head-left' %}
-                                        </button>
-                                        <button class="base-slider-controls-next product-slider-controls-next"
-                                                name="review-slider-control-next">
-                                            {% sw_icon 'arrow-head-right' %}
-                                        </button>
-                                    </div>
-                                </div>
-                            {% endif %}
                         </div>
-                    </nav>
+                  
                 {% endblock %}
             {% endif %}
             {{ parent() }}
         </nav>
+        <script>
+
+            var slider5 = tns({
+                container: '.gaisbock-theme-container',
+                items: 1,
+                gutter:0,
+                autoplay: true,
+                nav: false,
+                controls: false,
+                autoplayButton: false,
+                autoplayButtonOutput: false,
+            });
+        
+    </script>
     </div>
     <script>
         var slider1 = document.querySelector('.gaisbock-theme-container');
