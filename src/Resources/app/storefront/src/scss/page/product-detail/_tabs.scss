@@ -53,9 +53,6 @@
     } 
 }
 body {
-    .three-product-section {
-        padding-top: 0;
-    }
     .card-tabs .card-body {
         padding-top: 40px;
     }
@@ -64,29 +61,32 @@ body {
         padding-top: 0 !important;
     }
 }
+body.is-ctl-product {
+    .three-product-section {
+        padding-top: 0;
+    }
+}
+
+div#cs-placeholderSlider-tab-pane{
+    .tns-outer .tns-outer .tns-outer .tns-outer .tns-controls {
+        display: block;
+    }
+    .product-slider-container .tns-controls {
+        display: none;
+    }
+}
+div#cs-customersAlsoViewed-tab-pane{
+    .tns-outer .tns-outer .tns-controls {
+        display: block;
+    }
+    .product-slider-container .tns-controls {
+        display: none;
+    }
+}
 
 @include media-breakpoint-down(md) {
     body .product-detail-content {
         margin-bottom: 36px;
-    }
-    .tab-content {
-        .tns-controls {
-            position: absolute;
-            width: 100%;
-            left: 0%;
-        }
-        .product-slider-container {
-            position: relative;
-        }
-        button[data-controls~="prev"]{
-            .icon-gaisbock-left {
-                transform: rotate(180deg);
-            }
-        }
-        button[data-controls~="next"] {
-            position: absolute;
-            right: 0px;
-        }
     }
     .acris-suggested-products-tab .card-tabs .product-detail-tabs-content .tab-pane .cms-element-title p {
         font-size: 21px;
