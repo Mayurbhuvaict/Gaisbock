@@ -55,6 +55,9 @@
     "registerTitle": "S'inscrire",
     "registrationTitle": "Inscription",
     "patner": "Devenir partenaire",
+    "loginMail":"EMAIL",
+    "loginPassword": "MOT DE PASSE",
+    "loginRecover": "Mot de passe oublié?",
     "home": {
       "title": "Home"
     },
