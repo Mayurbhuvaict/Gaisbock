@@ -17,6 +17,7 @@ import './module/sw-cms/blocks/gaisbockOption/gaisbock-custom-text-image-slider'
 import './module/sw-cms/component';
 
 //elements
+import './module/sw-cms/elements/gaisbock-custom-category-extension';
 import './module/sw-cms/elements/gaisbock-category-image-text';
 import './module/sw-cms/elements/gaisbock-switch-image-text';
 import './module/sw-cms/elements/gaisbock-image';
