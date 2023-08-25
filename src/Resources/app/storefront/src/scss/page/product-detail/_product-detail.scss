@@ -496,17 +496,24 @@ span.product-detail-list-price-wrapper span.list-price-price {
         margin: 10px 0;
         .gasibook-variant-img {
             text-align: center;
+            position: relative;
+            width: 33.33%;
             img {
                 height: 100px;
                 object-fit: contain;
             }
         }
         .icon {
-            margin: 0 18px;
+            margin: 0;
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translate(-50%,-50%);
         }
         .gaisbock-product-image-text {
             font-size: 12px;
             line-height: 15px;
+            margin: 0 auto;
             letter-spacing: 0.12px;
             margin-top: 5px;
             text-align: center;
