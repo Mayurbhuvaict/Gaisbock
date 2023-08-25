@@ -5,23 +5,23 @@
   "footer": {
     "newsletter" : {
       "titleOne": "Lorem ipsum <br>PREMIUM-MEMBER WERDEN",
-      "descriptionText" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+      "descriptionText" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et <a href=\"#\">dolore magna aliqua.</a>"
     },
     "customText": {
       "customTextOne": "347",
-      "customTextTwo": "Nombre <br>de revendeurs",
+      "customTextTwo": "Number <br>of resellers",
       "customTextThree": "<1000",
-      "customTextFour": "Nombre <br>de clients",
+      "customTextFour": "Number of<br> customers",
       "customTextFive": "XXX",
-      "customTextSix": "Lorem <br>Sipdum dol"
+      "customTextSix": "Lorem<br> Sipdum dol"
     },
     "tryIt": {
-      "tryItItext": "WANT TO <br>TRY IT?",
+      "tryItItext": "WANT TO <br> TRY IT?",
       "tryItDescription": "Lorem ipsum dolor sit amet, consectetur adipiscing elit"
     },
     "handler": {
-      "handlerTitleOne": "BECOME A GAISBOCK- <br> HANDLAR NOW",
-      "handlerTitleDescription": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+      "handlerTitle": "BECOME A GAISBOCK- <br>HANDLAR NOW",
+      "handlerTitleDescription": "Händler Login Anfragen consectetuer adipisci lorem ipsuam dolor esang elit<a href=\"#\"> Aenean massa. Cum sociis.</a>"
     },
     "hotline": {
       "hotlineOne": "Gaisbock GmbH",
@@ -30,7 +30,7 @@
       "hotlineMobile": "+41 41 6620 89 88",
       "hotlineEmail": "info@gaisbock.ch",
       "hotlineOpeningInfo": "Offnungzeiten Showroom",
-      "hotlineOpenTiming": "Mo-fr 08-12h/13.30-17.00"
+      "hotlineOpenTiming": "Mo-fr 08-12h / 13.30-17.00"
     }
   },
   "listingPage": {
