@@ -29,6 +29,9 @@
                         width: 102px;
                         height: 122px;
                     }
+                    span {
+                        margin-bottom: 15px;
+                    }
                 }
                 .active {
                     border-bottom: 5px solid #DE1010;
@@ -176,6 +179,14 @@
 
 
 @include media-breakpoint-down(md){ 
+    .sw-cms-element-gaisbock-custom-category-extension__images{
+        .nav-item {
+            padding: 0 5px;
+        }
+        ul {
+            flex-wrap: wrap;
+        }        
+    }
     .navigation-offcanvas {
         top: 43px !important;
     }

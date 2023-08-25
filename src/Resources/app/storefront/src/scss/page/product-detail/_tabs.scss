@@ -53,15 +53,17 @@
     } 
 }
 body {
-    .three-product-section {
-        padding-top: 0;
-    }
     .card-tabs .card-body {
         padding-top: 40px;
     }
     div#cs-productsSameCategory-tab-pane p.cms-element-title-paragraph {
         border: 0 !important;
         padding-top: 0 !important;
+    }
+}
+body.is-ctl-product {
+    .three-product-section {
+        padding-top: 0;
     }
 }
 
