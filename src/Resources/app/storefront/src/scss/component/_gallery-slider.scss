@@ -94,3 +94,11 @@ div#cs-customersAlsoViewed-tab-pane {
         bottom: -37px;
     }
 }
+
+.three-sections-three {
+    .col-12 {
+        @media(max-width:767px){
+            padding: 0 !important;
+        }
+    }
+}
