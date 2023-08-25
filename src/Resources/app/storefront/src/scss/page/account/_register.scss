@@ -22,6 +22,9 @@ button.btn.btn-primary {
             }
         }
     }
+    form.login-form {
+        margin-top: 25px;
+    }
     .login-card,
     .register-card {
         max-width: 326px;
@@ -31,6 +34,7 @@ button.btn.btn-primary {
     }
 
     .form-group {
+        margin-top: 0;
         width: 100%;
         margin-bottom: 15px;
         flex: 0 0 100% !important;
