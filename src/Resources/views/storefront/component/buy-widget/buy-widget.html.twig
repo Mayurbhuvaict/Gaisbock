@@ -61,7 +61,11 @@
             <div class="product-main-title d-flex align-items-center justify-content-between">
                 <h1 class="product-detail-name"
                     itemprop="name">
-                    {{ page.product.translated.name }}
+                    {% if page.product.parentId !== null %}
+                        {{ page.extensions.products.productName }}
+                    {% else %}
+                        {{ page.product.translated.name }}
+                    {% endif %}
                 </h1>
                 {% if config('core.cart.wishlistEnabled') %}
                     {% sw_include '@Storefront/storefront/component/product/card/wishlist.html.twig' with {
@@ -447,10 +451,6 @@
 
                     {% if element.data.product %}
                         <div class="product-detail-tabs cms-element-{{ element.type }}{% if config.alignment.value %} has-vertical-alignment{% endif %}">
-                            {#                            {% sw_include '@Storefront/storefront/component/review/review.html.twig' with { #}
-                            {#                                reviews: element.data.reviews, #}
-                            {#                                product: element.data.product #}
-                            {#                            } %} #}
                             {% set reviewsPerListPage = 10 %}
 
                             {% set currentListPage = element.data.reviews.page + 1 %}

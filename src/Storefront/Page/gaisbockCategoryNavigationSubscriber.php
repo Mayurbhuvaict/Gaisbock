@@ -121,12 +121,18 @@ class gaisbockCategoryNavigationSubscriber implements EventSubscriberInterface
             }
             $event->getPage()->getProduct()->addArrayExtension('images', ['customImage' => $images]);
         }
-
+        $productName = '';
+        $getVariant = $event->getPage()->getProduct()->getParentId();
+        if ($getVariant != null)
+        {
+            $productName = $this->findParentProduct($getVariant,$event->getSalesChannelContext());
+        }
         $variantProducts = $this->variantProductImages($event, $event->getSalesChannelContext());
         $productNumber = $this->findProductNumber($event, $event->getSalesChannelContext());
         $event->getPage()->addArrayExtension('products', [
             'variants' => $variantProducts['products'],
             'VariantImage' => $variantProducts['images'],
+            'productName' => $productName,
             'productNumber' => $productNumber
         ]);
     }
@@ -193,6 +199,7 @@ class gaisbockCategoryNavigationSubscriber implements EventSubscriberInterface
                 $productImage[$product->getId()] =  $images;
             }
         }
+
         $variantProductImage = [
             'products' => $products,
             'images' => $productImage
@@ -219,5 +226,13 @@ class gaisbockCategoryNavigationSubscriber implements EventSubscriberInterface
         $criteria->addFilter(new EqualsFilter('id', $mediaId));
         $getImage = $this->mediaRepository->search($criteria, $context)->first();
         return $getImage;
+    }
+
+    private function findParentProduct($paraentId,$context)
+    {
+        $criteria = new Criteria();
+        $criteria->addFilter(new EqualsFilter('id',$paraentId));
+        $product = $this->salesChannelProductRepository->search($criteria,$context)->first();
+        return $product->getTranslated()['name'];
     }
 }
