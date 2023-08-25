@@ -9,8 +9,9 @@ hr {
 .gaisbock-description-contain-title-description {
     line-height: 23px;
     font-size: 18px;
-    font-family: 'Brandon-text';
+    font-family: $sw-font-family-base;
     letter-spacing: 0;
+    margin-top: -4px;
 }
 .gaisbock-addToCart-button {
     margin-bottom: 7px;
@@ -232,7 +233,7 @@ hr {
                 border-radius: 15px;
                 border-color:$sw-color-brand-secondary;
                 margin-top: 25px;
-                text-transform: capitalize;
+                text-transform: inherit;
             }
             .modal {
                 background: rgba(0,0,0,0.3);
@@ -479,8 +480,8 @@ span.product-detail-list-price-wrapper span.list-price-price {
             }
             .icon {
                 position: absolute;
-                right: 20px;
-                top: 0px;
+                right: 13px;
+                top: -5px;
                 color: $sw-color-brand-primary;
                 width: 14px;
             }
@@ -653,6 +654,18 @@ span.product-detail-list-price-wrapper span.list-price-price {
 
 @include media-breakpoint-down(md){  
     body {
+        .product-detail-buy{
+            .gaisbock-description-contain-title-description {
+                margin-top: 0;
+            }
+            .accordion{
+                .gaisbock-title-tab{
+                    span {
+                        padding: 13px 0;
+                    }
+                }
+            }
+        }
         .product-detail-buy {
             margin-top: 0;
         }

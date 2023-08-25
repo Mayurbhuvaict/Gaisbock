@@ -28,7 +28,9 @@
 {% sw_include '@Storefront/storefront/custom/nme-register-popup.html.twig' %}
 <body class="header-hover {% block base_body_classes %}{{ parent() }}{% set TanmarNgInfiniteScrollingData = context.context.extensions.TanmarNgInfiniteScrolling %}{% if TanmarNgInfiniteScrollingData.active %} is-tanmar-infinite-scrolling {% endif %}{% endblock %}"
       data-gaisbock-animation data-gaisbock-addmore-section data-gaisbock-image-with-addmore-slider>
-<div class="gaisbock-sticky-language-switcher">
+      <script src="https://cdn.jsdelivr.net/npm/tiny-slider@2.9.3/dist/tiny-slider.min.js"></script>
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tiny-slider/2.9.3/tiny-slider.css">
+      <div class="gaisbock-sticky-language-switcher">
     <form method="post"
           action="{{ path('frontend.checkout.switch-language') }}"
           class="language-form"
@@ -129,7 +131,6 @@
                 <div class="container">
                     {% block base_main_container %}
                         <div class="container-main" data-gaisbock-header-hover-add-class>
-
                             {% if app.request.get('_route') === 'frontend.account.login.page' %}
                             <nav aria-label="breadcrumb">
                                 <ol class="breadcrumb">
@@ -154,12 +155,12 @@
                                     category: page.product.seoCategory
                                 } only %}
                             {% endblock %}
-
                             {% block base_content %}{% endblock %}
                         </div>
                     {% endblock %}
                 </div>
             {% endblock %}
+            
         </main>
     {% endblock %}
 
@@ -185,6 +186,191 @@
 {% endblock %}
 
 {% block base_body_script %}
+<script>
+        var slider1 = document.querySelector('.product-detail-cross-selling');
+        if (slider1) {
+            var slider1 = tns({
+                container: '.product-detail-cross-selling .gaisbock-product-sliders',
+                items: 3,
+                gutter:0,
+                autoplay: true,
+                autoplayButton: false,
+                autoplayButtonOutput: false,
+                nav: false,
+                controls: false,
+                responsive: {
+                    320: {
+                        items: 1,
+                        controls: true,
+                        nav: true,
+                        loop:false
+                    },
+                    767: {
+                        controls: true,
+                        items: 1,
+                        nav: true,
+                        loop:false
+                    },
+                    992: {
+                        items: 3
+                    },
+                    1023: {
+                        items: 3
+                    }
+                }
+            });
+        }
+    </script>
+    <script>
+        var slider2 = document.querySelector('div#cs-productsSameCategory-tab-pane');
+        if (slider2) {
+            var slider2 = tns({
+                container: 'div#cs-productsSameCategory-tab-pane .gaisbock-product-sliders',
+                items: 3,
+                gutter:0,
+                autoplay: true,
+                autoplayButton: false,
+                autoplayButtonOutput: false,
+                nav: false,
+                controls: false,
+                responsive: {
+                    320: {
+                        items: 1,
+                        controls: true,
+                        nav: true,
+                        loop:false
+                    },
+                    767: {
+                        controls: true,
+                        nav: true,
+                        items: 1,
+                        loop:false
+                    },
+                    992: {
+                        items: 3
+                    },
+                    1023: {
+                        items: 3
+                    }
+                }
+            });
+        }
+    </script>
+    <script>
+        var slider3 = document.querySelector('div#cs-recentlyViewed-tab-pane');
+        if (slider3) {
+            var slider3 = tns({
+                container: 'div#cs-recentlyViewed-tab-pane .gaisbock-product-sliders',
+                items: 3,
+                gutter:0,
+                autoplay: true,
+                autoplayButton: false,
+                autoplayButtonOutput: false,
+                nav: false,
+                controls: false,
+                responsive: {
+                    320: {
+                        items: 1,
+                        controls: true,
+                        nav: true,
+                        loop:false
+                    },
+                    767: {
+                        controls: true,
+                        nav: true,
+                        items: 1,
+                        loop:false
+                    },
+                    992: {
+                        items: 3
+                    },
+                    1023: {
+                        items: 3
+                    }
+                }
+            });
+        }
+    </script>
+    <script>
+        var slider4 = document.querySelector('div#cs-customersAlsoViewed-tab-pane');
+        if (slider4) {
+            var slider4 = tns({
+                container: 'div#cs-customersAlsoViewed-tab-pane .gaisbock-product-sliders',
+                items: 3,
+                gutter:0,
+                autoplay: true,
+                autoplayButton: false,
+                autoplayButtonOutput: false,
+                nav: false,
+                controls: false,
+                responsive: {
+                    320: {
+                        items: 1,
+                        controls: true,
+                        nav: true,
+                        loop:false
+                    },
+                    767: {
+                        controls: true,
+                        items: 1,
+                        nav: true,
+                        loop:false
+                    },
+                    992: {
+                        items: 3
+                    },
+                    1023: {
+                        items: 3
+                    }
+                }
+            });
+        }
+    </script>
+        <script>
+        var slider5 = document.querySelector('.three-product-section');
+        if (slider5) {
+            var slider5 = tns({
+                container: '.three-product-section .gaisbock-product-sliders',
+                items: 1,
+                gutter:0,
+                autoplay: true,
+                nav: true,
+                controls: true,
+                autoplayButton: false,
+                autoplayButtonOutput: false,
+            });
+        }
+    </script>
+            <script>
+        var slider6 = document.querySelector('.three-sections-two');
+        if (slider6) {
+            var slider6 = tns({
+                container: '.three-sections-two .gaisbock-product-sliders',
+                items: 1,
+                gutter:0,
+                autoplay: true,
+                nav: true,
+                controls: true,
+                autoplayButton: false,
+                autoplayButtonOutput: false,
+            });
+        }
+    </script>
+            <script>
+        var slider7 = document.querySelector('.three-sections-three');
+        if (slider7) {
+            var slider7 = tns({
+                container: '.three-sections-three .gaisbock-product-sliders',
+                items: 1,
+                gutter:0,
+                autoplay: true,
+                nav: true,
+                controls: true,
+                autoplayButton: false,
+                autoplayButtonOutput: false,
+            });
+        }
+    </script>
     {% set TanmarNgInfiniteScrollingData = context.context.extensions.TanmarNgInfiniteScrolling %}
     {% if TanmarNgInfiniteScrollingData.active %}
         <script>
@@ -217,6 +403,7 @@
 
             })();
         </script>
+        
     {% endif %}
 {% endblock %}
 

@@ -67,22 +67,22 @@ body.is-ctl-product {
     }
 }
 
-div#cs-placeholderSlider-tab-pane{
-    .tns-outer .tns-outer .tns-outer .tns-outer .tns-controls {
-        display: block;
-    }
-    .product-slider-container .tns-controls {
-        display: none;
-    }
-}
-div#cs-customersAlsoViewed-tab-pane{
-    .tns-outer .tns-outer .tns-controls {
-        display: block;
-    }
-    .product-slider-container .tns-controls {
-        display: none;
-    }
-}
+// div#cs-placeholderSlider-tab-pane{
+//     .tns-outer .tns-outer .tns-outer .tns-outer .tns-controls {
+//         display: block;
+//     }
+//     .product-slider-container .tns-controls {
+//         display: none;
+//     }
+// }
+// div#cs-customersAlsoViewed-tab-pane{
+//     .tns-outer .tns-outer .tns-controls {
+//         display: block;
+//     }
+//     .product-slider-container .tns-controls {
+//         display: none;
+//     }
+// }
 
 @include media-breakpoint-down(md) {
     body .product-detail-content {
