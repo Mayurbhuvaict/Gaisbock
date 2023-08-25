@@ -15,12 +15,69 @@
                         line-height: 31px;
                         letter-spacing: 0.13px;
                         font-family: $sw-font-family-headline;
-                        margin-bottom: 4px;
+                        margin-bottom: 0px;
                     }
                 }
             }
         }
     }
+    .product-box .card-body {
+        text-align: center;
+        padding-left: 54px;
+        padding-right: 54px;
+        @media(max-width:1299px) {
+            padding-left: 25px;
+            padding-right: 25px;
+        }
+    }
+    .product-box .card-body .product-image-wrapper {
+        height: 339px;
+    }
+    .product-box .card-body .product-image-wrapper .product-image {
+        object-fit: contain;
+    }
+    .product-box .card-body .product-image-wrapper .product-image-link {
+        padding: 50px;
+    }
+    .tns-controls {
+        @media(min-width:768px) {
+            display: none;
+        }
+    }
 }
 
-
+@include media-breakpoint-down(lg) {
+    body .three-product-section {
+        padding-top: 0;
+    }
+}
+@include media-breakpoint-down(md) {
+    .tab-content {
+        div#gaisbock-controls {
+            position: absolute;
+            width: 100%;
+            bottom: 26.55%;
+        }
+        .gaisbock-button-previous{
+            .icon-gaisbock-left {
+                transform: rotate(180deg);
+            }
+        }
+        .gaisbock-property-button-next {
+            position: absolute;
+            right: 0px;
+        }
+        .icon.icon-gaisbock{
+            color: transparent;
+            background: transparent;
+            width: 7px;
+            height: 12px;
+            svg {
+                top: auto;
+            }
+            svg path {
+                stroke: #151515;
+            }
+        } 
+    }
+}
