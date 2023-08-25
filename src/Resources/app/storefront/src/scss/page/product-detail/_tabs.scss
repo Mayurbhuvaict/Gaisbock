@@ -1,4 +1,8 @@
+
 .acris-suggested-products-tab {
+    .cms-element-product-slider.gaisbock-product-slider {
+        margin-bottom: 75px;
+    }
     .card-tabs {
         .product-detail-tab-navigation {
             display: none;
@@ -9,6 +13,7 @@
                 opacity: 1 !important;
                 .cms-element-title {
                     display: block;
+                    padding: 0 54px;
                     p {
                         text-align: center;
                         font-size: 25px;
@@ -16,6 +21,8 @@
                         letter-spacing: 0.13px;
                         font-family: $sw-font-family-headline;
                         margin-bottom: 0px;
+                        border-top: 1px solid $sw-border-color;
+                        padding-top: 80px;
                     }
                 }
             }
@@ -43,14 +50,17 @@
         @media(min-width:768px) {
             display: none;
         }
+    } 
+}
+body {
+    .three-product-section {
+        padding-top: 0;
+    }
+    .card-tabs .card-body {
+        padding-top: 40px;
     }
 }
 
-@include media-breakpoint-down(lg) {
-    body .three-product-section {
-        padding-top: 0;
-    }
-}
 @include media-breakpoint-down(md) {
     .tab-content {
         div#gaisbock-controls {
@@ -80,4 +90,5 @@
             }
         } 
     }
+
 }
