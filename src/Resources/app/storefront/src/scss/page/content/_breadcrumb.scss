@@ -37,7 +37,7 @@
     width: 100%;
     z-index: -1;
     @media(max-width:1299px) {
-        top: 84px;
+        top: 60px;
     }
     @media(max-width:767px) {
         position: static;
@@ -50,6 +50,8 @@
         @media(max-width:1024px) {
             font-size: 30px;
             line-height: 49px;
+            max-width: 270px;
+            margin: 0 auto;
         }
         @media(max-width:767px) {
             font-size: 29px;
