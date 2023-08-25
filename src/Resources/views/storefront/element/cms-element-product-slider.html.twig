@@ -51,9 +51,9 @@
         </div>
     {% endif %}
     <script>
-        var slider = document.querySelector('.product-detail-cross-selling');
-        if (slider) {
-            var slider = tns({
+        var slider1 = document.querySelector('.product-detail-cross-selling');
+        if (slider1) {
+            var slider1 = tns({
                 container: '.product-detail-cross-selling .gaisbock-product-sliders',
                 items: 3,
                 gutter:0,
@@ -80,9 +80,9 @@
         }
     </script>
     <script>
-        var slider = document.querySelector('div#cs-productsSameCategory-tab-pane');
-        if (slider) {
-            var slider = tns({
+        var slider2 = document.querySelector('div#cs-productsSameCategory-tab-pane');
+        if (slider2) {
+            var slider2 = tns({
                 container: 'div#cs-productsSameCategory-tab-pane .gaisbock-product-sliders',
                 items: 3,
                 gutter:0,
@@ -109,10 +109,38 @@
         }
     </script>
     <script>
-        var slider = document.querySelector('div#cs-recentlyViewed-tab-pane');
-        if (slider) {
-            var slider = tns({
+        var slider3 = document.querySelector('div#cs-recentlyViewed-tab-pane');
+        if (slider3) {
+            var slider3 = tns({
                 container: 'div#cs-recentlyViewed-tab-pane .gaisbock-product-sliders',
+                items: 3,
+                gutter:0,
+                autoplay: false,
+                nav: false,
+                controls: false,
+                responsive: {
+                    320: {
+                        items: 2,
+                        controls: true,
+                    },
+                    767: {
+                        controls: true,
+                    },
+                    992: {
+                        items: 3
+                    },
+                    1023: {
+                        items: 3
+                    }
+                }
+            });
+        }
+    </script>
+    <script>
+        var slider4 = document.querySelector('div#cs-customersAlsoViewed-tab-pane');
+        if (slider4) {
+            var slider4 = tns({
+                container: 'div#cs-customersAlsoViewed-tab-pane .gaisbock-product-sliders',
                 items: 3,
                 gutter:0,
                 autoplay: false,
@@ -137,32 +165,42 @@
             });
         }
     </script>
-    <script>
-        var slider = document.querySelector('div#cs-customersAlsoViewed-tab-pane');
-        if (slider) {
-            var slider = tns({
-                container: 'div#cs-customersAlsoViewed-tab-pane .gaisbock-product-sliders',
-                items: 3,
+        <script>
+        var slider5 = document.querySelector('.three-product-section');
+        if (slider5) {
+            var slider5 = tns({
+                container: '.three-product-section .gaisbock-product-sliders',
+                items: 1,
                 gutter:0,
                 autoplay: false,
-                autoplayButtonOutput: false,
-                nav: false,
-                controls: false,
-                responsive: {
-                    320: {
-                        items: 2,
-                        controls: true,
-                    },
-                    767: {
-                        controls: true,
-                    },
-                    992: {
-                        items: 3
-                    },
-                    1023: {
-                        items: 3
-                    }
-                }
+                nav: true,
+                controls: true,
+            });
+        }
+    </script>
+            <script>
+        var slider6 = document.querySelector('.three-sections-two');
+        if (slider6) {
+            var slider6 = tns({
+                container: '.three-sections-two .gaisbock-product-sliders',
+                items: 1,
+                gutter:0,
+                autoplay: false,
+                nav: true,
+                controls: true,
+            });
+        }
+    </script>
+            <script>
+        var slider7 = document.querySelector('.three-sections-three');
+        if (slider7) {
+            var slider7 = tns({
+                container: '.three-sections-three .gaisbock-product-sliders',
+                items: 1,
+                gutter:0,
+                autoplay: false,
+                nav: true,
+                controls: true,
             });
         }
     </script>

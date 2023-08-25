@@ -59,36 +59,38 @@ body {
     .card-tabs .card-body {
         padding-top: 40px;
     }
+    div#cs-productsSameCategory-tab-pane p.cms-element-title-paragraph {
+        border: 0 !important;
+        padding-top: 0 !important;
+    }
 }
 
 @include media-breakpoint-down(md) {
+    body .product-detail-content {
+        margin-bottom: 36px;
+    }
     .tab-content {
-        div#gaisbock-controls {
+        .tns-controls {
             position: absolute;
             width: 100%;
-            bottom: 26.55%;
+            left: 0%;
         }
-        .gaisbock-button-previous{
+        .product-slider-container {
+            position: relative;
+        }
+        button[data-controls~="prev"]{
             .icon-gaisbock-left {
                 transform: rotate(180deg);
             }
         }
-        .gaisbock-property-button-next {
+        button[data-controls~="next"] {
             position: absolute;
             right: 0px;
         }
-        .icon.icon-gaisbock{
-            color: transparent;
-            background: transparent;
-            width: 7px;
-            height: 12px;
-            svg {
-                top: auto;
-            }
-            svg path {
-                stroke: #151515;
-            }
-        } 
     }
-
+    .acris-suggested-products-tab .card-tabs .product-detail-tabs-content .tab-pane .cms-element-title p {
+        font-size: 21px;
+        line-height: 25px;
+        letter-spacing: 0.1px;
+    }
 }
