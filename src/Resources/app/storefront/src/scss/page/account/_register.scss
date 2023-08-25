@@ -8,6 +8,18 @@ button.btn.btn-primary {
     border-color: $sw-color-brand-primary;
     text-transform: uppercase;
 }
+.cms-element-gaisbock-patnerpage-container {
+    font-size: 26px;
+    line-height: 35px;
+    font-family: 'Blacker-display';
+    width: 100%;
+    margin: 0 auto;
+    letter-spacing: 0;
+    text-align: center;
+    padding-top: 10px;
+    padding-bottom: 60px;
+}
+
 .account-register {
     max-width: 1024px;
     margin: 0 auto;
@@ -82,6 +94,8 @@ button.btn.btn-primary {
             letter-spacing: 0.12px;
             margin-top: 6px;
             display: block;
+            font-weight: 600;
+            color: $sw-color-brand-primary;
         }
     }   
     .register-personal {
@@ -135,6 +149,74 @@ button.btn.btn-primary {
         line-height: 29px !important;
     }
 }
+.data-protection-information label {
+    color: $sw-color-brand-primary;
+}
+.form-text.privacy-notice {
+    strong {
+        color:$sw-color-brand-primary;
+    }
+}
+.register-different-shipping {
+    padding-left: 0;
+    [type="checkbox"]:checked,
+    [type="checkbox"]:not(:checked) {
+        position: absolute;
+        left: -9999px;
+    }
+    [type="checkbox"]:checked + label,
+    [type="checkbox"]:not(:checked) + label
+    {
+        position: relative;
+        padding-left: 28px;
+        cursor: pointer;
+        display: inline-block;
+        color: $sw-color-brand-primary;
+    }
+    [type="checkbox"]:checked + label:before,
+    [type="checkbox"]:not(:checked) + label:before {
+        content: '';
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 18px;
+        height: 18px;
+        border: 1px solid $sw-color-brand-primary;
+        border-radius: 100%;
+        background: #fff;
+        @media(max-width:767px) {
+            width: 16px;
+            height: 16px;
+        }
+    }
+    [type="checkbox"]:checked + label:after,
+    [type="checkbox"]:not(:checked) + label:after {
+        content: '';
+        width: 10px;
+        height: 10px;
+        background: $sw-color-brand-secondary;
+        position: absolute;
+        top: 4px;
+        left: 4px;
+        border-radius: 100%;
+        -webkit-transition: all 0.2s ease;
+        transition: all 0.2s ease;
+        @media(max-width:767px) {
+            width: 8px;
+            height: 8px;
+        }
+    }
+    [type="checkbox"]:not(:checked) + label:after {
+        opacity: 0;
+        -webkit-transform: scale(0);
+        transform: scale(0);
+    }
+    [type="checkbox"]:checked + label:after {
+        opacity: 1;
+        -webkit-transform: scale(1);
+        transform: scale(1);
+    }
+}
 
 
 @include media-breakpoint-down(md) {
@@ -147,5 +229,11 @@ button.btn.btn-primary {
         .login-card {
             padding-top: 40px;
         }
+    }
+    .cms-element-gaisbock-patnerpage-container {
+        padding-top: 15px;
+        padding-bottom: 30px;
+        font-size: 18px;
+        line-height: 24px;
     }
 }
