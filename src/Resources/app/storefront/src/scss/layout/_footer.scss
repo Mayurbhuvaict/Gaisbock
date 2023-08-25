@@ -219,9 +219,17 @@ footer.footer-main {
         margin-bottom: 0;
     }
     footer.footer-main .footer__title br,
-    footer.footer-main .newsletter-form .btn-primary .icon,
-    footer.footer-main .footer-bottom .footer-copyright {
+    footer.footer-main .newsletter-form .btn-primary .icon {
         display: none;
+    }
+    footer.footer-main .footer-bottom .footer-copyright  {
+        display: block;
+        margin: 0 auto;
+        text-align: center;
+        width: 100%;
+        position: revert;
+        inset: 0;
+        padding: 41px 0px 58px 0px;
     }
     footer.footer-main .footer__title.third-column-text {
         max-width: initial;
