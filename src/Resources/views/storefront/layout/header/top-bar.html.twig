@@ -8,8 +8,11 @@
 
             {% if(context.salesChannel.customFields != null) %}
                 {% block layout_header_top_bar_usp %}
+
   
                         <div class="base-slider w-100">
+
+                   
                             <div class="gaisbock-theme-container">
                                 <div class="gaisbock-theme-item-container">
                                     {% block gaisbock_slider_card_slide_one %}
@@ -101,4 +104,18 @@
         
     </script>
     </div>
+    <script>
+        var slider1 = document.querySelector('.gaisbock-theme-container');
+        if (slider1) {
+            var slider1 = tns({
+                container: '.gaisbock-theme-container',
+                items: 1,
+                gutter:0,
+                autoplay: false,
+                autoplayButtonOutput: false,
+                nav: false,
+                controls: false
+            });
+        }
+    </script>
 {% endblock %}

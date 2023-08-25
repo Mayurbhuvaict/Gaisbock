@@ -4,7 +4,7 @@ Shopware.Component.register('sw-cms-preview-gaisbock-custom-category-extension',
 
 Shopware.Service('cmsService').registerCmsBlock({
    name:'gaisbock-custom-category-extension',
-   label:'sw-cms.blocks.ictCustomCategoryExtension.label',
+   label:'sw-cms.blocks.gaisbockCustomCategoryExtension.label',
    category:'gaisbock-cms-elements',
    component:'sw-cms-block-gaisbock-custom-category-extension',
    previewComponent:'sw-cms-preview-gaisbock-custom-category-extension',
