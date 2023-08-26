@@ -50,6 +50,11 @@
     "ratings": "bewertungen",
     "viewRatings": "Bewertungen anschauen"
   },
+  "address": {
+    "companyPlaceholder": "UNTERNEHMEN*",
+    "departmentPlaceholder": "ABTEILUNG",
+    "vatPlaceholder": "UMSATZSTEUER-ID"
+  },
   "account": {
     "loginTitle": "Anmelden",
     "registerTitle": "Registrieren",
@@ -58,6 +63,13 @@
     "loginMail":"EMAIL",
     "loginPassword": "PASSWORT",
     "loginRecover": "Passwort vergessen?",
+    "firstNamePlaceholder": "VORNAME*",
+    "lastNamePlaceholder": "NACHNAME*",
+    "mailPlaceholder": "EMAIL*",
+    "passwordLabel":"PASSWORT*",
+    "passwordConfirmationPlaceholder": "PASSWORT-WIEDERHOLUNG*",
+    "passwordDescription": "(Muss mindestens %minLength% Zeichen mit 1 Symbol sein)",
+    "register": "REGISTER",
     "home": {
       "title": "Home"
     },

@@ -50,6 +50,11 @@
     "ratings": "avis",
     "viewRatings": "Voir les évaluations"
   },
+  "address": {
+    "companyPlaceholder": "SOCIÉTÉ*",
+    "departmentPlaceholder": "DÉPARTEMENT",
+    "vatPlaceholder": "ID TVA"
+  },
   "account": {
     "loginTitle": "Connexion",
     "registerTitle": "S'inscrire",
@@ -58,6 +63,13 @@
     "loginMail":"EMAIL",
     "loginPassword": "MOT DE PASSE",
     "loginRecover": "Mot de passe oublié?",
+    "firstNamePlaceholder": "PRÉNOM*",
+    "lastNamePlaceholder": "NOM DE FAMILLE*",
+    "mailPlaceholder": "EMAIL*",
+    "passwordLabel":"MOT DE PASSE*",
+    "passwordConfirmationPlaceholder": "RÉPÉTITION DU MOT DE PASSE*",
+    "passwordDescription": "(Doit être au moins %minLength% caractères avec 1 symbole)",
+    "register": "S'INSCRIRE",
     "home": {
       "title": "Home"
     },

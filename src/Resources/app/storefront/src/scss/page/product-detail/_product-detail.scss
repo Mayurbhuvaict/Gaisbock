@@ -22,88 +22,105 @@ hr {
         line-height: 29px;
     }
 }
-.modal {
-    .modal-body {
-        padding: 0 38px;
-    }
-    .gaisbock-customer-review {
-        .product-detail-review-form-rating {
-            width: 100%;
-            display: flex;
-            align-items: center;
-            div#review-form-rating {
-                .product-detail-review-form-star.is-active .icon {
-                    color: $sw-color-brand-secondary;
+.product-detail-review-teaser {
+    .modal {
+        .modal-body {
+            padding: 0 38px;
+        }
+        .gaisbock-customer-review {
+            .product-detail-review-form-rating {
+                width: 100%;
+                display: flex;
+                align-items: center;
+                div#review-form-rating {
+                    .product-detail-review-form-star.is-active .icon {
+                        color: $sw-color-brand-secondary;
+                    }
+                }
+                > label {
+                    font-size: 15px;
+                    letter-spacing: 1.2px;
+                    font-family: $sw-font-family-base;
+                    font-weight: 700;
+                    line-height: 18px;
+                    margin-left: 0;
+                    padding-right: 15px;
+                    margin-bottom: 0;
+                }
+                .h6.product-detail-review-form-rating-text {
+                    font-size: 15px;
+                    letter-spacing: 1.2px;
+                    font-family: $sw-font-family-base;
+                    font-weight: 700;
+                    line-height: 18px;
+                    margin-left: 0;
+                    padding-right: 15px;
+                    margin-bottom: 0;
                 }
             }
-            > label {
-                font-size: 15px;
-                letter-spacing: 1.2px;
-                font-family: $sw-font-family-base;
-                font-weight: 700;
-                line-height: 18px;
-                margin-left: 0;
-                padding-right: 15px;
-                margin-bottom: 0;
-            }
-            .h6.product-detail-review-form-rating-text {
-                font-size: 15px;
-                letter-spacing: 1.2px;
-                font-family: $sw-font-family-base;
-                font-weight: 700;
-                line-height: 18px;
-                margin-left: 0;
-                padding-right: 15px;
-                margin-bottom: 0;
+            .modal-header button {
+                right: 20px;
+                top: 46px;
+                position: absolute;
             }
         }
-        .modal-header button {
-            right: 20px;
-            top: 46px;
-            position: absolute;
-        }
-    }
-    .form-group.product-detail-review-form-content label {
-        display: none;
-    }
-    .product-detail-review-form-title,
-    .form-group.product-detail-review-form-content {
-        margin: 0;
-        label.form-label {
+        .form-group.product-detail-review-form-content label {
             display: none;
         }
-        input {
-            height: 30px;
-            border-radius: 15px;
-            font-size: 13px;
-            letter-spacing: 0.78px;
-            padding: 0 17px;
-            border-color: #707070;
-            color: $sw-color-brand-secondary;
+        .product-detail-review-form-title,
+        .form-group.product-detail-review-form-content {
+            margin: 0;
+            label.form-label {
+                display: none;
+            }
+            input {
+                height: 30px;
+                border-radius: 15px;
+                font-size: 13px;
+                letter-spacing: 0.78px;
+                padding: 0 17px;
+                border-color: #707070;
+                color: $sw-color-brand-secondary;
+            }
+            textarea {
+                border-radius: 15px;
+                margin-top: 16px;
+                border-color: #707070;
+                color: $sw-color-brand-secondary;
+                font-size: 13px;
+                letter-spacing: 0.78px;
+                padding: 0 17px;
+            }
         }
-        textarea {
-            border-radius: 15px;
-            margin-top: 16px;
-            border-color: #707070;
-            color: $sw-color-brand-secondary;
-            font-size: 13px;
-            letter-spacing: 0.78px;
-            padding: 0 17px;
+        .product-detail-review-form-footer {
+            flex-wrap: wrap;
+            flex-direction: column-reverse;
+            .required-fields {
+                margin-top: 15px;
+                font-size: 12px;
+                letter-spacing: 0.12px;
+                line-height: 15px;
+            }
         }
-    }
-    .product-detail-review-form-footer {
-        flex-wrap: wrap;
-        flex-direction: column-reverse;
-        .required-fields {
+        .product-detail-review-form-actions {
+            margin-left: 0 !important;
             margin-top: 15px;
-            font-size: 12px;
-            letter-spacing: 0.12px;
-            line-height: 15px;
         }
     }
-    .product-detail-review-form-actions {
-        margin-left: 0 !important;
-        margin-top: 15px;
+    .modal-backdrop.fade.show {
+        display: none;
+    }
+    .modal-open .is-sticky {
+        z-index: -1;
+    }
+    .modal-open .product-detail-review-widget {
+        z-index: 9;
+    }
+    .modal-open {
+        overflow-y: auto !important;
+    }
+    .modal-backdrop.show{
+        opacity:0;
     }
 }
 .accordian-review {
@@ -639,18 +656,7 @@ span.product-detail-list-price-wrapper span.list-price-price {
         width: 50%;
     }
 }
-.modal-backdrop.fade.show {
-    display: none;
-}
-.modal-open .is-sticky {
-    z-index: 1;
-}
-.modal-open .product-detail-review-widget {
-    z-index: 9;
-}
-.modal-open {
-    overflow-y: auto !important;
-}
+
 
 @include media-breakpoint-down(md){  
     body {

@@ -135,7 +135,7 @@
                             <nav aria-label="breadcrumb">
                                 <ol class="breadcrumb">
                                     <li class="breadcrumb-item">
-                                        <a href="{{ app.request.server.get('APP_URL') }}" class="breadcrumb-link">{{ 'account.home.title'|trans|sw_sanitize }}</a> / {{ 'account.registrationTitle'|trans|sw_sanitize }}
+                                        <a href="{{ app.request.attributes.get('sw-storefront-url') }}" class="breadcrumb-link">{{ 'account.home.title'|trans|sw_sanitize }}</a> / {{ 'account.registrationTitle'|trans|sw_sanitize }}
                                     </li>
                                 </ol>
                             </nav>
@@ -144,7 +144,7 @@
                                 <nav aria-label="breadcrumb">
                                     <ol class="breadcrumb">
                                         <li class="breadcrumb-item">
-                                            <a href="{{ app.request.server.get('APP_URL') }}" class="breadcrumb-link">{{ 'account.home.title'|trans|sw_sanitize }}</a> / {{ 'account.patner'|trans|sw_sanitize }}
+                                            <a href="{{ app.request.attributes.get('sw-storefront-url') }}" class="breadcrumb-link">{{ 'account.home.title'|trans|sw_sanitize }}</a> / {{ 'account.patner'|trans|sw_sanitize }}
                                         </li>
                                     </ol>
                                 </nav>

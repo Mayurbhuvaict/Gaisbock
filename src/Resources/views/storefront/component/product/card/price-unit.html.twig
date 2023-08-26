@@ -49,8 +49,7 @@
                     {{ price.unitPrice|currency }}
 
                     {% if isListPrice and not displayFrom and not displayFromVariants %}
-                        {% set afterListPriceSnippetExists = "listing.afterListPrice"|trans|length > 0 %}
-                        {% set beforeListPriceSnippetExists = "listing.beforeListPrice"|trans|length > 0 %}
+
                         {% set hideStrikeTrough = beforeListPriceSnippetExists or afterListPriceSnippetExists %}
 
                         <span class="list-price{% if hideStrikeTrough %} list-price-no-line-through{% endif %}">
