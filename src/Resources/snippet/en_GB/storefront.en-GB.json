@@ -50,6 +50,11 @@
     "ratings": "ratings",
     "viewRatings": "View ratings"
   },
+  "address": {
+    "companyPlaceholder": "COMPANY*",
+    "departmentPlaceholder": "DEPARTMENT",
+    "vatPlaceholder": "VAT ID"
+  },
   "account": {
     "loginTitle": "Login",
     "registerTitle": "Register",
@@ -58,6 +63,13 @@
     "loginMail":"EMAIL",
     "loginPassword": "PASSWORD",
     "loginRecover": "Password forgotten?",
+    "firstNamePlaceholder": "FIRST NAME*",
+    "lastNamePlaceholder": "LAST NAME*",
+    "mailPlaceholder": "EMAIL*",
+    "passwordLabel":"PASSWORD*",
+    "passwordConfirmationPlaceholder": "PASSWORD REPEAT*",
+    "passwordDescription": "(Must be at least %minLength% characters with 1 symbol)",
+    "register": "REGISTER",
     "home": {
       "title": "Home"
     },
