@@ -527,6 +527,19 @@
     }
 }
 
+@include media-breakpoint-up(md) {
+    .is-act-home{
+        .bg-image.gaisbock-benefits {
+            margin-top: 56px;
+        }
+    }
+    .instagram-feed-section{
+        .insta-heading {
+            padding-top: 4px;
+        }
+    }
+}
+
 @include media-breakpoint-down(md){
     .Gaisbock-category-images{
         padding-bottom: 20px;
@@ -560,7 +573,7 @@
             font-size: 42px;
             line-height: 46px;
             letter-spacing: 2.94px;
-            padding-bottom: 5px;
+            padding-bottom: 7px;
         }
         h2{
             letter-spacing: 0.14px;

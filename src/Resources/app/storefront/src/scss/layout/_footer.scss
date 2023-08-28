@@ -175,6 +175,11 @@ footer.footer-main {
 }
 
 @include media-breakpoint-down(md){ 
+    .footer-contact-hotline-contact{
+        a{
+            color:#fff;
+        }
+    }
     footer.footer-main {
         padding-top: 58px;
         overflow-x: hidden;
