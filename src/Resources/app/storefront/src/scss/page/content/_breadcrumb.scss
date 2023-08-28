@@ -1,6 +1,11 @@
 // Breadcrumb Styling
 
-
+body{
+    .breadcrumb.cms-breadcrumb{
+        padding-left: 20px;
+        padding-right: 20px;    
+    }
+}
 .breadcrumb{
     .is-active{
         .breadcrumb-title{
@@ -79,12 +84,6 @@
 }
 
 @include media-breakpoint-down(lg) {
-    body{
-        .breadcrumb.cms-breadcrumb{
-            padding-left: 20px;
-            padding-right: 20px;    
-        }
-    }
     .is-act-loginpage.modal-open{
         .modal.fade.show.null {
             z-index:999999;
