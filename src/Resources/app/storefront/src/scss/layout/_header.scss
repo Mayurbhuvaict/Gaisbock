@@ -238,6 +238,12 @@ a.header-black-logo-main-link,
 .gaisbock-header-mobile-text-logo {
     display: none;
 }
+@media (min-width: 576px){
+    .header-cart-badge {
+        display: block !important;
+    }
+}
+
 .is-sticky {
     position: fixed;
     background: $sw-top-header-background;
@@ -246,6 +252,7 @@ a.header-black-logo-main-link,
     animation: slideDown 0.35s ease-out;
     width:100%;
     .header-logo-main {
+
         a.header-logo-main-link {
             display: none;
         }
