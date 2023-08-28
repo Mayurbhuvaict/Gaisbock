@@ -69,6 +69,7 @@
     "passwordLabel":"MOT DE PASSE*",
     "passwordConfirmationPlaceholder": "RÉPÉTITION DU MOT DE PASSE*",
     "passwordDescription": "(Doit être au moins %minLength% caractères avec 1 symbole)",
+    "salutationPlaceholder": "INTERPRÈTE",
     "register": "S'INSCRIRE",
     "home": {
       "title": "Home"
