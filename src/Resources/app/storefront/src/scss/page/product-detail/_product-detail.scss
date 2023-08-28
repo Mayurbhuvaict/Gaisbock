@@ -9,11 +9,17 @@ hr {
 .modal-backdrop {
     z-index: -1;
 }
+
 .product-detail-tabs{
     .product-detail-review{
         .product-detail-review-checkbox{
              .form-check {
                 max-width: 55px;
+            }
+            .custom-control-label {
+                width: 100%;
+                display: flex;
+                justify-content: flex-end;
             }
         }
     }
@@ -283,9 +289,9 @@ hr {
             }
             .modal-dialog {
                 left: 50%;
-                top: 5%;
+                top: 25%;
                 margin: 0;
-                transform: translate(-50%,-10%);
+                transform: translate(-50%,-10%) !important;
             }
             .modal.show .modal-dialog {
                 transform: translate(-50%,-50%);
@@ -681,6 +687,16 @@ span.product-detail-list-price-wrapper span.list-price-price {
 
 
 @include media-breakpoint-down(md){  
+    .product-detail-buy{
+        .gaisbock-product-description{
+            margin-top: 40px;
+            h1{
+                font-size: 27px;
+                line-height:30px;
+                letter-spacing: 0.14px;
+            }
+        }
+    }
     body {
         .product-detail-buy{
             .gaisbock-description-contain-title-description {
