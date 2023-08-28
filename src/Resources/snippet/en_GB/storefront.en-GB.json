@@ -69,6 +69,7 @@
     "passwordLabel":"PASSWORD*",
     "passwordConfirmationPlaceholder": "PASSWORD REPEAT*",
     "passwordDescription": "(Must be at least %minLength% characters with 1 symbol)",
+    "salutationPlaceholder": "ADDRESS",
     "register": "REGISTER",
     "home": {
       "title": "Home"
