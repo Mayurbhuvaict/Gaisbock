@@ -6,6 +6,28 @@ hr {
         line-height: 23px;
     }
 }
+.modal-backdrop {
+    z-index: -1;
+}
+.product-detail-tabs{
+    .product-detail-review{
+        .product-detail-review-checkbox{
+             .form-check {
+                max-width: 55px;
+            }
+        }
+    }
+}
+
+.product-detail-buy{
+    .gaisbock-product-description{
+        h1{
+            font-size:34px;
+            line-height:42px;
+            letter-spacing: 0.17px;
+        }
+    }
+}
 .gaisbock-description-contain-title-description {
     line-height: 23px;
     font-size: 18px;
@@ -261,9 +283,9 @@ hr {
             }
             .modal-dialog {
                 left: 50%;
-                top: 50%;
+                top: 5%;
                 margin: 0;
-                transform: translate(-50%,-50%);
+                transform: translate(-50%,-10%);
             }
             .modal.show .modal-dialog {
                 transform: translate(-50%,-50%);
