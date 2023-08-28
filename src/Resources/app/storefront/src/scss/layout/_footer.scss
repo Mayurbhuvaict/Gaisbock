@@ -175,6 +175,9 @@ footer.footer-main {
 }
 
 @include media-breakpoint-down(md){ 
+    .offcanvas.offcanvas-start.is-fullwidth.show {
+        z-index: 9999;
+    }
     .footer-contact-hotline-contact{
         a{
             color:#fff;
