@@ -19,6 +19,12 @@ button.btn.btn-primary {
     padding-top: 10px;
     padding-bottom: 60px;
 }
+.login-card{
+    .gaisbock-login-hr {
+        border-bottom: 1px solid $sw-border-color;
+        padding-top: 20px;
+    }
+}
 
 .account-register {
     max-width: 1024px;
