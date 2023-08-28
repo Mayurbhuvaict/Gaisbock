@@ -13,7 +13,7 @@
             } %}
         {% endif %}
         {% for variantProducts in page.extensions.products.variants %}
-            {% if page.extensions.products.VariantImage %}
+            {% if page.extensions.products.VariantImage|first != []%}
                 <hr>
             {% endif %}
             <div class="gaisbock-variant-header-section d-flex flex-wrap align-items-center">
@@ -157,7 +157,9 @@
                         {% endfor %}
             </div>
         {% endfor %}
-        <hr>
+        {% if page.extensions.products.VariantImage|first != []%}
+            <hr>
+        {% endif %}
         <div class="gaisbock-variant-comment">
             {{ page.product.translated.customFields.gaisbock_product_detail_extra_details_comment|raw }}
         </div>
