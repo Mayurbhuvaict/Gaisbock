@@ -80,6 +80,8 @@
     .block-ict-custom-text-on-image-banner {
         height: 605px;
         width: 100%;
+        background-attachment: fixed;
+        z-index: -1;
         position: relative;
         @media(max-width:767px) {
             background-position: center;
@@ -227,6 +229,10 @@
     }
 }
 
+.About-page-section {
+    z-index: 2;
+
+}
 .About-page-section .cms-block-gaisbock-listpage-text-image {
     position: static;
     width: 100%;

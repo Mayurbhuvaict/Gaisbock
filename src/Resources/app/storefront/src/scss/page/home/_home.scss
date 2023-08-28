@@ -526,7 +526,11 @@
         }
     }
 }
-
+.gailbock-faq-section{
+    .gaisbock-element-switch-image-text {
+        padding-bottom: 4px;
+    }
+}
 @include media-breakpoint-up(md) {
     .is-act-home{
         .bg-image.gaisbock-benefits {
