@@ -687,6 +687,9 @@ span.product-detail-list-price-wrapper span.list-price-price {
 
 
 @include media-breakpoint-down(md){  
+    .product-detail-main {
+        margin: 0;
+    }
     .product-detail-buy{
         .gaisbock-product-description{
             margin-top: 40px;
@@ -695,6 +698,11 @@ span.product-detail-list-price-wrapper span.list-price-price {
                 line-height:30px;
                 letter-spacing: 0.14px;
             }
+        }
+    }
+    .product-slider-item {
+        .product-info {
+            padding: 0 30px;
         }
     }
     body {
