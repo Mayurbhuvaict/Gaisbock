@@ -1,3 +1,57 @@
+.is-act-customergroupregistration {
+    .cms-block-gaisbock-listpage-text-image {
+        top: 117px;
+        h1 {
+            margin-bottom: 17px;
+        }
+    }
+    .account-register {
+        margin-bottom: 150px;
+    }
+    .cms-element-gaisbock-patnerpage-container {
+        padding-top: 26px;
+        padding-bottom: 48px;
+    }
+    .account-register form.login-form,
+    .account-register .register-form {
+        margin-top: 17px;
+    }
+    .account-register .form-control,
+    .account-register .form-select {
+        padding: 0 17px;
+    }
+    .login-password-recover {
+        padding-left: 17px;
+        margin-bottom: 24px;
+        margin-top: -8px;
+    }
+    .account-register .register-form .form-text.js-validation-message {
+        padding-left: 17px;
+    }
+    .account-register .login-password-recover a {
+        font-weight: 600;
+    }
+    .data-protection-information label {
+        font-size: 15px;
+    }
+    .form-text.privacy-notice strong {
+        color: #151515;
+        font-size: 18px;
+        margin-bottom: 0;
+        display: block;
+        margin-top: 15px;
+    }
+    .country-and-state-form-elements {
+        padding-bottom: 2px;
+    }
+    .account-register{
+        .register-form {
+            padding-bottom: 18px;
+        }
+    }
+}
+
+
 .is-act-customergroupregistration.modal-open{
     .modal.null {
         z-index:9999;
