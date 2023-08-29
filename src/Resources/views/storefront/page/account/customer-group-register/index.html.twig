@@ -20,10 +20,15 @@
                 <div class="row">
                     {% block page_account_register_login_container %}
                         <div class="col-lg-4">
-                            {% sw_include '@Storefront/storefront/component/account/login.html.twig' with {
-                                'cardTitle': "account.loginTitle"|trans|sw_sanitize
-                            } %}
-
+                            {% if activeRoute == "frontend.account.customer-group-registration.page" %}
+                                {% sw_include '@Storefront/storefront/component/account/login.html.twig' with {
+                                    'cardTitle': "account.partnerLoginTitle"|trans|sw_sanitize
+                                } %}
+                            {% else %}
+                                {% sw_include '@Storefront/storefront/component/account/login.html.twig' with {
+                                    'cardTitle': "account.loginTitle"|trans|sw_sanitize
+                                } %}
+                            {% endif %}
                             {% block page_account_register_advantages %}
 
                             {% endblock %}

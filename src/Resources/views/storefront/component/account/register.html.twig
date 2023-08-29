@@ -228,13 +228,6 @@
                                             {{ formGroupMail }}
                                         </div>
                                         <div class="form-group col-sm-6">
-                                            {% if config('core.loginRegistration.requireEmailConfirmation') %}
-                                                {{ formGroupMailConfirmation }}
-                                            {% elseif not config('core.loginRegistration.requirePasswordConfirmation') %}
-                                                {{ formGroupPassword }}
-                                            {% endif %}
-                                        </div>
-                                        <div class="form-group col-sm-6">
                                             {% if config('core.loginRegistration.requireEmailConfirmation') or config('core.loginRegistration.requirePasswordConfirmation') %}
                                                 {{ formGroupPassword }}
                                             {% endif %}
@@ -340,7 +333,15 @@
                             {% endblock %}
                         </div>
                     {% endblock %}
+                    {% if activeRoute == "frontend.account.customer-group-registration.page" %}
+                        {% set newsletterRegisterCheckedDefault = config('SwkwebNewsletterAtRegister.config.isCheckedByDefault') %}
 
+                        {% block swkweb_newsletter_at_register_personal_fields_newsletter %}
+                            {% sw_include '@SwkwebNewsletterAtRegister/storefront/component/account/register-newsletter.html.twig' with {
+                                'isCheckedByDefault': newsletterRegisterCheckedDefault
+                            } %}
+                        {% endblock %}
+                    {% endif %}
                     {% block component_account_register_captcha %}
                         {% sw_include '@Storefront/storefront/component/captcha/base.html.twig' with { preCheck: true } %}
                     {% endblock %}
@@ -350,6 +351,7 @@
                     {% endblock %}
 
                     {% block component_account_register_required_fields %}
+
                     {% endblock %}
 
                     {% block component_account_register_submit %}
