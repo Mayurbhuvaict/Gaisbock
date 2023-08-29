@@ -75,7 +75,7 @@
     "passwordConfirmationPlaceholder": "PASSWORT-WIEDERHOLUNG*",
     "passwordDescription": "(Muss mindestens %minLength% Zeichen mit 1 Symbol sein)",
     "salutationPlaceholder": "ANREDE",
-    "register": "REGISTRIEREN",
+    "register": "Anmelden",
     "partnerLoginTitle": "Ich bin bereits Partner",
     "home": {
       "title": "Home"
