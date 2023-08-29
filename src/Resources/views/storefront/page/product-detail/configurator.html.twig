@@ -88,7 +88,8 @@
                         </span>
                     </div>
                     </div>
-                    <div class="gaisbock-variant-selection-images">
+                    {% if page.extensions.products.VariantImage|first != []%}
+                        <div class="gaisbock-variant-selection-images">
                         {% for key,variantImage in page.extensions.products.VariantImage %}
                             {% if key == variantProducts.id %}
                                 {% if variantImage.1.image %}
@@ -150,7 +151,7 @@
                             {% endif %}
                         {% endfor %}
                     </div>
-                    
+                    {% endif %}
                 {% endfor %}
             {% endblock %}
             <div class="gaisbock-variant-comment">
