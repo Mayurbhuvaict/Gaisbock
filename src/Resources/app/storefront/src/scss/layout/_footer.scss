@@ -2,6 +2,12 @@ footer.footer-main {
     background-color: $sw-footer-background;
     border: 0;
     padding-top: 111px;
+    .confirm-alert {
+        font-size: 0;
+        .alert-info {
+            font-size: 14px;
+        }
+    }
     .custom-texts {
         align-items: center;
         justify-content: center;
