@@ -842,3 +842,14 @@ span.product-detail-list-price-wrapper span.list-price-price {
         padding: 0;
     }
 }
+@include media-breakpoint-down(sm) {
+    .product-detail-buy{
+        .gaisbock-description-contain-title-description{
+            .gasibook-variant-img{
+                img{
+                    max-width: 80px;
+                }
+            }
+        }
+    }
+}
