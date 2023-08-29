@@ -93,6 +93,9 @@ body{
 
 
 @include media-breakpoint-down(md){ 
+    .breadcrumb {
+        padding: 0 20px;
+    }
     body .container-main {
         padding: 0px 0;
     }
