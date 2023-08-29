@@ -154,8 +154,9 @@
                                 <nav aria-label="breadcrumb" style="margin-left: -16px;">
                                     <ol class="breadcrumb">
                                         <li class="breadcrumb-item">
-                                            <a href="{{ app.request.attributes.get('sw-storefront-url') }}" class="breadcrumb-link">{{ 'account.home.title'|trans|sw_sanitize }}</a>
-
+                                            <a href="{{ app.request.attributes.get('sw-storefront-url') }}" class="breadcrumb-link">
+                                                <span class="breadcrumb-title" itemprop="name">{{ 'account.home.title'|trans|sw_sanitize }}</span>
+                                            </a>
                                         </li>
                                         <div class="breadcrumb-placeholder">
                                             {% sw_icon 'arrow-medium-right' style { 'size': 'fluid', 'pack': 'solid'} %}

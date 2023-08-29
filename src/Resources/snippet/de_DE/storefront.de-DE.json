@@ -57,7 +57,8 @@
     "street": "STRASSE",
     "zipcode": "POSTLEITZAHL",
     "city": "STADT",
-    "countryState": "STAAT"
+    "countryState": "STAAT",
+    "privacyNotice": "Ich habe die <a data-toggle=\"modal\" data-bs-toggle=\"modal\" data-url=\"%privacyUrl%\" href=\"%privacyUrl%\" title=\"Datenschutzbestimmungen\">Datenschutzbestimmungen</a> zur Kenntnis genommen und die <a data-toggle=\"modal\" data-bs-toggle=\"modal\" data-url=\"%tosUrl%\" href=\"%tosUrl%\" title=\"AGB\">AGB</a> gelesen und bin mit ihnen einverstanden."
   },
   "account": {
     "loginTitle": "Anmelden",
