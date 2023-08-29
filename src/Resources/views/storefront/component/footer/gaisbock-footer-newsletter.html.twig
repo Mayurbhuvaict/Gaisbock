@@ -12,12 +12,35 @@
                         <div class="{{ formRowClass }}">
                             <div class="footer-newsletter-column-input-email input-group col">
 
-                                <div id="collapseFooterNewsletter"
-                                     class="footer-column-content collapse js-footer-column-content footer-contact"
-                                     aria-labelledby="collapseFooterNewsletter">
+                                <div class="footer-column-headline footer-headline js-footer-column-headline js-collapse-footer-column-trigger"
+                                     id="collapseFooterNewsletterTitle"
+                                     data-bs-target="#collapseFooterNewsletter"
+                                     aria-expanded="true"
+                                     aria-controls="collapseFooterNewsletter"
+                                     role="listitem">
                                     <p class="newsletter-title-one text-center footer__title">
                                         {{ 'footer.newsletter.titleOne'|trans|sw_sanitize }}
                                     </p>
+                                    {% block layout_footer_navigation_newsletter_icons %}
+                                        <div class="footer-column-toggle">
+                                        <span class="footer-plus-icon">
+                                            {% sw_icon 'ic-chevron-right-dark' style {
+                                                'pack': 'gaisbock',
+                                                'size': 'sm',
+                                            } %}
+                                        </span>
+                                            <span class="footer-minus-icon">
+                                            {% sw_icon 'chevron-down' style {
+                                                'pack': 'gaisbock',
+                                                'size': 'sm',
+                                            } %}
+                                        </span>
+                                        </div>
+                                    {% endblock %}
+                                </div>
+                                <div id="collapseFooterNewsletter"
+                                     class="footer-column-content collapse js-footer-column-content footer-contact"
+                                     aria-labelledby="collapseFooterNewsletter">
                                     <p class="newsletter-description text-center footer__content">
                                         {{ 'footer.newsletter.descriptionText'|trans|sw_sanitize }}
                                     </p>
@@ -50,6 +73,7 @@
                                             </button>
                                         {% endblock %}
                                     </div>
+                                </div>
                                 </div>
                                 <div class="w-100"></div>
                                 {% block cms_form_newsletter_privacy %}
