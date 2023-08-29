@@ -79,6 +79,14 @@ body{
     .modal-body{
         .cms-section-sidebar-main-content{
             width: auto;
+            padding: 0;
+        }
+    }
+}
+.header-actions-col{
+    .header-cart{
+        .header-cart-badge {
+            top: 0px;
         }
     }
 }
