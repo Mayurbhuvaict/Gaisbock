@@ -4,10 +4,12 @@
     <div class="input-group">
         {{ parent() }}
         {% block cms_element_form_input_label %}
+            <label class="form-label" for="form-{{ fieldName }}">
 
+            </label>
         {% endblock %}
         {% block cms_form_newsletter_icon %}
-            {% sw_icon 'envelope' style { 'class': 'newsletter-input', 'size': 'sm' }%}
+
         {% endblock %}
 
         {% block cms_form_newsletter_submit %}
