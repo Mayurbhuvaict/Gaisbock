@@ -15,6 +15,9 @@
                                 <div id="collapseFooterNewsletter"
                                      class="footer-column-content collapse js-footer-column-content footer-contact"
                                      aria-labelledby="collapseFooterNewsletter">
+                                    <p class="newsletter-title-one text-center footer__title">
+                                        {{ 'footer.newsletter.titleOne'|trans|sw_sanitize }}
+                                    </p>
                                     <p class="newsletter-description text-center footer__content">
                                         {{ 'footer.newsletter.descriptionText'|trans|sw_sanitize }}
                                     </p>
@@ -26,7 +29,6 @@
                                                 type: 'email',
                                                 required: true,
                                                 additionalClass: 'flex-fill mb-0',
-                                                label: 'newsletter.labelMail',
                                                 placeholder: 'newsletter.placeholderMail'
                                             }
                                             %}

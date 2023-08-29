@@ -33,7 +33,7 @@
             >
                 {% block footer_newsletter %}
                     <div class="col-md-3 footer-column js-footer-column">
-                        <div class=" newsletter">
+                        <div class="newsletter">
                             {% sw_include '@Storefront/storefront/component/footer/gaisbock-footer-newsletter.html.twig' with {
                                 action: 'frontend.form.newsletter.register.handle',
                                 submitText: 'newsletter.formSubmit'
@@ -75,7 +75,6 @@
                              class="footer-column-content collapse js-footer-column-content footer-contact"
                              aria-labelledby="collapseFooterTryIt">
                             <div class="try-it-section">
-                                {#                                <p class="footer__title">{{ "footer.tryIt.tryItItext"|trans|sw_sanitize }}</p> #}
                                 <p class="footer__content ">{{ "footer.tryIt.tryItDescription"|trans|sw_sanitize }}</p>
                             </div>
                         </div>
