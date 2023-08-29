@@ -462,6 +462,9 @@
 }
 .gaisbock-benefits.founder-section {
     height: 728px;
+    @media(max-width:767px) {
+        height: 501px;
+    }
     .title-image-button-section {
         
             right: auto;
@@ -599,6 +602,9 @@
     } 
     .home-banner .image-slider-container .image-slider-image {
         display: none;
+        height: 715px;
+    object-fit: cover;
+    padding-top: 148px;
     }
     .home-banner {
         .image-slider-item {
@@ -607,6 +613,7 @@
             background-repeat: no-repeat;
             width: 100%;
             height: 652px;
+            background: none;
         }
     }
     .home-banner .banner-conext {
@@ -706,7 +713,7 @@
     }   
     .natural-section {
         height: 501px;
-        background-image: none !important;
+        // background-image: none !important;
         margin-top: 45px;
     }
     .natural-section .title-image-button-section.left .sub-title {

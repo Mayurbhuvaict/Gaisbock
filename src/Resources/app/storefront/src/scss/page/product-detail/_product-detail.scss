@@ -546,6 +546,7 @@ span.product-detail-list-price-wrapper span.list-price-price {
             width: 33.33%;
             img {
                 height: 100px;
+                max-width: 100px;
                 object-fit: contain;
             }
         }
