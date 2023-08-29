@@ -53,7 +53,11 @@
   "address": {
     "companyPlaceholder": "SOCIÉTÉ*",
     "departmentPlaceholder": "DÉPARTEMENT",
-    "vatPlaceholder": "ID TVA"
+    "vatPlaceholder": "ID TVA",
+    "street": "STREET",
+    "zipcode": "CODE POSTAL",
+    "city": "VILLE",
+    "countryState": "ÉTAT"
   },
   "account": {
     "loginTitle": "Connexion",
@@ -71,6 +75,7 @@
     "passwordDescription": "(Doit être au moins %minLength% caractères avec 1 symbole)",
     "salutationPlaceholder": "INTERPRÈTE",
     "register": "S'INSCRIRE",
+    "partnerLoginTitle": "Je suis déjà partenaire",
     "home": {
       "title": "Home"
     },

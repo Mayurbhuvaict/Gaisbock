@@ -132,22 +132,42 @@
                     {% block base_main_container %}
                         <div class="container-main" data-gaisbock-header-hover-add-class>
                             {% if app.request.get('_route') === 'frontend.account.login.page' %}
-                            <nav aria-label="breadcrumb">
+                                <div class="breadcrumb cms-breadcrumb container">
+                            <nav aria-label="breadcrumb" style="margin-left: -16px;">
                                 <ol class="breadcrumb">
                                     <li class="breadcrumb-item">
                                         <a href="{{ app.request.attributes.get('sw-storefront-url') }}" class="breadcrumb-link">{{ 'account.home.title'|trans|sw_sanitize }}</a> / {{ 'account.registrationTitle'|trans|sw_sanitize }}
                                     </li>
+                                    <div class="breadcrumb-placeholder">
+                                        {% sw_icon 'arrow-medium-right' style { 'size': 'fluid', 'pack': 'solid'} %}
+                                    </div>
+                                    <a href="{{ app.request.attributes.get('sw-storefront-url') }}/{{ app.request.pathInfo }}" class="breadcrumb-link  is-active" title="{{ 'account.registrationTitle'|trans|sw_sanitize }}" itemprop="item">
+                                        <link itemprop="url" href="{{ app.request.attributes.get('sw-storefront-url') }}">
+                                        <span class="breadcrumb-title" itemprop="name">{{ 'account.registrationTitle'|trans|sw_sanitize }}</span>
+                                    </a>
                                 </ol>
                             </nav>
+                                </div>
                             {% endif %}
                             {% if app.request.get('_route') === 'frontend.account.customer-group-registration.page' %}
-                                <nav aria-label="breadcrumb">
+                            <div class="breadcrumb cms-breadcrumb container">
+                                <nav aria-label="breadcrumb" style="margin-left: -16px;">
                                     <ol class="breadcrumb">
                                         <li class="breadcrumb-item">
-                                            <a href="{{ app.request.attributes.get('sw-storefront-url') }}" class="breadcrumb-link">{{ 'account.home.title'|trans|sw_sanitize }}</a> / {{ 'account.patner'|trans|sw_sanitize }}
+                                            <a href="{{ app.request.attributes.get('sw-storefront-url') }}" class="breadcrumb-link">{{ 'account.home.title'|trans|sw_sanitize }}</a>
+
                                         </li>
+                                        <div class="breadcrumb-placeholder">
+                                            {% sw_icon 'arrow-medium-right' style { 'size': 'fluid', 'pack': 'solid'} %}
+                                        </div>
+                                        <a href="{{ app.request.attributes.get('sw-storefront-url') }}/{{ app.request.pathInfo }}" class="breadcrumb-link  is-active" title="{{ 'account.patner'|trans|sw_sanitize }}" itemprop="item">
+                                            <link itemprop="url" href="{{ app.request.get('_route') }}">
+                                            <span class="breadcrumb-title" itemprop="name">{{ 'account.patner'|trans|sw_sanitize }}</span>
+                                        </a>
+
                                     </ol>
                                 </nav>
+                            </div>
                             {% endif %}
                             {% block base_breadcrumb %}
                                 {% sw_include '@Storefront/storefront/layout/breadcrumb.html.twig' with {

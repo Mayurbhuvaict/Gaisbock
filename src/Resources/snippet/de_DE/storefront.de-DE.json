@@ -53,7 +53,11 @@
   "address": {
     "companyPlaceholder": "UNTERNEHMEN*",
     "departmentPlaceholder": "ABTEILUNG",
-    "vatPlaceholder": "UMSATZSTEUER-ID"
+    "vatPlaceholder": "UMSATZSTEUER-ID",
+    "street": "STRASSE",
+    "zipcode": "POSTLEITZAHL",
+    "city": "STADT",
+    "countryState": "STAAT"
   },
   "account": {
     "loginTitle": "Anmelden",
@@ -70,7 +74,8 @@
     "passwordConfirmationPlaceholder": "PASSWORT-WIEDERHOLUNG*",
     "passwordDescription": "(Muss mindestens %minLength% Zeichen mit 1 Symbol sein)",
     "salutationPlaceholder": "ANREDE",
-    "register": "REGISTER",
+    "register": "REGISTRIEREN",
+    "partnerLoginTitle": "Ich bin bereits Partner",
     "home": {
       "title": "Home"
     },

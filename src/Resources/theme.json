@@ -1,6 +1,6 @@
 {
   "name": "Gaisbock",
-  "author": "Shopware AG",
+  "author": "ICT",
   "views": [
      "@Storefront",
      "@Plugins",
