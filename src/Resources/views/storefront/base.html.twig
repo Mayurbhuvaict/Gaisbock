@@ -425,7 +425,15 @@
             })();
         </script>
     <script>
-
+        if (navigator.userAgent.indexOf('Safari') != -1 && navigator.userAgent.indexOf('Chrome') == -1) {
+            function rmNbsp() {
+                var options = document.getElementsByClassName('product-price')
+                for (index = 0; index < options.length; ++index) {
+                    options[index].innerHTML = options[index].innerHTML.replace(/\&nbsp;/g, '');
+                }
+            }
+            rmNbsp();
+        }
     </script>
     {% endif %}
 {% endblock %}
