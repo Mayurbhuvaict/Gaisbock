@@ -212,6 +212,7 @@ body {
             font-weight: $sw-headings-font-weight;
             font-size: 15px;
             line-height: 18px;
+            display: inline-block;
             @media(max-width:767px) {
                 font-size: 10px;
                 line-height: 11px;
