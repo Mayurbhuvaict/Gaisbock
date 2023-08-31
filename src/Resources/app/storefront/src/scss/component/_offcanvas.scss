@@ -13,9 +13,15 @@
                 width:auto;
                 margin-bottom: 0;
                 padding: 0 40px;
+                align-content: flex-end;
+                display: flex;
                 .nav-item {
                     margin: 0 auto;
                     text-align: center;
+                    @media(min-width:992px) {
+                        border-bottom: 4px solid $sw-color-brand-primary;
+                    }
+
                     &:hover {
                         padding-left: 0;
                     }
@@ -31,6 +37,11 @@
                     }
                     span {
                         margin-bottom: 15px;
+                    }
+                }
+                .nav-item:hover {
+                    @media(min-width:992px) { 
+                        border-color: #DE1010;
                     }
                 }
                 .active {
