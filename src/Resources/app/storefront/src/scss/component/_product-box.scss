@@ -97,6 +97,10 @@ body {
               font-family: $sw-font-family-base;
               font-size: 18px;
               line-height: 23px;
+              min-height: 70px;
+              @media(max-width:767px) {
+                min-height: auto;
+              }
           }
           .price-unit-reference {
               font-family: $sw-font-family-base;
