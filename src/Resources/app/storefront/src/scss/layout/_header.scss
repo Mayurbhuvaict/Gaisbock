@@ -541,7 +541,9 @@ body.modal-open .modal-backdrop.fade.show {
     .is-act-home .hovered-header .gaisbock-header-mobile-text-logo-white {
         display: block;
     }
-    
+    .offcanvas.offcanvas-start.is-fullwidth.show {
+        z-index: 99999;
+    }
 }   
 @media(max-width: 375px) {
     .gaisbock-header-mobile-text-logo img,
