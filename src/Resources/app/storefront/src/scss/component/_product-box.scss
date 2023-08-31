@@ -110,12 +110,7 @@ body {
               letter-spacing: 1.4px;
               color: $sw-color-brand-secondary;
               line-height: 27px;
-              font-size: 20px;
-              @media screen and (-webkit-min-device-pixel-ratio:0) { 
-                ::i-block-chrome{
-                    font-weight: 600;
-                } 
-            }  
+              font-size: 20px; 
           }      
       }
       .product-action{
@@ -290,6 +285,15 @@ body {
     }
 }
 
+@media screen and (-webkit-min-device-pixel-ratio:0) // High-resolution screen media query for WebKit-based browsers.
+
+{
+  .product-detail-buy .product-detail-price
+ {
+  font-weight: 600;
+ }
+}
+
 @include media-breakpoint-down(xl){ 
     .cms-block-gaisbock-category-image-text{
         .cms-element-gaisbock-category-image-text__category-name {
@@ -358,8 +362,6 @@ body {
           } 
       }
   }
-
-
   .product-box{
       .card-body{
           .product-info{
@@ -383,11 +385,6 @@ body {
                   letter-spacing: 1.19px;
                   font-size: 19px;
                   line-height: 22px;
-                  @media screen and (-webkit-min-device-pixel-ratio:0) { 
-                    ::i-block-chrome{
-                        font-weight: 600;
-                    } 
-                } 
               }
           }
           .product-action{
