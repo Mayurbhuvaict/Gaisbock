@@ -134,6 +134,12 @@ a.header-black-logo-main-link,
 .is-act-home .is-sticky .header-logo-main .gaisbock-text-sticky-logo {
     display: none;
 }
+body.modal-open .modal-backdrop.fade.show {
+    display: none;
+}
+.main-navigation-menu > li.hover-menu:first-child {
+    display: none;
+}
 .header-row {
     padding: 5px 20px 0;
     max-width: 1440px;
