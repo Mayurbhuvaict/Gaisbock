@@ -318,4 +318,30 @@ footer.footer-main {
     footer.footer-main .footer-bottom .footer-service-menu-list li {
         padding: 0 22px;
     }
+    .footer-column-headline {
+        .footer-column-toggle{
+            margin-top: -3px;
+            span {
+                margin-left: 5px;
+            }
+            .icon {
+                width: 10px;
+                height: 10px;
+                path {
+                    stroke: #fff;
+                }
+            }
+        }
+    }
+    .footer-column-headline.show {
+        .footer-column-toggle{
+            span {
+                transform: rotate(45deg);
+                margin-top: -4px;
+            }
+        }
+    }
 }
+
+
+
