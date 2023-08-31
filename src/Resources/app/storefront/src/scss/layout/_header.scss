@@ -336,14 +336,14 @@ body.modal-open .modal-backdrop.fade.show {
 @include media-breakpoint-up(lg){  
     .header-logo-col,
     .header-actions-col {
-        width: 25% !important;
+        width: 20% !important;
     }
     .header-logo-main {
         display: inline-block;
         width: auto;
     }
     .nav-main {
-        width: 50% !important;
+        width: 60% !important;
     }
 
 }
