@@ -691,6 +691,9 @@ span.product-detail-list-price-wrapper span.list-price-price {
     .modal-open .product-detail-review.product-detail-review-widget {
         display: block;
     }
+    .modal-open .sticky-top.product-detail-review-widget {
+        z-index: 9999;
+    }
     .accordian-review .sticky-top.product-detail-review-widget {
         display: block !important;
     }
