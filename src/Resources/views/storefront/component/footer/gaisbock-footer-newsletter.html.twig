@@ -10,7 +10,6 @@
                       data-form-validation="true">
                     <div class="form-content">
                         <div class="{{ formRowClass }}">
-                            <div class="footer-newsletter-column-input-email input-group col">
 
                                 <div class="footer-column-headline footer-headline js-footer-column-headline js-collapse-footer-column-trigger"
                                      id="collapseFooterNewsletterTitle"
@@ -30,10 +29,8 @@
                                             } %}
                                         </span>
                                             <span class="footer-minus-icon">
-                                            {% sw_icon 'ic-chevron-right-dark' style {
-                                                'pack': 'gaisbock',
-                                                'size': 'sm',
-                                                'class': 'down'
+                                            {% sw_icon 'ic-chevron-down-custom' style {
+                                                'pack': 'gaisbock'
                                             } %}
                                         </span>
                                         </div>
@@ -79,7 +76,6 @@
                                 <div class="w-100"></div>
                                 {% block cms_form_newsletter_privacy %}
                                 {% endblock %}
-                            </div>
 
                             {% block cms_form_newsletter_additional_fields %}{% endblock %}
 
