@@ -41,7 +41,6 @@ export default class gaisbockHeaderHoverAddClass extends FlyoutMenuPlugin {
         if (this._isOpen(triggerEl)) {
             flyoutEl.classList.remove(this.options.activeCls);
             triggerEl.classList.remove(this.options.activeCls);
-
             // add custom code for remove class
             let headerMainElement = document.getElementsByClassName("gaisbock-header-main");
             headerMainElement[0].classList.remove("hovered");
