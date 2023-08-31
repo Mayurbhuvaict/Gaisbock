@@ -52,6 +52,17 @@ body {
 	url('../../../bundles/gaisbock/storefront/assets/fonts/Brandon/Brandon Text Bold/BrandonText-Bold.otf') format('otf'); /* Legacy iOS */
 }
 @font-face {
+	font-family: 'Brandon-textbold';
+	font-style: normal;
+	font-weight: 700;
+	src: local(''),
+	url('../../../bundles/gaisbock/storefront/assets/fonts/Brandon/Brandon Text Bold/BrandonText-Bold.eot') format('embedded-opentype'), /* IE6-IE8 */
+	url('../../../bundles/gaisbock/storefront/assets/fonts/Brandon/Brandon Text Bold/BrandonText-Bold.woff2') format('woff2'), /* Super Modern Browsers */
+	url('../../../bundles/gaisbock/storefront/assets/fonts/Brandon/Brandon Text Bold/BrandonText-Bold.woff') format('woff'), /* Modern Browsers */
+	url('../../../bundles/gaisbock/storefront/assets/fonts/Brandon/Brandon Text Bold/BrandonText-Bold.ttf') format('truetype'), /* Safari, Android, iOS */
+	url('../../../bundles/gaisbock/storefront/assets/fonts/Brandon/Brandon Text Bold/BrandonText-Bold.otf') format('otf'); /* Legacy iOS */
+}
+@font-face {
 	font-family: 'Brandon-text';
 	font-style: normal;
 	font-weight: 500;
