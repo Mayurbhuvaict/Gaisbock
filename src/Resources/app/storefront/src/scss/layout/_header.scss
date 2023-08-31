@@ -326,6 +326,21 @@ body.modal-open .modal-backdrop.fade.show {
     }
 }
 
+@include media-breakpoint-up(lg){  
+    .header-logo-col,
+    .header-actions-col {
+        width: 25% !important;
+    }
+    .header-logo-main {
+        display: inline-block;
+        width: auto;
+    }
+    .nav-main {
+        width: 50% !important;
+    }
+
+}
+
 @include media-breakpoint-down(lg) {
     .cart-offcanvas {
         z-index: 99999 !important;
