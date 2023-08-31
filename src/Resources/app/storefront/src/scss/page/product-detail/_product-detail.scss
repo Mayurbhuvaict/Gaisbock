@@ -688,6 +688,9 @@ span.product-detail-list-price-wrapper span.list-price-price {
 
 
 @include media-breakpoint-down(md){  
+    .modal-open .product-detail-review.product-detail-review-widget {
+        display: block;
+    }
     .accordian-review .sticky-top.product-detail-review-widget {
         display: block !important;
     }
