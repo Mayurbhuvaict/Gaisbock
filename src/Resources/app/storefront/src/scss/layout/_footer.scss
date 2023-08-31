@@ -1,3 +1,10 @@
+.footer-link-item{
+    .footer-link{
+        &:hover {
+            border-bottom: 1px solid #fff;
+        }
+    }
+}
 footer.footer-main {
     background-color: $sw-footer-background;
     border: 0;

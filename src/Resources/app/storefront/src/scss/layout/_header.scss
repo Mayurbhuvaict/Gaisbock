@@ -164,11 +164,11 @@ body.modal-open .modal-backdrop.fade.show {
         }
     }
     .nav-main {
-        @media(min-width:1024px) {
-            position: absolute;
-            left: 50%;
-            transform: translate(-50%,0%);
-        }
+        // @media(min-width:1024px) {
+        //     position: absolute;
+        //     left: 50%;
+        //     transform: translate(-50%,0%);
+        // }
         @media(min-width:768px) {
             width: auto;
             margin: 0 auto;
@@ -299,6 +299,12 @@ body.modal-open .modal-backdrop.fade.show {
                     &.active {
                         .main-navigation-link-text {
                             border-bottom: 4px solid #DE1010;
+                        }
+                    }
+                    .main-navigation-link-text{
+                        &:hover {
+                            border-bottom: 4px solid #DE1010;
+                            display:inline-block;
                         }
                     }
                 }
