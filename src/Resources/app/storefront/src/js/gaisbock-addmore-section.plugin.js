@@ -16,6 +16,12 @@ export default class gaisbockAddmoreSection extends Plugin {
                 var textDiv = document.getElementById("gaisbock-addmore-section-"+id);
                 button.addEventListener("click", function () {
                     textDiv.style.display = textDiv.style.display === "block" ? "none" : "block";
+                    if (button.classList.contains('active'))
+                    {
+                        button.classList.remove('active');
+                    }else{
+                        button.classList.add('active');
+                    }
                     if (language === "de-DE") {
                         button.textContent = button.textContent === "Mehr lesen" ? "Weniger lesen" : "Mehr lesen";
                     } else if(language === "en-GB") {
