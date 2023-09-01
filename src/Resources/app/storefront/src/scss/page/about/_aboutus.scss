@@ -240,9 +240,9 @@
 .About-page-section {
     z-index: 2;
     margin-top: 32px;
-    @media(max-width:767px) {
-        margin: 0;
-    }
+    // @media(max-width:767px) {
+    //     margin: 0;
+    // }
 }
 .About-page-section .cms-block-gaisbock-listpage-text-image {
     position: static;

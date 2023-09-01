@@ -89,13 +89,11 @@
             padding: 0 20px;
             margin-bottom: 32px;
         }
-        .navigation-offcanvas{
-            .accordion-header {
-                display: flex;
-                align-items: center;
-                justify-content: flex-start;
-            }
-        }        
+        .accordion-header {
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+        }       
     }
     .offcanvas .search-toggle div#searchCollapse {
         top: 73px;
