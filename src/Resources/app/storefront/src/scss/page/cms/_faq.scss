@@ -11,6 +11,7 @@
             font-size: 0;
             position: relative;
             transform: revert;
+            right: -14px;
             &:after {
                 content: "";
                 background-repeat: no-repeat;
@@ -44,6 +45,9 @@
         }
         &:last-child{
             border-bottom: 1px solid $sw-border-color;
+        }
+        .hueb-seo-faq__question{
+            padding-right: 25px;
         }
     }
     .hueb-seo-faq__answer-content {

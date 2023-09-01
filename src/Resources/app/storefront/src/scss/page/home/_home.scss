@@ -256,6 +256,8 @@
 .gaisbock-benefits{
     height: 605px;
     margin-top: 60px;
+    background-attachment: fixed;
+    transition: background-color 0.5s ease;
     .cms-section-default, .cms-block, .cms-block-container, .cms-block-container-row {
         height: 100%;
     }
