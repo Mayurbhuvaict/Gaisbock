@@ -10,6 +10,11 @@ hr {
 //     z-index: -1;
 // }
 
+.product-detail-review-teaser{
+    button.btn-close {
+        background: none;
+    }
+}
 .product-detail-tabs{
     .product-detail-review{
         .product-detail-review-checkbox{
@@ -309,6 +314,7 @@ hr {
                     opacity: 1;
                     font-size: 25px;
                     font-weight: 400;
+                    padding-top: 0;
                 }
             }
             .product-detail-review-info {
