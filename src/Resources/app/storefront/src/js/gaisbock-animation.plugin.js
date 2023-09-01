@@ -7,9 +7,9 @@ export default class gaisbockAnimation extends Plugin {
 
     _reveal() {
         var reveals = document.querySelectorAll(".reveal");
-      
-        
-          
+
+
+
         window.addEventListener('scroll', function() {
                 for (var i = 0; i < reveals.length; i++) {
               var windowHeight = window.innerHeight;

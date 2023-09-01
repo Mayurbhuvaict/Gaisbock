@@ -249,6 +249,12 @@ body.modal-open .modal-backdrop.fade.show {
 .gaisbock-header-mobile-text-logo {
     display: none;
 }
+@media (min-width: 576px){
+    .header-cart-badge {
+        display: block !important;
+    }
+}
+
 .is-sticky {
     position: fixed;
     background: $sw-top-header-background;
@@ -257,6 +263,7 @@ body.modal-open .modal-backdrop.fade.show {
     animation: slideDown 0.35s ease-out;
     width:100%;
     .header-logo-main {
+
         a.header-logo-main-link {
             display: none;
         }

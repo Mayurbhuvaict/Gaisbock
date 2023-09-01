@@ -13,7 +13,7 @@
             } %}
         {% endif %}
         {% for variantProducts in page.extensions.products.variants %}
-            {% if page.extensions.products.VariantImage %}
+            {% if page.extensions.products.VariantImage|first != []%}
                 <hr>
             {% endif %}
             <div class="gaisbock-variant-header-section d-flex flex-wrap align-items-center">
@@ -95,8 +95,9 @@
                         </span>
             </div>
             </div>
+            {% if page.extensions.products.VariantImage|first != []%}
             <div class="gaisbock-variant-selection-images">
-            {% for key,variantImage in page.extensions.products.VariantImage %}
+                {% for key,variantImage in page.extensions.products.VariantImage %}
                             {% if key == variantProducts.id %}
                                 {% if variantImage.1.image %}
                                 <div class="gasibook-variant-img">
@@ -156,8 +157,11 @@
                             {% endif %}
                         {% endfor %}
             </div>
+            {% endif %}
         {% endfor %}
-        <hr>
+        {% if page.extensions.products.VariantImage|first != []%}
+            <hr>
+        {% endif %}
         <div class="gaisbock-variant-comment">
             {{ page.product.translated.customFields.gaisbock_product_detail_extra_details_comment|raw }}
         </div>

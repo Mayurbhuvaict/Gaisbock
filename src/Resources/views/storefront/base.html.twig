@@ -27,7 +27,7 @@
 {% sw_include '@Storefront/storefront/custom/nme-newsletter-popup.html.twig' %}
 {% sw_include '@Storefront/storefront/custom/nme-register-popup.html.twig' %}
 <body class="header-hover {% block base_body_classes %}{{ parent() }}{% set TanmarNgInfiniteScrollingData = context.context.extensions.TanmarNgInfiniteScrolling %}{% if TanmarNgInfiniteScrollingData.active %} is-tanmar-infinite-scrolling {% endif %}{% endblock %}"
-      data-gaisbock-animation data-gaisbock-addmore-section data-gaisbock-image-with-addmore-slider>
+      id="gaisbock-cookie" data-gaisbock-addmore-section data-gaisbock-image-with-addmore-slider data-gaisbock-animation>
 <script src="https://cdn.jsdelivr.net/npm/tiny-slider@2.9.3/dist/tiny-slider.min.js"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tiny-slider/2.9.3/tiny-slider.css">
 <div class="gaisbock-sticky-language-switcher">
@@ -132,22 +132,43 @@
                     {% block base_main_container %}
                         <div class="container-main" data-gaisbock-header-hover-add-class>
                             {% if app.request.get('_route') === 'frontend.account.login.page' %}
-                            <nav aria-label="breadcrumb">
+                                <div class="breadcrumb cms-breadcrumb container">
+                            <nav aria-label="breadcrumb" style="margin-left: -16px;">
                                 <ol class="breadcrumb">
                                     <li class="breadcrumb-item">
-                                        <a href="{{ app.request.attributes.get('sw-storefront-url') }}" class="breadcrumb-link">{{ 'account.home.title'|trans|sw_sanitize }}</a> / {{ 'account.registrationTitle'|trans|sw_sanitize }}
+                                        <a href="{{ app.request.attributes.get('sw-storefront-url') }}" class="breadcrumb-link">{{ 'account.home.title'|trans|sw_sanitize }}</a>
                                     </li>
+                                    <div class="breadcrumb-placeholder">
+                                        {% sw_icon 'arrow-medium-right' style { 'size': 'fluid', 'pack': 'solid'} %}
+                                    </div>
+                                    <a href="{{ app.request.attributes.get('sw-storefront-url') }}/{{ app.request.pathInfo }}" class="breadcrumb-link  is-active" title="{{ 'account.registrationTitle'|trans|sw_sanitize }}" itemprop="item">
+                                        <link itemprop="url" href="{{ app.request.attributes.get('sw-storefront-url') }}">
+                                        <span class="breadcrumb-title" itemprop="name">{{ 'account.registrationTitle'|trans|sw_sanitize }}</span>
+                                    </a>
                                 </ol>
                             </nav>
+                                </div>
                             {% endif %}
                             {% if app.request.get('_route') === 'frontend.account.customer-group-registration.page' %}
-                                <nav aria-label="breadcrumb">
+                            <div class="breadcrumb cms-breadcrumb container">
+                                <nav aria-label="breadcrumb" style="margin-left: -16px;">
                                     <ol class="breadcrumb">
                                         <li class="breadcrumb-item">
-                                            <a href="{{ app.request.attributes.get('sw-storefront-url') }}" class="breadcrumb-link">{{ 'account.home.title'|trans|sw_sanitize }}</a> / {{ 'account.patner'|trans|sw_sanitize }}
+                                            <a href="{{ app.request.attributes.get('sw-storefront-url') }}" class="breadcrumb-link">
+                                                <span class="breadcrumb-title" itemprop="name">{{ 'account.home.title'|trans|sw_sanitize }}</span>
+                                            </a>
                                         </li>
+                                        <div class="breadcrumb-placeholder">
+                                            {% sw_icon 'arrow-medium-right' style { 'size': 'fluid', 'pack': 'solid'} %}
+                                        </div>
+                                        <a href="{{ app.request.attributes.get('sw-storefront-url') }}/{{ app.request.pathInfo }}" class="breadcrumb-link  is-active" title="{{ 'account.patner'|trans|sw_sanitize }}" itemprop="item">
+                                            <link itemprop="url" href="{{ app.request.get('_route') }}">
+                                            <span class="breadcrumb-title" itemprop="name">{{ 'account.patner'|trans|sw_sanitize }}</span>
+                                        </a>
+
                                     </ol>
                                 </nav>
+                            </div>
                             {% endif %}
                             {% block base_breadcrumb %}
                                 {% sw_include '@Storefront/storefront/layout/breadcrumb.html.twig' with {
@@ -403,7 +424,17 @@
 
             })();
         </script>
-        
+    <script>
+        if (navigator.userAgent.indexOf('Safari') != -1 && navigator.userAgent.indexOf('Chrome') == -1) {
+            function rmNbsp() {
+                var options = document.getElementsByClassName('product-price')
+                for (index = 0; index < options.length; ++index) {
+                    options[index].innerHTML = options[index].innerHTML.replace(/\&nbsp;/g, '');
+                }
+            }
+            rmNbsp();
+        }
+    </script>
     {% endif %}
 {% endblock %}
 

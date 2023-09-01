@@ -4,8 +4,8 @@
   },
   "footer": {
     "newsletter" : {
-      "titleOne": "Lorem ipsum <br>PREMIUM-MEMBER WERDEN",
-      "descriptionText" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et <a href=\"#\">dolore magna aliqua.</a>"
+      "titleOne": "GAISBOCK <br>PREMIUM-MEMBER BECOMING",
+      "descriptionText" : "The first 300 get free socks, benefit from exclusive offers and discounts"
     },
     "customText": {
       "customTextOne": "347",
@@ -53,7 +53,12 @@
   "address": {
     "companyPlaceholder": "COMPANY*",
     "departmentPlaceholder": "DEPARTMENT",
-    "vatPlaceholder": "VAT ID"
+    "vatPlaceholder": "VAT ID",
+    "street": "STREET",
+    "zipcode": "POSTAL CODE",
+    "city": "CITY",
+    "countryState": "STATE",
+    "privacyNotice": "I accept the <a data-ajax-modal=\"true\" data-url=\"%privacyUrl%\" href=\"%privacyUrl%\" title=\"Data protection information\">Privacy Policy</a> and agree to the <a data-ajax-modal=\"true\" data-url=\"%tosUrl%\" href=\"%tosUrl%\" title=\"general terms and conditions\">Terms & Conditions</a>"
   },
   "account": {
     "loginTitle": "Login",
@@ -69,9 +74,11 @@
     "passwordLabel":"PASSWORD*",
     "passwordConfirmationPlaceholder": "PASSWORD REPEAT*",
     "passwordDescription": "(Must be at least %minLength% characters with 1 symbol)",
+    "salutationPlaceholder": "ADDRESS",
     "register": "REGISTER",
+    "partnerLoginTitle": "I am already a partner",
     "home": {
-      "title": "Home"
+      "title": "Shop"
     },
     "header": {
       "name": "Registered Customers",

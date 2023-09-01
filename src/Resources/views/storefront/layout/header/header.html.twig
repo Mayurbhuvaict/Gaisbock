@@ -30,6 +30,7 @@
                                     <button
                                             class="btn nav-main-toggle-btn header-actions-btn gaisbock-mobile-menu"
                                             type="button"
+                                            id="gaisbock-cookie-button"
                                             {# @deprecated tag:v6.6.0 - Registering plugin on selector "data-offcanvas-menu" is deprecated. Use "data-off-canvas-menu" instead #}
                                             {% if feature('v6.6.0.0') %}
                                                 data-off-canvas-menu="true"
@@ -42,6 +43,13 @@
                                             {% sw_icon 'stack' %}
                                         {% endblock %}
                                     </button>
+                                    <script>
+                                        var getButton = document.getElementById('gaisbock-cookie-button');
+
+                                        getButton.addEventListener("click", function () {
+                                            document.querySelector("#gaisbock-cookie").classList.add('ict-cookie');
+                                        });
+                                    </script>
                                     <button class="btn btn-light offcanvas-close js-offcanvas-close"
                                             type="button" onclick="closeButton()"> {% sw_icon 'x' %}</button>
                                 {% endblock %}

@@ -18,11 +18,20 @@
     {% block utilities_offcanvas_header %}
         <div class="offcanvas-header p-0" >
             {% block utilities_offcanvas_close %}
+                {% if controllerName == "Cookie" %}
+                    <button class="btn btn-light offcanvas-close js-offcanvas-close gaisbock-close" onclick="closeButton()">
+                        {% block utilities_offcanvas_close_icon_cookie %}
+                            {% sw_icon 'x' style { 'size': 'sm' } %}
+                        {% endblock %}
+                        {{ "cookie.headline"|trans|sw_sanitize }}
+                    </button>
+                {% else %}
                 <button class="btn btn-light offcanvas-close js-offcanvas-close gaisbock-close" onclick="closeButton()">
                     {% block utilities_offcanvas_close_icon %}
                         {% sw_icon 'x' style { 'size': 'sm' } %}
                     {% endblock %}
                 </button>
+                {% endif %}
             {% endblock %}
         </div>
     {% endblock %}
@@ -36,7 +45,9 @@
     <script>
         function closeButton() {
             let getNavCloseClass = document.querySelector('.header-main');
-            if(getNavCloseClass.classList.contains('hovered')){;
+            let getBody = document.querySelector('#gaisbock-cookie');
+            getBody.classList.remove('ict-cookie');
+            if(getNavCloseClass.classList.contains('hovered')){
                 getNavCloseClass.classList.remove('hovered');
             }
         }

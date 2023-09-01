@@ -15,15 +15,19 @@ export default class gaisbockAddmoreSection extends Plugin {
                 const id = button.getAttribute("data-diffrent");
                 var textDiv = document.getElementById("gaisbock-addmore-section-"+id);
                 button.addEventListener("click", function () {
+                    textDiv.style.display = textDiv.style.display === "block" ? "none" : "block";
+                    if (button.classList.contains('active'))
+                    {
+                        button.classList.remove('active');
+                    }else{
+                        button.classList.add('active');
+                    }
                     if (language === "de-DE") {
                         button.textContent = button.textContent === "Mehr lesen" ? "Weniger lesen" : "Mehr lesen";
-                        textDiv.style.display = textDiv.style.display === "block" ? "none" : "block";
                     } else if(language === "en-GB") {
                         button.textContent = button.textContent === "Read More" ? "Read Less" : "Read More";
-                        textDiv.style.display = textDiv.style.display === "block" ? "none" : "block";
                     }else {
                         button.textContent = button.textContent === "Lire la suite" ? "Lire moins" : "Lire la suite";
-                        textDiv.style.display = textDiv.style.display === "block" ? "none" : "block";
                     }
                 });
             });

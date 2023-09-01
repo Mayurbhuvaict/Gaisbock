@@ -33,7 +33,7 @@
             >
                 {% block footer_newsletter %}
                     <div class="col-md-3 footer-column js-footer-column">
-                        <div class=" newsletter">
+                        <div class="newsletter">
                             {% sw_include '@Storefront/storefront/component/footer/gaisbock-footer-newsletter.html.twig' with {
                                 action: 'frontend.form.newsletter.register.handle',
                                 submitText: 'newsletter.formSubmit'
@@ -62,9 +62,10 @@
                                             } %}
                                         </span>
                                     <span class="footer-minus-icon">
-                                            {% sw_icon 'chevron-down' style {
+                                            {% sw_icon 'ic-chevron-down-custom' style {
                                                 'pack': 'gaisbock',
                                                 'size': 'sm',
+                                                'class': 'down'
                                             } %}
                                         </span>
                                 </div>
@@ -75,7 +76,6 @@
                              class="footer-column-content collapse js-footer-column-content footer-contact"
                              aria-labelledby="collapseFooterTryIt">
                             <div class="try-it-section">
-                                {#                                <p class="footer__title">{{ "footer.tryIt.tryItItext"|trans|sw_sanitize }}</p> #}
                                 <p class="footer__content ">{{ "footer.tryIt.tryItDescription"|trans|sw_sanitize }}</p>
                             </div>
                         </div>
@@ -108,9 +108,10 @@
                                                     } %}
                                                 </span>
                                                 <span class="footer-minus-icon">
-                                                    {% sw_icon 'chevron-down' style {
+                                                    {% sw_icon 'ic-chevron-down-custom' style {
                                                         'pack': 'gaisbock',
                                                         'size': 'sm',
+                                                        'class': 'down'
                                                     } %}
                                                 </span>
                                             </div>
@@ -177,13 +178,12 @@
                                         <span class="footer-plus-icon">
                                             {% sw_icon 'ic-chevron-right-dark' style {
                                                 'pack': 'gaisbock',
-                                                'size': 'sm',
+                                                'size': 'sm'
                                             } %}
                                         </span>
                                     <span class="footer-minus-icon">
-                                            {% sw_icon 'chevron-down' style {
-                                                'pack': 'gaisbock',
-                                                'size': 'sm',
+                                            {% sw_icon 'ic-chevron-down-custom' style {
+                                                'pack': 'gaisbock'
                                             } %}
                                         </span>
                                 </div>

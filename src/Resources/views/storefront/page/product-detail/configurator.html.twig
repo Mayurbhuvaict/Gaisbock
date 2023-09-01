@@ -8,7 +8,9 @@
         {% block page_product_detail_configurator_form %}
             {% block page_product_detail_configurator_option_radio_label_text %}
                 {% for variantProducts in page.extensions.products.variants %}
-                    <hr>
+                    {% if page.extensions.products.VariantImage|first != []%}
+                        <hr>
+                    {% endif %}
                     <div class="gaisbock-variant-header-section d-flex flex-wrap align-items-center">
                     <a href="{{ seoUrl('frontend.detail.page', { 'productId': variantProducts.id }) }}"
                        title="{{ variantProducts.translated.name }}">
@@ -86,7 +88,8 @@
                         </span>
                     </div>
                     </div>
-                    <div class="gaisbock-variant-selection-images">
+                    {% if page.extensions.products.VariantImage|first != []%}
+                        <div class="gaisbock-variant-selection-images">
                         {% for key,variantImage in page.extensions.products.VariantImage %}
                             {% if key == variantProducts.id %}
                                 {% if variantImage.1.image %}
@@ -144,10 +147,11 @@
                                         <p class="gaisbock-product-image-text">{{ variantImage.8.text }}</p>
                                     </div>
                                 {% endif %}
+                                <hr>
                             {% endif %}
                         {% endfor %}
                     </div>
-                    
+                    {% endif %}
                 {% endfor %}
             {% endblock %}
             <div class="gaisbock-variant-comment">

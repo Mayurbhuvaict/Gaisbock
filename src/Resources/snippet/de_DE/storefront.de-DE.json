@@ -36,7 +36,7 @@
   "listingPage": {
     "product": {
       "card": {
-        "saleBadges": "Verkauf"
+        "saleBadges": "sale"
       }
     }
   },
@@ -53,7 +53,12 @@
   "address": {
     "companyPlaceholder": "UNTERNEHMEN*",
     "departmentPlaceholder": "ABTEILUNG",
-    "vatPlaceholder": "UMSATZSTEUER-ID"
+    "vatPlaceholder": "UMSATZSTEUER-ID",
+    "street": "STRASSE",
+    "zipcode": "POSTLEITZAHL",
+    "city": "STADT",
+    "countryState": "STAAT",
+    "privacyNotice": "Ich habe die <a data-toggle=\"modal\" data-bs-toggle=\"modal\" data-url=\"%privacyUrl%\" href=\"%privacyUrl%\" title=\"Datenschutzbestimmungen\">Datenschutzbestimmungen</a> zur Kenntnis genommen und die <a data-toggle=\"modal\" data-bs-toggle=\"modal\" data-url=\"%tosUrl%\" href=\"%tosUrl%\" title=\"AGB\">AGB</a> gelesen und bin mit ihnen einverstanden."
   },
   "account": {
     "loginTitle": "Anmelden",
@@ -69,9 +74,11 @@
     "passwordLabel":"PASSWORT*",
     "passwordConfirmationPlaceholder": "PASSWORT-WIEDERHOLUNG*",
     "passwordDescription": "(Muss mindestens %minLength% Zeichen mit 1 Symbol sein)",
-    "register": "REGISTER",
+    "salutationPlaceholder": "ANREDE",
+    "register": "Anmelden",
+    "partnerLoginTitle": "Ich bin bereits Partner",
     "home": {
-      "title": "Home"
+      "title": "Shop"
     },
     "header": {
       "name": "Registrierte Kunden",
