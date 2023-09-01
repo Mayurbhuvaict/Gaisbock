@@ -30,7 +30,10 @@ z-index: -1;
   }
   
   .reveal.active{
-    transform: translateY(0);
+    transform: revert;
+    @media(max-width:767px){
+        transform: translateY(0);
+    }
     opacity: 1;
   }
 
