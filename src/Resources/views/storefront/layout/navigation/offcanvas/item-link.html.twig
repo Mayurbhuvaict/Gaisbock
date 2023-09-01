@@ -4,7 +4,7 @@
     <div class="gaisbock-category-accordion accordion accordion-flush" id="gaisbockAccordion">
         <div class="accordion-item">
             <h2 class="accordion-header" id="gaisbock-heading">
-                <a href="{{ url }}" itemprop="url">{{ item.category.name }}</a>
+                <a href="{{ url }}" itemprop="url">{{ item.category.translated.name }}</a>
                 <span class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
                      data-bs-target="#gaisbockCollapse{{ item.category.id }}" aria-expanded="false"
                      aria-controls="gaisbockCollapse{{ item.category.id }}">
@@ -19,7 +19,7 @@
                                 {% if children.category.media.url %}
                                     <img src="{{ children.category.media.url }}" alt="category image">
                                 {% endif %}
-                                <div>{{ children.category.name }}</div>
+                                <div>{{ children.category.translated.name }}</div>
                             </a>
                         </div>
                     {% endfor %}
