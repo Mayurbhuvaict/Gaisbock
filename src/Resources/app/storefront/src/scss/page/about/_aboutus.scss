@@ -1,3 +1,19 @@
+.about-left-right-section{
+    .readmore-btn-slider{
+        &:after {
+            transform: rotate(90deg);
+            top: 1px;
+            right: -26px;
+        }
+    }
+    .readmore-btn-slider.active{
+        &:after {
+            transform: rotate(180deg);
+            top: 9px;
+        }
+    }
+}
+
 .cms-block-gaisbock-image-add-more-text{
     margin-bottom: 59px;
     &:first-child{
@@ -373,9 +389,9 @@
             height: 4px;
             position: absolute;
             content: url("data:image/svg+xml,%3Csvg width='13' height='9' viewBox='0 0 13 9' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11.09 8.20508L6.5 3.62508L1.91 8.20508L0.5 6.79508L6.5 0.795078L12.5 6.79508L11.09 8.20508Z' fill='%23000000'/%3E%3C/svg%3E");
-            transform: rotate(180deg);
-            right: -20px;
-            top: 11px;
+            //transform: rotate(180deg);
+            //right: -20px;
+            //top: 11px;
         }
     }
     .gaisbock-hideContent-contain,
@@ -486,9 +502,9 @@
     .about-left-right-section {
         margin-top: 0;
     }
-    .about-left-right-section .readmore-btn-slider:after {
-        top: 9px;
-    }
+    //.about-left-right-section .readmore-btn-slider:after {
+    //    top: 9px;
+    //}
     .about-left-right-section .cms-block-gaisbock-custom-text-image-slider .gaisbock-custom-text-image-slider-component-text-block .gaisbock-custom-text-image-slider-component-text-block-subTitle {
         font-size: 13px;
         letter-spacing: .91px;
