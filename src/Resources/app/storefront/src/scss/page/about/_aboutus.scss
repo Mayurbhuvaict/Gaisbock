@@ -1,6 +1,11 @@
 body .nme-newsletter-popup--close-btn:hover:before, .nme-newsletter-popup--close-btn:hover:after {
     background-color: #fff;
 }
+body {
+    .nme-newsletter-popup--close-btn:hover:before, .nme-newsletter-popup--close-btn:hover:after {
+        background-color: #fff;
+    }
+}
 .about-left-right-section{
     .readmore-btn-slider{
         &:after {
