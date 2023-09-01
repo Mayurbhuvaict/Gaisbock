@@ -777,16 +777,16 @@ export default {
             }
         },
         onBlurTwo(content) {
-            this.emitChanges(content);
+            this.emitChangesTwo(content);
         },
 
         onInputTwo(content) {
-            this.emitChangesOne(content);
+            this.emitChangesTwo(content);
         },
 
         emitChangesTwo(content) {
-            if (content !== this.element.config.subContent.value) {
-                this.element.config.subContent.value = content;
+            if (content !== this.element.config.subContentTwo.value) {
+                this.element.config.subContentTwo.value = content;
                 this.$emit('element-update', this.element);
             }
         },
