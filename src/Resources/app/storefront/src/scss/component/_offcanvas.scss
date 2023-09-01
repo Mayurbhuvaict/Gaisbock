@@ -81,7 +81,7 @@
 }
 
 @include media-breakpoint-down(lg){
-    .offcanvas-body{
+    .navigation-offcanvas .offcanvas-body{
         .navigation-offcanvas-container {
             padding-top: 68px;
         }
