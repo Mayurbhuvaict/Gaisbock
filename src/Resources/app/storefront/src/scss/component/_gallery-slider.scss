@@ -47,13 +47,14 @@
 .three-sections-three,
 div#cs-placeholderSlider-tab-pane,
 div#cs-customersAlsoViewed-tab-pane,
-div#cs-productsSameCategory-tab-pane {
+div#cs-productsSameCategory-tab-pane,
+.product-detail-cross-selling .product-slider-container {
     .tns-controls {
         position: absolute;
         width: 100%;
         left: 0%;
         z-index: 9;
-        top: 68%;
+        top: 70%;
     }
     .product-slider-container {
         position: relative;
@@ -61,7 +62,7 @@ div#cs-productsSameCategory-tab-pane {
     button[data-controls~="prev"]{
         font-size: 0;
         position: absolute;
-        left: 0px;
+        left: 20px;
         border: 0;
         padding:0;
         background: transparent;
@@ -77,7 +78,7 @@ div#cs-productsSameCategory-tab-pane {
     }
     button[data-controls~="next"] {
         position: absolute;
-        right: 0px;
+        right: 20px;
         padding:0;
         font-size: 0;
         border: 0;
