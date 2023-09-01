@@ -21,6 +21,12 @@ export default class gaisbockImageWithAddmoreSlider extends Plugin {
                     {
                         textDiv.classList.add('visibility');
                     }
+                    if (button.classList.contains('active'))
+                    {
+                        button.classList.remove('active');
+                    }else{
+                        button.classList.add('active');
+                    }
                     if (language === "de-DE") {
                         button.textContent = button.textContent === "Mehr lesen" ? "Weniger lesen" : "Mehr lesen";
                     } else if(language === "en-GB") {
