@@ -43,7 +43,7 @@
             {% endif %}
 
             {% set columns = 1 %}
-            <div id="gaisbock-custom-text-image-slider-{{ element.id }}" style="display:none">
+            <div id="gaisbock-custom-text-image-slider-{{ element.id }}" class="visibility">
             <div class="gaisbock-hideContent-contain">
                 {{ element.config.hideContent.value|raw }}
             </div>
@@ -122,4 +122,12 @@
         </div>
     </div>
 </div>
+
+    <style>
+        .visibility {
+            visibility: hidden;
+            max-height: 0;
+        }
+    </style>
 {% endblock %}
+

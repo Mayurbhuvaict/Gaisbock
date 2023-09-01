@@ -13,15 +13,18 @@
                 {% for item in navigation.tree %}
                     {% sw_include '@Storefront/storefront/layout/navigation/offcanvas/item-link.html.twig' with { item: item, activeId: activeId } %}
                 {% endfor %}
-                <div class="gaisbock-category-accordion accordion accordion-flush" id="gaisbockAccordion">
-                    <div class="accordion-item">
-                        <h2 class="accordion-header" id="gaisbock-heading">
-                            <div class="accordion-button collapsed" type="button">
-                                <a href="{{ path('frontend.account.login.page') }}" itemprop="url">{{ "account.loginSubmit"|trans|sw_sanitize }}</a>
-                            </div>
-                        </h2>
+                <li class="navigation-offcanvas-list-item">
+                    <div class="gaisbock-category-accordion accordion accordion-flush" id="gaisbockAccordion">
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="gaisbock-heading">
+                                <div class="accordion-button collapsed" type="button">
+                                    <a href="{{ path('frontend.account.login.page') }}"
+                                       itemprop="url">{{ "account.loginSubmit"|trans|sw_sanitize }}</a>
+                                </div>
+                            </h2>
+                        </div>
                     </div>
-                </div>
+                </li>
             </ul>
         </div>
     </div>
