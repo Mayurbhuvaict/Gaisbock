@@ -395,6 +395,10 @@
 
 .gaisbock-benefits.founder-section.store-section {
     margin-top: 130px;
+    background-attachment: fixed;
+    .cms-block-gaisbock-image-titles-button {
+        transition: background-color 0.5s ease;
+    }
     .title-image-button-section .main-title {
         font-size: 70px;
         line-height: 76px;
@@ -515,6 +519,12 @@
     }
 }
 @include media-breakpoint-down(md) {
+    .about-section {
+        padding: 0 20px;
+    }
+    .about-left-right-section {
+        padding: 0 20px;
+    }
     .about-left-right-section{
         .cms-section-default {
             padding: 0;

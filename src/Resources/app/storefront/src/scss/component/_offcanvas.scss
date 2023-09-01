@@ -1,3 +1,13 @@
+.accordion-flush{
+    .accordion-item {
+        .accordion-button.collapsed,
+        .accordion-button{
+            width: auto;
+            padding-top: 0px;
+            padding-bottom: 0;
+        }
+    }
+}
 .navigation-flyouts {
     left: 0;
     top: 86px;
@@ -71,6 +81,22 @@
 }
 
 @include media-breakpoint-down(lg){
+    .offcanvas-body{
+        .navigation-offcanvas-container {
+            padding-top: 68px;
+        }
+        li.navigation-offcanvas-list-item {
+            padding: 0 20px;
+            margin-bottom: 32px;
+        }
+        .navigation-offcanvas{
+            .accordion-header {
+                display: flex;
+                align-items: center;
+                justify-content: flex-start;
+            }
+        }        
+    }
     .offcanvas .search-toggle div#searchCollapse {
         top: 73px;
     }
@@ -121,7 +147,7 @@
                 box-shadow: none;
                 &:after {
                     position: absolute;
-                    right: -27px;
+                    right: -15px;
                 }
             }
             .accordion-button::after  {

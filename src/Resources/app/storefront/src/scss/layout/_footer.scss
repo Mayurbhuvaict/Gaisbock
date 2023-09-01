@@ -264,6 +264,7 @@ footer.footer-main {
     }
     .footer-column-content {
         padding: 0 20px;
+        height: auto !important;
     }
     .footer-column-headline {
         padding: 6px 0;
@@ -344,7 +345,8 @@ footer.footer-main {
         .footer-column-toggle{
             span {
                 transform: rotate(45deg);
-                margin-top: -2px;
+                position: relative;
+                top: -2px;
             }
         }
     }
