@@ -6,6 +6,18 @@
         }
     }
 }
+.search-suggest{
+    .search-suggest-container {
+        width: 100%;
+        .search-suggest-product-name {
+            font-size: 16px;
+        }
+        .search-suggest-product-price span.search-suggest-product-price {
+            color:$sw-color-brand-secondary;
+            font-weight: 700;
+        }
+    }
+}
 
     .search-toggle {
         position: static;
