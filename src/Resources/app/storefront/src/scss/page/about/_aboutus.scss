@@ -6,6 +6,27 @@ body {
         background-color: #fff;
     }
 }
+.cms-block-gaisbock-image-add-more-text {
+    .cms-image-container {
+        position: relative;
+        padding-top: 100%;
+        overflow: hidden;
+        display: block;
+        width: 100%;
+        height: 100%;
+        img {
+            width: 100%;
+            height: 100%;
+            margin: 0 auto;
+            text-align: center;
+            display: block;
+            position: absolute;
+            top: 0;
+            object-fit: contain;
+            left: 0;
+        }
+    }
+}
 .about-left-right-section{
     .readmore-btn-slider{
         &:after {
