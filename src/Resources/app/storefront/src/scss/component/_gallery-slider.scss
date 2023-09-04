@@ -40,7 +40,18 @@
         }
     }
 }
-
+.is-act-home {
+    .three-product-section,
+    .three-sections-two,
+    .three-sections-three {
+        button[data-controls~="prev"] {
+            left: 0;
+        }
+        button[data-controls~="next"] {
+            right:0;
+        }
+    }
+}
 
 .three-product-section,
 .three-sections-two,
