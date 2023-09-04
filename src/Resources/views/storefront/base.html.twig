@@ -435,6 +435,9 @@
 
             })();
         </script>
+
+    
+    {% endif %}
     <script>
         if (navigator.userAgent.indexOf('Safari') != -1 && navigator.userAgent.indexOf('Chrome') == -1) {
             function rmNbsp() {
@@ -446,8 +449,6 @@
             rmNbsp();
         }
     </script>
-    
-    {% endif %}
     <script>
         var getBenner = document.querySelector(".home-banner .cms-element-gaisbock-text-image-slider");
         if (getBenner !== null){
