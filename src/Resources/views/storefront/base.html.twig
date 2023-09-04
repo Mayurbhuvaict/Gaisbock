@@ -446,13 +446,22 @@
             rmNbsp();
         }
     </script>
+    
+    {% endif %}
     <script>
-        var getBenner = document.querySelector(".home-banner");
+        var getBenner = document.querySelector(".home-banner .cms-element-gaisbock-text-image-slider");
         if (getBenner !== null){
-            getBenner.style.height = window.innerHeight+"px";
+            const mediaQuery = window.matchMedia('(max-width: 767px)')
+            if(mediaQuery.matches){
+                getBenner.style.height = (window.innerHeight + 120) +"px";
+            
+            }
+            else{
+                getBenner.style.height = (window.innerHeight) +"px";
+            }
+            
         }
     </script>
-    {% endif %}
 {% endblock %}
 
 </body>
