@@ -446,6 +446,12 @@
             rmNbsp();
         }
     </script>
+    <script>
+        var getBenner = document.querySelector(".home-banner");
+        if (getBenner !== null){
+            getBenner.style.height = window.innerHeight+"px";
+        }
+    </script>
     {% endif %}
 {% endblock %}
 
