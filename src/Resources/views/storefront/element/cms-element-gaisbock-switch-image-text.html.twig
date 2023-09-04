@@ -24,7 +24,8 @@
                                                     'class': 'cms-image',
                                                     'alt': (element.data.media.translated.alt ?: ''),
                                                     'title': (element.data.media.translated.title ?: ''),
-                                                    'loading': 'lazy'
+                                                    'loading': 'lazy',
+                                                    'style': 'width:115px;'
                                                 } %}
 
                                                 {% if element.translated.config.displayMode.value == 'cover' or element.translated.config.displayMode.value == 'contain' %}
