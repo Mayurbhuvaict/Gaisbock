@@ -207,6 +207,17 @@
 {% endblock %}
 
 {% block base_body_script %}
+{% block base_script_solid_ie %}
+    {% set accessToken = config('SolidInstagramElements.config.accessToken') %}
+
+    {% if accessToken.isValid %}
+    <script>
+        window.solidIEAT = "{{ accessToken.accessToken|reverse|replace({ 'A': '+', 'Z': '-' }) }}"
+        window.solidIEU = "{{ accessToken.username }}"
+        window.solidIEEM = "{{ 'solidInstagramElements.general.alert.errorWhileFetching'|trans }}"
+    </script>
+    {% endif %}
+{% endblock %}
 <script>
         var slider1 = document.querySelector('.product-detail-cross-selling');
         if (slider1) {
