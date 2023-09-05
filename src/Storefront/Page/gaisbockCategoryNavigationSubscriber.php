@@ -66,6 +66,7 @@ class gaisbockCategoryNavigationSubscriber implements EventSubscriberInterface
             $categoryData = $this->categoryRepository->search($categoryDataCriteria, $event->getContext())->getElements();
         }
         $data = [
+            'activeCategory' => $getActiveCategory,
             'data' => $categoryData,
         ];
         $event->getPage()->addExtension('categoryData', new ArrayStruct($data));
