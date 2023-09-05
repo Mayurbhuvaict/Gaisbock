@@ -117,6 +117,9 @@ body {
               color: $sw-color-brand-secondary;
               line-height: 27px;
               font-size: 20px; 
+              direction: rtl;
+    display: flex;
+    justify-content: center;
           }      
       }
       .product-action{

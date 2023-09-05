@@ -387,6 +387,9 @@ span.product-detail-list-price-wrapper span.list-price-price {
     line-height: 27px;
     letter-spacing: 1.4px;
     color: $sw-color-brand-secondary;
+    direction: rtl;
+    display: flex;
+    justify-content: center;
 }
 .product-detail-list-price-wrapper {
     height: auto !important;
@@ -449,6 +452,9 @@ span.product-detail-list-price-wrapper span.list-price-price {
         line-height: 27px;
         font-weight: 700;
         color:$sw-color-brand-secondary;
+        direction: rtl;
+    display: flex;
+    justify-content: center;
     }
     .gaisbock-product-description {
         margin-top: 10px;
@@ -581,6 +587,9 @@ span.product-detail-list-price-wrapper span.list-price-price {
             letter-spacing: 1.2px;
             color: $sw-color-brand-secondary;
             padding-right: 15px;
+            direction: rtl;
+            display: flex;
+            justify-content: center;
         }
         label {
             font-size: 15px;
