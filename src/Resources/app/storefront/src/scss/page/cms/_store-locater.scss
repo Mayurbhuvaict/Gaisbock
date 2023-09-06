@@ -1,3 +1,51 @@
+body{
+    .neti-next-store-locator {
+        max-width: 1440px;
+        margin: 0 auto;
+        padding: 0 20px;
+        .map-overlay {
+          position: static !important;
+          width: 100%;
+          transform: revert;
+          .search-container-inner {
+            .form-control {
+                border-radius: 22px;
+                font-size: 18px;
+                letter-spacing: 1.08px;
+                padding-left: 27px;
+                padding-right: 27px;
+                color: $sw-color-brand-secondary;
+                &::placeholder {
+                  font-weight: 700;
+                  color: $sw-color-brand-secondary;
+                }
+            }
+            .toggle-filter {
+              position: absolute !important;
+              background: #fff !important;
+              width: auto;
+              border: 0;
+              top: 5px;
+              right: 14px;
+              @media(max-width: 1024px) {
+                  right: 65px;
+              }
+              .icon {
+                color:$sw-color-brand-secondary;
+              }
+            }
+          }
+        }
+        .store-container-wrapper {
+          .stores-container {
+            .store.featured {
+              margin:0 !important;
+            }
+          }
+        }
+    }
+  }
+
 .is-ctl-storelocator {
     .neti-next-store-locator {
         margin-top: 50px;
