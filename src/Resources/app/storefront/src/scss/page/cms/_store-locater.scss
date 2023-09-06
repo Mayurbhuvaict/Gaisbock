@@ -38,6 +38,12 @@ body{
         }
         .store-container-wrapper {
           .stores-container {
+            .store .button-group{
+                margin-top: 10px !important;
+              .btn{
+                flex: revert !important;
+              }
+            }
             .store.featured {
               margin:0 !important;
               background: #fff;
@@ -46,7 +52,19 @@ body{
         }
     }
   }
-
+  .neti-next-store-locator{
+    .map-container{
+      .horizontal-stores{
+        .store{
+          .button-group{
+            .btn{
+              flex: revert !important;
+            }
+          }
+        }
+      }
+    }
+  }
 .is-ctl-storelocator {
     .neti-next-store-locator {
         margin-top: 50px;
