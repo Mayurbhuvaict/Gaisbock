@@ -395,11 +395,16 @@ body {
                 margin-top: 24px;
             }
             .gaisbock-custom-text-image-slider-component-text-block-contentTitle {
-                font-size: 34px;
-                line-height: 42px;
-                font-family: $sw-font-family-headline;
-                letter-spacing: 0.17px;
+                // font-size: 34px;
+                // line-height: 42px;
+                font-size: 13px;
+                line-height: 14px;
+                // font-family: $sw-font-family-headline;
+                font-family: $sw-font-family-base;
+                // letter-spacing: 0.17px;
+                letter-spacing: 0.78px;
                 margin-bottom: 10px;
+                text-transform: uppercase;
             }
             .gaisbock-custom-text-image-slider-component-text-block-subTitle {
                 font-size: 18px;
@@ -539,9 +544,12 @@ body {
         letter-spacing: 0.6px;
     }
     .about-left-right-section .cms-block-gaisbock-custom-text-image-slider .gaisbock-custom-text-image-slider-component-text-block .gaisbock-custom-text-image-slider-component-text-block-contentTitle {
-        font-size: 21px;
-        line-height: 25px;
-        letter-spacing: 0.1px;
+        // font-size: 21px;
+        // line-height: 25px;
+        // letter-spacing: 0.1px;
+        font-size: 10px;
+    line-height: 14px;
+    letter-spacing: 0.6px;
     }
     .about-left-right-section {
         margin-top: 0;
