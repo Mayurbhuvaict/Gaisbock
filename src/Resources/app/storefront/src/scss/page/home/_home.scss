@@ -564,6 +564,16 @@
 }
 
 @include media-breakpoint-down(md){
+    .is-act-home .three-product-section {
+        .cms-block-text .cms-block-container {
+            padding-bottom: 0 !important;
+        }
+        .hidden-desktop.hidden-tablet.cms-block-product-slider  {
+            .cms-block-container {
+                padding-bottom: 0 !important;
+            }
+        }
+    }
     .Gaisbock-category-images{
         padding-bottom: 20px;
         .gaisbock-title{
@@ -667,12 +677,14 @@
                 font-size: 40px;
                 line-height: 43px;
                 letter-spacing: 0.2px;
-                color: #FFFFFF;
+                // color: #FFFFFF;
+                color:$sw-color-brand-primary;
                 text-shadow: 0px 0px 12px #00000029;
             }
             .cms-element-text-container{
                 letter-spacing: 0px;
-                color: #FFFFFF;
+                // color: #FFFFFF;
+                color:$sw-color-brand-primary;
                 text-shadow: 0px 0px 12px #00000029;
                 font-size: 14px;
                 line-height: 18px;
