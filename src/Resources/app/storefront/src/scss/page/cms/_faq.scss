@@ -1,3 +1,18 @@
+.cms-element-hueb-faq {
+    @media(min-width: 768px){
+        margin-top: 25px;
+    }
+}
+.faq-list .cms-block-gaisbock-listpage-text-image h1, 
+.faq-list .cms-block-gaisbock-listpage-text-image .h1 {
+    @media(max-width:1199px) {
+        letter-spacing: 0.24px;
+        font-size: 38px;
+        line-height: 49px;
+        max-width: 396px;
+        padding-top: 14px;
+    }
+}
 .faq-contents{
     padding-top: 35px;
     .hueb-seo-faq__box-element {

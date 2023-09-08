@@ -127,6 +127,9 @@ body{
 
 
 @include media-breakpoint-down(lg){
+  .neti-next-store-locator .search-container .filter-container.offcanvas {
+      z-index: 99999;
+  }
     .store-locater-block {
         .cms-element-sl-search{
             form {
