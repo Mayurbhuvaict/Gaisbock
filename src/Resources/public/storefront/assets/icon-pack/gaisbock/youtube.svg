@@ -4,7 +4,7 @@
       <rect id="Rechteck_440" data-name="Rechteck 440" width="19.849" height="15" fill="#fff"/>
     </clipPath>
   </defs>
-  <g id="Gruppe_673" data-name="Gruppe 673" transform="translate(0 0)" clip-path="url(#clip-path)">
+  <g id="Gruppe_673" data-name="Gruppe 673" transform="translate(0 0)" clip-path="url(#clip-path0)">
     <path id="Pfad_4416" data-name="Pfad 4416" d="M16.177,0H3.673A3.811,3.811,0,0,0,0,3.928v7.144A3.811,3.811,0,0,0,3.673,15h12.5a3.811,3.811,0,0,0,3.673-3.928V3.928A3.811,3.811,0,0,0,16.177,0M8.246,10.961V4.039L13.8,7.5l-5.552,3.46" transform="translate(0 0)" fill="#fff"/>
   </g>
 </svg>
