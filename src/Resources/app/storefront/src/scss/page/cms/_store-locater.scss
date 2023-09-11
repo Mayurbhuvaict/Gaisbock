@@ -37,6 +37,7 @@ body{
           }
         }
         .store-container-wrapper {
+          left: 0;
           .stores-container {
             .store .button-group{
                 margin-top: 10px !important;
@@ -127,6 +128,9 @@ body{
 
 
 @include media-breakpoint-down(lg){
+  .neti-next-store-locator .search-container .filter-container.offcanvas {
+      z-index: 99999;
+  }
     .store-locater-block {
         .cms-element-sl-search{
             form {

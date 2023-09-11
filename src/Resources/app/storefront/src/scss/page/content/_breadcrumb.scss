@@ -71,7 +71,9 @@ body{
             width: 107px;
         }
         @media(max-width:767px) {
-            display: none;
+            display: block;
+            margin: 0 auto;
+            margin-top: 15px;
         }
     }
 }
