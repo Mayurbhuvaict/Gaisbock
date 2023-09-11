@@ -686,6 +686,9 @@ body {
         font-size: 13px;
         letter-spacing: 0.91px;
     }
+    .element-gaisbock-image-add-more-text--inner .element-gaisbock-image-add-more-text__text .readmore-btn::after {
+        top: 2px;
+    }
 }
 
 @include media-breakpoint-down(md) {
