@@ -285,7 +285,7 @@ body {
                         font-weight: $fontWeight600;
                     }
                     img {
-                        max-width: 100px;
+                        max-width: 36px;
                         height: auto;
                     }
                 }
@@ -685,9 +685,6 @@ body {
         line-height: 18px;
         font-size: 13px;
         letter-spacing: 0.91px;
-    }
-    .element-gaisbock-image-add-more-text--inner .element-gaisbock-image-add-more-text__text .readmore-btn::after {
-        top: 2px;
     }
 }
 
