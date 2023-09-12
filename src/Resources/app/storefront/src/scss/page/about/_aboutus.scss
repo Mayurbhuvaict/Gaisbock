@@ -575,6 +575,8 @@ body {
     }
     .gaisbock-benefits.founder-section.store-section {
         margin-top: 60px;
+        margin-left: 0;
+        margin-right: 0;
     }
     .gaisbock-benefits.founder-section.store-section .title-image-button-section {
         left: 50%;
@@ -587,6 +589,9 @@ body {
     }
 }
 @include media-breakpoint-down(md) {
+    .gaisbock-benefits.founder-section.store-section .title-image-button-section {
+        transform: translate(-50%, 0%);
+    }
     .about-section {
         padding: 0 20px;
         .cms-element-gaisbock-about-title-text-image {
