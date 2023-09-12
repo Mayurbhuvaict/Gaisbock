@@ -38,7 +38,7 @@ z-index: -1;
 .reveals.active{
     transform: translateY(-50%) !important;
     opacity: 1;
-    @media(max-width:767px){
+    @media(max-width:1024px){
         transform: translate(-50% , -50%) !important;
     }
 }

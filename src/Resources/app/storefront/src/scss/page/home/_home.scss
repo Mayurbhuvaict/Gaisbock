@@ -7,7 +7,7 @@
 .store-section.gaisbock-benefits .title-image-button-section,
 body .gaisbock-benefits .title-image-button-section{
     transform: translate(0%, 50%);
-    @media(max-width:767px) {
+    @media(max-width:1024px) {
         transform: translate(-50%, 0%);
     }
 }
@@ -496,7 +496,11 @@ body .gaisbock-benefits .title-image-button-section{
         
             right: auto;
             left: 0;
-            @media(max-wdith:767px){
+            @media(max-width:1024px){
+                right: auto;
+                left: 50%;
+            }
+            @media(max-width:767px){
                 max-width: 320px;
             }
         .main-title {
@@ -685,6 +689,9 @@ body .gaisbock-benefits .title-image-button-section{
             right: auto;
             transform: translate(-50%, -50%);
             left: 50%;
+            @media(max-width:1024px) {
+                transform: translate(0%, 50%);
+            }
             .main-title{
                 font-size: 40px;
                 line-height: 43px;
