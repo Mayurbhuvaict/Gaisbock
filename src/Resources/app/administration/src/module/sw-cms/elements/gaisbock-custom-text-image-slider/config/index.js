@@ -240,10 +240,23 @@ export default {
         onInput(content) {
             this.emitChanges(content);
         },
+        onBlurOne(content) {
+            this.emitChangesOne(content);
+        },
+
+        onInputOne(content) {
+            this.emitChangesOne(content);
+        },
 
         emitChanges(content) {
             if (content !== this.element.config.detailTitle.value) {
                 this.element.config.detailTitle.value = content;
+                this.$emit('element-update', this.element);
+            }
+        },
+        emitChangesOne(content) {
+            if (content !== this.element.config.hideContent.value) {
+                this.element.config.hideContent.value = content;
                 this.$emit('element-update', this.element);
             }
         },
