@@ -27,6 +27,17 @@
                         <img :src="aboutMediaUrl" :style="imgStyles" alt="">
                     {% endblock %}
                 </div>
+                <sw-text-editor
+                        v-model="element.config.extraContain.value"
+                        :disabled="disabled"
+                        :vertical-align="element.config.verticalAlign.value"
+                        :allow-inline-data-mapping="true"
+                        :is-inline-edit="true"
+                        sanitize-input
+                        enable-transparent-background
+                        @blur="onBlurExtra"
+                        @input="onInputExtra"
+                />
             </div>
         {% endblock %}
     </div>

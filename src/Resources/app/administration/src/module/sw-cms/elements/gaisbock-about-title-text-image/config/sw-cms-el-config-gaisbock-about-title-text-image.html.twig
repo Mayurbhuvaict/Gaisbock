@@ -48,6 +48,12 @@
                         sanitize-input
                         @input="onInput"
                         @blur="onBlur"/>
+                <sw-text-editor
+                        v-model="element.config.extraContain.value"
+                        :label="$tc('sw-cms.elements.gaisbockAboutTitleTextImage.config.label.descriptionLabel')"
+                        sanitize-input
+                        @input="onInputExtra"
+                        @blur="onBlurExtra"/>
             {% endblock %}
 
             {% block sw_cms_el_config_gaisbock_about_title_text_image_aboutMedia %}

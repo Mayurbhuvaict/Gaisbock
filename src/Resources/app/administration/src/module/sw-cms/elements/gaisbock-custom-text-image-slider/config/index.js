@@ -236,6 +236,12 @@ export default {
         onBlur(content) {
             this.emitChanges(content);
         },
+        onBlurAfter(content) {
+            this.emitChangesAfter(content);
+        },
+        onInputAfter(content) {
+            this.emitChangesAfter(content);
+        },
 
         onInput(content) {
             this.emitChanges(content);
@@ -251,6 +257,12 @@ export default {
         emitChanges(content) {
             if (content !== this.element.config.detailTitle.value) {
                 this.element.config.detailTitle.value = content;
+                this.$emit('element-update', this.element);
+            }
+        },
+        emitChangesAfter(content) {
+            if (content !== this.element.config.afterSliderText.value) {
+                this.element.config.afterSliderText.value = content;
                 this.$emit('element-update', this.element);
             }
         },
