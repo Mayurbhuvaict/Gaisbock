@@ -171,14 +171,26 @@ export default {
         onBlur(content) {
             this.emitChanges(content);
         },
+        onBlurExtra(content) {
+            this.emitChangesExtra(content);
+        },
 
         onInput(content) {
             this.emitChanges(content);
+        },
+        onInputExtra(content) {
+            this.emitChangesExtra(content);
         },
 
         emitChanges(content) {
             if (content !== this.element.config.content.value) {
                 this.element.config.content.value = content;
+                this.$emit('element-update', this.element);
+            }
+        },
+        emitChangesExtra(content) {
+            if (content !== this.element.config.extraContain.value) {
+                this.element.config.extraContain.value = content;
                 this.$emit('element-update', this.element);
             }
         },

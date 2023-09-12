@@ -158,6 +158,12 @@
                                 type="text"
                                 :label="$tc('sw-cms.elements.image.config.label.subHeading')"
                         />
+                        <sw-field
+                                v-model="element.config.subTitle.value"
+                                class="sw-cms-el-config-button__link-tab"
+                                type="text"
+                                :label="$tc('Sub Title')"
+                        />
                         <sw-text-editor
                                 :value="element.config.content.value"
                                 :allow-inline-data-mapping="true"

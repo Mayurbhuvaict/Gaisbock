@@ -49,6 +49,11 @@ Shopware.Service('cmsService').registerCmsElement({
                 </p>
             `.trim(),
         },
+        extraContain:{
+            source: 'static',
+            value: `<p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, 
+                sed diam`.trim(),
+        },
         aboutMedia: {
             source: 'static',
             value: null,

@@ -10,6 +10,7 @@
                 {% block sw_cms_element_text %}
                     <div class="sw-cms-el-gaisbock-image-add-more-text__text">
                         <h1>{{ element.config.heading.value }}</h1>
+                        <p>{{ element.config.subTitle.value }}</p>
                         <div v-if="element.config.content.source === 'mapped'" class="sw-cms-el-text__mapping-preview content-editor" v-html="$sanitize(demoValue)"></div>
                         <sw-text-editor
                                 v-else
