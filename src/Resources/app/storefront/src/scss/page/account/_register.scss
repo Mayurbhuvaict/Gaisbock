@@ -290,6 +290,9 @@ button.btn.btn-primary {
 
 @include media-breakpoint-down(md) {
     .account-register{
+        .row {
+            margin: 0;
+        }
         .card-title {
             font-size: 18px;
         }  
