@@ -24,7 +24,7 @@ Shopware.Service('cmsService').registerCmsElement({
         sliderItems: {
             source: 'static',
             value: [],
-            required: true,
+            required: false,
             entity: {
                 name: 'media',
             },
