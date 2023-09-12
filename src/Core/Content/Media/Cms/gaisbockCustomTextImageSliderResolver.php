@@ -44,7 +44,9 @@ class gaisbockCustomTextImageSliderResolver extends AbstractCmsElementResolver
 
         $sliderItems = $sliderItemsConfig->getArrayValue();
         $mediaIds = array_column($sliderItems, 'mediaId');
-
+        if ($mediaIds === []){
+            return null;
+        }
         $criteria = new Criteria($mediaIds);
 
         $criteriaCollection = new CriteriaCollection();
