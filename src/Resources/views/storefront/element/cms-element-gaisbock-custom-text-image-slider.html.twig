@@ -31,26 +31,15 @@
             {{ element.config.detailTitle.value|raw }}
         </div>
         <div class="gaisbock-custom-text-image-slider-component-text-block-readMore">
-            {% if app.request.locale === 'de-DE' %}
-                <a href="javascript:void(0)" id="readMoreSlider" class="readmore-btn-slider"
-                   data-language-value="{{ app.request.locale }}" data-diffrent = "{{ element.id }}">Mehr lesen</a>
-            {% elseif app.request.locale === 'fr-FR' %}
-                <a href="javascript:void(0)" id="readMoreSlider" class="readmore-btn-slider"
-                   data-language-value="{{ app.request.locale }}" data-diffrent = "{{ element.id }}">Lire la suite</a>
-            {% else %}
-                <a href="javascript:void(0)" id="readMoreSlider" class="readmore-btn-slider"
-                   data-language-value="{{ app.request.locale }}" data-diffrent = "{{ element.id }}">Read More</a>
-            {% endif %}
-
             {% set columns = 1 %}
-            <div id="gaisbock-custom-text-image-slider-{{ element.id }}" class="visibility">
+            <div id="gaisbock-custom-text-image-slider-{{ element.id }}">
             <div class="gaisbock-hideContent-contain">
                 {{ element.config.hideContent.value|raw }}
             </div>
             {% block cms_element_gaisbock_custom_text_image_slider_alignment %}
                 <div class="base-slider image-slider has-dots-inside" id="gaisbock-slider"
                      data-base-slider="true"
-                     data-base-slider-options='{{ baseSliderOptions|json_encode }}' data-gaisbock-image-slider>
+                     data-base-slider-options='{{ baseSliderOptions|json_encode }}' >
 
                     {% block cms_element_gaisbock_custom_text_image_slider_inner %}
                         <div class="image-slider-container"

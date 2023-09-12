@@ -146,6 +146,11 @@
                                 {% endblock %}
 
                                 {% block sw_cms_el_config_gaisbock_custom_text_custom_text_image_slider_cover_image %}
+                                <sw-cms-mapping-field
+                                        v-model="element.config.coverMedia"
+                                        value-types="entity"
+                                        entity="media"
+                                >
                                     <sw-media-upload-v2
                                             variant="regular"
                                             :upload-tag="uploadCoverTag"
@@ -157,10 +162,38 @@
                                             @media-upload-sidebar-open="onCoverOpenMediaModal"
                                             @media-upload-remove-image="onCoverImageRemove"
                                     />
+                                    <template #preview="{ demoValue }">
+                                        <div class="sw-cms-el-config-image__mapping-preview">
+                                            <img
+                                                    v-if="demoValue.url"
+                                                    :src="demoValue.url"
+                                                    alt=""
+                                            >
+                                            <sw-alert
+                                                    v-else
+                                                    class="sw-cms-el-config-image__preview-info"
+                                                    variant="info"
+                                            >
+                                                {{ $tc('sw-cms.detail.label.mappingEmptyPreview') }}
+                                            </sw-alert>
+                                        </div>
+                                    </template>
+                                </sw-cms-mapping-field>
                                     <sw-upload-listener
                                             :upload-tag="uploadCoverTag"
                                             auto-upload
                                             @media-upload-finish="onCoverImageUpload"
+                                    />
+                                    <sw-media-modal-v2
+                                            v-if="coverOpenMediaModal"
+                                            variant="regular"
+                                            :caption="$tc('sw-cms.elements.general.config.caption.mediaUpload')"
+                                            :entity-context="cmsPageState.entityName"
+                                            :allow-multi-select="false"
+                                            :initial-folder-id="cmsPageState.defaultMediaFolderId"
+                                            @media-upload-remove-image="onCoverImageRemove"
+                                            @media-modal-selection-change="onSelectionChanges"
+                                            @modal-close="onCloseCoverMediaModal"
                                     />
                                 {% endblock %}
                             </div>

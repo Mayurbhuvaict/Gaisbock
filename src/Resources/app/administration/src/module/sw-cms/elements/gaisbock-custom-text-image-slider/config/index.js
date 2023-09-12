@@ -140,6 +140,10 @@ export default {
             this.mediaModalIsOpen = false;
         },
 
+        onCloseCoverMediaModal() {
+            this.coverOpenMediaModal = false;
+        },
+
         onMediaSelectionChange(mediaItems) {
             const sliderItems = this.element.config.sliderItems;
             if (sliderItems.source === 'default') {
@@ -259,7 +263,7 @@ export default {
                 this.$set(this.element, 'data', {mediaId});
                 this.$set(this.element, 'data', {coverMedia});
             } else {
-                this.$set(this.element.data, 'mediaId', mediaId);
+                this.$set(this.element.data, 'coverMediaId', mediaId);
                 this.$set(this.element.data, 'coverMedia', coverMedia);
             }
         },
@@ -267,7 +271,15 @@ export default {
         onCoverOpenMediaModal() {
             this.coverOpenMediaModal = true;
         },
+        onSelectionChanges(mediaEntity) {
+            const media = mediaEntity[0];
+            this.element.config.coverMedia.value = media.id;
+            this.element.config.coverMedia.source = 'static';
 
+            this.updateCoverElementData(media);
+
+            this.$emit('element-update', this.element);
+        },
         onCoverImageRemove() {
             this.element.config.coverMedia.value = null;
             this.element.config.coverUrl.value = null;
