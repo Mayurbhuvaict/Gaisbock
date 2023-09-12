@@ -29,6 +29,18 @@ z-index: -1;
     transition: 1s all ease;
   }
   
+  .reveals{
+    position: relative;
+    transform: translateY(-50px);
+    opacity: 0;
+    transition: 1s all ease;
+}
+.reveals.active{
+    transform: translateY(-50%) !important;
+    opacity: 1;
+}
+
+
   .reveal.active{
     transform: revert;
     @media(max-width:767px){

@@ -30,6 +30,8 @@
       id="gaisbock-cookie" data-gaisbock-addmore-section data-gaisbock-image-with-addmore-slider data-gaisbock-animation>
 <script src="https://cdn.jsdelivr.net/npm/tiny-slider@2.9.3/dist/tiny-slider.min.js"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tiny-slider/2.9.3/tiny-slider.css">
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+ <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 <div class="gaisbock-sticky-language-switcher">
     <form method="post"
           action="{{ path('frontend.checkout.switch-language') }}"
@@ -469,6 +471,21 @@
             }
             
         }
+    </script>
+    <script>
+        var newreveals = document.querySelectorAll(".reveals");
+        window.addEventListener('scroll', function() {
+        for (var i = 0; i < newreveals.length; i++) {
+        var windowHeight = window.innerHeight;
+        var elementTop = newreveals[i].getBoundingClientRect().top;
+        var elementVisible = 0;
+            if (elementTop < windowHeight - elementVisible) {
+                newreveals[i].classList.add("active");
+            } else {
+                newreveals[i].classList.remove("active");
+            }
+        }
+});
     </script>
 {% endblock %}
 

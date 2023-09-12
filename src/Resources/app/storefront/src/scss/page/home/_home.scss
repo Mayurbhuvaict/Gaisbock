@@ -3,6 +3,15 @@
         padding-bottom: 120px;
     }
 }
+.is-act-home .gaisbock-benefits .title-image-button-section,
+.store-section.gaisbock-benefits .title-image-button-section,
+body .gaisbock-benefits .title-image-button-section{
+    transform: translate(0%, 50%);
+}
+.is-act-home .natural-section .title-image-button-section.left.reveals,
+.is-act-home .natural-section .title-image-button-section.left.reveals.active {
+    transform: revert !important;
+}
 .home-banner {
     .cms-element-gaisbock-text-image-slider .base-slider, .tns-outer, .tns-ovh, .tns-inner, .image-slider-container, .image-slider-item-container {
         height: 100% !important;
