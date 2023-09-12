@@ -7,6 +7,39 @@ body {
     }
 }
 
+.gaisbock-custom-text-image-slider-component-media-slider{
+    .base-slider.image-slider {
+        padding-top: 30px;
+        padding-bottom: 21px;
+    }
+    .gaisbock-after-slider-text {
+        padding-top: 17px;
+    }
+    .base-slider-controls-prev, 
+    .base-slider-controls-next{
+        background: transparent;
+        border: 0;
+    }
+    .tns-nav-active {
+        background-color: #C9AC77 !important;
+    }
+    .base-slider .tns-nav .base-slider-dot,
+    .base-slider .tns-nav button,
+    .base-slider .base-slider-dots .base-slider-dot,
+    .base-slider .base-slider-dots button {
+        background-color: #bcc1c7;
+        border: 0;
+        height: 8px;
+        width: 8px;
+        padding: 5px;
+        border-radius: 50%;
+        margin: 0 8px;
+    }
+    .base-slider .tns-nav, 
+    .base-slider .base-slider-dots{
+        margin: 0;
+    } 
+}
 .cms-block-gaisbock-image-add-more-text {
     .cms-image-container {
         position: relative;
