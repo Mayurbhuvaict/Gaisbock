@@ -36,6 +36,7 @@
             <div class="gaisbock-hideContent-contain">
                 {{ element.config.hideContent.value|raw }}
             </div>
+                {% if element.data.sliderItems != [] %}
             {% block cms_element_gaisbock_custom_text_image_slider_alignment %}
                 <div class="base-slider image-slider has-dots-inside" id="gaisbock-slider"
                      data-base-slider="true"
@@ -44,6 +45,7 @@
                     {% block cms_element_gaisbock_custom_text_image_slider_inner %}
                         <div class="image-slider-container"
                              data-base-slider-container="true">
+
                             {% for image in element.data.sliderItems %}
 
                                 {% set imageElement %}
@@ -104,6 +106,7 @@
                     {% endblock %}
                 </div>
             {% endblock %}
+                {% endif %}
             <div class="gaisbock-after-slider-text">
                 {{ element.config.afterSliderText.value|raw }}
             </div>
