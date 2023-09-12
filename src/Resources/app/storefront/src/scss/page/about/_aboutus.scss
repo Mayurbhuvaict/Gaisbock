@@ -6,7 +6,6 @@ body {
         background-color: #fff;
     }
 }
-
 .gaisbock-custom-text-image-slider-component-media-slider{
     .base-slider.image-slider {
         padding-top: 30px;
@@ -555,6 +554,7 @@ body {
 @include media-breakpoint-down(lg) { 
     .cms-block-gaisbock-image-add-more-text{
         margin-bottom: 0px;
+        padding-bottom: 17px;
         &:first-child{
             padding-top: 10px;
         }
@@ -623,6 +623,13 @@ body {
     }
 }
 @include media-breakpoint-down(md) {
+    .about-section{
+        .cms-block-gaisbock-custom-text-image-slider{
+            &:not(:last-child) {
+                padding-bottom: 72px;
+            }
+        }
+    }
     .gaisbock-benefits.founder-section.store-section .title-image-button-section {
         transform: translate(-50%, 0%);
     }
