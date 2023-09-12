@@ -7,6 +7,9 @@
 .store-section.gaisbock-benefits .title-image-button-section,
 body .gaisbock-benefits .title-image-button-section{
     transform: translate(0%, 50%);
+    @media(max-width:767px) {
+        transform: translate(-50%, 0%);
+    }
 }
 .is-act-home .natural-section .title-image-button-section.left.reveals,
 .is-act-home .natural-section .title-image-button-section.left.reveals.active {
