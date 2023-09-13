@@ -278,8 +278,8 @@ body .gaisbock-benefits .title-image-button-section{
 .gaisbock-benefits{
     height: 667px;
     margin-top: 60px;
-    background-attachment: fixed;
-    transition: background-color 0.5s ease;
+    // background-attachment: fixed;
+    // transition: background-color 0.5s ease;
     .cms-section-default, .cms-block, .cms-block-container, .cms-block-container-row {
         height: 100%;
     }
@@ -589,7 +589,7 @@ body .gaisbock-benefits .title-image-button-section{
         }
         .cms-section-default{
             .cms-block-container {
-                padding-bottom: 10px !important;
+                padding-bottom: 0px !important;
             }
         }
         .image-text-container {

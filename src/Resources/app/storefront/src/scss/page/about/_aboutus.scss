@@ -6,6 +6,13 @@ body {
         background-color: #fff;
     }
 }
+.about-title-text-image-container .gaisbock-about-image-discription {
+    font-family: 'Brandon-text';
+    font-size: 16px;
+    text-align: center;
+    max-width: 100%;
+    margin: 0;
+}
 .gaisbock-custom-text-image-slider-component-media-slider{
     .base-slider.image-slider {
         padding-top: 30px;
@@ -167,7 +174,7 @@ body {
     .block-ict-custom-text-on-image-banner {
         height: 605px;
         width: 100%;
-        background-attachment: fixed;
+        // background-attachment: fixed;
         z-index: -1;
         position: relative;
         background-position: center;
@@ -439,14 +446,14 @@ body {
                 margin-bottom: 30px;
                 text-transform: uppercase;
                 b {
-                    font-size: 18px;
+                    font-size: 28px;
                     letter-spacing: 1.08px;
                     text-transform: uppercase;
-                    line-height: 25px;
+                    line-height: 34px;
                     font-weight: 700;
                     @media (max-width:767px){
-                        line-height: 18px;
-                        font-size: 13px;
+                        line-height: 34px;
+                        font-size: 24px;
                         letter-spacing: 0.91px;
                     }
                 }
@@ -502,7 +509,7 @@ body {
 
 .gaisbock-benefits.founder-section.store-section {
     margin-top: 130px;
-    background-attachment: fixed;
+    // background-attachment: fixed;
     @media(max-width:992px) {
         background-attachment: revert;
     }
@@ -635,6 +642,10 @@ body {
     }
 }
 @include media-breakpoint-down(md) {
+    .about-title-text-image-container .gaisbock-about-image-discription {
+        margin: 0 0 10px 0;
+        font-size: 14px;
+    }
     .about-section{
         .cms-block-gaisbock-custom-text-image-slider{
             &:not(:last-child) {
