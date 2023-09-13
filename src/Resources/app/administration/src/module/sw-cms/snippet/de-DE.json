@@ -100,7 +100,8 @@
             "Heading": "Überschrift",
             "subHeading": "Unterüberschrift",
             "sub sub Heading": "Sub sub heading",
-            "position": "position"
+            "position": "position",
+            "dropdown": "Dropdown"
           },
           "placeholder": {
               "enterMainTitle": "Haupttitel hier eingeben",
