@@ -88,7 +88,7 @@ export default {
             this.$emit('element-update', this.element);
         },
         onImageRemoveTwo() {
-            this.element.config.two.value = null;
+            this.element.config.mediaTwo.value = null;
 
             this.updateElementDataTwo();
 
@@ -136,8 +136,8 @@ export default {
             if (!this.element.data) {
                 this.$set(this.element, 'data', { mediaId, media });
             } else {
-                this.$set(this.element.data, 'twoId', mediaId);
-                this.$set(this.element.data, 'two', media);
+                this.$set(this.element.data, 'mediaTwoId', mediaId);
+                this.$set(this.element.data, 'mediaTwo', media);
             }
         },
 
