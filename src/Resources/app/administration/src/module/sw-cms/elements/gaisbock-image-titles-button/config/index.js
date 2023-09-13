@@ -74,7 +74,7 @@ export default {
         async onImageUploadTwo({ targetId }) {
             const mediaEntity = await this.mediaRepository.get(targetId);
 
-            this.element.config.two.value = mediaEntity.id;
+            this.element.config.mediaTwo.value = mediaEntity.id;
             this.element.config.urlTwo.value = mediaEntity.url;
             this.updateElementDataTwo(mediaEntity);
 
