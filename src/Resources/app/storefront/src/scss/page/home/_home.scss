@@ -379,7 +379,7 @@ body .gaisbock-benefits .title-image-button-section{
 
 
 .gift-code-section {
-    padding-top: 63px;
+    padding-top: 50px;
     .image-text-container {
         position: relative;
         text-align: center;
@@ -583,6 +583,28 @@ body .gaisbock-benefits .title-image-button-section{
 }
 
 @include media-breakpoint-down(md){
+    .gift-code-section{
+        .cms-block-gaisbock-switch-image-text {
+            position: relative;
+        }
+        .cms-section-default{
+            .cms-block-container {
+                padding-bottom: 10px !important;
+            }
+        }
+        .image-text-container {
+            position: static;
+            .cms-element-gaisbock-switch-image-text {
+                left: 0px !important;
+                top: 0px !important;
+                right: auto !important;
+                display: block;
+                img {
+                    max-width: 80px;
+                }
+            }
+        }
+    }
     .is-act-home .three-product-section {
         .cms-block-text .cms-block-container {
             padding-bottom: 0 !important;
@@ -700,14 +722,14 @@ body .gaisbock-benefits .title-image-button-section{
                 font-size: 40px;
                 line-height: 43px;
                 letter-spacing: 0.2px;
-                // color: #FFFFFF;
-                color:$sw-color-brand-primary;
+                color: #FFFFFF;
+                // color:$sw-color-brand-primary;
                 text-shadow: 0px 0px 12px #00000029;
             }
             .cms-element-text-container{
                 letter-spacing: 0px;
-                // color: #FFFFFF;
-                color:$sw-color-brand-primary;
+                color: #FFFFFF;
+                // color:$sw-color-brand-primary;
                 text-shadow: 0px 0px 12px #00000029;
                 font-size: 14px;
                 line-height: 18px;
@@ -823,6 +845,21 @@ body .gaisbock-benefits .title-image-button-section{
                 color: $sw-color-brand-primary;
                 font-size: 16px;
                 line-height: 19px;
+            }
+        }
+    }
+}
+
+@media (max-width:576px){
+    .gift-code-section{
+        .image-text-container{
+            .text-image{
+                padding-top: 40px;
+            }
+            .cms-element-gaisbock-switch-image-text{
+                img {
+                    max-width: 60px;
+                }
             }
         }
     }
