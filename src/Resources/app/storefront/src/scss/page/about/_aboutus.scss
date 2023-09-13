@@ -126,8 +126,8 @@ body {
             margin: 20px auto 30px;
         }
         @media(max-width:767px){
-            font-size: 14px;
-            line-height: 18px;
+            font-size: 16px;
+            line-height: 19px;
             margin: 0;
         }
     }
@@ -436,8 +436,20 @@ body {
                 font-family: $sw-font-family-base;
                 // letter-spacing: 0.17px;
                 letter-spacing: 0.78px;
-                margin-bottom: 10px;
+                margin-bottom: 30px;
                 text-transform: uppercase;
+                b {
+                    font-size: 18px;
+                    letter-spacing: 1.08px;
+                    text-transform: uppercase;
+                    line-height: 25px;
+                    font-weight: 700;
+                    @media (max-width:767px){
+                        line-height: 18px;
+                        font-size: 13px;
+                        letter-spacing: 0.91px;
+                    }
+                }
             }
             .gaisbock-custom-text-image-slider-component-text-block-subTitle {
                 font-size: 18px;
