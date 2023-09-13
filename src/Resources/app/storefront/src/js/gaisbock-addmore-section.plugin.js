@@ -23,7 +23,7 @@ export default class gaisbockAddmoreSection extends Plugin {
                         button.classList.add('active');
                     }
                     if (language === "de-DE") {
-                        button.textContent = button.textContent === "Mehr lesen" ? "Weniger lesen" : "Mehr lesen";
+                        button.textContent = button.textContent === "Mehr erfahren" ? "Weniger lesen" : "Mehr erfahren";
                     } else if(language === "en-GB") {
                         button.textContent = button.textContent === "Read More" ? "Read Less" : "Read More";
                     }else {
