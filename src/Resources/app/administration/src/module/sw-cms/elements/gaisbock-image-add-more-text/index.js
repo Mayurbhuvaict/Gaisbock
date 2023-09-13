@@ -9,6 +9,10 @@ Shopware.Service('cmsService').registerCmsElement({
     configComponent: 'sw-cms-el-config-gaisbock-image-add-more-text',
     previewComponent: 'sw-cms-el-preview-gaisbock-image-add-more-text',
     defaultConfig: {
+        dropdown:{
+            source: 'static',
+            value: null
+        },
         position:{
             source: 'static',
             value: null

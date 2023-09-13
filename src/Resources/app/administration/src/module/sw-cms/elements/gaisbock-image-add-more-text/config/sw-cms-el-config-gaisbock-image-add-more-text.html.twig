@@ -36,6 +36,12 @@
             >
                 {% block sw_cms_element_image_config %}
                     <div class="sw-cms-el-config-image">
+                        <sw-field
+                                v-model="element.config.dropdown.value"
+                                class="sw-cms-el-config-button__link-tab"
+                                type="switch"
+                                :label="$tc('sw-cms.elements.image.config.label.dropdown')"
+                        />
                         <!-- eslint-disable-next-line sw-deprecation-rules/no-twigjs-blocks -->
                         {% block sw_cms_element_image_config_media_upload %}
                             <sw-cms-mapping-field

@@ -104,7 +104,8 @@
             "Heading": "Heading",
             "subHeading": "Sub Heading",
             "sub sub Heading": "Sub sub heading",
-            "position": "position"
+            "position": "position",
+            "dropdown": "Dropdown"
           },
           "placeholder": {
             "enterMainTitle": "Enter main title here",
