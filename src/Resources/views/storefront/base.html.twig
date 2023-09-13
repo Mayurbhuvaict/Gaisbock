@@ -33,6 +33,7 @@
 <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 <div class="gaisbock-sticky-language-switcher">
+    {% if  page.header.languages.count > 1 %}
     <form method="post"
           action="{{ path('frontend.checkout.switch-language') }}"
           class="language-form"
@@ -86,6 +87,7 @@
         {% endfor %}
 
     </form>
+    {% endif %}
 </div>
 {% block base_body_inner %}
     {% block base_noscript %}
