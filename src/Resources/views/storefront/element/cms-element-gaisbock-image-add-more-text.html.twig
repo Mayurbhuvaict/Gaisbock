@@ -26,7 +26,7 @@
                     <p>{{ element.config.content.value|raw }}</p>
                     {% if element.config.dropdown.value === true %}
                         {% if app.request.locale === 'de-DE' %}
-                            <a href="javascript:void(0)" id="readMore" class="readmore-btn" data-language-value="{{ app.request.locale }}" data-diffrent = "{{ element.id }}">Mehr lesen</a>
+                            <a href="javascript:void(0)" id="readMore" class="readmore-btn" data-language-value="{{ app.request.locale }}" data-diffrent = "{{ element.id }}">Mehr erfahren</a>
                         {% elseif app.request.locale === 'fr-FR' %}
                             <a href="javascript:void(0)" id="readMore" class="readmore-btn" data-language-value="{{ app.request.locale }}" data-diffrent = "{{ element.id }}">Lire la suite</a>
                         {% else %}
