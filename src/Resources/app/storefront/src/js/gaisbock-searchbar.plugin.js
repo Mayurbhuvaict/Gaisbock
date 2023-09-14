@@ -2,7 +2,6 @@ import Plugin from 'src/plugin-system/plugin.class';
 
 export default class gaisbcksearchbar extends Plugin{
     init(){
-
         const parentDiv = document.querySelector('.header-main');
         const searchButton = document.querySelector('.gaisbock-search-button-for-css');
         searchButton.addEventListener('click',()=>{

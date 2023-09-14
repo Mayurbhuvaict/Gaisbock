@@ -128,21 +128,24 @@
                                                 <ul class="list-unstyled">
                                                     {% for treeItem in root.children %}
                                                         {% set cssClass = treeItem.category.customFields.css_classes %}
-                                                
+
                                                         {% set category = treeItem.category %}
                                                         {% set name = category.translated.name %}
 
                                                         {% block layout_footer_navigation_information_link_item %}
-                                                            <li class="footer-link-item">
+                                                            <li class="footer-link-item ">
                                                                 {% block layout_footer_navigation_information_link %}
                                                                     {% if category.type == 'folder' %}
                                                                         <div>{{ name }}</div>
                                                                     {% else %}
-                                                                    <a class="footer-link {% if cssClass !== null %} {{ cssClass }} search-toggle-btn js-search-toggle-btn gaisbock-search-button-for-css collapsed {% endif %}"
+                                                                        <a class="footer-link {% if cssClass !== null %} {{ cssClass }} search-toggle-btn js-search-toggle-btn  collapsed {% endif %}"
                                                                            id="{% if cssClass !== null %}closeToggle{% endif %}"
-                                                                           {% if cssClass !== null %}data-bs-toggle="collapse" data-bs-target="#searchCollapse" aria-expanded="false" type="button" aria-controls="searchCollapse" aria-label="Search"{% endif %}
-                                                                           href="{{ category_url(category) }}"
-                                                                           {% if category_linknewtab(category) %}target="_blank"{% endif %}
+                                                                           {% if cssClass !== null %}data-bs-toggle="collapse"
+                                                                           data-bs-target="#searchCollapse"
+                                                                           aria-expanded="false" type="button"
+                                                                           aria-controls="searchCollapse"
+                                                                           aria-label="Search"{% endif %}
+                                                                           href="javascrip:void(0)"
                                                                            title="{{ name }}">
                                                                             {{ name }}
                                                                         </a>
@@ -215,7 +218,7 @@
                          class="footer-column-content js-footer-column-content footer-contact"
                          aria-labelledby="collapseFooterHotlineTitle">
                         <div class="footer-column-content-inner">
-                            <div class="footer-contact-hotline d-flex justify-content-center    ">
+                            <div class="footer-contact-hotline d-flex justify-content-center">
                                 <p> {{ "footer.hotline.hotlineOne"|trans|sw_sanitize }}</p>
                                 <p> {{ "footer.hotline.hotlineTwo"|trans|sw_sanitize }}</p>
                                 <p> {{ "footer.hotline.hotlineThree"|trans|sw_sanitize }}</p>
@@ -335,4 +338,15 @@
             {% endblock %}
         </div>
     {% endblock %}
+    <script>
+        const parentDiv = document.querySelector('.header-main');
+        const searchButton = document.querySelector('.gaisbock-search-button-for-css-footer');
+        searchButton.addEventListener('click', function () {
+            if (parentDiv.classList.contains('hovered-header') === false) {
+                parentDiv.classList.add('hovered-header');
+            } else {
+                parentDiv.classList.remove('hovered-header');
+            }
+        });
+    </script>
 {% endblock %}
