@@ -1,5 +1,5 @@
 {% block cms_element_gaisbock_image_titles_button_ %}
-    <div class="gaisbock-element-image-titles-button">
+    <div class="gaisbock-element-image-titles-button reveals">
         {% if element.fieldConfig.elements.position.value == 'left' %}
             {% set active = 'left' %}
         {% elseif element.fieldConfig.elements.position.value == 'right' %}
@@ -8,7 +8,7 @@
             {% set active = 'center' %}
         {% endif %}
 
-        <div class="title-image-button-section {{ active }} reveals">
+        <div class="title-image-button-section {{ active }}">
             {% block cms_element_sub_title %}
                 <div class="sub-title">
                     {{ element.config.subTitle.value }}
