@@ -3,16 +3,24 @@
         padding-bottom: 120px;
     }
 }
-.is-act-home .gaisbock-benefits .title-image-button-section,
-.store-section.gaisbock-benefits .title-image-button-section,
-body .gaisbock-benefits .title-image-button-section{
+.is-act-home .gaisbock-benefits .gaisbock-element-image-titles-button .title-image-button-section,
+.store-section.gaisbock-benefits .gaisbock-element-image-titles-button .title-image-button-section,
+body .gaisbock-benefits .gaisbock-element-image-titles-button .title-image-button-section{
     transform: translate(0%, 50%);
     @media(max-width:1024px) {
         transform: translate(-50%, 0%);
     }
 }
-.is-act-home .natural-section .title-image-button-section.left.reveals,
-.is-act-home .natural-section .title-image-button-section.left.reveals.active {
+// .is-act-home .gaisbock-benefits.reveal.active .title-image-button-section,
+// .store-section.gaisbock-benefits.reveal.active .title-image-button-section,
+// body .gaisbock-benefits.reveal.active .title-image-button-section{
+//     transform: translateY(-50%) !important;
+//     @media(max-width:1024px) {
+//         transform: translate(-50%, -50%) !important;
+//     }
+// }
+.is-act-home .natural-section .gaisbock-element-image-titles-button.reveals .title-image-button-section.left,
+.is-act-home .natural-section .gaisbock-element-image-titles-button.reveals.active .title-image-button-section.left {
     transform: revert !important;
 }
 .home-banner {
@@ -315,8 +323,9 @@ body .gaisbock-benefits .title-image-button-section{
             line-height: 76px;
             letter-spacing: 0.35px;
             color: $sw-color-brand-primary;
-            font-family: $sw-font-family-headline;
-            font-weight: $sw-headings-font-weight;
+            // font-family: $sw-font-family-headline;
+            // font-weight: $sw-headings-font-weight;
+            font-family: $sw-font-family-base;
         }
         .cms-image-container{
             padding-top: 32px;
@@ -332,9 +341,10 @@ body .gaisbock-benefits .title-image-button-section{
             font-size: 24px;
             line-height: 32px;
             color: $sw-color-brand-primary;
-            font-family: $sw-font-family-headline;
-            font-weight: 500;
-            font-family: 'Blacker-display-regular';
+            // font-family: $sw-font-family-headline;
+            // font-weight: 500;
+            // font-family: 'Blacker-display-regular';
+            font-family: $sw-font-family-base;
         }
         .gaisbock-image-button{
             margin: 30px auto 0;
