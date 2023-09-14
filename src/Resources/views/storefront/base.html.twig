@@ -476,18 +476,21 @@
     </script>
     <script>
         var newreveals = document.querySelectorAll(".reveals");
-        window.addEventListener('scroll', function() {
-        for (var i = 0; i < newreveals.length; i++) {
-        var windowHeight = window.innerHeight;
-        var elementTop = newreveals[i].getBoundingClientRect().top;
-        var elementVisible = 0;
-            if (elementTop < windowHeight - elementVisible) {
-                newreveals[i].classList.add("active");
-            } else {
-                newreveals[i].classList.remove("active");
-            }
+        if (newreveals !== null){
+            window.addEventListener('scroll', function() {
+                for (var i = 0; i < newreveals.length; i++) {
+                    var windowHeight = window.innerHeight;
+                    var elementTop = newreveals[i].getBoundingClientRect().top;
+                    var elementVisible = 0;
+                    if (elementTop < windowHeight - elementVisible) {
+                        newreveals[i].classList.add("active");
+                    } else {
+                        newreveals[i].classList.remove("active");
+                    }
+                }
+            });
         }
-});
+
     </script>
 {% endblock %}
 
