@@ -19,7 +19,7 @@ footer.footer-main {
         }
     }
     .custom-texts {
-        align-items: center;
+        align-items: flex-start;
         justify-content: center;
         padding: 0 20px;
         flex-wrap: wrap;
@@ -191,6 +191,15 @@ footer.footer-main {
 }
 
 @include media-breakpoint-down(md){ 
+    footer.footer-main .custom-texts {
+        flex-wrap: wrap;
+    }
+    footer.footer-main .custom-texts>div:last-child {
+        width: 100%;
+    }
+    footer.footer-main .custom-texts>div {
+        width: 50%;
+    }
     // .offcanvas.offcanvas-start.is-fullwidth.show {
     //     z-index: 9999;
     // }
@@ -217,13 +226,13 @@ footer.footer-main {
             font-size: 13px;
             line-height: 17px;
             letter-spacing: 0.13px;
-            max-width: 58px;
-            word-break: break-all;
+            max-width: 148px;
+            // word-break: break-all;
             min-height: 58px;
 
-            br {
-                display: none;
-            }
+            // br {
+            //     display: none;
+            // }
         }
     }
     footer.footer-main .custom-texts>div {

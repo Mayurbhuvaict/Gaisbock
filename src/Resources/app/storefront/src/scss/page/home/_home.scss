@@ -23,6 +23,32 @@ body .gaisbock-benefits .gaisbock-element-image-titles-button .title-image-butto
 .is-act-home .natural-section .gaisbock-element-image-titles-button.reveals.active .title-image-button-section.left {
     transform: revert !important;
 }
+
+.insta-link {
+    margin: 30px auto 0;
+    color: #FFFFFF;
+    background: #c9ac77 0% 0% no-repeat padding-box;
+    display: block;
+    border-radius: 15px;
+    text-align: center;
+    width: auto;
+    max-width: 154px;
+    a {
+        font-family: $sw-font-family-base;
+        font-weight: 800;
+        font-size: 13px;
+        letter-spacing: 0.78px;
+        color: #FFFFFF;
+        text-transform: uppercase;
+        line-height: 14px;
+        padding: 10px 21px;
+        display: block;
+        &:hover{
+            text-decoration: none;
+        }
+    }
+}
+
 .home-banner {
     .cms-element-gaisbock-text-image-slider .base-slider, .tns-outer, .tns-ovh, .tns-inner, .image-slider-container, .image-slider-item-container {
         height: 100% !important;
@@ -31,6 +57,15 @@ body .gaisbock-benefits .gaisbock-element-image-titles-button .title-image-butto
         background-repeat: no-repeat !important;
         background-size: cover !important;
         height: 100%;
+        &:after {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+        }
     }
     margin-top: -201px;
     img {
@@ -47,7 +82,8 @@ body .gaisbock-benefits .gaisbock-element-image-titles-button .title-image-butto
         top: 50%;
         transform: translate(0%,-50%);
         left: 190px;
-        max-width: 355px;
+        max-width: 472px;
+            z-index: 9;
         @media(max-width:1299px) {
             top: 63%;
         }
@@ -255,7 +291,7 @@ body .gaisbock-benefits .gaisbock-element-image-titles-button .title-image-butto
 }
 
 .three-product-section {
-    padding-top: 70px;
+    padding-top: 50px;
     h2 {
         font-size: 48px;
         text-align: center;
@@ -341,10 +377,10 @@ body .gaisbock-benefits .gaisbock-element-image-titles-button .title-image-butto
             font-size: 24px;
             line-height: 32px;
             color: $sw-color-brand-primary;
-            // font-family: $sw-font-family-headline;
-            // font-weight: 500;
-            // font-family: 'Blacker-display-regular';
-            font-family: $sw-font-family-base;
+            font-family: $sw-font-family-headline;
+            font-weight: 500;
+            font-family: 'Blacker-display-regular';
+            // font-family: $sw-font-family-base;
         }
         .gaisbock-image-button{
             margin: 30px auto 0;
@@ -582,7 +618,7 @@ body .gaisbock-benefits .gaisbock-element-image-titles-button .title-image-butto
 @include media-breakpoint-up(md) {
     .is-act-home{
         .bg-image.gaisbock-benefits {
-            margin-top: 56px;
+            margin-top: 20px;
         }
     }
     .instagram-feed-section{
@@ -593,6 +629,21 @@ body .gaisbock-benefits .gaisbock-element-image-titles-button .title-image-butto
 }
 
 @include media-breakpoint-down(md){
+    .natural-section + .gift-code-section .image-text-container .cms-element-gaisbock-switch-image-text {
+        left: 0 !important;
+        top: 0px !important;
+        right: auto !important;
+        display: block;
+    }
+    .insta-link {
+        
+        margin: 15px auto 0;
+        a{
+            font-size: 10px;
+            letter-spacing: 0.6px;
+            padding: 8px 13px 8px;
+        }
+    }
     .gift-code-section{
         .cms-block-gaisbock-switch-image-text {
             position: relative;
@@ -605,9 +656,9 @@ body .gaisbock-benefits .gaisbock-element-image-titles-button .title-image-butto
         .image-text-container {
             position: static;
             .cms-element-gaisbock-switch-image-text {
-                left: 0px !important;
+                left: auto !important;
                 top: 0px !important;
-                right: auto !important;
+                right: 18px !important;
                 display: block;
                 img {
                     max-width: 80px;

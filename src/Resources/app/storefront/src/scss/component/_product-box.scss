@@ -1,3 +1,25 @@
+body .pagination {
+    margin-bottom: 50px;
+}
+body .product-badges {
+    z-index: 1;
+}
+body .product-box .card-body .product-info .product-price {
+    flex-wrap: wrap;
+    .list-price {
+        width: 100%;
+    }
+}
+button#confirmFormSubmit, 
+.register-submit button,
+.login-submit button{
+    position: relative;
+    .loader{
+        position: absolute;
+        left: 50%;
+        transform: translate(-50%,-50%);
+    }
+}
 .gaisbock-product-box{
   padding: 0;
 }
@@ -204,6 +226,7 @@ body {
         list-style: none;
         padding-bottom: 5px;
         text-align: center;
+        flex-wrap:wrap;
         @media(min-width:768px) {
             margin-top: 20px;
         }

@@ -46,5 +46,19 @@
             <tag name="kernel.event_subscriber"/>
         </service>
         <!--  subscriber  -->
+        <service id="Gaisbock\Message\OverwriteGenerateGiftcardMessageHandler"
+                 decorates="Laenen\Giftcard\Message\GenerateGiftcardMessageHandler"
+        parent="Laenen\Giftcard\Message\GenerateGiftcardMessageHandler" public="true">
+            <tag name="messenger.message_handler"/>
+            <argument type="service" id="Shopware\Core\Content\Mail\Service\MailService"/>
+            <argument type="service" id="Laenen\Giftcard\Service\GiftcardGateway"/>
+            <argument type="service" id="order.repository"/>
+            <argument type="service" id="Laenen\Giftcard\Document\GiftcardDocumentGenerator"/>
+            <argument type="service" id="Shopware\Core\System\SystemConfig\SystemConfigService"/>
+            <argument type="service" id="mail_template.repository"/>
+            <argument type="service" id="Shopware\Core\Framework\Adapter\Translation\Translator"/>
+            <argument type="service" id="Shopware\Core\System\Locale\LanguageLocaleCodeProvider"/>
+            <argument type="service" id="monolog.logger.lae_giftcard"/>
+        </service>
     </services>
 </container>

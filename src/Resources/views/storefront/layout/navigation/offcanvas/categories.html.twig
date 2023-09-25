@@ -17,8 +17,14 @@
                     <div class="gaisbock-category-accordion accordion accordion-flush" id="gaisbockAccordion">
                         <div class="accordion-item">
                             <h2 class="accordion-header" id="gaisbock-heading">
-                                <a href="{{ path('frontend.account.login.page') }}"
-                                   itemprop="url">{{ "account.loginSubmit"|trans|sw_sanitize }}</a>
+                                {% if context.customer == null %}
+                                    <a href="{{ path('frontend.account.login.page') }}"
+                                       itemprop="url">{{ "account.loginSubmit"|trans|sw_sanitize }}</a>
+                                {% else %}
+                                    <a href="{{ path('frontend.account.logout.page') }}" itemprop="url">
+                                        {{ "account.logout"|trans|sw_sanitize }}
+                                    </a>
+                                {% endif %}
                                 <div class="accordion-button collapsed" type="button">
 
                                 </div>

@@ -6,12 +6,48 @@ body {
         background-color: #fff;
     }
 }
+html body .nme-newsletter-popup--headline {
+    max-width:187px;
+    margin-bottom: 15px;
+}
+html body .nme-newsletter-popup--headline {
+    max-width: 258px;
+    margin-bottom: 15px;
+}
+html body .nme-newsletter-popup--headline h4 {
+    color: #fff;
+    max-width: 100%;
+    width: 100%;
+    font-size: 35px;
+    line-height: 43px;
+    text-transform: capitalize;
+}
+body .nme-newsletter-popup--subline {
+    font-size: 18px;
+    line-height: 28px;
+    color: #fff;
+    letter-spacing: 0.78px;
+    max-width: 257px;
+    font-weight: 600;
+}
+body .nme-newsletter-popup.has-background-image {
+    background-size: cover;
+    background-color: transparent;
+}
 .about-title-text-image-container .gaisbock-about-image-discription {
     font-family: 'Brandon-text';
     font-size: 16px;
     text-align: center;
     max-width: 100%;
     margin: 0;
+}
+.about-left-right-section .gaisbock-hideContent-contain b {
+    font-size: 34px;
+    letter-spacing: 0.17px;
+    text-transform: capitalize;
+    line-height: 42px;
+    font-weight: 900;
+    font-family: $sw-font-family-headline;
 }
 .gaisbock-custom-text-image-slider-component-media-slider{
     .base-slider.image-slider {
@@ -54,6 +90,9 @@ body {
         display: block;
         width: 100%;
         height: 100%;
+        @media(max-width:767px) {
+            padding-top: 70%;
+        }
         img {
             width: 100%;
             height: 100%;
@@ -173,6 +212,7 @@ body {
         background-color: rgba(0, 0, 0, 0); /* Initial transparent background */
         transition: background-color 0.5s ease; /* Smooth transition */
         pointer-events: all; /* Allow clicks to pass through */
+        background: transparent !important;
       }
     .block-ict-custom-text-on-image-banner {
         height: 605px;
@@ -256,6 +296,9 @@ body {
             line-height: 76px;
             letter-spacing: 0.35px;
             margin-bottom: 0px;
+            @media(max-width:1024px) {
+                    font-size: 50px;
+            }
         }
         .natural-product-title {
             padding-top: 23px;
@@ -456,17 +499,23 @@ body {
                 // letter-spacing: 0.17px;
                 letter-spacing: 0.78px;
                 margin-bottom: 30px;
-                text-transform: uppercase;
+                text-transform: revert;
                 b {
-                    font-size: 18px;
-                    letter-spacing: 1.08px;
-                    text-transform: uppercase;
-                    line-height: 25px;
-                    font-weight: 700;
+                    // font-size: 18px;
+                    // letter-spacing: 1.08px;
+                    // text-transform: uppercase;
+                    // line-height: 25px;
+                        font-size: 34px;
+                    letter-spacing: 0.17px;
+                    text-transform: revert;
+                    line-height: 42px;
+                    font-weight: 900;
+                    font-family:$sw-font-family-headline;
+
                     @media (max-width:767px){
-                        line-height: 18px;
-                        font-size: 13px;
-                        letter-spacing: 0.91px;
+                        line-height: 25px;
+                        font-size: 21px;
+                        letter-spacing: 0.1px;
                     }
                 }
             }
@@ -583,6 +632,10 @@ body {
     }
 }
 @include media-breakpoint-down(lg) { 
+    .cms-block-gaisbock-image-add-more-text .cms-block-container {
+        padding: 0 !important;
+        
+    }
     .cms-block-gaisbock-image-add-more-text{
         margin-bottom: 0px;
         padding-bottom: 17px;
@@ -602,6 +655,8 @@ body {
         width: 100%;
         max-width: 206px;
         margin-top: 0px;
+            margin: 0 auto;
+    display: block;
     }
     .about-left-right-section .readmore-btn-slider {
         font-size: 10px;
@@ -725,8 +780,9 @@ body {
             padding: 0;
             img{
                 width: 100%;
-                height: auto;
-                max-width: 198px;
+                height: 100%;
+                // max-width: 198px;
+                inset:0;
             }
         }
         .element-gaisbock-image-add-more-text__text{
@@ -770,6 +826,27 @@ body {
 }
 
 @include media-breakpoint-down(md) {
+    html body .nme-newsletter-popup {
+        max-width: 424px;
+        min-height: 495px;
+    }
+
+    html body .nme-newsletter-popup--headline h4 {
+        font-size: 30px;
+        line-height: 37px;
+
+    }
+    body .nme-newsletter-popup--subline {
+        line-height: 25px;
+        color: #fff;
+        max-width: 128px;
+        font-size: 16px;
+    }
+    .about-left-right-section .gaisbock-hideContent-contain b {
+        line-height: 25px;
+        font-size: 21px;
+        letter-spacing: 0.1px;
+    }
     .element-gaisbock-image-add-more-text--inner{
         .element-gaisbock-image-add-more-text__text{
             .readmore-btn{
