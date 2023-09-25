@@ -322,84 +322,84 @@ export default {
         },
         onOneImageRemove() {
             this.element.config.one.value = null;
-
+            this.element.config.urlOne.value=null;
             this.updateOneElementData();
 
             this.$emit('element-update', this.element);
         },
         onTwoImageRemove() {
             this.element.config.two.value = null;
-
+            this.element.config.urlTwo.value=null;
             this.updateTwoElementData();
 
             this.$emit('element-update', this.element);
         },
         onThreeImageRemove() {
             this.element.config.three.value = null;
-
+            this.element.config.urlThree.value=null;
             this.updateThreeElementData();
 
             this.$emit('element-update', this.element);
         },
         onFourImageRemove() {
             this.element.config.four.value = null;
-
+            this.element.config.urlFour.value=null;
             this.updateFourElementData();
 
             this.$emit('element-update', this.element);
         },
         onFiveImageRemove() {
             this.element.config.five.value = null;
-
+            this.element.config.urlFive.value=null;
             this.updateFiveElementData();
 
             this.$emit('element-update', this.element);
         },
         onSixImageRemove() {
             this.element.config.six.value = null;
-
+            this.element.config.urlSix.value=null;
             this.updateSixElementData();
 
             this.$emit('element-update', this.element);
         },
         onSevenImageRemove() {
             this.element.config.seven.value = null;
-
+            this.element.config.urlSeven.value=null;
             this.updateSevenElementData();
 
             this.$emit('element-update', this.element);
         },
         onEightImageRemove() {
             this.element.config.eight.value = null;
-
+            this.element.config.urlEight.value=null;
             this.updateEightElementData();
 
             this.$emit('element-update', this.element);
         },
         onNineImageRemove() {
             this.element.config.nine.value = null;
-
+            this.element.config.urlNine.value=null;
             this.updateNineElementData();
 
             this.$emit('element-update', this.element);
         },
         onTenImageRemove() {
             this.element.config.ten.value = null;
-
+            this.element.config.urlTen.value=null;
             this.updateTenElementData();
 
             this.$emit('element-update', this.element);
         },
         onElevenImageRemove() {
             this.element.config.eleven.value = null;
-
+            this.element.config.urlEleven.value=null;
             this.updateElevenElementData();
 
             this.$emit('element-update', this.element);
         },
         onTwelveImageRemove() {
             this.element.config.twelve.value = null;
-
+            this.element.config.urlTwelve.value=null;
             this.updateTwelveElementData();
 
             this.$emit('element-update', this.element);

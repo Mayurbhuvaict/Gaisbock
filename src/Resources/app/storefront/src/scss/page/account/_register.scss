@@ -1,3 +1,34 @@
+button.btn.product-wishlist-btn.product-wishlist-btn-remove {
+    padding: 0px 0px 10px 10px;
+    svg {
+        width: 20px;
+        height: 20px;
+    }
+    path {
+        color: #fff;
+    }
+    .icon-wishlist-remove {
+        color: #fff;
+    }
+}
+.hovered-header, .hovered, .is-sticky{
+    .header-actions-col{
+        .header-wishlist-badge ,
+        .header-cart-badge{
+            background: #fff !important;
+            color: #151516;
+        }
+    }
+}
+.header-wishlist .header-wishlist-badge {
+    top: 0;
+}
+.address-editor-edit.create {
+    margin: 7px 0;
+}
+.modal-open .modal.fade.address-editor-modal.show {
+    z-index: 99999;
+}
 .is-act-customergroupregistration {
     .cms-block-gaisbock-listpage-text-image {
         top: 117px;
@@ -289,6 +320,16 @@ button.btn.btn-primary {
 
 
 @include media-breakpoint-down(md) {
+    form#profileMailForm .col.form-group,
+    .card.account-email .form-group,
+    form#profilePasswordForm .col.form-group,
+    form#profilePasswordForm .form-group {
+        width: 100%;
+        flex: 0 0 100%;
+    }
+    .account-register .form-group {
+        padding: 0;
+    }
     .account-register{
         .row {
             margin: 0;

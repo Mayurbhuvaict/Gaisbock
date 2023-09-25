@@ -1,4 +1,7 @@
 {
+  "store": {
+    "title": "Stores <br> ipsum dolor sit ametin"
+  },
   "header": {
     "searchPlaceholder": "Saisir le terme de recherche"
   },

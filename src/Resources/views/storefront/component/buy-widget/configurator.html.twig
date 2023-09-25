@@ -30,7 +30,10 @@
                        title="{{ variantProducts.translated.name }}"
                        for="{{ parentId.id }}">
                     {% set varinatName = variantProducts.options|first %}
-                    {{ variantProducts.translated.name }} {{ varinatName.translated.name }}
+                    {{ variantProducts.translated.name }}
+                    {% if page.product.customFields.gaisbock_product_detail_extra_details_properties %}
+                        {{ varinatName.translated.name }}
+                    {% endif %}
                 </label>
             </a>
             <div class="gaisbock-price-view-section">
@@ -86,13 +89,13 @@
             <div class="gaisbock-variant-selection-price-number">
                 <meta itemprop="productID"
                       content="{{ variantProducts.id }}"/>
-                <span class="gaisbock-variant-product-detail-ordernumber-label">
-                            {{ "detail.productNumberLabel"|trans|sw_sanitize }}
-                        </span>
-                <span class="gaisbock-variant-product-detail-ordernumber"
-                      itemprop="sku">
-                            {{ variantProducts.productNumber }}
-                        </span>
+{#                <span class="gaisbock-variant-product-detail-ordernumber-label">#}
+{#                            {{ "detail.productNumberLabel"|trans|sw_sanitize }}#}
+{#                        </span>#}
+{#                <span class="gaisbock-variant-product-detail-ordernumber"#}
+{#                      itemprop="sku">#}
+{#                            {{ variantProducts.productNumber }}#}
+{#                        </span>#}
             </div>
             </div>
             {% if page.extensions.products.VariantImage|first != []%}

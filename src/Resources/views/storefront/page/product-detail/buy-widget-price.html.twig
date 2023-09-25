@@ -77,11 +77,9 @@
         {% endblock %}
     {% else %}
         {% set price = page.product.calculatedPrice %}
-
         {% if page.product.calculatedPrices|length == 1 %}
             {% set price = page.product.calculatedPrices.first %}
         {% endif %}
-
         <meta itemprop="price"
               content="{{ price.unitPrice }}">
 

@@ -665,13 +665,17 @@ span.product-detail-list-price-wrapper span.list-price-price {
         }
     }
     .gaisbock-variant-header-section {
-        margin-bottom: 5px;
+        margin-bottom: 7px;
         a {
             margin-top: 0 !important;
+            flex-grow: 1;
         }
         .gaisbock-price-view-section {
             padding-left: 35px;
-            flex-grow: 1;
+            // flex-grow: 1;
+                display: flex;
+    align-items: center;
+    flex-wrap: wrap;
             .product-detail-price  {
                 font-size: 15px;
                 letter-spacing: 1.2px;
