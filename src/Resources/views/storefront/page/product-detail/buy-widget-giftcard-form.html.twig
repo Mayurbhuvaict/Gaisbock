@@ -3,23 +3,48 @@
 {% block page_product_detail_buy_quantity_container %}
     <div class="product-detail-giftcard-form col-8">
         <div class="product-detail-configurator-group">
-            <div class="product-detail-configurator-group-title">
-                {{ 'detail.giftcardAmountLabel'|trans|sw_sanitize }}
-            </div>
             <div class="product-detail-configurator-options">
                 <div class="input-group mb-3">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text">{{ context.currency.isoCode }}</span>
-                    </div>
+{#                    {% block layout_header_actions_currency_widget_form_items_element_input %}#}
+                        <input class="gaisbock-gifcard-price"
+                               id="gift-card"
+                               value="50"
+                               name="lineItems[{{ product.id }}][giftcardAmount]"
+                               type="radio" checked>
+                        <label class="gaisbock-gifcard-price-lable"
+                               for="gift-card">
+                            {{"CHF 50.–" }}
+                        </label>
 
-                    <input type="number"
-                           class="form-control"
-                           min="{{ product.customFields.laeGiftcardMinValue ?? 0 }}"
-                           max="{{ product.customFields.laeGiftcardMaxValue ?? 100 }}"
-                           step="1"
-                           value="{{ product.customFields.laeGiftcardDefaultValue ?? product.customFields.laeGiftcardMinValue ?? 25 }}"
-                           name="lineItems[{{ product.id }}][giftcardAmount]"
-                    title="{{ 'detail.giftcardAmountLabel'|trans|sw_sanitize }}"/>
+                        <input class="gaisbock-gifcard-price"
+                               id="gift-card"
+                               value="100"
+                               name="lineItems[{{ product.id }}][giftcardAmount]"
+                               type="radio" checked>
+                        <label class="gaisbock-gifcard-price-lable"
+                               for="gift-card">
+                            {{"CHF 100.–" }}
+                        </label>
+                        <input class="gaisbock-gifcard-price"
+                               id="gift-card"
+                               value="150"
+                               name="lineItems[{{ product.id }}][giftcardAmount]"
+                               type="radio" checked>
+                        <label class="gaisbock-gifcard-price-lable"
+                               for="gift-card">
+                            {{"CHF 150.–" }}
+                        </label>
+                        <input class="gaisbock-gifcard-price"
+                               id="gift-card"
+                               value="50"
+                               name="lineItems[{{ product.id }}][giftcardAmount]"
+                               type="radio" checked>
+                        <label class="gaisbock-gifcard-price-lable"
+                               for="gift-card">
+                            {{"CHF 50.–" }}
+                        </label>
+
+{#                    {% endblock %}#}
                 </div>
             </div>
         </div>
