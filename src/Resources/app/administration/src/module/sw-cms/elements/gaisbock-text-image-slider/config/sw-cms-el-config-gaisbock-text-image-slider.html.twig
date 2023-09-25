@@ -306,6 +306,21 @@
                                                     />
                                                 </div>
                                             {% endblock %}
+                                            <sw-select-field
+                                                    v-model="sliderItem.position"
+                                                    :label="$tc('sw-cms.elements.general.config.label.position')"
+                                                    class="sw-cms-el-config-image-slider__setting-display-mode"
+                                            >
+                                                <option value="left">
+                                                    {{ $tc('sw-cms.elements.general.config.label.left') }}
+                                                </option>
+                                                <option value="center">
+                                                    {{ $tc('sw-cms.elements.general.config.label.center') }}
+                                                </option>
+                                                <option value="right">
+                                                    {{ $tc('sw-cms.elements.general.config.label.right') }}
+                                                </option>
+                                            </sw-select-field>
                                             <hr>
                                         </div>
 

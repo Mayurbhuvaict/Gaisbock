@@ -122,6 +122,10 @@
             "addmore": "Add more section"
           },
           "label":{
+            "position": "position",
+            "left": "Left",
+            "center": "Center",
+            "right": "Right",
             "linkTo": "Image link",
             "ImageText": "Image Text",
             "buttonTitle": "Button Title",
