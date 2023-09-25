@@ -118,6 +118,10 @@
             "addmore": "Weiteren Abschnitt hinzufügen"
           },
           "label": {
+            "position": "position",
+            "left": "Left",
+            "center": "Center",
+            "right": "Right",
             "linkTo": "Bild-Link",
             "ImageText": "Bild Text",
             "buttonTitle": "Schaltfläche Titel"

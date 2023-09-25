@@ -106,6 +106,10 @@
             "imageSetting": "Réglage de l'image"
           },
           "label": {
+            "position": "position",
+            "left": "Left",
+            "center": "Center",
+            "right": "Right",
             "linkTo": "Lien vers l'image",
             "ImageText": "Texte de l'image",
             "buttonTitle": "Titre du bouton"
