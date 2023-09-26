@@ -213,7 +213,20 @@
                                         @media-upload-finish="onImageUploadTwo"
                                 />
                             {% endblock %}
-
+                            <sw-select-field
+                                    v-model="element.config.position.value"
+                                    :label="$tc('sw-cms.elements.gaisbockCustomTextImageSlider.config.textFields.TextImagePosition')"
+                            >
+                                <option value="left" selected>
+                                    {{ $tc('sw-cms.elements.general.config.label.left') }}
+                                </option>
+                                <option value="center">
+                                    {{ $tc('sw-cms.elements.general.config.label.center') }}
+                                </option>
+                                <option value="right">
+                                    {{ $tc('sw-cms.elements.general.config.label.right') }}
+                                </option>
+                            </sw-select-field>
                             <!-- eslint-disable-next-line sw-deprecation-rules/no-twigjs-blocks -->
                             {% block sw_cms_element_image_config_display_mode %}
                                 <sw-select-field
