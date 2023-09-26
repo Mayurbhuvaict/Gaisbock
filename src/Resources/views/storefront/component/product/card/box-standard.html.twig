@@ -38,7 +38,7 @@
 
                             {% block component_product_box_description %}
                                 <div class="product-description">
-                                    {{ product.translated.description|striptags|raw }}
+                                    {{ product.translated.customFields['gaisbock_product_detail_extra_details_slogan'] }}
                                 </div>
                             {% endblock %}
 
