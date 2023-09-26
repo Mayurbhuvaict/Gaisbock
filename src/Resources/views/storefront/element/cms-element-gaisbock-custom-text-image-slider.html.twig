@@ -49,7 +49,7 @@
                             {% for image in element.data.sliderItems %}
 
                                 {% set imageElement %}
-                                    <div class="image-slider-item{% if loop.first != true %} is-not-first{% endif %} is-standard">
+                                    <div class="image-slider-item{% if loop.first != true %} is-not-first{% endif %} is-standard" style="height: 430px; width:600px;">
                                         {% set attributes = {
                                             'class': 'img-fluid image-slider-image',
                                             'alt': (image.media.translated.alt ?: ''),
