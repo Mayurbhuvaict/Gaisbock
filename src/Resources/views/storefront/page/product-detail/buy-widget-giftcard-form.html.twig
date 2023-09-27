@@ -4,9 +4,9 @@
     <div class="product-detail-giftcard-form col-8">
         <div class="product-detail-configurator-group">
             <div class="product-detail-configurator-options">
-                <div class="input-group mb-3">
+                <div class="input-group mb-3 product-detail-configurator">
 {#                    {% block layout_header_actions_currency_widget_form_items_element_input %}#}
-                        <input class="gaisbock-gifcard-price"
+                        <a class="d-block"><input class="gaisbock-gifcard-price"
                                id="gift-card"
                                value="50"
                                name="lineItems[{{ product.id }}][giftcardAmount]"
@@ -15,7 +15,8 @@
                                for="gift-card">
                             {{"CHF 50.–" }}
                         </label>
-
+                        </a>
+                        <a class="d-block">
                         <input class="gaisbock-gifcard-price"
                                id="gift-card"
                                value="100"
@@ -25,6 +26,8 @@
                                for="gift-card">
                             {{"CHF 100.–" }}
                         </label>
+                        </a>
+                        <a class="d-block">
                         <input class="gaisbock-gifcard-price"
                                id="gift-card"
                                value="150"
@@ -34,6 +37,8 @@
                                for="gift-card">
                             {{"CHF 150.–" }}
                         </label>
+                        </a>
+                        <a class="d-block">
                         <input class="gaisbock-gifcard-price"
                                id="gift-card"
                                value="50"
@@ -43,6 +48,7 @@
                                for="gift-card">
                             {{"CHF 50.–" }}
                         </label>
+                        </a>
 
 {#                    {% endblock %}#}
                 </div>
