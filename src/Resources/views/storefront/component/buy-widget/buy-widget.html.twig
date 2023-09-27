@@ -109,6 +109,14 @@
         {% endblock %}
 
         {% block buy_widget_buy_container %}
+        {% if page.product.customFields.laeGiftcardEnabled %}
+                <div class="gaisbock-product-description">
+                    {{ page.product.translated.description|raw }}
+                </div>
+                {% sw_include '@Storefront/storefront/page/product-detail/buy-widget-giftcard-form.html.twig' with {
+                    product: page.product
+                } %}
+            {% else %}
             <div itemprop="offers"
                  itemscope
                  itemtype="{% if product.calculatedPrices|length > 1 %}http://schema.org/AggregateOffer{% else %}http://schema.org/Offer{% endif %}">

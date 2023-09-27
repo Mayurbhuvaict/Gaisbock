@@ -6,6 +6,15 @@ hr {
         line-height: 23px;
     }
 }
+.product-detail-giftcard-form {
+    label.gaisbock-gifcard-price-lable {
+        color: $sw-color-brand-secondary !important;
+    }
+    a.d-block {
+        display: block !important;
+        width: 100%;
+    }
+}
 // .modal-backdrop {
 //     z-index: -1;
 // }
@@ -406,7 +415,7 @@ span.product-detail-list-price-wrapper span.list-price-price {
         margin-top: 25px;
     }
     .product-detail-name {
-        font-size: 47px;
+        font-size: 49px;
         line-height: 55px;
         text-transform: uppercase;
         letter-spacing: 3.29px;
@@ -459,7 +468,7 @@ span.product-detail-list-price-wrapper span.list-price-price {
     .gaisbock-product-description {
         margin-top: 10px;
         font-size: 18px;
-        margin-bottom: 30px;
+        margin-bottom: 23px;
         h3 {
             font-size: 34px;
             line-height: 42px;
@@ -608,7 +617,9 @@ span.product-detail-list-price-wrapper span.list-price-price {
             [type="radio"]:checked,
             [type="radio"]:not(:checked) {
                 position: absolute;
-                left: -9999px;
+                // left: -9999px;
+                opacity: 0;
+                z-index: 0;
             }
             [type="radio"]:checked + label,
             [type="radio"]:not(:checked) + label
@@ -706,6 +717,24 @@ span.product-detail-list-price-wrapper span.list-price-price {
     }
 }
 
+@include media-breakpoint-down(up){  
+    body.is-ctl-product{
+        .container-main {
+            padding-top: 0;
+        }
+        .header-main.gaisbock-header-main {
+            padding-bottom: 0;
+        }
+        .product-detail-headline{
+            margin-bottom: 10px;
+        }
+    }
+    .static-banner-section{
+        .cms-block-gaisbock-custom-text-on-image {
+            margin-top: 28px;
+        }
+    }    
+}
 
 @include media-breakpoint-down(md){  
     .modal-open .product-detail-review.product-detail-review-widget {
