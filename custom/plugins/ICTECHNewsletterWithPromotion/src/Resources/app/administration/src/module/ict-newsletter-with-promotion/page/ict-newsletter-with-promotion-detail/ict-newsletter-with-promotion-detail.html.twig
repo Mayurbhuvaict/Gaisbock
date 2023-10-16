@@ -1,0 +1,639 @@
+{% block ict_newsletter_with_promotion_newsletter_popup_detail %}
+    <sw-page class="ict-newsletter-with-promotion-popup-detail">
+        {% block sw_task_detail_header %}
+            <template #smart-bar-header>
+                <h2>{{ placeholder(popup, 'name', $tc('ict-newsletter-with-promotion.newsletter-popup.detail.textHeadline')) }}</h2>
+            </template>
+
+        {% endblock %}
+
+        {% block ict_newsletter_with_promotion_newsletter_popup_detail_actions %}
+            <template #smart-bar-actions>
+
+                <!-- eslint-disable-next-line sw-deprecation-rules/no-twigjs-blocks -->
+                {% block ict_newsletter_with_promotion_newsletter_popup_detail_actions_abort %}
+                    <sw-button
+                            v-tooltip.bottom="tooltipCancel"
+                            :disabled="popupIsLoading"
+                            @click="onCancel"
+                    >
+                        {{ $tc('ict-newsletter-with-promotion.general.cancelButtonText') }}
+                    </sw-button>
+                {% endblock %}
+
+                <!-- eslint-disable-next-line sw-deprecation-rules/no-twigjs-blocks -->
+                {% block ict_newsletter_with_promotion_newsletter_popup_detail_actions_save %}
+                    <sw-button-process
+                            v-model="isSaveSuccessful"
+                            v-tooltip.bottom="tooltipSave"
+                            class="newsletter-popup-detail__save-action"
+                            :is-loading="isLoading"
+                            variant="primary"
+                            @click.prevent="onSave"
+                    >
+                        {{ $tc('ict-newsletter-with-promotion.general.saveButtonText') }}
+                    </sw-button-process>
+                {% endblock %}
+
+            </template>
+        {% endblock %}
+
+        <!-- eslint-disable-next-line sw-deprecation-rules/no-twigjs-blocks -->
+        {% block ict_newsletter_with_promotion_newsletter_popup_detail_language_switch %}
+            <template #language-switch>
+                <sw-language-switch
+                        :disabled="popupId == null"
+                        :save-changes-function="saveOnLanguageChange"
+                        :abort-change-function="abortOnLanguageChange"
+                        @on-change="onChangeLanguage"
+                />
+            </template>
+        {% endblock %}
+
+        {% block ict_newsletter_with_promotion_newsletter_popup_detail_content %}
+            <template #content>
+                <sw-card-view>
+                    <template v-if="popupIsLoading">
+                        <sw-skeleton variant="detail-bold" />
+                        <sw-skeleton />
+                    </template>
+
+                    <template v-else>
+
+                        <!-- eslint-disable-next-line sw-deprecation-rules/no-twigjs-blocks -->
+                        {% block ict_newsletter_with_promotion_newsletter_popup_detail_content_language_info %}
+                            <sw-language-info
+                                    :entity-description="placeholder(popup, 'name', $tc('sw-manufacturer.detail.textHeadline'))"
+                            />
+                        {% endblock %}
+
+                        <!-- eslint-disable-next-line sw-deprecation-rules/no-twigjs-blocks -->
+                        {% block ict_newsletter_with_promotion_newsletter_popup_detail_base_basic_info_card %}
+                            <sw-card
+                                    position-identifier="ict-newsletter-popup-detail-basic-info"
+                            >
+                                <sw-container
+                                        class="ict-newsletter-popup-detail__container"
+                                        columns="repeat(auto-fit, minmax(250px, 1fr))"
+                                        gap="0 30px"
+                                >
+                                    <div class="ict-newsletter-popup-detail__base-info-wrapper">
+                                        <sw-field
+                                                :label="$tc('ict-newsletter-with-promotion.newsletter-popup.detail.nameLabel')"
+                                                v-model="popup.name"
+                                                name="name"
+                                                required
+{#                                                :placeholder="placeholder(popup, 'name', $tc('ict-newsletter-with-promotion.newsletter-popup.detail.nameLabel'))"#}
+                                                validation="required"
+                                                :error="popupNameError"
+                                        >
+                                        </sw-field>
+
+                                        <sw-select-field
+                                                :label="$tc('ict-newsletter-with-promotion.newsletter-popup.detail.storageTypeLabel')"
+                                                v-model="popup.storageType"
+                                        >
+                                            <option value="sessionStorage">{{ $tc('ict-newsletter-with-promotion.newsletter-popup.detail.storageTypeOptionSessionStorageLabel') }}</option>
+                                            <option value="localStorage">{{ $tc('ict-newsletter-with-promotion.newsletter-popup.detail.storageTypeOptionLocalStorageLabel') }}</option>
+                                        </sw-select-field>
+
+                                        <sw-switch-field
+                                                :label="$tc('ict-newsletter-with-promotion.newsletter-popup.detail.devModeLabel')"
+                                                v-model="popup.devMode"
+                                        >
+                                        </sw-switch-field>
+
+                                        <sw-switch-field
+                                                :label="$tc('ict-newsletter-with-promotion.newsletter-popup.detail.isGlobalLabel')"
+                                                v-model="popup.isGlobal"
+                                        >
+                                        </sw-switch-field>
+
+                                        <sw-select-field
+                                                :label="$tc('ict-newsletter-with-promotion.newsletter-popup.detail.visibleSettingsLabel')"
+                                                v-model="popup.visibleSettings"
+                                        >
+                                            <option value="category">{{ $tc('ict-newsletter-with-promotion.newsletter-popup.detail.visibleSettingsOptionCategoryLabel') }}</option>
+                                            <option value="product">{{ $tc('ict-newsletter-with-promotion.newsletter-popup.detail.visibleSettingsOptionProductLabel') }}</option>
+                                        </sw-select-field>
+
+                                        <sw-entity-single-select
+                                                :label="$tc('ict-newsletter-with-promotion.newsletter-popup.detail.assignCategoryLabel')"
+                                                entity="category"
+                                                v-model="popup.categoryId"
+                                        >
+                                        </sw-entity-single-select>
+
+                                        <sw-entity-single-select
+                                                :label="$tc('ict-newsletter-with-promotion.newsletter-popup.detail.assignProductLabel')"
+                                                entity="product"
+                                                v-model="popup.productId"
+                                        >
+                                        </sw-entity-single-select>
+
+                                        <sw-select-field
+                                                :label="$tc('ict-newsletter-with-promotion.newsletter-popup.detail.popupTriggerLabel')"
+                                                v-model="popup.popupTrigger"
+                                        >
+                                            <option value="time">{{ $tc('ict-newsletter-with-promotion.newsletter-popup.detail.popupTriggerOptionTime') }}</option>
+                                            <option value="scroll">{{ $tc('ict-newsletter-with-promotion.newsletter-popup.detail.popupTriggerOptionScroll') }}</option>
+                                        </sw-select-field>
+
+                                        <sw-number-field
+                                                :label="$tc('ict-newsletter-with-promotion.newsletter-popup.detail.popupTimeLabel')"
+                                                numberType="int"
+                                                v-model="popup.popupTime"
+                                        >
+                                        </sw-number-field>
+
+                                        <sw-number-field
+                                                :label="$tc('ict-newsletter-with-promotion.newsletter-popup.detail.popupScrollLabel')"
+                                                numberType="int"
+                                                v-model="popup.popupScroll"
+                                        >
+                                        </sw-number-field>
+
+                                        <sw-number-field
+                                                :label="$tc('ict-newsletter-with-promotion.newsletter-popup.detail.heightMobileLabel')"
+                                                numberType="int"
+                                                v-model="popup.heightMobile"
+                                        >
+                                        </sw-number-field>
+
+                                        <sw-number-field
+                                                :label="$tc('ict-newsletter-with-promotion.newsletter-popup.detail.heightDesktopLabel')"
+                                                numberType="int"
+                                                v-model="popup.heightDesktop"
+                                        >
+                                        </sw-number-field>
+
+                                        <sw-card
+                                                v-if="popup"
+                                                :title="$tc('ict-newsletter-with-promotion.newsletter-popup.detail.promotionCardLabel')"
+                                                position-identifier="ict-newsletter-pop-up-promotion"
+                                        >
+                                            <sw-help-text
+                                                    :text="$tc('ict-newsletter-with-promotion.newsletter-popup.detail.promotionHelpText')"
+                                                    :width="200"
+                                                    tooltipPosition="top"
+                                                    :showDelay="null"
+                                                    :hideDelay="null"
+                                            >
+                                            </sw-help-text>
+
+                                            <sw-switch-field
+                                                    :label="$tc('ict-newsletter-with-promotion.newsletter-popup.detail.promotionActiveLabel')"
+                                                    v-model="popup.promotionActive"
+                                            >
+                                            </sw-switch-field>
+
+                                            <sw-entity-single-select
+                                                    :label="$tc('ict-newsletter-with-promotion.newsletter-popup.detail.promotionAssignLabel')"
+                                                    entity="promotion"
+                                                    v-model="popup.promotionId"
+                                            >
+                                            </sw-entity-single-select>
+
+                                            <sw-alert variant="info">
+                                                {{ promotionIndividualCodesNotice }}
+                                            </sw-alert>
+
+                                            <sw-switch-field
+                                                    :label="$tc('ict-newsletter-with-promotion.newsletter-popup.detail.promotionShowValidUntilLabel')"
+                                                    v-model="popup.promotionShowValidUntil"
+                                            >
+                                            </sw-switch-field>
+
+                                            <sw-text-field
+                                                    :label="$tc('ict-newsletter-with-promotion.newsletter-popup.detail.promotionTextValidUntilLabel')"
+                                                    v-model="popup.promotionTextValidUntil"
+                                            >
+                                            </sw-text-field>
+                                        </sw-card>
+
+                                        <sw-card
+                                                v-if="popup"
+                                                :title="$tc('ict-newsletter-with-promotion.newsletter-popup.detail.mediaCardLabel')"
+                                                position-identifier="ict-newsletter-pop-up-media"
+                                        >
+                                            <sw-colorpicker
+                                                    :label="$tc('ict-newsletter-with-promotion.newsletter-popup.detail.placeholderBackgroundColorLabel')"
+                                                    v-model="popup.mediaBackgroundColor"
+                                            >
+                                            </sw-colorpicker>
+
+                                            <sw-media-field
+                                                    :label="$tc('ict-newsletter-with-promotion.newsletter-popup.detail.imageLabel')"
+                                                    v-model="popup.mediaImageId"
+                                            >
+                                            </sw-media-field>
+
+                                            <sw-select-field
+                                                    :label="$tc('ict-newsletter-with-promotion.newsletter-popup.detail.imageMobileSettingsLabel')"
+                                                    v-model="popup.imageMobileSettings"
+                                            >
+                                                <option value="background">{{ $tc('ict-newsletter-with-promotion.newsletter-popup.detail.imageMobileSettingsOptionBackground') }}</option>
+                                                <option value="left">{{ $tc('ict-newsletter-with-promotion.newsletter-popup.detail.imageMobileSettingsOptionLeft') }}</option>
+                                                <option value="right">{{ $tc('ict-newsletter-with-promotion.newsletter-popup.detail.imageMobileSettingsOptionRight') }}</option>
+                                                <option value="none">{{ $tc('ict-newsletter-with-promotion.newsletter-popup.detail.imageMobileSettingsOptionNone') }}</option>
+                                            </sw-select-field>
+
+                                            <sw-select-field
+                                                    :label="$tc('ict-newsletter-with-promotion.newsletter-popup.detail.imagePositionLabel')"
+                                                    v-model="popup.imagePosition"
+                                            >
+                                                <option value="left">{{ $tc('ict-newsletter-with-promotion.newsletter-popup.detail.imagePositionOptionLeft') }}</option>
+                                                <option value="right">{{ $tc('ict-newsletter-with-promotion.newsletter-popup.detail.imagePositionOptionRight') }}</option>
+                                                <option value="background">{{ $tc('ict-newsletter-with-promotion.newsletter-popup.detail.imagePositionOptionBackground') }}</option>
+                                            </sw-select-field>
+
+                                            <sw-select-field
+                                                    :label="$tc('ict-newsletter-with-promotion.newsletter-popup.detail.imageFitLabel')"
+                                                    v-model="popup.imageFit"
+                                            >
+                                                <option value="fill">{{ $tc('ict-newsletter-with-promotion.newsletter-popup.detail.imageFitLabelOptionFill') }}</option>
+                                                <option value="contain">{{ $tc('ict-newsletter-with-promotion.newsletter-popup.detail.imageFitLabelOptionContain') }}</option>
+                                                <option value="cover">{{ $tc('ict-newsletter-with-promotion.newsletter-popup.detail.imageFitLabelOptionCover') }}</option>
+                                            </sw-select-field>
+
+                                            <sw-select-field
+                                                    :label="$tc('ict-newsletter-with-promotion.newsletter-popup.detail.imageAlignmentLabel')"
+                                                    v-model="popup.imageAlignment"
+                                            >
+                                                <option value="center">{{ $tc('ict-newsletter-with-promotion.newsletter-popup.detail.imageAlignmentLabelOptionCenter') }}</option>
+                                                <option value="left">{{ $tc('ict-newsletter-with-promotion.newsletter-popup.detail.imageAlignmentLabelOptionLeft') }}</option>
+                                                <option value="right">{{ $tc('ict-newsletter-with-promotion.newsletter-popup.detail.imageAlignmentLabelOptionRight') }}</option>
+                                                <option value="top">{{ $tc('ict-newsletter-with-promotion.newsletter-popup.detail.imageAlignmentLabelOptionTop') }}</option>
+                                                <option value="bottom">{{ $tc('ict-newsletter-with-promotion.newsletter-popup.detail.imageAlignmentLabelOptionBottom') }}</option>
+                                            </sw-select-field>
+                                        </sw-card>
+
+                                        <sw-card
+                                                v-if="popup"
+                                                :title="$tc('ict-newsletter-with-promotion.newsletter-popup.detail.textCardLabel')"
+                                                position-identifier="ict-newsletter-pop-up-text"
+                                        >
+                                            <sw-text-editor
+                                                    :label="$tc('ict-newsletter-with-promotion.newsletter-popup.detail.headlineLabel')"
+                                                    v-model="popup.headline"
+                                                    placeholder="Headline"
+                                            >
+                                            </sw-text-editor>
+
+                                            <sw-text-editor
+                                                    :label="$tc('ict-newsletter-with-promotion.newsletter-popup.detail.sublineLabel')"
+                                                    v-model="popup.subline"
+                                                    placeholder="Subline"
+                                            >
+                                            </sw-text-editor>
+
+                                            <sw-text-field
+                                                    :label="$tc('ict-newsletter-with-promotion.newsletter-popup.detail.firstNamePlaceholderLabel')"
+                                                    v-model="popup.firstNameFieldPlaceholder"
+                                            >
+                                            </sw-text-field>
+
+                                            <sw-text-field
+                                                    :label="$tc('ict-newsletter-with-promotion.newsletter-popup.detail.lastNamePlaceholderLabel')"
+                                                    v-model="popup.lastNameFieldPlaceholder"
+                                            >
+                                            </sw-text-field>
+
+                                            <sw-text-field
+                                                    :label="$tc('ict-newsletter-with-promotion.newsletter-popup.detail.mailPlaceholderLabel')"
+                                                    v-model="popup.mailFieldPlaceholder"
+                                            >
+                                            </sw-text-field>
+
+                                            <sw-text-field
+                                                    :label="$tc('ict-newsletter-with-promotion.newsletter-popup.detail.subscribeButtonLabel')"
+                                                    v-model="popup.textSubscribeButton"
+                                            >
+                                            </sw-text-field>
+
+                                            <sw-text-field
+                                                    :label="$tc('ict-newsletter-with-promotion.newsletter-popup.detail.notSubscribeLabel')"
+                                                    v-model="popup.textNonSubscribe"
+                                            >
+                                            </sw-text-field>
+
+                                            <sw-select-field
+                                                    :label="$tc('ict-newsletter-with-promotion.newsletter-popup.detail.contentAlignmentLabel')"
+                                                    v-model="popup.contentAlignment"
+                                            >
+                                                <option value="center">{{ $tc('ict-newsletter-with-promotion.newsletter-popup.detail.contentAlignmentLabelOptionCenter') }}</option>
+                                                <option value="flex-start">{{ $tc('ict-newsletter-with-promotion.newsletter-popup.detail.contentAlignmentLabelOptionTop') }}</option>
+                                                <option value="flex-end">{{ $tc('ict-newsletter-with-promotion.newsletter-popup.detail.contentAlignmentLabelOptionBottom') }}</option>
+                                            </sw-select-field>
+                                        </sw-card>
+
+                                        <sw-card
+                                                v-if="popup"
+                                                :title="$tc('ict-newsletter-with-promotion.newsletter-popup.detail.typographyCardLabel')"
+                                                position-identifier="ict-newsletter-pop-up-typography"
+                                        >
+                                            <sw-text-field
+                                                    :label="$tc('ict-newsletter-with-promotion.newsletter-popup.detail.headlineFontFamilyLabel')"
+                                                    v-model="popup.headlineFontFamily"
+                                            >
+                                            </sw-text-field>
+
+                                            <sw-number-field
+                                                    :label="$tc('ict-newsletter-with-promotion.newsletter-popup.detail.mobileHeadlineFontSizeLabel')"
+                                                    v-model="popup.headlineFontSizeMobile"
+                                                    numberType="int"
+                                                    :min="1"
+                                            >
+                                            </sw-number-field>
+
+                                            <sw-number-field
+                                                    :label="$tc('ict-newsletter-with-promotion.newsletter-popup.detail.mobileHeadlineLineHeightLabel')"
+                                                    v-model="popup.headlineLineHeightMobile"
+                                                    numberType="int"
+                                                    :min="1"
+                                            >
+                                            </sw-number-field>
+
+                                            <sw-number-field
+                                                    :label="$tc('ict-newsletter-with-promotion.newsletter-popup.detail.tabletHeadlineFontSizeLabel')"
+                                                    v-model="popup.headlineFontSizeTablet"
+                                                    numberType="int"
+                                                    :min="1"
+                                            >
+                                            </sw-number-field>
+
+                                            <sw-number-field
+                                                    :label="$tc('ict-newsletter-with-promotion.newsletter-popup.detail.tabletHeadlineLineHeightLabel')"
+                                                    v-model="popup.headlineLineHeightTablet"
+                                                    numberType="int"
+                                                    :min="1"
+                                            >
+                                            </sw-number-field>
+
+                                            <sw-number-field
+                                                    :label="$tc('ict-newsletter-with-promotion.newsletter-popup.detail.desktopHeadlineFontSizeLabel')"
+                                                    v-model="popup.headlineFontSizeDesktop"
+                                                    numberType="int"
+                                                    :min="1"
+                                            >
+                                            </sw-number-field>
+
+                                            <sw-number-field
+                                                    :label="$tc('ict-newsletter-with-promotion.newsletter-popup.detail.desktopHeadlineLineHeightLabel')"
+                                                    v-model="popup.headlineLineHeightDesktop"
+                                                    numberType="int"
+                                                    :min="1"
+                                            >
+                                            </sw-number-field>
+
+                                            <sw-text-field
+                                                    :label="$tc('ict-newsletter-with-promotion.newsletter-popup.detail.sublineFontFamilyLabel')"
+                                                    v-model="popup.sublineFontFamily"
+                                            >
+                                            </sw-text-field>
+
+                                            <sw-number-field
+                                                    :label="$tc('ict-newsletter-with-promotion.newsletter-popup.detail.mobileSublineFontSizeLabel')"
+                                                    v-model="popup.sublineFontSizeMobile"
+                                                    numberType="int"
+                                                    :min="1"
+                                            >
+                                            </sw-number-field>
+
+                                            <sw-number-field
+                                                    :label="$tc('ict-newsletter-with-promotion.newsletter-popup.detail.mobileSublineLineHeightLabel')"
+                                                    v-model="popup.sublineLineHeightMobile"
+                                                    numberType="int"
+                                                    :min="1"
+                                            >
+                                            </sw-number-field>
+
+                                            <sw-number-field
+                                                    :label="$tc('ict-newsletter-with-promotion.newsletter-popup.detail.tabletSublineFontSizeLabel')"
+                                                    v-model="popup.sublineFontSizeTablet"
+                                                    numberType="int"
+                                                    :min="1"
+                                            >
+                                            </sw-number-field>
+
+                                            <sw-number-field
+                                                    :label="$tc('ict-newsletter-with-promotion.newsletter-popup.detail.tabletSublineLineHeightLabel')"
+                                                    v-model="popup.sublineLineHeightTablet"
+                                                    numberType="int"
+                                                    :min="1"
+                                            >
+                                            </sw-number-field>
+
+                                            <sw-number-field
+                                                    :label="$tc('ict-newsletter-with-promotion.newsletter-popup.detail.desktopSublineFontSizeLabel')"
+                                                    v-model="popup.sublineFontSizeDesktop"
+                                                    numberType="int"
+                                                    :min="1"
+                                            >
+                                            </sw-number-field>
+
+                                            <sw-number-field
+                                                    :label="$tc('ict-newsletter-with-promotion.newsletter-popup.detail.desktopSublineLineHeightLabel')"
+                                                    v-model="popup.sublineLineHeightDesktop"
+                                                    numberType="int"
+                                                    :min="1"
+                                            >
+                                            </sw-number-field>
+
+                                            <sw-text-field
+                                                    :label="$tc('ict-newsletter-with-promotion.newsletter-popup.detail.promotionFontFamilyLabel')"
+                                                    v-model="popup.promotionFontFamily"
+                                            >
+                                            </sw-text-field>
+
+                                            <sw-number-field
+                                                    :label="$tc('ict-newsletter-with-promotion.newsletter-popup.detail.mobilePromotionFontSizeLabel')"
+                                                    v-model="popup.promotionFontSizeMobile"
+                                                    numberType="int"
+                                                    :min="1"
+                                            >
+                                            </sw-number-field>
+
+                                            <sw-number-field
+                                                    :label="$tc('ict-newsletter-with-promotion.newsletter-popup.detail.mobilePromotionLineHeightLabel')"
+                                                    v-model="popup.promotionLineHeightMobile"
+                                                    numberType="int"
+                                                    :min="1"
+                                            >
+                                            </sw-number-field>
+
+                                            <sw-number-field
+                                                    :label="$tc('ict-newsletter-with-promotion.newsletter-popup.detail.tabletPromotionFontSizeLabel')"
+                                                    v-model="popup.promotionFontSizeTablet"
+                                                    numberType="int"
+                                                    :min="1"
+                                            >
+                                            </sw-number-field>
+
+                                            <sw-number-field
+                                                    :label="$tc('ict-newsletter-with-promotion.newsletter-popup.detail.tabletPromotionLineHeightLabel')"
+                                                    v-model="popup.promotionLineHeightTablet"
+                                                    numberType="int"
+                                                    :min="1"
+                                            >
+                                            </sw-number-field>
+
+                                            <sw-number-field
+                                                    :label="$tc('ict-newsletter-with-promotion.newsletter-popup.detail.desktopPromotionFontSizeLabel')"
+                                                    v-model="popup.promotionFontSizeDesktop"
+                                                    numberType="int"
+                                                    :min="1"
+                                            >
+                                            </sw-number-field>
+
+                                            <sw-number-field
+                                                    :label="$tc('ict-newsletter-with-promotion.newsletter-popup.detail.desktopPromotionLineHeightLabel')"
+                                                    v-model="popup.promotionLineHeightDesktop"
+                                                    numberType="int"
+                                                    :min="1"
+                                            >
+                                            </sw-number-field>
+                                        </sw-card>
+
+                                        <sw-card
+                                                v-if="popup"
+                                                :title="$tc('ict-newsletter-with-promotion.newsletter-popup.detail.edgesCardLabel')"
+                                                position-identifier="ict-newsletter-pop-up-edges"
+                                        >
+                                            <sw-number-field
+                                                    :label="$tc('ict-newsletter-with-promotion.newsletter-popup.detail.popupBorderRadiusLabel')"
+                                                    :min="0"
+                                                    numberType="int"
+                                                    v-model="popup.popupBorderRadius"
+                                            >
+                                            </sw-number-field>
+
+                                            <sw-number-field
+                                                    :label="$tc('ict-newsletter-with-promotion.newsletter-popup.detail.firstNameFieldBorderRadiusLabel')"
+                                                    :min="0"
+                                                    numberType="int"
+                                                    v-model="popup.firstNameFieldBorderRadius"
+                                            >
+                                            </sw-number-field>
+
+
+                                            <sw-number-field
+                                                    :label="$tc('ict-newsletter-with-promotion.newsletter-popup.detail.lastNameFieldBorderRadiusLabel')"
+                                                    :min="0"
+                                                    numberType="int"
+                                                    v-model="popup.lastNameFieldBorderRadius"
+                                            >
+                                            </sw-number-field>
+
+                                            <sw-number-field
+                                                    :label="$tc('ict-newsletter-with-promotion.newsletter-popup.detail.mailFieldBorderRadiusLabel')"
+                                                    :min="0"
+                                                    numberType="int"
+                                                    v-model="popup.mailFieldBorderRadius"
+                                            >
+                                            </sw-number-field>
+
+                                            <sw-number-field
+                                                    :label="$tc('ict-newsletter-with-promotion.newsletter-popup.detail.subscribeButtonBorderRadiusLabel')"
+                                                    :min="0"
+                                                    numberType="int"
+                                                    v-model="popup.subscribeButtonBorderRadius"
+                                            >
+                                            </sw-number-field>
+                                        </sw-card>
+
+                                        <sw-card
+                                                v-if="popup"
+                                                :title="$tc('ict-newsletter-with-promotion.newsletter-popup.detail.colorCardLabel')"
+                                                position-identifier="ict-newsletter-pop-up-color"
+                                        >
+                                            <sw-colorpicker
+                                                    :label="$tc('ict-newsletter-with-promotion.newsletter-popup.detail.backgroundColorLabel')"
+                                                    v-model="popup.backgroundColor"
+                                            >
+                                            </sw-colorpicker>
+
+                                            <sw-colorpicker
+                                                    :label="$tc('ict-newsletter-with-promotion.newsletter-popup.detail.closeButtonColorLabel')"
+                                                    v-model="popup.closeButtonColor"
+                                            >
+                                            </sw-colorpicker>
+
+                                            <sw-colorpicker
+                                                    :label="$tc('ict-newsletter-with-promotion.newsletter-popup.detail.closeButtonHoverColorLabel')"
+                                                    v-model="popup.closeButtonHoverColor"
+                                            >
+                                            </sw-colorpicker>
+
+                                            <sw-colorpicker
+                                                    :label="$tc('ict-newsletter-with-promotion.newsletter-popup.detail.promotionColorLabel')"
+                                                    v-model="popup.promotionColor"
+                                            >
+                                            </sw-colorpicker>
+
+                                            <sw-colorpicker
+                                                    :label="$tc('ict-newsletter-with-promotion.newsletter-popup.detail.firstNameFieldBorderColorLabel')"
+                                                    v-model="popup.firstNameFieldBorderColor"
+                                            >
+                                            </sw-colorpicker>
+
+                                            <sw-colorpicker
+                                                    :label="$tc('ict-newsletter-with-promotion.newsletter-popup.detail.lastNameFieldBorderColorLabel')"
+                                                    v-model="popup.lastNameFieldBorderColor"
+                                            >
+                                            </sw-colorpicker>
+
+                                            <sw-colorpicker
+                                                    :label="$tc('ict-newsletter-with-promotion.newsletter-popup.detail.mailFieldBorderColorLabel')"
+                                                    v-model="popup.mailFieldBorderColor"
+                                            >
+                                            </sw-colorpicker>
+
+                                            <sw-colorpicker
+                                                    :label="$tc('ict-newsletter-with-promotion.newsletter-popup.detail.subscribeButtonBackgroundColorLabel')"
+                                                    v-model="popup.subscribeButtonBackgroundColor"
+                                            >
+                                            </sw-colorpicker>
+
+                                            <sw-colorpicker
+                                                    :label="$tc('ict-newsletter-with-promotion.newsletter-popup.detail.subscribeButtonHoverBackgroundColorLabel')"
+                                                    v-model="popup.subscribeButtonBackgroundHoverColor"
+                                            >
+                                            </sw-colorpicker>
+
+                                            <sw-colorpicker
+                                                    :label="$tc('ict-newsletter-with-promotion.newsletter-popup.detail.subscribeButtonTextColorLabel')"
+                                                    v-model="popup.subscribeButtonTextColor"
+                                            >
+                                            </sw-colorpicker>
+
+                                            <sw-colorpicker
+                                                    :label="$tc('ict-newsletter-with-promotion.newsletter-popup.detail.subscribeButtonTextHoverColorLabel')"
+                                                    v-model="popup.subscribeButtonTextHoverColor"
+                                            >
+                                            </sw-colorpicker>
+
+                                            <sw-colorpicker
+                                                    :label="$tc('ict-newsletter-with-promotion.newsletter-popup.detail.notSubscribeTextColorLabel')"
+                                                    v-model="popup.nonSubscribeTextColor"
+                                            >
+                                            </sw-colorpicker>
+
+                                            <sw-colorpicker
+                                                    :label="$tc('ict-newsletter-with-promotion.newsletter-popup.detail.notSubscribeTextHoverColorLabel')"
+                                                    v-model="popup.nonSubscribeTextHoverColor"
+                                            >
+                                            </sw-colorpicker>
+                                        </sw-card>
+                                    </div>
+
+                                </sw-container>
+                            </sw-card>
+                        {% endblock %}
+                    </template>
+                </sw-card-view>
+            </template>
+        {% endblock %}
+
+    </sw-page>
+{% endblock %}

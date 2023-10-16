@@ -1,0 +1,183 @@
+{% sw_extends '@Storefront/storefront/base.html.twig' %}
+
+{% block base_content %}
+    {% block neti_store_locator_detail %}
+        <div class="neti-next-store-locator-detail" itemscope itemtype="http://schema.org/LocalBusiness">
+            {% block neti_store_locator_detail_config %}
+                <input type="hidden" value="{{ page.config|json_encode|escape }}" ref="config">
+                <input type="hidden" value="{{ page.store|json_encode|escape }}" ref="store">
+            {% endblock %}
+
+            {% set store = page.store %}
+
+            {% block neti_store_locator_detail_map %}
+                <div class="map-container" ref="mapContainer">
+                    <div id="map" ref="map"></div>
+                </div>
+            {% endblock %}
+
+            <div class="container">
+                {% block neti_store_locator_detail_header %}
+                    <div class="header">
+                        <div class="label">
+                            <span itemprop="name">{{ store.label }}</span>
+                            {% if page.isStoreOpen and page.storeBusinessHours %}
+                                <div class="text-success">
+                                    {{ "neti-next-store-locator.index.store.open"|trans }}
+                                </div>
+                            {% elseif page.storeBusinessHours %}
+                                <div class="text-danger">
+                                    {{ "neti-next-store-locator.index.store.closed"|trans }}
+                                </div>
+                            {% endif %}
+                        </div>
+
+                        {% if store.detailsPictureMedia.url %}
+                            <div class="logo">
+                                <img src="{{ store.detailsPictureMedia.url }}" alt="{{ store.label }}" itemprop="logo">
+                            </div>
+                        {% elseif store.pictureMedia.url %}
+                            <div class="logo">
+                                <img src="{{ store.pictureMedia.url }}" alt="{{ store.label }}" itemprop="logo">
+                            </div>
+                        {% endif %}
+                    </div>
+                {% endblock %}
+
+                <div class="row">
+                    {% block neti_store_locator_detail_description %}
+                        {% if store.translated.description %}
+                            <div class="col-md-6">
+                                <div class="description" itemprop="description">
+                                    {{ store.translated.description|raw }}
+                                </div>
+                            </div>
+                        {% endif %}
+                    {% endblock %}
+
+                    <div class="col-md-6">
+                        {% block neti_store_locator_detail_address %}
+                            <div itemprop="address" itemscope itemtype="http://schema.org/PostalAddress">
+                                {% if store.country.iso is same as('GB') %}
+                                    <span itemprop="streetAddress">{{ store.streetNumber }} {{ store.street }}</span>
+                                    <br />
+                                    <span itemprop="addressLocality">{{ store.city }}</span><br />
+                                    {% if store.countryState %}
+                                        <span itemprop="addressRegion">{{ store.countryState.translated.name }}</span><br>
+                                    {% endif %}
+                                    <span itemprop="postalCode">{{ store.zipCode }}</span><br />
+                                    {% if store.country %}
+                                        <span itemprop="addressCountry">{{ store.country.name }}</span>
+                                    {% endif %}
+                                {% else %}
+                                    <span itemprop="streetAddress">{{ store.street }} {{ store.streetNumber }}</span><br />
+                                    <span itemprop="postalCode">{{ store.zipCode }}</span>
+                                    <span itemprop="addressLocality">{{ store.city }}</span><br />
+                                    {% if store.country %}
+                                        <span itemprop="addressCountry">{{ store.country.name }}</span>
+                                    {% endif %}
+                                {% endif %}
+                            </div>
+                        {% endblock %}
+
+                        {% block neti_store_locator_detail_opening_times %}
+                            {% if page.storeBusinessHours %}
+                                {% sw_include "@Storefront/storefront/store_locator/business-hours.html.twig" %}
+                            {% elseif store.translated.openingTimes %}
+                                <div class="opening-times">
+                                    <strong>
+                                        {{ "neti-next-store-locator.index.store.labelOpeningTimes"|trans }}
+                                    </strong>
+                                    <div>
+                                        {{ store.translated.openingTimes|sw_sanitize }}
+                                    </div>
+                                </div>
+                            {% endif %}
+                        {% endblock %}
+
+                        {% block neti_store_locator_detail_contact_form_button %}
+                            {% if store.contactFormEnabled %}
+                                <div class="contact-form-button mb-2">
+                                    <button class="btn btn-primary" @click="onContactForm" itemprop="email">
+                                        {{ "neti-next-store-locator.index.store.buttonContact"|trans }}
+                                    </button>
+
+                                    <neti-store-locator-contact-form :store="store"/>
+                                </div>
+                            {% endif %}
+                        {% endblock %}
+
+                        {% block neti_store_locator_detail_additional_info %}
+                            <div class="additional-info">
+                                {% if store.phone %}
+                                    <strong>{{ "neti-next-store-locator.index.store.labelTelephone"|trans }}</strong>
+                                    <a href="tel:{{ store.phone|escape }}" itemprop="telephone">
+                                        {{ store.phone }}
+                                    </a>
+                                    <br/>
+                                {% endif %}
+                                {% if store.fax %}
+                                    <strong itemprop="faxNumber">{{ "neti-next-store-locator.index.store.labelFax"|trans }}</strong>
+                                    {{ store.fax }}
+                                    <br/>
+                                {% endif %}
+                                {% if store.email %}
+                                    <strong>{{ "neti-next-store-locator.index.store.labelEmail"|trans }}</strong>
+                                    <a href="mailto:{{ store.email|escape }}" itemprop="email">
+                                        {{ store.email }}
+                                    </a>
+                                    <br/>
+                                {% endif %}
+                                {% if store.url %}
+                                    <a href="{{ store.url|escape }}" target="_blank">
+                                        {{ store.url }}
+                                    </a>
+                                    <br/>
+                                {% endif %}
+                            </div>
+                        {% endblock %}
+                    </div>
+
+                    <div class="col-md-6">
+                        {% block neti_store_locator_detail_additional_text %}
+                            <div class="additional-text">
+                                {% if store.translated.additionalInformation %}
+                                    {{ store.translated.additionalInformation|raw }}
+                                {% endif %}
+                            </div>
+                        {% endblock %}
+
+                        {% block neti_store_locator_detail_html_content %}
+                            <div class="html-content" itemprop="additionalType" itemtype="https://schema.org/Store">
+                                <div itemprop="description">
+                                    {{ page.htmlContent|raw }}
+                                </div>
+                            </div>
+                        {% endblock %}
+                    </div>
+                </div>
+
+                {% block neti_store_locator_detail_back_button %}
+                    <a href="{{ url('frontend.store_locator.index') }}" class="btn btn-outline-primary back-button">
+                        {{ "neti-next-store-locator.detail.backToOverview"|trans }}
+                    </a>
+                {% endblock %}
+            </div>
+        </div>
+    {% endblock %}
+
+    <script type="text/x-template" id="neti-store-locator-contact-form">
+        {% sw_include '@Storefront/storefront/store_locator/contact-form.twig' %}
+    </script>
+
+    {% block neti_store_locator_cookie_consent %}
+        {% sw_include '@Storefront/storefront/store_locator/cookie-consent.html.twig' %}
+    {% endblock %}
+{% endblock %}
+
+{# Load google maps api after shopware js #}
+{% block base_script_hmr_mode %}
+    {{ parent() }}
+
+    <input type="hidden" name="netiNextStoreLocatorApiKey" value="{{ apiKey|url_encode }}"/>
+{% endblock %}

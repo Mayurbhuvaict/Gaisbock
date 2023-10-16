@@ -1,0 +1,44 @@
+<div class="neti-next-store-locator-map-preview-modal">
+    <sw-button variant="ghost" style="margin: 24px 0 0 0; height: 48px" @click="open">
+        {{ $t('neti-store-locator.mapPreviewModal.button') }}
+    </sw-button>
+
+    <sw-modal
+            v-show="isOpen"
+            :title="$t('neti-store-locator.mapPreviewModal.title')"
+            @modal-close="onClose"
+            class="neti-next-store-locator-map-preview-modal"
+    >
+        <sw-container columns="1fr 1fr" gap="10px">
+            <sw-number-field
+                    :label="$t('neti-store-locator.mapPreviewModal.labelLatitude')"
+                    v-model="newCoordinates.lat"
+                    :digits="32"
+                    disabled
+            >
+            </sw-number-field>
+            <sw-number-field
+                    :label="$t('neti-store-locator.mapPreviewModal.labelLongitude')"
+                    v-model="newCoordinates.lng"
+                    :digits="32"
+                    disabled
+            >
+            </sw-number-field>
+        </sw-container>
+
+        <sw-container columns="1fr auto auto" gap="10px">
+            <div></div>
+            <sw-button @click="onClose">
+                {{ $t('neti-store-locator.mapPreviewModal.abortBtn') }}
+            </sw-button>
+            <sw-button variant="primary" @click="onApply">
+                {{ $t('neti-store-locator.mapPreviewModal.applyBtn') }}
+            </sw-button>
+        </sw-container>
+
+        <div class="map" ref="map" style="height: 500px">
+        </div>
+
+        <sw-loader v-if="!map"></sw-loader>
+    </sw-modal>
+</div>

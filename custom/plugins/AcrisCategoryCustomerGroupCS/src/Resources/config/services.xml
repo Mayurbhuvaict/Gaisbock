@@ -1,0 +1,64 @@
+<?xml version="1.0" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <services>
+        <!-- Extensions -->
+        <service id="Acris\CategoryCustomerGroup\Core\Content\Category\CategoryExtension">
+            <tag name="shopware.entity.extension"/>
+        </service>
+        <service id="Acris\CategoryCustomerGroup\Core\Checkout\Customer\Aggregate\CustomerGroup\CustomerGroupExtension">
+            <tag name="shopware.entity.extension"/>
+        </service>
+
+        <!-- Definitions -->
+        <service id="Acris\CategoryCustomerGroup\Custom\CategoryCustomerGroupDefinition">
+            <tag name="shopware.entity.definition" entity="acris_category_customer_group" />
+        </service>
+
+        <!-- Decorated ElasticsearchProductDefinition service -->
+        <service id="Acris\CategoryCustomerGroup\Elasticsearch\Product\ElasticsearchProductDefinitionDecorated" decorates="Shopware\Elasticsearch\Product\ElasticsearchProductDefinition" decoration-priority="-200">
+            <argument type="service" id="Acris\CategoryCustomerGroup\Elasticsearch\Product\ElasticsearchProductDefinitionDecorated.inner"/>
+            <tag name="shopware.es.definition"/>
+        </service>
+
+        <!-- Subscriber -->
+        <service id="Acris\CategoryCustomerGroup\Storefront\Subscriber\CategorySubscriber">
+            <tag name="kernel.event_subscriber"/>
+            <argument type="service" id="Acris\CategoryCustomerGroup\Components\BlockCategoryService"/>
+            <argument type="service" id="Shopware\Core\System\SystemConfig\SystemConfigService"/>
+        </service>
+
+        <service id="Acris\CategoryCustomerGroup\Storefront\Subscriber\ProductSubscriber">
+            <tag name="kernel.event_subscriber"/>
+            <argument type="service" id="Acris\CategoryCustomerGroup\Components\BlockCategoryService"/>
+            <argument type="service" id="Shopware\Core\System\SystemConfig\SystemConfigService"/>
+        </service>
+
+        <!-- Services -->
+        <service id="Acris\CategoryCustomerGroup\Components\BlockCategoryService">
+            <argument type="service" id="acris_category_customer_group.repository"/>
+            <argument type="service" id="Shopware\Core\System\SystemConfig\SystemConfigService"/>
+        </service>
+
+        <service id="Acris\CategoryCustomerGroup\Core\Content\Sitemap\Provider\CategoryUrlProvider"
+                 decorates="Shopware\Core\Content\Sitemap\Provider\CategoryUrlProvider">
+
+            <argument type="service" id="category.repository"/>
+            <argument type="service" id="Acris\CategoryCustomerGroup\Core\Content\Sitemap\Provider\CategoryUrlProvider.inner"/>
+
+            <tag name="shopware.sitemap_url_provider"/>
+        </service>
+
+        <!-- SalesChannelProductRepository extension -->
+        <service id="Acris\CategoryCustomerGroup\Core\Content\Product\SalesChannel\SalesChannelProductRepository"
+                 decorates="sales_channel.product.repository">
+            <argument type="service" id="Acris\CategoryCustomerGroup\Core\Content\Product\SalesChannel\SalesChannelProductRepository.inner"/>
+            <argument type="service" id="Acris\CategoryCustomerGroup\Components\BlockCategoryService"/>
+            <argument type="service" id="Shopware\Core\System\SystemConfig\SystemConfigService"/>
+        </service>
+    </services>
+
+</container>

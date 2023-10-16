@@ -1,0 +1,55 @@
+{
+  "sw-cms": {
+    "detail": {
+      "label": {
+        "blockCategorySolidInstagramElements": "Instagram Elements"
+      }
+    },
+    "elements": {
+      "solidIE": {
+        "feed": {
+          "label": "Instagram Feed",
+          "config": {
+            "layout": {
+              "label": "Layout",
+              "options": {
+                "grid": "Grid",
+                "row": "Row"
+              }
+            },
+            "maxPostCount": {
+              "label": "Maximum post count"
+            },
+            "gutter": {
+              "label": "Gutter",
+              "options": {
+                "default": "Default",
+                "custom": "Custom"
+              }
+            },
+            "gutterWidthValue": {
+              "label": "Gutter width value"
+            },
+            "gutterWidthUnit": {
+              "label": "Gutter width unit"
+            },
+            "theme": {
+              "label": "Theme",
+              "options": {
+                "simple": "Simple",
+                "instagram": "Instagram"
+              }
+            }
+          }
+        }
+      }
+    },
+    "blocks": {
+      "solidIE": {
+        "feed": {
+          "label": "Instagram Feed"
+        }
+      }
+    }
+  }
+}

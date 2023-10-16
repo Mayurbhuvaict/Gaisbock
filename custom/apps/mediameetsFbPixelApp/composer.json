@@ -1,0 +1,66 @@
+{
+    "name": "mediameets/mediameets-fb-pixel-app",
+    "description": "App for integrating the Facebook Pixel.",
+    "license": "proprietary",
+    "type": "shopware-platform-app",
+    "version": "3.0.0",
+    "authors": [
+        {
+            "name": "media:meets GmbH",
+            "role": "Manufacturer"
+        }
+    ],
+    "require": {
+        "shopware/administration": "^6.5",
+        "shopware/core": "^6.5",
+        "shopware/storefront": "^6.5"
+    },
+    "minimum-stability": "RC",
+    "config": {
+        "sort-packages": true,
+        "allow-plugins": {
+            "symfony/runtime": true
+        }
+    },
+    "scripts": {
+        "admin:lint": [
+            "@admin:lint:js",
+            "@admin:lint:css"
+        ],
+        "admin:lint:css": "[[ -d Resources/app/administration ]] && { cd Resources/app/administration; npm run lint:css --if-present || true; } || true",
+        "admin:lint:css:fix": "[[ -d Resources/app/administration ]] && { cd Resources/app/administration; npm run lint:css:fix --if-present || true; } || true",
+        "admin:lint:fix": [
+            "@admin:lint:js:fix",
+            "@admin:lint:css:fix"
+        ],
+        "admin:lint:js": "[[ -d Resources/app/administration ]] && { cd Resources/app/administration; npm run lint:js --if-present || true; } || true",
+        "admin:lint:js:fix": "[[ -d Resources/app/administration ]] && { cd Resources/app/administration; npm run lint:js:fix --if-present || true; } || true",
+        "lint": [
+            "@admin:lint",
+            "@storefront:lint"
+        ],
+        "lint:fix": [
+            "@ecs:fix",
+            "@admin:lint:fix",
+            "@storefront:lint:fix"
+        ],
+        "release:zip": "git archive -o ./../$(basename $PWD)-$(git rev-parse --short HEAD).zip --prefix=$(basename $PWD)/ $(git rev-parse --abbrev-ref HEAD)",
+        "setup": [
+            "@composer install",
+            "[[ -d Resources/app/administration ]] && { cd Resources/app/administration; npm install; } || true",
+            "[[ -d Resources/app/storefront ]] && { cd Resources/app/storefront; npm install; } || true"
+        ],
+        "storefront:lint": [
+            "@storefront:lint:js",
+            "@storefront:lint:css"
+        ],
+        "storefront:lint:css": "[[ -d Resources/app/storefront ]] && { cd Resources/app/storefront; npm run lint:css --if-present || true; } || true",
+        "storefront:lint:css:fix": "[[ -d Resources/app/storefront ]] && { cd Resources/app/storefront; npm run lint:css:fix --if-present || true; } || true",
+        "storefront:lint:fix": [
+            "@storefront:lint:js:fix",
+            "@storefront:lint:css:fix"
+        ],
+        "storefront:lint:js": "[[ -d Resources/app/storefront ]] && { cd Resources/app/storefront; npm run lint:js --if-present || true; } || true",
+        "storefront:lint:js:fix": "[[ -d Resources/app/storefront ]] && { cd Resources/app/storefront; npm run lint:js:fix --if-present || true; } || true"
+    }
+}

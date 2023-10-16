@@ -1,0 +1,124 @@
+<sw-card
+    class="neti-store-locator-contact-form-card"
+    :title="$t('neti-store-locator-contact-form.detail.card.generalBasic.title')"
+    :isLoading="isLoading"
+    position-identifier="neti-store-locator-contact-form-card"
+>
+    <sw-container slot="grid" rows="auto auto">
+        <sw-card-section divider="bottom">
+            <sw-container columns="1fr max-content" gap="0px 30px">
+                <div v-if="!editMode && entity">
+                    {{ entity.label }}
+                </div>
+                <div v-else>
+                    <sw-text-field
+                        v-model="entity.label"
+                        :placeholder="$t('neti-store-locator-contact-form.detail.card.generalBasic.labelLabel')"
+                        :required="true"
+                        validation="required"
+                        :error="entityLabelError"
+                    >
+
+                    </sw-text-field>
+                </div>
+            </sw-container>
+        </sw-card-section>
+
+        <sw-card-section secondary slim>
+
+            <sw-loader v-if="isLoading"></sw-loader>
+
+            <sw-container
+                v-else
+                columns="repeat(auto-fit, minmax(250px, 1fr)"
+                gap="0px 15px"
+            >
+                <sw-description-list>
+                    <dt>
+                        {{ $t('neti-store-locator-contact-form.detail.card.generalBasic.labelActive') }}
+                    </dt>
+
+                    <dd v-if="!editMode">
+                        {{ entity.active }}
+                    </dd>
+                    <dd v-else>
+                        <sw-checkbox-field v-model="entity.active"></sw-checkbox-field>
+                    </dd>
+                </sw-description-list>
+                <sw-description-list>
+                    <dt>
+                        {{ $t('neti-store-locator-contact-form.detail.card.generalBasic.labelRequired') }}
+                    </dt>
+
+                    <dd v-if="!editMode">
+                        {{ entity.required }}
+                    </dd>
+                    <dd v-else>
+                        <sw-checkbox-field v-model="entity.required"></sw-checkbox-field>
+                    </dd>
+                </sw-description-list>
+                <sw-description-list>
+                    <dt>
+                        {{ $t('neti-store-locator-contact-form.detail.card.generalBasic.labelType') }}
+                    </dt>
+
+                    <dd v-if="!editMode">
+                        <template v-if="entity.type">
+                            {{ $t('neti-store-locator-contact-form.detail.card.generalBasic.labelsType.' + entity.type) }}
+                        </template>
+                        <template v-else>
+                            -
+                        </template>
+                    </dd>
+                    <dd v-else>
+                        <sw-select-field
+                            v-model="entity.type"
+                            validation="required"
+                            :error="entityTypeError"
+                        >
+                            <option selected disabled>
+                                {{ $t('neti-store-locator-contact-form.detail.card.generalBasic.placeholderType') }}
+                            </option>
+                            <option v-for="{ key } in availableTypes" :value="key" :key="key">
+                                {{ $t('neti-store-locator-contact-form.detail.card.generalBasic.labelsType.' + key) }}
+                            </option>
+                        </sw-select-field>
+                    </dd>
+                </sw-description-list>
+                <sw-description-list>
+                    <dt>
+                        {{ $t('neti-store-locator-contact-form.detail.card.generalBasic.labelPosition') }}
+                    </dt>
+
+                    <dd v-if="!editMode">
+                        {{ entity.position }}
+                    </dd>
+                    <dd v-else>
+                        <sw-number-field v-model="entity.position" numberType="int">
+
+                        </sw-number-field>
+                    </dd>
+                </sw-description-list>
+            </sw-container>
+
+            <sw-container
+                v-if="!isLoading"
+                columns="repeat(auto-fit, minmax(250px, 1fr)"
+                gap="0px 15px"
+            >
+                <sw-description-list>
+                    <dt>
+                        {{ $t('neti-store-locator-contact-form.detail.card.generalBasic.labelValue') }}
+                    </dt>
+
+                    <dd v-if="!editMode">
+                        {{ entity.value }}
+                    </dd>
+                    <dd v-else>
+                        <sw-textarea-field type="textarea" v-model="entity.value"></sw-textarea-field>
+                    </dd>
+                </sw-description-list>
+            </sw-container>
+        </sw-card-section>
+    </sw-container>
+</sw-card>

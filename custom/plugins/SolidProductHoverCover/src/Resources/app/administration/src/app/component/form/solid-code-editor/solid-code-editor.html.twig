@@ -1,0 +1,15 @@
+{% block sw_text_editor_label %}
+    <div
+        class="sw-code-editor__label"
+        v-if="label.length"
+    >
+        {{ label }}
+
+        <sw-help-text
+            class="help-text"
+            :text="helpText"
+            :width="400"
+            tooltipposition="top"
+        />
+    </div>
+{% endblock %}

@@ -1,0 +1,10 @@
+{% block sw_cms_element_category_image_text %}
+<div class="sw-cms-element-gaisbock-category-image-text">
+    <div class="sw-cms-element-gaisbock-category-image-text__images">
+        <div class="sw-cms-element-gaisbock-category-image-text__inner-images-text-one">
+            <span>{{ element.config.newTitle.value }}</span>
+            <img :src="mediaUrl">
+        </div>
+    </div>
+</div>
+{% endblock %}

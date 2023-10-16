@@ -1,0 +1,192 @@
+{% block element_solid_ie_feed %}
+    {% if useDatabaseAndFilesystem %}
+        {% set source = 'db-fs' %}
+    {% else %}
+        {% set source = 'meta-cdn' %}
+    {% endif %}
+
+    {% set config = element.fieldConfig.elements %}
+
+    {% if config.layout.value == 'grid' %}
+        {% if config.maxPostCount.value == '4' %}
+            {% set columnClass = 'col-sm-6' %}
+        {% elseif config.maxPostCount.value == '9' %}
+            {% set columnClass = 'col-sm-6 col-lg-4' %}
+        {% elseif config.maxPostCount.value == '12' %}
+            {% set columnClass = 'col-sm-6 col-lg-4 col-xl-3' %}
+        {% endif %}
+    {% elseif config.layout.value == 'row' %}
+        {% if config.maxPostCount.value == '3' %}
+            {% set columnClass = 'col-sm-6 col-lg-4' %}
+        {% elseif config.maxPostCount.value == '4' %}
+            {% set columnClass = 'col-sm-6 col-lg-4 col-xl-3' %}
+        {% elseif config.maxPostCount.value == '6' %}
+            {% set columnClass = 'col-sm-6 col-lg-3 col-xl-2' %}
+        {% endif %}
+    {% endif %}
+
+    <div class="cms-element-{{ element.type }}">
+        <div class="solid-ie-feed solid-ie-feed-{{ element.id }} solid-ie-feed-{{ source }} theme-{{ config.theme.value }}">
+            <div class="row feed-row">
+                {% for i in 0..config.maxPostCount.value - 1 %}
+                    {% if config.layout.value == 'grid' %}
+                        {% if config.maxPostCount.value == '4' %}
+                            {% if i == 3 %}
+                                {% set displayColumnClass = 'd-none d-sm-block' %}
+                            {% endif %}
+                        {% elseif config.maxPostCount.value == '9' %}
+                            {% if i > 2 %}
+                                {% set displayColumnClass = 'd-none' %}
+                            {% endif %}
+
+                            {% if i == 3 %}
+                                {% set displayColumnClass = displayColumnClass ~ ' d-sm-block' %}
+                            {% endif %}
+
+                            {% if i > 3 %}
+                                {% set displayColumnClass = displayColumnClass ~ ' d-lg-block' %}
+                            {% endif %}
+                        {% elseif config.maxPostCount.value == '12' %}
+                            {% if i > 2 %}
+                                {% set displayColumnClass = 'd-none' %}
+                            {% endif %}
+
+                            {% if i == 3 %}
+                                {% set displayColumnClass = displayColumnClass ~ ' d-sm-block' %}
+                            {% endif %}
+
+                            {% if i > 3 and i < 9 %}
+                                {% set displayColumnClass = displayColumnClass ~ ' d-lg-block' %}
+                            {% endif %}
+
+                            {% if i > 8 %}
+                                {% set displayColumnClass = displayColumnClass ~ ' d-xl-block' %}
+                            {% endif %}
+                        {% endif %}
+                    {% elseif config.layout.value == 'row' %}
+                        {% if config.maxPostCount.value == '3' %}
+                            {% if i > 1 %}
+                                {% set displayColumnClass = 'd-sm-none' %}
+                            {% endif %}
+
+                            {% if i == 2 %}
+                                {% set displayColumnClass = displayColumnClass ~ ' d-lg-block' %}
+                            {% endif %}
+                        {% elseif config.maxPostCount.value == '4' %}
+                            {% if i > 2 %}
+                                {% set displayColumnClass = 'd-none' %}
+                            {% endif %}
+
+                            {% if i == 2 %}
+                                {% set displayColumnClass = displayColumnClass ~ ' d-sm-none d-lg-block' %}
+                            {% endif %}
+
+                            {% if i == 3 %}
+                                {% set displayColumnClass = displayColumnClass ~ ' d-xl-block' %}
+                            {% endif %}
+                        {% elseif config.maxPostCount.value == '6' %}
+                            {% if i > 2 %}
+                                {% set displayColumnClass = 'd-none' %}
+                            {% endif %}
+
+                            {% if i == 2 %}
+                                {% set displayColumnClass = 'd-sm-none' %}
+                            {% endif %}
+
+                            {% if i > 1 and i < 4 %}
+                                {% set displayColumnClass = displayColumnClass ~ ' d-lg-block' %}
+                            {% endif %}
+
+                            {% if i > 3 %}
+                                {% set displayColumnClass = displayColumnClass ~ ' d-xl-block' %}
+                            {% endif %}
+                        {% endif %}
+                    {% endif %}
+
+                    <div class="{{ columnClass }} {{ displayColumnClass }} feed-col">
+                        <div class="feed-item {% if not useDatabaseAndFilesystem %}loading{% endif %}" data-feed-item>
+                            <div class="image-container {% if useDatabaseAndFilesystem and element.data and element.data[i] %}{{ element.data[i].mediaType|lower|replace({'_': '-'}) }}{% endif %}" data-append-image>
+                                <div class="media-type-icon">
+                                    <div class="play">
+                                        {% sw_icon 'play' style {
+                                            'namespace': 'SolidInstagramElements'
+                                        } %}
+                                    </div>
+
+                                    <div class="stack">
+                                        {% sw_icon 'stack' style {
+                                            'namespace': 'SolidInstagramElements'
+                                        } %}
+                                    </div>
+                                </div>
+
+                                {% if useDatabaseAndFilesystem and element.data and element.data[i] %}
+                                    <img
+                                        src="{{ solidIeGetCmsSlotInstagramPostMediaUrl(element.data[i]) }}"
+                                        alt="Instagram"
+                                        title="Instagram"
+                                    >
+                                {% endif %}
+                            </div>
+
+                            <div class="content-container">
+                                <div class="content">
+                                    <p class="caption">
+                                        <span class="username" data-insert-username>
+                                            {% if useDatabaseAndFilesystem and element.data and element.data[i] %}
+                                                {{ element.data[i].username }}
+                                            {% endif %}
+                                        </span>
+
+                                        <span data-insert-caption>
+                                            {% if useDatabaseAndFilesystem and element.data and element.data[i] %}
+                                                {{ element.data[i].caption }}
+                                            {% endif %}
+                                        </span>
+                                    </p>
+
+                                    <p class="mb-0">
+                                        <span class="date" data-insert-date>
+                                            {% if useDatabaseAndFilesystem and element.data and element.data[i] %}
+                                                {% set timestamp = element.data[i].timestamp %}
+                                                {% set delta = date(timestamp).diff(date('now')) %}
+
+                                                {% if timestamp|date('Y') === 'now'|date('Y') %}
+                                                    {% if delta.y == 0 and delta.m == 0 and delta.d <= 7 %}
+                                                        {% if delta.d == 0 and delta.h == 0 and delta.i == 0 %}
+                                                            {{ "solidInstagramElements.general.date.secondsAgo"|trans }}
+                                                        {% elseif delta.d == 0 and delta.h == 0 %}
+                                                            {{ "solidInstagramElements.general.date.minutesAgo"|trans({'%count%': delta.i}) }}
+                                                        {% elseif delta.d == 0 %}
+                                                            {{ "solidInstagramElements.general.date.hoursAgo"|trans({'%count%': delta.h}) }}
+                                                        {% else %}
+                                                            {{ "solidInstagramElements.general.date.daysAgo"|trans({'%count%': delta.d}) }}
+                                                        {% endif %}
+                                                    {% else %}
+                                                        {{ element.data[i].timestamp|format_datetime(pattern="solidInstagramElements.general.date.formatMonthAndDay"|trans) }}
+                                                    {% endif %}
+                                                {% else %}
+                                                    {{ element.data[i].timestamp|format_datetime(pattern="solidInstagramElements.general.date.formatFull"|trans) }}
+                                                {% endif %}
+                                            {% endif %}
+                                        </span>
+                                        •
+                                        <span class="link">
+                                            {{ "solidInstagramElements.feed.viewOnInstagram"|trans }}
+                                        </span>
+                                    </p>
+                                </div>
+                            </div>
+
+                            {% if useDatabaseAndFilesystem and element.data and element.data[i] %}
+                                <a href="{{ element.data[i].permalink }}" class="permalink stretched-link" title="Instagram" target="_blank" rel="noopener noreferrer"></a>
+                            {% else %}
+                                <div data-replace-permalink></div>
+                            {% endif %}
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,71 @@
+{% block neti_store_locator_info_window %}
+    <div class="neti-store-locator-info-window">
+        <template v-if="store.country && store.country.iso == 'GB'">
+            <strong>{{ '{{ store.label }}' }}</strong><br />
+            {{ '{{ store.streetNumber }} {{ store.street }}' }}<br />
+            {{ '{{ store.city }}' }}<br />
+            <template v-if="store.countryState">
+                {{ '{{ store.countryState.translated.name }}' }}<br />
+            </template>
+            {{ '{{ store.zipCode }}' }}<br />
+            <template v-if="store.country">
+                {{ '{{ store.country.name }}' }}<br />
+            </template>
+        </template>
+
+        <template v-else>
+            <strong>{{ '{{ store.label }}' }}</strong><br />
+            {{ '{{ store.street }} {{ store.streetNumber }}' }}<br />
+            {{ '{{ store.zipCode }} {{ store.city }}' }}<br />
+            <template v-if="store.country">
+                {{ '{{ store.country.name }}' }}<br />
+            </template>
+        </template>
+        <br />
+        <template v-if="store.phone">
+            <strong>{{ "neti-next-store-locator.index.store.labelTelephone"|trans }}</strong>
+            <a :href="'tel:' + store.phone">
+                {{ '{{ store.phone }}' }}
+            </a>
+            <br />
+        </template>
+        <template v-if="store.fax">
+            <strong>{{ "neti-next-store-locator.index.store.labelFax"|trans }}</strong>
+            {{ '{{ store.fax }}' }}
+            <br />
+        </template>
+
+        {% block neti_store_locator_info_window_opening_times %}
+            <template v-if="config.showOpeningTimesOnMarkerWindow">
+                <template v-if="hasBusinessHours">
+                    <br />
+                    <div v-if="isStoreOpen" class="font-weight-bold text-success mb-1">
+                        {{ "neti-next-store-locator.index.store.open"|trans }}
+                    </div>
+                    <div v-else-if="store.extensions.storeBusinessHours.businessHours.length > 0" class="text-danger">
+                        {{ "neti-next-store-locator.index.store.closed"|trans }}
+                    </div>
+                    <div class="buiness-hours-week">
+                        <dl v-for="weekDay in weekDays" class="row mb-1 justify-content-end">
+                            <template v-if="businessHours[weekDay.id]">
+                                <dt class="col-5">{{ '{{ weekDay.translated.name }}' }}:</dt>
+                                <dd v-for="businessHour in businessHours[weekDay.id]" class="col-7 mb-0">
+                                    {{ '{{ formatTime(businessHour.businessHour.start) }}' }} - {{ '{{ formatTime(businessHour.businessHour.end) }}' }}
+                                </dd>
+                            </template>
+                        </dl>
+                    </div>
+                </template>
+                <template v-else-if="formattedOpeningTimes">
+                    <br />
+                    <div class="opening-times">
+                        <strong>
+                            {{ "neti-next-store-locator.index.store.labelOpeningTimes"|trans }}
+                        </strong>
+                        <div v-html="formattedOpeningTimes"></div>
+                    </div>
+                </template>
+            </template>
+        {% endblock %}
+    </div>
+{% endblock %}

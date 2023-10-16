@@ -1,0 +1,10 @@
+{
+    "neti-next-language-detector": {
+        "modal": {
+            "headline": "Настроить язык:",
+            "text": "Вы хотите переключиться на язык <span>%LANG%</span>?",
+            "buttonAccept": "Да",
+            "buttonDecline": "Нет"
+        }
+    }
+}

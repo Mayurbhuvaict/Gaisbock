@@ -1,0 +1,36 @@
+{
+    "hueb-seo-faq": {
+        "page": {
+            "label": "SEO FAQ",
+            "list": {
+                "group": {
+                    "entrySuccessMessage" :"Eine neue Gruppe wird erstellt. Bitte füllen Sie den Gruppeneintrag aus.",
+                    "labelHeader": "SEO FAQ Gruppen",
+                    "labelAdd": "Neue Gruppe",
+                    "labelActive": "Aktive",
+                    "labelPosition": "Group Position",
+                    "labelName": "Gruppe",
+                    "labelTab": "Gruppen",
+                    "labelSalesChannelId": "Verkaufskanal",
+                    "newEntry": "Neue Gruppe"
+                },
+                "questions": {
+                    "entrySuccessMessage" :"Es wird eine neue Frage erstellt. Bitte füllen Sie den Frageneintrag aus.",
+                    "labelTab": "Fragen & Antworten",
+                    "labelAdd": "Neue Q&A",
+                    "labelGroup": "Gruppe",
+                    "labelQuestionPosition": "Frage Position",
+                    "labelName": "ID",
+                    "labelQuestion": "Fragen",
+                    "labelAnswer": "Antworten",
+                    "labelMetaTitle": "Meta Title",
+                    "labelMetaDescription": "Meta Description",
+                    "labelKeywords": "Keywords",
+                    "newEntry": "Neu",
+                    "newQuestion": "Frage eintragen",
+                    "newAnswer": "Antwort eintragen"
+                }
+            }
+        }
+    }
+}

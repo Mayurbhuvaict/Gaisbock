@@ -1,0 +1,9 @@
+{% sw_extends "@Storefront/storefront/page/checkout/finish/index.html.twig" %}
+
+{% block page_checkout_aside %}
+    {{ parent() }}
+
+    {% block neti_store_locator_checkout_stores %}
+        {% sw_include "@Storefront/storefront/component/store_locator/checkout_finish_stores.html.twig" %}
+    {% endblock %}
+{% endblock %}

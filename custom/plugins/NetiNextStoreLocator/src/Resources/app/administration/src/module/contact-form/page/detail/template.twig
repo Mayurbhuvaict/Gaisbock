@@ -1,0 +1,60 @@
+<sw-page class="neti-store-locator-contact-form-detail has--store-locator--sidebar-menu">
+    {% block neti_store_locator_contact_form_detail_header %}
+        <template #smart-bar-header>
+            <h2 v-if="entity">
+                {{ entity.label }}
+            </h2>
+        </template>
+    {% endblock %}
+
+    <template #smart-bar-actions>
+        <sw-button
+                v-if="!editMode && !createMode"
+                variant="primary"
+                :disabled="isLoading"
+                @click.prevent="onActivateEditMode"
+        >
+            {{ $t('neti-store-locator-contact-form.detail.button.edit') }}
+        </sw-button>
+
+        <span v-else>
+            <sw-button :disabled="isLoading" @click="onAbortButtonClick">
+                {{ $t('neti-store-locator-contact-form.detail.button.cancel') }}
+            </sw-button>
+
+            <sw-button-process
+                    :isLoading="isLoading"
+                    :processSuccess="isSaveSuccessful"
+                    :disabled="isLoading"
+                    variant="primary"
+                    @process-finish="saveFinish"
+                    @click.prevent="onSave"
+            >
+                {{ $t('neti-store-locator-contact-form.detail.button.save') }}
+            </sw-button-process>
+        </span>
+    </template>
+
+    <template #language-switch>
+        <sw-language-switch
+                :disabled="entityId == null"
+                :saveChangesFunction="saveOnLanguageChange"
+                :abortChangeFunction="abortOnLanguageChange"
+                @on-change="onChangeLanguage"
+        ></sw-language-switch>
+    </template>
+
+    <template #content>
+        <neti-store-locator-sidebar-menu></neti-store-locator-sidebar-menu>
+
+        <sw-card-view>
+            <sw-language-info :entityDescription="placeholder(entity, 'label', '')" style="margin-top: 15px"></sw-language-info>
+            <router-view
+                    :entity="entity"
+                    :editMode="editMode"
+                    :isLoading="isLoading || isSaveSuccessful"
+                    v-if="!isLoading"
+            ></router-view>
+        </sw-card-view>
+    </template>
+</sw-page>

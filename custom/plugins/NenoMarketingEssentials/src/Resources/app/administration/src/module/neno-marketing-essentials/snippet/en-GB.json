@@ -1,0 +1,351 @@
+{
+    "neno-marketing-essentials": {
+        "general": {
+            "menuTitle": "Marketing Essentials",
+            "cancelButtonText": "Cancel",
+            "saveButtonText": "Save",
+            "errorTitle": "Error"
+        },
+
+        "newsletter-popup": {
+            "general": {
+                "addPopupButtonText": "Add Popup"
+            },
+            "list": {
+                "columnName": "Name",
+                "columnVisibleSettings": "Assigned",
+                "columnIsGlobal": "Global",
+                "columnPromotionActiveLabel": "Promotion"
+            },
+            "detail": {
+                "nameLabel": "Name",
+                "storageTypeLabel": "Storage Type",
+                "storageTypeOptionSessionStorageLabel": "Session-Storage",
+                "storageTypeOptionLocalStorageLabel": "Local-Storage",
+                "devModeLabel": "Development mode (deactivate storage)",
+                "isGlobalLabel": "Activate global",
+                "visibleSettingsLabel": "Visibility settings",
+                "visibleSettingsOptionCategoryLabel": "Assign category",
+                "visibleSettingsOptionProductLabel": "Assign product page",
+                "assignCategoryLabel": "Visible in category",
+                "assignProductLabel": "Visible in product site",
+                "popupTriggerLabel": "Open popup",
+                "popupTriggerOptionTime": "By time (seconds)",
+                "popupTriggerOptionScroll": "By scrolling (pixel)",
+                "popupTimeLabel": "Open after seconds",
+                "popupScrollLabel": "Open by scrolled pixels",
+                "heightMobileLabel": "Height of the popup for mobile in pixel (0px - 480px)",
+                "heightDesktopLabel": "Height of the popup for desktop in pixel (481px - )",
+                "showFirstNameLabel": "Show field for firstname",
+                "showLastNameLabel": "Show field for lastname",
+
+                "promotionHelpText": "Please select a promotion you have previously created. It is recommended to create a unique promotion for the popup",
+                "promotionActiveLabel": "Active",
+                "promotionAssignLabel": "Select promotion",
+                "promotionShowValidUntilLabel": "Show valid until",
+                "promotionTextValidUntilLabel": "Prefix-text",
+
+                "placeholderBackgroundColorLabel": "Background color (placeholder)",
+                "imageLabel": "Image",
+                "imagePositionLabel": "Position of the image box for desktop (481px - )",
+                "imagePositionOptionLeft": "Left",
+                "imagePositionOptionRight": "Right",
+                "imagePositionOptionBackground": "Use as background",
+                "imageMobileSettingsLabel": "Position of the image box for mobile (0px - 480px)",
+                "imageMobileSettingsOptionBackground": "Show image as background",
+                "imageMobileSettingsOptionLeft": "Show image left",
+                "imageMobileSettingsOptionRight": "Show image right",
+                "imageMobileSettingsOptionNone": "Do not show image",
+                "imageFitLabel": "Adjustment of the image",
+                "imageFitLabelOptionFill": "Fill",
+                "imageFitLabelOptionContain": "Contain",
+                "imageFitLabelOptionCover": "Cover",
+                "imageAlignmentLabel": "Alignment of the image",
+                "imageAlignmentLabelOptionCenter": "Centered",
+                "imageAlignmentLabelOptionLeft": "Left",
+                "imageAlignmentLabelOptionRight": "Right",
+                "imageAlignmentLabelOptionTop": "Top",
+                "imageAlignmentLabelOptionBottom": "Bottom",
+
+                "headlineLabel": "Headline",
+                "sublineLabel": "Subline","firstNamePlaceholderLabel": "Placeholder text in firstname field",
+                "lastNamePlaceholderLabel": "Placeholder text in lastname field",
+                "mailPlaceholderLabel": "Placeholder text in email field",
+                "subscribeButtonLabel": "Text in the subscribe button",
+                "notSubscribeLabel": "Text for non-subscribe",
+                "contentAlignmentLabel": "Alignment of the elements",
+                "contentAlignmentLabelOptionCenter": "Centered",
+                "contentAlignmentLabelOptionTop": "Top",
+                "contentAlignmentLabelOptionBottom": "Bottom",
+
+                "headlineFontFamilyLabel": "Headline font (overwrite default)",
+                "sublineFontFamilyLabel": "Subline font (overwrite default)",
+                "promotionFontFamilyLabel": "Promotion font (overwrite default)",
+                "mobileHeadlineFontSizeLabel": "Headline font size - Mobile (0 - 480px)",
+                "mobileSublineFontSizeLabel": "Subline font size - Mobile (0 - 480px)",
+                "tabletHeadlineFontSizeLabel": "Headline font size - Tablet (481px - 1279px)",
+                "tabletSublineFontSizeLabel": "Subline font size - Tablet (481px - 1279px)",
+                "desktopHeadlineFontSizeLabel": "Headline font size - Desktop ( > 1280px)",
+                "desktopSublineFontSizeLabel": "Subline font size - Desktop ( > 1280px)",
+                "mobileHeadlineLineHeightLabel": "Headline line height - Mobile (0 - 480px)",
+                "mobileSublineLineHeightLabel": "Subline line height - Mobile (0 - 480px)",
+                "tabletHeadlineLineHeightLabel": "Headline line height - Tablet (481px - 1279px)",
+                "tabletSublineLineHeightLabel": "Subline line height - Tablet (481px - 1279px)",
+                "desktopHeadlineLineHeightLabel": "Headline line height - Desktop ( > 1280px)",
+                "desktopSublineLineHeightLabel": "Subline line height - Desktop ( > 1280px)",
+                "mobilePromotionFontSizeLabel": "Promotion font size - Mobile (0 - 480px)",
+                "mobilePromotionLineHeightLabel": "Promotion line height - Mobile (0 - 480px)",
+                "tabletPromotionFontSizeLabel": "Promotion font size - Tablet (481px - 1279px)",
+                "tabletPromotionLineHeightLabel": "Promotion line height - Tablet (481px - 1279px)",
+                "desktopPromotionFontSizeLabel": "Promotion font size - Desktop ( > 1280px)",
+                "desktopPromotionLineHeightLabel": "Promotion line height - Desktop ( > 1280px)",
+
+                "popupBorderRadiusLabel": "Border radius of the popup",
+                "firstNameFieldBorderRadiusLabel": "Border radius for the firstname field",
+                "lastNameFieldBorderRadiusLabel": "Border radius for the lastname field",
+                "mailFieldBorderRadiusLabel": "Border radius of the email field",
+                "subscribeButtonBorderRadiusLabel": "Border radius of subscribe button",
+
+                "backgroundColorLabel": "Background color",
+                "closeButtonColorLabel": "Close button",
+                "closeButtonHoverColorLabel": "Close button while hover",
+                "promotionColorLabel": "Promotion",
+                "firstNameFieldBorderColorLabel": "Border color for the firstname field",
+                "lastNameFieldBorderColorLabel": "Border color for the lastname field",
+                "mailFieldBorderColorLabel": "Border color of the email field",
+                "subscribeButtonBackgroundColorLabel": "Background color of subscribe button",
+                "subscribeButtonHoverBackgroundColorLabel": "Background color of subscribe button while hover",
+                "subscribeButtonTextColorLabel": "Text color of subscribe button",
+                "subscribeButtonTextHoverColorLabel": "Text color of subscribe button while hover",
+                "notSubscribeTextColorLabel": "Text for non-subscribe",
+                "notSubscribeTextHoverColorLabel": "Text for non-subscribe while hover",
+
+                "generalCardLabel": "General",
+                "promotionCardLabel": "Promotion",
+                "mediaCardLabel": "Media",
+                "textCardLabel": "Text",
+                "typographyCardLabel": "Typography",
+                "edgesCardLabel": "Edges",
+                "colorCardLabel": "Colours",
+
+                "promotionIndividualCodesNotice": "Individual promotion codes will be automatically expanded once depleted."
+            }
+        },
+
+        "register-popup": {
+            "general": {
+                "addPopupButtonText": "Add Popup"
+            },
+            "list": {
+                "columnName": "Name",
+                "columnVisibleSettings": "Assigned",
+                "columnIsGlobal": "Global",
+                "columnPromotionActiveLabel": "Promotion"
+            },
+            "detail": {
+                "nameLabel": "Name",
+                "storageTypeLabel": "Storage Type",
+                "storageTypeOptionSessionStorageLabel": "Session-Storage",
+                "storageTypeOptionLocalStorageLabel": "Local-Storage",
+                "devModeLabel": "Development mode (deactivate session storage)",
+                "isGlobalLabel": "Activate global",
+                "visibleSettingsLabel": "Visibility settings",
+                "visibleSettingsOptionCategoryLabel": "Assign category",
+                "visibleSettingsOptionProductLabel": "Assign product page",
+                "assignCategoryLabel": "Assign category",
+                "assignProductLabel": "Assign product page",
+                "popupTriggerLabel": "Open popup",
+                "popupTriggerOptionTime": "By time (seconds)",
+                "popupTriggerOptionScroll": "By scrolling (pixel)",
+                "popupTimeLabel": "Open after seconds",
+                "popupScrollLabel": "Open by scrolled pixels",
+                "heightMobileLabel": "Height of the popup for mobile in pixel (0px - 480px)",
+                "heightDesktopLabel": "Height of the popup for desktop in pixel (481px - )",
+
+                "promotionHelpText": "Please select a promotion you have previously created. It is recommended to create a unique promotion code for the popup",
+                "promotionActiveLabel": "Active",
+                "promotionActiveHelpTextLabel": "Please activate the double opt-in for registrations for this purpose",
+                "promotionAssignLabel": "Select promotion",
+                "promotionShowValidUntilLabel": "Show valid until",
+                "promotionTextValidUntilLabel": "Prefix-text",
+
+                "placeholderBackgroundColorLabel": "Background color (placeholder)",
+                "imageLabel": "Image",
+                "imagePositionLabel": "Position of the image box for desktop (481px - )",
+                "imagePositionOptionLeft": "Left",
+                "imagePositionOptionRight": "Right",
+                "imagePositionOptionBackground": "Use as background",
+                "imageMobileSettingsLabel": "Position of the image box for mobile (0px - 480px)",
+                "imageMobileSettingsOptionBackground": "Show image as background",
+                "imageMobileSettingsOptionLeft": "Show image left",
+                "imageMobileSettingsOptionRight": "Show image right",
+                "imageMobileSettingsOptionNone": "Do not show image",
+                "imageFitLabel": "Adjustment of the image",
+                "imageFitLabelOptionFill": "Fill",
+                "imageFitLabelOptionContain": "Contain",
+                "imageFitLabelOptionCover": "Cover",
+                "imageAlignmentLabel": "Alignment of the image",
+                "imageAlignmentLabelOptionCenter": "Centered",
+                "imageAlignmentLabelOptionLeft": "Left",
+                "imageAlignmentLabelOptionRight": "Right",
+                "imageAlignmentLabelOptionTop": "Top",
+                "imageAlignmentLabelOptionBottom": "Bottom",
+
+                "headlineLabel": "Headline",
+                "sublineLabel": "Subline",
+                "textLabel": "Text",
+                "submitButtonLabel": "Text in the submit button",
+                "notSubmitLabel": "Text for non-submit",
+                "contentAlignmentLabel": "Alignment of the elements",
+                "contentAlignmentLabelOptionCenter": "Centered",
+                "contentAlignmentLabelOptionTop": "Top",
+                "contentAlignmentLabelOptionBottom": "Bottom",
+
+                "headlineFontFamilyLabel": "Headline font (overwrite default)",
+                "sublineFontFamilyLabel": "Subline font (overwrite default)",
+                "promotionFontFamilyLabel": "Promotion font (overwrite default)",
+                "mobileHeadlineFontSizeLabel": "Headline font size - Mobile (0 - 480px)",
+                "mobileSublineFontSizeLabel": "Subline font size - Mobile (0 - 480px)",
+                "tabletHeadlineFontSizeLabel": "Headline font size - Tablet (481px - 1279px)",
+                "tabletSublineFontSizeLabel": "Subline font size - Tablet (481px - 1279px)",
+                "desktopHeadlineFontSizeLabel": "Headline font size - Desktop ( > 1280px)",
+                "desktopSublineFontSizeLabel": "Subline font size - Desktop ( > 1280px)",
+                "mobileHeadlineLineHeightLabel": "Headline line height - Mobile (0 - 480px)",
+                "mobileSublineLineHeightLabel": "Subline line height - Mobile (0 - 480px)",
+                "tabletHeadlineLineHeightLabel": "Headline line height - Tablet (481px - 1279px)",
+                "tabletSublineLineHeightLabel": "Subline line height - Tablet (481px - 1279px)",
+                "desktopHeadlineLineHeightLabel": "Headline line height - Desktop ( > 1280px)",
+                "desktopSublineLineHeightLabel": "Subline line height - Desktop ( > 1280px)",
+                "mobilePromotionFontSizeLabel": "Promotion font size - Mobile (0 - 480px)",
+                "mobilePromotionLineHeightLabel": "Promotion line height - Mobile (0 - 480px)",
+                "tabletPromotionFontSizeLabel": "Promotion font size - Tablet (481px - 1279px)",
+                "tabletPromotionLineHeightLabel": "Promotion line height - Tablet (481px - 1279px)",
+                "desktopPromotionFontSizeLabel": "Promotion font size - Desktop ( > 1280px)",
+                "desktopPromotionLineHeightLabel": "Promotion line height - Desktop ( > 1280px)",
+
+                "popupBorderRadiusLabel": "Border radius of the popup",
+                "submitButtonBorderRadiusLabel": "Border radius of submit button",
+
+                "backgroundColorLabel": "Background color",
+                "closeButtonColorLabel": "Close button",
+                "closeButtonHoverColorLabel": "Close button while hover",
+                "promotionColorLabel": "Promotion",
+                "submitButtonBackgroundColorLabel": "Background color of submit button",
+                "submitButtonHoverBackgroundColorLabel": "Background color of submit button while hover",
+                "submitButtonTextColorLabel": "Text color of submit button",
+                "submitButtonTextHoverColorLabel": "Text color of submit button while hover",
+                "notSubmitTextColorLabel": "Text for non-submit",
+                "notSubmitTextHoverColorLabel": "Text for non-submit while hover",
+
+                "generalCardLabel": "General",
+                "promotionCardLabel": "Promotion",
+                "mediaCardLabel": "Media",
+                "textCardLabel": "Text",
+                "typographyCardLabel": "Typography",
+                "edgesCardLabel": "Edges",
+                "colorCardLabel": "Colours",
+
+                "promotionIndividualCodesNotice": "Individual promotion codes will be automatically expanded once depleted."
+            }
+        },
+
+        "tabs": {
+            "general": {
+                "addTabText": "Add Tab"
+            },
+            "list": {
+                "columnName": "Name",
+                "columnDisplay": "Assigned",
+                "columnIsGlobal": "Global"
+            },
+            "detail": {
+                "nameLabel": "Name",
+                "isGlobalLabel": "Activate global",
+                "displaySettingsLabel": "Visibility settings",
+                "displaySettingsOptionCategory": "Assign category page",
+                "displaySettingsOptionProduct": "Assign product page",
+                "assignCategoryPageLabel": "Assign category",
+                "assignProductPageLabel": "Assign product page",
+                "textLabel": "Text",
+                "faviconLabel": "Favicon",
+
+                "generalCardLabel": "General",
+                "contentCardLabel": "Content"
+            }
+        },
+
+        "conversion-bar": {
+            "general": {
+                "addBarText": "Add Bar"
+            },
+            "list": {
+                "columnName": "Name"
+            },
+            "detail": {
+                "nameLabel": "Name",
+                "conversionBarActiveLabel": "Conversion bar active",
+                "sliderMaxWidthLabel": "Maximum screen width to display content as a slider (in pixel)",
+
+                "backgroundColorLabel": "Background",
+                "textColorLabel": "Text",
+                "linkColorLabel": "Link text",
+
+                "text1Label": "Text",
+                "Text1ClickableLabel": "Make text clickable",
+                "Text1ClickableUrlLabel": "Link url",
+                "Text1PrimaryActionLabel": "Primary action",
+                "Text1PrimaryActionTextLabel": "Text",
+                "Text1PrimaryActionUrlLabel": "Link url",
+                "Text1IconLabel": "Icon",
+
+                "text2Label": "Text",
+                "Text2ClickableLabel": "Make text clickable",
+                "Text2ClickableUrlLabel": "Link url",
+                "Text2PrimaryActionLabel": "Primary action",
+                "Text2PrimaryActionTextLabel": "Text",
+                "Text2PrimaryActionUrlLabel": "Link url",
+                "Text2IconLabel": "Icon",
+
+                "text3Label": "Text",
+                "Text3ClickableLabel": "Make text clickable",
+                "Text3ClickableUrlLabel": "Link url",
+                "Text3PrimaryActionLabel": "Primary action",
+                "Text3PrimaryActionTextLabel": "Text",
+                "Text3PrimaryActionUrlLabel": "Link url",
+                "Text3IconLabel": "Icon",
+
+                "generalCardLabel": "General",
+                "ColorCardLabel": "Colors",
+                "text1CardLabel": "Text 1",
+                "text2CardLabel": "Text 2",
+                "text3CardLabel": "Text 3"
+            }
+        },
+
+        "free-shipping-bar": {
+            "detail": {
+                "activeLabel": "Free shipping bar active",
+                "onlyShowIfProductAddedLabel": "Show only if at least one product is in the shopping cart",
+                "positionLabel": "Position",
+                "positionOptionTopLabel": "Above the conversion bar",
+                "positionOptionBottomLabel": "Below the conversion bar",
+                "goalLabel": "Free shipping goal",
+                "includeShippingCostsLabel": "Include shipping costs",
+                "includeShippingCostsHelpLabel": "If you add a product to the shopping cart, shipping costs will be calculated or deducted up to the goal amount.",
+
+                "backgroundColorLabel": "Background",
+                "textColorLabel": "Text",
+
+                "iconLabel": "Icon",
+
+                "messageButtonLabel": "Go to snippets",
+                "messageInfoLabel": "The texts are created using the shopware snippets",
+
+                "generalCardLabel": "General",
+                "colorCardLabel": "Colors",
+                "iconCardLabel": "Icon",
+                "messagesCardLabel": "Messages"
+            }
+        }
+    }
+}

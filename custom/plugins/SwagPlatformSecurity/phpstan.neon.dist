@@ -1,0 +1,25 @@
+includes:
+	- phpstan-baseline.neon
+
+parameters:
+    level: 8
+    tmpDir: ../../../var/cache/phpstan
+    inferPrivatePropertyTypeFromConstructor: true
+    checkMissingIterableValueType: false
+    checkGenericClassInNonGenericObjectType: false
+    bootstrapFiles:
+            - tests/TestBootstrap.php
+    # run `php tests/TestBootstrap.php` to create the container
+    symfony:
+        constantHassers: false
+        containerXmlPath: '../../../var/cache/test/Shopware_Core_DevOps_StaticAnalyze_StaticAnalyzeKernelTestDebugContainer.xml'
+        consoleApplicationLoader: ../../../src/Core/DevOps/StaticAnalyze/PHPStan/console-application.php
+    excludePaths:
+        - vendor
+        - var
+
+    ignoreErrors:
+
+    paths:
+        - src
+        - tests

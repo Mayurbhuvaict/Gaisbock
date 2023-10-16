@@ -1,0 +1,33 @@
+{% sw_extends '@Storefront/storefront/base.html.twig' %}
+
+{% block base_body_script %}
+    {% with %}
+        {% if config('mediameetsFbPixelApp.config.pixelIds') and config('mediameetsFbPixelApp.config.pixelIds') is not empty %}
+            {% set pluginConfig = config('mediameetsFbPixelApp.config') %}
+
+            {% set pluginOptions = {
+                'config': {
+                    'pixelIds': pluginConfig.pixelIds,
+                    'privacyMode': 'integrate',
+                    'autoConfig': pluginConfig.autoConfig,
+                    'advancedMatching': pluginConfig.advancedMatching,
+                    'disablePushState': pluginConfig.disablePushState,
+                    'includeShippingCosts': pluginConfig.includeShippingCosts,
+                },
+                'shop': {
+                    'controller': controllerName|lower,
+                    'action': controllerAction|lower,
+                    'currency': context.currency.isoCode
+                },
+                'routes': {
+                    'cart': path('frontend.checkout.cart.json'),
+                    'context': path('frontend.script_endpoint', {'hook': 'mmfp-context'}),
+                    'order': path('frontend.script_endpoint', {'hook': 'mmfp-order'})
+                }
+            } %}
+
+            <div data-mediameets-facebook-pixel-options='{{ pluginOptions|json_encode }}'></div>
+        {% endif %}
+    {% endwith %}
+    {{ parent() }}
+{% endblock %}

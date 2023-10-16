@@ -1,0 +1,11 @@
+<div
+        class="search-result place"
+        v-for="(item, key) in autocompleteResults"
+        :key="'a' + key"
+        @click="onPlaceClicked(item)"
+>
+    {% sw_icon 'marker' %}
+    <span class="result-text">
+        {{ '{{ item.description }}' }}
+    </span>
+</div>

@@ -1,0 +1,108 @@
+{% block neno_marketing_essentials_free_shipping_bar_detail %}
+<div class="neno-marketing-essentials-free-shipping-bar-detail">
+    <sw-sales-channel-switch
+        class="neno-marketing-essentials-free-shipping-bar-detail--sales-channel-switch"
+        @change="onSalesChannelChanged"
+        :value="currentSalesChannelId"
+    >
+    </sw-sales-channel-switch>
+
+    <sw-card position-identifier="nme-free-shipping-bar-language">
+        <sw-button-process
+            :isLoading="isLoading"
+            :processSuccess="processSuccess"
+            @process-finish="saveFinish"
+            variant="primary"
+            @click="onClickSave"
+        >
+            {{ $t('neno-marketing-essentials.general.saveButtonText') }}
+        </sw-button-process>
+    </sw-card>
+
+    <sw-card
+        v-if="actualConfigData.null"
+        :title="$t('neno-marketing-essentials.free-shipping-bar.detail.generalCardLabel')"
+        position-identifier="nme-free-shipping-bar-general"
+    >
+        <sw-switch-field
+            :label="$t('neno-marketing-essentials.free-shipping-bar.detail.activeLabel')"
+            v-model="actualConfigData.null['NenoMarketingEssentials.config.freeShippingBarActive']"
+        >
+        </sw-switch-field>
+
+        <sw-switch-field
+            :label="$t('neno-marketing-essentials.free-shipping-bar.detail.onlyShowIfProductAddedLabel')"
+            v-model="actualConfigData.null['NenoMarketingEssentials.config.onlyShowIfProductAdded']"
+        >
+        </sw-switch-field>
+
+        <sw-select-field
+            :label="$t('neno-marketing-essentials.free-shipping-bar.detail.positionLabel')"
+            v-model="actualConfigData.null['NenoMarketingEssentials.config.freeShippingBarPosition']"
+        >
+            <option value="top">{{ $t('neno-marketing-essentials.free-shipping-bar.detail.positionOptionTopLabel') }}</option>
+            <option value="bottom">{{ $t('neno-marketing-essentials.free-shipping-bar.detail.positionOptionBottomLabel') }}</option>
+        </sw-select-field>
+
+        <sw-number-field
+            :label="$t('neno-marketing-essentials.free-shipping-bar.detail.goalLabel')"
+            v-model="actualConfigData.null['NenoMarketingEssentials.config.freeShippingBarGoal']"
+        >
+        </sw-number-field>
+
+        <sw-switch-field
+            :label="$t('neno-marketing-essentials.free-shipping-bar.detail.includeShippingCostsLabel')"
+            v-model="actualConfigData.null['NenoMarketingEssentials.config.includeShippingCosts']"
+        >
+        </sw-switch-field>
+
+        <sw-help-text
+            text="{{ $t('neno-marketing-essentials.free-shipping-bar.detail.includeShippingCostsHelpLabel') }}"
+            :width="200"
+            tooltipPosition="top"
+            :showDelay="100"
+            :hideDelay="100">
+        </sw-help-text>
+    </sw-card>
+
+    <sw-card
+        v-if="actualConfigData.null"
+        :title="$t('neno-marketing-essentials.free-shipping-bar.detail.colorCardLabel')"
+        position-identifier="nme-free-shipping-bar-color"
+    >
+        <sw-colorpicker
+            :label="$t('neno-marketing-essentials.free-shipping-bar.detail.backgroundColorLabel')"
+            v-model="actualConfigData.null['NenoMarketingEssentials.config.freeShippingBarBackgroundColor']"
+        >
+        </sw-colorpicker>
+
+        <sw-colorpicker
+            :label="$t('neno-marketing-essentials.free-shipping-bar.detail.textColorLabel')"
+            v-model="actualConfigData.null['NenoMarketingEssentials.config.freeShippingBarTextColor']"
+        >
+        </sw-colorpicker>
+    </sw-card>
+
+    <sw-card
+        v-if="actualConfigData.null"
+        :title="$t('neno-marketing-essentials.free-shipping-bar.detail.iconCardLabel')"
+        position-identifier="nme-free-shipping-bar-icon"
+    >
+        <sw-media-field
+            :label="$t('neno-marketing-essentials.free-shipping-bar.detail.iconLabel')"
+            v-model="actualConfigData.null['NenoMarketingEssentials.config.freeShippingBarIcon']"
+        >
+        </sw-media-field>
+    </sw-card>
+
+    <sw-card
+        v-if="actualConfigData.null"
+        :title="$t('neno-marketing-essentials.free-shipping-bar.detail.messagesCardLabel')"
+        position-identifier="nme-free-shipping-bar-message"
+    >
+        <sw-button :routerLink="{ name: 'sw.settings.snippet.index' }">
+            {{ $t('neno-marketing-essentials.free-shipping-bar.detail.messageButtonLabel') }}
+        </sw-button>
+    </sw-card>
+</div>
+{% endblock %}

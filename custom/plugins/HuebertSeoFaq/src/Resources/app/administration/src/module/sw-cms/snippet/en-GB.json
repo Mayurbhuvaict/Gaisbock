@@ -1,0 +1,30 @@
+{
+    "sw-cms": {
+        "blocks": {
+            "faq": {
+                "faq": {
+                    "label": "FAQ Group",
+                    "form": "SEO FAQ",
+                    "question": "Question",
+                    "answer": "Answer"
+                }
+            }
+        },
+        "detail": {
+            "faq": {
+                "label": {
+                    "blockCategoryFaq": "FAQ"
+                }
+            }
+        },
+        "elements": {
+            "faq": {
+                "label": "FAQ Element",
+                "config": {
+                    "label": "FAQ Group",
+                    "placeholder": "Group"
+                }
+            }
+        }
+    }
+}

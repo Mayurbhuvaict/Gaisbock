@@ -1,0 +1,42 @@
+{% sw_extends '@Storefront/storefront/base.html.twig' %}
+
+{% block base_body_classes %}{{ parent() }}{% set TanmarNgInfiniteScrollingData = context.context.extensions.TanmarNgInfiniteScrolling %}{% if TanmarNgInfiniteScrollingData.active %} is-tanmar-infinite-scrolling {% endif %}{% endblock %}
+
+{% block base_body_script %}
+    {{ parent() }}
+
+    {% set TanmarNgInfiniteScrollingData = context.context.extensions.TanmarNgInfiniteScrolling %}
+    {% if TanmarNgInfiniteScrollingData.active %}
+        <script>
+            ;(function(){
+                var _pages = parseInt('{{ TanmarNgInfiniteScrollingData.pages }}',10);
+
+                window._tanmarInfiniteScrolling = {
+                    version: '1.5.1',
+                    pages: isNaN(_pages) ? 0 : _pages,
+                    snippets: {
+                        prev: {
+                            btn: '{{ "tanmar-infinite-scrolling.prev.btn"|trans }}',
+                            navi: '{{ "tanmar-infinite-scrolling.prev.navi"|trans }}'
+                        },
+                        next: {
+                            btn: '{{ "tanmar-infinite-scrolling.next.btn"|trans }}',
+                            navi: '{{ "tanmar-infinite-scrolling.next.navi"|trans }}'
+                        }
+                    },
+                    customProduct: '{{ TanmarNgInfiniteScrollingData.customProduct }}',
+                    customPrepend: '{{ TanmarNgInfiniteScrollingData.customPrepend }}',
+                    customAppend: '{{ TanmarNgInfiniteScrollingData.customAppend }}',
+                    rootMargin: '{{ TanmarNgInfiniteScrollingData.rootMargin }}',
+                    threshold: '{{ TanmarNgInfiniteScrollingData.threshold }}',
+                    debug: {% if TanmarNgInfiniteScrollingData.debug %}true{% else %}false{% endif %},
+                    triggerAfterRenderResponseEvent: {% if TanmarNgInfiniteScrollingData.triggerAfterRenderResponseEvent %}true{% else %}false{% endif %},
+                    onlyObserveWithinListingWrapper: {% if TanmarNgInfiniteScrollingData.onlyObserveWithinListingWrapper %}true{% else %}false{% endif %},
+                    customPaginationSelector: '{{ TanmarNgInfiniteScrollingData.customPaginationSelector }}'
+                };
+                
+            })();
+        </script>
+    {% endif %}
+
+{% endblock %}

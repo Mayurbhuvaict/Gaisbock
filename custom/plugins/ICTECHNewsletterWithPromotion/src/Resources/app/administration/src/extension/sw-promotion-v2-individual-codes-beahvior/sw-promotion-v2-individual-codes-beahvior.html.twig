@@ -1,0 +1,9 @@
+{% block sw_promotion_v2_individual_codes_behavior_grid_redeemed_icon_true %}
+    <p
+        v-if="!item.payload && !!reservedCodes[item.id]"
+        class="newsletter-popup-individual-code-label"
+    >
+        Reserved by Newsletter Popup
+    </p>
+    {% parent %}
+{% endblock %}

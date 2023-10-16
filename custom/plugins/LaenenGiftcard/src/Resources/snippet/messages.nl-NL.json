@@ -1,0 +1,10 @@
+{
+    "checkout": {
+        "summaryAppliedGiftcard": "Cadeaubon %name%",
+        "summaryAppliedGiftcardRemove": "x",
+        "summaryAppliedGiftcardRemoveTitle": "Verwijder cadeaubon uit winkelwagen"
+    },
+    "detail": {
+        "giftcardAmountLabel": "Cadeaubon waarde"
+    }
+}

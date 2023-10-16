@@ -1,0 +1,530 @@
+{% block neno_marketing_essentials_register_popup_detail %}
+<div class="neno-marketing-essentials-register-popup-detail">
+    <sw-card position-identifier="nme-register-pop-up-language">
+        <sw-button v-if="registerPopup" :routerLink="{ name: 'neno.marketing.essentials.overview.registerPopupList' }">
+            {{ $t('neno-marketing-essentials.general.cancelButtonText') }}
+        </sw-button>
+
+        <sw-button-process
+            :isLoading="isLoading"
+            :processSuccess="processSuccess"
+            @process-finish="saveFinish"
+            variant="primary"
+            @click="onClickSave"
+        >
+            {{ $t('neno-marketing-essentials.general.saveButtonText') }}
+        </sw-button-process>
+
+        <sw-language-switch
+            class="neno-marketing-essentials-register-popup-detail--language-switch"
+            ref="langSwitch"
+            :saveChangesFunction="saveOnLanguageChange"
+            :abortChangeFunction="abortOnLanguageChange"
+            @on-change="onChangeLanguage"
+            :disabled="!registerPopup || registerPopup.isNew()"
+        >
+        </sw-language-switch>
+    </sw-card>
+
+    <sw-language-info
+        v-if="registerPopup"
+        :entityDescription="'Popup'"
+        :isNewEntity="registerPopup.isNew()">
+    </sw-language-info>
+
+    <sw-card
+        v-if="registerPopup"
+        :title="$t('neno-marketing-essentials.register-popup.detail.generalCardLabel')"
+        position-identifier="nme-register-pop-up-general"
+    >
+        <sw-field
+            :label="$t('neno-marketing-essentials.register-popup.detail.nameLabel')"
+            v-model="registerPopup.name"
+            :required="true"
+        >
+        </sw-field>
+
+        <sw-select-field
+            :label="$t('neno-marketing-essentials.register-popup.detail.storageTypeLabel')"
+            v-model="registerPopup.storageType"
+        >
+            <option value="sessionStorage">{{ $t('neno-marketing-essentials.register-popup.detail.storageTypeOptionSessionStorageLabel') }}</option>
+            <option value="localStorage">{{ $t('neno-marketing-essentials.register-popup.detail.storageTypeOptionLocalStorageLabel') }}</option>
+        </sw-select-field>
+
+        <sw-switch-field
+            :label="$t('neno-marketing-essentials.register-popup.detail.devModeLabel')"
+            v-model="registerPopup.devMode"
+        >
+        </sw-switch-field>
+
+        <sw-switch-field
+            :label="$t('neno-marketing-essentials.register-popup.detail.isGlobalLabel')"
+            v-model="registerPopup.isGlobal"
+        >
+        </sw-switch-field>
+
+        <sw-select-field
+            :label="$t('neno-marketing-essentials.register-popup.detail.visibleSettingsLabel')"
+            v-model="registerPopup.visibleSettings"
+        >
+            <option value="category">{{ $t('neno-marketing-essentials.register-popup.detail.visibleSettingsOptionCategoryLabel') }}</option>
+            <option value="product">{{ $t('neno-marketing-essentials.register-popup.detail.visibleSettingsOptionProductLabel') }}</option>
+        </sw-select-field>
+
+        <sw-entity-single-select
+            :label="$t('neno-marketing-essentials.register-popup.detail.assignCategoryLabel')"
+            entity="category"
+            v-model="registerPopup.categoryId"
+        >
+        </sw-entity-single-select>
+
+        <sw-entity-single-select
+            :label="$t('neno-marketing-essentials.register-popup.detail.assignProductLabel')"
+            entity="product"
+            v-model="registerPopup.productId"
+        >
+        </sw-entity-single-select>
+
+        <sw-select-field
+            :label="$t('neno-marketing-essentials.register-popup.detail.popupTriggerLabel')"
+            v-model="registerPopup.popupTrigger"
+        >
+            <option value="time">{{ $t('neno-marketing-essentials.register-popup.detail.popupTriggerOptionTime') }}</option>
+            <option value="scroll">{{ $t('neno-marketing-essentials.register-popup.detail.popupTriggerOptionScroll') }}</option>
+        </sw-select-field>
+
+        <sw-number-field
+            :label="$t('neno-marketing-essentials.register-popup.detail.popupTimeLabel')"
+            numberType="int"
+            v-model="registerPopup.popupTime"
+        >
+        </sw-number-field>
+
+        <sw-number-field
+            :label="$t('neno-marketing-essentials.register-popup.detail.popupScrollLabel')"
+            numberType="int"
+            v-model="registerPopup.popupScroll"
+        >
+        </sw-number-field>
+
+        <sw-number-field
+            :label="$t('neno-marketing-essentials.register-popup.detail.heightMobileLabel')"
+            numberType="int"
+            v-model="registerPopup.heightMobile"
+        >
+        </sw-number-field>
+
+        <sw-number-field
+            :label="$t('neno-marketing-essentials.register-popup.detail.heightDesktopLabel')"
+            numberType="int"
+            v-model="registerPopup.heightDesktop"
+        >
+        </sw-number-field>
+    </sw-card>
+
+    <sw-card
+        v-if="registerPopup"
+        :title="$t('neno-marketing-essentials.register-popup.detail.promotionCardLabel')"
+        position-identifier="nme-register-pop-up-promotion"
+    >
+        <sw-help-text
+            :text="$t('neno-marketing-essentials.newsletter-popup.detail.promotionHelpText')"
+            :width="200"
+            tooltipPosition="top"
+            :showDelay="null"
+            :hideDelay="null"
+        >
+        </sw-help-text>
+        <sw-switch-field
+            :label="$t('neno-marketing-essentials.register-popup.detail.promotionActiveLabel')"
+            v-model="registerPopup.promotionActive"
+        >
+        </sw-switch-field>
+
+        <sw-entity-single-select
+            :label="$t('neno-marketing-essentials.register-popup.detail.promotionAssignLabel')"
+            entity="promotion"
+            v-model="registerPopup.promotionId"
+        >
+        </sw-entity-single-select>
+
+        <sw-alert variant="info">
+            {{ promotionIndividualCodesNotice }}
+        </sw-alert>
+
+        <sw-switch-field
+            :label="$t('neno-marketing-essentials.register-popup.detail.promotionShowValidUntilLabel')"
+            v-model="registerPopup.promotionShowValidUntil"
+        >
+        </sw-switch-field>
+
+        <sw-text-field
+            :label="$t('neno-marketing-essentials.register-popup.detail.promotionTextValidUntilLabel')"
+            v-model="registerPopup.promotionTextValidUntil"
+        >
+        </sw-text-field>
+    </sw-card>
+
+    <sw-card
+        v-if="registerPopup"
+        :title="$t('neno-marketing-essentials.register-popup.detail.mediaCardLabel')"
+        position-identifier="nme-register-pop-up-media"
+    >
+        <sw-colorpicker
+            :label="$t('neno-marketing-essentials.register-popup.detail.placeholderBackgroundColorLabel')"
+            v-model="registerPopup.mediaBackgroundColor"
+        >
+        </sw-colorpicker>
+
+        <sw-media-field
+            :label="$t('neno-marketing-essentials.register-popup.detail.imageLabel')"
+            v-model="registerPopup.registerMediaImageId"
+        >
+        </sw-media-field>
+
+        <sw-select-field
+            :label="$t('neno-marketing-essentials.register-popup.detail.imageMobileSettingsLabel')"
+            v-model="registerPopup.imageMobileSettings"
+        >
+            <option value="background">{{ $t('neno-marketing-essentials.register-popup.detail.imageMobileSettingsOptionBackground') }}</option>
+            <option value="left">{{ $t('neno-marketing-essentials.register-popup.detail.imageMobileSettingsOptionLeft') }}</option>
+            <option value="right">{{ $t('neno-marketing-essentials.register-popup.detail.imageMobileSettingsOptionRight') }}</option>
+            <option value="none">{{ $t('neno-marketing-essentials.register-popup.detail.imageMobileSettingsOptionNone') }}</option>
+        </sw-select-field>
+
+        <sw-select-field
+            :label="$t('neno-marketing-essentials.register-popup.detail.imagePositionLabel')"
+            v-model="registerPopup.imagePosition"
+        >
+            <option value="left">{{ $t('neno-marketing-essentials.register-popup.detail.imagePositionOptionLeft') }}</option>
+            <option value="right">{{ $t('neno-marketing-essentials.register-popup.detail.imagePositionOptionRight') }}</option>
+            <option value="background">{{ $t('neno-marketing-essentials.register-popup.detail.imagePositionOptionBackground') }}</option>
+        </sw-select-field>
+
+        <sw-select-field
+            :label="$t('neno-marketing-essentials.register-popup.detail.imageFitLabel')"
+            v-model="registerPopup.imageFit"
+        >
+            <option value="fill">{{ $t('neno-marketing-essentials.register-popup.detail.imageFitLabelOptionFill') }}</option>
+            <option value="contain">{{ $t('neno-marketing-essentials.register-popup.detail.imageFitLabelOptionContain') }}</option>
+            <option value="cover">{{ $t('neno-marketing-essentials.register-popup.detail.imageFitLabelOptionCover') }}</option>
+        </sw-select-field>
+
+        <sw-select-field
+            :label="$t('neno-marketing-essentials.register-popup.detail.imageAlignmentLabel')"
+            v-model="registerPopup.imageAlignment"
+        >
+            <option value="center">{{ $t('neno-marketing-essentials.register-popup.detail.imageAlignmentLabelOptionCenter') }}</option>
+            <option value="left">{{ $t('neno-marketing-essentials.register-popup.detail.imageAlignmentLabelOptionLeft') }}</option>
+            <option value="right">{{ $t('neno-marketing-essentials.register-popup.detail.imageAlignmentLabelOptionRight') }}</option>
+            <option value="top">{{ $t('neno-marketing-essentials.register-popup.detail.imageAlignmentLabelOptionTop') }}</option>
+            <option value="bottom">{{ $t('neno-marketing-essentials.register-popup.detail.imageAlignmentLabelOptionBottom') }}</option>
+        </sw-select-field>
+    </sw-card>
+
+    <sw-card
+        v-if="registerPopup"
+        :title="$t('neno-marketing-essentials.register-popup.detail.textCardLabel')"
+        position-identifier="nme-register-pop-up-text"
+    >
+        <sw-text-editor
+            :label="$t('neno-marketing-essentials.register-popup.detail.headlineLabel')"
+            v-model="registerPopup.headline"
+            placeholder="Headline"
+        >
+        </sw-text-editor>
+
+        <sw-text-editor
+            :label="$t('neno-marketing-essentials.register-popup.detail.sublineLabel')"
+            v-model="registerPopup.subline"
+            placeholder="Subline"
+        >
+        </sw-text-editor>
+
+        <sw-text-editor
+            :label="$t('neno-marketing-essentials.register-popup.detail.textLabel')"
+            v-model="registerPopup.text"
+            placeholder="Text"
+        >
+        </sw-text-editor>
+
+        <sw-text-field
+            :label="$t('neno-marketing-essentials.register-popup.detail.submitButtonLabel')"
+            v-model="registerPopup.textSubmitButton"
+        >
+        </sw-text-field>
+
+        <sw-text-field
+            :label="$t('neno-marketing-essentials.register-popup.detail.notSubmitLabel')"
+            v-model="registerPopup.textNonSubmit"
+        >
+        </sw-text-field>
+
+        <sw-select-field
+            :label="$t('neno-marketing-essentials.register-popup.detail.contentAlignmentLabel')"
+            v-model="registerPopup.contentAlignment"
+        >
+            <option value="center">{{ $t('neno-marketing-essentials.register-popup.detail.contentAlignmentLabelOptionCenter') }}</option>
+            <option value="flex-start">{{ $t('neno-marketing-essentials.register-popup.detail.contentAlignmentLabelOptionTop') }}</option>
+            <option value="flex-end">{{ $t('neno-marketing-essentials.register-popup.detail.contentAlignmentLabelOptionBottom') }}</option>
+        </sw-select-field>
+    </sw-card>
+
+    <sw-card
+        v-if="registerPopup"
+        :title="$t('neno-marketing-essentials.register-popup.detail.typographyCardLabel')"
+        position-identifier="nme-register-pop-up-typography"
+    >
+        <sw-text-field
+            :label="$t('neno-marketing-essentials.register-popup.detail.headlineFontFamilyLabel')"
+            v-model="registerPopup.headlineFontFamily"
+        >
+        </sw-text-field>
+
+        <sw-number-field
+            :label="$t('neno-marketing-essentials.register-popup.detail.mobileHeadlineFontSizeLabel')"
+            v-model="registerPopup.headlineFontSizeMobile"
+            numberType="int"
+            :min="1"
+        >
+        </sw-number-field>
+
+        <sw-number-field
+            :label="$t('neno-marketing-essentials.register-popup.detail.mobileHeadlineLineHeightLabel')"
+            v-model="registerPopup.headlineLineHeightMobile"
+            numberType="int"
+            :min="1"
+        >
+        </sw-number-field>
+
+        <sw-number-field
+            :label="$t('neno-marketing-essentials.register-popup.detail.tabletHeadlineFontSizeLabel')"
+            v-model="registerPopup.headlineFontSizeTablet"
+            numberType="int"
+            :min="1"
+        >
+        </sw-number-field>
+
+        <sw-number-field
+            :label="$t('neno-marketing-essentials.register-popup.detail.tabletHeadlineLineHeightLabel')"
+            v-model="registerPopup.headlineLineHeightTablet"
+            numberType="int"
+            :min="1"
+        >
+        </sw-number-field>
+
+        <sw-number-field
+            :label="$t('neno-marketing-essentials.register-popup.detail.desktopHeadlineFontSizeLabel')"
+            v-model="registerPopup.headlineFontSizeDesktop"
+            numberType="int"
+            :min="1"
+        >
+        </sw-number-field>
+
+        <sw-number-field
+            :label="$t('neno-marketing-essentials.register-popup.detail.desktopHeadlineLineHeightLabel')"
+            v-model="registerPopup.headlineLineHeightDesktop"
+            numberType="int"
+            :min="1"
+        >
+        </sw-number-field>
+
+        <sw-text-field
+            :label="$t('neno-marketing-essentials.register-popup.detail.sublineFontFamilyLabel')"
+            v-model="registerPopup.sublineFontFamily"
+        >
+        </sw-text-field>
+
+        <sw-number-field
+            :label="$t('neno-marketing-essentials.register-popup.detail.mobileSublineFontSizeLabel')"
+            v-model="registerPopup.sublineFontSizeMobile"
+            numberType="int"
+            :min="1"
+        >
+        </sw-number-field>
+
+        <sw-number-field
+            :label="$t('neno-marketing-essentials.register-popup.detail.mobileSublineLineHeightLabel')"
+            v-model="registerPopup.sublineLineHeightMobile"
+            numberType="int"
+            :min="1"
+        >
+        </sw-number-field>
+
+        <sw-number-field
+            :label="$t('neno-marketing-essentials.register-popup.detail.tabletSublineFontSizeLabel')"
+            v-model="registerPopup.sublineFontSizeTablet"
+            numberType="int"
+            :min="1"
+        >
+        </sw-number-field>
+
+        <sw-number-field
+            :label="$t('neno-marketing-essentials.register-popup.detail.tabletSublineLineHeightLabel')"
+            v-model="registerPopup.sublineLineHeightTablet"
+            numberType="int"
+            :min="1"
+        >
+        </sw-number-field>
+
+        <sw-number-field
+            :label="$t('neno-marketing-essentials.register-popup.detail.desktopSublineFontSizeLabel')"
+            v-model="registerPopup.sublineFontSizeDesktop"
+            numberType="int"
+            :min="1"
+        >
+        </sw-number-field>
+
+        <sw-number-field
+            :label="$t('neno-marketing-essentials.register-popup.detail.desktopSublineLineHeightLabel')"
+            v-model="registerPopup.sublineLineHeightDesktop"
+            numberType="int"
+            :min="1"
+        >
+        </sw-number-field>
+
+        <sw-text-field
+            :label="$t('neno-marketing-essentials.register-popup.detail.promotionFontFamilyLabel')"
+            v-model="registerPopup.promotionFontFamily"
+        >
+        </sw-text-field>
+
+        <sw-number-field
+            :label="$t('neno-marketing-essentials.register-popup.detail.mobilePromotionFontSizeLabel')"
+            v-model="registerPopup.promotionFontSizeMobile"
+            numberType="int"
+            :min="1"
+        >
+        </sw-number-field>
+
+        <sw-number-field
+            :label="$t('neno-marketing-essentials.register-popup.detail.mobilePromotionLineHeightLabel')"
+            v-model="registerPopup.promotionLineHeightMobile"
+            numberType="int"
+            :min="1"
+        >
+        </sw-number-field>
+
+        <sw-number-field
+            :label="$t('neno-marketing-essentials.register-popup.detail.tabletPromotionFontSizeLabel')"
+            v-model="registerPopup.promotionFontSizeTablet"
+            numberType="int"
+            :min="1"
+        >
+        </sw-number-field>
+
+        <sw-number-field
+            :label="$t('neno-marketing-essentials.register-popup.detail.tabletPromotionLineHeightLabel')"
+            v-model="registerPopup.promotionLineHeightTablet"
+            numberType="int"
+            :min="1"
+        >
+        </sw-number-field>
+
+        <sw-number-field
+            :label="$t('neno-marketing-essentials.register-popup.detail.desktopPromotionFontSizeLabel')"
+            v-model="registerPopup.promotionFontSizeDesktop"
+            numberType="int"
+            :min="1"
+        >
+        </sw-number-field>
+
+        <sw-number-field
+            :label="$t('neno-marketing-essentials.register-popup.detail.desktopPromotionLineHeightLabel')"
+            v-model="registerPopup.promotionLineHeightDesktop"
+            numberType="int"
+            :min="1"
+        >
+        </sw-number-field>
+    </sw-card>
+
+    <sw-card
+        v-if="registerPopup"
+        :title="$t('neno-marketing-essentials.register-popup.detail.edgesCardLabel')"
+        position-identifier="nme-register-pop-up-edges"
+    >
+        <sw-number-field
+            :label="$t('neno-marketing-essentials.register-popup.detail.popupBorderRadiusLabel')"
+            :min="0"
+            numberType="int"
+            v-model="registerPopup.popupBorderRadius"
+        >
+        </sw-number-field>
+
+        <sw-number-field
+            :label="$t('neno-marketing-essentials.register-popup.detail.submitButtonBorderRadiusLabel')"
+            :min="0"
+            numberType="int"
+            v-model="registerPopup.submitButtonBorderRadius"
+        >
+        </sw-number-field>
+    </sw-card>
+
+    <sw-card
+        v-if="registerPopup"
+        :title="$t('neno-marketing-essentials.register-popup.detail.colorCardLabel')"
+        position-identifier="nme-register-pop-up-color"
+    >
+        <sw-colorpicker
+            :label="$t('neno-marketing-essentials.register-popup.detail.backgroundColorLabel')"
+            v-model="registerPopup.backgroundColor"
+        >
+        </sw-colorpicker>
+
+        <sw-colorpicker
+            :label="$t('neno-marketing-essentials.register-popup.detail.closeButtonColorLabel')"
+            v-model="registerPopup.closeButtonColor"
+        >
+        </sw-colorpicker>
+
+        <sw-colorpicker
+            :label="$t('neno-marketing-essentials.register-popup.detail.closeButtonHoverColorLabel')"
+            v-model="registerPopup.closeButtonHoverColor"
+        >
+        </sw-colorpicker>
+
+        <sw-colorpicker
+            :label="$t('neno-marketing-essentials.register-popup.detail.promotionColorLabel')"
+            v-model="registerPopup.promotionColor"
+        >
+        </sw-colorpicker>
+
+        <sw-colorpicker
+            :label="$t('neno-marketing-essentials.register-popup.detail.submitButtonBackgroundColorLabel')"
+            v-model="registerPopup.submitButtonBackgroundColor"
+        >
+        </sw-colorpicker>
+
+        <sw-colorpicker
+            :label="$t('neno-marketing-essentials.register-popup.detail.submitButtonHoverBackgroundColorLabel')"
+            v-model="registerPopup.submitButtonBackgroundHoverColor"
+        >
+        </sw-colorpicker>
+
+        <sw-colorpicker
+            :label="$t('neno-marketing-essentials.register-popup.detail.submitButtonTextColorLabel')"
+            v-model="registerPopup.submitButtonTextColor"
+        >
+        </sw-colorpicker>
+
+        <sw-colorpicker
+            :label="$t('neno-marketing-essentials.register-popup.detail.submitButtonTextHoverColorLabel')"
+            v-model="registerPopup.submitButtonTextHoverColor"
+        >
+        </sw-colorpicker>
+
+        <sw-colorpicker
+            :label="$t('neno-marketing-essentials.register-popup.detail.notSubmitTextColorLabel')"
+            v-model="registerPopup.nonSubmitTextColor"
+        >
+        </sw-colorpicker>
+
+        <sw-colorpicker
+            :label="$t('neno-marketing-essentials.register-popup.detail.notSubmitTextHoverColorLabel')"
+            v-model="registerPopup.nonSubmitTextHoverColor"
+        >
+        </sw-colorpicker>
+    </sw-card>
+</div>
+{% endblock %}

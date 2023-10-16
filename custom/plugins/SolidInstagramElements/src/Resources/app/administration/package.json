@@ -1,0 +1,18 @@
+{
+    "name": "administration",
+    "version": "1.0.0",
+    "description": "Shopware administration",
+    "main": ".src/main.js",
+    "scripts": {
+        "lint": "../../../../../../../src/Administration/Resources/app/administration/node_modules/.bin/eslint --resolve-plugins-relative-to ../../../../../../../src/Administration/Resources/app/administration/node_modules --ext .js,.ts,.vue,.html.twig src",
+        "lint:fix": "npm run lint -- --fix",
+        "lint:twig": "../../../../../../../src/Administration/Resources/app/administration/node_modules/.bin/eslint --resolve-plugins-relative-to ../../../../../../../src/Administration/Resources/app/administration/node_modules --ext .html.twig src",
+        "lint:twig:fix": "npm run lint:twig -- --fix",
+        "lint:scss": "../../../../../../../src/Administration/Resources/app/administration/node_modules/.bin/stylelint **/*.scss",
+        "lint:scss:fix": "npm run lint:scss -- --fix",
+        "lint:all": "npm run lint && npm run lint:scss",
+        "lint:all:fix": "npm run lint:fix && npm run lint:scss:fix"
+    },
+    "author": "Studio Solid",
+    "license": "proprietary"
+}

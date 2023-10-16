@@ -1,0 +1,18 @@
+{
+    "acrisSuggestedProducts": {
+        "product": {
+            "detail": {
+                "productsSameCategory": "Ähnliche Produkte",
+                "customersAlsoBought": "Kunden kauften auch",
+                "customersAlsoViewed": "Kunden haben sich ebenfalls angesehen",
+                "recentlyViewed": "Zuletzt angesehen"
+            }
+        },
+        "cookie": {
+            "nameRecentlyViewed": "Zuletzt angesehen Produkte",
+            "descriptionRecentlyViewed": "Das Cookie speichert die zuletzt angesehenen Produkte um diese dann auf weiteren Produktseiten vorzuschlagen.",
+            "nameCustomersAlsoViewed": "Kunden haben sich ebenfalls angesehen",
+            "descriptionCustomersAlsoViewed": "Das Cookie speichert die zuletzt angesehenen Produkte um sie für andere Kunden auf Produktseiten vorzuschlagen."
+        }
+    }
+}

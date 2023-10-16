@@ -1,0 +1,7 @@
+{
+    "acris-category-customer-group": {
+        "cardCustomerGroup": "Block for customer groups",
+        "fieldPlaceholderCustomerGroup": "Select customer group",
+        "fieldLabelExcludeSitemap": "Exclude from sitemap"
+    }
+}

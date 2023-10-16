@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="../../../../../../vendor/shopware/platform/src/Core/System/SystemConfig/Schema/config.xsd">
+    <card>
+        <title>Default settings</title>
+        <title lang="de-DE">Allgemeine Einstellungen</title>
+
+        <input-field type="bool">
+            <name>status</name>
+            <label>Activate plugin</label>
+            <label lang="de-DE">Plugin aktivieren</label>
+            <helpText>Enables the plugin for the current sales channel.</helpText>
+            <helpText lang="de-DE">Soll das Plugin für diesen Verkaufskanal aktiviert werden?</helpText>
+            <defaultValue>true</defaultValue>
+        </input-field>
+    </card>
+
+    <card>
+        <title>Conditions</title>
+        <title lang="de-DE">Bedingungen</title>
+
+        <component name="sw-entity-multi-id-select">
+            <name>conditionCountry</name>
+            <entity>country</entity>
+            <label>Valid countries</label>
+            <label lang="de-DE">Gültige Länder</label>
+            <helpText><![CDATA[Please select valid countries for which the net item prices are to be fixed. This means that the gross prices for these countries also differ for different VAT rates.<br /><br /><b>Note:</b><br />If you do not select a country, then no country is considered valid.]]></helpText>
+            <helpText lang="de-DE"><![CDATA[Bitte wählen Sie gültige Länder aus für die die Netto Artikelpreise fixiert werden sollen. Das heißt, dass sich bei diesen Ländern die Bruttopreise bei unterschiedlicher MwSt.-Sätzen ebenfalls unterscheiden.<br /><br /><b>Hinweis:</b><br />Wenn Sie kein Land auswählen, dann gilt kein Land als gültig.]]></helpText>
+        </component>
+
+        <component name="sw-entity-multi-id-select">
+            <name>conditionCustomerGroup</name>
+            <entity>customer_group</entity>
+            <label>Valid customer groups</label>
+            <label lang="de-DE">Gültige Kundengruppen</label>
+            <helpText><![CDATA[Please select valid customer groups for which the net item prices are to be fixed. This means that the gross prices for these customer groups also differ for different VAT rates.<br /><br /><b>Note:</b><br />If you do not select a customer group, then no customer group is considered valid.]]></helpText>
+            <helpText lang="de-DE"><![CDATA[Bitte wählen Sie gültige Kundengruppen aus für die die Netto Artikelpreise fixiert werden sollen. Das heißt, dass sich bei diesen Kundengruppen die Bruttopreise bei unterschiedlicher MwSt.-Sätzen ebenfalls unterscheiden.<br /><br /><b>Hinweis:</b><br />Wenn Sie keine Kundengruppe auswählen, dann gilt keine Kundengruppe als gültig.]]></helpText>
+        </component>
+    </card>
+</config>

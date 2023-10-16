@@ -1,0 +1,200 @@
+{% block page_product_detail_acris_suggested_products_tabs_inner %}
+
+    {% set enableRecentlyViewedItems = config('AcrisSuggestedProductsCS.config').enableRecentlyViewedItems %}
+    {% if enableRecentlyViewedItems %}
+        {% set recentlyViewedItemLimit = config('AcrisSuggestedProductsCS.config').recentlyViewedItemLimit %}
+        {% if recentlyViewedItemLimit is not defined or recentlyViewedItemLimit is empty %}
+            {% set recentlyViewedItemLimit = 7 %}
+        {% endif %}
+
+        {% set recentlyViewedDuration = config('AcrisSuggestedProductsCS.config').recentlyViewedDuration %}
+        {% if recentlyViewedDuration is not defined or recentlyViewedDuration is empty %}
+            {% set recentlyViewedDuration = 365 %}
+        {% endif %}
+
+        {% set productDetailRecentyViewed = {
+            id: page.product.id,
+            url: path('frontend.acris.suggested.products.recentlyviewed'),
+            recentlyViewedItemLimit: recentlyViewedItemLimit,
+            recentlyViewedDuration: recentlyViewedDuration,
+            sliderConfig: sliderConfig
+        } %}
+
+        <div
+            data-acris-recently-viewed-plugin="true"
+            data-acris-recently-viewed-plugin-options="{{ productDetailRecentyViewed|json_encode }}">
+        </div>
+    {% endif %}
+
+    {% set product = page.product %}
+
+    {% set enableCustomersAlsoBought = config('AcrisSuggestedProductsCS.config').enableCustomersAlsoBought %}
+
+    {% set enableCustomersAlsoViewed = config('AcrisSuggestedProductsCS.config').enableCustomersAlsoViewed %}
+    {% if enableCustomersAlsoViewed %}
+        {% set productDetailAlsoViewed = {
+            id: page.product.id
+        } %}
+        <div
+            data-acris-customers-also-viewed-plugin="true"
+            data-acris-customers-also-viewed-plugin-options="{{ productDetailAlsoViewed|json_encode }}"
+        >
+        </div>
+    {% endif %}
+
+    {% set tabs = product.extensions.acris_suggested_products_tab_order_struct.getTabs() %}
+
+    {% set activeProductTabs = [] %}
+
+    {% for key, tab in tabs %}
+        {% if (key == 'productsSameCategory' and page.product.extensions.acrisSuggestedProducts.products) or
+            (key == 'recentlyViewed' and enableRecentlyViewedItems) or
+            (key == 'customersAlsoBought' and page.product.extensions.acris_customers_also_bought.getProducts() is not empty) or
+            (key == 'customersAlsoViewed' and page.product.extensions.acris_customers_also_viewed.getProducts() is not empty) %}
+            {% set activeProductTabs = activeProductTabs|merge([key]) %}
+        {% endif %}
+    {% endfor %}
+
+    {% set activeProductTabs = activeProductTabs|merge(['placeholderSlider']) %}
+
+    <div class="card card-tabs" data-cross-selling="true">
+        {% block page_product_detail_acris_suggested_products_tabs_navigation %}
+            <div class="card-header product-detail-tab-navigation product-cross-selling-tab-navigation">
+                {% block page_product_detail_acris_suggested_products_tabs_navigation_container %}
+                    <ul class="nav nav-tabs product-detail-tab-navigation-list"
+                        id="product-detail-cross-selling-tabs"
+                        role="tablist">
+
+
+                        {% for tab in activeProductTabs %}
+                            {% set message = "acrisSuggestedProducts.product.detail."~tab %}
+
+                            {% if tab == 'placeholderSlider' %}
+                                <li id="acris-suggested-{{ tab }}"
+                                    class="nav-item li-acris-suggested-{{ tab }} d-none"
+                                >
+                                    <a class="nav-link product-detail-tab-navigation-link{% if loop.first %} active{% endif %}"
+                                       id="cs-{{ tab }}-tab"
+                                       data-bs-toggle="tab"
+                                       href="#cs-{{ tab }}-tab-pane"
+                                       role="tab"
+                                       aria-controls="cs-{{ tab }}-tab-pane"
+                                       aria-selected="true">
+                                        {{ message|trans|sw_sanitize }}
+                                        <span class="product-detail-tab-navigation-icon">
+                                                {% sw_icon 'arrow-medium-right' style {'pack':'solid'} %}
+                                            </span>
+                                    </a>
+                                </li>
+
+                            {% elseif activeProductTabs|first == 'recentlyViewed' and activeProductTabs|length > 1 %}
+                                <li id="acris-suggested-{{ tab }}"
+                                    class="nav-item li-acris-suggested-{{ tab }}{% if tab == 'recentlyViewed' %} d-none{% endif %}{% if tab =='recentlyViewed' and activeProductTabs|first == 'recentlyViewed' %} recentlyViewedIsFirst{% endif %}"
+                                >
+                                    <a class="nav-link product-detail-tab-navigation-link{% if loop.index == 2 %} active{% endif %}"
+                                       id="cs-{{ tab }}-tab"
+                                       data-bs-toggle="tab"
+                                       href="#cs-{{ tab }}-tab-pane"
+                                       role="tab"
+                                       aria-controls="cs-{{ tab }}-tab-pane"
+                                       aria-selected="true">
+                                        {{ message|trans|sw_sanitize }}
+                                        <span class="product-detail-tab-navigation-icon">
+                                            {% sw_icon 'arrow-medium-right' style {'pack':'solid'} %}
+                                        </span>
+                                    </a>
+                                </li>
+                            {% else %}
+                                <li id="acris-suggested-{{ tab }}"
+                                    class="nav-item li-acris-suggested-{{ tab }}{% if tab == 'recentlyViewed' %} d-none{% endif %}"
+                                >
+                                    <a class="nav-link product-detail-tab-navigation-link{% if loop.first %} active{% endif %}"
+                                       id="cs-{{ tab }}-tab"
+                                       data-bs-toggle="tab"
+                                       href="#cs-{{ tab }}-tab-pane"
+                                       role="tab"
+                                       aria-controls="cs-{{ tab }}-tab-pane"
+                                       aria-selected="true">
+                                        {{ message|trans|sw_sanitize }}
+                                        <span class="product-detail-tab-navigation-icon">
+                                            {% sw_icon 'arrow-medium-right' style {'pack':'solid'} %}
+                                        </span>
+                                    </a>
+                                </li>
+                            {% endif %}
+                        {% endfor %}
+                    </ul>
+                {% endblock %}
+            </div>
+        {% endblock %}
+
+        {% block page_product_detail_acris_suggested_products_tabs_content %}
+            <div class="product-detail-tabs-content card-body">
+                {% block page_product_detail_acris_suggested_products_tabs_content_container %}
+                    <div class="tab-content">
+                        <div
+                                class="tab-pane fade show"
+                                id="cs-placeholderSlider-tab-pane"
+                                role="tabpanel"
+                                aria-labelledby="cs-placeholderSlider-tab">
+                            {% sw_include "@Storefront/storefront/component/acris-placeholder-slider/acris-placeholder-slider.html.twig" with {
+                                config: sliderConfig,
+                            } %}
+                        </div>
+                        {% if page.product.extensions.acrisSuggestedProducts.products %}
+                            <div
+                                class="tab-pane fade show{% if activeProductTabs|first == 'productsSameCategory' or activeProductTabs|first == 'recentlyViewed' and activeProductTabs|length > 1 and activeProductTabs[1] == 'productsSameCategory' %} active{% endif %}"
+                                id="cs-productsSameCategory-tab-pane"
+                                role="tabpanel"
+                                aria-labelledby="cs-productsSameCategory-tab">
+                                {% sw_include "@Storefront/storefront/component/suggested-products/suggested-products.html.twig" with {
+                                    config: sliderConfig,
+                                    products: product.extensions.acrisSuggestedProducts.products
+                                } %}
+                            </div>
+                        {% endif %}
+
+                        {% if enableRecentlyViewedItems %}
+                            <div
+                                class="tab-pane fade show{% if activeProductTabs|first == 'recentlyViewed' and activeProductTabs|length == 1 %} active{% endif %}"
+                                id="cs-recentlyViewed-tab-pane"
+                                role="tabpanel"
+                                aria-labelledby="cs-recentlyViewed-tab">
+                                <div id="recently-viewed-products-container"
+                                     class="d-none recently-viewed-products-container"></div>
+                            </div>
+                        {% endif %}
+
+
+                        {% if enableCustomersAlsoBought and page.product.extensions.acris_customers_also_bought is defined and page.product.extensions.acris_customers_also_bought.getProducts() is not empty %}
+                            <div
+                                class="tab-pane fade show{% if activeProductTabs|first == 'customersAlsoBought' or activeProductTabs|first == 'recentlyViewed' and activeProductTabs|length > 1 and activeProductTabs[1] == 'customersAlsoBought' %} active{% endif %}"
+                                id="cs-customersAlsoBought-tab-pane"
+                                role="tabpanel"
+                                aria-labelledby="cs-customersAlsoBought-tab">
+                                {% sw_include "@Storefront/storefront/component/customers-also-bought/customers-also-bought.html.twig" with {
+                                    config: sliderConfig,
+                                    products: page.product.extensions.acris_customers_also_bought.getProducts()
+                                } %}
+                            </div>
+                        {% endif %}
+
+                        <div
+                            class="tab-pane fade show{% if activeProductTabs|first == 'customersAlsoViewed' or activeProductTabs|first == 'recentlyViewed' and activeProductTabs|length > 1 and activeProductTabs[1] == 'customersAlsoViewed' %} active{% endif %}"
+                            id="cs-customersAlsoViewed-tab-pane"
+                            role="tabpanel"
+                            aria-labelledby="cs-customersAlsoViewed-tab">
+                            {% if enableCustomersAlsoViewed and page.product.extensions.acris_customers_also_viewed is defined and page.product.extensions.acris_customers_also_viewed.getProducts() is not empty %}
+                                {% sw_include "@Storefront/storefront/component/customers-also-viewed/customers-also-viewed.html.twig" with {
+                                    config: sliderConfig,
+                                    products: page.product.extensions.acris_customers_also_viewed.getProducts()
+                                } %}
+                            {% endif %}
+                        </div>
+                    </div>
+                {% endblock %}
+            </div>
+        {% endblock %}
+
+    </div>
+{% endblock %}

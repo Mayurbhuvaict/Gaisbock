@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/shopware/platform/master/src/Core/System/SystemConfig/Schema/config.xsd">
+  <card>
+    <title>Product Hover Cover</title>
+    <title lang="de-DE">Produkt Hover-Cover</title>
+
+    <input-field type="bool">
+      <name>enabled</name>
+      <label>Show alternative cover when hovering products in product listing</label>
+      <label lang="de-DE">Alternatives Cover bei Hover über Produkten im Produkt-Listing anzeigen</label>
+      <defaultValue>true</defaultValue>
+    </input-field>
+
+    <input-field type="single-select">
+      <name>effect</name>
+      <label>Hover effect</label>
+      <label lang="de-DE">Hover-Effekt</label>
+      <helpText>The effect used for the hover animation.</helpText>
+      <helpText lang="de-DE">Der Effekt, der für die Hover-Animation verwendet wird.</helpText>
+      <defaultValue>none</defaultValue>
+      <options>
+        <option>
+          <id>none</id>
+          <name>None</name>
+          <name lang="de-DE">Keiner</name>
+        </option>
+        <option>
+          <id>fade-in</id>
+          <name>Fade in</name>
+          <name lang="de-DE">Weich einblenden</name>
+        </option>
+        <option>
+          <id>zoom-in</id>
+          <name>Zoom in</name>
+          <name lang="de-DE">Hineinzoomen</name>
+        </option>
+        <option>
+          <id>overlay-from-top</id>
+          <name>Overlay from top</name>
+          <name lang="de-DE">Von oben überlagern</name>
+        </option>
+        <option>
+          <id>overlay-from-right</id>
+          <name>Overlay from right</name>
+          <name lang="de-DE">Von rechts überlagern</name>
+        </option>
+        <option>
+          <id>overlay-from-bottom</id>
+          <name>Overlay from bottom</name>
+          <name lang="de-DE">Von unten überlagern</name>
+        </option>
+        <option>
+          <id>overlay-from-left</id>
+          <name>Overlay from left</name>
+          <name lang="de-DE">Von links überlagern</name>
+        </option>
+        <option>
+          <id>push-from-top</id>
+          <name>Push from top</name>
+          <name lang="de-DE">Von oben schieben</name>
+        </option>
+        <option>
+          <id>push-from-right</id>
+          <name>Push from right</name>
+          <name lang="de-DE">Von rechts schieben</name>
+        </option>
+        <option>
+          <id>push-from-bottom</id>
+          <name>Push from bottom</name>
+          <name lang="de-DE">Von unten schieben</name>
+        </option>
+        <option>
+          <id>push-from-left</id>
+          <name>Push from left</name>
+          <name lang="de-DE">Von links schieben</name>
+        </option>
+        <option>
+          <id>custom</id>
+          <name>Custom CSS</name>
+          <name lang="de-DE">Benutzerdefiniertes CSS</name>
+        </option>
+      </options>
+    </input-field>
+
+    <component name="solid-code-editor">
+      <name>customStyles</name>
+      <label>Custom CSS</label>
+      <label lang="de-DE">Benutzerdefiniertes CSS</label>
+      <helpText>
+        Product box class is 'product-box'. Default cover container class is 'solid-product-cover'. Hover cover container class is 'solid-product-hover-cover'. Both cover images have the class 'product-image'.
+      </helpText>
+      <helpText lang="de-DE">
+        Die Produkt-Box Klasse lautet 'product-box'. Die Standard-Cover-Container Klasse lautet 'solid-product-cover'. Die Hover-Cover-Container Klasse lautet 'solid-product-hover-cover'. Beide Cover-Bilder besitzen die Klasse 'product-image'.
+      </helpText>
+      <helpText lang="de-DE">Infos über die CSS Klassen</helpText>
+    </component>
+  </card>
+</config>

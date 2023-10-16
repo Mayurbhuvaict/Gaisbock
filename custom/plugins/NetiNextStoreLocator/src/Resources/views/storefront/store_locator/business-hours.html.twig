@@ -1,0 +1,89 @@
+{% block neti_store_locator_detail_business_hours %}
+    {% set businessHours = page.storeBusinessHours %}
+    {% set weekDays = page.weekDays %}
+
+
+    {% if "now"|date("m/d/Y H:i", page.store.timezone) is not same as "now"|date("m/d/Y H:i", app.request.cookies.get('timezone')) %}
+        {% sw_include '@Storefront/storefront/utilities/alert.html.twig' with {
+            type: "info",
+            content: "neti-next-store-locator.index.store.differentTimeZone"|trans({
+                "%storeTimezone%": page.store.timezone,
+                "%userTimezone%": app.request.cookies.get('timezone')
+            })|sw_sanitize
+        } %}
+    {% endif %}
+
+    <div class="neti-store-locator-detail__buiness-hours-week">
+        {% for weekDay in weekDays %}
+            {% if businessHours[weekDay.id] %}
+                <dl class="row mb-1 justify-content-end">
+                    <dt class="col-5 col-sm-3">{{ weekDay.translated.name }}:</dt>
+
+                    {% for businessHour in businessHours[weekDay.id] %}
+                        <dd
+                            class="col-7 col-sm-9 mb-0"
+                            itemprop="openingHours"
+                            content="{{ weekDay.name }} {{ businessHour.businessHour.start|date('H:i') }}-{{ businessHour.businessHour.end|date('H:i') }}"
+                        >
+                            {{ businessHour.businessHour.start|date('H:i') }}
+                            - {{ businessHour.businessHour.end|date('H:i') }}
+                        </dd>
+                    {% endfor %}
+                </dl>
+            {% endif %}
+        {% endfor %}
+    </div>
+
+    <div
+        class="neti-store-locator-detail__business-hours-open-special"
+        itemprop="OpeningHoursSpecification"
+        itemscope
+        itemtype="https://schema.org/OpeningHoursSpecification"
+    >
+        {% if businessHours['specialOpenDays'] %}
+            <b>{{ "neti-next-store-locator.detail.openDays"|trans }}</b><br>
+            <dl class="row mb-1 justify-content-end">
+                {% for businessHour in businessHours['specialOpenDays'] %}
+                    <dt
+                        class="col-5 col-sm-3"
+                        itemprop="validFrom"
+                        content="{{ businessHour.specialDate }} {{ businessHour.businessHour.start|date('H:i') }}-{{ businessHour.businessHour.end|date('H:i') }}"
+                    >
+                        {{ businessHour.specialDate|format_datetime('long', 'none', locale=page.header.activeLanguage.translationCode.code) }}
+                    </dt>
+                    <dd class="col-7 col-sm-9 mb-0">
+                        {{ businessHour.businessHour.start|date('H:i') }}
+                        - {{ businessHour.businessHour.end|date('H:i') }}
+                    </dd>
+                {% endfor %}
+            </dl>
+        {% endif %}
+    </div>
+
+    <div
+        class="neti-store-locator-detail__business-hours-closed-special"
+        itemprop="OpeningHoursSpecification"
+        itemscope
+        itemtype="https://schema.org/OpeningHoursSpecification"
+    >
+        {% if businessHours['specialClosedDays'] %}
+            <b>{{ "neti-next-store-locator.detail.closeDays"|trans }}</b><br>
+
+            <dl class="row mb-1 justify-content-end">
+                {% for businessHour in businessHours['specialClosedDays'] %}
+                    <dt
+                        class="col-5 col-sm-3"
+                        itemprop="closes"
+                        content="{{ businessHour.specialDate }} {{ businessHour.businessHour.start|date('H:i') }}-{{ businessHour.businessHour.end|date('H:i') }}"
+                    >
+                        {{ businessHour.specialDate|format_datetime('long', 'none', locale=page.header.activeLanguage.translationCode.code) }}
+                    </dt>
+                    <dd class="col-7 col-sm-9 mb-0">
+                        {{ businessHour.businessHour.start|date('H:i') }}
+                        - {{ businessHour.businessHour.end|date('H:i') }}
+                    </dd>
+                {% endfor %}
+            </dl>
+        {% endif %}
+    </div>
+{% endblock %}

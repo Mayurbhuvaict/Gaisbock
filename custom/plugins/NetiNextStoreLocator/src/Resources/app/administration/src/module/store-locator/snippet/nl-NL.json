@@ -1,0 +1,280 @@
+{
+    "neti-store-locator": {
+        "bool": {
+            "0": "Geen",
+            "1": "Ja"
+        },
+        "custom-fields": {
+            "linkTitle": "Extra velden bewerken",
+            "noFields": "U hebt nog geen extra velden voor de Filiaalzoeker toegewezen."
+        },
+        "notification": {
+            "requiredFields": "Gelieve alle verplichte velden in te vullen."
+        },
+        "general": {
+            "mainMenuItemGeneral": "Filiaalzoeker",
+            "mainMenuItemList": "Overzicht",
+            "mainMenuItemAdd": "Filiaal toevoegen",
+            "descriptionTextModule": "Beheer hier de filialen.",
+            "placeholderSearchBar": "Zoek in alle filialen",
+            "newStore": "Nieuw filiaal"
+        },
+        "list": {
+            "textStores": "Filialen",
+            "textStoresTotal": "Geen filialen | Een filiaal | {count} filialen",
+            "buttonAddStore": "Filiaal toevoegen",
+            "columnLabel": "Nam",
+            "columnActive": "Actief",
+            "columnSalesChannel": "Distributiekanalen",
+            "columnFeatured": "Gemarkeerd",
+            "labelFeaturedHelp": "De winkel is altijd visueel gemarkeerd.",
+            "columnStreet": "Straße",
+            "columnStreetNumber": "Hausnummer",
+            "columnZipCode": "Postcode",
+            "columnCity": "Stad",
+            "columnCountry": "Land",
+            "columnActions": "Actie(s)",
+            "contextMenuView": "Aanzicht",
+            "contextMenuDelete": "Delete",
+            "contextMenuDuplicate": "Duplicaat",
+            "contextMenuEdit": "Bewerken",
+            "messageEmpty": "Nog geen filialen beschikbaar",
+            "modalTitleDelete": "Filiaal verwijderen",
+            "textDeleteConfirm": "Weet je zeker dat je de filiaal \"{name}\" wilt verwijderen?",
+            "buttonCancel": "Annuleren",
+            "buttonDelete": "Delete",
+            "titleSidebarItemRefresh": "Update",
+            "buttonCreate": "Filiaal toevoegen",
+            "titleSidebarFilter": "Filter"
+        },
+        "detail": {
+            "buttonEdit": "Bewerken",
+            "buttonCancel": "Annuleren",
+            "buttonSave": "Save",
+            "buttonLocate": "Adres lokaliseren",
+            "tabGeneral": "Algemeen",
+            "tabAddress": "Adres",
+            "tabDetails": "Details",
+            "tabContact": "Contact",
+            "titleSaveError": "Fout",
+            "titleSaveSuccess": "Succes",
+            "messageSaveError": "De filiaal kon niet gered worden.",
+            "messageBusinessTimeSaveError": "Het filiaal kon niet worden opgeslagen omdat de tijd voor openingstijden niet was geconfigureerd.",
+            "messageSaveSuccess": "Het filiaal \"{name}\" is opgeslagen.",
+            "titleLocateError": "Adres kon niet worden gevonden.",
+            "messageLocateError": "Controleer uw adres en probeer het opnieuw of neem contact op met uw systeembeheerder.",
+            "contentTypeLabel": "Type inhoud",
+            "contentTypeHTML": "HTML / WYSIWYG-Editor",
+            "contentTypeCMS": "Werelden van ervaring",
+            "contentTypeHelp": "",
+            "contentDescriptionLabel": "Inhoud",
+            "contentDescriptionHelp": "Plak hier uw inhoud, zodat die wordt weergegeven.",
+            "cmsPageLabel": "Wereld van ervaring",
+            "cmsPageHelp": "Selecteer een reeds aangemaakte belevingswereld (Inhoud > Belevingswerelden > Filiaalzoeker).",
+            "cmsPageLinkInfo": "Toon werelden van ervaring"
+        },
+        "cms-stores": {
+            "cardFieldSets": "Beleef werelden",
+            "buttonFieldSetsAdd": "Voeg belevingswerelden toe",
+            "context-menu": {
+                "openCmsPage": "Open de wereld van ervaring",
+                "removeCmsPage": "Ervaringswereld verwijderen",
+                "moveCmsPageUp": "Breng de ervaringswereld naar boven",
+                "moveCmsPageDown": "Verplaats de belevingswereld naar beneden"
+            },
+            "modal": {
+                "removeCmsPageTitle": "Ervaringswereld verwijderen",
+                "modalConfirmText": "Wil je de belevingswereld {name} echt ongedaan maken?",
+                "buttonCancel": "Annuleren",
+                "buttonDelete": "Toewijzing ongedaan maken",
+                "modalTitleMassDelete": "Verwijder geselecteerde ervaringswerelden",
+                "textMassDeleteConfirm": "Wil je de opdracht aan de geselecteerde belevingswerelden echt annuleren?"
+            },
+            "column": {
+                "name": "Achternaam",
+                "position": "Positie"
+            },
+            "assignment-modal": {
+                "buttonCancel": "Annuleren",
+                "buttonSave": "Beleveniswerelden toewijzen",
+                "cmsPageLabel": "Beleef de wereld",
+                "title": "Beleveniswerelden toewijzen",
+                "successTitle": "Succes",
+                "successMessage": "Belevingswerelden zijn met succes toegewezen.",
+                "errorTitle": "Fout",
+                "errorMessage": "Ervaringswerelden konden niet worden toegewezen."
+            }
+        },
+        "detailBase": {
+            "labelBasicCard": "Algemeen",
+            "labelMiscCard": "Andere",
+            "labelMediaCard": "Media"
+        },
+        "detailAddress": {
+            "labelBasicCard": "Algemeen",
+            "labelMiscCard": "Andere",
+            "labelGooglePlacesCard": "Google Places"
+        },
+        "detailDetails": {
+            "labelBasicCard": "Algemeen",
+            "labelContentCard": "Inhoud",
+            "labelSeoCard": "Seo"
+        },
+        "detailContact": {
+            "labelBasicCard": "Algemeen"
+        },
+        "baseInfo": {
+            "labelActive": "Actief",
+            "labelDetailPageEnabled": "Detailpagina activeren",
+            "labelSalesChannel": "Verkoopkanalen",
+            "labelSeoUrl": "SEO URL",
+            "labelShowAlways": "Altijd laten zien",
+            "labelShowAlwaysHelp": "Selecteer de positie waar deze winkel in de lijst moet verschijnen. 'Top' = De winkel wordt altijd bovenaan de lijst weergegeven / 'Onder' = De winkel wordt altijd onderaan de lijst weergegeven.",
+            "labelShowAlwaysValues": {
+                "no": "Standaard",
+                "top": "Top",
+                "bottom": "Onder"
+            },
+            "labelContactFormEnabled": "Contactformulier geactiveerd",
+            "labelContactFormEnabledHelp": "Als u het contactformulier activeert, moet u ook het e-mailadres voor kennisgeving opgeven. Anders zal een klant geen contact kunnen opnemen met het filiaal.",
+            "labelContactFormDetail": "Toon contactformulier op detailpagina",
+            "labelHidden": "Verberg filiaal",
+            "labelNotificationMail": "E-mail adres voor kennisgeving",
+            "labelMapZoom": "Zoom op de kaart",
+            "labelExcludeFromSync": "Uitsluiten van Google Places Sync",
+            "labelGooglePlaceID": "Google Place ID",
+            "labelFeatured": "Uitgelicht",
+            "labelRadius": "Radius",
+            "labelStreet": "Straat",
+            "labelStreetNumber": "Huisnummer",
+            "labelZipCode": "Postcode",
+            "labelCity": "Stad",
+            "labelLongitude": "Lengtegraad",
+            "labelLatitude": "Breedtegraad",
+            "labelCountry": "Land",
+            "labelCountryState": "Deelstaat",
+            "labelPhone": "Telefoonnummer",
+            "labelFax": "Fax",
+            "labelUrl": "URL",
+            "labelEmail": "E-mail",
+            "labelAdditionalInformation": "Aanvullende informatie",
+            "labelDescription": "Beschrijving",
+            "labelPictureMedia": "Voorbeeld afbeelding",
+            "labelIconMedia": "Alternatief kaartsymbool",
+            "helpAdditionalInformation": "b.v. openingstijden, enz.",
+            "labelSeoTitle": "SEO-Titel",
+            "labelSeoDescription": "SEO-Beschrijving",
+            "labelDetailTitle": "Titel",
+            "labelTags": "Tags / Trefwoorden",
+            "labelOpeningTimes": "Openingstijden"
+        },
+        "card": {
+            "labelLabel": "Naam",
+            "placeholderLabel": "Naam van het filiaal",
+            "placeholderStreet": "Straat",
+            "placeholderStreetNumber": "Huisnummer",
+            "placeholderCity": "Stad",
+            "placeholderZipCode": "Postcode",
+            "placeholderLatitude": "Automatisch gevuld wanneer leeg",
+            "placeholderLongitude": "Automatisch gevuld wanneer leeg",
+            "placeholderSeoUrl": "Uw aangepaste SEO URL",
+            "helpSeoUrl": "Belangrijke opmerking: Slashes worden geïnterpreteerd als koppeltekens.",
+            "placeholderNotificationMail": "E-mail adres voor kennisgeving",
+            "placeholderMapZoom": "Zoom op de kaart",
+            "placeholderGooglePlaceID": "Google Place ID",
+            "placeholderRadius": "Radius",
+            "placeholderSeoTitle": "SEO Titel",
+            "externalIdLabel": "Extern Id",
+            "placeholderExternalId": "Extern Id..."
+        },
+        "updateCoordinatesModal": {
+            "title": "Coördinaten bijwerken",
+            "infoText": "Dit proces haalt de coördinaten op voor alle winkels zonder coördinaten.",
+            "timezoneErrorText": "Het lijkt erop dat de tijdzone-API niet is ingeschakeld voor uw Google API-sleutel.",
+            "errorTitle": "Fout",
+            "errorText": "Helaas ging er iets mis. Probeer het later nog eens.",
+            "step1Text": "De filialen worden geladen",
+            "step2Text": "Verwerking",
+            "step3Text": "Voltooid",
+            "buttonAbort": "Annuleren",
+            "buttonRun": "Uitvoeren",
+            "buttonClose": "Sluit",
+            "chunkSizeLabel": "Brokgrootte",
+            "chunkSizeHelpText": "Het aantal winkels dat wordt opgehaald per verzoek."
+        },
+        "mapPreviewModal": {
+            "button": "Kaart voorbeeld",
+            "title": "Kaart voorbeeld",
+            "labelLatitude": "Breedtegraad",
+            "labelLongitude": "Lengtegraad",
+            "abortBtn": "Annuleren",
+            "applyBtn": "Overnemen"
+        },
+        "sidebar-filter": {
+            "activeLabel": "Actief",
+            "featuredLabel": "Uitgelicht",
+            "showAlwaysLabel": "Altijd laten zien",
+            "detailPageEnabledLabel": "Detail pagina actief",
+            "contactFormEnabledLabel": "Contactformulier actief",
+            "tagLabel": "Tags",
+            "salesChannelLabel": "Verkoopkanalen",
+            "active": {
+                "none": "Alle",
+                "true": "Ja",
+                "false": "Geen"
+            },
+            "featured": {
+                "none": "Alle",
+                "true": "Ja",
+                "false": "Geen"
+            },
+            "detailPageEnabled": {
+                "none": "Alle",
+                "true": "Ja",
+                "false": "Geen"
+            },
+            "contactFormEnabled": {
+                "none": "Alle",
+                "true": "Ja",
+                "false": "Geen"
+            },
+            "showAlways": {
+                "none": "Alle",
+                "no": "Geen",
+                "top": "Top",
+                "bottom": "Onder"
+            },
+            "streetLabel": "Straat",
+            "streetPlaceholder": "Straat...",
+            "streetNumberLabel": "Straat nr.",
+            "streetNumberPlaceholder": "Straat nr....",
+            "zipCodeLabel": "Postcode",
+            "zipCodePlaceholder": "Postcode...",
+            "cityLabel": "Stad",
+            "cityPlaceholder": "Stad...",
+            "countryLabel": "Land",
+            "externalIdLabel": "Externe ID",
+            "externalIdPlaceholder": "Externe ID...",
+            "mediaLabel": "Heeft media",
+            "media": {
+                "none": "Alle",
+                "true": "Ja",
+                "false": "Geen"
+            }
+        },
+        "business-hours": {
+            "labelWeekdaysCard": "Weekdagen",
+            "extraClosedDaysCard": "Speciale sluitingstijden",
+            "extraOpenDaysCard": "Speciale openingstijden",
+            "addTime": "Tijdslot toevoegen",
+            "removeTime": "Tijdslot verwijderen",
+            "labelFrom": "Van",
+            "labelTo": "Tot",
+            "labelDescription": "Beschrijving",
+            "labelAnnual": "Jaarlijks",
+            "labelDate": "Datum",
+            "timezoneWarning": "Aan deze tak is geen tijdzone toegewezen. Om de openingstijden te beheren, activeert u de bepaling van de tijdzones in de configuratie van de plug-in en werkt u de coördinaten bij. <br>Klik hiervoor op de knop <strong>Coördinaten bijwerken</strong> in het overzicht van de winkels.",
+            "timezoneInfo": "De tijden worden beheerd in de tijdzone van het filiaal."
+        }
+    }
+}

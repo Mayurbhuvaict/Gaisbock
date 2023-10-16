@@ -1,0 +1,70 @@
+{% block neti_store_locator_route_modal %}
+    <div class="modal route-form fade" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content" v-if="store">
+                {% block neti_store_locator_route_modal_header %}
+                    <div class="modal-header">
+                        <h5 class="modal-title">
+                            {{ "neti-next-store-locator.index.print.title"|trans }}
+                        </h5>
+                        <button
+                                type="button"
+                                class="btn-close close"
+                                data-bs-dismiss="modal"
+                                aria-label="Close"
+                        ></button>
+                    </div>
+                {% endblock %}
+
+                {% block neti_store_locator_route_modal_body %}
+                    <div class="modal-body" :class="{ 'has-error': isError }">
+                        <template v-if="isError">
+                            {% sw_include '@Storefront/storefront/utilities/alert.html.twig' with {
+                                type: "danger",
+                                content: "neti-next-store-locator.index.print.error"|trans
+                            } %}
+                        </template>
+                        <div class="spinner-container" v-if="isLoading">
+                            <div class="spinner-border spinner" role="status">
+                                <span class="visually-hidden">
+                                    {{ "neti-next-store-locator.index.print.loadingText"|trans }}
+                                </span>
+                            </div>
+                        </div>
+                        <div class="route-description" v-if="route">
+                            <div class="route-meta">
+                                <div class="meta-item from">
+                                    <span class="label">{{ "neti-next-store-locator.index.print.labelFrom"|trans }}</span>
+                                    <span class="value">{{ '{{ route.start_address }}' }}</span>
+                                </div>
+                                <div class="meta-item to">
+                                    <span class="label">{{ "neti-next-store-locator.index.print.labelTo"|trans }}</span>
+                                    <span class="value">{{ '{{ route.end_address }}' }}</span>
+                                </div>
+                                <div class="meta-item distance">
+                                    <span class="label">{{ "neti-next-store-locator.index.print.labelDistance"|trans }}</span>
+                                    <span class="value">{{ '{{ route.distance.text }}' }}</span>
+                                </div>
+                                <div class="meta-item duration">
+                                    <span class="label">{{ "neti-next-store-locator.index.print.labelDuration"|trans }}</span>
+                                    <span class="value">{{ '{{ route.duration.text }}' }}</span>
+                                </div>
+                            </div>
+                            <ol>
+                                <li v-for="step in route.steps" v-html="step.instructions"></li>
+                            </ol>
+                        </div>
+                    </div>
+                {% endblock %}
+
+                {% block neti_store_locator_route_modal_footer %}
+                    <div class="modal-footer" v-if="!isLoading && !isError">
+                        <a :href="routeLink" class="btn btn-primary" target="_blank">
+                            {{ "neti-next-store-locator.index.print.buttonPrint"|trans }}
+                        </a>
+                    </div>
+                {% endblock %}
+            </div>
+        </div>
+    </div>
+{% endblock %}

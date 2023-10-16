@@ -1,0 +1,35 @@
+{% sw_extends '@Storefront/storefront/layout/meta.html.twig' %}
+
+{% block layout_head_meta_tags %}
+    {% if page.questionSpecific %}
+        {% if page.questionSpecific.metaDescription %}
+            {% set metaDescription = page.questionSpecific.metaDescription %}
+        {% else %}
+            {% set metaDescription = config('HuebertSeoFaq.config.faqMetaDescription') %}
+        {% endif %}
+        {% if page.questionSpecific.metaTitle %}
+            {% set metaTitle = page.questionSpecific.metaTitle %}
+        {% else %}
+            {% set metaTitle = config('HuebertSeoFaq.config.faqMetaTitle') %}
+        {% endif %}
+        {% if page.questionSpecific.metaKeywords %}
+            {% set metaKeywords = page.questionSpecific.metaKeywords %}
+        {% endif %}
+    {% elseif controllerName == "SeoFaq" %}
+        {% set metaDescription = config('HuebertSeoFaq.config.faqMetaDescription') %}
+        <link rel="canonical" href="{{ page.metaInformation.canonical }}"/>
+    {% endif %}
+    {{ parent() }}
+{% endblock %}
+
+{% block layout_head_title_inner %}{% apply spaceless %}
+    {% if page.questionSpecific.metaTitle %}
+        {{ page.questionSpecific.metaTitle }}
+    {% elseif page.questionSpecific.question %}
+        {{ page.questionSpecific.question }}
+    {% elseif controllerName == "SeoFaq" and page.questionSpecific == null%}
+        {{ config('HuebertSeoFaq.config.faqMetaTitle')}}
+    {% else %}
+        {{ metaTitle }}
+    {% endif %}
+{% endapply %}{% endblock %}

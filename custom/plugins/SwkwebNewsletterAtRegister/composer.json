@@ -1,0 +1,42 @@
+{
+    "name": "swkweb/newsletter-at-register",
+    "description": "Allow new customers to subscribe to the newsletter in the sign up form.",
+    "version": "3.0.0",
+    "type": "shopware-platform-plugin",
+    "license": "proprietary",
+    "authors": [
+        {
+            "name": "SWK Web",
+            "email": "info@swk-web.com",
+            "homepage": "https://www.swk-web.com"
+        }
+    ],
+    "require": {
+        "shopware/core": "~6.5.0",
+        "shopware/storefront": "~6.5.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Swkweb\\NewsletterAtRegister\\": "src/"
+        }
+    },
+    "extra": {
+        "shopware-plugin-class": "Swkweb\\NewsletterAtRegister\\SwkwebNewsletterAtRegister",
+        "label": {
+            "en-GB": "Newsletter subscription upon registration",
+            "de-DE": "Newsletter Anmeldung bei Registrierung"
+        },
+        "description": {
+            "en-GB": "Register at Newsletter at the registration of your onlineshop. It's only one click per Checkbox needed. Very simple and comfortable for your customers.",
+            "de-DE": "Neukunden können sich direkt beim Registrieren für Ihren Newsletter anmelden. Es wird eine Checkbox hinzugefügt mit der Ihr Kunde per Klick in Ihrem Newsletter ist."
+        },
+        "manufacturerLink": {
+            "en-GB": "https://store.shopware.com/en/swkweb.html",
+            "de-DE": "https://store.shopware.com/swkweb.html"
+        },
+        "supportLink": {
+            "en-GB": "https://doku.swk-web.com",
+            "de-DE": "https://doku.swk-web.com"
+        }
+    }
+}

@@ -1,0 +1,130 @@
+.product-image-link {
+    position: relative;
+}
+
+.solid-product-cover,
+.solid-product-hover-cover {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+.solid-product-cover {
+    &.solid-product-hover-cover-effect- {
+        &push-from-top,
+        &push-from-right,
+        &push-from-bottom,
+        &push-from-left {
+            transition: transform 0.5s ease;
+        }
+    }
+}
+
+.solid-product-hover-cover {
+    &.solid-product-hover-cover-effect- {
+        &none {
+            display: none;
+        }
+
+        &fade-in {
+            opacity: 0;
+            transition: opacity 0.25s ease;
+        }
+
+        &zoom-in {
+            opacity: 0;
+            transition: opacity 0.25s ease, transform 0.4s ease;
+            transform: scale(0.9);
+        }
+
+        &overlay-from-top,
+        &overlay-from-right,
+        &overlay-from-bottom,
+        &overlay-from-left,
+        &push-from-top,
+        &push-from-right,
+        &push-from-bottom,
+        &push-from-left {
+            transition: transform 0.5s ease;
+        }
+
+        &overlay-from-,
+        &push-from- {
+            &top {
+                transform: translateY(-100%);
+            }
+
+            &right {
+                transform: translateX(100%);
+            }
+
+            &bottom {
+                transform: translateY(100%);
+            }
+
+            &left {
+                transform: translateX(-100%);
+            }
+        }
+    }
+}
+
+.product-image-wrapper.solid-product-hover-cover-image-wrapper {
+    overflow: hidden;
+
+    &:hover {
+        .solid-product-cover {
+            &.solid-product-hover-cover-effect- {
+                &push-from- {
+                    &top {
+                        transform: translateY(100%);
+                    }
+
+                    &right {
+                        transform: translateX(-100%);
+                    }
+
+                    &bottom {
+                        transform: translateY(-100%);
+                    }
+
+                    &left {
+                        transform: translateX(100%);
+                    }
+                }
+            }
+        }
+
+        .solid-product-hover-cover {
+            &.solid-product-hover-cover-effect- {
+                &none {
+                    display: flex;
+                }
+
+                &fade-in {
+                    opacity: 1;
+                }
+
+                &zoom-in {
+                    opacity: 1;
+                    transform: scale(1);
+                }
+
+                &overlay-from-top,
+                &overlay-from-right,
+                &overlay-from-bottom,
+                &overlay-from-left,
+                &push-from-top,
+                &push-from-right,
+                &push-from-bottom,
+                &push-from-left {
+                    transform: none;
+                }
+            }
+        }
+    }
+}

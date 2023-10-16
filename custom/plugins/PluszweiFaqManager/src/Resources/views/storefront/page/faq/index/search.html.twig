@@ -1,0 +1,67 @@
+{% block pluszwei_faq_manager_index_search %}
+    <div class="pluszwei-faq-search-field"
+         id="search_form">
+
+        {% block pluszwei_faq_manager_index_search_container %}
+            <div class="form-container"
+                 aria-label="Search help">
+
+                {% block pluszwei_faq_manager_index_search_heading %}
+                    <h1 class="h2">{{ 'pluszweiFaqManager.search.searchHeading'|trans|sw_sanitize }}</h1>
+                {% endblock %}
+
+                {% block pluszwei_faq_manager_index_search_form_container %}
+                    <div itemscope
+                         itemtype="https://schema.org/WebSite"
+                         class="form-container-search-input">
+                        <meta itemprop="url"
+                              content="{{ seoUrl('frontend.home.page') }}"/>
+
+                        {% block pluszwei_faq_manager_index_search_form %}
+                            <form itemprop="potentialAction"
+                                  itemscope
+                                  itemtype="https://schema.org/SearchAction"
+                                  method="get"
+                                  data-search-article="true"
+                                  data-url="{{ path('frontend.pluszwei.faq.frontend.search') }}?search="
+                                  class="header-search-form">
+                                <div class="input-group">
+                                    <meta itemprop="target"
+                                          content="{{ path('frontend.pluszwei.faq.frontend.search') }}?search={search}"/>
+
+                                    {% block pluszwei_faq_manager_index_search_input_field %}
+                                        <input itemprop="query-input"
+                                               type="search"
+                                               name="search"
+                                               class="form-control header-search-input"
+                                               autocomplete="off"
+                                               autocapitalize="off"
+                                               placeholder="{{ 'pluszweiFaqManager.search.searchPlaceholder'|trans|sw_sanitize }}"
+                                               aria-label="{{ 'pluszweiFaqManager.search.searchPlaceholder'|trans|sw_sanitize }}"
+                                               value="{{ app.request.get('search') }}">
+                                    {% endblock %}
+
+                                    {% block pluszwei_faq_manager_index_search_search_button %}
+                                        <div class="input-group-append">
+                                            <button type="submit"
+                                                    class="btn header-search-btn"
+                                                    aria-label="Search">
+                                            <span class="header-search-icon">
+                                                {% sw_icon 'search' %}
+                                            </span>
+                                            </button>
+                                        </div>
+                                    {% endblock %}
+
+                                </div>
+                            </form>
+                        {% endblock %}
+
+                    </div>
+                {% endblock %}
+
+            </div>
+        {% endblock %}
+
+    </div>
+{% endblock %}

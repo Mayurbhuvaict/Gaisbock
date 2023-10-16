@@ -1,0 +1,58 @@
+{
+    "global": {
+        "entities": {
+            "lae_giftcard": "Giftcard"
+        },
+        "sw-condition-generic": {
+            "cartLineItemOfType": {
+                "lineItemType": {
+                    "options": {
+                        "lae-giftcards": "Giftcard"
+                    }
+                }
+            }
+        }
+    },
+    "lae-giftcard": {
+        "general": {
+            "mainMenuItemGeneral": "Giftcards",
+            "descriptionTextModule": "Manage the giftcards in your Shopware shop.",
+            "placeholderSearchBar": "Search giftcards..."
+        },
+        "list": {
+            "columnCode": "Code",
+            "columnBalance": "Balance",
+            "columnInitialAmount": "Initial Balance",
+            "columnCreatedAt": "Activated",
+            "badgeImported": "Imported",
+            "overview": {
+                "activeCards": "Active cards",
+                "boughtLastMonth": "Amount bought last 30 days",
+                "redeemedLastMonth": "Amount redeemed last 30 days",
+                "totalUnredeemed": "Total unredeemed amount in active cards"
+            }
+        },
+        "detail": {
+            "cardGiftcardDetails": "Giftcard details",
+            "cardGiftcardTransactions": "Giftcard Transactions",
+            "actionDownload": "Download",
+            "detailCurrentBalance": "Remaining balance",
+            "detailName": "Name",
+            "detailDescription": "Description",
+            "detailSalesChannel": "Sales Channel",
+            "detailCode": "Code",
+            "detailCreatedAt": "Activated"
+        },
+        "transaction": {
+            "columnAmount": "Amount",
+            "columnComment": "Comment",
+            "columnCreatedAt": "Date & time",
+            "emptyTitle": "No transactions have happened yet.",
+            "labelAmount": "Amount",
+            "labelComment": "Comment",
+            "typeTopUp": "Top up",
+            "typeRedeem": "Redeem",
+            "saveNewTransaction": "Create transaction"
+        }
+    }
+}

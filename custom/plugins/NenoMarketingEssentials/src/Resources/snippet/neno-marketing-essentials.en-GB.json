@@ -1,0 +1,9 @@
+{
+    "neno-marketing-essentials": {
+        "freeShippingBar": {
+            "textInitial": "Free shipping for orders over $goal",
+            "textProgress": "Still $goal until free delivery",
+            "textGoal": "Congratulations! Your delivery is free of shipping costs"
+        }
+    }
+}

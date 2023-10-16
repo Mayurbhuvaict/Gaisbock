@@ -1,0 +1,44 @@
+{
+    "neti-store-locator": {
+        "filter": {
+            "title": "Filter",
+            "description": "",
+            "buttonSave": "Save",
+            "buttonAbort": "Abort",
+            "buttonAdd": "Add filter",
+            "buttonRemove": "Remove",
+            "buttonRefreshIndex": "Refresh index",
+            "emptyInfo": "No filters created yet. Click on the button on the right to add a new filter.",
+            "editInfoAlternativeLanguage": "Note: You have selected an alternative language. If you want to add a new filter, you must first select the default language.",
+            "editInfoNewFilter": "Note: The language selection has been temporarily disabled because you have currently added a new filter. Save or delete it to reactivate the language selection.",
+            "titlePlaceholder": "New filter",
+            "detail": {
+                "titleLabel": "Title",
+                "activeLabel": "Active",
+                "valueTypeLabel": "Type",
+                "displayTypeLabel": "Display as",
+                "tagsLabel": "Tags",
+                "customFieldLabel": "Custom field"
+            },
+            "value-type": {
+                "tag": "Tag",
+                "customField": "Custom Field"
+            },
+            "display-type": {
+                "checkbox": "Checkbox",
+                "radio": "Radio",
+                "select": "Select"
+            },
+            "refresh-index-modal": {
+                "title": "Filter indexing",
+                "infoText": "Indexing is required if filters of the custom-field type exist. <br /> <br /> When creating/editing/deleting relevant filters or changing the free text fields in stores, indexing should be performed so that the filters are played out correctly in the storefront.",
+                "filterText": "Currently <strong>{count}</strong> filters can be indexed.",
+                "step1": "Preparation",
+                "step2": "Indexing...",
+                "step3": "Finished",
+                "buttonIndex": "Start indexing",
+                "buttonAbort": "Abort"
+            }
+        }
+    }
+}

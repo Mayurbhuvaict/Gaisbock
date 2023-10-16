@@ -1,0 +1,43 @@
+{% sw_extends '@Storefront/storefront/component/product/card/action.html.twig' %}
+
+{% block component_product_box_action_buy %}
+    {% if activeRoute == 'frontend.cart.offcanvas' and config('ProxaBasketCrossSellingSW6.config.proxaDisplayBuyButton') %}
+        {# @var product \Shopware\Core\Content\Product\SalesChannel\SalesChannelProductEntity #}
+        <form action="{{ path('frontend.checkout.line-item.add') }}"
+              method="post"
+              class="buy-widget"
+            {% if controllerAction|lower is same as("offcanvas") %}
+            data-add-to-cart="true"
+            {% endif %}>
+
+            {% block component_product_box_action_form %}
+
+                {% block component_product_box_action_buy_redirect_input %}
+                    {# fallback redirect back to detail page is deactivated via js #}
+                    <input type="hidden"
+                           name="redirectTo"
+                           value="{% if controllerAction|lower is same as("cartpage") %}frontend.checkout.cart.page{% elseif controllerAction|lower is same as("offcanvas") %}frontend.cart.offcanvas{% else %}frontend.detail.page{% endif %}">
+                    <input type="hidden"
+                           name="redirectParameters"
+                           data-redirect-parameters="true"
+                           value='{"productId": "{{ product.id }}"}'>
+                {% endblock %}
+
+                {% block page_product_detail_buy_product_buy_info %}
+                    {{ parent() }}
+                {% endblock %}
+
+                {% block page_product_detail_product_buy_meta %}
+                    {{ parent() }}
+                {% endblock %}
+
+                {% block page_product_detail_product_buy_button %}
+                    {{ parent() }}
+                {% endblock %}
+
+            {% endblock %}
+        </form>
+    {% else %}
+        {{ parent() }}
+    {% endif %}
+{% endblock %}

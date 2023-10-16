@@ -1,0 +1,29 @@
+{
+    "hats-store-survey": {
+        "titles": {
+            "menuName": "Umfrage speichern",
+            "pluginName": "Umfrage speichern"
+        },
+        "experiences": {
+            "menuLabel": "Umfrage speichern",
+            "customerNameLabel": "Kunde",
+            "ratingLabel": "Bewertung",
+            "commentLabel": "Kommentar",
+            "columnCreated": "Erstellt",
+            "columnSalesChannel": "Verkaufskanal",
+            "labelDetails": "Aussicht"
+        },
+        "experience": {
+            "menuLabel": "Einkaufserfahrung",
+            "customerNameLabel": "Kunde",
+            "ratingLabel": "Bewertung",
+            "commentLabel": "Kommentar",
+            "createdLabel": "Erstellt",
+            "cancelButtonText": "Stornieren",
+            "labelSalesChannel": "Verkaufskanal"
+        },
+        "contents": {
+            "menuDescription": "Umfrage speichern"
+        }
+    }
+}

@@ -1,0 +1,14 @@
+{
+    "hlStoreSurvey": {
+        "shopExperience": {
+            "submitButtonText": "einreichen",
+            "cancelButtonText": "Stornieren",
+            "successMessage" : "Vielen Dank, dass Sie Ihre Bewertung abgegeben haben!",
+            "errorMessage" : "In Ihrer Bewertung ist ein Fehler aufgetreten. Bitte versuche es erneut!"
+        },
+        "general":{
+            "required" : "*",
+            "checkoutLinkText" : "Bitte klicken Sie hier, um Ihr Einkaufserlebnis zu verbessern"
+        }
+    }
+}

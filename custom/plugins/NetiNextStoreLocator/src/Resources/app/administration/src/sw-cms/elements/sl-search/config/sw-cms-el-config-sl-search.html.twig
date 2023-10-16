@@ -1,0 +1,10 @@
+{% block sw_cms_element_sl_search_config %}
+    <sw-text-field
+            :label="$t('neti-next-store-locator.sw-cms.elements.slSearchElement.cms-element.label')"
+            :placeholder="$t('neti-next-store-locator.sw-cms.elements.slSearchElement.cms-element.placeHolder')"
+            v-model="searchParams.value"
+            :help-text="$t('neti-next-store-locator.sw-cms.elements.slSearchElement.cms-element.helpText')"
+            @element-update="onElementUpdate"
+    >
+    </sw-text-field>
+{% endblock %}

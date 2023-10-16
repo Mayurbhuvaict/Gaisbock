@@ -1,0 +1,58 @@
+{
+    "global": {
+        "entities": {
+            "lae_giftcard": "Cadeaubon"
+        },
+        "sw-condition-generic": {
+            "cartLineItemOfType": {
+                "lineItemType": {
+                    "options": {
+                        "lae-giftcards": "Cadeaubon"
+                    }
+                }
+            }
+        }
+    },
+    "lae-giftcard": {
+        "general": {
+            "mainMenuItemGeneral": "Cadeaubonnen",
+            "descriptionTextModule": "Beheer de cadeaubonnen voor je Shopware winkel.",
+            "placeholderSearchBar": "Zoeken naar Cadeaubonnen..."
+        },
+        "list": {
+            "columnCode": "Code",
+            "columnBalance": "Saldo",
+            "columnInitialAmount": "Initieel bedrag",
+            "columnCreatedAt": "Geactiveerd op",
+            "badgeImported": "Geïmporteerd",
+            "overview": {
+                "activeCards": "Actieve bonnen",
+                "boughtLastMonth": "Aangekocht in de laatste 30 dagen",
+                "redeemedLastMonth": "Gebruikt in de laatste 30 dagen",
+                "totalUnredeemed": "Totaal ongebruikt bedrag op actieve bonnen"
+            }
+        },
+        "detail": {
+            "cardGiftcardDetails": "Cadeaubon details",
+            "cardGiftcardTransactions": "Cadeaubon Transacties",
+            "actionDownload": "Download",
+            "detailCurrentBalance": "Resterend saldo",
+            "detailName": "Naam",
+            "detailDescription": "Beschrijving",
+            "detailSalesChannel": "Verkoopskanaal",
+            "detailCode": "Code",
+            "detailCreatedAt": "Geactiveerd op"
+        },
+        "transaction": {
+            "columnAmount": "Bedrag",
+            "columnComment": "Beschrijving",
+            "columnCreatedAt": "Datum & tijd",
+            "emptyTitle": "Er zijn nog geen transacties voor deze cadeaubon",
+            "labelAmount": "Bedrag",
+            "labelComment": "Beschrijving",
+            "typeTopUp": "Opwaarderen (+)",
+            "typeRedeem": "Inwisselen (-)",
+            "saveNewTransaction": "Transactie uitvoeren"
+        }
+    }
+}

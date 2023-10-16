@@ -1,0 +1,67 @@
+{
+    "neti-store-locator-contact-form": {
+        "title": "Contactformulier",
+        "description": "Contactformulieren Velden hier beheren",
+
+        "list": {
+            "title": "Contactformulier velden",
+            "messageEmpty": "Nog geen velden",
+            "button": {
+                "create": "Veld toevoegen",
+                "cancel": "Annuleren",
+                "delete": "Delete",
+                "refresh": "Update"
+            },
+            "column": {
+                "active": "Actief",
+                "label": "Etiket",
+                "type": "Type",
+                "required": "Verplicht veld",
+                "position": "Positie"
+            },
+            "contextMenu": {
+                "view": "Aanzicht",
+                "delete": "Delete",
+                "duplicate": "Duplicaat",
+                "edit": "Bewerken"
+            },
+            "deleteForm": {
+                "title": "Veld verwijderen",
+                "confirmText": "Weet je zeker dat je het \"{name}\" veld wilt verwijderen?"
+            }
+        },
+        "create": {
+            "title": "Nieuw veld"
+        },
+        "detail": {
+            "button": {
+                "edit": "Bewerken",
+                "cancel": "Annuleren",
+                "save": "Save"
+            },
+            "card": {
+                "generalBasic": {
+                    "title": "Instellingen veld",
+                    "labelActive": "Actief",
+                    "labelLabel": "Etiket",
+                    "labelRequired": "Verplicht veld",
+                    "labelType": "Type",
+                    "labelPosition": "Positie",
+                    "labelValue": "Standaardwaarde",
+                    "labelsType": {
+                        "textfield": "Tekst",
+                        "textarea": "Tekstveld",
+                        "checkbox": "Checkbox",
+                        "radio": "Radioknoppen / Optievelden",
+                        "select": "Selectieveld",
+                        "subject": "Onderwerp",
+                        "email": "E-mail adres",
+                        "email_copy": "E-mail adres (Kopie)",
+                        "file_upload": "Bestandsbijlage"
+                    },
+                    "placeholderType": "Selecteer type"
+                }
+            }
+        }
+    }
+}

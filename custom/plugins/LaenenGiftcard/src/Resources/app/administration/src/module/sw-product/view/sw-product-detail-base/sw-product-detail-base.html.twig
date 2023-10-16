@@ -1,0 +1,45 @@
+{% block sw_product_detail_base_price_card %}
+    {% parent %}
+
+    <sw-card title="Giftcard"
+             class="product-detail-base-giftcard-card"
+             :is-loading="isLoading">
+        <sw-switch-field v-model="giftcardEnabled"
+                         :label="$tc('lae-giftcard.sw-product-detail-base.enabled')"/>
+
+        <template v-if="giftcardEnabled">
+            <strong>{{ $tc('lae-giftcard.sw-product-detail-base.valuesTitle') }}</strong>
+            <p>{{ $tc('lae-giftcard.sw-product-detail-base.valuesIntro') }}</p>
+
+            <sw-container columns="1fr 1fr 1fr" gap="12px">
+                <sw-number-field v-model="product.customFields.laeGiftcardMinValue"
+                                 :label="$tc('lae-giftcard.sw-product-detail-base.minValue')"/>
+                <sw-number-field v-model="product.customFields.laeGiftcardDefaultValue"
+                                 :label="$tc('lae-giftcard.sw-product-detail-base.defaultValue')"/>
+                <sw-number-field v-model="product.customFields.laeGiftcardMaxValue"
+                                 :label="$tc('lae-giftcard.sw-product-detail-base.maxValue')"/>
+            </sw-container>
+        </template>
+
+        <template v-if="giftcardEnabled">
+            <strong>{{ $tc('lae-giftcard.sw-product-detail-base.designTitle') }}</strong>
+            <p>{{ $tc('lae-giftcard.sw-product-detail-base.designIntro') }}</p>
+            <sw-container columns="1fr 1fr" gap="16px">
+                <sw-single-select v-model="giftcardDesignType"
+                                  :options="designTypeOptions"
+                                  :label="$tc('lae-giftcard.sw-product-detail-base.designTemplate')"/>
+
+                <div>
+
+                </div>
+            </sw-container>
+        </template>
+
+        <template v-if="giftcardEnabled && giftcardDesignType === 'simple'">
+            <sw-media-field v-model="product.customFields.laeGiftcardSimpleDesign"
+                            :label="$tc('lae-giftcard.sw-product-detail-base.simpleDesign')"
+                            :helpText="$tc('lae-giftcard.sw-product-detail-base.simpleDesignHelptext')"
+                            defaultFolder="lae_giftcard"/>
+        </template>
+    </sw-card>
+{% endblock %}

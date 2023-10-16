@@ -1,0 +1,16 @@
+{% sw_extends '@Storefront/storefront/layout/meta.html.twig' %}
+
+{% block layout_head_stylesheet %}
+  {{ parent() }}
+
+  {% block solid_product_hover_cover_styles %}
+    {% set productHoverCoverConfig = config('SolidProductHoverCover.config') %}
+
+    {% if productHoverCoverConfig %}
+      {% if productHoverCoverConfig.enabled and
+        productHoverCoverConfig.effect == 'custom' %}
+        <style>{{ productHoverCoverConfig.customStyles | replace({'\n': '', '\r': '', '\t': ''}) }}</style>
+      {% endif %}
+    {% endif %}
+  {% endblock %}
+{% endblock %}

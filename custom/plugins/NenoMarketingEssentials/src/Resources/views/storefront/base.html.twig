@@ -1,0 +1,15 @@
+{% sw_extends '@Storefront/storefront/base.html.twig' %}
+{% set nmeConfig = config('NenoMarketingEssentials.config') %}
+
+{% block base_body %}
+    {% if nmeConfig.freeShippingBarPosition == 'top' %}
+        {% sw_include '@Storefront/storefront/custom/nme-free-shipping-bar.html.twig' %}
+    {% endif %}
+    {% sw_include '@Storefront/storefront/custom/nme-conversion-bar.html.twig' %}
+    {% if nmeConfig.freeShippingBarPosition == 'bottom' %}
+        {% sw_include '@Storefront/storefront/custom/nme-free-shipping-bar.html.twig' %}
+    {% endif %}
+    {% sw_include '@Storefront/storefront/custom/nme-newsletter-popup.html.twig' %}
+    {% sw_include '@Storefront/storefront/custom/nme-register-popup.html.twig' %}
+    {{ parent() }}
+{% endblock %}

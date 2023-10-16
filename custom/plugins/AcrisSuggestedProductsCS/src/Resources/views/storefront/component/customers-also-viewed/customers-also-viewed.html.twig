@@ -1,0 +1,79 @@
+{% block page_product_detail_customers_also_viewed_tabs_content_container %}
+    {% if config is defined and config|length > 0 %}
+
+        {% set config = {
+            'title': {
+                'value': "acrisSuggestedProducts.product.detail.customersAlsoViewed"|trans|sw_sanitize
+            },
+            'border': {
+                'value': false
+            },
+            'rotate': {
+                'value': false
+            },
+            'products': {
+                'value': products
+            },
+            'boxLayout': {
+                'value': config.boxLayout.value ?? sliderConfig.boxLayout.value
+            },
+            'elMinWidth': {
+                'value': config.elMinWidth.value ?? sliderConfig.elMinWidth.value
+            },
+            'navigation': {
+                'value': true
+            },
+            'displayMode': {
+                'value': config.displayMode.value ?? sliderConfig.displayMode.value
+            },
+            'verticalAlign': {
+                'value': center
+            },
+        } %}
+
+    {% else %}
+        {% set config = {
+            'title': {
+                'value': 'acrisSuggestedProducts.product.detail.customersAlsoViewed'|trans
+            },
+            'border': {
+                'value': false
+            },
+            'rotate': {
+                'value': false
+            },
+            'products': {
+                'value': products
+            },
+            'boxLayout': {
+                'value': 'standard'
+            },
+            'elMinWidth': {
+                'value': '300px'
+            },
+            'navigation': {
+                'value': true
+            },
+            'displayMode': {
+                'value': 'minimal'
+            },
+            'verticalAlign': {
+                'value': 'top'
+            },
+        } %}
+
+    {% endif %}
+
+    {% sw_include "@Storefront/storefront/element/cms-element-product-slider.html.twig" with {
+        sliderConfig: config,
+        element: {
+            'data': {
+                'products': {
+                    elements: products
+                }
+            },
+            type: 'product-slider'
+        }
+    } %}
+
+{% endblock %}

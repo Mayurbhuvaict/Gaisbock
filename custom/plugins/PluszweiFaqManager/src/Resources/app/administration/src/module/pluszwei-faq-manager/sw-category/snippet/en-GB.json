@@ -1,0 +1,12 @@
+{
+  "sw-category": {
+    "base": {
+      "general": {
+        "types": {
+          "faq": "FAQ Page",
+          "faq-help": "FAQ Help Page"
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/shopware/platform/master/src/Core/System/SystemConfig/Schema/config.xsd">
+
+    <card>
+        <title>Configuration</title>
+        <title lang="de-DE">Aufbau</title>
+
+        <!-- <input-field type="bool">
+            <name>enableHowDidYouHearSurvey</name>
+            <label>Enable "How did you hear about the store?" survey</label>
+            <label lang="de-DE">Aktivieren Sie "Wie haben Sie von dem Geschäft erfahren?" Umfrage</label>
+            <value>true</value>
+        </input-field>
+
+         <input-field type="bool">
+            <name>howDidYouHearSurveyMandatory</name>
+            <label lang="de-DE">Möchten Sie eine obligatorische Umfrage im Geschäft haben?</label>
+            <label>Do you want to keep store survey mandatory?</label>
+            <value>false</value>
+            <helpText>Make "How did you hear about the store?" select box required in the checkout page</helpText>
+            <helpText lang="de-DE">Make "Wie haben Sie von dem Geschäft erfahren?" Auswahlfeld auf der Checkout-Seite erforderlich</helpText>
+        </input-field> -->
+
+         <input-field type="bool">
+            <name>enableShoppingExperienceSurvey</name>
+            <label lang="de-DE">Umfrage "Einkaufserlebnis" aktivieren</label>
+            <label>Enable "Shopping experience" survey</label>
+            <value>true</value>
+            <defaultValue>true</defaultValue>
+        </input-field>
+
+        <input-field type="text">
+            <name>checkoutRatingQuestion</name>
+            <label>Checkout rating survey, rating question</label>
+            <label lang="de-DE">Checkout-Bewertungsumfrage, Bewertungsfrage</label>
+            <defaultValue>Your rating:</defaultValue>
+        </input-field>
+
+        <input-field type="text">
+            <name>checkoutRatingYourCommentsQuestion</name>
+            <label lang="de-DE">Checkout-Bewertungsumfrage, die Frage Ihres Kommentars</label>
+            <label>Checkout rating survey, your comment's question</label>
+            <defaultValue>How do you rate your shopping experience?</defaultValue>
+        </input-field>
+
+    </card>
+</config>

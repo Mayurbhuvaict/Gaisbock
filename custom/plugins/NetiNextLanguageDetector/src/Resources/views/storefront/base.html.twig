@@ -1,0 +1,9 @@
+{% sw_extends '@Storefront/storefront/base.html.twig' %}
+
+{% block base_body_script %}
+    {{ parent() }}
+
+    <script>
+        window.router['frontend.language_detector.check_language'] = '{{ path('frontend.language_detector.check_language', {'redirectRoute': app.request.requestUri}) }}';
+    </script>
+{% endblock %}

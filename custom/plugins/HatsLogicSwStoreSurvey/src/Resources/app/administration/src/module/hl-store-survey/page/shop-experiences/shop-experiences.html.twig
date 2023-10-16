@@ -1,0 +1,37 @@
+{% block hl_shop_experiences %}
+	<sw-page class="hl-shop-experiences-list">
+		<template slot="content">
+			{% block hl_shop_experiences_content %}
+				<sw-entity-listing v-if="experiences" :items="experiences" :repository="repository" :showselection="false" :columns="columns" :sortby="sortBy" :sortdirection="sortDirection" :isloading="isLoading" detailroute="hl.store.survey.experience">
+
+					<template slot="column-customer.firstName" slot-scope="{ item }">
+						<a @click="showDetail(item.id)" href="#">
+							{{ item.customer.firstName }}
+							{{ item.customer.lastName }}
+						</a>
+					</template>
+
+					{% block hl_shop_experiences_list_points %}
+						<template slot="column-points" slot-scope="{ item }">
+							<div class="sw-review-list__stars">
+								<span v-html="getRatingHtml(item.points)"></span>
+							</div>
+						</template>
+					{% endblock %}
+
+					<template slot="delete-action">
+						<span></span>
+					</template>
+
+					<template #detail-action="{ item }">
+						<sw-context-menu-item class="sw-entity-listing__context-menu-edit-action" :routerLink="{ name: 'hl.store.survey.experience', params: { id: item.id } }">{{ $tc('hl-store-survey.experiences.labelDetails') }}
+						</sw-context-menu-item>
+					</template>
+
+
+				</sw-entity-listing>
+
+			{% endblock %}
+		</template>
+	</sw-page>
+{% endblock %}

@@ -1,0 +1,72 @@
+<?xml version="1.0" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+    <services>
+        <!-- Resolver -->
+        <service id="Gaisbock\Core\Content\Media\Cms\gaisbockImageCmsElementResolver">
+            <tag name="shopware.cms.data_resolver" />
+            <argument type="service" id="Shopware\Core\Content\Media\Cms\DefaultMediaResolver"/>
+        </service>
+        <service id="Gaisbock\Core\Content\Media\Cms\gaisbockImageTextLeftRightCmsElementResolver">
+            <tag name="shopware.cms.data_resolver" />
+            <argument type="service" id="Shopware\Core\Content\Media\Cms\DefaultMediaResolver"/>
+        </service>
+        <service id="Gaisbock\Core\Content\Media\Cms\gaisbockListingPageImageTextCmsElementResolver">
+            <tag name="shopware.cms.data_resolver"/>
+            <argument type="service" id="Shopware\Core\Content\Media\Cms\DefaultMediaResolver"/>
+        </service>
+        <service id="Gaisbock\Core\Content\Media\Cms\gaisbockTitleTextImageElementResolver">
+            <tag name="shopware.cms.data_resolver" />
+            <argument type="service" id="Shopware\Core\Content\Media\Cms\DefaultMediaResolver"/>
+        </service>
+        <service id="Gaisbock\Core\Content\Media\Cms\gaisbockImageTitlesButtonCmsElementResolver">
+            <tag name="shopware.cms.data_resolver" />
+            <argument type="service" id="Shopware\Core\Content\Media\Cms\DefaultMediaResolver"/>
+        </service>
+        <service id="Gaisbock\Core\Content\Media\Cms\gaisbockCategoryThreeCustomImageResolver">
+            <tag name="shopware.cms.data_resolver" />
+            <argument type="service" id="Shopware\Core\Content\Media\Cms\DefaultMediaResolver"/>
+        </service>
+        <service id="Gaisbock\Core\Content\Media\Cms\gaisbockAboutTitleTextImageCmsElementResolver">
+            <tag name="shopware.cms.data_resolver" />
+            <argument type="service" id="Shopware\Core\Framework\Util\HtmlSanitizer"/>
+        </service>
+        <service id="Gaisbock\Core\Content\Media\Cms\gaisbockCustomTextImageSliderResolver">
+            <tag name="shopware.cms.data_resolver" />
+            <argument type="service" id="Shopware\Core\Content\Media\Cms\DefaultMediaResolver"/>
+        </service>
+        <!-- Resolver -->
+        <!-- subscriber  -->
+        <service id="Gaisbock\Storefront\Page\gaisbockCategoryNavigationSubscriber">
+            <argument type="service" id="category.repository"/>
+            <argument type="service" id="media.repository"/>
+            <argument type="service" id="sales_channel.product.repository"/>
+            <tag name="kernel.event_subscriber"/>
+        </service>
+        <!--  subscriber  -->
+        <service id="Gaisbock\Message\OverwriteGenerateGiftcardMessageHandler"
+                 decorates="Laenen\Giftcard\Message\GenerateGiftcardMessageHandler"
+                 parent="Laenen\Giftcard\Message\GenerateGiftcardMessageHandler" public="true">
+            <tag name="messenger.message_handler"/>
+            <argument type="service" id="Shopware\Core\Content\Mail\Service\MailService"/>
+            <argument type="service" id="Laenen\Giftcard\Service\GiftcardGateway"/>
+            <argument type="service" id="order.repository"/>
+            <argument type="service" id="Laenen\Giftcard\Document\GiftcardDocumentGenerator"/>
+            <argument type="service" id="Shopware\Core\System\SystemConfig\SystemConfigService"/>
+            <argument type="service" id="mail_template.repository"/>
+            <argument type="service" id="Shopware\Core\Framework\Adapter\Translation\Translator"/>
+            <argument type="service" id="Shopware\Core\System\Locale\LanguageLocaleCodeProvider"/>
+            <argument type="service" id="monolog.logger.lae_giftcard"/>
+        </service>
+        <service id="Gaisbock\Core\Content\Product\SalesChannel\Review\GaisbockProductReviewSaveRoute"
+                 decorates="Shopware\Core\Content\Product\SalesChannel\Review\ProductReviewSaveRoute"
+                 parent="Shopware\Core\Content\Product\SalesChannel\Review\ProductReviewSaveRoute">
+            <argument type="service" id="product_review.repository"/>
+            <argument type="service" id="Shopware\Core\Framework\Validation\DataValidator"/>
+            <argument type="service" id="Shopware\Core\System\SystemConfig\SystemConfigService"/>
+            <argument type="service" id="event_dispatcher"/>
+        </service>
+    </services>
+</container>

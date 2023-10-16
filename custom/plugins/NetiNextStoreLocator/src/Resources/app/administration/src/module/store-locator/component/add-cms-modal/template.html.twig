@@ -1,0 +1,56 @@
+<sw-modal
+    class="neti-store-locator-cms-assignment"
+    :title="$t('neti-store-locator.detail.cms-stores.assignment-modal.title')"
+    @modal-close="$emit('modal-close')"
+>
+    <template v-if="store">
+        <sw-entity-multi-select
+            :label="$t('neti-store-locator.detail.cms-stores.assignment-modal.cmsPageLabel')"
+            v-model="newCmsPages"
+            entity="cms_page"
+            :criteria="cmsPageCriteria"
+        >
+            <template #selection-label-property="{ item }">
+                <sw-product-variant-info
+                    :variations="item.variation"
+                >
+                    {{ item.translated.name || item.name }}
+                </sw-product-variant-info>
+            </template>
+            <template #result-item="{ item, index }">
+                <slot
+                    name="result-item"
+                    v-bind="{ item, index }"
+                >
+                    <li
+                        is="sw-select-result"
+                        v-bind="{ item, index, selected: isSelected(item.id)}"
+                    >
+                        <span class="sw-select-result__result-item-text">
+                            <sw-product-variant-info
+                                :variations="item.variation"
+                            >
+                                {{ item.translated.name || item.name }}
+                            </sw-product-variant-info>
+                        </span>
+                    </li>
+                </slot>
+            </template>
+        </sw-entity-multi-select>
+    </template>
+
+    <template #modal-footer>
+        <sw-button :disabled="isLoading" @click="onAbortButtonClick">
+            {{ $t('neti-store-locator.detail.cms-stores.assignment-modal.buttonCancel') }}
+        </sw-button>
+
+        <sw-button
+            :isLoading="isLoading"
+            :disabled="isLoading"
+            variant="primary"
+            @click.prevent="onSave"
+        >
+            {{ $t('neti-store-locator.detail.cms-stores.assignment-modal.buttonSave') }}
+        </sw-button>
+    </template>
+</sw-modal>

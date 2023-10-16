@@ -1,0 +1,95 @@
+{% sw_extends '@Storefront/storefront/component/checkout/offcanvas-cart.html.twig' %}
+
+
+{% block component_offcanvas_cart %}
+    {{ parent() }}
+
+    {% if page.cart.extensions.sliderType.get(0) == "horizontal" and page.cart.extensions.sliderProducts.all %}
+        {% set config = {
+            'title': {
+                'value':  'proxa-basket-cross-selling.cart-slider-title'|trans
+            },
+            'border': {
+                'value': false
+            },
+            'rotate': {
+                'value': false
+            },
+            'boxLayout': {
+                'value': 'cart'
+            },
+            'elMinWidth': {
+                'value': '300px'
+            },
+            'navigation': {
+                'value': true
+            },
+            'displayMode': {
+                'value': 'minimal'
+            },
+            'position' :{
+                'value': page.cart.extensions.sliderType.get(0)
+            }
+        } %}
+        <div class="offcanvas-cart-horizontal-product-slider">
+            {% sw_include '@Storefront/storefront/element/cms-element-cart-product-slider.html.twig' with {
+                elements: page.cart.extensions.sliderProducts.all ,
+                sliderConfig: config,
+            } %}
+        </div>
+    {% endif %}
+{% endblock %}
+
+
+{% block utilities_offcanvas %}
+    {% if page.cart.extensions.sliderType.get(0) == "vertical" and page.cart.extensions.sliderProducts.all %}
+        <div class="offcanvas-cart-content-container">
+            {% set config = {
+                'title': {
+                    'value': 'proxa-basket-cross-selling.cart-slider-title'|trans
+                },
+                'border': {
+                    'value': false
+                },
+                'rotate': {
+                    'value': false
+                },
+                'boxLayout': {
+                    'value': 'cart'
+                },
+                'elMinWidth': {
+                    'value': '300px'
+                },
+                'elMinHeight': {
+                    'value': '300px'
+                },
+                'navigation': {
+                    'value': true
+                },
+                'displayMode': {
+                    'value': 'minimal'
+                },
+                'position' :{
+                    'value': page.cart.extensions.sliderType.get(0)
+                }
+            } %}
+            <div class="offcanvas-cart-vertical-product-slider">
+                {% sw_include '@Storefront/storefront/element/cms-element-cart-product-slider.html.twig' with {
+                    elements: page.cart.extensions.sliderProducts.all ,
+                    sliderConfig: config,
+                } %}
+            </div>
+
+            <div class="offcanvas-cart-content">
+                {{ parent() }}
+            </div>
+        </div>
+    {% elseif page.cart.extensions.sliderType.get(0) == "horizontal" and page.cart.extensions.sliderProducts.all %}
+        <div class="offcanvas-cart-content">
+            {{ parent() }}
+        </div>
+    {% else %}
+        {{ parent() }}
+    {% endif %}
+
+{% endblock %}

@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/shopware/platform/master/src/Core/System/SystemConfig/Schema/config.xsd">
+
+    <card>
+        <title lang="de-DE">Cross-Selling-Name</title>
+        <title>Cross-Selling Name</title>
+
+        <input-field type="text">
+            <name>proxaAccessoriesProductGroupName</name>
+            <label lang="de-DE">Bitte geben Sie den Namen der Cross-Selling-Gruppe der Produkte für "Zubehör" ein.</label>
+            <label>Please type name of the cross-selling-group of the products for "Accessories"</label>
+            <required>true</required>
+        </input-field>
+
+        <input-field type="text">
+            <name>proxaSimilarArticlesProductGroupName</name>
+            <label lang="de-DE">Bitte geben Sie den Namen der Cross-Selling-Gruppe der Produkte für "Ähnliche Artikel" ein.</label>
+            <label>Please type name of the cross-selling-group of the products for "Similar Articles"</label>
+            <required>true</required>
+        </input-field>
+    </card>
+
+    <card>
+        <title lang="de-DE">Ajax Cart</title>
+        <title>Ajax Cart</title>
+
+        <input-field type="bool">
+            <name>proxaShowOnlyAccessoriesAjaxCart</name>
+            <label lang="de-DE">Nur Zubehör anzeigen? (ajax cart)</label>
+            <label>Show only accessories (ajax cart)</label>
+            <defaultValue>0</defaultValue>
+        </input-field>
+
+        <input-field type="bool">
+            <name>proxaShowSimilarAjaxCart</name>
+            <label lang="de-DE">Ähnliche Artikel anzeigen wenn kein Zubehör vorhanden ist? (ajax cart)</label>
+            <label>Show similar articles when no accessories are set? (ajax cart)</label>
+            <defaultValue>0</defaultValue>
+        </input-field>
+
+        <input-field type="single-select">
+            <name>proxaAjaxSliderType</name>
+            <options>
+                <option>
+                    <id>vertical</id>
+                    <name>Vertical</name>
+                    <name lang="de-DE">Vertikal</name>
+                </option>
+                <option>
+                    <id>horizontal</id>
+                    <name>Horizontal</name>
+                    <name lang="de-DE">Horizontal</name>
+                </option>
+            </options>
+            <label lang="de-DE">Ajax Cart Slider Ausrichtung (ajax cart)</label>
+            <label>Ajax Cart Slider Orientation (ajax cart)</label>
+            <defaultValue>vertical</defaultValue>
+        </input-field>
+
+        <component name="sw-entity-multi-id-select">
+            <name>proxaArticlesAjaxCart</name>
+            <entity>product</entity>
+            <label lang="de-DE">Konkrete Produkte für das Cross-Selling definieren (ajax cart)</label>
+            <label>Define specific products for the cross-selling (ajax cart)</label>
+        </component>
+
+        <component name="sw-entity-multi-id-select">
+            <name>proxaProductStreamAjaxCart</name>
+            <entity>product_stream</entity>
+            <label lang="de-DE">Dynamische produktgruppe als Fallback hinterlegen (ajax cart)</label>
+            <label>Add dynamic product group as Fallback (ajax cart)</label>
+            <helpText lang="de-DE">Wenn kein Zubehör &amp; ähnliche Artikel sind definiert</helpText>
+            <helpText>When no accessories &amp; similar articles are defined</helpText>
+        </component>
+    </card>
+    <card>
+        <title>Checkout Cart</title>
+        <title lang="de-DE">Checkout Cart</title>
+
+        <input-field type="bool">
+            <name>proxaShowOnlyAccessoriesBasket</name>
+            <label lang="de-DE">Nur Zubehör anzeigen? (/checkout/cart)</label>
+            <label>Show only accessories (/checkout/cart)</label>
+            <defaultValue>0</defaultValue>
+        </input-field>
+
+        <input-field type="bool">
+            <name>proxaShowSimilarBasket</name>
+            <label lang="de-DE">Ähnliche Artikel anzeigen wenn kein Zubehör vorhanden ist? (/checkout/cart)</label>
+            <label>Show similar articles when no accessories are set? (/checkout/cart)</label>
+            <defaultValue>0</defaultValue>
+        </input-field>
+
+        <component name="sw-entity-multi-id-select">
+            <name>proxaArticlesBasket</name>
+            <entity>product</entity>
+            <label lang="de-DE">Konkrete Produkte für das Cross-Selling definieren (/checkout/cart)</label>
+            <label>Define specific products for the cross-selling (/checkout/cart)</label>
+        </component>
+
+        <component name="sw-entity-multi-id-select">
+            <name>proxaProductStreamBasket</name>
+            <entity>product_stream</entity>
+            <label lang="de-DE">Dynamische produktgruppe als Fallback hinterlegen (/checkout/cart)</label>
+            <label>Add dynamic product group as Fallback (/checkout/cart)</label>
+            <helpText lang="de-DE">Wenn kein Zubehör &amp; ähnliche Artikel sind definiert</helpText>
+            <helpText>When no accessories &amp; similar articles are defined</helpText>
+        </component>
+    </card>
+    <card>
+        <title lang="de-DE">Schaltfläche "In den Warenkorb" anzeigen</title>
+        <title>Add to Cart button</title>
+
+        <input-field type="bool">
+            <name>proxaDisplayBuyButton</name>
+            <label lang="de-DE">Schaltfläche "In den Warenkorb" anzeigen</label>
+            <label>Show "Add to Cart" button</label>
+            <defaultValue>0</defaultValue>
+        </input-field>
+    </card>
+</config>
+
+

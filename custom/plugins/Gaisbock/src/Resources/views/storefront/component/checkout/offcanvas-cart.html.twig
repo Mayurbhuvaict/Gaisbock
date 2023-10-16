@@ -1,0 +1,34 @@
+{% sw_extends '@Storefront/storefront/component/checkout/offcanvas-cart.html.twig' %}
+
+{% block utilities_offcanvas1 %}
+        {% if page.cart.extensions.sliderType.get(0) == "horizontal" and page.cart.extensions.sliderProducts.all %}
+        <div class="offcanvas-cart-content">
+            {% block utilities_offcanvas_meta %}
+                {% set isAjaxOffcanvas = true %}
+
+                {{ parent() }}
+            {% endblock %}
+
+            {% block utilities_offcanvas_close_text %}
+
+                {{ "checkout.continueShopping"|trans|sw_sanitize }}
+            {% endblock %}
+
+            {% block utilities_offcanvas_close_icon %}
+                {% sw_icon 'arrow-head-left' style { 'size': 'sm' } %}
+            {% endblock %}
+
+            {% block component_offcanvas_cart_header %}
+                {% set nmeConfig = config('NenoMarketingEssentials.config') %}
+                {% if nmeConfig != 'null' or nmeConfig.freeShippingBarActive == true %}
+                {% sw_include '@Storefront/storefront/custom/nme-free-shipping-bar.html.twig' %}
+                {% endif %}
+                {{ parent() }}
+            {% endblock %}
+
+        </div>
+    {% else %}
+        {{ parent() }}
+    {% endif %}
+
+{% endblock %}

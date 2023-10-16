@@ -1,0 +1,88 @@
+<div class="neti-language-detector-template">
+    {% block neti_language_detector %}
+        <div id="neti-language-detector-modal" class="modal" tabindex="-1" role="dialog">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="neti-language-detector-title">{{ languages[targetLanguage.id].headline }}</h5>
+
+                        {% set isoCode = targetLanguage.translationCode.code|lower|split('-') %}
+                        {% set country = isoCode[0] %}
+                        {% set language = isoCode[1] %}
+                        <div class="languages-menu dropdown">
+                            <button
+                                    class="btn dropdown-toggle top-bar-nav-btn"
+                                    type="button"
+                                    id="languagesDropdown"
+                                    data-bs-toggle="dropdown"
+                                    aria-haspopup="true"
+                                    aria-expanded="false"
+                            >
+                                <div
+                                        class="top-bar-list-icon language-flag country-{{ country }} language-{{ language }}"
+                                        id="ld-modal-lang-flag"
+                                ></div>
+                                <span class="top-bar-nav-text" id="ld-modal-lang-name">{{ targetLanguage.name }}</span>
+                            </button>
+
+                            {% block ld_actions_languages_widget_form_items %}
+                                <div
+                                        class="top-bar-list dropdown-menu dropdown-menu-right"
+                                        aria-labelledby="languagesDropdown"
+                                >
+                                    {% for lDlanguage in languages %}
+                                        <div
+                                                class="top-bar-list-item dropdown-item{% if lDlanguage.language.id is same as(targetLanguage.id) %} item-checked{% endif %}"
+                                                title="{{ lDlanguage.language.translated.name }}"
+                                        >
+
+                                            {% block layout_header_actions_languages_widget_form_items_flag %}
+                                                {% set isoCode = lDlanguage.language.translationCode.code|lower|split('-') %}
+                                                {% set flagCountry = isoCode[0] %}
+                                                {% set flagLanguage = isoCode[1] %}
+
+                                                <label
+                                                        class="top-bar-list-label"
+                                                        for="languageDetectorLang-{{ lDlanguage.language.id }}"
+                                                >
+                                                    <input
+                                                            id="languageDetectorLang-{{ lDlanguage.language.id }}"
+                                                            class="top-bar-list-radio"
+                                                            value="{{ lDlanguage.language.id }}"
+                                                            name="languageId"
+                                                            type="radio"
+                                                            {% if lDlanguage.language.id is same as(targetLanguage.id) %} checked{% endif %}>
+                                                    <div class="top-bar-list-icon language-flag country-{{ flagCountry }} language-{{ flagLanguage }}"></div>
+                                                    {{ lDlanguage.language.name }}
+                                                </label>
+                                            {% endblock %}
+                                        </div>
+                                    {% endfor %}
+                                </div>
+                            {% endblock %}
+                        </div>
+                    </div>
+
+                    <div class="modal-body">
+                        <p class="neti-language-detector-text">{{ languages[targetLanguage.id].text|raw }}</p>
+                    </div>
+
+                    <div class="modal-footer">
+                        <a
+                                id="languageDetectorAccept"
+                                class="btn btn-primary"
+                                href="{{ url('frontend.language_detector.redirect', {'domainId': languages[targetLanguage.id].domain, 'route': languages[targetLanguage.id].route }) }}"
+                                data-language-detector='{"route": "{{ languages[targetLanguage.id].route }}", "domain": "{{ languages[targetLanguage.id].domain }}" }'
+                        >{{ languages[targetLanguage.id].buttonAccept }}</a>
+                        <button
+                                type="button"
+                                id="languageDetectorDecline"
+                                class="btn btn-secondary"
+                                data-bs-dismiss="modal"
+                        >{{ languages[targetLanguage.id].buttonDecline }}</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endblock %}
+</div>

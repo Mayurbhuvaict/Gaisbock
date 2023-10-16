@@ -1,0 +1,11 @@
+{% block sw_cms_element_faq %}
+    <div class="sw-cms-el-faq">
+        <sw-entity-single-select
+            :label="$tc('sw-cms.elements.faq.config.label')"
+            :placeholder="$tc('sw-cms.elements.faq.config.placeholder')"
+            entity="hueb_seo_faq_group"
+            v-model="element.config.group.value"
+            :value="faqGroup">
+        </sw-entity-single-select>
+    </div>
+{% endblock %}

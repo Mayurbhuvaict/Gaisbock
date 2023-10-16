@@ -1,0 +1,21 @@
+{
+  "solidInstagramElements": {
+    "general": {
+      "alert": {
+        "missingAccessToken": "Bitte trage einen gültigen Instagram Access Token in der Plugin Konfiguration ein.",
+        "errorWhileFetching": "Beim Laden deiner Instagram Daten ist ein Fehler aufgetreten."
+      },
+      "date": {
+        "secondsAgo": "Vor ein paar Sekunden",
+        "minutesAgo": "{1} Vor einer Minute|]1,Inf[ Vor %count% Minuten",
+        "hoursAgo": "{1} Vor einer Stunde|]1,Inf[ Vor %count% Stunden",
+        "daysAgo": "{1} Vor einem Tag|]1,Inf[ Vor %count% Tagen",
+        "formatMonthAndDay": "d. MMMM",
+        "formatFull": "d. MMMM Y"
+      }
+    },
+    "feed": {
+      "viewOnInstagram": "Auf Instagram ansehen"
+    }
+  }
+}

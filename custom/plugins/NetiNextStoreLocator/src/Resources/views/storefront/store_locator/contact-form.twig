@@ -1,0 +1,253 @@
+{% block neti_store_locator_contact %}
+    <div class="modal contact-form fade" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content" v-if="store">
+                <form
+                        action="{{ path('frontend.store_locator.contact') }}"
+                        id="neti-store-locator-contact-form"
+                        novalidate
+                        data-form-csrf-handler="true"
+                        ref="form"
+                        @submit.prevent="onSubmit"
+                        :class="{ 'was-validated': wasValidated }"
+                >
+                    <input type="hidden" name="storeId" v-model="store.id" />
+
+                    {% block neti_store_locator_contact_header %}
+                        <div class="modal-header">
+                            <h5 class="modal-title">
+                                {{ "neti-next-store-locator.index.contact.title"|trans }}
+                            </h5>
+
+                            <button
+                                    type="button"
+                                    class="btn-close close"
+                                    data-bs-dismiss="modal"
+                                    aria-label="Close"
+                            ></button>
+                        </div>
+                    {% endblock %}
+
+                    {% block neti_store_locator_contact_body %}
+                        <div class="modal-body">
+                            {% block neti_store_locator_contact_body_success_alert %}
+                                <template v-if="isSuccess">
+                                    {% sw_include '@Storefront/storefront/utilities/alert.html.twig' with {
+                                        type: "success",
+                                        content: "neti-next-store-locator.index.contact.successText"|trans
+                                    } %}
+                                </template>
+                            {% endblock %}
+
+                            {% block neti_store_locator_contact_body_error_alert %}
+                                <template v-if="isError">
+                                    {% sw_include '@Storefront/storefront/utilities/alert.html.twig' with {
+                                        type: "danger",
+                                        content: "neti-next-store-locator.index.contact.errorText"|trans
+                                    } %}
+                                </template>
+                            {% endblock %}
+
+                            {% block neti_store_locator_contact_form %}
+
+                                {% for key, field in page.contactFormFields %}
+                                    {% if field.type == 'textfield' %}
+                                        <div class="form-group">
+                                            <label for="{{ field.id }}">
+                                                {{ field.translated.label }}
+                                            </label>
+                                            <input
+                                                    type="text"
+                                                    class="form-control"
+                                                    id="{{ field.id }}"
+                                                    name="{{ field.id }}"
+                                                    {% if field.required %}required{% endif %}
+                                                    data-field="{{ field.id }}"
+                                            />
+                                        </div>
+                                    {% elseif field.type == 'textarea' %}
+                                        <div class="form-group">
+                                            <label for="{{ field.id }}">
+                                                {{ field.translated.label }}
+                                            </label>
+                                            <textarea
+                                                    class="form-control"
+                                                    id="{{ field.id }}"
+                                                    name="{{ field.id }}"
+                                                    {% if field.required %}required{% endif %}
+                                                data-field="{{ field.id }}"
+                                            ></textarea>
+                                        </div>
+                                    {% elseif field.type == 'checkbox' %}
+                                        <div class="custom-control custom-checkbox">
+                                            <input
+                                                    class="custom-control-input"
+                                                    type="checkbox"
+                                                    value=""
+                                                    id="{{ field.id }}"
+                                                    name="{{ field.id }}"
+                                                    data-field="{{ field.id }}"
+                                            >
+                                            <label class="custom-control-label" for="{{ field.id }}">
+                                                {{ field.translated.label }}
+                                            </label>
+                                        </div>
+                                    {% elseif field.type == 'radio' %}
+                                        <label>
+                                            {{ field.translated.label }}
+                                        </label>
+                                        {% for key, value in field.translated.value|split(';') %}
+                                            <div class="custom-control custom-radio">
+                                                <input
+                                                        type="radio"
+                                                        id="{{ field.id ~ key }}"
+                                                        name="{{ field.id }}"
+                                                        class="custom-control-input"
+                                                        {% if field.required %}required{% endif %}
+                                                        data-field="{{ field.id }}"
+                                                        value="{{ value }}"
+                                                >
+                                                <label class="custom-control-label" for="{{ field.id ~ key }}">
+                                                    {{ value }}
+                                                </label>
+                                            </div>
+                                        {% endfor %}
+                                    {% elseif field.type == 'select' %}
+                                        <div class="form-group">
+                                            <label for="{{ field.id }}">
+                                                {{ field.translated.label }}
+                                            </label>
+                                            <select
+                                                    class="form-select"
+                                                    id="{{ field.id }}"
+                                                    name="{{ field.id }}"
+                                                    {% if field.required %}required{% endif %}
+                                                    data-field="{{ field.id }}"
+                                            >
+                                                <option selected disabled>
+                                                    {{ "neti-next-store-locator.index.contact.selectPlaceholder"|trans }}
+                                                </option>
+
+                                                {% for value in field.translated.value|split(';') %}
+                                                    <option value="{{ value }}">{{ value }}</option>
+                                                {% endfor %}
+                                            </select>
+                                        </div>
+                                    {% elseif field.type == 'subject' %}
+                                        <div class="form-group">
+                                            <label for="{{ field.id }}">
+                                                {{ field.translated.label }}
+                                            </label>
+                                            {% if page.contactSubjectOptions %}
+                                                <select
+                                                        class="form-select"
+                                                        id="{{ field.id }}"
+                                                        name="{{ field.id }}"
+                                                        {% if field.required %}required{% endif %}
+                                                        data-field="{{ field.id }}"
+                                                >
+                                                    <option selected disabled>
+                                                        {{ "neti-next-store-locator.index.contact.selectPlaceholder"|trans }}
+                                                    </option>
+
+                                                    {% for value in page.contactSubjectOptions %}
+                                                        <option value="{{ value }}">{{ value }}</option>
+                                                    {% endfor %}
+                                                </select>
+                                            {% else %}
+                                                <input
+                                                        type="text"
+                                                        class="form-control"
+                                                        id="{{ field.id }}"
+                                                        name="{{ field.id }}"
+                                                        {% if field.required %}required{% endif %}
+                                                        data-field="{{ field.id }}"
+                                                />
+                                            {% endif %}
+                                        </div>
+                                    {% elseif field.type == 'email' %}
+                                        <div class="form-group">
+                                            <label for="{{ field.id }}">
+                                                {{ field.translated.label }}
+                                            </label>
+                                            <input
+                                                    type="email"
+                                                    class="form-control"
+                                                    id="{{ field.id }}"
+                                                    name="{{ field.id }}"
+                                                    {% if field.required %}required{% endif %}
+                                                    data-field="{{ field.id }}"
+                                            />
+                                        </div>
+                                    {% elseif field.type == 'email_copy' %}
+                                        <div class="custom-control custom-checkbox">
+                                            <input
+                                                    class="custom-control-input"
+                                                    type="checkbox"
+                                                    value=""
+                                                    id="{{ field.id }}"
+                                                    name="{{ field.id }}"
+                                                    data-field="{{ field.id }}"
+                                            >
+                                            <label class="custom-control-label" for="{{ field.id }}">
+                                                {{ "neti-next-store-locator.index.contact.emailCopyLabel"|trans }}
+                                            </label>
+                                        </div>
+                                    {% elseif field.type == 'file_upload' %}
+                                        <div class="form-group">
+                                            <label for="{{ field.id }}">
+                                                {{ field.translated.label }}
+                                            </label>
+                                            <input
+                                                    type="file"
+                                                    class="form-control"
+                                                    id="{{ field.id }}"
+                                                    name="{{ field.id }}"
+                                                    {% if field.required %}required{% endif %}
+                                                    data-field="{{ field.id }}"
+                                                    data-allowed-types="{{ field.value }}"
+                                                    ref="fileUpload_{{ field.id }}"
+                                            />
+
+                                            <span v-if="invalidUploadFields['{{ field.id }}']" class="invalid-file-type-error">
+                                                {{ "neti-next-store-locator.index.contact.invalidFileTypeError"|trans }}{{ field.value }}
+                                            </span>
+                                        </div>
+                                    {% else %}
+                                        {{ field.type }}
+                                    {% endif %}
+                                {% endfor %}
+                            {% endblock %}
+
+                            {% block neti_store_locator_contact_privacy %}
+                                {% set neti_privacy_content %}
+                                    {% sw_include '@Storefront/storefront/component/privacy-notice.html.twig' %}
+                                {% endset %}
+
+                                {{ neti_privacy_content|replace({'data-url': 'data-neti-url'})|raw }}
+                            {% endblock %}
+                        </div>
+                    {% endblock %}
+
+                    {% block neti_store_locator_contact_footer %}
+                        <div class="modal-footer">
+                            <button class="btn btn-secondary" data-bs-dismiss="modal" type="reset" v-if="!isLoading">
+                                {{ "neti-next-store-locator.index.contact.buttonAbort"|trans }}
+                            </button>
+                            <button
+                                    class="btn btn-primary" type="submit" v-if="!isLoading"
+                            >
+                                {{ "neti-next-store-locator.index.contact.buttonSubmit"|trans }}
+                            </button>
+                            <div class="spinner-border spinner" role="status" v-if="isLoading">
+                                <span class="visually-hidden">
+                                    {{ "neti-next-store-locator.index.contact.loadingText"|trans }}
+                                </span>
+                            </div>
+                        </div>
+                    {% endblock %}
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}

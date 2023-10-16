@@ -1,0 +1,44 @@
+{
+    "neti-store-locator": {
+        "filter": {
+            "title": "Filter",
+            "description": "",
+            "buttonSave": "Save",
+            "buttonAbort": "Afbreken",
+            "buttonAdd": "Filter toevoegen",
+            "buttonRemove": "Verwijder",
+            "buttonRefreshIndex": "Index verversen",
+            "emptyInfo": "Nog geen filters aangemaakt. Klik op de knop aan de rechterkant om een nieuwe filter toe te voegen.",
+            "editInfoAlternativeLanguage": "Opmerking: U heeft een alternatieve taal geselecteerd. Als u een nieuw filter wilt toevoegen, moet u eerst de standaardtaal selecteren.",
+            "editInfoNewFilter": "Opmerking: De taalkeuze is tijdelijk uitgeschakeld omdat u momenteel een nieuw filter hebt toegevoegd. Opslaan of verwijderen om de taalkeuze weer te activeren.",
+            "titlePlaceholder": "Nieuw filter",
+            "detail": {
+                "titleLabel": "Titel",
+                "activeLabel": "Actief",
+                "valueTypeLabel": "Type",
+                "displayTypeLabel": "Weergeven als",
+                "tagsLabel": "Tags",
+                "customFieldLabel": "Aangepast veld"
+            },
+            "value-type": {
+                "tag": "Tag",
+                "customField": "Aangepast veld"
+            },
+            "display-type": {
+                "checkbox": "Checkbox",
+                "radio": "Radio",
+                "select": "Select"
+            },
+            "refresh-index-modal": {
+                "title": "Filter indexering",
+                "infoText": "Indexering is vereist als er filters van het type aangepaste velden bestaan. <br /> <br /> Bij het aanmaken/bewerken/verwijderen van relevante filters of het wijzigen van de vrije tekstvelden in winkels, moet indexering worden uitgevoerd zodat de filters correct worden weergegeven in de storefront.",
+                "filterText": "Momenteel kunnen <strong>{count}</strong> filters worden geïndexeerd.",
+                "step1": "Voorbereiding",
+                "step2": "Indexering...",
+                "step3": "Afgewerkt",
+                "buttonIndex": "Begin met indexeren",
+                "buttonAbort": "Afbreken"
+            }
+        }
+    }
+}

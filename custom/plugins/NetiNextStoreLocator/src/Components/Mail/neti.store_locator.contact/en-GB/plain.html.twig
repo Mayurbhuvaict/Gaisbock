@@ -1,0 +1,10 @@
+Hello {{ store.label }},
+
+You have a new contact request. See information below.
+
+{% for key, value in values %}
+    {{ key }}: {{ value }}
+{% endfor %}
+
+Yours sincerely
+Your {{ shopName }} team

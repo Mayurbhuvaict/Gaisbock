@@ -1,0 +1,21 @@
+{% sw_extends '@Storefront/storefront/layout/meta.html.twig' %}
+{% set tabs = page.extensions.nme_tabs.elements %}
+
+ {% block layout_head_favicon %}
+     {% if tabs %}
+         <link rel="shortcut icon" href="{{ tabs|first.mediaImage|sw_encode_media_url }}">
+     {% else %}
+         {{ parent() }}
+     {% endif %}
+ {% endblock %}
+
+{% block layout_head_title %}
+    {% if tabs %}
+        <title itemprop="name">
+            {{ tabs|first.text }}
+        </title>
+    {% else %}
+        {{ parent() }}
+    {% endif %}
+{% endblock %}
+

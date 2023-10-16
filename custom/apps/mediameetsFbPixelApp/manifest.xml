@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<manifest xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/shopware/platform/trunk/src/Core/Framework/App/Manifest/Schema/manifest-2.0.xsd">
+    <meta>
+        <name>mediameetsFbPixelApp</name>
+        <label>Facebook Pixel Integration</label>
+        <label lang="de-DE">Facebook Pixel einbinden</label>
+        <description>Captures 8 standard and 4 custom events with the Facebook Pixel to optimize conversions, use dynamic product ads and create custom audiences in the Facebook ad manager</description>
+        <description lang="de-DE">Misst 12 Ereignisse mit dem Facebook Pixel zur Optimierung von Conversions, der Nutzung von Dynamic Product Ads und dem Anlegen von Custom Audiences im Werbeanzeigenmanager von Facebook</description>
+        <author>media:meets GmbH</author>
+        <copyright>(c) by media:meets GmbH</copyright>
+        <version>3.0.0</version>
+        <icon>Resources/config/plugin.png</icon>
+        <license>proprietary</license>
+    </meta>
+    <permissions>
+        <read>order</read>
+        <read>order_customer</read>
+        <read>order_line_item</read>
+        <read>customer</read>
+    </permissions>
+    <cookies>
+        <group>
+            <snippet-name>cookie.groupMarketing</snippet-name>
+            <snippet-description>cookie.groupMarketingDescription</snippet-description>
+            <entries>
+                <cookie>
+                    <snippet-name>cookie.mediameetsFacebookPixel</snippet-name>
+                    <snippet-description>cookie.mediameetsFacebookPixelDescription</snippet-description>
+                    <cookie>mediameets-facebook-pixel-enabled</cookie>
+                    <value>true</value>
+                    <expiration>90</expiration>
+                </cookie>
+            </entries>
+        </group>
+    </cookies>
+</manifest>

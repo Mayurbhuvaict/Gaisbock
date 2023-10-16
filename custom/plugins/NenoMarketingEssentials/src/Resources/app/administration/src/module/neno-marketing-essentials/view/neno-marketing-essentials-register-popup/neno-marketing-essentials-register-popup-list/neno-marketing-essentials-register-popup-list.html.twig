@@ -1,0 +1,31 @@
+{% block neno_marketing_essentials_register_popup_list %}
+<div class="neno-marketing-essentials-register-popup-list">
+    <sw-card position-identifier="nme-register-pop-up-list">
+        <sw-container columns="1fr 1fr 1fr">
+            <sw-button
+                :disabled="false"
+                :square="false"
+                :block="false"
+                :isLoading="false"
+                variant="primary"
+                :routerLink="{ name: 'neno.marketing.essentials.overview.registerPopupCreate' }"
+                style="text-align: center"
+            >
+                {{ $t('neno-marketing-essentials.register-popup.general.addPopupButtonText') }}
+            </sw-button>
+        </sw-container>
+        <sw-container class="neno-marketing-essentials-register-popup-list--listing-container">
+            <sw-entity-listing
+                class="neno-marketing-essentials-register-popup-list--listing"
+                v-if="registerPopup"
+                :items="registerPopup"
+                :repository="repository"
+                :showSelection="false"
+                :columns="columns"
+                detailRoute="neno.marketing.essentials.overview.registerPopupDetail"
+            >
+            </sw-entity-listing>
+        </sw-container>
+    </sw-card>
+</div>
+{% endblock %}

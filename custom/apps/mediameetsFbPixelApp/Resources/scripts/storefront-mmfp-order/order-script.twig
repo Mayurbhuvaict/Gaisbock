@@ -1,0 +1,46 @@
+{% block response %}
+    {% set orderId = hook.request.orderId %}
+    {% set customer = hook.salesChannelContext.customer %}
+
+    {% set responseData = {} %}
+
+    {% if customer !== null && orderId !== null %}
+
+        {% set criteria = {
+            'filter': [
+                { 'field': 'id', 'type': 'equals', 'value': orderId },
+                { 'field': 'orderCustomer.customer.id', 'type': 'equalsAny', 'value': customer.id }
+            ],
+            'associations': {
+                'orderCustomer': {
+                    'associations': {
+                        'customer': {}
+                    }
+                },
+                'lineItems': {}
+            }
+        } %}
+
+        {% set order = services.repository.search('order', criteria).first %}
+
+        {% if order !== null %}
+            {% set contents = [] %}
+            {% set totalItems = 0 %}
+
+            {% foreach order.lineItems as lineItem %}
+                {% set contents = contents|merge([{ 'id': lineItem.payload.productNumber, 'quantity': lineItem.quantity }]) %}
+                {% set totalItems = totalItems + lineItem.quantity %}
+            {% endforeach %}
+
+            {% set responseData = {
+                'totalPrice': order.price.totalPrice,
+                'positionPrice': order.price.positionPrice,
+                'contents': contents,
+                'totalItems': totalItems
+            } %}
+        {% endif %}
+    {% endif %}
+
+    {% set response = services.response.json(responseData) %}
+    {% do hook.setResponse(response) %}
+{% endblock %}

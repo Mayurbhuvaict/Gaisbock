@@ -1,0 +1,243 @@
+{% block neno_marketing_essentials_conversion_bar_detail %}
+<div class="neno-marketing-essentials-conversion-bar-detail">
+    <sw-sales-channel-switch
+        class="neno-marketing-essentials-conversion-bar-detail--sales-channel-switch"
+        @change-sales-channel-id="onSalesChannelChanged"
+        @change="onSalesChannelChanged"
+        :value="currentSalesChannelId"
+    >
+    </sw-sales-channel-switch>
+
+    <sw-card position-identifier="nme-conversion-bar-language">
+        <sw-button-process
+            :isLoading="isLoading"
+            :processSuccess="processSuccess"
+            @process-finish="saveFinish"
+            variant="primary"
+            @click="onClickSave"
+        >
+            {{ $t('neno-marketing-essentials.general.saveButtonText') }}
+        </sw-button-process>
+
+        <sw-language-switch
+            class="neno-marketing-essentials-register-popup-detail--language-switch"
+            ref="langSwitch"
+            :saveChangesFunction="saveOnLanguageChange"
+            :abortChangeFunction="abortOnLanguageChange"
+            @on-change="onChangeLanguage"
+            :disabled="!conversionBar || conversionBar.isNew()"
+        >
+        </sw-language-switch>
+    </sw-card>
+
+    <sw-language-info
+        v-if="conversionBar"
+        :entityDescription="'Conversion Bar'"
+        :isNewEntity="conversionBar.isNew()">
+    </sw-language-info>
+
+    <sw-card
+        :isLoading="isLoading"
+        v-if="conversionBar"
+        :title="$t('neno-marketing-essentials.conversion-bar.detail.generalCardLabel')"
+        position-identifier="nme-conversion-bar-general"
+    >
+        <sw-switch-field
+            :label="$t('neno-marketing-essentials.conversion-bar.detail.conversionBarActiveLabel')"
+            v-model="conversionBar.active"
+        >
+        </sw-switch-field>
+
+        <sw-number-field
+            :label="$t('neno-marketing-essentials.conversion-bar.detail.sliderMaxWidthLabel')"
+            numberType="int"
+            v-model="conversionBar.sliderMaxWidth"
+        >
+        </sw-number-field>
+    </sw-card>
+
+    <sw-card
+        :isLoading="isLoading"
+        v-if="conversionBar"
+        :title="$t('neno-marketing-essentials.conversion-bar.detail.ColorCardLabel')"
+        position-identifier="nme-conversion-bar-color"
+    >
+        <sw-colorpicker
+            :label="$t('neno-marketing-essentials.conversion-bar.detail.backgroundColorLabel')"
+            v-model="conversionBar.backgroundColor"
+        >
+        </sw-colorpicker>
+
+        <sw-colorpicker
+            :label="$t('neno-marketing-essentials.conversion-bar.detail.textColorLabel')"
+            v-model="conversionBar.textColor"
+        >
+        </sw-colorpicker>
+
+        <sw-colorpicker
+            :label="$t('neno-marketing-essentials.conversion-bar.detail.linkColorLabel')"
+            v-model="conversionBar.linkColor"
+        >
+        </sw-colorpicker>
+    </sw-card>
+
+    <sw-card
+        :isLoading="isLoading"
+        v-if="conversionBar"
+        :title="$t('neno-marketing-essentials.conversion-bar.detail.text1CardLabel')"
+        position-identifier="nme-conversion-bar-text-1"
+    >
+        <sw-text-field
+            :label="$t('neno-marketing-essentials.conversion-bar.detail.text1Label')"
+            :placeholder="(conversionBar.translated && conversionBar.translated.text01) || ''"
+            v-model="conversionBar.text01"
+        >
+        </sw-text-field>
+
+        <sw-switch-field
+            :label="$t('neno-marketing-essentials.conversion-bar.detail.Text1ClickableLabel')"
+            v-model="conversionBar.text01Clickable"
+        >
+        </sw-switch-field>
+
+        <sw-text-field
+            :label="$t('neno-marketing-essentials.conversion-bar.detail.Text1ClickableUrlLabel')"
+            :placeholder="(conversionBar.translated && conversionBar.translated.text01Url) || ''"
+            v-model="conversionBar.text01Url"
+        >
+        </sw-text-field>
+
+        <sw-switch-field
+            :label="$t('neno-marketing-essentials.conversion-bar.detail.Text1PrimaryActionLabel')"
+            v-model="conversionBar.text01PrimaryActive"
+        >
+        </sw-switch-field>
+
+        <sw-text-field
+            :label="$t('neno-marketing-essentials.conversion-bar.detail.Text1PrimaryActionTextLabel')"
+            :placeholder="(conversionBar.translated && conversionBar.translated.text01Primary) || ''"
+            v-model="conversionBar.text01Primary"
+        >
+        </sw-text-field>
+
+        <sw-text-field
+            :label="$t('neno-marketing-essentials.conversion-bar.detail.Text1PrimaryActionUrlLabel')"
+            :placeholder="(conversionBar.translated && conversionBar.translated.text01PrimaryUrl) || ''"
+            v-model="conversionBar.text01PrimaryUrl"
+        >
+        </sw-text-field>
+
+        <sw-media-field
+            :label="$t('neno-marketing-essentials.conversion-bar.detail.Text1IconLabel')"
+            v-model="conversionBar.text01MediaId"
+        >
+        </sw-media-field>
+    </sw-card>
+
+    <sw-card
+        :isLoading="isLoading"
+        v-if="conversionBar"
+        :title="$t('neno-marketing-essentials.conversion-bar.detail.text2CardLabel')"
+        position-identifier="nme-conversion-bar-text-2"
+    >
+        <sw-text-field
+            :label="$t('neno-marketing-essentials.conversion-bar.detail.text2Label')"
+            :placeholder="(conversionBar.translated && conversionBar.translated.text02) || ''"
+            v-model="conversionBar.text02"
+        >
+        </sw-text-field>
+
+        <sw-switch-field
+            :label="$t('neno-marketing-essentials.conversion-bar.detail.Text2ClickableLabel')"
+            v-model="conversionBar.text02Clickable"
+        >
+        </sw-switch-field>
+
+        <sw-text-field
+            :label="$t('neno-marketing-essentials.conversion-bar.detail.Text2ClickableUrlLabel')"
+            :placeholder="(conversionBar.translated && conversionBar.translated.text02Url) || ''"
+            v-model="conversionBar.text02Url"
+        >
+        </sw-text-field>
+
+        <sw-switch-field
+            :label="$t('neno-marketing-essentials.conversion-bar.detail.Text2PrimaryActionLabel')"
+            v-model="conversionBar.text02PrimaryActive"
+        >
+        </sw-switch-field>
+
+        <sw-text-field
+            :label="$t('neno-marketing-essentials.conversion-bar.detail.Text2PrimaryActionTextLabel')"
+            :placeholder="(conversionBar.translated && conversionBar.translated.text02Primary) || ''"
+            v-model="conversionBar.text02Primary"
+        >
+        </sw-text-field>
+
+        <sw-text-field
+            :label="$t('neno-marketing-essentials.conversion-bar.detail.Text2PrimaryActionUrlLabel')"
+            :placeholder="(conversionBar.translated && conversionBar.translated.text02PrimaryUrl) || ''"
+            v-model="conversionBar.text02PrimaryUrl"
+        >
+        </sw-text-field>
+
+        <sw-media-field
+            :label="$t('neno-marketing-essentials.conversion-bar.detail.Text2IconLabel')"
+            v-model="conversionBar.text02MediaId"
+        >
+        </sw-media-field>
+    </sw-card>
+
+    <sw-card
+        :isLoading="isLoading"
+        v-if="conversionBar"
+        :title="$t('neno-marketing-essentials.conversion-bar.detail.text3CardLabel')"
+        position-identifier="nme-conversion-bar-text-3"
+    >
+        <sw-text-field
+            :label="$t('neno-marketing-essentials.conversion-bar.detail.text3Label')"
+            :placeholder="(conversionBar.translated && conversionBar.translated.text03) || ''"
+            v-model="conversionBar.text03"
+        >
+        </sw-text-field>
+
+        <sw-switch-field
+            :label="$t('neno-marketing-essentials.conversion-bar.detail.Text3ClickableLabel')"
+            v-model="conversionBar.text03Clickable"
+        >
+        </sw-switch-field>
+
+        <sw-text-field
+            :label="$t('neno-marketing-essentials.conversion-bar.detail.Text3ClickableUrlLabel')"
+            :placeholder="(conversionBar.translated && conversionBar.translated.text03Url) || ''"
+            v-model="conversionBar.text03Url"
+        >
+        </sw-text-field>
+
+        <sw-switch-field
+            :label="$t('neno-marketing-essentials.conversion-bar.detail.Text3PrimaryActionLabel')"
+            v-model="conversionBar.text03PrimaryActive"
+        >
+        </sw-switch-field>
+
+        <sw-text-field
+            :label="$t('neno-marketing-essentials.conversion-bar.detail.Text3PrimaryActionTextLabel')"
+            :placeholder="(conversionBar.translated && conversionBar.translated.text03Primary) || ''"
+            v-model="conversionBar.text03Primary"
+        >
+        </sw-text-field>
+
+        <sw-text-field
+            :label="$t('neno-marketing-essentials.conversion-bar.detail.Text3PrimaryActionUrlLabel')"
+            :placeholder="(conversionBar.translated && conversionBar.translated.text03PrimaryUrl) || ''"
+            v-model="conversionBar.text03PrimaryUrl"
+        >
+        </sw-text-field>
+
+        <sw-media-field
+            :label="$t('neno-marketing-essentials.conversion-bar.detail.Text3IconLabel')"
+            v-model="conversionBar.text03MediaId"
+        >
+        </sw-media-field>
+    </sw-card>
+</div>
+{% endblock %}

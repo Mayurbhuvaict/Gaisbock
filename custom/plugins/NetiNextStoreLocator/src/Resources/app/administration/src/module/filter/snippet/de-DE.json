@@ -1,0 +1,44 @@
+{
+    "neti-store-locator": {
+        "filter": {
+            "title": "Filter",
+            "description": "",
+            "buttonSave": "Speichern",
+            "buttonAbort": "Abbrechen",
+            "buttonAdd": "Filter hinzufügen",
+            "buttonRemove": "Löschen",
+            "buttonRefreshIndex": "Index aktualisieren",
+            "emptyInfo": "Keine Filter angelegt. Klicke auf den Button rechts, um einen Filter hinzuzufügen.",
+            "editInfoAlternativeLanguage": "Hinweis: Sie haben eine alternative Sprache ausgewählt. Wenn Sie einen neuen Filter hinzufügen wollen, müssen Sie zunächst die Standard-Sprache auswählen.",
+            "editInfoNewFilter": "Hinweis: Die Sprachauswahl wurde vorübergehend deaktiviert, da Sie aktuell einen neuen Filter hinzugefügt haben. Speichern oder löschen Sie diesen, damit die Sprachauswal wieder aktiviert wird.",
+            "titlePlaceholder": "Neuer Filter",
+            "detail": {
+                "titleLabel": "Titel",
+                "activeLabel": "Aktiv",
+                "valueTypeLabel": "Typ",
+                "displayTypeLabel": "Anzeigen als",
+                "tagsLabel": "Tags",
+                "customFieldLabel": "Freitext-Feld"
+            },
+            "value-type": {
+                "tag": "Tag",
+                "customField": "Freitext-Feld"
+            },
+            "display-type": {
+                "checkbox": "Checkbox",
+                "radio": "Radio",
+                "select": "Select"
+            },
+            "refresh-index-modal": {
+                "title": "Indexierung der Filter",
+                "infoText": "Die Indexierung wird benötigt, wenn Filter vom Typ \"Freitext-Feld\" existieren. <br /> <br /> Bei Anlage / Bearbeitung / Löschung von relevanten Filtern oder Änderung der Freitextfelder in Filialen, sollte eine Indexierung ausgeführt werden, damit die Filter in der Storefront korrekt ausgespielt werden.",
+                "filterText": "Es können aktuell <strong>{count}</strong> Filter indexiert werden.",
+                "step1": "Vorbereitung",
+                "step2": "Indexierung läuft...",
+                "step3": "Fertig",
+                "buttonIndex": "Indexierung starten",
+                "buttonAbort": "Abbrechen"
+            }
+        }
+    }
+}

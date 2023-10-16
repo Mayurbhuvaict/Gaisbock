@@ -1,0 +1,279 @@
+{% block neno_marketing_essentials_conversion_bar %}
+    {% set nmeConvBar = page.extensions.nme_conversion_bar|first %}
+
+    {% if nmeConvBar %}
+
+    {% set validMediaIds = [
+        nmeConvBar.text01MediaId,
+        nmeConvBar.text02MediaId,
+        nmeConvBar.text03MediaId,
+    ]|filter(id => id is not null) %}
+
+    {% set customMediaCollection = searchMedia(validMediaIds, context.context) %}
+
+    {% set text01Icon = customMediaCollection.get(nmeConvBar.text01MediaId) %}
+    {% set text02Icon = customMediaCollection.get(nmeConvBar.text02MediaId) %}
+    {% set text03Icon = customMediaCollection.get(nmeConvBar.text03MediaId) %}
+
+    {% if nmeConvBar.active %}
+        <div class="nme-conversion-bar">
+            <div class="nme-conversion-bar--container mobile" data-conversion-bar>
+                {% if nmeConvBar.translated.text01 or nmeConvBar.translated.text01Primary %}
+                    <div class="nme-conversion-bar--item">
+                        {% if text01Icon %}
+                            <img alt="icon" class="nme-conversion-bar--item-icon" src="{{ text01Icon.url }}">
+                        {% endif %}
+                        {% if nmeConvBar.translated.text01 %}
+                            <div class="nme-conversion-bar--item-text">
+                                {% if nmeConvBar.text01Clickable %}
+                                    <a
+                                        href="{{ nmeConvBar.translated.text01Url }}"
+                                        title="{{ nmeConvBar.translated.text01 }}"
+                                        target="_blank"
+                                        rel="noopener"
+                                    >
+                                        {{ nmeConvBar.translated.text01 }}
+                                    </a>
+                                {% else %}
+                                    <p>{{ nmeConvBar.translated.text01 }}</p>
+                                {% endif %}
+                            </div>
+                        {% endif %}
+                        {% if nmeConvBar.text01PrimaryActive %}
+                            <div class="nme-conversion-bar--item-primary">
+                                <a
+                                    href="{{ nmeConvBar.translated.text01PrimaryUrl }}"
+                                    title="{{ nmeConvBar.translated.text01Primary }}"
+                                    target="_blank"
+                                    rel="noopener"
+                                >
+                                    {{ nmeConvBar.translated.text01Primary }}
+                                </a>
+                            </div>
+                        {% endif %}
+                    </div>
+                {% endif %}
+                {% if nmeConvBar.translated.text02 or nmeConvBar.translated.text02Primary %}
+                    <div class="nme-conversion-bar--item">
+                        {% if text02Icon %}
+                            <img alt="icon" class="nme-conversion-bar--item-icon" src="{{ text02Icon.url }}">
+                        {% endif %}
+                        {% if nmeConvBar.translated.text02 %}
+                            <div class="nme-conversion-bar--item-text">
+                                {% if nmeConvBar.text02Clickable %}
+                                    <a
+                                        href="{{ nmeConvBar.translated.text02Url }}"
+                                        title="{{ nmeConvBar.translated.text02 }}"
+                                        target="_blank"
+                                        rel="noopener"
+                                    >
+                                        {{ nmeConvBar.translated.text02 }}
+                                    </a>
+                                {% else %}
+                                    <p>{{ nmeConvBar.translated.text02 }}</p>
+                                {% endif %}
+                            </div>
+                        {% endif %}
+                        {% if nmeConvBar.text02PrimaryActive %}
+                            <div class="nme-conversion-bar--item-primary">
+                                <a
+                                    href="{{ nmeConvBar.translated.text02PrimaryUrl }}"
+                                    title="{{ nmeConvBar.translated.text02Primary }}"
+                                    target="_blank"
+                                    rel="noopener"
+                                >
+                                    {{ nmeConvBar.translated.text02Primary }}
+                                </a>
+                            </div>
+                        {% endif %}
+                    </div>
+                {% endif %}
+                {% if nmeConvBar.translated.text03 or nmeConvBar.translated.text03Primary %}
+                    <div class="nme-conversion-bar--item">
+                        {% if text03Icon %}
+                            <img alt="icon" class="nme-conversion-bar--item-icon" src="{{ text03Icon.url }}">
+                        {% endif %}
+                        {% if nmeConvBar.translated.text03 %}
+                            <div class="nme-conversion-bar--item-text">
+                                {% if nmeConvBar.text03Clickable %}
+                                    <a
+                                        href="{{ nmeConvBar.translated.text03Url }}"
+                                        title="{{ nmeConvBar.translated.text03 }}"
+                                        target="_blank"
+                                        rel="noopener"
+                                    >
+                                        {{ nmeConvBar.translated.text03 }}
+                                    </a>
+                                {% else %}
+                                    <p>{{ nmeConvBar.translated.text03 }}</p>
+                                {% endif %}
+                            </div>
+                        {% endif %}
+                        {% if nmeConvBar.text03PrimaryActive %}
+                            <div class="nme-conversion-bar--item-primary">
+                                <a
+                                    href="{{ nmeConvBar.translated.text03PrimaryUrl }}"
+                                    title="{{ nmeConvBar.translated.text03Primary }}"
+                                    target="_blank"
+                                    rel="noopener"
+                                >
+                                    {{ nmeConvBar.translated.text03Primary }}
+                                </a>
+                            </div>
+                        {% endif %}
+                    </div>
+                {% endif %}
+            </div>
+            <div class="nme-conversion-bar--container desktop">
+                {% if nmeConvBar.translated.text01 or nmeConvBar.translated.text01Primary %}
+                    <div class="nme-conversion-bar--item">
+                        {% if text01Icon %}
+                            <img alt="icon" class="nme-conversion-bar--item-icon" src="{{ text01Icon.url }}">
+                        {% endif %}
+                        {% if nmeConvBar.translated.text01 %}
+                            <div class="nme-conversion-bar--item-text">
+                                {% if nmeConvBar.text01Clickable %}
+                                    <a
+                                        href="{{ nmeConvBar.translated.text01Url }}"
+                                        title="{{ nmeConvBar.translated.text01 }}"
+                                        target="_blank"
+                                        rel="noopener"
+                                    >
+                                        {{ nmeConvBar.translated.text01 }}
+                                    </a>
+                                {% else %}
+                                    <p>{{ nmeConvBar.translated.text01 }}</p>
+                                {% endif %}
+                            </div>
+                        {% endif %}
+                        {% if nmeConvBar.text01PrimaryActive %}
+                            <div class="nme-conversion-bar--item-primary">
+                                <a
+                                    href="{{ nmeConvBar.translated.text01PrimaryUrl }}"
+                                    title="{{ nmeConvBar.translated.text01Primary }}"
+                                    target="_blank"
+                                    rel="noopener"
+                                >
+                                    {{ nmeConvBar.translated.text01Primary }}
+                                </a>
+                            </div>
+                        {% endif %}
+                    </div>
+                {% endif %}
+                {% if nmeConvBar.translated.text02 or nmeConvBar.translated.text02Primary %}
+                    <div class="nme-conversion-bar--item">
+                        {% if text02Icon %}
+                            <img alt="icon" class="nme-conversion-bar--item-icon" src="{{ text02Icon.url }}">
+                        {% endif %}
+                        {% if nmeConvBar.translated.text02 %}
+                            <div class="nme-conversion-bar--item-text">
+                                {% if nmeConvBar.text02Clickable %}
+                                    <a
+                                        href="{{ nmeConvBar.translated.text02Url }}"
+                                        title="{{ nmeConvBar.translated.text02 }}"
+                                        target="_blank"
+                                        rel="noopener"
+                                    >
+                                        {{ nmeConvBar.translated.text02 }}
+                                    </a>
+                                {% else %}
+                                    <p>{{ nmeConvBar.translated.text02 }}</p>
+                                {% endif %}
+                            </div>
+                        {% endif %}
+                        {% if nmeConvBar.text02PrimaryActive %}
+                            <div class="nme-conversion-bar--item-primary">
+                                <a
+                                    href="{{ nmeConvBar.translated.text02PrimaryUrl }}"
+                                    title="{{ nmeConvBar.translated.text02Primary }}"
+                                    target="_blank"
+                                    rel="noopener"
+                                >
+                                    {{ nmeConvBar.translated.text02Primary }}
+                                </a>
+                            </div>
+                        {% endif %}
+                    </div>
+                {% endif %}
+                {% if nmeConvBar.translated.text03 or nmeConvBar.translated.text03Primary %}
+                    <div class="nme-conversion-bar--item">
+                        {% if text03Icon %}
+                            <img alt="icon" class="nme-conversion-bar--item-icon" src="{{ text03Icon.url }}">
+                        {% endif %}
+                        {% if nmeConvBar.translated.text03 %}
+                            <div class="nme-conversion-bar--item-text">
+                                {% if nmeConvBar.text03Clickable %}
+                                    <a
+                                        href="{{ nmeConvBar.translated.text03Url }}"
+                                        title="{{ nmeConvBar.translated.text03 }}"
+                                        target="_blank"
+                                        rel="noopener"
+                                    >
+                                        {{ nmeConvBar.translated.text03 }}
+                                    </a>
+                                {% else %}
+                                    <p>{{ nmeConvBar.translated.text03 }}</p>
+                                {% endif %}
+                            </div>
+                        {% endif %}
+                        {% if nmeConvBar.text03PrimaryActive %}
+                            <div class="nme-conversion-bar--item-primary">
+                                <a
+                                    href="{{ nmeConvBar.translated.text03PrimaryUrl }}"
+                                    title="{{ nmeConvBar.translated.text03Primary }}"
+                                    target="_blank"
+                                    rel="noopener"
+                                >
+                                    {{ nmeConvBar.translated.text03Primary }}
+                                </a>
+                            </div>
+                        {% endif %}
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+        <style>
+            {% set minWidth = nmeConvBar.sliderMaxWidth + 1 %}
+
+            .nme-conversion-bar--container.desktop {
+                display: none;
+            }
+
+            @media all and (min-width: {{ minWidth }}px) {
+                .nme-conversion-bar--container.desktop {
+                    display: block;
+                }
+            }
+
+            .nme-conversion-bar--container.mobile {
+                display: block;
+            }
+
+            @media all and (min-width: {{ minWidth }}px) {
+                .nme-conversion-bar--container.mobile {
+                    display: none;
+                }
+            }
+
+            .nme-conversion-bar {
+                {% if nmeConvBar.backgroundColor %}
+                    background-color: {{ nmeConvBar.backgroundColor }};
+                {% endif %}
+            }
+
+            .nme-conversion-bar--item-text p,
+            .nme-conversion-bar--item-text a {
+                {% if nmeConvBar.textColor %}
+                    color: {{ nmeConvBar.textColor }}
+                {% endif %}
+            }
+
+            .nme-conversion-bar--item-primary a {
+                {% if nmeConvBar.linkColor %}
+                    color: {{ nmeConvBar.linkColor }};
+                {% endif %}
+            }
+        </style>
+    {% endif %}
+    {% endif %}
+{% endblock %}

@@ -1,0 +1,162 @@
+{% block element_gaisbock_image_addmore_text %}
+    {% set config = element.fieldConfig.elements %}
+    {% set active = '' %}
+    <div class="element-gaisbock-image-add-more-text" id="{{ element.config.heading.value|replace({' ': ''}) }}">
+        {% if element.fieldConfig.elements.position.value == true %}
+            {% set active = 'active' %}
+        {% endif %}
+        <div class="element-gaisbock-image-add-more-text--inner {{ active }} ">
+            {% block sw_cms_element_image_content %}
+                <div class="cms-element-{{ element.type }}{% if config.verticalAlign.value %} has-vertical-alignment{% endif %}">
+                    {% block element_product_slider_alignment %}
+                        {% block element_image_container %}
+                            {% if element.config.url.value %}
+                                <div class="cms-image-container is-{{ element.translated.config.displayMode.value }}">
+                                    <img src="{{ element.config.url.value }}" alt="">
+                                </div>
+                            {% endif %}
+                        {% endblock %}
+                    {% endblock %}
+                </div>
+            {% endblock %}
+            {% block sw_cms_element_text %}
+                <div class="element-gaisbock-image-add-more-text__text">
+                    <h1>{{ element.config.heading.value }}</h1>
+                    <em>{{ element.config.subTitle.value }}</em>
+                    <p>{{ element.config.content.value|raw }}</p>
+                    {% if element.config.dropdown.value === true %}
+                        {% if app.request.locale === 'de-DE' %}
+                            <a href="javascript:void(0)" id="readMore" class="readmore-btn" data-language-value="{{ app.request.locale }}" data-diffrent = "{{ element.id }}">Mehr erfahren</a>
+                        {% elseif app.request.locale === 'fr-FR' %}
+                            <a href="javascript:void(0)" id="readMore" class="readmore-btn" data-language-value="{{ app.request.locale }}" data-diffrent = "{{ element.id }}">Lire la suite</a>
+                        {% else %}
+                            <a href="javascript:void(0)" id="readMore" class="readmore-btn" data-language-value="{{ app.request.locale }}" data-diffrent = "{{ element.id }}">Read More</a>
+                        {% endif %}
+                    {% endif %}
+                    <div id="gaisbock-addmore-section-{{ element.id }}" {% if element.config.dropdown.value === true %}style="display:none;"{% endif %}>
+                        <div class="element-gaisbock-image-addmore-text__images">
+                            <div class="gaisbock-text-line">
+                                <p>{{ element.config.subContent.value|raw }}</p>
+                                <h2>{{ element.config.subHeading.value }}</h2>
+                                <p>{{ element.config.subContentTwo.value|raw }}</p>
+                            </div>
+                            <div class="element-gaisbock-image-addmore-text__images_main">
+                                <div class="gaisbock-image-line">
+                                    <div class="gaisbock-image-inner">
+
+                                        {% if element.config.urlOne.value and element.config.titleOne.value %}
+                                        <a href="{{ element.config.productUrlOne.value }}" {% if element.config.newTabOne.value == true %} target="_blank"{% endif %}>
+                                            <img src="{{ element.config.urlOne.value }}" alt="">
+                                            <p>{{ element.config.titleOne.value }}</p>
+                                        </a>
+                                        {% endif %}
+                                    </div>
+                                    <div class="gaisbock-image-inner">
+
+                                        {% if element.config.urlTwo.value and element.config.titleTwo.value %}
+                                        <a href="{{ element.config.productUrlTwo.value }}" {% if element.config.newTabTwo.value == true %} target="_blank"{% endif %}>
+                                            <img src="{{ element.config.urlTwo.value }}" alt="">
+                                            <p>{{ element.config.titleTwo.value }}</p>
+                                        </a>
+                                        {% endif %}
+                                    </div>
+                                    <div class="gaisbock-image-inner">
+
+                                        {% if element.config.urlThree.value and element.config.titleThree.value %}
+                                        <a href="{{ element.config.productUrlThree.value }}" {% if element.config.newTabThree.value == true %} target="_blank"{% endif %}>
+                                            <img src="{{ element.config.urlThree.value }}" alt="">
+                                            <p>{{ element.config.titleThree.value }}</p>
+                                        </a>
+                                        {% endif %}
+                                    </div>
+                                    <div class="gaisbock-image-inner">
+
+                                        {% if element.config.urlFour.value and element.config.titleFour.value %}
+                                        <a href="{{ element.config.productUrlFour.value }}" {% if element.config.newTabFour.value == true %} target="_blank"{% endif %}>
+                                            <img src="{{ element.config.urlFour.value }}" alt="">
+                                            <p>{{ element.config.titleFour.value }}</p>
+                                        </a>
+                                        {% endif %}
+                                    </div>
+                                    <div class="gaisbock-image-inner">
+
+                                        {% if element.config.urlFive.value and element.config.titleFive.value %}
+                                        <a href="{{ element.config.productUrlFive.value }}" {% if element.config.newTabFive.value == true %} target="_blank"{% endif %}>
+                                            <img src="{{ element.config.urlFive.value }}" alt="">
+                                            <p>{{ element.config.titleFive.value }}</p>
+                                        </a>
+                                        {% endif %}
+                                    </div>
+                                    <div class="gaisbock-image-inner">
+
+                                        {% if element.config.urlSix.value and element.config.titleSix.value %}
+                                        <a href="{{ element.config.productUrlSix.value }}" {% if element.config.newTabSix.value == true %} target="_blank"{% endif %}>
+                                            <img src="{{ element.config.urlSix.value }}" alt="">
+                                            <p>{{ element.config.titleSix.value }}</p>
+                                        </a>
+                                        {% endif %}
+                                    </div>
+                                    <div class="gaisbock-image-inner">
+
+                                        {% if element.config.urlSeven.value and element.config.titleSeven.value %}
+                                        <a href="{{ element.config.productUrlSeven.value }}" {% if element.config.newTabSeven.value == true %} target="_blank"{% endif %}>
+                                            <img src="{{ element.config.urlSeven.value }}" alt="">
+                                            <p>{{ element.config.titleSeven.value }}</p>
+                                        </a>
+                                        {% endif %}
+                                    </div>
+                                    <div class="gaisbock-image-inner">
+
+                                        {% if element.config.urlEight.value and element.config.titleEight.value %}
+                                        <a href="{{ element.config.productUrlEight.value }}" {% if element.config.newTabEight.value == true %} target="_blank"{% endif %}>
+                                            <img src="{{ element.config.urlEight.value }}" alt="">
+                                            <p>{{ element.config.titleEight.value }}</p>
+                                        </a>
+                                        {% endif %}
+                                    </div>
+                                    <div class="gaisbock-image-inner">
+
+                                        {% if element.config.urlNine.value and element.config.titleNine.value %}
+                                        <a href="{{ element.config.productUrlNine.value }}" {% if element.config.newTabNine.value == true %} target="_blank"{% endif %}>
+                                            <img src="{{ element.config.urlNine.value }}" alt="">
+                                            <p>{{ element.config.titleNine.value }}</p>
+                                        </a>
+                                        {% endif %}
+                                    </div>
+                                    <div class="gaisbock-image-inner">
+                                        {% if element.config.urlTen.value and element.config.titleTen.value %}
+                                        <a href="{{ element.config.productUrlTen.value }}" {% if element.config.newTabTen.value == true %} target="_blank"{% endif %}>
+                                            <img src="{{ element.config.urlTen.value }}" alt="">
+                                            <p>{{ element.config.titleTen.value }}</p>
+                                        </a>
+                                        {% endif %}
+                                    </div>
+                                    <div class="gaisbock-image-inner">
+
+                                        {% if element.config.urlEleven.value and element.config.titleEleven.value %}
+                                        <a href="{{ element.config.productUrlEleven.value }}" {% if element.config.newTabEleven.value == true %} target="_blank"{% endif %}>
+                                            <img src="{{ element.config.urlEleven.value }}" alt="">
+                                            <p>{{ element.config.titleEleven.value }}</p>
+                                        </a>
+                                        {% endif %}
+                                    </div>
+                                    <div class="gaisbock-image-inner">
+                                        {% if element.config.urlTwelve.value and element.config.titleTwelve.value %}
+                                        <a href="{{ element.config.productUrlTwelve.value }}" {% if element.config.newTabTwelve.value == true %} target="_blank"{% endif %}>
+                                            <img src="{{ element.config.urlTwelve.value }}" alt="">
+                                            <p>{{ element.config.titleTwelve.value }}</p>
+                                        </a>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endblock %}
+        </div>
+    </div>
+    <script>
+
+    </script>
+{% endblock %}

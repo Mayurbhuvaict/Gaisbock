@@ -1,0 +1,28 @@
+{% block response %}
+    {% if hook.salesChannelContext.customer is not null %}
+        {% set customer = {
+            guest: hook.salesChannelContext.customer.guest,
+            orderCount: hook.salesChannelContext.customer.orderCount,
+            email: hook.salesChannelContext.customer.email,
+            firstName: hook.salesChannelContext.customer.firstName,
+            lastName: hook.salesChannelContext.customer.lastName,
+            birthday: hook.salesChannelContext.customer.birthday,
+            salutation: {
+                salutationKey: hook.salesChannelContext.customer.salutation.salutationKey
+            },
+            activeShippingAddress: {
+                phoneNumber: hook.salesChannelContext.customer.activeShippingAddress.phoneNumber,
+                city: hook.salesChannelContext.customer.activeShippingAddress.city,
+                zipcode: hook.salesChannelContext.customer.activeShippingAddress.zipcode,
+                country: {
+                    iso: hook.salesChannelContext.customer.activeShippingAddress.country.iso
+                }
+            }
+        } %}
+    {% else %}
+        {% set customer = null %}
+    {% endif %}
+
+    {% set response = services.response.json({ customer: customer }) %}
+    {% do hook.setResponse(response) %}
+{% endblock %}

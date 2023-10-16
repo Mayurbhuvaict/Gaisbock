@@ -1,0 +1,13 @@
+{
+    "neti-next-language-detector": {
+        "modal": {
+            "headline": "Configure your language:",
+            "text": "Would you like to switch to <span>%LANG%</span>?",
+            "buttonAccept": "Yes",
+            "buttonDecline": "No"
+        },
+        "cookie": {
+            "name": "NetiLanguageDetector"
+        }
+    }
+}

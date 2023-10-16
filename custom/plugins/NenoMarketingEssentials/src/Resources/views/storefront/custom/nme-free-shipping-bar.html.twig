@@ -1,0 +1,39 @@
+{% set nmeConfig = config('NenoMarketingEssentials.config') %}
+
+{% block neno_marketing_essentials_free_shipping_bar %}
+
+    {% set validMediaIds = [
+        nmeConfig.freeShippingBarIcon,
+    ]|filter(id => id is not null) %}
+    {% set customMediaCollection = searchMedia(validMediaIds, context.context) %}
+    {% set freeShippingBarIcon = customMediaCollection.get(nmeConfig.freeShippingBarIcon) %}
+
+    {% if nmeConfig.freeShippingBarActive %}
+        <div class="nme-free-shipping-bar"
+             data-free-shipping-bar
+             data-free-shipping-goal="{{ nmeConfig.freeShippingBarGoal }}"
+             data-base-url="{{ url('frontend.home.page') }}"
+             data-hide-bar-when-no-items="{{ nmeConfig.onlyShowIfProductAdded ? '1' : '' }}"
+        >
+            <div class="nme-free-shipping-bar--item">
+                {% if nmeConfig.freeShippingBarIcon %}
+                    <img class="nme-free-shipping-bar--icon" alt="icon" src="{{ freeShippingBarIcon.url }}">
+                {% endif %}
+                <div class="nme-free-shipping-bar__message"></div>
+            </div>
+        </div>
+        <style>
+            .nme-free-shipping-bar {
+                {% if nmeConfig.freeShippingBarBackgroundColor %}
+                    background-color: {{ nmeConfig.freeShippingBarBackgroundColor }};
+                {% endif %}
+            }
+
+            .nme-free-shipping-bar__message {
+                {% if nmeConfig.freeShippingBarTextColor %}
+                    color: {{ nmeConfig.freeShippingBarTextColor }};
+                {% endif %}
+            }
+        </style>
+    {% endif %}
+{% endblock %}

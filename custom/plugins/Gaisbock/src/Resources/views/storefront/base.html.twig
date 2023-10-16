@@ -1,0 +1,711 @@
+{% sw_extends '@Storefront/storefront/base.html.twig' %}
+{# Set variable to "true" to enable HMR (hot page reloading) mode #}
+{% set isHMRMode = app.request.headers.get('hot-reload-mode') and app.environment == 'dev' %}
+
+{% block base_doctype %}
+<!DOCTYPE html>
+{% endblock %}
+
+{% block base_html %}
+<html lang="{{ page.header.activeLanguage.translationCode.code }}"
+      itemscope="itemscope"
+      itemtype="https://schema.org/WebPage">
+{% endblock %}
+
+{% block base_head %}
+    {% sw_include '@Storefront/storefront/layout/meta.html.twig' %}
+{% endblock %}
+
+{% block base_body %}
+
+<body class="header-hover {% block base_body_classes %}{{ parent() }}{% set TanmarNgInfiniteScrollingData = context.context.extensions.TanmarNgInfiniteScrolling %}{% if TanmarNgInfiniteScrollingData.active %} is-tanmar-infinite-scrolling {% endif %}{% endblock %} {% if app.request.attributes.get('navigationId') != null %}gaisbock-{{ app.request.attributes.get('navigationId') }}{% endif %}"
+      id="gaisbock-cookie" data-gaisbock-addmore-section data-gaisbock-image-with-addmore-slider data-gaisbock-animation>
+<script src="https://cdn.jsdelivr.net/npm/tiny-slider@2.9.3/dist/tiny-slider.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tiny-slider/2.9.3/tiny-slider.css">
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+ <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+<div class="gaisbock-sticky-language-switcher">
+    {% if  page.header.languages.count > 1 %}
+    <form method="post"
+          action="{{ path('frontend.checkout.switch-language') }}"
+          class="language-form"
+          data-form-auto-submit="true">
+
+
+        {% set isoCode = page.header.activeLanguage.translationCode.code|lower|split('-') %}
+        {% set language = isoCode[0] %}
+        {% set country = isoCode[1] %}
+
+        <div class="languages-menu dropdown">
+            <button class="btn dropdown-toggle top-bar-nav-btn"
+                    type="button"
+                    id="languagesDropdown-{{ position }}"
+                    data-bs-toggle="dropdown"
+                    aria-haspopup="true"
+                    aria-expanded="false">
+                <span class="top-bar-nav-text">{{ page.header.activeLanguage.name|capitalize|slice(0,1) }}</span>
+            </button>
+
+            <div class="top-bar-list dropdown-menu dropdown-menu-right"
+                 aria-labelledby="languagesDropdown-{{ position }}">
+                {% for language in  page.header.languages %}
+                    <div class="top-bar-list-item dropdown-item{% if language.id is same as(page.header.activeLanguage.id) %} item-checked{% endif %}"
+                         title="{{ language.translated.name }}">
+
+
+                        {% set isoCode = language.translationCode.code|lower|split('-') %}
+                        {% set flagLanguage = isoCode[0] %}
+                        {% set flagCountry = isoCode[1] %}
+
+                        <label class="top-bar-list-label"
+                               for="{{ position }}-{{ language.id }}">
+                            <input id="{{ position }}-{{ language.id }}"
+                                   class="top-bar-list-radio"
+                                   value="{{ language.id }}"
+                                   name="languageId"
+                                   type="radio"
+                                    {% if language.id is same as(page.header.activeLanguage.id) %} checked{% endif %}>
+                            {{ language.translationCode.code|capitalize|slice(0,1) }}
+                        </label>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+
+        <input name="redirectTo" type="hidden" value="{{ app.request.get('_route') }}"/>
+
+        {% for key, value in app.request.attributes.get('_route_params') %}
+            <input name="redirectParameters[{{ key }}]" type="hidden" value="{{ value }}">
+        {% endfor %}
+
+    </form>
+    {% endif %}
+</div>
+{% block base_body_inner %}
+    {% block base_noscript %}
+        <noscript class="noscript-main">
+            {% sw_include '@Storefront/storefront/utilities/alert.html.twig' with {
+                type: 'info',
+                content: 'general.noscriptNotice'|trans|sw_sanitize,
+                iconCache: false
+            } %}
+        </noscript>
+    {% endblock %}
+
+    {% block base_header %}
+        <header class="header-main gaisbock-header-main" id="mainNavigationHover" data-gaisbock-add-remove-class>
+            {% block base_header_inner %}
+                <div class="container" data-flyout-menu>
+
+                    {% sw_include '@Storefront/storefront/layout/header/header.html.twig' %}
+                </div>
+            {% endblock %}
+        </header>
+    {% endblock %}
+
+    {% block base_offcanvas_navigation %}
+        {% if page.header.navigation %}
+            <div class="d-none js-navigation-offcanvas-initial-content{% if context.salesChannel.navigationCategoryId == page.header.navigation.active.id %} is-root{% endif %}">
+                {% block base_offcanvas_navigation_inner %}
+                    {% sw_include '@Storefront/storefront/layout/navigation/offcanvas/navigation.html.twig' with { navigation: page.header.navigation } %}
+                {% endblock %}
+            </div>
+        {% endif %}
+    {% endblock %}
+
+    {% block base_main %}
+        <main class="content-main" id="mainNavigationHoverMainClass">
+            {% block base_flashbags %}
+                <div class="flashbags container">
+                    {% for type, messages in app.flashes %}
+                        {% sw_include '@Storefront/storefront/utilities/alert.html.twig' with { type: type, list: messages } %}
+                    {% endfor %}
+                </div>
+            {% endblock %}
+
+            {% block base_main_inner %}
+                <div class="container">
+                    {% block base_main_container %}
+                        <div class="container-main" data-gaisbock-header-hover-add-class>
+                            {% if app.request.get('_route') === 'frontend.account.login.page' %}
+                                <div class="breadcrumb cms-breadcrumb container">
+                            <nav aria-label="breadcrumb" style="margin-left: -16px;">
+                                <ol class="breadcrumb">
+                                    <li class="breadcrumb-item">
+                                        <a href="{{ app.request.attributes.get('sw-storefront-url') }}" class="breadcrumb-link">{{ 'account.home.title'|trans|sw_sanitize }}</a>
+                                    </li>
+                                    <div class="breadcrumb-placeholder">
+                                        {% sw_icon 'arrow-medium-right' style { 'size': 'fluid', 'pack': 'solid'} %}
+                                    </div>
+                                    <a href="{{ app.request.attributes.get('sw-storefront-url') }}/{{ app.request.pathInfo }}" class="breadcrumb-link  is-active" title="{{ 'account.registrationTitle'|trans|sw_sanitize }}" itemprop="item">
+                                        <link itemprop="url" href="{{ app.request.attributes.get('sw-storefront-url') }}">
+                                        <span class="breadcrumb-title" itemprop="name">{{ 'account.registrationTitle'|trans|sw_sanitize }}</span>
+                                    </a>
+                                </ol>
+                            </nav>
+                                </div>
+                            {% endif %}
+                            {% if app.request.get('_route') === 'frontend.account.customer-group-registration.page' %}
+                            <div class="breadcrumb cms-breadcrumb container">
+                                <nav aria-label="breadcrumb" style="margin-left: -16px;">
+                                    <ol class="breadcrumb">
+                                        <li class="breadcrumb-item">
+                                            <a href="{{ app.request.attributes.get('sw-storefront-url') }}" class="breadcrumb-link">
+                                                <span class="breadcrumb-title" itemprop="name">{{ 'account.home.title'|trans|sw_sanitize }}</span>
+                                            </a>
+                                        </li>
+                                        <div class="breadcrumb-placeholder">
+                                            {% sw_icon 'arrow-medium-right' style { 'size': 'fluid', 'pack': 'solid'} %}
+                                        </div>
+                                        <a href="{{ app.request.attributes.get('sw-storefront-url') }}/{{ app.request.pathInfo }}" class="breadcrumb-link  is-active" title="{{ 'account.patner'|trans|sw_sanitize }}" itemprop="item">
+                                            <link itemprop="url" href="{{ app.request.get('_route') }}">
+                                            <span class="breadcrumb-title" itemprop="name">{{ 'account.patner'|trans|sw_sanitize }}</span>
+                                        </a>
+
+                                    </ol>
+                                </nav>
+                            </div>
+                            {% endif %}
+                            {% block base_breadcrumb %}
+                                {% sw_include '@Storefront/storefront/layout/breadcrumb.html.twig' with {
+                                    context: context,
+                                    category: page.product.seoCategory
+                                } only %}
+                            {% endblock %}
+                            {% block base_content %}{% endblock %}
+                        </div>
+                    {% endblock %}
+                </div>
+            {% endblock %}
+            
+        </main>
+    {% endblock %}
+
+    {% block base_footer %}
+        <footer class="footer-main">
+            {% block base_footer_inner %}
+                {% sw_include '@Storefront/storefront/layout/footer/footer.html.twig' %}
+            {% endblock %}
+        </footer>
+    {% endblock %}
+{% endblock %}
+
+{% block base_scroll_up %}
+    {% sw_include '@Storefront/storefront/layout/scroll-up.html.twig' %}
+{% endblock %}
+
+{% block base_cookie_permission %}
+    {% sw_include '@Storefront/storefront/layout/cookie/cookie-permission.html.twig' %}
+{% endblock %}
+
+{% block base_pseudo_modal %}
+    {% sw_include '@Storefront/storefront/component/pseudo-modal.html.twig' %}
+{% endblock %}
+
+{% block base_body_script %}
+{% block base_script_solid_ie %}
+    {% set accessToken = config('SolidInstagramElements.config.accessToken') %}
+
+    {% if accessToken.isValid %}
+    <script>
+        window.solidIEAT = "{{ accessToken.accessToken|reverse|replace({ 'A': '+', 'Z': '-' }) }}"
+        window.solidIEU = "{{ accessToken.username }}"
+        window.solidIEEM = "{{ 'solidInstagramElements.general.alert.errorWhileFetching'|trans }}"
+    </script>
+    {% endif %}
+{% endblock %}
+<script>
+        var slider1 = document.querySelector('.product-detail-cross-selling');
+        if (slider1) {
+            var slider1 = tns({
+                container: '.product-detail-cross-selling .gaisbock-product-sliders',
+                items: 3,
+                gutter:0,
+                autoplay: true,
+                autoplayButton: false,
+                autoplayButtonOutput: false,
+                nav: false,
+                controls: false,
+                autoplayTimeout:10000,
+                responsive: {
+                    320: {
+                        items: 1,
+                        controls: true,
+                        nav: true,
+                        loop:false
+                    },
+                    767: {
+                        controls: true,
+                        items: 2,
+                        nav: true,
+                        loop:false
+                    },
+                    992: {
+                        items: 3
+                    },
+                    1023: {
+                        items: 3
+                    }
+                }
+            });
+        }
+    </script>
+    <script>
+        var slider2 = document.querySelector('div#cs-productsSameCategory-tab-pane');
+        if (slider2) {
+            var slider2 = tns({
+                container: 'div#cs-productsSameCategory-tab-pane .gaisbock-product-sliders',
+                items: 3,
+                gutter:0,
+                autoplay: true,
+                autoplayButton: false,
+                autoplayButtonOutput: false,
+                nav: false,
+                controls: false,
+                autoplayTimeout:10000,
+                responsive: {
+                    320: {
+                        items: 1,
+                        controls: true,
+                        nav: false,
+                        loop:false
+                    },
+                    767: {
+                        controls: true,
+                        nav: false,
+                        items: 2,
+                        loop:false
+                    },
+                    992: {
+                        items: 3
+                    },
+                    1023: {
+                        items: 3
+                    }
+                }
+            });
+        }
+    </script>
+    <script>
+        window.onload = function () {
+            setTimeout(function () {
+                var slider3 = document.querySelector('div#cs-recentlyViewed-tab-pane');
+                if (slider3) {
+                   slider3 = tns({
+                        container: 'div#cs-recentlyViewed-tab-pane .gaisbock-product-sliders',
+                        items: 3,
+                        gutter: 0,
+                        autoplay: true,
+                        autoplayButton: false,
+                        autoplayButtonOutput: false,
+                        nav: false,
+                        controls: false,
+                        autoplayTimeout: 10000,
+                        responsive: {
+                            320: {
+                                items: 1,
+                                controls: true,
+                                nav: true,
+                                loop: false
+                            },
+                            767: {
+                                controls: true,
+                                nav: true,
+                                items: 2,
+                                loop: false
+                            },
+                            992: {
+                                items: 3
+                            },
+                            1023: {
+                                items: 3
+                            }
+                        }
+                    });
+                }
+            },1000);
+        };
+    </script>
+    <script>
+        var slider4 = document.querySelector('div#cs-customersAlsoViewed-tab-pane');
+        if (slider4) {
+            var slider4 = tns({
+                container: 'div#cs-customersAlsoViewed-tab-pane .gaisbock-product-sliders',
+                items: 3,
+                gutter:0,
+                autoplay: true,
+                autoplayButton: false,
+                autoplayButtonOutput: false,
+                nav: false,
+                controls: false,
+                autoplayTimeout:10000,
+                responsive: {
+                    320: {
+                        items: 1,
+                        controls: true,
+                        nav: true,
+                        loop:false
+                    },
+                    767: {
+                        controls: true,
+                        items: 2,
+                        nav: true,
+                        loop:false
+                    },
+                    992: {
+                        items: 3
+                    },
+                    1023: {
+                        items: 3
+                    }
+                }
+            });
+        }
+        var customersAlsoBought = document.querySelector('div#cs-customersAlsoBought-tab-pane');
+        if (customersAlsoBought) {
+            var slider4 = tns({
+                container: 'div#cs-customersAlsoBought-tab-pane .gaisbock-product-sliders',
+                items: 3,
+                gutter:0,
+                autoplay: true,
+                autoplayButton: false,
+                autoplayButtonOutput: false,
+                nav: false,
+                controls: false,
+                autoplayTimeout:10000,
+                responsive: {
+                    320: {
+                        items: 1,
+                        controls: true,
+                        nav: true,
+                        loop:false
+                    },
+                    767: {
+                        controls: true,
+                        items: 2,
+                        nav: true,
+                        loop:false
+                    },
+                    992: {
+                        items: 3
+                    },
+                    1023: {
+                        items: 3
+                    }
+                }
+            });
+        }
+    </script>
+        <script>
+        var slider5 = document.querySelector('.three-product-section');
+        if (slider5) {
+            var slider5 = tns({
+                container: '.three-product-section .gaisbock-product-sliders',
+                items: 1,
+                gutter:0,
+                autoplay: true,
+                nav: true,
+                controls: true,
+                autoplayButton: false,
+                autoplayButtonOutput: false,
+                autoplayTimeout:10000,
+            });
+        }
+    </script>
+            <script>
+        var slider6 = document.querySelector('.three-sections-two');
+        if (slider6) {
+            var slider6 = tns({
+                container: '.three-sections-two .gaisbock-product-sliders',
+                items: 1,
+                gutter:0,
+                autoplay: true,
+                nav: true,
+                controls: true,
+                autoplayButton: false,
+                autoplayButtonOutput: false,
+                autoplayTimeout:10000,
+            });
+        }
+    </script>
+            <script>
+        var slider7 = document.querySelector('.three-sections-three');
+        if (slider7) {
+            var slider7 = tns({
+                container: '.three-sections-three .gaisbock-product-sliders',
+                items: 1,
+                gutter:0,
+                autoplay: true,
+                nav: true,
+                controls: true,
+                autoplayButton: false,
+                autoplayButtonOutput: false,
+                autoplayTimeout:10000,
+            });
+        }
+    </script>
+    {% set TanmarNgInfiniteScrollingData = context.context.extensions.TanmarNgInfiniteScrolling %}
+    {% if TanmarNgInfiniteScrollingData.active %}
+        <script>
+            ;(function(){
+                var _pages = parseInt('{{ TanmarNgInfiniteScrollingData.pages }}',10);
+
+                window._tanmarInfiniteScrolling = {
+                    version: '1.5.1',
+                    pages: isNaN(_pages) ? 0 : _pages,
+                    snippets: {
+                        prev: {
+                            btn: '{{ "tanmar-infinite-scrolling.prev.btn"|trans }}',
+                            navi: '{{ "tanmar-infinite-scrolling.prev.navi"|trans }}'
+                        },
+                        next: {
+                            btn: '{{ "tanmar-infinite-scrolling.next.btn"|trans }}',
+                            navi: '{{ "tanmar-infinite-scrolling.next.navi"|trans }}'
+                        }
+                    },
+                    customProduct: '{{ TanmarNgInfiniteScrollingData.customProduct }}',
+                    customPrepend: '{{ TanmarNgInfiniteScrollingData.customPrepend }}',
+                    customAppend: '{{ TanmarNgInfiniteScrollingData.customAppend }}',
+                    rootMargin: '{{ TanmarNgInfiniteScrollingData.rootMargin }}',
+                    threshold: '{{ TanmarNgInfiniteScrollingData.threshold }}',
+                    debug: {% if TanmarNgInfiniteScrollingData.debug %}true{% else %}false{% endif %},
+                    triggerAfterRenderResponseEvent: {% if TanmarNgInfiniteScrollingData.triggerAfterRenderResponseEvent %}true{% else %}false{% endif %},
+                    onlyObserveWithinListingWrapper: {% if TanmarNgInfiniteScrollingData.onlyObserveWithinListingWrapper %}true{% else %}false{% endif %},
+                    customPaginationSelector: '{{ TanmarNgInfiniteScrollingData.customPaginationSelector }}'
+                };
+
+            })();
+        </script>
+
+    
+    {% endif %}
+<!--     <script>
+        if (navigator.userAgent.indexOf('Safari') != -1 && navigator.userAgent.indexOf('Chrome') == -1) {
+            function rmNbsp() {
+                var options = document.getElementsByClassName('product-price')
+                for (index = 0; index < options.length; ++index) {
+                    options[index].innerHTML = options[index].innerHTML.replace(/\&nbsp;/g, '');
+                }
+            }
+            rmNbsp();
+        }
+    </script> -->
+<!--     <script>
+        var getBenner = document.querySelector(".home-banner .cms-element-gaisbock-text-image-slider");
+        if (getBenner !== null){
+            const mediaQuery = window.matchMedia('(max-width: 767px)')
+            if(mediaQuery.matches){
+                getBenner.style.height = (window.innerHeight + 120) +"px";
+            
+            }
+            else{
+                getBenner.style.height = (window.innerHeight) +"px";
+            }
+            
+        }
+    </script> -->
+    <script>
+        var getBenner = document.querySelector(".home-banner .cms-block-gaisbock-text-image-slider");
+        if (getBenner !== null){
+            const mediaQuery = window.matchMedia('(min-width: 992px)')
+            if(mediaQuery.matches){
+                getBenner.style.height = (window.innerHeight) +"px";
+            
+            }
+            else{
+                getBenner.style.height = (window.innerHeight + 275) +"px";
+            }
+            
+        }
+
+    </script>
+    <script>
+        var getBenner = document.querySelector(".home-banner.hidden-desktop .cms-block-gaisbock-text-image-slider");
+        var headeclass = document.querySelector(".header-main");
+        if (getBenner !== null){
+            const _mediaQuery = window.matchMedia('(max-width: 992px)')
+            const __mediaQuery = window.matchMedia('(max-width: 767px)')
+            if (__mediaQuery.matches){
+                getBenner.style.height = (window.innerHeight) +"px";
+            
+            } else if(_mediaQuery.matches){
+                getBenner.style.height = (window.innerHeight) +"px";
+            
+            }
+            else{
+                getBenner.style.height = (window.innerHeight) +"px";
+            }
+            
+        }
+        
+
+    </script>
+
+    <script type="text/javascript">
+        document.addEventListener("DOMContentLoaded", function() {
+            // Get the parent element of the existing divs
+            var parentElement = document.createElement("div");
+            var grandParent = document.querySelector(".is-act-home .cms-sections");
+            parentElement.classList.add("parent"); // Add a class to the parent div
+
+            // Get all the child div elements
+            var childDivs = document.querySelectorAll(".is-act-home .cms-sections > [class*='pos-'");
+
+            // Wrap each child div with the parent div
+            var notAlloweClass = ['pos-0','pos-1'];
+            for (var i = 0; i < childDivs.length; i++) {
+                var classList = childDivs[i].classList;
+                var allowToAppend = true;
+                for (var j = 0; j < notAlloweClass.length; j++) {
+                    if(classList.contains(notAlloweClass[j])) {
+                        allowToAppend = false;
+                    }
+
+                }
+                if(allowToAppend) {
+                    parentElement.appendChild(childDivs[i].cloneNode(true));
+                    childDivs[i].parentNode.removeChild(childDivs[i]);
+                }
+            }
+            // Add the parent div to the document
+            grandParent.appendChild(parentElement);
+            
+            var newrevealss = document.querySelectorAll(".reveal");
+            if (newrevealss !== null){
+                window.addEventListener('scroll', function() {
+                    for (var i = 0; i < newrevealss.length; i++) {
+                        var windowHeight = window.innerHeight;
+                        var elementTop = newrevealss[i].getBoundingClientRect().top;
+                        var elementVisible = 0;
+                        if (elementTop < windowHeight - elementVisible) {
+                            newrevealss[i].classList.add("active");
+                        } else {
+                            newrevealss[i].classList.remove("active");
+                        }
+                    }
+                });
+            }
+            var newreveals = document.querySelectorAll(".reveals");
+            if (newreveals !== null){
+                window.addEventListener('scroll', function() {
+                    for (var i = 0; i < newreveals.length; i++) {
+                        var windowHeight = window.innerHeight;
+                        var elementTop = newreveals[i].getBoundingClientRect().top;
+                        var elementVisible = 0;
+                        if (elementTop < windowHeight - elementVisible) {
+                            newreveals[i].classList.add("active");
+                        } else {
+                            newreveals[i].classList.remove("active");
+                        }
+                    }
+                });
+            }
+            const elementToScale = document.querySelector(".parent");
+
+            // Define the initial and maximum scale values
+            const initialScale = 1;
+            const maxScale = 1.05;
+
+            // Define the scroll threshold at which the scaling will be at its maximum
+            const scrollThreshold = window.innerHeight; // Adjust this value as needed
+
+            // Listen for the "scroll" event on the window
+            window.addEventListener("scroll", () => {
+              // Calculate the scaling factor based on the scroll position
+              const scrollY = window.scrollY;
+              const scale = Math.min(maxScale, 1 + (scrollY / scrollThreshold) * (maxScale - initialScale));
+
+              // Apply the scaling transformation to the element
+              elementToScale.style.transform = `scaleY(${scale})`;
+            });
+
+            const overlay = document.querySelectorAll('.overlay');
+            const content = document.querySelector('.home-banner');
+
+            window.addEventListener('scroll', () => {
+            // Calculate scroll progress
+            const scrollProgress = (window.scrollY / content.clientHeight);
+
+            // Calculate opacity based on scroll progress
+            const overlayOpacity = Math.min(1, scrollProgress * 1);
+
+            // Update overlay background color
+
+            for (var j = 0; j < overlay.length; j++) {
+                    overlay[j].style.backgroundColor = `rgba(0, 0, 0, ${overlayOpacity})`;
+
+                }
+
+            });
+        });
+    
+    </script>
+
+    <script type="text/javascript">
+        var innernewreveals = document.querySelectorAll(".reveals");
+        if (innernewreveals !== null){
+            window.addEventListener('scroll', function() {
+                for (var i = 0; i < innernewreveals.length; i++) {
+                    var windowHeight = window.innerHeight;
+                    var elementTop = innernewreveals[i].getBoundingClientRect().top;
+                    var elementVisible = 0;
+                    if (elementTop < windowHeight - elementVisible) {
+                        innernewreveals[i].classList.add("active");
+                    } else {
+                        innernewreveals[i].classList.remove("active");
+                    }
+                }
+            });
+        }
+    </script>
+    <script>
+        const header = document.querySelector(".gaisbock-header-main");
+        const extraDiv = document.querySelector(".main-navigation-menu");
+        // Variable to track the scroll direction
+        let lastScrollTop = 0;
+        let shouldApplyClasses = false;
+        // Function to handle the scroll event
+        function handleScroll() {
+            const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+            const flyout = document.querySelector(".is-open");
+            // Check if user has scrolled at least 200 pixels from the top
+            if (scrollTop >= 150) {
+                shouldApplyClasses = true;
+            } else {
+                shouldApplyClasses = false;
+            }
+
+            if (shouldApplyClasses) {
+                if (scrollTop > lastScrollTop) {
+                    // Scrolling down
+                    if (flyout !== null){
+                        header.classList.remove("hovered");
+                        flyout.classList.remove("is-open");
+                    }
+                    header.classList.remove('show-on-scroll');
+                    header.classList.add('is-surolling','hide-on-scroll');
+                } else {
+                    if (flyout !== null){
+                        header.classList.remove("hovered");
+                        flyout.classList.remove("is-open");
+                    }
+                    // Scrolling up
+                    header.classList.remove('hide-on-scroll');
+                    header.classList.add('is-sticky','is-surolling','show-on-scroll');
+                }
+            } else {
+                // Reset all classes when not scrolled 200 pixels
+                header.classList.remove('is-sticky', 'is-fixed', 'is-surolling', 'hide-on-scroll', 'show-on-scroll');
+            }
+
+            lastScrollTop = scrollTop;
+        }
+
+        // Attach the scroll event listener
+        window.addEventListener('scroll', handleScroll);
+    </script>
+{% endblock %}
+
+</body>
+</html>
+{% endblock %}

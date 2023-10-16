@@ -1,0 +1,64 @@
+{
+    "sw-seo-url-template-card": {
+        "routeNames": {
+            "frontend-store_locator-detail": "Filiaalzoeker"
+        }
+    },
+    "global": {
+        "entities": {
+            "neti_store_locator": "Filiaalzoeker"
+        },
+        "businessEvents": {
+            "neti_store_locator_contact": "Contactformulier van een Filiaalzoeker-filiaal",
+            "neti_store_locator_contact_copy": "Contactformulier van een Filiaalzoeker-filiaal (Stuur een kopie naar mij)"
+        }
+    },
+    "neti-next-store-locator": {
+        "sidebar-menu": {
+            "store-locator": {
+                "title": "StoreLocator",
+                "stores": "Filiaal",
+                "contactForm": "Contactformulier",
+                "filter": "Filter"
+            }
+        },
+        "sw-cms": {
+            "sorting": {
+                "labelSortByStoreLocator": "Filiaalzoeker Details"
+            },
+            "detail": {
+                "label": {
+                    "labelPageType": "Filiaalzoeker"
+                }
+            },
+            "elements": {
+                "slSearchElement": {
+                    "label": "Filiaalzoeker snel zoeken",
+                    "block": {
+                        "blockLabel": "Filiaalzoeker Block Element",
+                        "form": "Formulier",
+                        "buttonSend": "Zenden",
+                        "zip": "Postcode / Plaats"
+                    },
+                    "cms-element": {
+                        "slSearch": "Filiaalzoeker zoektocht",
+                        "label": "Extra zoekparameters",
+                        "placeHolder": "Parameters invoegen...",
+                        "componentPlaceholder": "Postcode / Plaats",
+                        "buttonSend": "Zenden",
+                        "helpText": "Deze parameters worden toegevoegd aan de zoekopdracht van de cliënt. Voer de parameters in op één regel en verbind ze met &. Bijvoorbeeld: distance=250&country=DE. U kunt alle parameters hier vinden https://shopware6.io.netinventors.de/plugins/NetiNextStoreLocator/en/features/get-parameter/"
+                    }
+                }
+            }
+        }
+    },
+    "sw-profile.tabSearchPreferences.modules.neti_store_locator.label": "Naam",
+    "sw-flow": {
+        "triggers": {
+            "neti": "Net Inventors",
+            "storeLocator": "StoreLocator",
+            "contact": "Contact",
+            "contactCopy": "Contact (kopie sturen)"
+        }
+    }
+}

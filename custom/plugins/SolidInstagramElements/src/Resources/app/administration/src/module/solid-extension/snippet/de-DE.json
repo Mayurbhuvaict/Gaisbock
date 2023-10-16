@@ -1,0 +1,12 @@
+{
+  "sw-extension": {
+    "component": {
+      "solid-extension-data-handling-form": {
+        "title": "Datenhandhabung",
+        "label": "Daten von Datenbank und Dateisystem laden statt vom Meta CDN",
+        "fetchAndStoreLatestPosts": "Neuste Posts abrufen und speichern",
+        "alert": "Diese Funktion reduziert API-Anfragen und versichert DSGVO-Konformität, falls keine externen Dateisysteme verwendet werden. Aktuelle Daten von Instagram werden alle 5 Minuten synchronisiert. <strong>Die Einrichtung eines CLI-Workers ist notwendig</strong>, um regelmäßig geplante Hintergrundaufgaben auszuführen. Für mehr Informationen siehe <a href=\"https://docs.shopware.com/de/shopware-6-de/tutorials-und-faq/message-queue-und-scheduled-tasks\" target=\"_blank\" rel=\"noopener noreferrer\">Dokumentation</a>. Um die manuelle Synchronisation zu aktivieren, muss die Einstellung zuerst gespeichert werden."
+      }
+    }
+  }
+}

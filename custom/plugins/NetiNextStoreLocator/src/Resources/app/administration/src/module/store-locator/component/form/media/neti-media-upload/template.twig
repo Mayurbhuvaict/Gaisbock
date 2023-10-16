@@ -1,0 +1,19 @@
+<div class="neti-store-locator-media-upload-field">
+    <sw-upload-listener
+            :uploadTag="uploadTag"
+            :autoUpload="true"
+            @media-upload-finish="setMediaItem"
+    ></sw-upload-listener>
+    <sw-media-compact-upload-v2
+            :uploadTag="uploadTag"
+            :source="source"
+            :allowMultiSelect="false"
+            :autoUpload="true"
+            variant="regular"
+            :label="label"
+            :defaultFolder="defaultFolder"
+            @media-upload-remove-image="onRemoveMedia"
+            @media-drop="onDropMedia"
+            @selection-change="onMediaSelected"
+    ></sw-media-compact-upload-v2>
+</div>

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/shopware/platform/master/src/Core/System/SystemConfig/Schema/config.xsd">
+
+    <card>
+        <title>Basic Configuration</title>
+        <title lang="de-DE">Grundeinstellungen</title>
+
+        <input-field type="bool">
+            <name>hideAssignedProductsForSearch</name>
+            <copyable>true</copyable>
+            <label>Hide products in search if they are assigned to a blocked category</label>
+            <label lang="de-DE">Produkte aus der Suche ausnehmen, sofern sie einer geblockten Kategorie zugeordnet sind</label>
+            <helpText>If products are assigned to at least one blocked category, they are excluded from the search.</helpText>
+            <helpText lang="de-DE">Sind Produkte mindestens einer geblockten Kategorie zugeordnet, werden sie aus der Suche ausgenommen.</helpText>
+            <defaultValue>false</defaultValue>
+        </input-field>
+
+        <input-field type="bool">
+            <name>hideAssignedProductsForOtherCategories</name>
+            <copyable>true</copyable>
+            <label>Hide products in other categories if they are assigned to a blocked category</label>
+            <label lang="de-DE">Produkte in anderen Kategorien verstecken, sofern sie einer geblockten Kategorie zugeordnet sind</label>
+            <helpText>If products are assigned to at least one blocked category, they are excluded from all other categories which are not blocked.</helpText>
+            <helpText lang="de-DE">Sind Produkte mindestens einer geblockten Kategorie zugeordnet, werden sie in allen anderen geblockten Kategorien ebenfalls nicht angezeigt.</helpText>
+            <defaultValue>false</defaultValue>
+        </input-field>
+
+        <input-field type="single-select">
+            <name>blockCategoriesIfNoCustomerGroupAssigned</name>
+            <label>Behaviour when no client group has been selected for block</label>
+            <label lang="de-DE">Verhalten wenn keine Kundengruppe zur Freigabe ausgewählt wurde</label>
+            <helpText>If there are no customer groups assigned for the category, then the category will be blocked in Storefront.</helpText>
+            <helpText lang="de-DE">Wenn der Kategorie keine Kundengruppen zugeordnet sind, wird die Kategorie in Storefront blockiert.</helpText>
+            <defaultValue>default</defaultValue>
+            <options>
+                <option>
+                    <id>default</id>
+                    <name>ACRIS Standard (block of categories only if customer group is entered in designated field)</name>
+                    <name lang="de-DE">ACRIS Standard (Block von Kategorien nur, wenn die Kundengruppe in das dafür vorgesehene Feld eingegeben wird)</name>
+                </option>
+                <option>
+                    <id>blockIfEmpty</id>
+                    <name>Block without customer group assignment (If no category is entered in the intended field, then automatically block for ALL customer groups)</name>
+                    <name lang="de-DE">Sperren ohne Kundengruppenzuordnung (Wenn im vorgesehenen Feld keine Kategorie eingetragen ist, dann wird automatisch für ALLE Kundengruppen gesperrt)</name>
+                </option>
+            </options>
+        </input-field>
+    </card>
+</config>

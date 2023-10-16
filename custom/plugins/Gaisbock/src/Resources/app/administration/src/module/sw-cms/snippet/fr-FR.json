@@ -1,0 +1,168 @@
+{
+  "sw-cms": {
+    "component": {
+      "label": {
+        "gaisBockCategory": "GaisBock Option"
+      }
+    },
+    "blocks": {
+      "gaisbockAboutTitleTextImage" : {
+        "label": "A propos du titre texte Image"
+      },
+      "gaisbockCustomTextOnImage": {
+        "label": "Texte sur l'image"
+      },
+      "gaisbockImageAddMoreText": {
+        "label": "Ajouter une section supplémentaire Avec des images"
+      },
+      "gaisBockListingpageHeadingimage": {
+        "label": "Titre et image"
+      },
+      "gaisBockTextImageSlider": {
+        "label": "Slider texte-image"
+      },
+      "gaisbockCustomCategoryExtension": {
+        "label": "Custom Category Navigation"
+      },
+      "gaisbockCategoryImageText": {
+        "label": "Category Image Text"
+      },
+      "gaisbockImageText": {
+        "label": "Gaisbock Image Bubble"
+      },
+      "GaisbockText": {
+        "label": "Gaisbock Text"
+      },
+      "gaisbockTitleTextImageMain":{
+        "label": "Titre Texte Image"
+      },
+      "gaisbockTitleTextImage": {
+        "label": "Titre Texte Image"
+      },
+      "gaisbockTextImage": {
+        "gaisbockSwitchImageTextBubble": {
+          "label": "Text with Left or Right Image"
+        }
+      },
+      "gaisbockTextImageButton": {
+        "gaisbockImageTitlesButtons": {
+          "label": "Image de fond avec titre, image, texte et bouton"
+        }
+      }
+    },
+    "elements": {
+      "gaisbockCustomTextImageSlider": {
+        "learnMore": "En savoir plus...",
+        "config": {
+          "tab": {
+            "settings": "Paramètres",
+            "images": "Images"
+          },
+          "textFields": {
+            "afterSliderText": "Après le texte du curseur",
+            "hidecontent": "Après plus de contenu de section",
+            "contentTitle": "Titre",
+            "subTitle": "Sous-titre",
+            "detailTitle": "Détail",
+            "TextImagePosition": "Text Image Position",
+            "TextBeforeImage": "Texte avant l'image",
+            "TextAfterImage": "Texte après l'image",
+            "TextImagePositionPlaceholder": "Veuillez sélectionner",
+            "coverImage": "Image de couverture",
+            "description": "Description"
+          },
+          "mediaFields": {
+            "bgTitle": "Images"
+          }
+        }
+      },
+      "gaisbockCustomTextOnImage": {
+        "config": {
+          "uploadMediaCaption": "Télécharger les médias",
+          "label": "Ajouter une image de fond"
+        }
+      },
+      "image": {
+        "config": {
+          "label": {
+            "mainTitle": "Titre",
+            "subTitle": "Sub title",
+            "Heading": "Titre",
+            "subHeading": "Sous-titre",
+            "sub sub Heading": "Sub sub heading",
+            "position": "position"
+          },
+          "placeholder": {
+            "enterMainTitle": "Saisir le titre principal ici",
+            "enterSubtitle" : "Saisir le sous-titre ici"
+          }
+        }
+      },
+      "general": {
+        "config": {
+          "tab": {
+            "content": "contenu",
+            "settings": "paramètres",
+            "imageSetting": "Réglage de l'image"
+          },
+          "label": {
+            "position": "position",
+            "left": "Left",
+            "center": "Center",
+            "right": "Rechts",
+            "linkTo": "Lien vers l'image",
+            "ImageText": "Texte de l'image",
+            "buttonTitle": "Titre du bouton"
+          }
+        }
+      },
+      "buttonTitle": "Bouton Titre",
+      "gaisbockImageTitlesButton": {
+        "config": {
+          "label": {
+            "gaisbockTextImageTwo": "Position de l'élément",
+            "imageButtonLeft": "Gauche",
+            "imageButtonRight": "Droit",
+            "imageButtonCenter": "Centre"
+          }
+        }
+      },
+      "gaisbockImages": {
+        "label": "Gaisbock Image"
+      },
+      "gaisbockText": {
+        "label": "Textes de Gaisbock"
+      },
+      "gaisbockTab": {
+        "label": "Ouvrir le lien dans un nouvel onglet"
+      },
+      "gaisbockImage": {
+        "label": "Ouvrir le lien dans un nouvel onglet"
+      },
+      "gaisbockSwitchImageText": {
+        "config": {
+          "label": {
+            "gaisbockTextImage": "Position de l'image",
+            "imageLeft": "Gauche",
+            "imageRight": "Droit"
+          },
+          "disabledConfigInfoTextKey": "Les données de navigation de cet élément sont automatiquement chargées par la catégorie associée à cette mise en page. Le contenu n'est qu'un exemple de prévisualisation."
+        }
+      }
+    },
+    "general": {
+      "config": {
+        "tab": {
+          "content": "contenu",
+          "settings": "paramètres",
+          "imageSetting": "Réglage de l'image"
+        },
+        "label": {
+          "linkTo": "Lien vers l'image",
+          "ImageText": "Texte de l'image",
+          "buttonTitle": "Titre du bouton"
+        }
+      }
+    }
+  }
+}

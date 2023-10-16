@@ -1,0 +1,96 @@
+{% block cms_element_gaisbock_image_titles_button_ %}
+    <div class="gaisbock-element-image-titles-button reveals">
+        {% if element.fieldConfig.elements.position.value == 'left' %}
+            {% set active = 'left' %}
+        {% elseif element.fieldConfig.elements.position.value == 'right' %}
+            {% set active = 'right' %}
+        {% else %}
+            {% set active = 'center' %}
+        {% endif %}
+
+        <div class="title-image-button-section {{ active }}">
+            {% block cms_element_sub_title %}
+                <div class="sub-title">
+                    {{ element.config.subTitle.value }}
+                </div>
+            {% endblock %}
+            {% block cms_element_main_titile %}
+                <div class="main-title">
+                    {{ element.config.mainTitle.value }}
+                </div>
+            {% endblock %}
+
+            {% block second_image %}
+                <div class="cms-image-container" >
+                    <img src="{{ element.translated.config.urlTwo.value }}" class="cms-image" alt="">
+                    {% endblock%}
+                </div>
+            {% endblock %}
+
+            {% block element_text %}
+            {% set config = element.fieldConfig.elements %}
+            <div class="cms-element-text-container">
+                {{config.content.value|raw }}
+            </div>
+            <div class="gaisbock-image-button">
+                <a href="{{ element.config.buttonOneUrl.value }}" >
+                    {{  element.config.buttonOneText.value|raw }}
+                </a>
+            </div>
+        </div>
+            
+        <div class="image-text-container">
+            {% block element_image %}
+                {% set config = element.fieldConfig.elements %}
+                <div class="cms-element-{{ element.type }}{% if config.verticalAlign.value %} has-vertical-alignment{% endif %}">
+                    {% block element_product_slider_alignment %}
+                        {% if config.verticalAlign.value %}
+                            <div class="cms-element-alignment{% if config.verticalAlign.value == 'center' %} align-self-center{% elseif config.verticalAlign.value == 'flex-end' %} align-self-end{% else %} align-self-start{% endif %}">
+                        {% endif %}
+                        {% block element_image_inner %}
+                            {% set imageElement %}
+                                {% block element_image_container %}
+                                    {% if element.data.media.url %}
+                                        <div class="cms-image-container is-{{ element.translated.config.displayMode.value }}"
+                                                {% if element.translated.config.minHeight.value and element.translated.config.displayMode.value == 'cover' %} style="min-height: {{ element.translated.config.minHeight.value }};"{% endif %}>
+                                            {% block element_image_media %}
+                                                {% set attributes = {
+                                                    'class': 'cms-image',
+                                                    'alt': (element.data.media.translated.alt ?: ''),
+                                                    'title': (element.data.media.translated.title ?: ''),
+                                                    'loading': 'lazy'
+                                                } %}
+
+                                                {% if element.translated.config.displayMode.value == 'cover' or element.translated.config.displayMode.value == 'contain' %}
+                                                    {% set attributes = attributes|merge({ 'data-object-fit': element.translated.config.displayMode.value }) %}
+                                                {% endif %}
+
+                                                {% sw_thumbnails 'cms-image-thumbnails' with {
+                                                    media: element.data.media
+                                                } %}
+                                            {% endblock %}
+                                        </div>
+                                    {% endif %}
+                                {% endblock %}
+                            {% endset %}
+
+                            {% if element.translated.config.url.value %}
+                                <a href="{{ element.translated.config.url.value }}"
+                                   class="cms-image-link"
+                                   {% if element.translated.config.newTab.value %}target="_blank" rel="noopener"{% endif %}>
+                                    {{ imageElement }}
+                                </a>
+                            {% else %}
+                                {{ imageElement }}
+                            {% endif %}
+                        {% endblock %}
+
+                        {% if config.verticalAlign.value %}
+                            </div>
+                        {% endif %}
+                    {% endblock %}
+                </div>
+            {% endblock %}
+        </div>
+    </div>
+{% endblock %}

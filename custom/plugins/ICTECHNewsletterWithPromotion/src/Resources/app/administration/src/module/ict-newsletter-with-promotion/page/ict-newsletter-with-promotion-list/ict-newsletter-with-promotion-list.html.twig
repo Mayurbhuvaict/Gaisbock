@@ -1,0 +1,113 @@
+{% block ict_newsletter_with_promotion_newsletter_popup_list %}
+    <sw-page class="ict-newsletter-with-promotion-popup-list">
+        {% block ict_newsletter_with_promotion_newsletter_popup_list_list_search_bar %}
+            <template #search-bar>
+                <sw-search-bar
+                        initial-search-type="Newsletter Popup"
+                        :initial-search="term"
+                        @search="onSearch"
+                />
+            </template>
+        {% endblock %}
+
+        {% block ict_newsletter_with_promotion_newsletter_popup_list_smart_bar_header %}
+            <template #smart-bar-header>
+                <!-- eslint-disable-next-line sw-deprecation-rules/no-twigjs-blocks -->
+                {% block ict_newsletter_with_promotion_newsletter_popup_list_smart_bar_header_title %}
+                    <h2>
+                        <!-- eslint-disable-next-line sw-deprecation-rules/no-twigjs-blocks -->
+                        {% block ict_newsletter_with_promotion_newsletter_popup_list_smart_bar_header_title_text %}
+                            {{ $tc('ict-newsletter-with-promotion.newsletter-popup.list.textPopupOverview') }}
+                        {% endblock %}
+
+                        <!-- eslint-disable-next-line sw-deprecation-rules/no-twigjs-blocks -->
+                        {% block ict_newsletter_with_promotion_newsletter_popup_list_smart_bar_header_amount %}
+                            <span
+                                    v-if="!isLoading"
+                                    class="sw-page__smart-bar-amount"
+                            >
+                ({{ total }})
+            </span>
+                        {% endblock %}
+                    </h2>
+                {% endblock %}
+            </template>
+        {% endblock %}
+
+        <!-- eslint-disable-next-line sw-deprecation-rules/no-twigjs-blocks -->
+        {% block ict_newsletter_with_promotion_newsletter_popup_list_actions %}
+            <template #smart-bar-actions>
+                <!-- eslint-disable-next-line sw-deprecation-rules/no-twigjs-blocks -->
+                {% block ict_newsletter_with_promotion_newsletter_popup_list_smart_bar_actions %}
+                    <sw-button
+                            v-tooltip.bottom="{
+                message: $tc('sw-privileges.tooltip.warning'),
+                showOnDisabledElements: true
+            }"
+                            :router-link="{ name: 'ict.newsletter.with.promotion.create' }"
+                            class="ict-newsletter-popup-list__add-popup"
+                            variant="primary"
+                    >
+                        {{ $tc('ict-newsletter-with-promotion.newsletter-popup.general.addPopupButtonText') }}
+                    </sw-button>
+                {% endblock %}
+            </template>
+        {% endblock %}
+
+        <!-- eslint-disable-next-line sw-deprecation-rules/no-twigjs-blocks -->
+        {% block ict_newsletter_with_promotion_newsletter_popup_list_language_switch %}
+            <template #language-switch>
+                <sw-language-switch @on-change="onChangeLanguage" />
+            </template>
+        {% endblock %}
+
+        <template #content>
+            <!-- eslint-disable-next-line sw-deprecation-rules/no-twigjs-blocks -->
+            {% block ict_newsletter_with_promotion_newsletter_popup_list_content %}
+                <div class="ict-newsletter-popup-list__content">
+                    <!-- eslint-disable-next-line sw-deprecation-rules/no-twigjs-blocks -->
+                    {% block ict_newsletter_with_promotion_newsletter_popup_list_grid %}
+                        <sw-entity-listing
+                                class="ict-newsletter-with-promotion-newsletter-popup-list--listing"
+                                v-if="popup"
+                                :items="popup"
+                                :repository="popupRepository"
+                                :showSelection="false"
+                                :columns="columns"
+                                :criteria-limit="limit"
+                                :sort-by="currentSortBy"
+                                :sort-direction="sortDirection"
+                                :disable-data-fetching="true"
+                                detail-route="ict.newsletter.with.promotion.detail"
+                                identifier="newsletter-with-promotion-list"
+                                @update-records="updateTotal"
+                                @page-change="onPageChange"
+                                @column-sort="onSortColumn"
+                        >
+                        </sw-entity-listing>
+                    {% endblock %}
+
+                    <!-- eslint-disable-next-line sw-deprecation-rules/no-twigjs-blocks -->
+                    {% block ict_newsletter_with_promotion_newsletter_popup_list_empty_state %}
+                        <sw-empty-state
+                                v-if="!isLoading && !total && isValidTerm(term)"
+                                :title="$tc('sw-empty-state.messageNoResultTitle')"
+                        >
+                            <template #default>
+                                {{ $tc('sw-empty-state.messageNoResultSublineBefore') }}
+                                <router-link
+                                        class="sw-empty-state__description-link"
+                                        :to="{ name: 'sw.profile.index.searchPreferences' }"
+                                >
+                                    {{ $tc('sw-empty-state.messageNoResultSublineLink') }}
+                                </router-link>
+                                {{ $tc('sw-empty-state.messageNoResultSublineAfter') }}
+                            </template>
+                        </sw-empty-state>
+                    {% endblock %}
+                </div>
+            {% endblock %}
+
+        </template>
+    </sw-page>
+{% endblock %}

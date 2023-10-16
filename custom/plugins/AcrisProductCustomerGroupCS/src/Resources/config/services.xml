@@ -1,0 +1,75 @@
+<?xml version="1.0" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <services>
+        <!-- Extensions -->
+        <service id="Acris\ProductCustomerGroup\Core\Content\Product\ProductExtension">
+            <tag name="shopware.entity.extension"/>
+        </service>
+        <service id="Acris\ProductCustomerGroup\Core\Checkout\Customer\Aggregate\CustomerGroup\CustomerGroupExtension">
+            <tag name="shopware.entity.extension"/>
+        </service>
+
+        <!-- Definitions -->
+        <service id="Acris\ProductCustomerGroup\Custom\ProductCustomerGroupDefinition">
+            <tag name="shopware.entity.definition" entity="acris_product_customer_group" />
+        </service>
+
+        <!-- Subscriber -->
+        <service id="Acris\ProductCustomerGroup\Storefront\Subscriber\ProductSubscriber">
+            <tag name="kernel.event_subscriber"/>
+            <argument type="service" id="Acris\ProductCustomerGroup\Components\BlockProductService"/>
+            <argument type="service" id="Shopware\Core\System\SystemConfig\SystemConfigService"/>
+        </service>
+
+        <!-- Services -->
+        <service id="Acris\ProductCustomerGroup\Components\BlockProductService">
+            <argument type="service" id="acris_product_customer_group.repository"/>
+            <argument type="service" id="product.repository"/>
+        </service>
+
+        <service id="Acris\ProductCustomerGroup\Components\TruncateBlockedCustomerGroupService">
+            <argument type="service" id="service_container"/>
+        </service>
+
+        <!-- Service for sitemap exclude -->
+        <service id="Acris\ProductCustomerGroup\Core\Content\Sitemap\Provider\ProductUrlProvider"
+                 decorates="Shopware\Core\Content\Sitemap\Provider\ProductUrlProvider">
+
+            <argument type="service" id="product.repository"/>
+            <argument type="service" id="Acris\ProductCustomerGroup\Core\Content\Sitemap\Provider\ProductUrlProvider.inner"/>
+
+            <tag name="shopware.sitemap_url_provider"/>
+        </service>
+
+        <!-- Cart processor -->
+        <service id="Acris\ProductCustomerGroup\Core\Content\Product\Cart\AcrisProductCustomerGroupCartProcessor">
+            <argument type="service" id="Acris\ProductCustomerGroup\Components\BlockProductService"/>
+            <argument type="service" id="Shopware\Core\System\SystemConfig\SystemConfigService"/>
+            <tag name="shopware.cart.collector" priority="4000"/>
+            <tag name="shopware.cart.processor" priority="4000"/>
+        </service>
+
+        <service id="Acris\ProductCustomerGroup\Core\Content\Product\SalesChannel\Detail\ProductConfiguratorLoader" decorates="Shopware\Core\Content\Product\SalesChannel\Detail\ProductConfiguratorLoader" decoration-priority="200">
+            <argument type="service" id="Acris\ProductCustomerGroup\Core\Content\Product\SalesChannel\Detail\ProductConfiguratorLoader.inner"/>
+            <argument type="service" id="Acris\ProductCustomerGroup\Components\BlockProductService"/>
+            <argument type="service" id="Shopware\Core\System\SystemConfig\SystemConfigService"/>
+        </service>
+
+        <service id="Acris\ProductCustomerGroup\Core\Framework\DataAbstractionLayer\Write\WriteCommandExtractor" decorates="Shopware\Core\Framework\DataAbstractionLayer\Write\WriteCommandExtractor">
+            <argument type="service" id="Acris\ProductCustomerGroup\Core\Framework\DataAbstractionLayer\Write\WriteCommandExtractor.inner"/>
+            <argument type="service" id="Acris\ProductCustomerGroup\Components\TruncateBlockedCustomerGroupService"/>
+        </service>
+
+        <!-- SalesChannelProductRepository extension -->
+        <service id="Acris\ProductCustomerGroup\Core\Content\Product\SalesChannel\SalesChannelProductRepository"
+                 decorates="sales_channel.product.repository">
+            <argument type="service" id="Acris\ProductCustomerGroup\Core\Content\Product\SalesChannel\SalesChannelProductRepository.inner"/>
+            <argument type="service" id="Acris\ProductCustomerGroup\Components\BlockProductService"/>
+            <argument type="service" id="Shopware\Core\System\SystemConfig\SystemConfigService"/>
+        </service>
+    </services>
+</container>

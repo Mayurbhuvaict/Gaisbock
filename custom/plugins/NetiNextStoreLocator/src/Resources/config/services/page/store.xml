@@ -1,0 +1,41 @@
+<?xml version="1.0" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <services>
+        <!-- Detail -->
+        <service id="NetInventors\NetiNextStoreLocator\Storefront\Page\Store\Detail\StoreDetailLoader">
+            <argument id="neti_store_locator.repository" type="service"/>
+        </service>
+
+        <service id="NetInventors\NetiNextStoreLocator\Storefront\Page\Store\Detail\StoreDetailPageLoader">
+            <argument id="Shopware\Storefront\Page\GenericPageLoader" type="service"/>
+            <argument id="NetInventors\NetiNextStoreLocator\Storefront\Page\Store\Detail\StoreDetailLoader" type="service"/>
+            <argument type="service" id="NetInventors\NetiNextStoreLocator\Components\ContactForm\ContactForm"/>
+            <argument type="service" id="NetInventors\NetiNextStoreLocator\Components\CmsPageRenderer"/>
+            <argument type="service" id="event_dispatcher"/>
+            <argument type="service" id="Shopware\Core\Content\Seo\SeoUrlPlaceholderHandlerInterface"/>
+            <argument type="service" id="NetInventors\NetiNextStoreLocator\Service\StoreBusinessHoursService"/>
+            <argument type="service" id="NetInventors\NetiNextStoreLocator\Service\StorefrontConfigFactory"/>
+        </service>
+
+        <!-- Listing -->
+        <service id="NetInventors\NetiNextStoreLocator\Storefront\Page\Store\Listing\StoreListingPageLoader">
+            <argument id="Shopware\Storefront\Page\GenericPageLoader" type="service"/>
+            <argument id="neti_store_locator.repository" type="service"/>
+            <argument id="NetInventors\NetiNextStoreLocator\Components\ContactForm\ContactForm" type="service" />
+            <argument type="service" id="NetInventors\NetiNextStoreLocator\Components\CmsPageRenderer"/>
+            <argument type="service" id="event_dispatcher"/>
+            <argument type="service" id="translator"/>
+            <argument type="service" id="plugin.repository"/>
+            <argument type="service" id="NetInventors\NetiNextStoreLocator\Service\StoreFilterService"/>
+            <argument type="service" id="NetInventors\NetiNextStorePickup\Service\ContextService" on-invalid="null"/>
+            <argument type="service" id="Shopware\Core\Content\Seo\SeoUrlPlaceholderHandlerInterface"/>
+            <argument type="service" id="Doctrine\DBAL\Connection"/>
+            <argument type="service" id="neti_store_locator.plugin_config"/>
+            <argument type="service" id="NetInventors\NetiNextStoreLocator\Service\StorefrontConfigFactory"/>
+        </service>
+    </services>
+</container>

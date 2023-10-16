@@ -1,0 +1,22 @@
+<div class="neti-store-locator-detail-base">
+    <neti-store-locator-general-basic-card
+            :store="store"
+            :isLoading="store.isLoading"
+            :salesChannels="salesChannels"
+    ></neti-store-locator-general-basic-card>
+
+    <neti-store-locator-general-misc-card
+            :store="store"
+            :isLoading="store.isLoading"
+    ></neti-store-locator-general-misc-card>
+
+    <neti-store-locator-general-media-card
+            :store="store"
+            :isLoading="store.isLoading"
+    ></neti-store-locator-general-media-card>
+            
+    <neti-store-locator-general-custom-fields
+            :store="store"
+            :isLoading="store.isLoading"
+    ></neti-store-locator-general-custom-fields>
+</div>

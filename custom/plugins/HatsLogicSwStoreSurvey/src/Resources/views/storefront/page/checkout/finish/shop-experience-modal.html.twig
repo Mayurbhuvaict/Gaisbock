@@ -1,0 +1,51 @@
+{% block page_checkout_shopping_experience_content %}
+	{% block page_checkout_hl_shopping_experience_modal %}
+		<div class="modal fade hl-shop-experience-modal" id="hlShopExperienceModal" tabindex="-1" role="dialog">
+			<div class="modal-dialog modal-lg modal-dialog-scrollable modal-dialog-centered" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<div class="modal-title h5">
+							{{ hatsLogicSwStoreSurveyConfig.checkoutRatingYourCommentsQuestion }}
+						</div>
+						<button type="button" class="modal-close close" data-bs-dismiss="modal" aria-label="Close">
+							<span aria-hidden="true">
+								{% sw_icon 'x' style { 'size': 'sm' } %}
+							</span>
+						</button>
+					</div>
+					<div class="modal-body js-shopping-experience-ajax-response">
+
+						{% block page_checkout_hl_shopping_experience_form %}
+							<form id="hlShopExperienceForm" name="hlShopExperienceForm" method="post" action="{{ path("frontend.checkout.saveShoppingExperience") }}" data-form-ajax-submit="true" data-form-ajax-submit-options='{ "replaceSelectors": ".js-shopping-experience-ajax-response" }'>
+
+								
+
+								<div class="form-group">
+									<label>{{ hatsLogicSwStoreSurveyConfig.checkoutRatingQuestion }}</label>
+									<div id="emotionContainer"></div>
+								</div>
+
+								<div class="form-group">
+									<label for="shopExperienceComment">
+										{{ hatsLogicSwStoreSurveyConfig.checkoutRatingYourCommentsQuestion }}{{ "general.required"|trans|sw_sanitize }}
+									</label>
+									<textarea required="required" rows="4" cols="50" class="form-control" id="shopExperienceComment" name="shopExperienceComment"></textarea>
+								</div>
+
+								<div class="form-group">
+									<button class="btn btn-primary" type="submit">
+										{{ "hlStoreSurvey.shopExperience.submitButtonText"|trans|sw_sanitize }}
+									</button>
+									<button class="btn btn-light" type="button" data-bs-dismiss="modal" aria-label="Close">
+										{{ "hlStoreSurvey.shopExperience.cancelButtonText"|trans|sw_sanitize }}
+									</button>
+								</div>
+
+							</form>
+						{% endblock %}
+					</div>
+				</div>
+			</div>
+		</div>
+	{% endblock %}
+{% endblock %}

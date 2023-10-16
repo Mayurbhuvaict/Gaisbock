@@ -1,0 +1,36 @@
+{% block neti_store_locator_map_container %}
+    <div class="map-container" ref="mapContainer">
+        {% block neti_store_locator_map %}
+            <div id="map" ref="map"></div>
+        {% endblock %}
+
+        {% block neti_store_locator_map_horizontal_stores %}
+            <div
+                    class="horizontal-stores"
+                    v-if="isMobile"
+                    :class="{ 'd-none': storeListing }"
+            >
+                <neti-store-locator-store
+                        v-for="(store, key) in filteredStores"
+                        :map="map"
+                        :location="currentLocation"
+                        :config="config"
+                        :store="store" :key="key"
+                        :selected="selectedStore === store"
+                        :horizontal="true"
+                        :siblings="filteredStores"
+                ></neti-store-locator-store>
+
+                <div
+                        class="alert-empty-result w-100 empty-store-info"
+                        v-if="filteredStores.length <= 0 && !isLoadingStores && config.autoloadStores"
+                >
+                    {% sw_include '@Storefront/storefront/utilities/alert.html.twig' with {
+                        type:"warning",
+                        content: "neti-next-store-locator.index.search.filterNoResults"|trans
+                    } %}
+                </div>
+            </div>
+        {% endblock %}
+    </div>
+{% endblock %}

@@ -1,0 +1,106 @@
+<sw-page
+    class="lae-giftcard-detail"
+>
+    <template #smart-bar-header>
+        <h2>{{ giftcardLabel }}</h2>
+
+        <sw-icon name="regular-eye-slash" v-if="hideCode" :small="true" @click="hideCode = false"></sw-icon>
+        <sw-icon name="regular-eye" v-if="!hideCode" :small="true" @click="hideCode = true"></sw-icon>
+    </template>
+
+    <template #smart-bar-actions>
+        <sw-button @click="onDownloadButtonClick" :isLoading="isDownloadLoading" variant="primary">
+            {{ $tc('lae-giftcard.detail.actionDownload') }}
+        </sw-button>
+    </template>
+
+    <sw-card-view
+        slot="content"
+        class="sw-dashboard-index__content"
+    >
+        <sw-card :title="$tc('lae-giftcard.detail.cardGiftcardDetails')" :isLoading="isLoading"
+                 class="lae-giftcard-detail--detail-card">
+            <sw-description-list grid="265px 1fr">
+                <dt v-text="$tc('lae-giftcard.detail.detailCurrentBalance')"></dt>
+                <dd>
+                    <sw-progress-bar :value="giftcard.balance"
+                                     :maxValue="giftcard.initialAmount"
+                                     class="lae-giftcard--progress-bar"></sw-progress-bar>
+                    <div class="lae-giftcard--progress-bar--amounts">
+                        {{ giftcard.balance | currency(giftcard.currency.translated.shortName) }} <span
+                            class="lae-giftcard--progress-bar--amounts--initial">/ {{ giftcard.initialAmount | currency(giftcard.currency.translated.shortName) }}</span>
+                    </div>
+                </dd>
+                <dt v-text="$tc('lae-giftcard.detail.detailName')"></dt>
+                <dd>{{ giftcard.name }}</dd>
+                <dt v-text="$tc('lae-giftcard.detail.detailDescription')"></dt>
+                <dd>{{ giftcard.description }}</dd>
+                <dt v-text="$tc('lae-giftcard.detail.detailSalesChannel')"></dt>
+                <dd>{{ giftcard.salesChannel ? giftcard.salesChannel.translated.name : 'N/A' }}</dd>
+                <dt v-text="$tc('lae-giftcard.detail.detailCode')"></dt>
+                <dd>{{ giftcardLabel }}</dd>
+                <dt v-text="$tc('lae-giftcard.detail.detailCreatedAt')"></dt>
+                <dd>{{ giftcard.createdAt|date({hour: '2-digit', minute: '2-digit'}) }}</dd>
+            </sw-description-list>
+        </sw-card>
+
+        <sw-card :title="$tc('lae-giftcard.detail.cardGiftcardTransactions')" :isLoading="isLoading"
+                 class="lae-giftcard-detail--transaction-card">
+            <template #toolbar>
+                <sw-button @click="openTransactionModal">New transaction</sw-button>
+            </template>
+            <sw-data-grid
+                v-if="giftcard.transactions.length > 0"
+                :dataSource="giftcard.transactions"
+                :columns="getTransactionColumns()"
+                :showSelection="false"
+                :showSettings="false"
+                :fullPage="false">
+
+                <template #column-amount="{ item }">
+                    {{ (- item.amount) | currency(giftcard.currency.translated.shortName) }}
+                </template>
+
+                <template #column-createdAt="{item}">
+                    {{ item.createdAt|date({hour: '2-digit', minute: '2-digit'}) }}
+                </template>
+            </sw-data-grid>
+
+            <sw-empty-state
+                v-else
+                :absolute="false"
+                :title="$tc('lae-giftcard.transaction.emptyTitle')">
+            </sw-empty-state>
+
+            <sw-modal
+                v-if="showTransactionModal"
+                class="lae-giftcard-detail--transaction-modal"
+                :title="$tc('global.default.warning')"
+                variant="small"
+                @modal-close="closeTransactionModal"
+            >
+                <sw-single-select
+                    v-model="newTransactionType"
+                    :options="newTransactionTypeOptions"
+                ></sw-single-select>
+
+                <sw-number-field v-model.number="newTransaction.amount"
+                                 :label="$tc('lae-giftcard.transaction.labelAmount')"
+                                 :min="0"
+                                 :max="newTransactionType == 'redeem' ? giftcard.balance : 99999999"
+                ></sw-number-field>
+
+                <sw-text-field
+                    v-model="newTransaction.comment"
+                    :label="$tc('lae-giftcard.transaction.labelComment')"
+                ></sw-text-field>
+
+                <template #modal-footer>
+                    <sw-button @click="saveNewTransaction">
+                        {{ $tc('lae-giftcard.transaction.saveNewTransaction') }}
+                    </sw-button>
+                </template>
+            </sw-modal>
+        </sw-card>
+    </sw-card-view>
+</sw-page>

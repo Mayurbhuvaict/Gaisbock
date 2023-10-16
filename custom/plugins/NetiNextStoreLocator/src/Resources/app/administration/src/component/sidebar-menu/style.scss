@@ -1,0 +1,54 @@
+.sw-page.has--store-locator--sidebar-menu {
+    .sw-page__main-content-inner {
+        display: grid;
+        grid-template-columns: min-content auto;
+
+        .neti-store-locator-sidebar-menu {
+            border-right: 1px solid #ccc;
+            position: relative;
+            width: 200px;
+
+            .menu-holder {
+                position: sticky;
+                top: 0;
+                padding: 1.5rem;
+
+                .menu-item {
+                    > .menu-item-name {
+                        border-left: 2px solid #D1D9E0;
+                        font-weight: 600;
+                        font-size: 1rem;
+                        padding: 0.5rem;
+                        cursor: default;
+                    }
+
+                    .menu-item-children {
+                        border-left: 2px solid #D1D9E0;
+                        transition: background ease 50ms;
+
+                        &.active {
+                            border-left-color: #189EFF;
+                        }
+
+                        &:hover {
+                            background: rgba(0, 0, 0, 0.05);
+                        }
+
+                        a {
+                            color: #303a4f;
+                            text-decoration: none;
+                            display: block;
+                            padding: 0.5rem 0.5rem 0.5rem 1rem;
+                        }
+                    }
+                }
+
+            }
+
+        }
+
+        > div:not(.neti-store-locator-sidebar-menu) {
+            position: relative;
+        }
+    }
+}

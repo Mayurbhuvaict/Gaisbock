@@ -1,0 +1,21 @@
+@import "~scss/variables";
+.hl-shop-experiences-detail {
+    .emotion-style-myRating {
+        border-radius: 50%;
+        display: inline-block;
+        font-size: 30px;
+        text-decoration: none;
+        line-height: 1.4;
+        text-align: center;
+        color: #ffbf00;
+    }
+    .hl-ss-review-stars {
+        text-align: right;
+    }
+    .hl-ss-experience-dt {
+        padding-bottom: 0;
+    }
+    .hl-ss-experience-dd {
+        padding-bottom: 5px;
+    }
+}

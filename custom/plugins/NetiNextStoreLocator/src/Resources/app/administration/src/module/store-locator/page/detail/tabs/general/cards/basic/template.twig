@@ -1,0 +1,75 @@
+<sw-card
+        :title="$t('neti-store-locator.detailBase.labelBasicCard')"
+        :isLoading="isLoading"
+        position-identifier="neti-store-locator-detail-basic"
+>
+    <sw-container columns="1fr auto" gap="15px">
+        <sw-text-field
+                v-model="store.label"
+                :label="$t('neti-store-locator.card.labelLabel')"
+                validation="required"
+                required
+                :placeholder="$t('neti-store-locator.card.placeholderLabel')"
+                :error="storeLabelError"
+        ></sw-text-field>
+
+        <sw-field
+                :label="$t('neti-store-locator.baseInfo.labelActive')"
+                v-model="store.active"
+                type="switch"
+                bordered
+        ></sw-field>
+    </sw-container>
+
+    <sw-container columns="1fr" gap="15px">
+        <sw-switch-field
+                v-model="store.featured"
+                :label="$t('neti-store-locator.baseInfo.labelFeatured')"
+                :helpText="$t('neti-store-locator.baseInfo.labelFeaturedHelp')"
+                bordered
+        ></sw-switch-field>
+    </sw-container>
+
+    <sw-container columns="1fr 1fr" gap="15px">
+        <sw-entity-multi-select
+                v-model="store.salesChannels"
+                :label="$t('neti-store-locator.baseInfo.labelSalesChannel')"
+        ></sw-entity-multi-select>
+
+        <sw-field
+                type="select"
+                validation="required"
+                required
+                v-model="store.showAlways"
+                :label="$t('neti-store-locator.baseInfo.labelShowAlways')"
+                :helpText="$t('neti-store-locator.baseInfo.labelShowAlwaysHelp')"
+        >
+            <option v-for="value in showAlwaysValues" :key="value.key" :value="value.key">
+                {{ $t('neti-store-locator.baseInfo.labelShowAlwaysValues.' + value.key) }}
+            </option>
+        </sw-field>
+    </sw-container>
+
+    <neti-media-upload
+            uploadTag="icon_media"
+            :source="store.iconMedia"
+            :sourceId="store.iconMediaId"
+            :label="$t('neti-store-locator.baseInfo.labelIconMedia')"
+            @change="onIconMediaSelected"
+            style="margin-bottom: 30px"
+            defaultFolder="neti_store_locator"
+    ></neti-media-upload>
+
+    <sw-entity-tag-select
+            :label="$t('neti-store-locator.baseInfo.labelTags')"
+            placeholder="Tags hinzufügen..."
+            :entityCollection="store.tags"
+            @change="onTagSelected"
+    ></sw-entity-tag-select>
+
+    <sw-text-field
+        v-model="store.externalId"
+        :label="$t('neti-store-locator.card.externalIdLabel')"
+        :placeholder="$t('neti-store-locator.card.placeholderExternalId')"
+    ></sw-text-field>
+</sw-card>

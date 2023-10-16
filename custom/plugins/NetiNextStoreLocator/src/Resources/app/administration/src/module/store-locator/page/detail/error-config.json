@@ -1,0 +1,12 @@
+{
+    "neti.store_locator.detail.base": {
+        "store": [
+            "label",
+            "street",
+            "streetNumber",
+            "zipCode",
+            "city",
+            "countryId"
+        ]
+    }
+}

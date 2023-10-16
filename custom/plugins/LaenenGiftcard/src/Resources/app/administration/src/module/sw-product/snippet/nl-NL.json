@@ -1,0 +1,19 @@
+{
+    "lae-giftcard": {
+        "sw-product-detail-base": {
+            "enabled": "Is Cadeaubon product",
+            "valuesTitle": "Cadeaubon bedragen",
+            "valuesIntro": "Je klant kan het bedrag van de kadobon kiezen. Je kan een min- en max-limiet instellen.",
+            "minValue": "Minimum bedrag",
+            "defaultValue": "Standaardbedrag",
+            "maxValue": "Maximum bedrag",
+            "designTitle": "Ontwerp",
+            "designIntro": "Configureer de onderstaande opties om de look and feel van je kadobon aan te passen. Begin met het kiezen van een template, want afhankelijk van de gekozen template zijn er andere configuratie-opties in te vullen.",
+            "designTemplate": "Template",
+            "simpleDesign": "Ontwerp (Optimale grootte: 1040 x 650 px)"
+        },
+        "designType": {
+            "simple": "Eenvoud"
+        }
+    }
+}

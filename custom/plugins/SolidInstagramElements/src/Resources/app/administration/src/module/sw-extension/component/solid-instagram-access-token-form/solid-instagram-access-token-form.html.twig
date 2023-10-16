@@ -1,0 +1,80 @@
+<div
+    class="solid-instagram-access-token-form"
+>
+    <h2>{{ $t('sw-extension.component.solid-instagram-access-token-form.title') }}</h2>
+
+    <sw-alert
+        v-show="finishedTestingAccessToken || finishedRefreshingAccessToken"
+        :variant="requestWasSuccessful ? 'success' : 'error'"
+    >
+        <p
+            v-html="alertText"
+        ></p>
+
+        <p>
+            {{ alertInfo }}
+        </p>
+    </sw-alert>
+
+    <sw-alert
+        v-if="finishedTestingAccessToken && requestWasSuccessful && !value.lastRefreshed"
+        variant="warning"
+    >
+        <span
+            v-html="$t('sw-extension.component.solid-instagram-access-token-form.alert.refreshHint')"
+        ></span>
+    </sw-alert>
+
+    <p
+        v-html="$t('sw-extension.component.solid-instagram-access-token-form.info')"
+    ></p>
+
+    <sw-text-field
+        class="access-token"
+        :label="$t('sw-extension.component.solid-instagram-access-token-form.accessToken')"
+        :disabled="testingAccessToken || refreshingAccessToken"
+        :value="value.accessToken"
+        @input="onInput"
+    />
+
+    <sw-container
+        columns="1fr 1fr"
+        gap="30px"
+    >
+        <sw-button
+            :disabled="!value.accessToken || refreshingAccessToken"
+            :is-loading="testingAccessToken"
+            @click="onTestAccessToken"
+        >
+            {{ $t('sw-extension.component.solid-instagram-access-token-form.testAccessToken') }}
+        </sw-button>
+
+        <sw-button
+            :disabled="!finishedTestingAccessToken || (finishedTestingAccessToken && !requestWasSuccessful)"
+            :is-loading="refreshingAccessToken"
+            @click="onRefreshAccessToken"
+        >
+            {{ $t('sw-extension.component.solid-instagram-access-token-form.refreshAccessToken') }}
+        </sw-button>
+    </sw-container>
+
+    <div
+        v-if="value.username || expiresInDays || value.lastRefreshed"
+        class="access-token-info"
+    >
+        <p
+            v-show="value.username"
+            v-html="$t('sw-extension.component.solid-instagram-access-token-form.username', { username: value.username })"
+        ></p>
+
+        <p
+            v-show="expiresInDays"
+            v-html="$t('sw-extension.component.solid-instagram-access-token-form.expiresIn', { days: expiresInDays })"
+        ></p>
+
+        <p
+            v-show="value.lastRefreshed"
+            v-html="$t('sw-extension.component.solid-instagram-access-token-form.lastRefreshed', { date: value.lastRefreshed })"
+        ></p>
+    </div>
+</div>

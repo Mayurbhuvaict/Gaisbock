@@ -1,0 +1,14 @@
+include:
+    project: 'shopware/6/product/platform'
+    ref: 'trunk'
+    file: '.gitlab/templates/plugin.yml'
+
+phpunit:
+    parallel:
+        matrix:
+            - SHOPWARE_FAKE_VERSION: 6.5.99.99
+              PLATFORM_BRANCH: trunk
+            # add new releases here
+            - PLATFORM_BRANCH:
+                - v6.5.0.0-rc2
+                - 6.5.0.0

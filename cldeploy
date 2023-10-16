@@ -1,0 +1,2661 @@
+#!/bin/bash
+
+# Copyright © Cloud Linux GmbH & Cloud Linux Software, Inc 2010-2023 All Rights Reserved
+#
+# Licensed under CLOUD LINUX LICENSE AGREEMENT
+# http://cloudlinux.com/docs/LICENSE.TXT
+
+## centos2cl INFO
+# Short Description	:upgrades CentOS or RHEL distro to CloudLinux
+# Description      	:removes yum repo configuration related to CentOS/RHEL,
+#	  		as well as release related packages. Installs cloudlinux
+#		        release related packages, new kernel and lve tools
+## centos2cl INFO
+
+version="1.100"
+
+OS_VERSION="$(rpm -q --qf %{version} $(rpm -q --whatprovides redhat-release 2>/dev/null) 2>/dev/null | cut -c 1)"
+OS_RELEASE="$(rpm -q --qf %{version} $(rpm -q --whatprovides redhat-release 2>/dev/null) 2>/dev/null | cut -c 3-)"
+
+if [[ -z "$OS_RELEASE" && -e /etc/redhat-release && "$OS_VERSION" -eq "7" ]]; then
+   OS_RELEASE="$(grep -oP "7.\d+" /etc/redhat-release | cut -c 3-)"
+fi
+
+LOWER_VERSION_RELEASE=$(echo "$OS_VERSION.$OS_RELEASE" | /bin/awk -F "." 'BEGIN { OFS = "." } {print $1,$2-1}')
+INSTALL_LOWER_VERSION=false
+
+BACKUP="/etc/cl-convert-saved"
+CL_SOLO_META_PACKAGE="cloudlinux-solo-meta"
+CL_ADMIN_META_PACKAGE="cloudlinux-admin-meta"
+CL_CONTAINER_META_PACKAGE="cloudlinux-container"
+
+BOOT_STACK_PACKAGES="shim* fwupd* fwupdate* grub2*"
+
+ROLLOUT_WARNING_FILTER="forced skip_if_unavailable"
+OPEN_VZ_MARKER="/proc/vz/vestat"
+
+ALMALINUX_REPO_URL="https://repo.almalinux.org"
+PUBLIC_REPO_URL="https://repo.cloudlinux.com"
+# CURRENT_REPO_URL can be changed by setting such enviroment variable
+CURRENT_REPO_URL="${CURRENT_REPO_URL:-$PUBLIC_REPO_URL}"
+
+ARGS=$*
+
+init_vars()
+{
+   # the files below are also used in script 'cldeploy-precheck' script in 'cpanel-lvemanager' project
+   # if your change the path to any of them here, don't forget to make changes to 'cldeploy-precheck'
+   log=/var/log/cldeploy.log
+   lock=/var/lock/cldeploy.lck
+   last_result_file=/var/run/cldeploy.last  # contains exit code of last performed operation
+   mode_file=/var/run/cldeploy.mode  # contains last performed operation ("install"/"uninstall")
+   precheck_log=/var/log/cldeploy-precheck.log
+
+   wget="/usr/bin/wget"
+   wget_options="-q"
+   kexec=false
+   uninstall=false
+   buildeasyapache=true
+   isea4=false
+   builddirectadmin=true
+   regen_modprobe_conf=false
+   activationkey=""
+   components=false
+   conversion=false
+   hybridize=false
+   no_force_hybridize=false
+   cl_solo_edition=false
+   cl_admin_edition=false
+   cl_container=false
+   solo_activation_key=false
+   admin_activation_key=false
+   hostinglimits=false
+   conversiononly=false
+   show_reboot_message=true
+   skipkmodcheck=false
+   skipbootcheck=false
+   skipversioncheck=false
+   skiposcheck=false
+   skip_ea4_script_download=false
+   force_packages_installation=false
+   registration=true
+   beta=false
+   build_ids=()
+   build_centos_ids=()
+   base_repo_url=""
+   addon_repo_urls=()
+   addon_repo_names=()
+   test_updates=false
+   serverurl="https://xmlrpc.cln.cloudlinux.com/XMLRPC/"
+   noninteractive=false
+   cldeploy_started=false
+   remove_non_standard_kernels=false
+   precheck=false
+
+   # adjust variables for container edition
+   if [[ -f "${OPEN_VZ_MARKER}" ]]; then
+      cl_container=true
+      show_reboot_message=false
+   fi
+
+   # Update checker URL
+   checksite="${PUBLIC_REPO_URL}/cloudlinux/sources/cln/"
+   checkfile="version.dat"
+   checkurl="$checksite$checkfile"
+   scriptname="cldeploy"
+   upgradeurl="$checksite$scriptname"
+   script="cldeploy"
+   dry_run="0"
+   script="$1"
+      case "$script" in
+       ./*) script="`pwd`/`basename $script`" ;;
+        /*) script="$script" ;;
+         *) script="`pwd`/$script" ;;
+      esac
+
+   # special marks which are added to log during --precheck command,
+   # they are used to parse the log in 'cldeploy-precheck' script in 'cpanel-lvemanager' project
+   # if your change any of these marks, don't forget to make changes to 'cldeploy-precheck'
+   CHECK_MARK="[CHECK]"
+   FT_START_MARK="[FIX TIP START]"
+   FT_END_MARK="[FIX TIP END]"
+   MC_START_MARK="[MANDATORY CHANGE START]"
+   MC_END_MARK="[MANDATORY CHANGE END]"
+}
+
+check_pipestatus()   { if [ $PIPESTATUS -ne $1 ]; then echo -e $2 | tee -a $log; exit 1; fi; }
+
+# Check exit code of last executed command
+# - error has occurred during precheck - write error to log
+# - error has occurred during conversion process - exit with error
+check_exit_code()
+{
+    local exit_code=$?
+    local expected_exit_code=$1
+    local description=$2
+    local fix_tip=$3
+    local message_for_cli=$4
+
+    if [ "$exit_code" -eq "$expected_exit_code" ]; then
+        description="$(echo "$description" | awk -F '|' '{print $1}')"
+        [ "$precheck" = "true" ] && echo "$CHECK_MARK $description - SUCCESS" | tee -a $log
+        return 0
+    fi
+
+    description="$(echo "$description" | awk -F '|' '{print $2}')"
+
+    # if precheck in progress, write special marks (intended to help log parsing) to the log
+    [ "$precheck" = "true" ] && echo "$CHECK_MARK $description - FAILED" | tee -a $log
+    [ "$precheck" = "true" ] && echo "$FT_START_MARK" | tee -a $log
+    echo -e "$fix_tip" | tee -a $log
+    [ "$precheck" = "true" ] && echo "$FT_END_MARK" | tee -a $log
+    [ "$precheck" = "true" ] && return 1
+
+    [ -n "$message_for_cli" ] && echo -e "$message_for_cli" | tee -a $log
+    exit 1
+}
+
+add_precheck_mandatory_change()
+{
+    [ "$precheck" = "false" ] && return 0
+
+    echo "$MC_START_MARK" | tee -a $log
+    echo -e "$1" | tee -a $log
+    echo "$MC_END_MARK" | tee -a $log
+}
+
+retry_wrapper() {
+  for iteration in {1..5}; do
+    /bin/bash -c "set -o pipefail; $1"
+    exit_code=$?
+    if [[ ${exit_code} -ne 0 ]]; then
+      continue
+    else
+      break
+    fi
+  done
+  return ${exit_code}
+}
+
+config_manager_wrapper() {
+    local command_args
+    command_args=$1
+
+    if [[ "$OS_VERSION" -ge "8" ]]; then
+        retry_wrapper "dnf config-manager ${command_args}"
+    else
+        retry_wrapper "yum-config-manager ${command_args}"
+    fi
+}
+
+# $1 = Message prompt
+# Returns ans=0 for no, ans=1 for yes
+yesno()
+{
+   local message="$1"
+
+   if [ "$precheck" = "true" ]; then
+      add_precheck_mandatory_change "$message"
+      ans=1
+      return 0
+   fi
+
+   echo "$message" | tee -a $log
+
+   if [ $dry_run -eq 1 ] || [ "$noninteractive" = "true" ]
+   then
+      echo "Would be asked here if you wanted to continue (y/n - y is assumed)"
+      ans=1
+   else
+      ans=2
+   fi
+
+   while [ $ans -eq 2 ]
+   do
+      echo -n "Do you want to continue (y/n)? " ; read reply
+      case "$reply" in
+          [yY][eE][sS]|[yY]) ans=1 ;;
+          [nN][oO]|[nN]) ans=0 ;;
+          *) echo "Please answer yes or no" ;;
+      esac
+   done
+}
+
+# $1 = Full URL to download
+# $2 = Optional basename to save to (if omitted, then = basename $1)
+#      Also allow download to fail without exit if $2 is set
+download_file()
+{
+   if [ "$2" = "" ]
+   then
+      dlbase="`basename \"$1\"`"
+   else
+      dlbase="$2"
+   fi
+
+   if [ $dry_run -eq 1 ]
+   then
+      echo "Would download this URL to $tmp_tree/$dlbase :"
+      echo $1 ; echo
+      return
+   fi
+
+   old_dlbase="$dlbase.old"
+   if [ -f "$dlbase" ]
+   then
+      rm -f "$old_dlbase"
+      mv -f "$dlbase" "$old_dlbase"
+   fi
+
+   echo "Downloading $dlbase (please wait)"
+   $wget $wget_options -O "$dlbase" "$1"
+
+   if [ ! -s "$dlbase" ]
+   then
+      if [ -f "$old_dlbase" ]
+      then
+         mv -f "$old_dlbase" "$dlbase"
+      fi
+      if [ "$2" = "" ]
+      then
+         echo "Failed to download $dlbase"
+         rm -f $lock
+         exit 1
+      fi
+   fi
+}
+
+# Make sure that we are running the latest version
+# $* = Params passed to script
+check_script_version()
+{
+   echo "Checking for an update to $scriptname"
+   download_file "$checkurl"
+
+   if [ $dry_run -eq 1 ] || [ "$noninteractive" = "true" ]
+   then
+      echo "Would check if this running script (version $version) is out of date."
+      echo "If it's been superseded, the new version would be downloaded and you'd be asked"
+      echo "if you want to upgrade to it and run the new version."
+      echo
+      return
+   fi
+
+   newversion="`cat \"$checkfile\"`"
+   newversion="`echo $newversion`"
+   rm -f "$checkfile"
+
+   if [ "$newversion" = "$version" ]
+   then
+      echo "$scriptname is already the latest version ($version) - continuing"
+   else
+      echo "New version ($newversion) of $scriptname detected"
+      echo "It will be downloaded and run now"
+      yesno
+      if [ $ans -eq 1 ]
+      then
+         echo "OK, downloading and executing $script $*"
+         download_file "$upgradeurl"
+         if [ "$scriptname" -ef "$script" ]
+         then
+            let a=1
+         else
+            mv -f "$scriptname" "$script"
+         fi
+         chmod u+x "$script"
+         echo "Download of $scriptname $newversion successful"
+         rm -f $lock
+         exec "$script" --skip-version-check $*
+         error "Failed to run $script $*"
+      else
+         echo "New version of script is available: ${PUBLIC_REPO_URL}/cloudlinux/sources/cln/cldeploy"
+         echo "Please download new script, review code and run it."
+         echo "If you prefer to use current version, run it with \"--skip-version-check\" key."
+         exit 1
+      fi
+   fi
+}
+
+function check_solo_conversion_supported() {
+  # This function call will check if conversion to CL SOLO is possible.
+
+  # 1: Check if os version is other than 8
+  # Exit 0 in this cases.
+
+  if [[ "${SKIP_PANEL_CHECK}" -eq 1 ]]; then
+    echo "Skipping check_solo_conversion_supported"
+    return 0
+  fi
+
+  local description="CloudLinux OS Solo edition is compatible with your system|CloudLinux OS Solo edition is only compatible with AlmaLinux 8 and 9"
+  local fix_tip="You are trying to install CloudLinux OS Solo edition which is only compatible with AlmaLinux 8 and 9.
+Please, use AlmaLinux 8 or 9 server for conversion or install CloudLinux OS Solo using ISO.
+
+Also, take a look at this section of CloudLinux Solo documentation: https://docs.solo.cloudlinux.com/installation/
+Please, contact CloudLinux support at https://cloudlinux.zendesk.com/ if you still have questions"
+
+  [[ "$OS_VERSION" -ge "8" && "$OS_VERSION" -le "9" ]]
+  check_exit_code 0 "$description" "$fix_tip"
+
+  # Check that governor-mysql is not installed (it is not available on CL Solo)
+  local conflicting_packages='governor-mysql'
+  local description2="Your system doesn't contain packages that will be unavailable on CloudLinux OS Solo|Your system contains some packages that are not supported on CloudLinux OS Solo edition: ${conflicting_packages}"
+  local fix_tip2="CloudLinux Solo provides less features than other editions, some packages installed on your system will stop working.
+Make sure to delete all packages from this list: ${conflicting_packages}.
+After that run cldeploy again
+
+More information about supported features can be found at https://www.cloudlinux.com/pricing/"
+
+  rpm -q $conflicting_packages &>/dev/null
+  check_exit_code 1 "$description2" "$fix_tip2"
+
+}
+
+function check_admin_conversion_supported() {
+  # This function call will check if conversion to CL ADMIN is possible.
+
+  # 1: Check if os version is other than 8
+    local description="CloudLinux OS Admin edition is compatible with your system|CloudLinux OS Admin edition is only compatible with AlmaLinux 8 and 9"
+    local fix_tip="You are trying to install CloudLinux OS Admin edition which is only compatible with AlmaLinux 8 and 9.
+Please, use AlmaLinux 8 or 9 server for conversion or install CloudLinux OS Admin using ISO.
+
+Also, take a look at this section of CloudLinux Admin documentation: https://docs.cloudlinux.com/cloudlinux_installation/
+Please, contact CloudLinux support at https://cloudlinux.zendesk.com/ if you still have questions"
+
+  [[ "$OS_VERSION" -ge "8" && "$OS_VERSION" -le "9" ]]
+  check_exit_code 0 "$description" "$fix_tip"
+}
+
+
+check_kernel_update_permission()
+{
+    if [ -e /etc/yum.conf ] && [ -n "$(grep exclude /etc/yum.conf | grep kernel | grep -v '^#')" ]; then
+        yesno "Kernel update is prohibited on your system.
+Continuing the installation will upgrade the kernel."
+        if [ $ans -eq 0 ]; then
+            echo "Cannot run without upgrading kernel." | tee -a $log
+            rm -f $lock
+            exit 1;
+        fi
+    fi
+
+    local description="incompatible binary driver is not detected|binary driver is not compatible with CloudLinux kernel"
+    local fix_tip="This server uses a binary driver hpahcisr.ko (HP AHCI Software RAID).
+That driver is not compatible with CloudLinux kernel.
+We don't know about any open source alternatives for that driver.
+The only workaround known to us at the moment is to disable the RAID feature in system BIOS and configure Linux software RAID instead.
+This workaround requires a full re-install of the OS."
+    rpm -q --qf '%{name}\n' `rpm -qa | grep hpahcisr` > /dev/null 2>&1
+    check_exit_code 1 "$description" "$fix_tip"
+
+    if [ "$skipkmodcheck" = "false" ]; then
+        list_not_compatible_kmods=$(rpm -q --qf '%{name}\n' `rpm -qa | grep ^kmod\-` | grep -v -e kvdo -e lve -e iolimits -e aacraid -e megaraid_sas -e1000e -e r8168 -e microsoft -e igb -e ixgbe -e dell-dm-switch -e libs -e "^kmod$")
+        local description="incompatible third-party kernel modules are not installed|incompatible third-party kernel modules are installed"
+        local fix_tip="You have third-party kernel modules rpm installed:
+${list_not_compatible_kmods}
+They are not compatible with CloudLinux kernel.
+Please contact CloudLinux support at https://cloudlinux.zendesk.com/hc/requests/new"
+        [[ -z "${list_not_compatible_kmods}" ]]
+        check_exit_code 0 "$description" "$fix_tip"
+    fi
+
+    local non_standard_kernels
+    non_standard_kernels="$(uname -r | grep --invert-match $KERNEL_VERSION)"
+    if [ -n "$non_standard_kernels" ] ; then
+        if uname -r | grep -q linode ; then
+            if [ -f /proc/xen/capabilities ]; then
+                LINODE=true
+            else
+                LINODE_KVM=true
+            fi
+        else
+            yesno "Your server has non-standard kernel installed: ${non_standard_kernels}.
+Continuing the installation will unregister this kernel RPM from RPM database."
+            if [ $ans -eq 0 ]; then
+                echo "Please remove non-standard kernels manually and run this script again." | tee -a $log
+                rm -f $lock
+                exit 1
+            fi
+            remove_non_standard_kernels=true
+        fi
+    fi
+}
+
+check_ea4 ()
+{
+    if [ -f /etc/cpanel/ea4/is_ea4 ]  ; then
+        buildeasyapache=false
+        isea4=true
+        echo "Updating cPanel" | tee -a $log
+        if [[ $(detect_distro) == "AlmaLinuxOS" ]]; then
+            # cpanel script calls `yum update`, and by default this updates AlmaLinux to new release
+            # here we lock release version before update
+            AL_REPO_LIST="/etc/yum.repos.d/almalinux.repo
+            /etc/yum.repos.d/almalinux-appstream.repo
+            /etc/yum.repos.d/almalinux-baseos.repo
+            /etc/yum.repos.d/almalinux-devel.repo
+            /etc/yum.repos.d/almalinux-extras.repo
+            /etc/yum.repos.d/almalinux-ha.repo
+            /etc/yum.repos.d/almalinux-powertools.repo
+            /etc/yum.repos.d/almalinux-resilientstorage.repo
+            /etc/yum.repos.d/almalinux-crb.repo
+            /etc/yum.repos.d/almalinux-highavailability.repo"
+            for repo_conf in $AL_REPO_LIST; do
+                # replace yum variable '$releasever' (default value is like 8) with more specific version like 8.5
+                [[ -f "$repo_conf" ]] && sed -i "s/\$releasever/$OS_VERSION.$OS_RELEASE/" "$repo_conf"
+            done
+        fi
+        /scripts/upcp 2>&1 | tee -a $log
+    fi
+}
+
+check_yum ()
+{
+    # yum plugins enabled only when config contains
+    local description="yum plugins are enabled|yum plugins are disabled"
+    local fix_tip="Please enable yum-plugins: add string 'plugins=1' to the /etc/yum.conf"
+    [ -n "$(cat /etc/yum.conf | sed -e 's/ //g' | grep -i ^"plugins=1")" ]
+    check_exit_code 0 "$description" "$fix_tip"
+}
+
+check_dnf ()
+{
+    # dnf has another behavior: plugins are ENABLED unless config has plugins=False record
+    local config="$(cat /etc/dnf/dnf.conf | sed -e 's/ //g')"
+    local description="dnf plugins are enabled|dnf plugins are disabled"
+    local fix_tip="Please enable dnf-plugins: remove string started with 'plugins=' from the /etc/dnf/dnf.conf"
+    [[ -n "$(echo "${config}" | grep -i ^"plugins=False")" || -n "$(echo "${config}" | grep -i ^"plugins=0")" ]]
+    check_exit_code 1 "$description" "$fix_tip"
+}
+
+check_system_supported()
+{
+    local exit_code=0
+    local description="basic system checks passed|basic system checks failed"
+    local message_for_cli=""
+    if grep -iE "(ubuntu)|(debian)" /etc/os-release > /dev/null 2>&1; then
+        exit_code=1
+        local fix_tip="Conversion from Ubuntu is not supported."
+        local message_for_cli="Please, use the ubuntu2cloudlinux.py script to convert to CloudLinux OS."
+    elif ! rpm -q --whatprovides redhat-release > /dev/null 2>&1; then
+        exit_code=1
+        local fix_tip="There is no package providing /etc/redhat-release, please install redhat-release or centos-release or almalinux-release"
+    elif [ "$OS_VERSION" != 5 ] && [ "$OS_VERSION" != 6 ] && [ "$OS_VERSION" != 7 ] && [ "$OS_VERSION" != 8 ] && [ "$OS_VERSION" != 9 ]; then
+        exit_code=1
+        local fix_tip="Conversion is available for Version 6, 7, 8 and 9 only."
+    elif [[ "$skiposcheck" == "false" && "$OS_VERSION" -ge 7 ]]; then
+        check_cl_release_available
+        if [[ $? -ne 0 && "$INSTALL_LOWER_VERSION" != "true" ]]; then
+            exit_code=1
+            local distro
+            distro="$(detect_distro)"
+            local fix_tip
+            fix_tip="WARNING: Your ${distro} release version is greater then the latest currently available CloudLinux release!\nYou can either wait for a new version of CloudLinux or downgrade your ${distro} installation version to ${LAST_CL_VERSION}.${LAST_CL_RELEASE}\nDowngrade conversion is currently supported only for installations without panel or with one of the following panels: cPanel, Plesk."
+            local message_for_cli="To continue conversion anyway, you may also run cldeploy with --skip-os-check option,\nbut there are no guarantees that it won't cause any issues after the conversion."
+        fi
+    fi
+
+    [ $exit_code -eq 0 ]
+    # if this check failed, we exit immediately even during precheck as system is not supported
+    ! check_exit_code 0 "$description" "$fix_tip" "$message_for_cli" && exit 1
+}
+
+function set_base_url_lower_version {
+    CLOUDLINUX_RELEASE_PACKAGES_DIR_URL="${CURRENT_REPO_URL}/cloudlinux/${LOWER_VERSION_RELEASE}/BaseOS/x86_64/os/Packages/"
+    CLOUDLINUX_RELEASE_PACKAGE=$(curl "${CLOUDLINUX_RELEASE_PACKAGES_DIR_URL}" 2>/dev/null | sed -n "s/^.*\(cloudlinux-release.*rpm\).*$/\1/p" | head -1)
+    CLOUDLINUX_RELEASE="${CLOUDLINUX_RELEASE_PACKAGES_DIR_URL}${CLOUDLINUX_RELEASE_PACKAGE}"
+}
+
+check_release ()
+{
+ARCH=$(uname -i)
+CPU=$(uname -p)
+
+# handle 32bit xen with x86_64 host kernel
+if ( ! rpm -q glibc.x86_64 > /dev/null 2>&1 ) && [ "$ARCH" = "x86_64" ] ; then
+ARCH=i386
+CPU=i686
+fi
+    if [[ "$OS_VERSION" -eq "5" ]]; then
+        KERNEL_VERSION="2.6.18"
+        CLOUDLINUX_RELEASE="${CURRENT_REPO_URL}/cloudlinux/migrate/release-files/cloudlinux/5/cloudlinux5-release-current.noarch.rpm"
+        CLOUDLINUX_LOGOS="${CURRENT_REPO_URL}/cloudlinux/migrate/release-files/cloudlinux/5/cloudlinux-logos-0.3-1.el5.1.noarch.rpm"
+        CENTOS_RELEASE="${CURRENT_REPO_URL}/cloudlinux/migrate/release-files/centos/5/${ARCH}/centos5-release-current.${ARCH}.rpm"
+    elif [[ "$OS_VERSION" -eq "6" ]]; then
+        KERNEL_VERSION="2.6.32"
+        CLOUDLINUX_RELEASE="${CURRENT_REPO_URL}/cloudlinux/migrate/release-files/cloudlinux/6/${ARCH}/cloudlinux6-release-current.${CPU}.rpm"
+        CLOUDLINUX_EA4_RELEASE="${CURRENT_REPO_URL}/cloudlinux/EA4/cloudlinux-ea4-release-latest-6.noarch.rpm"
+        CLOUDLINUX_LOGOS="${CURRENT_REPO_URL}/cloudlinux/migrate/release-files/cloudlinux/6/i386/redhat-logos-60.0.14-1.el6.cloudlinux.noarch.rpm"
+        CENTOS_RELEASE="${CURRENT_REPO_URL}/cloudlinux/migrate/release-files/centos/6/${ARCH}/centos6-release-current.${CPU}.rpm"
+    elif [[ "$OS_VERSION" -eq "7" ]]; then
+        KERNEL_VERSION="3.10.0"
+        CLOUDLINUX_RELEASE="${CURRENT_REPO_URL}/cloudlinux/migrate/release-files/cloudlinux/7/${ARCH}/cloudlinux7-release-current.${CPU}.rpm"
+        CLOUDLINUX_EA4_RELEASE="${CURRENT_REPO_URL}/cloudlinux/EA4/cloudlinux-ea4-release-latest-7.noarch.rpm"
+        CLOUDLINUX_LOGOS="${CURRENT_REPO_URL}/cloudlinux/migrate/release-files/cloudlinux/7/${ARCH}/cloudlinux-logos-70.0.3-5.el7.noarch.rpm"
+        CENTOS_RELEASE="${CURRENT_REPO_URL}/cloudlinux/migrate/release-files/centos/7/${ARCH}/centos7-release-current.${CPU}.rpm"
+    elif [[ "$OS_VERSION" -eq "8" ]]; then
+        KERNEL_VERSION="4.18.0"
+        if [[ "$CLDEPLOY_TEST_SET_LOWER_VERSION_AS_CURRENT" == "true" ]]; then
+            set_base_url_lower_version
+            echo "Note: Using cloudlinux-release package from fixed URL ${CLOUDLINUX_RELEASE}" | tee -a $log
+        else
+            CLOUDLINUX_RELEASE="${CURRENT_REPO_URL}/cloudlinux/migrate/release-files/cloudlinux/${OS_VERSION}/x86_64/cloudlinux${OS_VERSION}-release-current.x86_64.rpm"
+        fi
+        CLOUDLINUX_EA4_RELEASE="${CURRENT_REPO_URL}/cloudlinux/EA4/cloudlinux-ea4-release-latest-8.noarch.rpm"
+        CLOUDLINUX_LOGOS="${CURRENT_REPO_URL}/cloudlinux/migrate/release-files/cloudlinux/8/x86_64/cloudlinux8-logos-current.x86_64.rpm"
+        CENTOS_RELEASE="${CURRENT_REPO_URL}/cloudlinux/migrate/release-files/centos/8/x86_64/centos8-release-current.x86_64.rpm"
+        CENTOS_GPG_KEYS="${CURRENT_REPO_URL}/cloudlinux/migrate/release-files/centos/8/x86_64/centos-gpg-keys-current.x86_64.rpm"
+        CENTOS_REPOS="${CURRENT_REPO_URL}/cloudlinux/migrate/release-files/centos/8/x86_64/centos-repos-latest.x86_64.rpm"
+        ALMALINUX_RELEASE="${ALMALINUX_REPO_URL}/almalinux/almalinux-release-latest-8.x86_64.rpm"
+    elif [[ "$OS_VERSION" -eq "9" ]]; then
+        KERNEL_VERSION="5.14.0"
+        if [[ "$CLDEPLOY_TEST_SET_LOWER_VERSION_AS_CURRENT" == "true" ]]; then
+            set_base_url_lower_version
+            echo "Note: Using cloudlinux-release package from fixed URL ${CLOUDLINUX_RELEASE}" | tee -a $log
+        else
+            CLOUDLINUX_RELEASE="${CURRENT_REPO_URL}/cloudlinux/migrate/release-files/cloudlinux/9/x86_64/cloudlinux9-release-current.x86_64.rpm"
+        fi
+        CLOUDLINUX_EA4_RELEASE="${CURRENT_REPO_URL}/cloudlinux/EA4/cloudlinux-ea4-release-latest-9.noarch.rpm"
+        CLOUDLINUX_LOGOS="${CURRENT_REPO_URL}/cloudlinux/migrate/release-files/cloudlinux/9/x86_64/cloudlinux9-logos-current.x86_64.rpm"
+        CENTOS_RELEASE="${CURRENT_REPO_URL}/cloudlinux/migrate/release-files/centos/9/x86_64/centos9-release-current.noarch.rpm"
+        CENTOS_GPG_KEYS="${CURRENT_REPO_URL}/cloudlinux/migrate/release-files/centos/9/x86_64/centos-gpg-keys-current.noarch.rpm"
+        CENTOS_REPOS="${CURRENT_REPO_URL}/cloudlinux/migrate/release-files/centos/9/x86_64/centos-repos-current.noarch.rpm"
+        ALMALINUX_RELEASE="${ALMALINUX_REPO_URL}/almalinux/almalinux-release-latest-9.x86_64.rpm"
+    fi
+}
+
+check_digitalocean ()
+{
+if [ -f /etc/digitalocean ]; then
+    yesno "This looks like DigitalOcean droplet. DigitalOcean doesn't allow custom kernel installations via grub.
+Continuing the installation requires the kexec mechanism for CloudLinux kernel to be enabled."
+    if [ $ans -eq 0 ]; then
+        echo "Exiting" | tee -a $log
+        rm -f $lock
+        exit 1
+    fi
+    kexec=true
+    echo "Enabled" | tee -a $log
+fi
+}
+
+check_linode_kvm ()
+{
+if uname -r | grep -q linode && [ ! -f /proc/xen/capabilities ] ; then
+    yesno "This looks like Linode KVM. Linode KVM doesn't let custom kernel installations via grub.
+Continuing installation requires enabled kexec mechanism for CloudLinux kernel."
+    if [ $ans -eq 0 ]; then
+        echo "Exiting" | tee -a $log
+        rm -f $lock
+        exit 1
+    fi
+    kexec=true
+    echo "Enabled" | tee -a $log
+fi
+}
+
+backup_file() {
+    local file_name="$1"
+    if [[ -f "$file_name" ]]; then
+        yes | mv "$file_name" "${BACKUP}"
+    fi
+}
+
+erase_package_via_yum() {
+    local package_name="$1"
+    if rpm -q "$package_name" > /dev/null 2>&1; then
+        yum erase -y "$package_name"
+    fi
+}
+
+erase_package_via_rpm() {
+    local package_name="$1"
+    if rpm -q "$package_name" > /dev/null 2>&1; then
+        rpm --erase --nodeps "$package_name"
+    fi
+}
+
+backup ()
+{
+    mkdir -p "${BACKUP}" | tee -a "${log}"
+    yes | cp /etc/redhat-release "${BACKUP}" 2>&1 | tee -a "${log}"
+    # disable redhat
+    backup_file "/etc/yum.repos.d/RedHat-Base.repo" &>> "${log}"
+    erase_package_via_yum rhnlib &>> "${log}"
+    erase_package_via_yum subscription-manager &>> "${log}"
+    erase_package_via_rpm redhat-release-notes &>> "${log}"
+    erase_package_via_rpm redhat-release &>> "${log}"
+    erase_package_via_rpm redhat-logos &>> "${log}"
+    erase_package_via_rpm redhat-release-server  &>> "${log}"
+    backup_file "/etc/sysconfig/rhn/systemid" &>> "${log}"
+    backup_file "/etc/yum/pluginconf.d/rhnplugin.conf" &>> "${log}"
+
+    # disable centos
+    backup_file "/etc/yum.repos.d/CentOS-AppStream.repo" &>> "${log}"
+    backup_file "/etc/yum.repos.d/CentOS-Base.repo" &>> "${log}"
+    backup_file "/etc/yum.repos.d/CentOS-CR.repo" &>> "${log}"
+    backup_file "/etc/yum.repos.d/CentOS-Debuginfo.repo" &>> "${log}"
+    backup_file "/etc/yum.repos.d/CentOS-Extras.repo" &>> "${log}"
+    backup_file "/etc/yum.repos.d/CentOS-Media.repo" &>> "${log}"
+    backup_file "/etc/yum.repos.d/CentOS-PowerTools.repo" &>> "${log}"
+    backup_file "/etc/yum.repos.d/CentOS-Sources.repo" &>> "${log}"
+    backup_file "/etc/yum.repos.d/CentOS-Vault.repo" &>> "${log}"
+    backup_file "/etc/yum.repos.d/CentOS-centosplus.repo" &>> "${log}"
+    backup_file "/etc/yum.repos.d/CentOS-fasttrack.repo" &>> "${log}"
+    backup_file "/etc/yum.repos.d/CentOS-Stream-AppStream.repo" &>> "${log}"
+    backup_file "/etc/yum.repos.d/CentOS-Stream-Base.repo" &>> "${log}"
+    backup_file "/etc/yum.repos.d/CentOS-Stream-Debuginfo.repo" &>> "${log}"
+    backup_file "/etc/yum.repos.d/CentOS-Stream-Extras.repo" &>> "${log}"
+    backup_file "/etc/yum.repos.d/CentOS-Stream-Media.repo" &>> "${log}"
+    backup_file "/etc/yum.repos.d/CentOS-Stream-PowerTools.repo" &>> "${log}"
+    backup_file "/etc/yum.repos.d/CentOS-Stream-Sources.repo" &>> "${log}"
+    backup_file "/etc/yum.repos.d/CentOS-Stream-Vault.repo" &>> "${log}"
+    backup_file "/etc/yum.repos.d/CentOS-Stream-centosplus.repo" &>> "${log}"
+    erase_package_via_rpm centos-release &>> "${log}"
+    erase_package_via_rpm centos-release-notes &>> "${log}"
+    erase_package_via_rpm redhat-logos &>> "${log}"
+    erase_package_via_rpm centos-logos &>> "${log}"
+    # disable scientific linux
+    backup_file "/etc/yum.repos.d/sl.repo" &>> "${log}"
+    backup_file "/etc/yum.repos.d/cd.repo" &>> "${log}"
+    erase_package_via_rpm sl-release &>> "${log}"
+    erase_package_via_rpm sl-release-notes &>> "${log}"
+
+    # disable almalinux* repos
+    # don't move repos to backup here, because cloudlinux-release
+    # contains same files as almalinux-release
+    # mv breaks retries of cldeploy
+    if ls /etc/yum.repos.d/almalinux*.repo > /dev/null 2>&1; then
+        yes | cp /etc/yum.repos.d/almalinux*.repo "${BACKUP}" &>> "${log}"
+    fi
+    erase_package_via_rpm almalinux-release &>> "${log}"
+    erase_package_via_rpm almalinux-repos &>> "${log}"
+    erase_package_via_rpm almalinux-logos &>> "${log}"
+
+    # disable rocky* repos
+    if ls /etc/yum.repos.d/Rocky*.repo > /dev/null 2>&1; then
+        yes | mv /etc/yum.repos.d/Rocky*.repo "${BACKUP}" &>> "${log}"
+    fi
+    erase_package_via_rpm rocky-release &>> "${log}"
+    erase_package_via_rpm rocky-logos &>> "${log}"
+    erase_package_via_rpm rocky-repos &>> "${log}"
+}
+
+
+function is_cpanel_ea4() {
+  if [[ "cpanel" == "${PANEL}" && -f "/etc/cpanel/ea4/is_ea4" ]]; then
+    return 0
+  else
+    return 1
+  fi
+}
+
+
+function yum_exclude_packages() {
+    EXCLUDED_PACKAGES+=" $1"
+}
+
+
+function apply_yum_excludes() {
+    # EXCLUDED_PACKAGES has a space at the beginning. :1 removes it.
+    EXCLUDED_PACKAGES="${EXCLUDED_PACKAGES:1}"
+
+    # Either add a new line to the config, or append packages to an existing one.
+    for config_file in '/etc/yum.conf' '/etc/dnf/dnf.conf' ; do
+        local grep_result=$(grep "^exclude=" $config_file)
+        if [[ -n $grep_result ]]; then
+            sed -i "s/\(^exclude=.*$\)/\1 ${EXCLUDED_PACKAGES}/" $config_file
+        else
+            echo "exclude=${EXCLUDED_PACKAGES}" >> $config_file
+        fi
+
+        # Insert the message before the "exclude" line.
+        sed -i "/exclude=.*$/ i\
+# The exclude pattern list was extended by the CloudLinux deployment script.\n\
+# They will be automatically removed once a new CloudLinux release becomes available.\n\
+# CloudLinux automatic exclude list: $EXCLUDED_PACKAGES" $config_file
+    done
+}
+
+
+prep ()
+{
+    # this url should be public
+    rpm --import "${PUBLIC_REPO_URL}/cloudlinux/security/RPM-GPG-KEY-CloudLinux" &>> "${log}"
+    # localinstall is used because it can correctly handle direct url installations on old yum as well
+    retry_wrapper "yum localinstall -y ${CLOUDLINUX_RELEASE} --disablerepo='*' &>> ${log}"
+    retry_wrapper "yum localinstall -y ${CLOUDLINUX_LOGOS} --disablerepo='*' |& grep -v \"${ROLLOUT_WARNING_FILTER}\" &>> ${log}"
+
+    if [[ "$OS_VERSION" -ge "8" ]]; then
+        ALMALINUX_BASE="baseos"
+        URL_BASE_REPO="${CURRENT_REPO_URL}/cloudlinux/${OS_VERSION}/BaseOS/x86_64/os/"
+    else
+        BASE_REPO="cloudlinux-base"
+    fi
+
+    if [[ "$INSTALL_LOWER_VERSION" == "true" ]]; then
+        # replace lower CL release version with current Almalinux release version in almalinux repos
+        for repo_conf in /etc/yum.repos.d/almalinux-*.repo; do
+            [[ -f "$repo_conf" ]] && sed -i "s/$LOWER_VERSION_RELEASE/$OS_VERSION.$OS_RELEASE/" "$repo_conf"
+        done
+
+        # cl-mysql packages have a bumped epoch, which is why a normal yum upgrade
+        # can actually decrement the MySQL version
+        # we don't want that, because MySQL doesn't support working with databases from higher versions
+        # and will refuse to run if downgraded
+        yum_exclude_packages "mysql* mariadb*"
+
+        echo "Note: Setting $OS_VERSION.$OS_RELEASE to /etc/dnf/vars/almalinux_releasever" | tee -a "${log}"
+        echo "$OS_VERSION.$OS_RELEASE" > /etc/dnf/vars/almalinux_releasever
+
+        echo "Note: Setting ${LOWER_VERSION_RELEASE} to /etc/dnf/vars/cloudlinux_releasever" | tee -a "${log}"
+        echo "${LOWER_VERSION_RELEASE}" > /etc/dnf/vars/cloudlinux_releasever
+
+        URL_BASE_REPO="${CURRENT_REPO_URL}/cloudlinux/${LOWER_VERSION_RELEASE}/BaseOS/x86_64/os/"
+    fi
+
+    # set base repo from cldeploy argument if provided
+    if [[ -n "${base_repo_url}" ]]; then
+        URL_BASE_REPO="${base_repo_url}"
+    fi
+
+    if is_cpanel_ea4; then
+        retry_wrapper "yum localinstall -y ${CLOUDLINUX_EA4_RELEASE} --disablerepo='*' |& grep -v \"${ROLLOUT_WARNING_FILTER}\" &>> ${log}"
+    fi
+    # Handle LES
+    if [[ -x "/usr/local/sbin/les" ]]; then
+        LES=true
+        /usr/local/sbin/les -da 2>&1 | tee -a "${log}"
+        check_pipestatus 0 "Unable to turn off LES, please contact CloudLinux support at https://cloudlinux.zendesk.com/hc/requests/new"
+    fi
+
+    # install packages providing config-manager
+    if [[ "$OS_VERSION" -ge "8" ]]; then
+        dnf install -y --disablerepo=cloudlinux-rollout-* 'dnf-command(config-manager)' | tee -a "${log}"
+    else
+        yum install -y --disablerepo=cloudlinux-rollout-* yum-utils \
+            |& grep -v \"${ROLLOUT_WARNING_FILTER}\" | tee -a "${log}"
+    fi
+
+    # add external repos
+    for repo_url in "${addon_repo_urls[@]}"; do
+        config_manager_wrapper "--add-repo=${repo_url} |& grep -v \"${ROLLOUT_WARNING_FILTER}\""
+    done
+
+    # set up base repo
+    if [[ -n "${URL_BASE_REPO}" ]]; then
+        echo "Configuring Base repo: ${URL_BASE_REPO}" | tee -a "${log}"
+        config_manager_wrapper "--add-repo=${URL_BASE_REPO} |& grep -v \"${ROLLOUT_WARNING_FILTER}\""
+        BASE_REPO="$(echo ${URL_BASE_REPO##*://} | tr / _)"
+    fi
+    echo "Note: Base repo name: ${BASE_REPO}" | tee -a "${log}"
+}
+
+check_panel ()
+{
+PANEL=""
+ROOT_PLESK_DIR="/usr/local/psa/admin/"
+ROOT_CPANEL_DIR="/usr/local/cpanel/whostmgr/docroot/"
+ROOT_IWORX_DIR="/usr/local/interworx/"
+ROOT_ISPMGR_DIR="/usr/local/ispmgr/"
+ROOT_ISPMGR5_FILE="/usr/local/mgr5/sbin/mgrctl"
+ROOT_DA_DIR="/usr/local/directadmin/"
+CUSTOM_PANEL_INTEGRATION_FILE="/opt/cpvendor/etc/integration.ini"
+
+if [ -d $ROOT_PLESK_DIR ]; then PANEL="plesk"; fi
+if [ -d $ROOT_IWORX_DIR ]; then PANEL="interworx"; fi
+if [ -d $ROOT_CPANEL_DIR ]; then PANEL="cpanel"; fi
+if [ -d $ROOT_ISPMGR_DIR ]; then PANEL="ispmgr"; fi
+if [ -d $ROOT_DA_DIR ]; then PANEL="directadmin"; fi
+if [ -f $CUSTOM_PANEL_INTEGRATION_FILE ]; then PANEL="CUSTOM-PANEL"; fi
+if [ -f $ROOT_ISPMGR5_FILE ]; then PANEL="ispmgr5"; fi
+
+if [ "$PANEL" != "" ] && [ "$PANEL" = "cpanel" ] && [ -x /usr/local/cpanel/cpanel ] ; then
+    CPANEL_MAJOR=`/usr/local/cpanel/cpanel -V | cut -f 1 -d "."`
+    CPANEL_MINOR=`/usr/local/cpanel/cpanel -V | cut -f 2 -d "."`
+	if [ $CPANEL_MAJOR -eq 11 ] && [ $CPANEL_MINOR -lt 30 ]; then
+	CPANEL_OLD=YES
+	else
+	CPANEL_OLD=NO
+	fi
+fi
+
+if [ "$PANEL" != "" ] && [ "$PANEL" = "plesk" ] && [ -f  /usr/local/psa/version ] ; then
+    PLESK_MAJOR=`cut -f 1 -d "." /usr/local/psa/version`
+    PLESK_MINOR=`cut -f 2 -d "." /usr/local/psa/version`
+        if [ $PLESK_MAJOR -eq 11 ] && [ $PLESK_MINOR -lt 5 ]; then
+        PLESK_OLD=YES
+        else
+        PLESK_OLD=NO
+        fi
+fi
+
+}
+
+function check_that_groups_clsupergid_and_clsudoers_are_empty () {
+    local var_lve="/var/lve"
+    local already_passed="${var_lve}/.clsupergid_clsudoers_check_is_passed.cldeploy"
+    local check=0
+    if [[ -f "${already_passed}" ]]; then
+        echo "Check that groups clsupergid and clsudoers are empty is skipped, because it has already been performed" >> "${log}"
+        return 0
+    fi
+    # check that the special groups don't contain any user
+    echo "Check that groups clsupergid and clsudoers are empty" >> "${log}"
+    local result=$(getent group clsupergid | awk -F ':' '{print $4; exit}' 2>&1)
+    echo "Check that the group clsupergid doesn't contain any user" >> "${log}"
+    echo "${result}" >> "${log}"
+    [[ "" != "${result}" ]] && let check+=1
+    local result=$(getent group clsudoers | awk -F ':' '{print $4; exit}' 2>&1)
+    echo "Check that the group clsudoers doesn't contain any user" >> "${log}"
+    echo "${result}" >> "${log}"
+    [[ "" != "${result}" ]] && let check+=1
+    # check that the users with special names don't belong to special groups
+    echo "Check that the user clsupergid doesn't belong to the group with same name" >> "${log}"
+    id -ng "clsupergid" 2>/dev/null | grep -w "clsupergid" >> "${log}" && let check+=1
+    echo "Check that the user clsupergid doesn't belong to the group with same name" >> "${log}"
+    id -ng "clsudoers" 2>/dev/null | grep -w "clsudoers" >> "${log}" && let check+=1
+
+    local description="groups clsupergid and clsudoers are empty|groups clsupergid and clsudoers are not empty"
+    local fix_tip="You have users in the group 'clsudoers', 'clsupergid' or both.
+This may create a security issue on the server, because after the conversion
+the users in those groups will be granted permissions higher than of a simple user.
+Please move the users to another group(s)."
+    [[ "0" == "${check}" ]]
+    ! check_exit_code 0 "$description" "$fix_tip" && return 1
+
+    mkdir -p "${var_lve}"
+    chmod 755 "${var_lve}"
+    touch "${already_passed}"
+}
+
+
+check_cloudlinux_repos ()
+{
+    ENABLED_REPOS="--disablerepo=* --enablerepo=cloudlinux-$ARCH-server-$OS_VERSION"
+
+    if [[ "0" != "${#addon_repo_urls[@]}" ]]; then
+        ENABLED_REPOS="${ENABLED_REPOS} --enablerepo=$(echo ${addon_repo_names[@]})"
+    fi
+    if [[ -n "${build_ids[*]}" ]]; then
+        for build_id in "${build_ids[@]}"; do
+        ENABLED_REPOS="${ENABLED_REPOS} --enablerepo=${build_id}"
+        done
+    fi
+    if [[ -n "${build_centos_ids[*]}" ]]; then
+        for build_id in "${build_centos_ids[@]}"; do
+        ENABLED_REPOS="${ENABLED_REPOS} --enablerepo=${build_id}"
+        done
+    fi
+    ENABLED_REPOS="${ENABLED_REPOS} --enablerepo=${BASE_REPO}"
+    if [[ "${OS_VERSION}" -ge "8" ]]; then
+        ENABLED_REPOS="${ENABLED_REPOS} --enablerepo=baseos --enablerepo=appstream"
+    fi
+    if [[ "true" == "${test_updates}" ]]; then
+        ENABLED_REPOS="${ENABLED_REPOS} --enablerepo=cloudlinux-updates-testing"
+    fi
+    # CLDEPLOY-133. We should enable cl-ea4 repo for updating package `mod_lsapi` to CL package,
+    # because lve-utils conflicts with cpanel package `mod_lsapi`
+    if is_cpanel_ea4 && [[ "true" == "${test_updates}" ]]; then
+        ENABLED_REPOS="${ENABLED_REPOS} --enablerepo=cl-ea4,cl-ea4-testing"
+    elif is_cpanel_ea4; then
+        ENABLED_REPOS="${ENABLED_REPOS} --enablerepo=cl-ea4"
+    fi
+}
+
+create_repos ()
+{
+    if [[ -n "${build_ids[*]}" ]] || [[ -n "${build_centos_ids[*]}" ]]; then
+        deploy_dst_file='/var/run/deploy.py'
+        download_file "https://build.cloudlinux.com/api/v1/deployment-tool" "${deploy_dst_file}"
+        if [[ "$OS_VERSION" -eq "8" ]]; then
+            /usr/bin/python2 "${deploy_dst_file}" --with-linked -t "${auth_token}" ${build_ids[*]} ${build_centos_ids[*]}
+        else
+            python "${deploy_dst_file}" --with-linked -t "${auth_token}" ${build_ids[*]} ${build_centos_ids[*]}
+        fi
+    fi
+}
+
+# We need to install kernel-devel for virtual containers
+check_source ()
+{
+[ "$precheck" = "true" ] && return 0
+NEED_SOURCE="NO"
+#check if pci bus is exist in system. in openvz pci bus is absent
+if [ -e /proc/bus/pci ] ; then
+  if ! rpm -q pciutils > /dev/null 2>&1; then
+  retry_wrapper "yum -y install pciutils"
+  fi
+  if [ -x /sbin/lspci ] ; then
+      if $(/sbin/lspci -n | grep -q 1414) || $(/sbin/lspci -n | grep -q 15ad) || $(/sbin/lspci -n | grep -q 1ab8); then
+      NEED_SOURCE="YES"
+      fi
+  fi
+fi
+}
+
+
+fix_mdadm_config() {
+python -c '
+import sys
+import subprocess
+import os
+import shutil
+MDADM = "/sbin/mdadm"
+MDADM_CONF = "/etc/mdadm.conf"
+out_put = subprocess.Popen([MDADM, "--detail", "--scan"], stdout = subprocess.PIPE)
+mdadm = out_put.stdout.readlines()
+result_output = """MAILADDR root
+AUTO +imsm +1.x -all
+"""
+for line in mdadm:
+    for item in line.split():
+        if "/dev" in item:
+            dev = item
+        elif "UUID" in item:
+            uuid = item
+    out = subprocess.Popen([MDADM,"--detail", dev], stdout = subprocess.PIPE)
+    mdadm_scan_out = out.stdout.readlines()
+    for line in mdadm_scan_out:
+        if "Raid Level" in line:
+            raid_level = line.split(":")[1].strip()
+        elif "Raid Devices" in line:
+            raid_devices = line.split(":")[1].strip()
+    result_string = "ARRAY " + dev.strip() + " level=" + raid_level + " num-devices=" + raid_devices + " " + uuid +"\n"
+    result_output = result_output + result_string
+    if os.path.exists(MDADM_CONF):
+        shutil.copyfile(MDADM_CONF, MDADM_CONF + "." + str(os.getpid()))
+conf = open(MDADM_CONF, "w")
+conf.write(result_output)
+conf.close()
+'
+}
+
+add_raid_to_grub(){
+python -c '
+import os
+import subprocess
+import shutil
+
+GRUB_CFG_DEFAULT = "/etc/default/grub"
+OPTIONS = ["net.ifnames=0", "rd.auto=1"]
+
+grub_data = open(GRUB_CFG_DEFAULT).readlines()
+grub_data_result = ""
+add_opt = ""
+try:
+    for line in grub_data:
+        if "GRUB_CMDLINE_LINUX" in line:
+            for opt in OPTIONS:
+              if opt not in line:
+                  add_opt = add_opt + opt + " "
+            line_new = line[:-2] + " " + add_opt.strip() + "\"\n"
+            grub_data_result = grub_data_result + line_new
+        else:
+            grub_data_result = grub_data_result + line
+    if os.path.exists(GRUB_CFG_DEFAULT):
+        shutil.copyfile(GRUB_CFG_DEFAULT, GRUB_CFG_DEFAULT + "." + str(os.getpid()))
+except (OSError, IOError):
+    grub_data_result = "GRUB_CMDLINE_LINUX=\"net.ifnames=0 rd.auto=1\""
+conf = open(GRUB_CFG_DEFAULT, "w")
+conf.write(grub_data_result)
+conf.close()
+
+# In general, there is no 100% reliable way to find where is current
+# grub config because its location is embedded to binary EFI stub during
+# grub-install and, in general case, could be anywhere on disk,
+# BUT usually its location follows such pattern "/boot/efi/EFI/XYZ/grub.cfg"
+# where XYZ is a efi entry name which is for CentOS 7 == "centos" and
+# "redhat" for earlie versions.
+# Also, by default there are few symlinks that may point to correct file:
+#   /etc/grub2.cfg -> ../boot/grub2/grub.cfg
+#   /etc/grub2-efi.cfg -> ../boot/efi/EFI/centos/grub.cfg
+GRUB_CFG_PATH_1 = "/boot/grub2/grub.cfg"
+GRUB_CFG_PATH_2 = "/etc/grub2-efi.cfg"
+
+found_any_grub_cfg = False
+
+if os.path.exists(GRUB_CFG_PATH_1):
+    found_any_grub_cfg = True
+# write file anyway for additional safety:
+subprocess.call(["/usr/sbin/grub2-mkconfig", "-o", GRUB_CFG_PATH_1])
+
+if os.path.exists("/sys/firmware/efi"):
+    # will be False if symlink points to not existed file
+    if os.path.exists(GRUB_CFG_PATH_2):
+        found_any_grub_cfg = True
+        subprocess.call(["/usr/sbin/grub2-mkconfig", "-o", GRUB_CFG_PATH_2])
+    else:
+        print("*" * 10)
+        print("WARNING: Your EFI-based system doesnt have correct symlink "
+              "\"/etc/grub2-efi.cfg\" this may cause boot troubles. "
+              "Please, fix it to point to your current grub.cfg file and run "
+              "grub2-mkconfig -o /etc/grub2-efi.cfg")
+        print("*" * 10)
+
+if not found_any_grub_cfg:
+    print("*" * 10)
+    print("WARNING: Unable to find grub.cfg in a few default locations. "
+          "It will be generated to {}".format(GRUB_CFG_PATH_1))
+    print("Its STRONGLY recommended to check your GRUB configuration and "
+          "ensure that GRUB is configured to use exactly this file BEFORE "
+          "reboot, because else it may refuse to boot!")
+    print("*" * 10)
+'
+}
+
+add_dracut_config(){
+python -c '
+import os
+import shutil
+import glob, re, rpm
+import subprocess
+
+DRACUT_CFG = "/etc/dracut.conf.d/raid.conf"
+dracut_cfg_result = ""
+try:
+    for line in open(DRACUT_CFG):
+        if line.startswith("add_drivers"):
+            if "$add_drivers" not in line:
+                result_line = "add_drivers=\"$add_drivers raid1 raid0\""
+                dracut_cfg_result = dracut_cfg_result + result_line
+        else:
+            dracut_cfg_result = dracut_cfg_result + line
+    if "$add_drivers" not in dracut_cfg_result:
+        dracut_cfg_result = dracut_cfg_result + "add_drivers=\"$add_drivers raid1 raid0\"\n"
+    if os.path.exists(DRACUT_CFG):
+        shutil.copyfile(DRACUT_CFG, DRACUT_CFG + "." + str(os.getpid()))
+except (OSError, IOError):
+    dracut_cfg_result = "add_drivers=\"$add_drivers raid1 raid0\"\n"
+conf = open(DRACUT_CFG, "w")
+conf.write(dracut_cfg_result)
+conf.close()
+list = sorted([(h["version"], h["release"], h["arch"]) for h in rpm.TransactionSet().dbMatch(rpm.RPMTAG_NAME, "kernel")], cmp=lambda b, a: rpm.labelCompare(("0", a[0], a[1]), ("0", b[0], b[1])))
+for kernel in list:
+    if "lve" in kernel[1]:
+        version = kernel[0]
+        release = kernel[1]
+        arch = kernel[2]
+        break
+lve_kernel_version = version + "-" + release + "." + arch
+subprocess.call(["/usr/bin/dracut", "-f", "/boot/initramfs-" + lve_kernel_version + ".img", lve_kernel_version])
+
+'
+}
+
+mdadm_conf_error(){
+	echo -e "\e[1m\e[31m"
+	echo "Invalid /etc/mdadm.conf file detected, please contact CloudLinux support at https://cloudlinux.zendesk.com/hc/requests/new" | tee -a $log
+	echo -e "\e[0m"
+	rm -f $lock
+	exit 1
+}
+
+check_mdadm_conf() {
+# CLDEPLOY-43 - Detect wrong formatted /etc/mdadm.conf file
+if [ -f /etc/mdadm.conf ]; then
+	if grep -i -e '^ARR' /etc/mdadm.conf &>/dev/null; then
+		if ! grep -i -e '^AUT' /etc/mdadm.conf &>/dev/null; then
+			#mdadm_conf_error
+			fix_mdadm_config
+		fi
+		options_count=0
+		first_array=1
+		for p in `grep -i -e '^ARR' /etc/mdadm.conf`; do
+			if echo "$p" | grep -i -e '^ARR' &>/dev/null; then
+				if [ $first_array -ne 1 ]; then
+					if [ $options_count -lt 1 ]; then
+						#mdadm_conf_error
+						fix_mdadm_config
+					fi
+					options_count=0
+				else
+					first_array=0
+				fi
+			else
+				if echo "$p" | grep '=' &>/dev/null; then
+					options_count=`expr $options_count + 1`
+				fi
+			fi
+		done
+		if [ $options_count -lt 1 ]; then
+			#mdadm_conf_error
+			fix_mdadm_config
+		fi
+	fi
+fi
+}
+
+# Tricks for OVH hosting
+check_ovh ()
+{
+if [ -f /etc/sysconfig/mkinitrd/OVH ] && [ -h /sys/block/sda/device ] && [ "$OS_VERSION" -eq "5" ] ; then
+	devicepath=$(readlink /sys/block/sda/device)
+	if [ -f /sys/block/sda/$devicepath/../../../uevent ]; then
+	. /sys/block/sda/$devicepath/../../../uevent
+	if [ -n "$DRIVER" ] && ! grep  "${DRIVER}" /etc/modprobe.conf | grep -q scsi_hostadapter ; then
+        cat /etc/modprobe.conf | grep -v scsi_hostadapter > /root/modprobe.conf.$$
+        echo "alias scsi_hostadapter $DRIVER" >> /root/modprobe.conf.$$
+	mv /etc/modprobe.conf /etc/modprobe.conf.orig
+	mv /root/modprobe.conf.$$ /etc/modprobe.conf
+	cat /root/modprobe.conf.$$
+	fi
+	fi
+	rm -f /etc/sysconfig/mkinitrd/OVH
+	if [ -L /etc/mtab ] ; then
+	    rm /etc/mtab
+	    cp /proc/mounts /etc/mtab
+	fi
+fi
+# OVH CentOS7
+if [ -f /etc/grub.d/06_OVHkernel ] ; then
+	add_raid_to_grub
+	add_dracut_config
+fi
+# check mdadm.conf
+if [ -f /etc/sysconfig/mkinitrd/OVH ] || [ -f /etc/grub.d/06_OVHkernel ]; then
+    check_mdadm_conf
+fi
+}
+
+# Root device link
+check_root_device_link ()
+{
+if [ ! -e /dev/root ]; then
+    if grep -q ^/ /etc/fstab; then
+    ln -s `awk '{ if ($2 == "/") print $1; }' /etc/fstab` /dev/root
+    fi
+fi
+}
+
+add_efi_cl_boot_record() {
+    if [[ ! -d /sys/firmware/efi ]]; then
+        return
+    fi
+    local device
+    local disk_name
+    local disk_num
+    local soft_dev1
+    local soft_dev2
+    local disk_name1
+    local disk_name2
+    local disk_num1
+    local disk_num2
+    device="$(df -T /boot/efi | sed -n 2p | awk '{print $1}')"
+
+    if [[ $device == *"/dev/md"* ]]; then
+        echo "ESP Partition on software raid detected:" | tee -a $log
+        soft_dev1=/dev/"$(cat /proc/mdstat | grep "${device:5} " | awk '{print $5}' | head -c -4)"
+        soft_dev2=/dev/"$(cat /proc/mdstat | grep "${device:5} " | awk '{print $6}' | head -c -4)"
+        echo "$soft_dev1" | tee -a $log
+        echo "$soft_dev2" | tee -a $log
+        disk_name1="$(echo "${soft_dev1}" | sed -re 's/(p|)[0-9]$//g')"
+        disk_name2="$(echo "${soft_dev2}" | sed -re 's/(p|)[0-9]$//g')"
+        disk_num1="$(echo "${soft_dev1}" | tail -c 2 | sed 's/[^0-9]//g')"
+        disk_num2="$(echo "${soft_dev2}" | tail -c 2 | sed 's/[^0-9]//g')"
+    else
+        disk_name="$(echo "${device}" | sed -re 's/(p|)[0-9]$//g')"
+        disk_num="$(echo "${device}" | tail -c 2 | sed 's/[^0-9]//g')"
+    fi
+
+    if [[ $device == *"/dev/md"* ]]; then
+        efibootmgr -c -L "CloudLinux" -l "\EFI\centos\shimx64.efi" -d "${disk_name1}" -p "${disk_num1}" | tee -a $log
+        efibootmgr -c -L "CloudLinux" -l "\EFI\centos\shimx64.efi" -d "${disk_name2}" -p "${disk_num2}" | tee -a $log
+    else
+        efibootmgr -c -L "CloudLinux" -l "\EFI\centos\shimx64.efi" -d "${disk_name}" -p "${disk_num}" | tee -a $log
+    fi
+}
+
+function enable_use_pam() {
+  sed -i 's/^#UsePAM no/UsePAM yes/' /etc/ssh/sshd_config
+}
+
+check_update_uefi_boot_entries()
+{
+    if [[ ! -d /sys/firmware/efi ]]; then
+        return
+    fi
+
+    local bios_vendor="$(dmidecode -s bios-vendor)"
+    # Starting from CL9 we use AlmaLinux kernel and don't have to modify UEFI boot entries
+    if [[ "$OS_VERSION" -lt "9" && "$bios_vendor" == *Dell* ]]; then
+        echo "Your UEFI vendor is detected as Dell. In some cases this firmware can't automatically update UEFI Boot Entries, so we have to delete old AlmaLinux entries in cldeploy" | tee -a $log
+        echo -e "Current state of 'efibootmgr -v' is\n$(efibootmgr -v)" >>$log
+        local almalinux_entries
+        almalinux_entries="$(efibootmgr -v | grep AlmaLinux | sed 's/Boot\(.\{4\}\).*/\1/')"
+        echo -e "The following bootnums will be deleted:\n$almalinux_entries" | tee -a $log
+        for i in $almalinux_entries; do
+            efibootmgr -B -b "$i"
+        done
+        echo "EFI boot record for AlmaLinux is deleted" | tee -a $log
+
+        # don't add new records if cldeploy is executed second time on the same server
+        if ! efibootmgr | grep CloudLinux >/dev/null; then
+            add_efi_cl_boot_record
+        fi
+        # check that efibootmgr output contains CloudLinux record that points to existing file
+        # example of full record: Boot0003* CloudLinux    HD(2,MBR,0x28056f88,0x200800,0x12c000)/File(\EFI\centos\shimx64.efi)
+        # example of cl_loader value: /EFI/centos/shimx64.efi
+        # there are 2 CloudLinux records in case of RAID1
+        cl_loader="$(efibootmgr -v | grep --max-count=1 CloudLinux | sed 's/^.*File(\([^)]*\))/\1/' | tr '\\' '/')"
+        check_pipestatus 0 "cldeploy failed to add CloudLinux UEFI Boot Entry. Please don't reboot the server and contact CloudLinux support at https://cloudlinux.zendesk.com/hc/requests/new"
+        cl_loader_path="/boot/efi${cl_loader}"
+        if [[ ! -f $cl_loader_path ]]; then
+            echo "WARNING: CloudLinux UEFI Boot Entry points to non-existing file $cl_loader_path" | tee -a $log
+            echo "Please don't reboot the server and contact CloudLinux support at https://cloudlinux.zendesk.com/hc/requests/new" | tee -a $log
+            exit 1
+        else
+            echo "The new EFI boot record for CloudLinux is added" | tee -a $log
+        fi
+    fi
+}
+
+
+print_help ()
+{
+    cat << EOF >&2
+Usage:
+
+  -h, --help                    Print this message
+  -k, --key <key>               Update your system to CloudLinux with activation key
+  -i, --byip                    Update your system to CloudLinux and register by IP
+  -c, --uninstall               Convert CloudLinux back to CentOS
+  --serverurl                   Use non-default registration server
+                                (default is https://xmlrpc.cln.cloudlinux.com/XMLRPC)
+  --components-only             Install control panel components only
+  --conversion-only             Do not install control panel components after converting
+  --hostinglimits               Install mod_hostinglimits rpm
+  --skip-kmod-check             Skip check for unsupported kmods
+  --skip-boot-check             Skip check that etc/fstab configuration is explicit about device mounting on boot/efi
+  --skip-version-check          Do not check for script updates
+  --skip-os-check               Do not check whether conversion to CloudLinux is supported for running OS release
+  --skip-registration           Don't register on CLN if already have access to CL repos
+  --force-hybridize             After end of converting it allows to hybridize machine from CloudLinux 7 to
+                                CloudLinux 7 Hybrid, which has a newer kernel then CL7
+  --no-force-hybridize          Don't hybridize machine from CloudLinux 7 to CloudLinux 7 Hybrid automatically,
+                                even though machine has a new hardware
+  --to-solo-edition             Convert to CloudLinux Solo edition (only allowed with --skip-registration option)
+  --to-admin-edition            Convert to CloudLinux Admin edition (only allowed with --skip-registration option)
+  --to-container-environment    Convert to CloudLinux which supports working inside container
+  --force-packages-installation Automatically resolve dependencies and remove conflicting packages
+
+For internal use only:
+
+  --testing-repos               Enable cloudlinux-updates-testing and cl-ea4-testing repositories
+  -a, --alt-repo <build_id>     Add build from alternatives to repolist (each build_id needs another flag)
+  --centos-repo <build_id>      Add centos build from alternatives to repolist (each build_id needs another flag)
+  -t, --auth-token <token>      Personal Build system authentication token
+  --base-repo-url <url>         URL of base repository which will be used instead predefined in cldeploy
+  --addon-repo-urls <url,url>   URLs of additional repositories which will be used in addition to existing (e.g. migrate or
+                                specific kernel repos). Each value should be separated by comma.
+  -y, --noninteractive          Assume user answered yes to all questions
+  --precheck                    Check if system is ready to be converted to CloudLinux
+  --skip-ea4-script-download    Do not download cloudlinux_ea3_to_ea4 script from remote repository during conversion on cPanel
+EOF
+}
+
+
+write_linode_grub_conf ()
+{
+if [ -e /boot/grub/grub.conf ]; then
+cp /boot/grub/grub.conf /boot/grub/grub.conf.backup
+fi
+
+mkdir -p /boot/grub/
+
+if [ "$OS_VERSION" -eq "6" ]; then
+	KVERSION=`python -c 'import glob, re, rpm; print "%s-%s.%s" % sorted([(h["version"], h["release"], h["arch"]) for h in rpm.TransactionSet().dbMatch(rpm.RPMTAG_NAME, "kernel")], cmp=lambda b, a: rpm.labelCompare(("0", a[0], a[1]), ("0", b[0], b[1])))[0]'`
+
+    cat > /boot/grub/grub.conf << EOF
+
+default=0
+timeout=5
+hiddenmenu
+title CloudLinux ($KVERSION)
+	root (hd0)
+	kernel /boot/vmlinuz-$KVERSION ro root=/dev/xvda xencons=tty console=tty1 console=hvc0 crashkernel=auto SYSFONT=latarcyrheb-sun16 LANG=en_US.UTF-8 KEYTABLE=us
+	initrd /boot/initramfs-$KVERSION.img
+
+EOF
+fi
+
+if [ "$OS_VERSION" -eq "5" ]; then
+	KVERSION=`rpm -q kernel-xen --qf "%{version}-%{release}\n" | sort | tail -1`xen
+
+    cat > /boot/grub/grub.conf << EOF
+
+default=0
+timeout=5
+title CentOS ($KVERSION)
+    root (hd0)
+    kernel /boot/vmlinuz-$KVERSION root=/dev/xvda console=xvc0 xencons=xvc0
+    initrd /boot/initrd-$KVERSION.img
+
+EOF
+fi
+
+
+ln -sf /boot/grub/grub.conf /boot/grub/menu.lst
+ln -sf /boot/grub/grub.conf /etc/grub.conf
+
+}
+
+add_digitalocean_kexec ()
+{
+if [ $kexec == true ]; then
+    retry_wrapper "yum -y install kexec-tools 2>&1 | tee -a ${log}"
+    cat > /etc/rc.d/init.d/kexec << EOF
+#!/bin/bash
+#
+# Boot CloudLinux kernel via kexec
+#
+# chkconfig: 345 01 99
+. /etc/init.d/functions
+
+if [ "\$1" != "start" ]; then
+   exit 0
+fi
+
+touch /var/lock/subsys/local
+latestkernel=\`python -c 'import glob, re, rpm; print "%s-%s.%s" % sorted(filter(lambda r: r is not None, [re.search("/boot/vmlinuz-([^-]+)-(.*?)\.([^\.]+)$", f) for f in glob.glob("/boot/vmlinuz-*lve*")]), cmp=lambda b, a: rpm.labelCompare(("0", a.group(1), a.group(2)), ("0", b.group(1), b.group(2))))[0].groups()'\`
+if [ ! -f /boot/try-boot-cl-kernel ]; then
+  touch /boot/try-boot-cl-kernel
+  kexec -l /boot/vmlinuz-\${latestkernel} --initrd=/boot/initramfs-\${latestkernel}.img --append="`cat /proc/cmdline`"
+  kexec -e
+else
+  rm /boot/try-boot-cl-kernel
+fi
+EOF
+    /bin/chmod a+x /etc/rc.d/init.d/kexec
+    /sbin/chkconfig --add kexec 2>&1 | tee -a $log
+fi
+}
+
+check_and_fix_grub_cfg() {
+    if [ -e /sys/firmware/efi ]; then
+        # current cfg for grub in centos and cloudlinux grub 2 on efi systems
+        # 2018.10.31. Centos 7 OVH image provides broken grub2-efi-x64 package with strange custom grub binary.
+        # This custom grub2 build uses config from /boot/grub2/grub.conf
+        # After update to new version of grub2-efi-x64 (centos\cloudlinux) grub2 binary is changed.
+        # Original grub2 efi build uses config from /boot/efi/EFI/centos/grub.cfg
+        # So we need to create this config before installation CL and kernel.
+
+        # By default in almalinux boot folder is /boot/efi/EFI/almalinux/*.
+
+        # Package grub2-efi creates centos folder and associated files in /boot/efi/EFI/centos/*
+        # OUR package from CLOUDLINUX repos uses "centos" directory
+
+        # After package installation, file grub.cfg does not exist in /boot/efi/EFI/centos folder, also /etc/grub2-efi.cfg link is broken
+        # Attention: Broken link doesn't cause boot issue.
+
+        # We have to regenerate grub.cfg file in /boot/efi/EFI/centos/ after converting to CloudLinux and also to solve boot problems.
+
+        CL_GRUB_EFI_DIR="/boot/efi/EFI/centos"
+        CL_GRUB_EFI_CFG="${CL_GRUB_EFI_DIR}/grub.cfg"
+        if [[ -d "$CL_GRUB_EFI_DIR" && ! -e "$CL_GRUB_EFI_CFG" ]]; then
+            echo "WARNING: grub config $CL_GRUB_EFI_CFG for EFI system not found." | tee -a $log
+            grub2-mkconfig -o "$CL_GRUB_EFI_CFG" 2>&1 | tee -a $log
+            # this should fix grub2 packages
+            retry_wrapper "yum -y reinstall grub2* 2>&1 | tee -a $log"
+        fi
+    fi
+}
+
+
+remove_unified_cgroup_hierarchy_from_grub() {
+    # Remove 'systemd.unified_cgroup_hierarchy=1' option from /etc/default/grub.
+    # This option prevents loading kmod-lve modules.
+    GRUB_SETTINGS_FILE="/etc/default/grub"
+    OPTION="systemd.unified_cgroup_hierarchy=1"
+
+    if [ -e "$GRUB_SETTINGS_FILE" ] && grep -q "$OPTION" "$GRUB_SETTINGS_FILE"; then
+        sed -i "s/\s*$OPTION//g" "$GRUB_SETTINGS_FILE"
+        echo "Removed $OPTION option from $GRUB_SETTINGS_FILE." | tee -a $log
+        # need to rebuild grub.cfg after removing
+        grub2-mkconfig -o /boot/grub2/grub.cfg 2>&1 | tee -a $log
+        if [[ -e /sys/firmware/efi && -d /boot/efi/EFI/centos ]]; then
+            grub2-mkconfig -o /boot/efi/EFI/centos/grub.cfg 2>&1 | tee -a $log
+        fi
+    fi
+}
+
+
+generate_sysinfo_cpanel() {
+    if [ -e /scripts/gensysinfo ]; then
+        rm -f /var/cpanel/sysinfo.config
+        /scripts/gensysinfo
+    fi
+}
+
+
+kernel_debug_output() {
+        echo
+        echo "=== DEBUG OUTPUT ==="
+        [[ -e /sys/firmware/efi ]] && echo -e "Looks like system is EFI-based\n"
+        [[ ${skipkmodcheck} == "true" ]] && echo -e "WARN: --skip-kmod-check option was used. It's dangerous because it may hide critical compatibility problems.\n"
+        echo "uname -r :"; uname -r
+        echo
+        echo "ls -la /boot : "; ls -la /boot
+        echo
+        echo "ls -l /etc/grub2.cfg :"; ls -l /etc/grub2.cfg
+        echo "=== //DEBUG OUTPUT ==="
+}
+
+
+
+print_error_about_wrong_kernel() {
+    local path_to_initramfs="${1}"
+    local path_to_kernel="${2}"
+    echo "WARNING! Please check validity of default grub record" | tee -a ${log}
+    echo "Parameters \"initrd\" and \"linux\" should point to those that are installed by CloudLinux, but found:" | tee -a ${log}
+    echo "\"initrd\"=${path_to_initramfs}" | tee -a ${log}
+    echo "\"linux\"=${path_to_kernel}" | tee -a ${log}
+    echo "PLEASE DO NOT REBOOT SERVER. See article https://cloudlinux.zendesk.com/hc/en-us/articles/360017630613" | tee -a ${log}
+    kernel_debug_output | tee -a ${log}
+    show_reboot_message=false
+}
+
+
+check_validity_of_default_grub_record() {
+    # We install grubby if one is absent
+    if [[ ! -e "$(which grubby)" ]]; then
+        retry_wrapper "yum -y install grubby 2>&1 | tee -a ${log}"
+    fi
+    local kernel="$(grubby --info=DEFAULT | grep "^kernel=" | awk -F= '$1=="kernel" {print $2; exit}')"
+    # remove '"' symbol from the start and from the end of parameter
+    # (used on cl8, but on cl6/7 parameter is without '"')
+    kernel="${kernel%%\"}"
+    local path_to_kernel="${kernel##\"}"
+    local initrd="$(grubby --info=DEFAULT | grep "^initrd=" | awk -F= '$1=="initrd" {print $2; exit}')"
+    local path_to_initramfs="$(echo ${initrd##\"} | awk -F ' ' '{print $1; exit}')"
+    if [[ ! -e "${path_to_kernel}" || ! -e "${path_to_initramfs}" ]]; then
+        echo "WARNING!!! Please check existence of files ${path_to_kernel} and ${path_to_initramfs}" | tee -a ${log}
+        echo "PLEASE DO NOT REBOOT SERVER IF THOSE ARE NOT EXISTS. See article https://cloudlinux.zendesk.com/hc/en-us/articles/360017630613" | tee -a ${log}
+        kernel_debug_output | tee -a ${log}
+    # /boot/vmlinuz-3.10.0-962.3.2.lve1.5.24.3.el7.x86_64
+    # /boot/initramfs-3.10.0-962.3.2.lve1.5.24.3.el7.x86_64.img
+    # It works without pipefail options
+    else
+        if [[ "${OS_VERSION}" -ge "8" ]]; then
+            local title=$(grubby --info=DEFAULT | grep "^title=" | awk -F= '$1=="title" {print $2; exit}')
+            if [[ -z $(grep -i "el${OS_VERSION}" <<< "${path_to_initramfs}") ]] ||
+              [[ -z $(grep -i "el${OS_VERSION}" <<< "${path_to_kernel}") ]] ||
+              [[ -z $(grep -i "CloudLinux" <<< "${title}") && "$OS_VERSION" -le "8" ]] ||
+              [[ -z $(grep -iE "(AlmaLinux|CloudLinux)" <<< "${title}") && "$OS_VERSION" -ge "9" && "$INSTALL_LOWER_VERSION" == "false" ]] ||
+              [[ -z $(grep -i "CloudLinux" <<< "${title}") && "$OS_VERSION" -ge "9" && "$INSTALL_LOWER_VERSION" == "true" ]]; then
+                print_error_about_wrong_kernel "${path_to_initramfs}" "${path_to_kernel}"
+            fi
+        else
+            if ! echo "${path_to_initramfs}" | grep -i lve | grep -i "el${OS_VERSION}" &> /dev/null ||
+              ! echo "${path_to_kernel}" | grep -i lve | grep -i "el${OS_VERSION}" &> /dev/null; then
+                print_error_about_wrong_kernel "${path_to_initramfs}" "${path_to_kernel}"
+            fi
+        fi
+
+    fi
+}
+
+function vm_has_new_hardware() {
+    #AuthenticAMD arch list:
+    #23 Zen / Zen+ / Zen 2
+    #24 Hygon Dhyana
+    #25 Zen 3
+
+    #GenuineIntel arch list:
+    #Cooper Lake/Cascade Lake/ Skylake(Server) - Family 6 Model 85
+    #Ice Lake(Server) - Family 6 Model 108, Family 6 Model 106
+    #Broadwell(Server) -  Family 6 Model 79, Family 6 Model 86
+
+    #Intel desktop CPUs:
+    #Alder Lake -  Family 6 Model 151,  	Family 6 Model 154
+    #Rocket Lake - Family 6 Model 167
+    #Tiger Lake - Family 6 Model 141, Family 6 Model 140
+    #Ice Lake (Client) - Family 6 Model 126,  	Family 6 Model 125
+    #Comet Lake - Family 6 Model 165, Family 6 Model 142
+
+    local intel_arch_list=("79" "85" "86" "106" "108" "125" "126" "142" "151" "154" "165")
+    local amd_arch_list=("23" "24" "25")
+    local vendor=$(grep -m1 ^"vendor_id" /proc/cpuinfo)
+    local vendor_name=$(echo ${vendor} | awk '{print $3}')
+    local cpu_family=$(grep -m1 ^"cpu family" /proc/cpuinfo | awk '{print $4}')
+    local has_nvme=`find /dev -type b -name nvme*`
+
+    if [[ $has_nvme ]]; then
+        return 0
+    fi
+
+    if [[ "GenuineIntel" == "${vendor_name}" ]]; then
+        for val in "${intel_arch_list[@]}"; do
+            if [[ "${cpu_family}" == "${val}" ]]; then
+                return 0
+            fi
+        done
+        return 1
+    fi
+
+    if [[ "AuthenticAMD" == "${vendor_name}" ]]; then
+        for val in "${amd_arch_list[@]}"; do
+            if [[ "${cpu_family}" == "${val}" ]]; then
+                return 0
+            fi
+        done
+        return 1
+    fi
+
+
+    return 1
+}
+
+
+function write_unlimited_lve_limits_to_ve_cfg() {
+    # CLDEPLOY-143: Adapt cldeploy for small servers
+    local cpu_max_limit="$(nproc)00%"
+    local ve_cfg="/etc/container/ve.cfg"
+    sed -i "s/<cpu limit=\".*\"/<cpu limit=\"${cpu_max_limit}\"/g" "${ve_cfg}"
+    sed -i "s/<io limit=\".*\"/<io limit=\"0\"/g" "${ve_cfg}"
+    sed -i "s/<mem limit=\".*\"/<mem limit=\"0\"/g" "${ve_cfg}"
+    sed -i "s/<pmem limit=\".*\"/<pmem limit=\"0\"/g" "${ve_cfg}"
+    sed -i "s/<nproc limit=\".*\"/<nproc limit=\"0\"/g" "${ve_cfg}"
+    sed -i "s/<other maxentryprocs=\".*\"/<other maxentryprocs=\"0\"/g" "${ve_cfg}"
+    sed -i "s/<ncpu limit=\".*\"/<ncpu limit=\"0\"/g" "${ve_cfg}"
+    sed -i "s/<iops limit=\".*\"/<iops limit=\"0\"/g" "${ve_cfg}"
+}
+
+
+function adapt_CL_for_small_servers() {
+    if [[ "cpanel" == ${PANEL} && "6" == "${OS_VERSION}" ]]; then
+        local count_users="$(whmapi1 listaccts | grep user: | wc -l)"
+        local small_servers_users_count="4"
+        if (( "${small_servers_users_count}" > "${count_users}" )); then
+            write_unlimited_lve_limits_to_ve_cfg
+        fi
+    fi
+
+}
+
+function regenerate_grub_conf(){
+	grub2_conf=$(readlink -f /etc/grub2.cfg)
+	grub2_efi_conf=$(readlink -f /etc/grub2-efi.cfg)
+	default=/boot/grub2/grub.cfg
+	if [[ -e /etc/grub2.cfg && -e ${grub2_conf} ]]; then
+		echo "${grub2_conf} found as grub config" | tee -a $log
+		grub2-mkconfig -o ${grub2_conf} | tee -a $log
+	elif [[ -e /etc/grub2-efi.cfg && -e ${grub2_efi_conf} ]]; then
+		echo "${grub2_efi_conf} found as grub config" | tee -a $log
+		grub2-mkconfig -o ${grub2_efi_conf} | tee -a $log
+	else
+		echo "No valid symlinks found! Default ${default} detected as grub config" | tee -a $log
+		grub2-mkconfig -o "${default}" | tee -a $log
+	fi
+}
+
+function check_convert_to_hybrid() {
+    local message="Your server has new hardware. It will be automatically converted to CloudLinux 7 Hybrid which has a newer kernel"
+    if ([[ "${no_force_hybridize}" == "false" && "7" == "${OS_VERSION}" ]] && vm_has_new_hardware) || ${hybridize}; then
+        add_precheck_mandatory_change "$message"
+        return 0
+    fi
+    return 1
+}
+
+function convert_cl7_to_cl7h_if_needed() {
+    # We convert CL7 to CL7h if VM has the new hardware (see CLKRN-214)
+
+    if check_convert_to_hybrid; then
+        echo "Your server has new hardware. It will be automatically converted to CloudLinux 7 Hybrid which has a newer kernel" | tee -a "${log}"
+        if [[ "true" == "${test_updates}" ]]; then
+           ENABLE_BETA_REPO="1" normal-to-hybrid
+        else
+           normal-to-hybrid
+        fi
+        echo "You can find complete log of hybrid conversion process in /var/log/normal-to-hybrid.log" | tee -a "${log}"
+    fi
+}
+
+function detect_distro() {
+    os_name=$(rpm -q --qf %{name} `rpm -q --whatprovides redhat-release` | awk -F- '{print $1}')
+    if [[ "${os_name}" == "almalinux" ]]; then
+      echo "AlmaLinuxOS"
+    elif [[ "${os_name}" == "rocky" ]]; then
+      echo "RockyLinux"
+    elif [[ "${os_name}" == "cloudlinux" ]]; then
+      echo "CloudLinux"
+    elif [[ "${os_name}" == "centos" ]]; then
+      echo "CentOS"
+    else
+      echo "unknown"
+    fi
+}
+
+function check_boot_duplicates() {
+    # Check that etc/fstab configuration is explicit about device mounting on boot/efi
+    fstab_boot_efi=$(grep /boot/efi /etc/fstab)
+    # Colors should be empty during precheck
+    RED=$([ "$precheck" = "false" ] && echo '\033[0;31m' || echo '')
+    NOCOLOR=$([ "$precheck" = "false" ] && echo '\033[0m' || echo '')
+
+    if [ -n "$fstab_boot_efi" ]; then
+        # get pattern (LABEL or UUID of device mounted on /boot/efi)
+        # example (fstab_boot_efi -> pattern):
+        # "LABEL=EFI_SYSPART  /boot/efi  vfat  defaults  0  1" -> "EFI_SYSPART"
+        # or
+        # "UUID=999C-7B59  /boot/efi  vfat  defaults,uid=0,gid=0,umask=0077,shortname=winnt  0  0" -> "999C-7B59"
+        pattern=$(echo "$fstab_boot_efi" | awk '{print $1}' | cut -d= -f2)
+        # search for pattern duplicates in blkid
+        blkid_pattern_count=$(blkid | grep "$pattern" | wc -l)
+        local description="/etc/fstab configuration is explicit about device mounting on /boot/efi|/etc/fstab configuration is not explicit about device mounting on /boot/efi"
+        local fix_tip="${RED}WARNING! Your /etc/fstab configuration is not explicit about device mounting on boot/efi.
+This is not a CL software issue but this potentially can cause problems with booting the CL kernel.
+It is strongly recommended to contact your hosting provider before proceeding.
+For details please read this article: https://cloudlinux.zendesk.com/hc/en-us/articles/360021620699 ${NOCOLOR}"
+        local message_for_cli="If you're certain that your configuration is correct, please run this script again, adding this flag: --skip-boot-check"
+        [ "$blkid_pattern_count" -ge 2 ]
+        check_exit_code 1 "$description" "$fix_tip" "$message_for_cli"
+    fi
+}
+
+function check_conversion_from_centos8() {
+    # Block conversions from CentOS 8 and advices user to convert into AlmaLinux first
+    local description="conversion will be performed from Almalinux|trying to perform conversion from CentOS"
+    local fix_tip="Conversion from CentOS 8 and 9 is not supported.
+Instead, you can convert into AlmaLinux using the following script: https://github.com/AlmaLinux/almalinux-deploy"
+    local message_for_cli="If you want to continue with conversion, rerun the script with --skip-os-check option, but in this case
+the consequences can be unpredictable, and the corporation does not bear any responsibility for the consequences of such a launch.
+We strongly recommend that you do not attempt to convert production servers with this script"
+    [[ "$(detect_distro)" == "CentOS" ]]
+    check_exit_code 1 "$description" "$fix_tip" "$message_for_cli"
+}
+
+function is_root() {
+    [ $(id -u) -eq 0 ]
+    return $?
+}
+
+function check_cl_release_available() {
+    # return 1 if base OS release > last available CloudLinux release, 0 otherwise
+    rpm --import "${PUBLIC_REPO_URL}/cloudlinux/security/RPM-GPG-KEY-CloudLinux" 2>/dev/null
+    LAST_CL_VERSION="$(rpm -qp ${CLOUDLINUX_RELEASE} --qf %{version} 2>/dev/null | cut -c 1)"
+    LAST_CL_RELEASE="$(rpm -qp ${CLOUDLINUX_RELEASE} --qf %{version} 2>/dev/null | cut -c 3-)"
+    echo "Last available CloudLinux release: $LAST_CL_VERSION.$LAST_CL_RELEASE" | tee -a $log
+    echo "Current system release: $OS_VERSION.$OS_RELEASE" | tee -a $log
+    if [[ "$OS_VERSION" -gt "$LAST_CL_VERSION" ]]; then
+        return 1
+    elif [[ ! -z "$LAST_CL_RELEASE" && "$OS_VERSION" -eq "$LAST_CL_VERSION" ]]; then
+        if [[ "$OS_RELEASE" -le "$LAST_CL_RELEASE" ]]; then
+            return 0
+        elif [[ "$OS_RELEASE" -eq "$((LAST_CL_RELEASE+1))" && "$INSTALL_LOWER_VERSION" == "true" ]]; then
+            return 0
+        elif [[ "$(detect_distro)" = "CentOS" && "$OS_VERSION" = "7" && -z "$OS_RELEASE" ]]; then
+            return 0
+        else
+            return 1
+        fi
+    elif [[ -z "$LAST_CL_RELEASE" ]]; then
+        echo "WARNING: Last CloudLinux release unknown" | tee -a $log
+        return 1
+    else
+        return 0
+    fi
+}
+
+function check_install_lower_version() {
+    # Allow conversion with downgrade only on Almalinux >= 8 without panel, cPanel or Plesk.
+    if [[ "$(detect_distro)" == "AlmaLinuxOS" && "$OS_VERSION" -ge "8" ]]; then
+        if [[ -z "$PANEL" ]] || [[ "$PANEL" =~ ^(cpanel|plesk)$ ]]; then
+            # This env variable forces the downgrade. Intended for testing.
+            if [[ $CLDEPLOY_TEST_SET_LOWER_VERSION_AS_CURRENT == "true" ]]; then
+                current_cl_release_rpm_uri_dir="${CURRENT_REPO_URL}/cloudlinux/${LOWER_VERSION_RELEASE}/BaseOS/x86_64/os/Packages/"
+                current_cl_release_rpm=$(curl "${current_cl_release_rpm_uri_dir}" 2>/dev/null | sed -n "s/^.*\(cloudlinux-release.*rpm\).*$/\1/p" | head -1)
+                current_cl_release_rpm_uri="${current_cl_release_rpm_uri_dir}${current_cl_release_rpm}"
+                echo "Note: Using current_cl_release_rpm_uri ${current_cl_release_rpm_uri}" | tee -a $log
+            else
+                current_cl_release_rpm_uri="${CURRENT_REPO_URL}/cloudlinux/migrate/release-files/cloudlinux/${OS_VERSION}/x86_64/cloudlinux${OS_VERSION}-release-current.x86_64.rpm"
+            fi
+
+            current_cl_version_release=$(rpm -qp "${current_cl_release_rpm_uri}" --qf '%{version}' 2>/dev/null)
+            current_cl_version=$(echo "$current_cl_version_release" | cut -c 1)
+            current_cl_release=$(echo "$current_cl_version_release" | cut -c 3-)
+
+            if [[ $OS_VERSION -eq $current_cl_version && $OS_RELEASE -eq $((current_cl_release+1)) ]]; then
+                local distro
+                distro="$(detect_distro)"
+                local kernel_warning
+                kernel_warning=""
+                [[ "$OS_VERSION" -ge "9" ]] && kernel_warning="The kernel will be switched to the version available on AlmaLinux ${LOWER_VERSION_RELEASE} to ensure CloudLinux kernel module compatibility."
+                yesno "Your ${distro} release version is greater then the latest currently available CloudLinux release.
+You can either wait for a new version of CloudLinux, or install an older version of CloudLinux ${LOWER_VERSION_RELEASE} over your ${distro} installation.
+To ignore this restriction entirely and run a standard conversion anyway, you may run cldeploy with --skip-os-check option,
+but there are no guarantees that it won't cause any problems after conversion.
+If you continue, your system will be downgraded to CloudLinux ${LOWER_VERSION_RELEASE}. MySQL and MariaDB packages will be excluded from updates to prevent them from downgrading to older CL-provided versions. ${kernel_warning}
+To upgrade to a newer CloudLinux release once it's avaiable, remove MySQL/MariaDB/kernel excludes from /etc/yum.conf and install the most recent cloudlinux-release package, overwriting modified AlmaLinux and CloudLinux package repository configuration files."
+
+                if [ $ans -eq 0 ]; then
+                    echo "Exiting" | tee -a $log
+                    rm -f $lock
+                    exit 1
+                fi
+
+                INSTALL_LOWER_VERSION=true
+                echo "Note: converting to CL version ${current_cl_version}.${current_cl_release}" | tee -a $log
+            fi
+        else
+            echo "Conversion with downgrade not supported on $PANEL - will not attempt to perform it. Conversion with downgrade is currently supported only for installations without panel or with one of the following panels: cPanel, Plesk." | tee -a $log
+        fi
+    fi
+}
+
+function record_system_info() {
+    local log="/var/log/cldeploy-debug.log"
+    echo "===== $(date) =====" >> "$log"
+    echo "Passed arguments: $ARGS" >> "$log"
+    uname -a >> "$log" 2>&1
+    rpm -qa >> "$log" 2>&1
+    echo >> "$log"
+}
+
+function is_cldeploy_running() {
+    if [ -f "$lock" ]; then
+        local proc_path="/proc/$(cat $lock)"
+        [ -d "$proc_path" ] && grep -q cldeploy "${proc_path}/cmdline"
+        return $?
+    fi
+    return 1
+}
+
+function create_mode_file() {
+    local mode="install"
+    if [ "$uninstall" = "true" ]; then
+        mode="uninstall"
+    fi
+    echo "$mode" > "$mode_file"
+}
+
+function clean_log() {
+    [ ! -f "$log" ] && return 0
+    echo "$(cat $log)" >> "${log}.old"
+    echo >> "${log}.old"
+    echo "===== $(date) =====" > "$log"
+}
+
+function cleanup() {
+    local exit_code=$?
+    [ "${cldeploy_started:-false}" = "false" ] && exit $exit_code
+
+    echo "$exit_code" > "$last_result_file"
+    rm -f "$lock"
+    exit $exit_code
+}
+
+trap "cleanup" EXIT
+trap "exit $?" INT
+
+is_root
+[ $? -ne 0 ] && echo "Please run cldeploy as root" && exit 1
+
+init_vars $0
+
+
+options=$(getopt -o ecmik:a:t:y -l uninstall,buildeasyapache,regenmodprobeconf,force-hybridize,no-force-hybridize,to-solo-edition,to-admin-edition,to-container-environment,force-packages-installation,components-only,conversion-only,hostinglimits,skip-kmod-check,skip-boot-check,help,byip,skip-version-check,skip-os-check,skip-ea4-script-download,skip-registration,beta,alt-repo:,centos-repo:,auth-token:,testing-repos,noninteractive,precheck,serverurl:,key:,base-repo-url:,addon-repo-urls: -- "$@")
+
+if [ $? != 0 ] ; then print_help ; exit 1 ; fi
+
+eval set -- "$options"
+
+while true; do
+    case $1 in
+    --help)
+	print_help
+	exit 0
+	;;
+    --precheck)
+	precheck=true
+	log=$precheck_log
+    > $log
+	shift
+	;;
+    -c|--uninstall)
+	uninstall=true
+	shift
+	;;
+    --force-hybridize)
+	hybridize=true
+	shift
+	;;
+    --no-force-hybridize)
+	no_force_hybridize=true
+	shift
+	;;
+    --to-solo-edition)
+	cl_solo_edition=true
+	check_solo_conversion_supported
+	shift
+	;;
+    --to-admin-edition)
+	cl_admin_edition=true
+	check_admin_conversion_supported
+	shift
+	;;
+    --to-container-environment)
+	if [[ -f "${OPEN_VZ_MARKER}" ]]; then
+	    cl_container=true
+	fi
+	shift
+	;;
+    --force-packages-installation)
+	force_packages_installation=true
+	shift
+	;;
+    -e|--buildeasyapache)
+	buildeasyapache=true
+	shift
+	;;
+    -k|--key)
+ 	conversion=true
+	activationkey=$2
+	if  [[ $activationkey == CLSOLO* ]]; then
+	    solo_activation_key=true
+	elif  [[ $activationkey == CLADMIN* ]]; then
+	    admin_activation_key=true
+	fi
+	shift 2
+	;;
+    -i|--byip)
+ 	conversion=true
+	activationkey=false
+	shift
+	;;
+    -m|--regenmodprobeconf)
+	regen_modprobe_conf=true
+	shift
+	;;
+    --components-only)
+	components=true
+	shift
+	;;
+    --conversion-only)
+	conversiononly=true
+	shift
+	;;
+    --hostinglimits)
+	hostinglimits=true
+	shift
+	;;
+    --skip-kmod-check)
+	skipkmodcheck=true
+	shift
+	;;
+    --skip-boot-check)
+	skipbootcheck=true
+	shift
+	;;
+    --skip-version-check)
+	skipversioncheck=true
+	shift
+	;;
+    --skip-os-check)
+	skiposcheck=true
+	shift
+	;;
+    --skip-ea4-script-download)
+	skip_ea4_script_download=true
+	shift
+	;;
+    --serverurl)
+	serverurl=$2
+	shift 2
+	;;
+    --skip-registration)
+	registration=false
+	shift
+	;;
+    --beta)
+	beta=true
+	shift
+	;;
+    -a|--alt-repo)
+	build_ids+=($2)
+	shift 2
+	;;
+    --centos-repo)
+	build_centos_ids+=($2)
+	shift 2
+	;;
+    --base-repo-url)
+	base_repo_url=($2)
+	shift 2
+	;;
+    --addon-repo-urls)
+	IFS_BAK="${IFS}"
+	IFS=','
+	read -r -a addon_repo_urls <<< "${2}"
+	IFS="${IFS_BAK}"
+	unset IFS_BAK
+	# yum-config-manager get repo's name truncating http(s):// and replacing / to _ in repo's url
+	for repo_url in "${addon_repo_urls[@]}"; do addon_repo_names+=("$(echo ${repo_url##http://} | tr / _)"); done
+	shift 2
+	;;
+    -t|--auth-token)
+	auth_token=$2
+	shift 2
+	;;
+    --testing-repos)
+	test_updates=true
+	shift
+	;;
+    -y|--noninteractive)
+	noninteractive=true
+	shift
+	;;
+    --)
+	shift
+	break
+	;;
+    -*)
+	echo "$0: error - unrecognized option $1" 1>&2
+	print_help
+	exit 1
+	;;
+     *) echo "Internal error!" ; exit 1 ;;
+    esac
+done
+
+is_cldeploy_running
+! check_exit_code 1 "conversion to CloudLinux is not running|conversion to CloudLinux is running right now" \
+"It is detected that another conversion process is running on the server right now.
+Only one CloudLinux conversion process can run at a time." && exit 0  # exit during precheck if conversion is already running
+
+if [ "$precheck" = "false" ]; then
+    echo $$ > $lock
+    cldeploy_started=true
+    create_mode_file
+    clean_log
+fi
+
+check_panel
+check_install_lower_version
+check_release
+check_system_supported
+
+if [[ "$admin_activation_key" == "true" ]]; then
+    check_admin_conversion_supported
+fi
+if [[ "$solo_activation_key" == "true" ]]; then
+    check_solo_conversion_supported
+fi
+check_digitalocean
+# check_linode_kvm
+if [[ "$OS_VERSION" -ge "8" ]]; then
+    check_dnf
+else
+    check_yum
+fi
+check_source
+check_convert_to_hybrid
+
+# Check system requirements before conversion and during precheck
+if [ "$conversion" = "true" ] || [ "$precheck" = "true" ]; then
+    check_that_groups_clsupergid_and_clsudoers_are_empty
+    if [ "$vzbeta" != "true" ]; then
+        check_kernel_update_permission
+    fi
+fi
+
+if [[ "$OS_VERSION" -ge "8" ]] && [[ "$skiposcheck" == "false" ]] && [[ "$uninstall" == "false" ]]; then
+    check_conversion_from_centos8
+fi
+
+if [[ "$skipbootcheck" == "false" ]]; then
+    check_boot_duplicates
+fi
+
+[ "$precheck" = "true" ] && exit 0
+
+if { [ -n "${build_ids[*]}" ] || [ -n "${build_centos_ids[*]}" ]; } && [ -z "$auth_token" ]; then
+    echo "Specify buildsystem auth token"
+    exit 1
+fi
+
+if [ "$skipversioncheck" = "false" ]; then
+    check_script_version
+fi
+
+if [[ "${no_force_hybridize}" = "true" && "${hybridize}" = "true" ]]; then
+    echo "Passing both --force-hybridize and --no-force-hybridize is not allowed." | tee -a $log
+    echo "Please, specify only one of those options if needed." | tee -a $log
+    rm -f $lock
+    exit 1
+fi
+
+# Record information to /var/log/cldeploy-debug.log about system before conversion starts
+# to simplify debug in case of error
+record_system_info
+
+check_and_fix_grub_cfg
+remove_unified_cgroup_hierarchy_from_grub
+
+
+if [ "$conversion" = "true" ] && [ "$uninstall" = "true" ] ; then
+    echo "invalid combination"; rm -f $lock; exit 1;
+fi
+
+if [ "$conversion" = "false" ] && [ "$components" = "false" ] && [ "$uninstall" = "false" ] ; then
+    echo "Nothing to do, please select an option"
+    rm -f $lock
+    exit 1
+fi
+
+if [ "$conversion" = "true" ] && [ "$conversiononly" = "false" ] && [ "$components" = "false" ] ; then
+    components=true
+fi
+
+if [ "$components" = "true" ] ; then
+    hostinglimits=true;
+fi
+
+if [ "$OS_VERSION" -eq "9" ]; then
+  # enable UsePAM if disabled
+  enable_use_pam
+fi
+
+# echo conversion=$conversion
+# echo components=$components
+
+# UNINSTALL
+if [[ ${uninstall} == "true" ]]; then
+
+	if [[ -d "${BACKUP}" ]]; then
+		if ls "${BACKUP}" | grep "Rocky" &> /dev/null; then
+			downgrade_to="RockyLinux"
+			echo "RockyLinux is detected to be installed before CloudLinux instalation" | tee -a "${log}"
+			echo "Unfortunately automatic uninstall for ${downgrade_to} is not possible."  | tee -a "${log}"
+			echo "Reinstall you server from scratch."  | tee -a "${log}"
+			exit 1
+		fi
+	fi
+
+	if [[ "cpanel" == "${PANEL}" ]] ; then
+		if [ "$OS_VERSION" -eq "6" ] && [ "$CPANEL_MAJOR" -ge 88 ] ; then
+            yesno "You are running cPanel & WHM version 88 or higher.
+These versions do not support CentOS 6 and uninstalling CloudLinux 6 on them will result in broken cPanel & WHM licenses."
+			if [ $ans -eq 0 ]; then
+				exit 0
+			fi
+		fi
+		if [[ -f /etc/cpanel/ea4/is_ea4 ]]  ; then
+			pushd ~ > /dev/null
+			if [[ "$skip_ea4_script_download" == "false" ]]; then
+				rm -f ./cloudlinux_ea3_to_ea4
+				wget "${PUBLIC_REPO_URL}/cloudlinux/sources/cloudlinux_ea3_to_ea4" 2>&1 | tee -a $log
+			fi
+			if [[ -f ./cloudlinux_ea3_to_ea4 ]]; then
+				sh ./cloudlinux_ea3_to_ea4 --restore-cpanel-ea4-repo 2>&1 | tee -a "${log}"
+				/scripts/restartsrv_httpd 2>&1 | tee -a "${log}"
+			else
+				echo "Failed to download cloudlinux_ea3_to_ea4. Failed to restore cPanel EasyApache4" 2>&1 | tee -a "${log}"
+			fi
+			popd > /dev/null
+		fi
+	fi
+
+	if [[ -f /usr/sbin/cagefsctl ]] ; then
+    	  echo "cagefs found, erasing" 2>&1 | tee -a "${log}"
+          /usr/sbin/cagefsctl --do-not-ask --remove-all
+          yum -y erase cagefs cagefs-safebin bsock bsock-libs 2>&1 | tee -a "${log}"
+	fi
+
+	if [[ -f /usr/sbin/db_governor ]]; then
+	    if [[ -f /usr/share/lve/dbgovernor/mysqlgovernor.py ]]; then
+	        echo "db-governor installed, erasing" 2>&1 | tee -a "${log}"
+	        /usr/share/lve/dbgovernor/mysqlgovernor.py --delete 2>&1 | tee -a "${log}"
+	    fi
+	fi
+
+	if ls /opt/alt/php*/usr/bin/php > /dev/null 2>&1 ; then
+	  echo "alt-php installed, erasing" 2>&1 | tee -a "${log}"
+          yum -y groupremove alt-php 2>&1 | tee -a "${log}"
+	fi
+
+	if ls /opt/alt/python*/bin/python > /dev/null 2>&1; then
+	    echo "alt-python installed, erasing" 2>&1 | tee -a "${log}"
+	    yum -y erase alt-python* 2>&1 | tee -a "${log}"
+	fi
+
+	if [[ -f /usr/share/l.v.e-manager/install-lvemanager-plugin.py ]]; then
+	    echo "lvemanager installed, erasing" 2>&1 | tee -a "${log}"
+	    yum -y erase lvemanager 2>&1 | tee -a "${log}"
+	fi
+
+    # in case CL Solo meta package installed
+	if [[ -f /etc/cloudlinux-edition-solo ]]; then
+	    echo "cloudlinux-solo-meta package detected, erasing" 2>&1 | tee -a "${log}"
+	    # https://stackoverflow.com/questions/15799047/trying-to-remove-yum-which-is-protected-in-centos
+	    rpm -e --nodeps "${CL_SOLO_META_PACKAGE}" 2>&1 | tee -a "${log}"
+	fi
+
+    # in case CL Admin meta package installed
+	if [[ -f /etc/cloudlinux-edition-admin ]]; then
+	    echo "cloudlinux-admin-meta package detected, erasing" 2>&1 | tee -a "${log}"
+	    # https://stackoverflow.com/questions/15799047/trying-to-remove-yum-which-is-protected-in-centos
+	    rpm -e --nodeps "${CL_ADMIN_META_PACKAGE}" 2>&1 | tee -a "${log}"
+	fi
+
+	# in case CL Container meta package installed
+	if [[ -f /etc/cloudlinux-container ]]; then
+	    echo "cloudlinux-container-meta package detected, erasing" 2>&1 | tee -a "${log}"
+	    # https://stackoverflow.com/questions/15799047/trying-to-remove-yum-which-is-protected-in-centos
+	    rpm -e --nodeps "${CL_CONTAINER_META_PACKAGE}" 2>&1 | tee -a "${log}"
+	fi
+
+	if [[ -d "${BACKUP}" ]]; then
+	    if ls "${BACKUP}" | grep "almalinux" &> /dev/null; then
+	        downgrade_to="AlmaLinuxOS"
+	        echo "AlmaLinuxOS is detected to be installed" | tee -a "${log}"
+	    else
+	      	downgrade_to="CentOS"
+	      	echo "CentOS is detected to be installed" | tee -a "${log}"
+	    fi
+	else
+	  	downgrade_to="AlmaLinuxOS"
+	  	# install centos for < 8.3 and for cpanel/plesk (currently do not support AlmaLinux)
+		if [[ "${OS_VERSION}" -lt 8  || "8" == "${OS_VERSION}" && "${OS_RELEASE}" -lt 3 || "${PANEL}" == "plesk" || "${PANEL}" == "cpanel" ]]; then
+			downgrade_to="CentOS"
+		elif [[ "8" == "${OS_VERSION}" && "${OS_RELEASE}" -ge 3 ]]; then
+			yesno "Your Cloudlinux version is 8.3 or higher.
+That means that AlmaLinux OS could be installed instead of CentOS.
+Select 'yes' if you want to install AlmaLinux OS, 'no' for CentOS."
+			[ $ans -eq 0 ] && downgrade_to="CentOS"
+		fi
+	fi
+
+	if [[ "${downgrade_to}" == "CentOS" ]]; then
+		rpm --import http://mirror.centos.org/centos/RPM-GPG-KEY-CentOS-5 2>&1 | tee -a "${log}"
+		rpm -ivh "${CENTOS_RELEASE}" --force --nodeps 2>&1 | tee -a "${log}"
+		if [[ "${OS_VERSION}" -ge "8" ]]; then
+			rpm -ivh "${CENTOS_GPG_KEYS}" --force --nodeps 2>&1 | tee -a "${log}"
+			rpm -ivh "${CENTOS_REPOS}" --force --nodeps 2>&1 | tee -a "${log}"
+		fi
+		retry_wrapper "yum -y install centos-release-notes 2>&1 | tee -a ${log}"
+	elif [[ "${downgrade_to}" == "AlmaLinuxOS" ]]; then
+	  	rpm --import "${ALMALINUX_REPO_URL}/almalinux/RPM-GPG-KEY-AlmaLinux" 2>&1 | tee -a "${log}"
+	  	rpm -ivh "${ALMALINUX_RELEASE}" --force --nodeps 2>&1 | tee -a "${log}"
+	fi
+
+	rpm -e --nodeps cloudlinux-release 2>&1 | tee -a "${log}"
+	rpm -e --nodeps cloudlinux-ea4-release 2>&1 | tee -a "${log}"
+	rpm -e --nodeps pam_lve 2>&1 | tee -a "${log}"
+	rpm -e --nodeps cloudlinux-linksafe 2>&1 | tee -a "${log}"
+	rpm -e --nodeps rhn-setup-gnome 2>&1 | tee -a "${log}"
+	rpm -e rhn-client-tools rhn-check rhnsd rhn-setup rhnlib yum-rhn-plugin 2>&1 | tee -a "${log}"
+	generate_sysinfo_cpanel
+	xz_rpm=`rpm -q xz`
+	if echo ${xz_rpm} | grep cloudlinux ; then
+		# downgrade xz rpm packages to centos versions, see CLDEPLOY-149
+		yum -y downgrade xz xz-libs xz-devel 2>&1 | tee -a "${log}"
+	fi
+	echo -e "\e[1m\e[31m"
+	echo "You converted back to ${downgrade_to}" | tee -a "${log}"
+	echo "Now is the time to install kernel." | tee -a "${log}"
+	echo -e "To delete CloudLinux kernel do \nrpm -e --nodeps $(rpm -qa | grep ^kernel | grep lve | tr -s '\n' ' ')"
+	echo "To install new ${downgrade_to} kernel once you deleted CloudLinux kernel, type yum install kernel" | tee -a "${log}"
+	echo "If yum say that latest kernel is already installed - it\'s Ok" | tee -a "${log}"
+	echo "Please check your bootloader configuration before rebooting the system" | tee -a "${log}"
+	echo -e "To remove unused kmods and lve libs do \nyum remove lve kmod*lve*"
+	echo "Also some CloudLinux packages weren't removed automatically,"
+	echo "because it can lead to the problems with excludes, dependencies, protected packages"
+	echo "or something else. You can find the remained packages using the command"
+	echo "rpm -qa --queryformat '%{name}-%{version}-%{release} %{vendor}\n' | grep CloudLinux"
+	echo "And manually downgrade them to upstream packages if ones exist in the upstream repositories"
+	echo "or remove them if packages exist only in the CloudLinux repositories."
+	echo "You can contact CloudLinux support at https://cloudlinux.zendesk.com/hc/requests/new"
+	echo "if you still have questions. Thank you for using our product."
+	echo -e "\e[0m"
+	rm -f "${lock}"
+	exit 0
+fi
+
+
+if [ "$conversion" = "true" ] ; then
+
+if [ "$remove_non_standard_kernels" = "true" ]; then
+    echo "Removing non-standard kernels from RPM database" | tee -a $log
+    rpm -e --justdb `rpm -qa | grep kernel | grep -v $KERNEL_VERSION` 2>&1 | tee -a $log
+    check_source
+fi
+
+check_ea4
+
+if [ "$registration" = "true" ] ; then
+    backup
+    prep
+fi
+check_ovh
+check_root_device_link
+
+yum clean all 2>&1 |& grep -v "${ROLLOUT_WARNING_FILTER}" | tee -a $log
+
+if rpm -qf --queryformat "%{name}" /lib/modules/$(uname -r) > /dev/null 2>&1 ; then
+    KERNEL=$(rpm -qf --queryformat "%{name} " /lib/modules/$(uname -r))
+else
+    KERNEL=kernel
+fi
+
+if [ "$OS_VERSION" -eq "5" ] && [ "$LINODE" = "true" ]; then
+    KERNEL=kernel-xen
+fi
+
+echo "kernel flavour $KERNEL" >> $log
+
+if [[ "$OS_VERSION" -ge "8" && "$INSTALL_LOWER_VERSION" == "true" ]]; then
+    PKGS="$KERNEL lve lve-utils liblve liblve-devel lve-stats"
+else
+    PKGS="$KERNEL cloudlinux-release lve lve-utils liblve liblve-devel lve-stats"
+fi
+
+SOLO_PACKAGES="${CL_SOLO_META_PACKAGE}"
+ADMIN_PACKAGES="${CL_ADMIN_META_PACKAGE}"
+CL_CONTAINER_PACKAGES="${CL_CONTAINER_META_PACKAGE}"
+SHARED_PACKAGES="pam_lve"
+	if [[ "${solo_activation_key}" == "true" || "${cl_solo_edition}" == "true" ]]; then
+		echo "CloudLinux Solo edition detected, going to install ${CL_SOLO_META_PACKAGE}" | tee -a $log
+		cl_solo_edition=true
+		cl_edition="solo"
+		PKGS="${SOLO_PACKAGES} ${PKGS}"
+	elif [[ "${admin_activation_key}" == "true" || "${cl_admin_edition}" == "true" ]]; then
+		echo "CloudLinux Admin edition detected, going to install ${CL_ADMIN_META_PACKAGE}" | tee -a $log
+		cl_admin_edition=true
+		cl_edition="admin"
+		PKGS="${ADMIN_PACKAGES} ${SHARED_PACKAGES} ${PKGS}"
+	elif [[ "${cl_container}" == "true" ]]; then
+	    echo "CloudLinux Container environment detected, going to install ${CL_CONTAINER_META_PACKAGE}" | tee -a $log
+		cl_edition="shared"
+		PKGS="${CL_CONTAINER_PACKAGES} ${PKGS}"
+	else
+		cl_edition="shared"
+		PKGS="${PKGS} ${SHARED_PACKAGES}"
+	fi
+	# on cloudlinux 8 these modules are builtin in kernel package
+	if [[ "${OS_VERSION}" != "5" && "${OS_VERSION}" != "8" && "${OS_VERSION}" != "9" ]]; then
+            PKGS="$PKGS kmod-ixgbe kmod-igb kmod-e1000e"
+	fi
+	if rpm -qa | grep -q kmod > /dev/null 2>&1 ; then
+	for kmod in `rpm -q --qf '%{name}\n' $(rpm -qa | grep ^kmod\-) | grep -v x86_64 | grep -v i686 | grep -e e1000e -e aacraid -e r8168 -e microsoft -e igb -e dell-dm-switch -e ixgbe`; do
+	    rpm -e --justdb $kmod --nodeps
+	    PKGS="$PKGS $kmod"
+	done
+	fi
+
+	if [ -d /sys/module/storvsc ] ; then
+	    PKGS="$PKGS microsoft-hyper-v"
+	fi
+
+	# upstream iproute package is not compatible with CL 7 kernel so we
+	# need to upgrade it before reboot to prevent network issues.
+	# See CLKRN-242 for details.
+	if [ "$OS_VERSION" -eq "7" ] ; then
+	    PKGS="$PKGS iproute"
+	fi
+
+	if [ $NEED_SOURCE = "YES" ] ; then PKGS="$PKGS kernel-devel gcc make"; fi
+	create_repos
+
+	BS_REPOS=""
+	for build_id in "${build_ids[@]}"; do
+		BS_REPOS="$BS_REPOS --enablerepo=${build_id}"
+	done
+
+	if [ "$registration" = "true" ] ; then
+	if [[ "$OS_VERSION" -ge "8" ]]; then
+		retry_wrapper "yum -y --disablerepo=* ${BS_REPOS} --enablerepo=${BASE_REPO} install dnf --enablerepo=baseos --enablerepo=appstream |& grep -v \"${ROLLOUT_WARNING_FILTER}\" 2>&1 | tee -a $log"
+		retry_wrapper "yum -y --disablerepo=* ${BS_REPOS} --enablerepo=${BASE_REPO} install dnf-plugin-spacewalk rhn-setup --enablerepo=baseos --enablerepo=appstream |& grep -v \"${ROLLOUT_WARNING_FILTER}\" 2>&1 | tee -a $log"
+	else
+		retry_wrapper "yum -y --disablerepo=* ${BS_REPOS} --enablerepo=${BASE_REPO} --enablerepo=cloudlinux-updates install yum |& grep -v \"${ROLLOUT_WARNING_FILTER}\" 2>&1 | tee -a $log"
+		retry_wrapper "yum -y --disablerepo=* ${BS_REPOS} --enablerepo=${BASE_REPO} --enablerepo=cloudlinux-updates install yum-rhn-plugin |& grep -v \"${ROLLOUT_WARNING_FILTER}\" 2>&1 | tee -a $log"
+	fi
+	check_pipestatus 0 "Unable to install yum-rhn-plugin, please contact CloudLinux support at https://cloudlinux.zendesk.com/hc/requests/new"
+
+	echo "Registering as CloudLinux ${cl_edition}" | tee -a $log
+	if [[ $activationkey != "false" ]]; then
+	    /usr/sbin/rhnreg_ks --activationkey $activationkey --serverUrl=$serverurl --edition=${cl_edition} 2>&1 | tee -a $log
+	    check_pipestatus 0 "Unable to register at CLN server, please contact CloudLinux support at https://cloudlinux.zendesk.com/hc/requests/new"
+	else
+	    /usr/sbin/clnreg_ks --serverUrl=$serverurl --edition=${cl_edition} 2>&1 | tee -a $log
+	    check_pipestatus 0 "Unable to register at CLN server, please contact CloudLinux support at https://cloudlinux.zendesk.com/hc/requests/new"
+	fi
+
+	check_cloudlinux_repos
+
+	if [ $? -ne 0 ]; then
+		echo "No valid repo in repolist output" | tee -a $log; rm -f $lock; exit 1;
+	fi
+
+	echo "Success" | tee -a $log
+	fi
+
+	if rpm -q openssl-1.0.1e-30.el6.8 > /dev/null 2>&1; then
+	    yum -y downgrade openssl-1.0.1e-30.el6_6.8 openssl-devel-1.0.1e-30.el6_6.8 openssl-perl-1.0.1e-30.el6_6.8 \
+	    openssl-static-1.0.1e-30.el6_6.8
+	fi
+
+	if rpm -q subscription-manager > /dev/null 2>&1; then
+	echo "Uninstalling subscription-manager..." | tee -a $log
+	    yum -y erase subscription-manager
+	fi
+
+	# get latest CL release version
+	CL_RELEASE="$(rpm -q --qf %{version} cloudlinux-release | cut -c 3-)"
+
+	if [[ "${OS_RELEASE}" -gt "${CL_RELEASE}" ]]; then
+		# upgrading kmod packages when conversion from greater OS version: e.g 8.4 -> 8.3
+		echo "Update kmod* from repos ${ENABLED_REPOS}" | tee -a $log
+		retry_wrapper "yum -y ${ENABLED_REPOS} update kmod* 2>&1 | tee -a ${log}"
+	else
+		if [ -e /sys/firmware/efi ]; then
+			# we need to update to latest available (even in BETA)
+			# the yum update below does not enable beta repos for transaction
+			# I did not enable it there, because it breaks ea3_to_ea4 script, which is buggy
+			# when --beta option passed (https://cloudlinux.atlassian.net/browse/AAP-466)
+			# SO IT IS TEMPORARY UNTIL AAP-466 done
+			echo "Updating grub2-efi packages.." | tee -a $log
+			yum -y $ENABLED_REPOS update grub2-efi 2>&1 | tee -a ${log}
+		fi
+		# just update when conversion from less/same OS version: e.g 8.3 -> 8.3
+		echo "Updating all packages.." | tee -a $log
+		retry_wrapper "yum -y update 2>&1 | tee -a ${log}"
+	fi
+
+    if [[ "$OS_VERSION" -ge "7" ]]; then
+        # syncing boot stack packages to be installed exactly from CL repos
+        echo "Syncing boot stack packages: ${BOOT_STACK_PACKAGES} with CL repositories. This is needed, otherwise Secure Boot is not working" | tee -a $log
+
+        BOOT_STACK_SYNC_PARAMS="-y ${ENABLED_REPOS} distro-sync ${BOOT_STACK_PACKAGES}"
+        if [[ "$OS_VERSION" -ge "9" && "$INSTALL_LOWER_VERSION" == "true" ]]; then
+            # use --allowerasing to downgrade packages that are not compatible with higher version kernel
+            BOOT_STACK_SYNC_PARAMS="--allowerasing ${BOOT_STACK_SYNC_PARAMS}"
+        fi
+        retry_wrapper "yum ${BOOT_STACK_SYNC_PARAMS} 2>&1 | tee -a ${log}"
+
+        echo "Syncing kernel packages with CL repositories" | tee -a $log
+        if [[ "$OS_VERSION" -ge "9" ]]; then
+            if [[ "$INSTALL_LOWER_VERSION" == "true" ]]; then
+                # We use Almalinux kernel starting from CL9
+                ALMALINUX_BASE_REPO_URL="https://repo.almalinux.org/almalinux/${LOWER_VERSION_RELEASE}/BaseOS/x86_64/os/"
+                config_manager_wrapper "--add-repo=${ALMALINUX_BASE_REPO_URL}"
+                ALMALINUX_BASE_REPO="$(echo "${ALMALINUX_BASE_REPO_URL##*://}" | tr / _)"
+                retry_wrapper "yum -y --disablerepo='*' --enablerepo=${ALMALINUX_BASE_REPO} distro-sync kernel* 2>&1 | tee -a ${log}"
+                rm -f /etc/yum.repos.d/"${ALMALINUX_BASE_REPO}.repo" &>/dev/null
+                # we don't want to allow kernel upgrades to the latest on CL9 if downgrading,
+                # because we want to keep them at the same version as the CL kmodlve kernel module,
+                # which will be older than the most recent accessible Alma kernel in a downgrade scenario
+                yum_exclude_packages "kernel*"
+            else
+                retry_wrapper "yum -y ${ENABLED_REPOS} distro-sync kernel* 2>&1 | tee -a ${log}"
+            fi
+        elif [[ "true" == "${test_updates}" ]]; then
+            retry_wrapper "yum -y ${ENABLED_REPOS} distro-sync kernel* --setopt=cloudlinux-${ARCH}-server-${OS_VERSION}.exclude=kernel* --setopt=${ALMALINUX_BASE}.exclude=kernel* 2>&1 | tee -a ${log}"
+        else
+            retry_wrapper "yum -y ${ENABLED_REPOS} distro-sync kernel* --setopt=${ALMALINUX_BASE}.exclude=kernel* 2>&1 | tee -a ${log}"
+        fi
+    fi
+
+    apply_yum_excludes
+
+	echo "Installing lve..." | tee -a $log
+
+	if [ "$OS_VERSION" = "5" ] && [ "$LINODE" = "true" ]; then
+	    cp /etc/modprobe.conf /etc/modprobe.conf.orig
+	    echo "alias scsi_hostadapter xenblk" > /etc/modprobe.conf
+	    echo "co:2345:respawn:/sbin/mingetty xvc0" >> /etc/inittab
+	    echo "xvc0"  >> /etc/securetty
+	    echo "UPDATEDEFAULT=yes" > /etc/sysconfig/kernel
+	    echo "DEFAULTKERNEL=kernel-xen" >> /etc/sysconfig/kernel
+	fi
+        rpm -e --nodeps cpuspeed > /dev/null 2>&1
+
+	# INSTALL CORE CL PACKAGES
+	if [[ "$OS_VERSION" -ge "8" ]]; then
+		if [[ "${force_packages_installation}" == "true" ]]; then
+			retry_wrapper "yum -y ${ENABLED_REPOS} --disableexcludes=all install $PKGS --allowerasing 2>&1 | tee -a ${log}"
+			check_pipestatus 0 "Unable to install required packages, please contact CloudLinux support at https://cloudlinux.zendesk.com/hc/requests/new"
+		else
+			retry_wrapper "yum -y ${ENABLED_REPOS} --disableexcludes=all install $PKGS 2>&1 | tee -a ${log}"
+			check_pipestatus 0 "Unable to install required packages, you may use --force-packages-installation option to automatically resolve dependencies and remove conflicting packages.\nPlease contact CloudLinux support at https://cloudlinux.zendesk.com/hc/requests/new"
+		fi
+	else
+		retry_wrapper "yum -y ${ENABLED_REPOS} --disableexcludes=all install $PKGS 2>&1 | tee -a ${log}"
+		check_pipestatus 0 "Unable to install required packages, please contact CloudLinux support at https://cloudlinux.zendesk.com/hc/requests/new"
+	fi
+
+	rpm -q cloudlinux-linksafe &> /dev/null
+	if [ $? -eq 0 ]; then
+		/usr/bin/cl-linksafe-reconfigure --convert 2>&1 | tee -a $log
+	fi
+
+	if [ "$PANEL" == 'cpanel' ]; then
+		generate_sysinfo_cpanel
+	fi
+
+        if [ "$OS_VERSION" = "7" ];then
+            retry_wrapper "yum -y ${ENABLED_REPOS} update systemd 2>&1 | tee -a ${log}"
+        fi
+
+	if [ "$OS_VERSION" = "7" ] && [ "$LINODE_KVM" = "true" ]; then
+	    retry_wrapper "yum -y install grub2 2>&1 | tee -a ${log}"
+            cat > /etc/default/grub << EOF
+GRUB_TIMEOUT=5
+GRUB_DISTRIBUTOR="$(sed 's, release .*$,,g' /etc/system-release)"
+GRUB_DEFAULT=saved
+GRUB_DISABLE_SUBMENU=true
+GRUB_TERMINAL_OUTPUT="console"
+GRUB_DISABLE_RECOVERY="true"
+GRUB_DISABLE_LINUX_UUID="true"
+GRUB_CMDLINE_LINUX="crashkernel=auto console=tty1 console=ttyS0,19200n8"
+GRUB_SERIAL_COMMAND="serial --speed=19200 --unit=0 --word=8 --parity=no --stop=1"
+EOF
+	    ln -s /boot/grub2 /boot/grub
+	    grub2-mkconfig -o /boot/grub2/grub.cfg 2>&1 | tee -a $log
+	fi
+
+	if [[ "${cl_container}" != "true" && "$OS_VERSION" -ge "8" ]]; then
+		if [[ $(grep -c GRUB_ENABLE_BLSCFG /etc/default/grub) == "0" ]]; then
+			echo -e "\n # added by CloudLinux"  >> /etc/default/grub
+			echo -e "GRUB_ENABLE_BLSCFG=true" >> /etc/default/grub
+			echo "GRUB_ENABLE_BLSCFG=true was added to /etc/default/grub" | tee -a $log
+			regenerate_grub_conf
+			BLSCFG_CHANGED=true
+		elif [[ ! "$(grep GRUB_ENABLE_BLSCFG /etc/default/grub | awk -F= '{print $2}')" =~ \"?true\"? ]] || \
+				[[ $(grep -c -P "^\s*#\s*GRUB_ENABLE_BLSCFG" /etc/default/grub) != "0" ]]; then
+			echo "$(grep GRUB_ENABLE_BLSCFG /etc/default/grub) was found" | tee -a $log
+			sed -i -r 's/(#\s*)?GRUB_ENABLE_BLSCFG="?.*"?/GRUB_ENABLE_BLSCFG=true/g' /etc/default/grub
+			echo "GRUB_ENABLE_BLSCFG was changed to true in /etc/default/grub" | tee -a $log
+			regenerate_grub_conf
+			BLSCFG_CHANGED=true
+		fi
+	fi
+
+	if [ "$OS_VERSION" = "6" ] && [ "$LINODE_KVM" = "true" ]; then
+	    retry_wrapper "yum -y install grub 2>&1 | tee -a ${log}"
+	    KVERSION=`python -c 'import glob, re, rpm; print "%s-%s.%s" % sorted([(h["version"], h["release"], h["arch"]) for h in rpm.TransactionSet().dbMatch(rpm.RPMTAG_NAME, "kernel")], cmp=lambda b, a: rpm.labelCompare(("0", a[0], a[1]), ("0", b[0], b[1])))[0]'`
+            cat > /boot/grub/grub.conf << EOF
+default=0
+timeout=5
+title CloudLinux Server ($KVERSION)
+root (hd0)
+kernel /boot/vmlinuz-$KVERSION root=/dev/sda ro
+initrd /boot/initramfs-$KVERSION.img
+EOF
+    ln -sf /boot/grub/grub.conf /boot/grub/menu.lst
+    ln -sf /boot/grub/grub.conf /etc/grub.conf
+	fi
+
+
+fi
+
+if [[ "true" == "${components}" ]]; then
+		retry_wrapper "yum -y ${ENABLED_REPOS} install lvemanager 2>&1 | tee -a ${log}"
+		check_pipestatus 0 "Unable to install lvemanager package, please contact CloudLinux support at https://cloudlinux.zendesk.com/hc/requests/new"
+		if rpm -q apr &> /dev/null; then
+			retry_wrapper "yum -y ${ENABLED_REPOS} update apr 2>&1 | tee -a ${log}"
+		else
+			retry_wrapper "yum -y ${ENABLED_REPOS} install apr 2>&1 | tee -a ${log}"
+		fi
+		check_pipestatus 0 "Unable to install/update apr package, please contact CloudLinux support at https://cloudlinux.zendesk.com/hc/requests/new"
+fi
+
+if [ "$vzbeta" = "true" ] ; then
+	retry_wrapper "yum -y ${ENABLED_REPOS} install lve-utils cagefs | tee -a ${log}"
+fi
+
+# https://cloudlinux.atlassian.net/browse/LU-2268
+# ensure we really need to install hostinglimits
+if [ "$hostinglimits" = "true" ] ; then
+
+	if [ "$PANEL" = "ispmanager" ] || [ "$PANEL" = "interworx" ] ; then
+	    echo "Installing mod_hostinglimits" 2>&1 | tee -a $log
+	    retry_wrapper "yum -y install mod_hostinglimits 2>&1 | tee -a ${log}"
+	    check_pipestatus 0 "mod_hostinglimits install failed, please contact CloudLinux support at https://cloudlinux.zendesk.com/hc/requests/new"
+	fi
+
+	if [ "$PANEL" = "plesk" ] ; then
+	  if [ "$PLESK_OLD" = "YES" ] ; then
+	    if rpm -q psa-mod_fcgid > /dev/null 2>&1; then
+        echo "Replacing mod_fcgid..." 2>&1 | tee -a $log
+        rpm -e --nodeps psa-mod-fcgid-configurator 2>&1 | tee -a $log
+        rpm -e --nodeps psa-mod_fcgid 2>&1 | tee -a $log
+        retry_wrapper "yum -y install mod_fcgid 2>&1 | tee -a ${log}"
+	    fi
+	  fi
+	  if rpm -q --quiet "${CL_SOLO_META_PACKAGE}"; then
+	    echo "mod_hostinglimits installation skipped: Solo edition detected"
+	  else
+	    echo "Installing mod_hostinglimits" 2>&1 | tee -a $log
+	    retry_wrapper "yum -y install mod_hostinglimits 2>&1 | tee -a ${log}"
+	    check_pipestatus 0 "mod_hostinglimits install failed, please contact CloudLinux support at https://cloudlinux.zendesk.com/hc/requests/new"
+	  fi
+	fi
+
+	if [ "$PANEL" = "cpanel" ] ; then
+		if [ "$buildeasyapache" = "true" ]; then
+	    		echo "EasyApache build enabled, building..."
+	    		/scripts/easyapache --build 2>&1 | tee -a $log
+	    		check_pipestatus 0 "EasyApache build failed, please contact CloudLinux support at https://cloudlinux.zendesk.com/hc/requests/new"
+	    		echo "EasyApache build succeeded" 2>&1 | tee -a ${log}
+		fi
+		if [ "$isea4" = "true" ]; then
+			pushd ~ > /dev/null
+			if [[ "$skip_ea4_script_download" == "false" ]]; then
+				rm -f ./cloudlinux_ea3_to_ea4
+				wget "${PUBLIC_REPO_URL}/cloudlinux/sources/cloudlinux_ea3_to_ea4" 2>&1 | tee -a $log
+			fi
+			if [ -f ./cloudlinux_ea3_to_ea4 ]; then
+				cloudlinux_ea3_to_ea4_args="--convert"
+				if [[ "true" == "${test_updates}" ]]; then
+					cloudlinux_ea3_to_ea4_args="${cloudlinux_ea3_to_ea4_args} --beta"
+				fi
+				if [[ "true" == "${INSTALL_LOWER_VERSION}" ]]; then
+					cloudlinux_ea3_to_ea4_args="${cloudlinux_ea3_to_ea4_args} --allow-nobest"
+				fi
+				sh ./cloudlinux_ea3_to_ea4 $cloudlinux_ea3_to_ea4_args 2>&1 | tee -a $log
+				/scripts/restartsrv_httpd 2>&1 | tee -a $log
+			else
+				echo "Failed to download cloudlinux_ea3_to_ea4. EasyApache4 setup for CloudLinux failed" 2>&1 | tee -a $log
+			fi
+			popd > /dev/null
+		fi
+        fi
+
+        if [ "$PANEL" = "directadmin" ] && [ "$builddirectadmin" = "true" ]; then
+	    echo "Adding admin user to wheel group..." 2>&1 | tee -a $log
+	    da_admin_user=$(/usr/bin/cldetect --print-da-admin)
+	    /usr/sbin/usermod -a -G wheel $da_admin_user 2>&1 | tee -a $log
+	    echo "Apache build enabled, building..." 2>&1 | tee -a $log
+	    if [ -f /usr/local/directadmin/custombuild/build ] ; then
+		/usr/local/directadmin/custombuild/build set cloudlinux yes 2>&1 | tee -a $log
+		check_pipestatus 0 "Command failed, please contact CloudLinux support at https://cloudlinux.zendesk.com/hc/requests/new"
+		/usr/local/directadmin/custombuild/build apache
+		check_pipestatus 0 "Apache build failed, the CloudLinux installation can't be continued. Please contact CloudLinux support (https://cloudlinux.zendesk.com/hc/requests/new) to check if the issue is related to cldeploy script."
+		echo "Apache build succeeded" 2>&1 | tee -a $log
+	    fi
+        fi
+fi
+
+add_digitalocean_kexec
+
+if [ "$LINODE" = "true" ]; then
+write_linode_grub_conf
+echo "Please edit your Linode profile, select pv-grub-x86_64 or pv-grub-x86_32 as a boot kernel and uncheck \"Xenify Distro\" button"
+fi
+
+if [ "$OS_VERSION" = "7" ] && [ "$LINODE_KVM" = "true" ]; then
+echo "Please edit configuration of your Linode and select \"GRUB 2\" in Boot Settings - Kernel"
+fi
+
+if [ "$OS_VERSION" = "6" ] && [ "$LINODE_KVM" = "true" ]; then
+echo "Please edit configuration of your Linode and select \"GRUB\" in Boot Settings - Kernel"
+fi
+
+if [ "$LES" = "true" ]; then
+echo "Linux Environment Security was disabled, you can re-enable it if needed"
+fi
+
+# CentOS 7 OVH grub.conf
+if [ -f /etc/grub.d/06_OVHkernel ] && [ -f /boot/bzImage* ] ; then
+    mv /boot/bzImage* /etc/cl-convert-saved/
+    grub2-mkconfig -o /boot/grub2/grub.cfg
+    if [ -e /sys/firmware/efi ]; then
+        # Hardening to make sure that on EFI we update correct grub.cfg even
+        # if it's in other location
+        [[ -e /etc/grub2-efi.cfg ]] && grub2-mkconfig -o /etc/grub2-efi.cfg || echo "Your EFI-based system doesn't have correct symlink \"/etc/grub2-efi.cfg\" this may cause boot troubles. Please, fix it to point to your current grub.cfg file and run grub2-mkconfig -o /etc/grub2-efi.cfg" | tee -a /var/log/ovh-cl-deploy.log
+    fi
+    echo "Your OVH server is now configured to boot into the CloudLinux kernel from local HDD" | tee -a /var/log/ovh-cl-deploy.log
+    echo "OVH kernel was saved to /etc/cl-convert-saved/" | tee -a /var/log/ovh-cl-deploy.log
+    echo "In case of troubles please boot from network, copy $(ls /etc/cl-convert-saved/bzImage*) to /boot and run" | tee -a /var/log/ovh-cl-deploy.log
+    echo "grub2-mkconfig -o /boot/grub2/grub.cfg" | tee -a /var/log/ovh-cl-deploy.log
+    echo "You can find a copy of this message in /var/log/ovh-cl-deploy.log" | tee -a $log
+fi
+
+convert_cl7_to_cl7h_if_needed
+if [[ "${cl_container}" != "true" ]]; then
+    check_validity_of_default_grub_record
+fi
+adapt_CL_for_small_servers
+
+if [ "$PANEL" = "" ] ; then
+	packages_to_reinstall="lvemanager lve-utils alt-python27-cllib"
+	supported_panels="cPanel"
+	if [[ "${cl_solo_edition}" == "true" ]]; then
+		packages_to_reinstall="${packages_to_reinstall} lvemanager-xray"
+	else
+		supported_panels="${supported_panels}, DirectAdmin, Plesk"
+		packages_to_reinstall="${packages_to_reinstall} cagefs"
+	fi
+		echo "Warning!! If you will install a control panel natively supported by CloudLinux (${supported_panels}) later,"
+		echo "then you MUST reinstall the CloudLinux Manager packages with the following command:"
+		echo "yum reinstall -y ${packages_to_reinstall}"
+		echo ""
+fi
+
+if [[ "$BLSCFG_CHANGED" == "true" ]]; then
+    echo "WARNING! GRUB_ENABLE_BLSCFG was set to true in grub config to load the CL kernel after reboot." | tee -a $log
+    echo "This option is enabled by default in RHEL-based distributives with version higher than 8." | tee -a $log
+    echo "It causes the grub menu to be generated dynamically, using configs from /boot/loader/entries." | tee -a $log
+    echo "If you have custom grub settings, please ensure they were not overridden, or reapply them via grubby" | tee -a $log
+    echo "For details, please check the following article https://fedoraproject.org/wiki/Changes/BootLoaderSpecByDefault" | tee -a $log
+    show_reboot_message=false
+fi
+
+check_and_fix_grub_cfg
+check_update_uefi_boot_entries
+
+[[ "$show_reboot_message" == "true" ]] && echo "Please reboot the server to apply the changes" | tee -a $log
+echo "You can find complete log in /var/log/cldeploy.log"
+
+if [[ "$OS_VERSION" -ge "8" ]]; then
+    rm -f /etc/yum.repos.d/"${BASE_REPO}.repo" &>/dev/null
+fi
+
+[[ -f /usr/bin/systemctl ]] && /usr/bin/systemctl daemon-reload &> /dev/null
+
+check_boot_duplicates
+
+rm -f $lock
+exit 0

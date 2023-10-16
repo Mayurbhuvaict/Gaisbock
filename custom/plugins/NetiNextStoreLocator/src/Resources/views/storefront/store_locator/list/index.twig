@@ -1,0 +1,62 @@
+{% block neti_store_locator_list_container %}
+    <div class="store-container-wrapper" ref="storeContainerWrapper" :class="{ 'd-none': !storeListing && isMobile }">
+        <div class="stores-container flex" ref="storesContainer">
+            {% block neti_store_locator_list_empty_result %}
+                <div
+                        class="alert-empty-result w-100"
+                        v-if="filteredStores.length <= 0 && !isLoadingStores && storesWereLoadedOnce && !searchResultShouldBeHidden"
+                >
+                    {% sw_include '@Storefront/storefront/utilities/alert.html.twig' with {
+                        type:"warning",
+                        content: "neti-next-store-locator.index.search.filterNoResults"|trans
+                    } %}
+                </div>
+            {% endblock %}
+
+            {% block neti_store_locator_list_empty_result_manual_loading %}
+                <div
+                        class="alert-empty-result w-100"
+                        v-if="filteredStores.length <= 0 && !isLoadingStores && !config.autoloadStores && !storesWereLoadedOnce"
+                >
+                    {% sw_include '@Storefront/storefront/utilities/alert.html.twig' with {
+                        type:"warning",
+                        content: "neti-next-store-locator.index.search.filterNoResultsManualLoading"|trans
+                    } %}
+                </div>
+            {% endblock %}
+
+            {% block neti_store_locator_list_empty_result_keywords_required %}
+                <div
+                        class="alert-empty-result w-100"
+                        v-if="searchResultShouldBeHidden && !isLoadingStores && storesWereLoadedOnce"
+                >
+                    {% sw_include '@Storefront/storefront/utilities/alert.html.twig' with {
+                        type:"warning",
+                        content: "neti-next-store-locator.index.search.filterNoResultsKeywordsRequired"|trans
+                    } %}
+                </div>
+            {% endblock %}
+
+            {% block neti_store_locator_list_spinner %}
+                <div class="spinner-container" v-if="isLoadingStores">
+                    <div class="spinner-border spinner" role="status">
+                        <span class="visually-hidden">
+                            {{ "neti-next-store-locator.index.store.loadingText"|trans }}
+                        </span>
+                    </div>
+                </div>
+            {% endblock %}
+
+            {% block neti_store_locator_list_item %}
+                <neti-store-locator-store
+                        v-for="(store, key) in filteredStores"
+                        :map="map"
+                        :location="currentLocation"
+                        :config="config"
+                        :store="store" :key="key"
+                        :selected="selectedStore === store"
+                ></neti-store-locator-store>
+            {% endblock %}
+        </div>
+    </div>
+{% endblock %}

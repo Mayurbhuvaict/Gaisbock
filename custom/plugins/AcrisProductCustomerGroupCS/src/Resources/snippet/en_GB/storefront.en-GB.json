@@ -1,0 +1,5 @@
+{
+    "checkout": {
+        "product-blocked-for-customer-group": "The product \"%name%\" is blocked for current customer group and removed from cart."
+    }
+}

@@ -1,0 +1,103 @@
+{
+  "store": {
+    "title": "Stores <br> ipsum dolor sit ametin"
+  },
+  "header": {
+    "searchPlaceholder": "Suchbegriff eingeben"
+  },
+  "footer": {
+    "newsletter" : {
+      "titleOne": "GAISBOCK <br>PREMIUM-MEMBER WERDEN",
+      "descriptionText" : "Die ersten 300 erhalten gratis Socken, Profitiere von exklusiven Angeboten und Rabatten"
+    },
+    "customText": {
+      "customTextOne": "347",
+      "customTextTwo": "Anzahl <br> Wiederverkäufer",
+      "customTextThree": "<1000",
+      "customTextFour": "Anzahl <br> Kunden",
+      "customTextFive": "XXX",
+      "customTextSix": "Lorem <br>Sipdum dol"
+    },
+    "tryIt": {
+      "tryItItext": "BOCK AUF <br>AUSPROBIEREN?",
+      "tryItDescription": "Hier gehts zu den Gaisbock-Händlern in Deiner Nähe."
+    },
+    "handler": {
+      "handlerTitle": "JETZT GAISBOCK-<br> HÄNDLER WERDEN",
+      "handlerTitleDescription": "Händler Login Anfragen consectetuer adipisci lorem ipsuam dolor esang elit<a href=\"#\"> Aenean massa. Cum sociis.</a>"
+    },
+    "hotline": {
+      "hotlineOne": "Gaisbock GmbH",
+      "hotlineTwo": "Bahnhafasse 10",
+      "hotlineThree": "CH-6065 kagiswill",
+      "hotlineMobile": "+41 41 6620 89 88",
+      "hotlineEmail": "info@gaisbock.ch",
+      "hotlineOpeningInfo": "Offnungzeiten Showroom",
+      "hotlineOpenTiming": "Mo-fr 08-12h / 13.30-17.00"
+    }
+  },
+  "listingPage": {
+    "product": {
+      "card": {
+        "saleBadges": "sale"
+      }
+    }
+  },
+  "productDetailPage": {
+    "contents": "INHALT",
+    "benefits": "nutzen",
+    "effect": "Wirkung",
+    "application": "anwendung",
+    "integral": "INHALTSSTOFFE",
+    "shipping": "VERSAND",
+    "ratings": "bewertungen",
+    "viewRatings": "Bewertungen anschauen",
+    "addProduct": "In den Warenkorb"
+  },
+  "address": {
+    "companyPlaceholder": "UNTERNEHMEN*",
+    "departmentPlaceholder": "ABTEILUNG",
+    "vatPlaceholder": "UMSATZSTEUER-ID",
+    "street": "STRASSE",
+    "zipcode": "POSTLEITZAHL",
+    "city": "STADT",
+    "countryState": "STAAT",
+    "privacyNotice": "Ich habe die <a data-toggle=\"modal\" data-bs-toggle=\"modal\" data-url=\"%privacyUrl%\" href=\"%privacyUrl%\" title=\"Datenschutzbestimmungen\">Datenschutzbestimmungen</a> zur Kenntnis genommen und die <a data-toggle=\"modal\" data-bs-toggle=\"modal\" data-url=\"%tosUrl%\" href=\"%tosUrl%\" title=\"AGB\">AGB</a> gelesen und bin mit ihnen einverstanden."
+  },
+  "account": {
+    "mobileLoginSubmit": "Anmelden",
+    "loginTitle": "Anmelden",
+    "registerTitle": "Registrieren",
+    "registrationTitle": "Registrierung",
+    "patner": "Partner werden",
+    "loginMail":"EMAIL",
+    "loginPassword": "PASSWORT",
+    "loginRecover": "Passwort vergessen?",
+    "firstNamePlaceholder": "VORNAME*",
+    "lastNamePlaceholder": "NACHNAME*",
+    "mailPlaceholder": "EMAIL*",
+    "passwordLabel":"PASSWORT*",
+    "passwordConfirmationPlaceholder": "PASSWORT-WIEDERHOLUNG*",
+    "passwordDescription": "(Muss mindestens %minLength% Zeichen mit 1 Symbol sein)",
+    "salutationPlaceholder": "ANREDE",
+    "register": "Anmelden",
+    "partnerLoginTitle": "Ich bin bereits Partner",
+    "home": {
+      "title": "Shop"
+    },
+    "header": {
+      "name": "Registrierte Kunden",
+      "customerGroup": "Partner werden<br> ipsum dolor sit ametin"
+    }
+  },
+  "search": {
+    "headline": "Produkt passt zu:",
+    "noCount": "Keine Produktübereinstimmungen gefunden"
+  },
+  "customer-group-register": {
+    "data": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit.<br> Aenean commodo ligula eget dolor."
+  },
+  "review": {
+    "validation": "Bitte geben Sie mindestens 5 Zeichen im Titel und 40 Zeichen in der Bewertung ein, um eine Bewertung abzugeben."
+  }
+}

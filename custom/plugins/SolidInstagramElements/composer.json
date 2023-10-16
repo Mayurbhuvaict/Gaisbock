@@ -1,0 +1,54 @@
+{
+    "name": "studiosolid/instagram-elements",
+    "description": "Instagram CMS elements and blocks for Shopware 6 shopping experiences",
+    "version": "2.1.4",
+    "type": "shopware-platform-plugin",
+    "license": "proprietary",
+    "authors": [
+        {
+            "name": "Studio Solid",
+            "homepage": "https://www.studiosolid.de"
+        }
+    ],
+    "require": {
+        "shopware/core": "6.5.*"
+    },
+    "autoload": {
+        "psr-4": {
+            "StudioSolid\\InstagramElements\\": "src/"
+        }
+    },
+    "extra": {
+        "shopware-plugin-class": "StudioSolid\\InstagramElements\\SolidInstagramElements",
+        "copyright": "(c) by Studio Solid",
+        "label": {
+            "de-DE": "Instagram Elements | Instagram für Erlebniswelten",
+            "en-GB": "Instagram Elements | Instagram for shopping experiences"
+        },
+        "autoload": {
+            "psr-4": {
+                "StudioSolid\\InstagramElements\\": "src/"
+            }
+        },
+        "extra": {
+            "shopware-plugin-class": "StudioSolid\\InstagramElements\\SolidInstagramElements",
+            "copyright": "(c) by Studio Solid",
+            "label": {
+                "de-DE": "Instagram Elements | Instagram für Erlebniswelten",
+                "en-GB": "Instagram Elements | Instagram for shopping experiences"
+            },
+            "description": {
+                "de-DE": "Instagram CMS-Elemente und -Blöcke für Shopware 6 Erlebniswelten",
+                "en-GB": "Instagram CMS elements and blocks for Shopware 6 shopping experiences"
+            },
+            "manufacturerLink": {
+                "de-DE": "https://www.studiosolid.de/",
+                "en-GB": "https://www.studiosolid.de/"
+            },
+            "supportLink": {
+                "de-DE": "https://www.studiosolid.de/",
+                "en-GB": "https://www.studiosolid.de/"
+            }
+        }
+    }
+}

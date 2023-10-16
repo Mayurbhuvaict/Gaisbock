@@ -1,0 +1,26 @@
+{% sw_extends '@Storefront/storefront/component/product/card/badges.html.twig' %}
+{% block component_product_badges %}
+    {{ parent() }}
+    <div class="product-badges">
+        {% block component_product_badges_discount %}
+            {% set price = product.calculatedPrice %}
+            {% if product.calculatedPrices.count > 0 %}
+                {% set price = product.calculatedPrices.last %}
+            {% endif %}
+
+            {% set listPrice = price.listPrice.percentage > 0 %}
+            {% set hasRange = product.calculatedPrices.count > 1 %}
+
+            {% set displayParent = product.variantListingConfig.displayParent and product.parentId === null %}
+            {% if displayParent %}
+                {% set displayFromVariants = displayParent and price.unitPrice !== product.calculatedCheapestPrice.unitPrice %}
+            {% endif %}
+
+            {% if listPrice and not hasRange and not displayFromVariants %}
+                <div class="badge bg-danger badge-discount">
+                    <span>{{ "listingPage.product.card.saleBadges"|trans|sw_sanitize }}</span>
+                </div>
+            {% endif %}
+        {% endblock %}
+    </div>
+{% endblock %}

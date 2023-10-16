@@ -1,0 +1,43 @@
+<sw-modal
+        class="neti-store-locator-filter-refresh-index-modal"
+        :title="$t('neti-store-locator.filter.refresh-index-modal.title')"
+        @modal-close="onCloseModal"
+>
+    <sw-loader v-if="isLoading"></sw-loader>
+    <template v-else>
+        <sw-alert variant="info">
+            <p v-html="$t('neti-store-locator.filter.refresh-index-modal.infoText')"></p>
+        </sw-alert>
+
+        <p v-html="$t('neti-store-locator.filter.refresh-index-modal.filterText', { count: filters.length })"></p>
+
+        <sw-step-display :itemIndex="currentIndex" :itemVariant="currentStatus" ref="stepDisplay">
+            <sw-step-item>
+                {{ $t('neti-store-locator.filter.refresh-index-modal.step1') }}
+            </sw-step-item>
+
+            <sw-step-item>
+                {{ $t('neti-store-locator.filter.refresh-index-modal.step2') }}
+                <span v-if="currentIndex >= 1">({{ buildPercentage }} %)</span>
+            </sw-step-item>
+
+            <sw-step-item>
+                {{ $t('neti-store-locator.filter.refresh-index-modal.step3') }}
+            </sw-step-item>
+        </sw-step-display>
+    </template>
+
+    <template #modal-footer>
+        <sw-button
+                variant="primary" size="small"
+                :disabled="!indexButtonEnabled"
+                @click="onIndex"
+        >
+            {{ $t('neti-store-locator.filter.refresh-index-modal.buttonIndex') }}
+        </sw-button>
+
+        <sw-button size="small" @click="onAbort" :disabled="!abortButtonEnabled">
+            {{ $t('neti-store-locator.filter.refresh-index-modal.buttonAbort') }}
+        </sw-button>
+    </template>
+</sw-modal>

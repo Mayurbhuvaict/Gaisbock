@@ -1,0 +1,45 @@
+{
+  "name": "proxa/basket-cross-selling",
+  "description": "Proxa Basket Cross Selling Advanced",
+  "version": "2.0.3",
+  "type": "shopware-platform-plugin",
+  "license": "proprietary",
+  "authors": [
+    {
+      "name": "Proxation GmbH"
+    }
+  ],
+  "require": {
+    "shopware/core": "^6.5",
+    "shopware/storefront": "^6.5"
+  },
+  "conflict": {
+    "shopware/storefront": "<6,>=7",
+    "shopware/administration": "<6,>=7"
+  },
+  "autoload": {
+    "psr-4": {
+      "ProxaBasketCrossSellingSW6\\": "src/"
+    }
+  },
+  "extra": {
+    "shopware-plugin-class": "ProxaBasketCrossSellingSW6\\ProxaBasketCrossSellingSW6",
+    "copyright": "Copyright ©  2021. Proxation GmbH",
+    "label": {
+      "de-DE": "Warenkorb Cross-Selling Advanced",
+      "en-GB": "Basket Cross-Selling Advanced"
+    },
+    "description": {
+      "de-DE": "Das Warenkorb Cross-Selling Advanced Plug-in bietet Ihnen die Möglichkeit, hoch individualisiert, passende Produkte zu den Warenkorb-Inhalten zu präsentieren.",
+      "en-GB": "This cross-selling plugin displays highly individualized and personalized products in the checkout basket, motivating your customer to add more products to the cart."
+    },
+    "manufacturerLink": {
+      "de-DE": "https://www.proxation.de/",
+      "en-GB": "https://www.proxation.de/"
+    },
+    "supportLink": {
+      "de-DE": "https://www.proxation.de/",
+      "en-GB": "https://www.proxation.de/"
+    }
+  }
+}

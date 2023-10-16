@@ -1,0 +1,44 @@
+<!-- eslint-disable-next-line sw-deprecation-rules/no-twigjs-blocks -->
+{% block sw_cms_block_preview_solid_ie_feed %}
+<div
+    class="sw-cms-block-preview-solid-ie-feed"
+>
+    <div
+        class="row"
+    >
+        <div
+            v-for="i in 4"
+            :key="i"
+            class="col"
+        >
+            <div
+                class="feed-item"
+            >
+                <div
+                    class="image-container"
+                >
+                    <img
+                        :src="'/solidinstagramelements/static/img/cms/preview-mountain-small-blurred.jpg'|asset"
+                    >
+
+                    <div
+                        class="logo-container"
+                    >
+                        <img
+                            :src="'/solidinstagramelements/static/img/cms/instagram-logo.png'|asset"
+                        >
+                    </div>
+                </div>
+
+                <div
+                    class="content"
+                >
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,246 @@
+{% block hueb_seo_faq_listing %}
+<sw-page class="hueb-seo-faq-listing">
+
+    {% block hueb_seo_faq_smart_bar %}
+    <template #smart-bar-header>
+        {% block hueb_seo_faq_bar_header_title %}
+        <h2> {{ $tc('hueb-seo-faq.page.list.group.labelHeader') }}
+            <span
+                v-if="!processSuccess"
+                class="sw-page__smart-bar-amount"
+            >
+               ({{ total }})
+            </span>
+        </h2>
+        {% endblock %}
+    </template>
+
+    <template #language-switch>
+        {% block hueb_seo_faq_language_switch %}
+        <sw-language-switch
+            @on-change="onChangeLanguage">
+        </sw-language-switch>
+        {% endblock %}
+    </template>
+
+    <template #smart-bar-actions>
+        {% block hueb_seo_faq_add_button %}
+        <sw-button-process
+            v-if="activeList"
+            variant="primary"
+            @click="onClickAddGroup">
+            {{ $tc('hueb-seo-faq.page.list.group.labelAdd') }}
+        </sw-button-process>
+        <sw-button-process
+            v-if="!activeList"
+            variant="primary"
+            {#:processSuccess="processSuccess"#}
+            @click="onClickAddQuestion">
+            {{ $tc('hueb-seo-faq.page.list.questions.labelAdd') }}
+        </sw-button-process>
+        {% endblock %}
+    </template>
+    {% endblock %}
+
+
+    {% block hueb_seo_faq_content %}
+    <template #content>
+        <sw-tabs defaultItem="tabGroup"
+                 :small="false">
+
+            <template #default="{ active }">
+                {% block hueb_seo_faq_content_tabs %}
+                <sw-tabs-item name="tabGroup"
+                              :activeTab="active"
+                              :title="$tc('hueb-seo-faq.page.group.list.labelTab')"
+                              @click="onClickTabGroup">
+                    {{ $tc('hueb-seo-faq.page.list.group.labelTab') }}
+                </sw-tabs-item>
+                <sw-tabs-item name="tabQuestions"
+                              :activeTab="active"
+                              :title="$tc('hueb-seo-faq.page.questions.list.labelTab')"
+                              @click="onClickTabQuestion">
+                    {{ $tc('hueb-seo-faq.page.list.questions.labelTab') }}
+                </sw-tabs-item>
+                {% endblock %}
+            </template>
+
+            <template #content="{ active }">
+                {% block hueb_seo_faq_content_groups %}
+                    <sw-entity-listing
+                        v-show="active === 'tabGroup'"
+                        v-if="groups && totalGroups"
+                        :items="groups"
+                        :repository="groupRepository"
+                        :showSelection="false"
+                        :columns="columnsGroup"
+                        :fullPage="false"
+                        :compactMode="false"
+                        @update-records="updateRecordsGroup">
+                        {% block hueb_seo_faq_listing_column_active %}
+                            <template slot="column-active" slot-scope="{ item, isInlineEdit }">
+                                <template v-if="isInlineEdit">
+                                    <sw-checkbox-field v-model="item.active"></sw-checkbox-field>
+                                </template>
+                                <template v-else>
+                                    <sw-icon v-if="item.active" name="regular-eye" small class="is--active"></sw-icon>
+                                    <sw-icon v-else name="regular-eye-slash" small class="is--inactive"></sw-icon>
+                                </template>
+                            </template>
+
+                            {# Added position field for the groups 28.12.21 #}
+                            <template slot="column-position" slot-scope="{ item, isInlineEdit }">
+                                <template v-if="isInlineEdit">
+                                    <sw-number-field
+                                          v-model="item.position">
+                                    </sw-number-field>
+                                </template>
+                                <template v-else>
+                                    {{ item.position }}
+                                </template>
+                            </template>
+
+                            <template slot="column-name" slot-scope="{ item, isInlineEdit }">
+                                <template v-if="item.name && !isInlineEdit">
+                                    <div>{{ item.name }}</div>
+                                </template>
+                                <template v-else-if="!isInlineEdit">
+                                    <div style="color:#afafaf">{{ item.translated.name }}</div>
+                                </template>
+                                <template v-else>
+                                    <sw-text-field
+                                        v-model="item.name">
+                                    </sw-text-field>
+                                </template>
+                            </template>
+                            
+                            <template slot="column-salesChannelId" slot-scope="{ item, isInlineEdit }">
+                                <template v-if="isInlineEdit">
+                                    {% block hueb_seo_faq_sales_channel_switch %}
+                                    <sw-sales-channel-switch
+                                        @change-sales-channel-id="onSalesChannelChanged($event, item)">
+                                    </sw-sales-channel-switch>
+                                    {% endblock %}
+                                </template>
+                                <template v-else>
+                                    <div>{{ item.salesChannelName }}</div>
+                                </template>
+                            </template>
+                        {% endblock %}
+                    </sw-entity-listing>
+                {% endblock %}
+
+                {% block hueb_seo_faq_content_questions %}
+                    <sw-entity-listing
+                        v-show="active === 'tabQuestions'"
+                        v-if="questions && totalQuestions"
+                        :items="questions"
+                        :repository="questionsRepository"
+                        :showSelection="false"
+                        :columns="columnsQuestions"
+                        :fullPage="false"
+                        :compactMode="false">
+                        {% block hueb_seo_faq_listing_questions_column_active %}
+                        <template slot="column-group" slot-scope="{ item, isInlineEdit }">
+                            <template v-if="isInlineEdit">
+                                <sw-entity-single-select
+                                    entity="hueb_seo_faq_group"
+                                    v-model="item.group">
+                                </sw-entity-single-select>
+                            </template>
+                            <template v-else-if="item.group">
+                                <span v-if="groups.find(group => group.id === item.group)">
+                                    {{ groups.find(group => group.id === item.group).translated.name }}
+                                </span>
+                            </template>
+                        </template>
+
+                        {# Added position field for the questions 28.12.21 #}
+                        <template slot="column-questionPosition" slot-scope="{ item, isInlineEdit }">
+                              <template v-if="isInlineEdit">
+                                 <sw-number-field
+                                        v-model="item.questionPosition">
+                                 </sw-number-field>
+                              </template>
+                              <template v-else>
+                                  {{ item.questionPosition }}
+                              </template>
+                         </template>
+
+                        <template slot="column-question" slot-scope="{ item, isInlineEdit }">
+                            <template v-if="item.question && !isInlineEdit">
+                                <div>{{ item.question }}</div>
+                            </template>
+                            <template v-else-if="!isInlineEdit">
+                                <div style="color:#afafaf">{{ item.translated.question }}</div>
+                            </template>
+                            <template v-else>
+                                <sw-text-field
+                                    v-model="item.question">
+                                </sw-text-field>
+                            </template>
+                        </template>
+
+                        <template slot="column-answer" slot-scope="{ item, isInlineEdit }">
+                            <template v-if="item.answer && !isInlineEdit">
+                                <div>{{ item.answer }}</div>
+                            </template>
+                            <template v-else-if="!isInlineEdit">
+                                <div style="color:#afafaf">{{ item.translated.answer }}</div>
+                            </template>
+                            <template v-else>
+                                <sw-text-field
+                                    v-model="item.answer">
+                                </sw-text-field>
+                            </template>
+                        </template>
+                        <template slot="column-metaTitle" slot-scope="{ item, isInlineEdit }">
+                            <template v-if="item.metaTitle && !isInlineEdit">
+                                <div>{{ item.metaTitle }}</div>
+                            </template>
+                            <template v-else-if="!isInlineEdit">
+                                <div style="color:#afafaf">{{ item.translated.metaTitle }}</div>
+                            </template>
+                            <template v-else>
+                                <sw-text-field
+                                    v-model="item.metaTitle">
+                                </sw-text-field>
+                            </template>
+                        </template>
+                        <template slot="column-metaDescription" slot-scope="{ item, isInlineEdit }">
+                            <template v-if="item.metaDescription && !isInlineEdit">
+                                <div>{{ item.metaDescription }}</div>
+                            </template>
+                            <template v-else-if="!isInlineEdit">
+                                <div style="color:#afafaf">{{ item.translated.metaDescription }}</div>
+                            </template>
+                            <template v-else>
+                                <sw-text-field
+                                    v-model="item.metaDescription">
+                                </sw-text-field>
+                            </template>
+                        </template>
+                        <template slot="column-keywords" slot-scope="{ item, isInlineEdit }">
+                            <template v-if="item.keywords && !isInlineEdit">
+                                <div>{{ item.keywords }}</div>
+                            </template>
+                            <template v-else-if="!isInlineEdit">
+                                <div style="color:#afafaf">{{ item.translated.keywords }}</div>
+                            </template>
+                            <template v-else>
+                                <sw-text-field
+                                    v-model="item.keywords">
+                                </sw-text-field>
+                            </template>
+                        </template>
+                        {% endblock %}
+                    </sw-entity-listing>
+                {% endblock %}
+            </template>
+        </sw-tabs>
+    </template>
+    {% endblock %}
+
+
+</sw-page>
+{% endblock %}

@@ -1,0 +1,42 @@
+{% block neno_marketing_essentials_overview %}
+    <sw-page class="neno-marketing-essentials-overview">
+        <sw-card-view slot="content">
+            <sw-tabs class="neno-marketing-essentials-overview--tabs" position-identifier="nme-tabs-overview">
+                <sw-tabs-item
+                    class="neno-marketing-essentials-overview--tab"
+                    :route="{ name: 'neno.marketing.essentials.overview.newsletterPopupList' }"
+                    title="marketing-essentials-list"
+                >
+                    Newsletter Popup
+                </sw-tabs-item>
+                <sw-tabs-item
+                    :route="{ name: 'neno.marketing.essentials.overview.registerPopupList' }"
+                    class="neno-marketing-essentials-overview--tab"
+                >
+                    Register Popup
+                </sw-tabs-item>
+                <sw-tabs-item
+                    class="neno-marketing-essentials-overview--tab"
+                    :route="{ name: 'neno.marketing.essentials.overview.tabsList' }"
+                >
+                    Tabs
+                </sw-tabs-item>
+                <sw-tabs-item
+                    class="neno-marketing-essentials-overview--tab"
+                    :route="{ name: 'neno.marketing.essentials.overview.conversionBarDetail' }"
+                >
+                    Conversion Bar
+                </sw-tabs-item>
+                <sw-tabs-item
+                    class="neno-marketing-essentials-overview--tab"
+                    :route="{ name: 'neno.marketing.essentials.overview.freeShippingBarDetail' }"
+                >
+                    Free Shipping Bar
+                </sw-tabs-item>
+            </sw-tabs>
+
+            <router-view></router-view>
+
+        </sw-card-view>
+    </sw-page>
+{% endblock %}

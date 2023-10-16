@@ -1,0 +1,105 @@
+<?xml version="1.0" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <services>
+        <service id="ICTECHNewsletterWithPromotion\Core\Content\NewsletterPopup\NewsletterPopupDefinition">
+            <tag name="shopware.entity.definition" entity="newsletter_popup" />
+        </service>
+
+        <service id="ICTECHNewsletterWithPromotion\Core\Content\NewsletterPopup\Aggregate\NewsletterPopupTranslation\NewsletterPopupTranslationDefinition">
+            <tag name="shopware.entity.definition" entity="newsletter_popup_translation" />
+        </service>
+
+        <service id="ICTECHNewsletterWithPromotion\Core\Content\Extension\LanguageExtension">
+            <tag name="shopware.entity.extension"/>
+        </service>
+
+        <service id="ICTECHNewsletterWithPromotion\Core\Content\Extension\PromotionExtension">
+            <tag name="shopware.entity.extension"/>
+        </service>
+
+        <service id="ICTECHNewsletterWithPromotion\Core\Content\Extension\MediaExtension">
+            <tag name="shopware.entity.extension"/>
+        </service>
+
+        <service id="ICTECHNewsletterWithPromotion\Core\Content\ReservedIndividualPromotionCode\ReservedIndividualPromotionCodeDefinition">
+            <tag name="shopware.entity.definition" entity="reserved_individual_promotion_code" />
+        </service>
+
+        <service id="ICTECHNewsletterWithPromotion\Service\CustomCookieProvider" decorates="Shopware\Storefront\Framework\Cookie\CookieProviderInterface">
+            <argument type="service" id="ICTECHNewsletterWithPromotion\Service\CustomCookieProvider.inner" />
+        </service>
+
+        <service id="ICTECHNewsletterWithPromotion\Service\NewsletterPopupHandlePromotionService">
+            <argument type="service" id="newsletter_recipient.repository"/>
+            <argument type="service" id="newsletter_popup.repository"/>
+            <argument type="service" id="promotion.repository"/>
+            <argument type="service" id="ICTECHNewsletterWithPromotion\Service\PromotionCodeHelper" />
+        </service>
+
+        <service id="ICTECHNewsletterWithPromotion\Service\PromotionCodeHelper">
+            <argument type="service" id="promotion_individual_code.repository"/>
+            <argument type="service" id="reserved_individual_promotion_code.repository"/>
+            <argument type="service" id="Shopware\Core\Checkout\Promotion\Util\PromotionCodeService"/>
+        </service>
+
+        <service id="ICTECHNewsletterWithPromotion\Service\SendPromotionMail" public="true">
+            <argument type="service" id="Shopware\Core\Content\Mail\Service\MailService"/>
+            <argument type="service" id="mail_template.repository"/>
+        </service>
+
+        <service id="ICTECHNewsletterWithPromotion\Controller\NewsletterPopupController" public="true">
+            <argument type="service" id="Shopware\Core\Content\Newsletter\SalesChannel\NewsletterSubscribeRoute" />
+            <argument type="service" id="ICTECHNewsletterWithPromotion\Service\NewsletterPopupHandlePromotionService" />
+            <argument type="service" id="ICTECHNewsletterWithPromotion\Service\PromotionCodeHelper" />
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+
+            <call method="setTwig">
+                <argument type="service" id="twig"/>
+            </call>
+        </service>
+
+        <service id="ICTECHNewsletterWithPromotion\Service\SendPromotionMail" public="true">
+            <argument type="service" id="Shopware\Core\Content\Mail\Service\MailService"/>
+            <argument type="service" id="mail_template.repository"/>
+        </service>
+
+        <service id="ICTECHNewsletterWithPromotion\Storefront\Subscriber\PopupNavigationPageLoadedSubscriber">
+            <argument type="service" id="newsletter_popup.repository"/>
+            <tag name="kernel.event_subscriber"/>
+        </service>
+
+        <service id="ICTECHNewsletterWithPromotion\Storefront\Subscriber\NewsletterConfirmedSubscriber">
+            <argument type="service" id="promotion.repository"/>
+            <argument type="service" id="ICTECHNewsletterWithPromotion\Service\PromotionCodeHelper" />
+            <argument type="service" id="ICTECHNewsletterWithPromotion\Service\SendPromotionMail" />
+            <tag name="kernel.event_subscriber"/>
+        </service>
+
+        <service id="ICTECHNewsletterWithPromotion\Storefront\Subscriber\PopupProductPageLoadedSubscriber">
+            <argument type="service" id="newsletter_popup.repository"/>
+            <tag name="kernel.event_subscriber"/>
+        </service>
+
+        <service id="ICTECHNewsletterWithPromotion\Subscriber\NewsletterPopupEntitySubscriber">
+            <argument type="service" id="Shopware\Core\Framework\Adapter\Cache\CacheClearer"/>
+            <tag name="kernel.event_subscriber"/>
+        </service>
+
+        <service id="ICTECHNewsletterWithPromotion\Subscriber\NewsletterPopupEntitySubscriber">
+            <argument type="service" id="Shopware\Core\Framework\Adapter\Cache\CacheClearer"/>
+            <tag name="kernel.event_subscriber"/>
+        </service>
+
+        <service id="ICTECHNewsletterWithPromotion\Subscriber\SystemConfigChangedSubscriber">
+            <argument type="service" id="Shopware\Core\Framework\Adapter\Cache\CacheClearer"/>
+            <tag name="kernel.event_subscriber"/>
+        </service>
+
+    </services>
+</container>

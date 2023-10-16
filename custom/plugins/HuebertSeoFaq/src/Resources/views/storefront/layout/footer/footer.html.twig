@@ -1,0 +1,17 @@
+{% sw_extends '@Storefront/storefront/layout/footer/footer.html.twig' %}
+
+{% block layout_footer_navigation_columns %}
+    {{ parent() }}
+    {% block hueb_seo_faq_footer %}
+        {% if not page.footer.HuebertSeoFaq.config.disableFaqLink %}
+        <div class="col-md-4 footer-column js-footer-column">
+            <div class="footer-column-headline footer-headline js-footer-column-headline js-collapse-footer-column-trigger">
+                <a href="{{ path('frontend.seoFaq') }}">
+                    FAQ
+                </a>
+            </div>
+        </div>
+        {% endif %}
+    {% endblock %}
+{% endblock %}
+

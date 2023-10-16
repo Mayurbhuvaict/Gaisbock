@@ -1,0 +1,23 @@
+.newsletter-popup-individual-code-label {
+    width: 140px;
+    order: 2;
+    font-size: .8rem;
+    white-space: normal;
+    line-height: 1;
+    margin-left: 1rem;
+}
+
+.newsletter-popup-individual-code-label + .sw-icon > svg {
+    path {
+        fill: gray;
+    }
+}
+
+.newsletter-popup-individual-code-label + .sw-icon:not(.sw-promotion-v2-individual-codes-behavior__redeemed-state) {
+    clip-path: inset(0px 0px 0px 5px);
+    transform: translate(-2px, 0px);
+
+    > svg {
+        transform: rotate(45deg);
+    }
+}

@@ -1,0 +1,35 @@
+{% block neno_marketing_essentials_free_shipping_bar_info %}
+    {% set nmeConfig = config('NenoMarketingEssentials.config') %}
+    {% set showOnlyIfProductAdded = nmeConfig.onlyShowIfProductAdded  %}
+    {% set includeShippingCosts = nmeConfig.includeShippingCosts %}
+    {% set currentShippingCosts = page.cart.deliveries.elements|first.shippingCosts.totalPrice %}
+
+    {% if includeShippingCosts %}
+        {% set totalPrice = page.cart.price.totalPrice %}
+    {% else %}
+        {% if (currentShippingCosts is null) or (currentShippingCosts is not defined) %}
+            {% set totalPrice = page.cart.price.totalPrice %}
+        {% else %}
+            {% set totalPrice = page.cart.price.totalPrice - currentShippingCosts %}
+        {% endif %}
+    {% endif %}
+
+    {% if showOnlyIfProductAdded and page.cart.lineItems|length == 0 %}
+    {% else %}
+
+        {% if totalPrice == 0 %}
+            <p class="nme-free-shipping-bar-text-initial">
+                {{ 'neno-marketing-essentials.freeShippingBar.textInitial'|trans({ '$goal': nmeConfig.freeShippingBarGoal|currency })|raw }}
+            </p>
+        {% elseif totalPrice < nmeConfig.freeShippingBarGoal %}
+            <p class="nme-free-shipping-bar-text-progress">
+                {{ 'neno-marketing-essentials.freeShippingBar.textProgress'|trans({ '$goal': (nmeConfig.freeShippingBarGoal - totalPrice)|currency })|raw }}
+            </p>
+        {% elseif totalPrice >= nmeConfig.freeShippingBarGoal  %}
+            <p class="nme-free-shipping-bar-text-goal">
+                {{ 'neno-marketing-essentials.freeShippingBar.textGoal'|trans }}
+            </p>
+        {% endif %}
+
+    {% endif %}
+{% endblock %}

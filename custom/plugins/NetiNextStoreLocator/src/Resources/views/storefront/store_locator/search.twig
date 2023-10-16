@@ -1,0 +1,239 @@
+{% block neti_store_locator_search %}
+    <form class="neti-next-store-locator-filter search-container">
+        <div class="search-container-inner d-flex flex-row mx-2 pb-2 border-bottom">
+            {% block neti_store_locator_search_locate_button %}
+                <template v-if="geoLocationEnabled">
+                    <button
+                        v-if="isLocating"
+                        class="locate btn btn-light me-2"
+                    >
+                        <div class="spinner-border spinner"></div>
+                    </button>
+                    <button
+                            v-else
+                            class="locate btn btn-light me-2"
+                            @click.prevent="onLocate"
+                            aria-label="locate"
+                    >
+                        {% sw_icon 'gps' %}
+                    </button>
+                </template>
+            {% endblock %}
+
+            {% block neti_store_locator_search_input %}
+                {#
+                For some reason the icons are not shown in a special case. Unfortunately yet not reproducable for us.
+                https://redmine.netinventors.de/issues/42545
+                #}
+                <span style="display: none">{% sw_icon 'marker' %}</span>
+
+                <div
+                        class="search-input"
+                        :class="{ 'has-countries': countries.length > 2, 'has-country-filter': config.showCountryFilter }"
+                >
+                    {% block neti_store_locator_search_input_country_select %}
+                        <div class="dropdown country-select" v-if="countries.length > 2">
+                            <button
+                                    class="btn dropdown-toggle" type="button" id="dropdownCountries"
+                                    data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+                            >
+                                <span class="badge text-bg-primary selected-country" v-if="selectedCountry">
+                                    {{ '{{ selectedCountry.isoCode }}' }}
+                                </span>
+                            </button>
+                            <div class="dropdown-menu" aria-labelledby="dropdownCountries">
+                                <input
+                                        v-if="config.showCountryFilter"
+                                        class="country-filter"
+                                        type="text"
+                                        placeholder="{{ "neti-next-store-locator.index.search.placeholderCountryFilter"|trans }}"
+                                        v-model="countryFilterInput"
+                                />
+
+                                <div class="dropdown-item-container">
+                                    <a
+                                            href="#" class="dropdown-item"
+                                            v-for="(country, key) in filteredCountries" :key="key"
+                                            @click.prevent="onSelectCountry(country)"
+                                    >
+                                        <div class="country-iso-code">
+                                        <span class="badge text-bg-light">
+                                            {{ '{{ country.isoCode }}' }}
+                                        </span>
+                                        </div>
+                                        <div class="country-label">
+                                            {{ '{{ country.label }}' }}
+                                        </div>
+                                    </a>
+                                </div>
+
+                                <div class="no-results" v-if="filteredCountries.length === 0">
+                                    {{ "neti-next-store-locator.index.search.noCountriesText"|trans }}
+                                </div>
+                            </div>
+                        </div>
+                    {% endblock %}
+                    {% block neti_store_locator_search_input_field %}
+                        <input
+                                type="text" name="address"
+                                placeholder="{{ "neti-next-store-locator.index.search.placeholder"|trans }}"
+                                class="form-control flex-fill"
+                                v-model="searchInput"
+                                ref="searchInput"
+                                @focus="searchInputFocused = true"
+                                @blur="onBlur"
+                                @keydown.enter.prevent="onAutocompletedSearch"
+                                autocomplete="off"
+                                aria-label="Search stores"
+                        />
+                    {% endblock %}
+                </div>
+            {% endblock %}
+
+            {% block neti_store_locator_search_toggle_filter_button %}
+                <button
+                        class="toggle-filter btn btn-light ms-2"
+                        @click.prevent="onToggleFilter"
+                        aria-label="Toggle filter"
+                        v-if="isToggleFilterButtonVisible"
+                >
+                    {% sw_icon 'filter' %}
+                    <span class="filter-badge" v-if="searchFilter.customFilterCount > 0"></span>
+                </button>
+            {% endblock %}
+
+            {% block neti_store_locator_search_toggle_stores_button %}
+                <button class="toggle-stores btn btn-light ms-2" v-if="isMobile" @click.prevent="onToggleStores">
+                    {% sw_icon 'editor-list' %}
+                </button>
+            {% endblock %}
+
+            {% block neti_store_locator_search_autocomplete_search_result %}
+                <div
+                        class="autocomplete-search-result"
+                        v-if="searchInputFocused && searchInput.length"
+                >
+                    {% if config('NetiNextStoreLocator.config.autocompleteResultPriority') == 'stores_before_places' %}
+                        {% sw_include '@Storefront/storefront/store_locator/search/autocomplete-stores.html.twig' %}
+                        {% sw_include '@Storefront/storefront/store_locator/search/autocomplete-places.html.twig' %}
+                    {% else %}
+                        {% sw_include '@Storefront/storefront/store_locator/search/autocomplete-places.html.twig' %}
+                        {% sw_include '@Storefront/storefront/store_locator/search/autocomplete-stores.html.twig' %}
+                    {% endif %}
+
+                    <div class="search-result" v-if="!autocompleteResults.length && !autocompletedStores.length">
+                        {{ "neti-next-store-locator.index.search.autocompleteNoResults"|trans }}
+                    </div>
+                </div>
+            {% endblock %}
+        </div>
+
+        {% block neti_store_locator_search_filter %}
+            <div
+                    :class="filterClass"
+                    v-offcanvas="filter.offCanvas ? { open: filter.opened } : null"
+                    @close="filter.opened = false"
+                    @opened="onOffcanvasOpened"
+                    @closed="onOffcanvasClosed"
+            >
+                {% block neti_store_locator_search_filter_header %}
+                    <div class="header">
+                        {{ "neti-next-store-locator.index.search.filterHeader"|trans }}
+
+                        <div class="close-button" @click="filter.opened = false">
+                            {% sw_icon 'x' %}
+                        </div>
+                    </div>
+                {% endblock %}
+
+                {% block neti_store_locator_search_filter_radius %}
+                    <div class="form-group">
+                        <label for="radius">
+                            {{ "neti-next-store-locator.index.search.fieldRadius"|trans }}
+                        </label>
+                        <select id="radius" name="radius" class="form-select" v-model="searchFilter.radius">
+                            <option>
+                                {{ "neti-next-store-locator.index.search.fieldRadiusPlaceholder"|trans }}
+                            </option>
+
+                            {% for item in page.radiusList %}
+                                <option value="{{ item.value }}">
+                                    {{ item.value }}
+                                    {{ page.config.distanceUnit }}
+                                </option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                {% endblock %}
+
+                {% block neti_store_locator_search_filter_order %}
+                    <div class="form-group">
+                        <label for="order">
+                            {{ "neti-next-store-locator.index.search.fieldOrder"|trans }}
+                        </label>
+                        <div class="d-flex flex-row space">
+                            <select id="order" name="order" class="form-select" v-model="searchFilter.orderBy.id">
+                                {% for key, orderType in page.orderTypes %}
+                                    <option value="{{ orderType }}"{% if key == 0 %} selected{% endif %}>
+                                        {{ ("neti-next-store-locator.index.search.order." ~ orderType)|trans }}
+                                    </option>
+                                {% endfor %}
+                            </select>
+                            &nbsp;
+
+                            <div class="btn-group" role="group">
+                                <button
+                                        type="button" class="btn"
+                                        :class="searchFilter.orderBy.direction === 'asc' ? 'btn-secondary' : 'btn-outline-secondary'"
+                                        @click="searchFilter.orderBy.direction = 'asc'"
+                                >
+                                    &uarr;
+                                </button>
+                                <button
+                                        type="button" class="btn"
+                                        :class="searchFilter.orderBy.direction === 'desc' ? 'btn-secondary' : 'btn-outline-secondary'"
+                                        @click="searchFilter.orderBy.direction = 'desc'"
+                                >
+                                    &darr;
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                {% endblock %}
+
+                {% block neti_store_locator_search_filter_featured %}
+                    {% if config('NetiNextStoreLocator.config.enableFilterOnlyFeatured') == true %}
+                        <div class="form-group">
+                            <input
+                                    class="form-check-input"
+                                    type="checkbox"
+                                    id="onlyFeatured"
+                                    v-model="searchFilter.onlyFeatured"
+                            >
+                            <label class="form-check-label" for="onlyFeatured">
+                                {{ "neti-next-store-locator.index.search.onlyFeatured"|trans }}
+                            </label>
+                        </div>
+                    {% endif %}
+                {% endblock %}
+
+                <div class="custom-filter-container" v-if="searchFilter.customFilterVisible">
+                    {% block neti_store_locator_search_filter_custom %}
+                        {% sw_include '@Storefront/storefront/store_locator/filter/index.html.twig' %}
+                    {% endblock %}
+                </div>
+
+                {% block neti_store_locator_search_filter_buttons %}
+                    <div class="buttons d-flex flex-row justify-content-between">
+                        <button type="reset" class="btn btn-secondary btn-sm" @click.prevent="onReset">
+                            {{ "neti-next-store-locator.index.search.buttonReset"|trans }}
+                        </button>
+                        <button type="submit" class="btn btn-primary btn-sm" @click.prevent="onSearch">
+                            {{ "neti-next-store-locator.index.search.buttonSearch"|trans }}
+                        </button>
+                    </div>
+                {% endblock %}
+            </div>
+        {% endblock %}
+    </form>
+{% endblock %}

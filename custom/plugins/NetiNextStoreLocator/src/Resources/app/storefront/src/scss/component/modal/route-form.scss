@@ -1,0 +1,9 @@
+.modal.route-form {
+  .modal-body {
+    &.has-error {
+      .alert {
+        margin: 0 !important;
+      }
+    }
+  }
+}

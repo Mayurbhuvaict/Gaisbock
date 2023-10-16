@@ -1,0 +1,23 @@
+#neti-language-detector-modal {
+  .modal-header {
+    .neti-language-detector-title {
+      margin: 0;
+    }
+
+    .languages-menu {
+      .btn.dropdown-toggle {
+        line-height: normal;
+      }
+    }
+  }
+
+  .modal-body {
+    .neti-language-detector-text span {
+      font-weight: bold;
+    }
+
+    p:last-child {
+      margin-bottom: 0;
+    }
+  }
+}

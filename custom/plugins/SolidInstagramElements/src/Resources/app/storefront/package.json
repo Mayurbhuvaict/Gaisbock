@@ -1,0 +1,16 @@
+{
+    "name": "storefront",
+    "version": "1.0.0",
+    "description": "Shopware storefront",
+    "main": ".src/main.js",
+    "scripts": {
+        "lint": "../../../../../../../src/Storefront/Resources/app/storefront/node_modules/.bin/eslint --resolve-plugins-relative-to ../../../../../../../src/Storefront/Resources/app/storefront/node_modules --ext .js,.ts src",
+        "lint:fix": "npm run lint -- --fix",
+        "lint:scss": "../../../../../../../src/Storefront/Resources/app/storefront/node_modules/.bin/stylelint src",
+        "lint:scss:fix": "npm run lint:scss -- --fix",
+        "lint:all": "npm run lint && npm run lint:scss",
+        "lint:all:fix": "npm run lint:fix && npm run lint:scss:fix"
+    },
+    "author": "Studio Solid",
+    "license": "proprietary"
+}

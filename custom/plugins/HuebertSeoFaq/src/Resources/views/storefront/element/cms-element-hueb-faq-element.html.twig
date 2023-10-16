@@ -1,0 +1,28 @@
+{% block element_hueb_faq %}
+    <div class="cms-element-hueb-faq">
+        {% block element_seo_faq_qa %}
+            {% set cmsId = _key %}
+            <h3 class="hueb-seo-faq__group">{{ element.group.translated.name }}</h3>
+            <div class="hueb-seo-faq__wrapper">
+                {% for entry in element.faqs|sort((a, b) => a.questionPosition <=> b.questionPosition) %}
+                    {% if entry.translated.question %}
+                    {% set questionUrl = entry.translated.question|replace({',':'','?':'','!':'','%':'','/':'','.':'','"':'','+':'','-':'','_':'','ä':'','ö':'','ü':'','Ä':'','Ö':'','Ü':'','ß':''}) %}
+                        <div class="hueb-seo-faq__box-element">
+                        <div class="hueb-seo-faq__question col-md-12">
+                            <a class="cms-faq-link" id="link_{{ cmsId }}_{{ questionUrl|url_encode|replace({'%20':'-'}) }}"
+                               href="{{ path('frontend.seoFaq.question', {'question': questionUrl })|replace({'%20':'-'})|url_encode|replace({'%2F':'/'})|replace({' ':'-'})|lower }}"
+                               title="{{ entry.translated.question }}">
+                                <span class="hueb-seo-faq__toggle --active" id="plus_{{ cmsId }}_{{ questionUrl|url_encode|replace({'%20':'-'}) }}">+</span>
+                                <span class="hueb-seo-faq__toggle minus" id="minus_{{ cmsId }}_{{ questionUrl|url_encode|replace({'%20':'-'}) }}">-</span>
+                                {{ entry.translated.question }}
+                            </a>
+                        </div>
+                        <div id="{{ cmsId }}_{{ questionUrl|url_encode|replace({'%20':'-'}) }}" class="hueb-seo-faq__answer col-md-12">
+                            <div class="hueb-seo-faq__answer-content">{{ entry.translated.answer|raw }}</div>
+                        </div>
+                    </div>
+                {% endif %}{% endfor %}
+            </div>
+        {% endblock %}
+    </div>
+{% endblock %}

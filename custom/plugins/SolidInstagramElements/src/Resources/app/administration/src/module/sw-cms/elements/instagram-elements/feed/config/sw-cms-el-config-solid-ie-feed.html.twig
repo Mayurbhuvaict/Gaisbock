@@ -1,0 +1,129 @@
+<!-- eslint-disable-next-line sw-deprecation-rules/no-twigjs-blocks -->
+{% block sw_cms_el_config_solid_ie_feed %}
+<div
+    class="sw-cms-el-config-solid-ie-feed"
+>
+    <sw-container
+        columns="1fr 1fr"
+        gap="20px"
+    >
+        <sw-select-field
+            v-model="element.config.layout.value"
+            :label="$t('sw-cms.elements.solidIE.feed.config.layout.label')"
+            @change="onChangeLayout"
+        >
+            <option
+                value="grid"
+            >
+                {{ $t('sw-cms.elements.solidIE.feed.config.layout.options.grid') }}
+            </option>
+
+            <option
+                value="row"
+            >
+                {{ $t('sw-cms.elements.solidIE.feed.config.layout.options.row') }}
+            </option>
+        </sw-select-field>
+
+        <sw-select-field
+            v-model="element.config.maxPostCount.value"
+            :label="$t('sw-cms.elements.solidIE.feed.config.maxPostCount.label')"
+        >
+            <template v-if="element.config.layout.value === 'grid'">
+                <option
+                    v-for="i in gridMaxPostCountOptions"
+                    :key="i"
+                    :value="i"
+                >
+                    {{ i }}
+                </option>
+            </template>
+
+            <template v-if="element.config.layout.value === 'row'">
+                <option
+                    v-for="i in rowMaxPostCountOptions"
+                    :key="i"
+                    :value="i"
+                >
+                    {{ i }}
+                </option>
+            </template>
+        </sw-select-field>
+    </sw-container>
+
+    <sw-container
+        columns="1fr 1fr 1fr"
+        gap="20px"
+    >
+        <sw-select-field
+            v-model="element.config.gutter.value"
+            :label="$t('sw-cms.elements.solidIE.feed.config.gutter.label')"
+        >
+            <option
+                value="default"
+            >
+                {{ $t('sw-cms.elements.solidIE.feed.config.gutter.options.default') }}
+            </option>
+
+            <option
+                value="custom"
+            >
+                {{ $t('sw-cms.elements.solidIE.feed.config.gutter.options.custom') }}
+            </option>
+        </sw-select-field>
+
+        <sw-text-field
+            v-model="element.config.gutterWidthValue.value"
+            :label="$t('sw-cms.elements.solidIE.feed.config.gutterWidthValue.label')"
+            :disabled="element.config.gutter.value === 'default'"
+        />
+
+        <sw-select-field
+            v-model="element.config.gutterWidthUnit.value"
+            :label="$t('sw-cms.elements.solidIE.feed.config.gutterWidthUnit.label')"
+            :disabled="element.config.gutter.value === 'default'"
+        >
+            <option
+                value="px"
+            >
+                px
+            </option>
+
+            <option
+                value="%"
+            >
+                %
+            </option>
+
+            <option
+                value="rem"
+            >
+                rem
+            </option>
+
+            <option
+                value="vw"
+            >
+                vw
+            </option>
+        </sw-select-field>
+    </sw-container>
+
+    <sw-select-field
+        v-model="element.config.theme.value"
+        :label="$t('sw-cms.elements.solidIE.feed.config.theme.label')"
+    >
+        <option
+            value="simple"
+        >
+            {{ $t('sw-cms.elements.solidIE.feed.config.theme.options.simple') }}
+        </option>
+
+        <option
+            value="instagram"
+        >
+            {{ $t('sw-cms.elements.solidIE.feed.config.theme.options.instagram') }}
+        </option>
+    </sw-select-field>
+</div>
+{% endblock %}

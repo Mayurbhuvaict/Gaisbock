@@ -1,0 +1,9 @@
+{
+    "acris-product-customer-group": {
+        "cardCustomerGroup": "Block for customer groups",
+        "fieldPlaceholderCustomerGroup": "Select customer group",
+        "fieldLabelExcludeSitemap": "Exclude from sitemap",
+        "fieldLabelCustomerGroup": "Customer groups",
+        "fieldHelpTextCustomerGroup": "This product will be blocked for selected customer groups at storefront."
+    }
+}

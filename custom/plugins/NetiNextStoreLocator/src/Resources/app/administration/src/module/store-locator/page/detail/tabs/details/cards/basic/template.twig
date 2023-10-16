@@ -1,0 +1,12 @@
+<sw-card
+        :title="$t('neti-store-locator.detailDetails.labelBasicCard')"
+        :isLoading="isLoading"
+        position-identifier="neti-store-locator-detail-details-basic"
+>
+    <sw-field
+        :label="$t('neti-store-locator.baseInfo.labelDetailPageEnabled')"
+        v-model="store.detailPageEnabled"
+        type="switch"
+        style="margin: 0"
+    ></sw-field>
+</sw-card>

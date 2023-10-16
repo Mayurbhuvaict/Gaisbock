@@ -1,0 +1,12 @@
+{
+    "tanmar-infinite-scrolling": {
+        "prev": {
+            "btn": "Charger les produits précédents",
+            "navi": "Chargement de la page {x} sur {y}"
+        },
+        "next": {
+            "btn": "Charger plus de produits",
+            "navi": "Chargement de la page {x} sur {y}"
+        }
+    }
+}

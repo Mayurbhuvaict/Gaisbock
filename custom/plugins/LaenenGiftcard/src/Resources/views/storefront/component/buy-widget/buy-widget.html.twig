@@ -1,0 +1,11 @@
+{% sw_extends '@Storefront/storefront/component/buy-widget/buy-widget.html.twig' %}
+
+{% block buy_widget_buy_container %}
+    {% if page.product.customFields.laeGiftcardEnabled %}
+        {% sw_include '@Storefront/storefront/page/product-detail/buy-widget-giftcard-form.html.twig' with {
+            product: page.product
+        } %}
+    {% else %}
+        {{ parent() }}
+    {% endif %}
+{% endblock %}

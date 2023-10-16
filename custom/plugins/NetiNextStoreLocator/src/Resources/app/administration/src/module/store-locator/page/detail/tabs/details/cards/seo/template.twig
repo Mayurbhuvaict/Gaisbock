@@ -1,0 +1,25 @@
+<sw-card
+        :title="$t('neti-store-locator.detailDetails.labelSeoCard')"
+        :isLoading="isLoading"
+        position-identifier="neti-store-locator-detail-seo"
+>
+    <sw-container columns="1fr 1fr" gap="15px">
+        <sw-text-field
+                v-model="store.seoTitle"
+                :label="$t('neti-store-locator.baseInfo.labelSeoTitle')"
+                :placeholder="$t('neti-store-locator.card.placeholderSeoTitle')"
+        ></sw-text-field>
+
+        <sw-text-field
+                v-model="store.seoUrl"
+                :label="$t('neti-store-locator.baseInfo.labelSeoUrl')"
+                :placeholder="$t('neti-store-locator.card.placeholderSeoUrl')"
+                :helpText="$t('neti-store-locator.card.helpSeoUrl')"
+        ></sw-text-field>
+    </sw-container>
+
+    <sw-textarea-field
+            v-model="store.seoDescription"
+            :label="$t('neti-store-locator.baseInfo.labelSeoDescription')"
+    ></sw-textarea-field>
+</sw-card>

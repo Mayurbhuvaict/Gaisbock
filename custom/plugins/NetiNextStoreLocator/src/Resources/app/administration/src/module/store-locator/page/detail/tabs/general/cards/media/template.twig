@@ -1,0 +1,14 @@
+<sw-card
+        :title="$t('neti-store-locator.detailBase.labelMediaCard')"
+        :isLoading="isLoading"
+        position-identifier="neti-store-locator-detail-media"
+>
+    <neti-media-upload
+            uploadTag="picture_media"
+            :source="store.pictureMedia"
+            :sourceId="store.pictureMediaId"
+            :label="$t('neti-store-locator.baseInfo.labelPictureMedia')"
+            @change="onPictureMediaSelected"
+            defaultFolder="neti_store_locator"
+    ></neti-media-upload>
+</sw-card>

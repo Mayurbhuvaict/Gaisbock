@@ -1,0 +1,668 @@
+{% sw_extends '@Storefront/storefront/component/review/review-widget.html.twig' %}
+{% block component_review_widget %}
+    <div class="sticky-top product-detail-review-widget">
+
+        {% block component_review_info_container %}
+            {% block component_review_info %}
+                <div class="product-detail-review-info js-review-info">
+
+                    {% block component_review_title %}
+
+                        <div class="product-detail-review-rating"
+                                {% if productReviewCount > 0 %}
+                            itemprop="aggregateRating" itemscope itemtype="https://schema.org/AggregateRating"
+                                {% endif %}>
+                            <p class="product-detail-review-title h5">
+                                {{ "productDetailPage.ratings"|trans }}({{ reviews.totalReviews }})
+                            </p>
+                            {% if productReviewCount > 0 %}
+                                <meta itemprop="bestRating" content="5">
+                                <meta itemprop="ratingCount" content="{{ productReviewCount }}">
+                                <meta itemprop="ratingValue" content="{{ productAvgRating }}">
+                            {% endif %}
+
+                            {% sw_include '@Storefront/storefront/component/review/rating.html.twig' with {
+                                points: productAvgRating,
+                                style: 'text-primary'
+                            } %}
+                        </div>
+                        {% if productReviewCount > 0 %}
+                            <p class="h6">
+                                {{ productAvgRating }} / {{ reviews.matrix.maxPoints }}
+                            </p>
+                        {% endif %}
+                    {% endblock %}
+
+                    {% block component_review_overview %}
+
+
+
+                    {% endblock %}
+                </div>
+            {% endblock %}
+
+            {% if productReviewCount > 0 %}
+
+            {% endif %}
+
+            {% set formAjaxSubmitOptions = {
+                replaceSelectors: [".js-review-container"],
+                submitOnChange: true
+            } %}
+
+            {% block component_review_filter %}
+                {% if productReviewCount > 0 %}
+                    <div class="js-review-filter">
+                        <form class="review-filter-form"
+                              action="{{ path('frontend.product.reviews', { productId: product.id, parentId: product.parentId }) }}"
+                              method="post"
+                              data-form-ajax-submit="true"
+                              data-form-ajax-submit-options='{{ formAjaxSubmitOptions|json_encode }}'>
+
+                            {% if app.request.get('limit') %}
+                                <input type="hidden" name="limit" value="{{ app.request.get('limit') }}">
+                            {% endif %}
+
+                            {% if app.request.get('language') %}
+                                <input type="hidden" name="language" value="{{ app.request.get('language') }}">
+                            {% endif %}
+
+                            {% if app.request.get('sort') %}
+                                <input type="hidden" name="sort" value="{{ app.request.get('sort') }}">
+                            {% endif %}
+
+                            {% for matrix in reviews.matrix.matrix %}
+                                {% block component_review_filter_box %}
+                                    <div class="row product-detail-review-filter">
+
+                                        {% block component_review_filter_checkbox %}
+                                            <div class="col-md-8 col-lg-5 product-detail-review-checkbox">
+                                                <div class="form-check">
+                                                    {% block component_review_filter_checkbox_label %}
+                                                        <label class="custom-control-label text-nowrap"
+                                                               for="reviewRating{{ matrix.points }}">
+                                                            <small>{{ matrix.points }}</small>
+                                                            <div class="point-container">
+                                                                <div class="point-rating point-full">
+                                                                    {% sw_icon 'gaisbock-star' style { 'size': 'xs', 'pack': 'gaisbock' } %}
+                                                                </div>
+                                                            </div>
+                                                        </label>
+                                                    {% endblock %}
+                                                </div>
+                                            </div>
+                                        {% endblock %}
+
+                                        {% block component_review_filter_progressbar %}
+                                            <div class="col d-lg-block product-detail-review-progressbar-col">
+                                                <div class="progress product-detail-review-progressbar-container">
+                                                    <div class="progress-bar product-detail-review-progressbar-bar"
+                                                         role="progressbar"
+                                                         style="width: {{ matrix.percent }}%;"
+                                                         aria-valuenow="{{ matrix.percent }}"
+                                                         aria-valuemin="0"
+                                                         aria-valuemax="100"></div>
+                                                </div>
+                                            </div>
+                                        {% endblock %}
+
+                                        {% block component_review_filter_share %}
+                                            <div class="col-12 col-md-3 product-detail-review-share">
+                                                <p><small>{{ matrix.count }}</small></p>
+                                            </div>
+                                        {% endblock %}
+                                    </div>
+                                {% endblock %}
+                            {% endfor %}
+                        </form>
+                    </div>
+
+                    {% block component_review_filter_divider %}
+
+                    {% endblock %}
+                {% endif %}
+            {% endblock %}
+        {% endblock %}
+
+        {% block component_review_form_teaser %}
+            <div class="product-detail-review-teaser js-review-teaser">
+
+                {% block component_review_form_teaser_header %}
+
+                {% endblock %}
+
+                {% block component_review_form_teaser_text %}
+
+                {% endblock %}
+
+                {% block component_review_form_teaser_button %}
+                    <!-- Button trigger modal -->
+
+                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                        {{ "productDetailPage.viewRatings"|trans }}
+                    </button>
+
+                    <!-- Modal -->
+                    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                         aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel"></h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                            aria-label="Close">
+                                        {% sw_icon 'review-close' style {'pack': 'gaisbock','class':'gaisbock-review-close'} %}
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="gaisbock-customer-review">
+                                        <div class="collapse multi-collapse{% if ratingSuccess == -1 %} show{% endif %}"
+                                             id="review-form">
+
+                                            {% if context.customer and not context.customer.guest %}
+                                                <div class="product-detail-review-form">
+                                                    {% if data is not defined and reviews.customerReview is defined %}
+                                                        {% set data = reviews.customerReview %}
+                                                    {% endif %}
+
+                                                    {% set formAjaxSubmitOptions = {
+                                                        replaceSelectors: '.js-review-container'
+                                                    } %}
+
+                                                    {% block component_review_form_form %}
+                                                        <form class="review-form"
+                                                              action="{{ path('frontend.detail.review.save', { productId: reviews.productId }) }}"
+                                                              method="post"
+                                                              data-form-validation="true"
+                                                              data-form-ajax-submit="true" data-refresh-page>
+
+                                                            {% block component_review_form_forward %}
+                                                                <input type="hidden"
+                                                                       name="forwardTo"
+                                                                       value="frontend.product.reviews">
+
+                                                                <input type="hidden"
+                                                                       name="parentId"
+                                                                       value="{{ reviews.parentId }}">
+
+                                                                <input type="hidden"
+                                                                       name="forwardParameters"
+                                                                       value='{"productId": "{{ reviews.productId }}"}'>
+                                                            {% endblock %}
+
+                                                            {% if reviews.customerReview %}
+                                                                <input type="hidden"
+                                                                       value="{{ reviews.customerReview.id }}"
+                                                                       name="id"/>
+                                                            {% endif %}
+
+                                                            {% block component_review_form_details %}
+                                                                <div class="row g-2">
+                                                                    {% block component_review_form_rating %}
+                                                                        <div class="form-group col-md-4 product-detail-review-form-rating">
+                                                                            <label for="#review-form-rating">
+                                                                                {{ "detail.reviewFormRatingLabel"|trans|sw_sanitize }}{{ "general.required"|trans|sw_sanitize }}
+                                                                            </label>
+
+                                                                            <div id="review-form-rating"
+                                                                                 class="product-detail-review-form-rating-input"
+                                                                                 data-rating-system="true">
+                                                                                {% if data.get('points') is not empty %}
+                                                                                    {% set currentPoints = data.get('points')|number_format %}
+                                                                                {% else %}
+                                                                                    {% set currentPoints = reviews.matrix.maxPoints %}
+                                                                                {% endif %}
+
+                                                                                {% set maxPoints = reviews.matrix.maxPoints %}
+
+                                                                                {% for point in 1..maxPoints %}
+                                                                                    <label data-review-form-point="{{ point }}"
+                                                                                           class="product-detail-review-form-star{% if currentPoints >= point %} is-active{% endif %}">
+                                                                                        <input class="product-detail-review-form-radio"
+                                                                                               type="radio"
+                                                                                               name="points"
+                                                                                               value="{{ point }}"
+                                                                                                {% if currentPoints >= point %} checked="checked"{% endif %}>
+
+                                                                                        {% sw_include '@Storefront/storefront/component/review/point.html.twig' with {
+                                                                                            type: 'blank'
+                                                                                        } %}
+                                                                                    </label>
+                                                                                {% endfor %}
+                                                                            </div>
+                                                                        </div>
+                                                                    {% endblock %}
+
+                                                                    {% block component_review_form_title %}
+                                                                        <div class="form-group col-12 product-detail-review-form-title">
+                                                                            {% block component_review_form_title_label %}
+                                                                                <label class="form-label"
+                                                                                       for="reviewTitle">
+                                                                                    {{ "detail.reviewFormTitleLabel"|trans|sw_sanitize }}{{ "general.required"|trans|sw_sanitize }}
+                                                                                </label>
+                                                                            {% endblock %}
+
+                                                                            {% block component_review_form_title_input %}
+                                                                                <input type="text"
+                                                                                       class="form-control{% if formViolations.getViolations('/title') %} is-invalid{% endif %}"
+                                                                                       id="reviewTitle"
+                                                                                       placeholder="{{ "detail.reviewFormTitlePlaceholder"|trans|striptags }}{{ "general.required"|trans|striptags }}"
+                                                                                       name="title"
+                                                                                       value="{{ data.get('title') }}"
+                                                                                       required="required">
+                                                                            {% endblock %}
+
+                                                                            {% block component_review_form_title_violation %}
+                                                                                {% if formViolations.getViolations('/title') is not empty %}
+                                                                                    {% sw_include '@Storefront/storefront/utilities/form-violation.html.twig' with {
+                                                                                        violationPath: '/title'
+                                                                                    } %}
+                                                                                {% endif %}
+                                                                            {% endblock %}
+                                                                        </div>
+                                                                    {% endblock %}
+                                                                </div>
+                                                            {% endblock %}
+
+                                                            {% block component_review_form_content %}
+                                                                <div class="form-group product-detail-review-form-content">
+                                                                    {% block component_review_form_content_label %}
+                                                                        <label for="reviewContent">
+                                                                            {{ "detail.reviewFormContentLabel"|trans|sw_sanitize }}{{ "general.required"|trans|sw_sanitize }}
+                                                                        </label>
+                                                                    {% endblock %}
+
+                                                                    {% block component_review_form_content_textarea %}
+                                                                        <textarea
+                                                                                class="form-control{% if formViolations.getViolations('/content') %} is-invalid{% endif %}"
+                                                                                id="reviewContent"
+                                                                                name="content"
+                                                                                rows="8">{% if data.get('content') is not empty %}{{ data.get('content') }}{% endif %}</textarea>
+                                                                    {% endblock %}
+
+                                                                    {% block component_review_form_content_violation %}
+                                                                        {% if formViolations.getViolations('/content') is not empty %}
+                                                                            {% sw_include '@Storefront/storefront/utilities/form-violation.html.twig' with {
+                                                                                violationPath: '/content'
+                                                                            } %}
+                                                                        {% endif %}
+                                                                    {% endblock %}
+                                                                </div>
+                                                            {% endblock %}
+
+                                                            {% block component_review_form_footer %}
+                                                                <div class="product-detail-review-form-footer">
+                                                                    {% block component_review_form_required %}
+                                                                        <p class="required-fields">
+                                                                            {{ "general.requiredFields"|trans|sw_sanitize }}
+                                                                        </p>
+                                                                    {% endblock %}
+
+                                                                    <div class="product-detail-review-form-actions">
+                                                                        {% block component_review_form_cancel %}
+                                                                            <a href="#"
+                                                                               class="btn btn-outline-secondary product-detail-review-cancel"
+                                                                               data-bs-toggle="collapse"
+                                                                               data-bs-target=".multi-collapse"
+                                                                               aria-expanded="false"
+                                                                               aria-controls="review-form review-list">
+                                                                                {{ "detail.reviewFormCancelText"|trans|sw_sanitize }}
+                                                                            </a>
+                                                                        {% endblock %}
+
+                                                                        {% block component_review_form_submit %}
+                                                                            <button type="submit"
+                                                                                    class="btn btn-primary btn-review-submit"
+                                                                                    id="gaisbock-submit">
+                                                                                {{ "detail.reviewFormSubmitText"|trans|sw_sanitize }}
+                                                                            </button>
+                                                                        {% endblock %}
+                                                                    </div>
+                                                                </div>
+                                                            {% endblock %}
+                                                        </form>
+                                                    {% endblock %}
+                                                </div>
+                                            {% else %}
+                                                <div class="product-detail-review-login">
+                                                    {% sw_include '@Storefront/storefront/component/review/review-login.html.twig' %}
+                                                </div>
+                                            {% endif %}
+                                        </div>
+                                    </div>
+                                    <button class="btn btn-primary product-detail-review-teaser-btn"
+                                            type="button"
+                                            data-bs-toggle="collapse"
+                                            data-bs-target=".multi-collapse"
+                                            aria-expanded="false"
+                                            aria-controls="review-form">
+                                        <span class="product-detail-review-teaser-show">
+                                            {% if not reviews.customerReview %}
+                                                {{ "detail.reviewTeaserButton"|trans|sw_sanitize }}
+                                            {% else %}
+                                                {{ "detail.reviewExistsTeaserButton"|trans|sw_sanitize }}
+                                            {% endif %}
+                                        </span>
+                                        <span class="product-detail-review-teaser-hide">
+                                            {{ "detail.reviewTeaserButtonHide"|trans|sw_sanitize }}
+                                        </span>
+                                    </button>
+                                    {% block component_review_info1 %}
+                                        <div class="product-detail-review-info js-review-info">
+
+                                            {% block component_review_title1 %}
+
+                                                <div class="product-detail-review-rating"
+                                                        {% if productReviewCount > 0 %}
+                                                    itemprop="aggregateRating" itemscope itemtype="https://schema.org/AggregateRating"
+                                                        {% endif %}>
+                                                    <p class="product-detail-review-title h5">
+                                                        {{ "productDetailPage.ratings"|trans }}
+                                                        ({{ reviews.totalReviews }})
+                                                    </p>
+                                                    {% if productReviewCount > 0 %}
+                                                        <meta itemprop="bestRating" content="5">
+                                                        <meta itemprop="ratingCount" content="{{ productReviewCount }}">
+                                                        <meta itemprop="ratingValue" content="{{ productAvgRating }}">
+                                                    {% endif %}
+
+                                                    {% sw_include '@Storefront/storefront/component/review/rating.html.twig' with {
+                                                        points: productAvgRating,
+                                                        style: 'text-primary'
+                                                    } %}
+                                                </div>
+                                            {% endblock %}
+
+                                            {% block component_review_overview1 %}
+
+
+                                                {% if productReviewCount > 0 %}
+                                                    <p class="h6">
+                                                        {{ productAvgRating }} / {{ reviews.matrix.maxPoints }}
+                                                    </p>
+                                                {% endif %}
+                                            {% endblock %}
+                                            {% set formAjaxSubmitOptions = {
+                                                replaceSelectors: [".js-review-container"],
+                                                submitOnChange: true
+                                            } %}
+
+                                            {% block component_review_filter1 %}
+                                                {% if productReviewCount > 0 %}
+                                                    <div class="js-review-filter">
+                                                        <form class="review-filter-form"
+                                                              action="{{ path('frontend.product.reviews', { productId: product.id, parentId: product.parentId }) }}"
+                                                              method="post"
+                                                              data-form-ajax-submit="true"
+                                                              data-form-ajax-submit-options='{{ formAjaxSubmitOptions|json_encode }}'>
+
+                                                            {% if app.request.get('limit') %}
+                                                                <input type="hidden" name="limit"
+                                                                       value="{{ app.request.get('limit') }}">
+                                                            {% endif %}
+
+                                                            {% if app.request.get('language') %}
+                                                                <input type="hidden" name="language"
+                                                                       value="{{ app.request.get('language') }}">
+                                                            {% endif %}
+
+                                                            {% if app.request.get('sort') %}
+                                                                <input type="hidden" name="sort"
+                                                                       value="{{ app.request.get('sort') }}">
+                                                            {% endif %}
+
+                                                            {% for matrix in reviews.matrix.matrix %}
+                                                                {% block component_review_filter_box1 %}
+                                                                    <div class="row product-detail-review-filter">
+
+                                                                        {% block component_review_filter_checkbox1 %}
+                                                                            <div class="col-md-8 col-lg-5 product-detail-review-checkbox">
+                                                                                <div class="form-check">
+                                                                                    {% block component_review_filter_checkbox_label1 %}
+                                                                                        <label class="custom-control-label text-nowrap"
+                                                                                               for="reviewRating{{ matrix.points }}">
+                                                                                            <small>{{ matrix.points }}</small>
+                                                                                            <div class="point-container">
+                                                                                                <div class="point-rating point-full">
+                                                                                                    {% sw_icon 'star' style { 'size': 'xs', 'pack': 'solid' } %}
+                                                                                                </div>
+                                                                                            </div>
+                                                                                        </label>
+                                                                                    {% endblock %}
+                                                                                </div>
+                                                                            </div>
+                                                                        {% endblock %}
+
+                                                                        {% block component_review_filter_progressbar1 %}
+                                                                            <div class="col d-lg-block product-detail-review-progressbar-col">
+                                                                                <div class="progress product-detail-review-progressbar-container">
+                                                                                    <div class="progress-bar product-detail-review-progressbar-bar"
+                                                                                         role="progressbar"
+                                                                                         style="width: {{ matrix.percent }}%;"
+                                                                                         aria-valuenow="{{ matrix.percent }}"
+                                                                                         aria-valuemin="0"
+                                                                                         aria-valuemax="100"></div>
+                                                                                </div>
+                                                                            </div>
+                                                                        {% endblock %}
+
+                                                                        {% block component_review_filter_share1 %}
+                                                                            <div class="col-12 col-md-3 product-detail-review-share">
+                                                                                <p><small>{{ matrix.count }}</small></p>
+                                                                            </div>
+                                                                        {% endblock %}
+                                                                    </div>
+                                                                {% endblock %}
+                                                            {% endfor %}
+                                                        </form>
+                                                    </div>
+
+                                                {% endif %}
+                                            {% endblock %}
+                                        </div>
+                                    {% endblock %}
+
+                                    {% block component_review_form_container %}
+
+                                    {% endblock %}
+
+                                    {% block component_review_list_container %}
+                                        <div id="review-list"
+                                             class="gaisbock-review-list">
+
+                                            {% block component_review_list %}
+                                                {% block component_review_list_actions %}
+                                                    <div class="row align-items-center product-detail-review-actions">
+                                                        {% set formAjaxSubmitOptions = {
+                                                            replaceSelectors: [".js-review-container"],
+                                                            submitOnChange: true
+                                                        } %}
+                                                    </div>
+                                                    <hr/>
+                                                    {% set listReviewsCount = productReviewCount - foreignReviewsCount %}
+                                                    {% if listReviewsCount < 0 %}
+                                                        {% set listReviewsCount = 0 %}
+                                                    {% endif %}
+
+                                                    <p class="text-right product-detail-review-counter">
+                                                        {% if (listReviewsCount > 1 and listReviewsCount > reviewsPerListPage) %}
+                                                            <small><strong>{{ currentListPage }}</strong> -
+                                                                <strong>{{ reviewsPerListPage }}</strong> {{ "detail.reviewCountBefore"|trans|sw_sanitize }}
+                                                                <strong>{{ listReviewsCount }}</strong> {{ "detail.reviewCountAfter"|trans({'%count%': listReviewsCount })|sw_sanitize }}
+                                                            </small>
+                                                        {% elseif listReviewsCount > 0 %}
+                                                            <small><strong>{{ listReviewsCount }}</strong> {{ "detail.reviewCountAfter"|trans({'%count%': listReviewsCount })|sw_sanitize }}
+                                                            </small>
+                                                        {% endif %}
+                                                    </p>
+                                                {% endblock %}
+
+                                                {% block component_review_list_content %}
+                                                    {% for review in reviews %}
+                                                        {% set reviewVerifcation = 0 %}
+                                                        <div class="product-detail-review-list-content">
+                                                            <div class="product-detail-review-item"
+                                                                 itemprop="review"
+                                                                 itemscope
+                                                                 itemtype="https://schema.org/Review">
+                                                                {% block page_product_detail_review_item_meta_published %}
+                                                                    <meta itemprop="datePublished"
+                                                                          content="{{ review.createdAt|date }}">
+                                                                {% endblock %}
+
+                                                                {% block page_product_detail_review_item_meta_title %}
+                                                                    <meta itemprop="name" content="{{ review.title }}">
+                                                                {% endblock %}
+
+                                                                {% block page_product_detail_review_item_meta_author %}
+                                                                    <div itemprop="author"
+                                                                         itemtype="https://schema.org/Person" itemscope>
+                                                                        <meta itemprop="name"
+                                                                              content="{{ review.externalUser }}"/>
+                                                                    </div>
+                                                                {% endblock %}
+
+                                                                {% block page_product_detail_review_item_info %}
+                                                                    <div class="row product-detail-review-item-info">
+
+                                                                        {% block page_product_detail_review_item_info_date %}
+                                                                            <div class="col-12 product-detail-review-item-date">
+                                                                                <p>
+                                                                                    <small>{{ review.createdAt|date("d.m.Y") }}</small>
+                                                                                </p>
+                                                                            </div>
+                                                                        {% endblock %}
+
+                                                                        {% block page_product_detail_review_item_info_points %}
+                                                                            <div class="col-md-auto product-detail-review-item-points">
+                                                                                <p>{{ review.externalUser }}</p>
+                                                                                {% sw_include '@Storefront/storefront/component/review/rating.html.twig' with {
+                                                                                    points: review.points
+                                                                                } %}
+                                                                            </div>
+                                                                        {% endblock %}
+
+                                                                        {% block page_product_detail_review_item_title %}
+                                                                            <div class="col-md-auto product-detail-review-item-title">
+                                                                                <p class="h5">
+                                                                                    {{ review.title|striptags|sw_sanitize }}
+                                                                                </p>
+                                                                            </div>
+                                                                        {% endblock %}
+
+                                                                        {% block page_product_detail_review_item_info_verify %}
+                                                                            <div class="col product-detail-review-item-verify">
+                                                                                {% if reviewVerifcation == 1 %}
+                                                                                    <a data-bs-toggle="tooltip"
+                                                                                       data-placement="bottom"
+                                                                                       title="{{ "detail.reviewVerifiedItemTooltip"|trans|striptags }}">
+                                                                                        {% sw_icon 'checkmark-circle' style {
+                                                                                            'color': 'primary',
+                                                                                            'size': 'sm'
+                                                                                        } %}
+                                                                                    </a>
+                                                                                {% endif %}
+                                                                            </div>
+                                                                        {% endblock %}
+                                                                    </div>
+                                                                {% endblock %}
+
+                                                                {% block page_product_detail_review_item_content %}
+                                                                    <p class="product-detail-review-item-content"
+                                                                       itemprop="description">
+                                                                        {{ review.content|sw_sanitize }}
+                                                                    </p>
+                                                                {% endblock %}
+
+                                                                {% block page_product_detail_review_item_comment %}
+                                                                    {% if review.comment %}
+                                                                        <div class="product-detail-review-item-comment">
+                                                                            <blockquote class="blockquote">
+                                                                                <footer class="blockquote-footer">
+                                                                                    {{ "detail.reviewCommentLabel"|trans|sw_sanitize }}{{ review.comment }}
+                                                                                </footer>
+                                                                            </blockquote>
+                                                                        </div>
+                                                                    {% endif %}
+                                                                {% endblock %}
+                                                            </div>
+                                                        </div>
+
+
+
+                                                    {% endfor %}
+                                                {% endblock %}
+
+                                                {% block component_review_list_paging %}
+                                                    {% set criteria = reviews.criteria %}
+
+                                                    {% set totalPages = (productReviewCount/reviewsPerListPage)|round(0,'ceil') %}
+
+                                                    {% if totalPages > 1 %}
+                                                        {% set formAjaxSubmitOptions = {
+                                                            replaceSelectors: ".js-review-container",
+                                                            submitOnChange: true
+                                                        } %}
+
+                                                        {% block component_review_list_paging_form %}
+                                                            <div class="product-detail-review-pagination">
+                                                                <form class="product-detail-review-pagination-form"
+                                                                      action="{{ path('frontend.product.reviews', { productId: product.id, parentId: product.parentId }) }}"
+                                                                      method="post"
+                                                                      data-form-ajax-submit="true"
+                                                                      data-form-ajax-submit-options='{{ formAjaxSubmitOptions|json_encode }}'>
+
+                                                                    {% if app.request.get('limit') %}
+                                                                        <input type="hidden" name="limit"
+                                                                               value="{{ app.request.get('limit') }}">
+                                                                    {% endif %}
+
+                                                                    {% if app.request.get('language') %}
+                                                                        <input type="hidden" name="language"
+                                                                               value="{{ app.request.get('language') }}">
+                                                                    {% endif %}
+
+                                                                    {% if app.request.get('sort') %}
+                                                                        <input type="hidden" name="sort"
+                                                                               value="{{ app.request.get('sort') }}">
+                                                                    {% endif %}
+
+                                                                    {% if app.request.get('points') %}
+                                                                        {% for points in app.request.get('points') %}
+                                                                            <input type="hidden" name="points[]"
+                                                                                   value="{{ points }}">
+                                                                        {% endfor %}
+                                                                    {% endif %}
+
+                                                                    {% sw_include '@Storefront/storefront/component/pagination.html.twig' with {
+                                                                        entities: reviews,
+                                                                        criteria: criteria,
+                                                                        total: productReviewCount,
+                                                                    } %}
+                                                                </form>
+                                                            </div>
+                                                        {% endblock %}
+                                                    {% endif %}
+                                                {% endblock %}
+                                            {% endblock %}
+
+                                            {% if productReviewCount <= 0 %}
+                                                {% block component_review_list_empty %}
+                                                    {% sw_include '@Storefront/storefront/utilities/alert.html.twig' with {
+                                                        type: "info",
+                                                        content: "detail.reviewListEmpty"|trans|sw_sanitize
+                                                    } %}
+                                                {% endblock %}
+                                            {% endif %}
+                                        </div>
+                                    {% endblock %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                {% endblock %}
+            </div>
+        {% endblock %}
+    </div>
+{% endblock %}

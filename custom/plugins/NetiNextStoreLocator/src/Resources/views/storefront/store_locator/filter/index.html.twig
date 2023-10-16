@@ -1,0 +1,62 @@
+{% for filter in page.filters %}
+    <div
+            class="form-group"
+            v-if="searchFilter.customFilters['{{ filter.id }}'] !== undefined"
+    >
+        <label for="{{ filter.id }}">
+            {{ filter.title }}
+        </label>
+
+        {% if filter.displayType == 1 %}
+            {# Checkbox #}
+            {% for item in filter.values %}
+                <div class="form-check">
+                    <input
+                            class="form-check-input"
+                            type="checkbox"
+                            id="{{ item.inputId }}"
+                             v-model="searchFilter.customFilters['{{ filter.id }}']['{{ item.id }}']"
+                    />
+                    <label class="form-check-label" for="{{ item.inputId }}">
+                        {{ item.label }}
+                    </label>
+                </div>
+            {% endfor %}
+        {% elseif filter.displayType == 2 %}
+            {# Radio #}
+            {% for item in filter.values %}
+                <div class="form-check">
+                    <input
+                            class="form-check-input"
+                            type="radio"
+                            id="{{ item.inputId }}"
+                            name="{{ filter.id }}"
+                            v-model="searchFilter.customFilters['{{ filter.id }}']"
+                            value="{{ item.id }}"
+                    />
+                    <label class="form-check-label" for="{{ item.inputId }}">
+                        {{ item.label }}
+                    </label>
+                </div>
+            {% endfor %}
+        {% elseif filter.displayType == 3 %}
+            {# Select #}
+            <select
+                    id="{{ filter.id }}"
+                    name="{{ filter.id }}"
+                    class="form-select"
+                    v-model="searchFilter.customFilters['{{ filter.id }}']"
+            >
+                <option value="">
+                    {{ "neti-next-store-locator.index.search.filterSelectPlaceholder"|trans }}
+                </option>
+
+                {% for item in filter.values %}
+                    <option value="{{ item.id }}">
+                        {{ item.label }}
+                    </option>
+                {% endfor %}
+            </select>
+        {% endif %}
+    </div>
+{% endfor %}

@@ -1,0 +1,31 @@
+{% block pluszwei_faq_manager_category_breadcrumb %}
+    {% set position = 0 %}
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb" itemscope itemtype="https://schema.org/BreadcrumbList">
+            {% if category.navigation %}
+                {% sw_include '@PluszweiFaqManager/storefront/page/faq/layout/navigation-breadcrumb.html.twig' with {category: category.navigation} %}
+
+                <div class="breadcrumb-placeholder">
+                    {% sw_icon 'arrow-medium-right' style { 'size': 'fluid', 'pack': 'solid'} %}
+                </div>
+
+                {% set breadcrumbCategories = sw_breadcrumb_full(category.navigation, context.context)|filter(c => c.type != 'folder') %}
+                {% set position = breadcrumbCategories|length + 1 %}
+            {% endif %}
+
+            {% block pluszwei_faq_manager_category_breadcrumb_active %}
+                <li class="breadcrumb-item"
+                    aria-current="page"
+                    itemprop="itemListElement" itemscope
+                    itemtype="https://schema.org/ListItem">
+                    <a class="breadcrumb-link is-active"
+                       itemprop="item"
+                       href="{{ seoUrl('pluszwei.faq.frontend.category', {categoryId: category.id}) }}">
+                        <span class="breadcrumb-title" itemprop="name">{{ category.translated.name }}</span>
+                    </a>
+                    <meta itemprop="position" content="{{ position + 1 }}">
+                </li>
+            {% endblock %}
+        </ol>
+    </nav>
+{% endblock %}

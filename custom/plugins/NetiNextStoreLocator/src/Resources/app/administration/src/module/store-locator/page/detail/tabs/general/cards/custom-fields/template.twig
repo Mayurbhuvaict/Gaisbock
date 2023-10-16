@@ -1,0 +1,27 @@
+<sw-card
+         class="neti-store-locator-card"
+         :title="$t('sw-settings-custom-field.general.mainMenuItemGeneral')"
+         :isLoading="isLoading"
+         position-identifier="neti-store-locator-detail-custom-fields"
+>
+    <sw-custom-field-set-renderer
+        :entity="store"
+        :sets="customFieldSets">
+    </sw-custom-field-set-renderer>
+
+    <template v-if="customFieldSets.length < 1">
+        {{ $t('neti-store-locator.custom-fields.noFields') }} <br>
+    </template>
+
+    <sw-icon
+        name="regular-cog"
+        class="config-icon"
+        :small="true"
+        @click="onConfigOpen"
+        v-tooltip="{
+            message: $t('neti-store-locator.custom-fields.linkTitle'),
+            width: 200,
+            position: 'top'
+          }"
+    ></sw-icon>
+</sw-card>

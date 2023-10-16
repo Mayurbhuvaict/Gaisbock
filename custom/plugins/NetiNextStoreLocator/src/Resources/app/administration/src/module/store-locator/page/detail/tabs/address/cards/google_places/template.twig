@@ -1,0 +1,35 @@
+<sw-card
+        :title="$t('neti-store-locator.detailAddress.labelGooglePlacesCard')"
+        :isLoading="isLoading"
+        position-identifier="neti-store-locator-detail-address-card-google-places"
+>
+    <sw-container columns="1fr 1fr" gap="15px">
+        <sw-field
+                v-model="store.hidden"
+                :label="$t('neti-store-locator.baseInfo.labelHidden')"
+                type="switch"
+                bordered
+        ></sw-field>
+
+        <sw-field
+                v-model="store.excludeFromSync"
+                :label="$t('neti-store-locator.baseInfo.labelExcludeFromSync')"
+                type="switch"
+                bordered
+        ></sw-field>
+    </sw-container>
+
+    <sw-container columns="1fr 1fr" gap="15px">
+        <sw-text-field
+                v-model="store.googlePlaceID"
+                :label="$t('neti-store-locator.baseInfo.labelGooglePlaceID')"
+                :placeholder="$t('neti-store-locator.card.placeholderGooglePlaceID')"
+        ></sw-text-field>
+
+        <sw-number-field
+                v-model="store.zoom"
+                :label="$t('neti-store-locator.baseInfo.labelMapZoom')"
+                :placeholder="$t('neti-store-locator.card.placeholderMapZoom')"
+        ></sw-number-field>
+    </sw-container>
+</sw-card>

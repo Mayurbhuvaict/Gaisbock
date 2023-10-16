@@ -1,0 +1,64 @@
+{
+    "sw-seo-url-template-card": {
+        "routeNames": {
+            "frontend-store_locator-detail": "Store Locator"
+        }
+    },
+    "global": {
+        "entities": {
+            "neti_store_locator": "Store Locator"
+        },
+        "businessEvents": {
+            "neti_store_locator_contact": "Kontaktformular einer StoreLocator Filiale",
+            "neti_store_locator_contact_copy": "Kontaktformular einer StoreLocator Filiale (Kopie an mich senden)"
+        }
+    },
+    "neti-next-store-locator": {
+        "sidebar-menu": {
+            "store-locator": {
+                "title": "StoreLocator",
+                "stores": "Filialen",
+                "contactForm": "Kontaktformular",
+                "filter": "Filter"
+            }
+        },
+        "sw-cms": {
+            "sorting": {
+                "labelSortByStoreLocator": "Store Locator Details"
+            },
+            "detail": {
+                "label": {
+                    "labelPageType": "Store Locator Details"
+                }
+            },
+            "elements": {
+                "slSearchElement": {
+                    "label": "StoreLocator Schnellsuche",
+                    "block": {
+                        "blockLabel": "StoreLocator Block Element",
+                        "form": "Formular",
+                        "buttonSend": "Senden",
+                        "zip": "PLZ / Ort"
+                    },
+                    "cms-element": {
+                        "slSearch": "StoreLocator Suche",
+                        "label": "Zusätzliche Suchparameter",
+                        "placeHolder": "Parameter einfügen...",
+                        "componentPlaceholder": "PLZ / Ort",
+                        "buttonSend": "Senden",
+                        "helpText": "Diese Parameter werden zu der Suche des Kunden hinzugefügt. Geben Sie die Parameter in einer Zeile ein und verbinden Sie diese mit &. Zum Beispiel: distance=250&country=DE. Alle Parameter findest du hier https://shopware6.io.netinventors.de/plugins/NetiNextStoreLocator/de/features/get-parameter/"
+                    }
+                }
+            }
+        }
+    },
+    "sw-profile.tabSearchPreferences.modules.neti_store_locator.label": "Name",
+    "sw-flow": {
+        "triggers": {
+            "neti": "Net Inventors",
+            "storeLocator": "StoreLocator",
+            "contact": "Kontakt",
+            "contactCopy": "Kontakt (Kopie senden)"
+        }
+    }
+}

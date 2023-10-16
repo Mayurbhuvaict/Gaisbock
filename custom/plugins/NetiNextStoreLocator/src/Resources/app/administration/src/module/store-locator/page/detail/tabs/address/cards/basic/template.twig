@@ -1,0 +1,100 @@
+<sw-card
+        :title="$t('neti-store-locator.detailAddress.labelBasicCard')"
+        :isLoading="isLoading"
+        position-identifier="neti-store-locator-detail-address-card-basic"
+>
+    <sw-container columns="1fr 1fr" gap="15px">
+        <sw-text-field
+                v-model="store.street"
+                :label="$t('neti-store-locator.baseInfo.labelStreet')"
+                :placeholder="$t('neti-store-locator.card.placeholderStreet')"
+                validation="required"
+                required
+                :error="storeStreetError"
+        ></sw-text-field>
+
+        <sw-text-field
+                v-model="store.streetNumber"
+                :label="$t('neti-store-locator.baseInfo.labelStreetNumber')"
+                :placeholder="$t('neti-store-locator.card.placeholderStreetNumber')"
+                :error="storeStreetNumberError"
+        ></sw-text-field>
+    </sw-container>
+
+    <sw-container columns="1fr 1fr" gap="15px">
+        <sw-text-field
+                v-model="store.zipCode"
+                :label="$t('neti-store-locator.baseInfo.labelZipCode')"
+                :placeholder="$t('neti-store-locator.card.placeholderZipCode')"
+                validation="required"
+                required
+                :error="storeZipCodeError"
+        ></sw-text-field>
+
+        <sw-text-field
+                v-model="store.city"
+                :label="$t('neti-store-locator.baseInfo.labelCity')"
+                :placeholder="$t('neti-store-locator.card.placeholderCity')"
+                validation="required"
+                required
+                :error="storeCityError"
+        ></sw-text-field>
+    </sw-container>
+
+    <sw-container columns="1fr 1fr" gap="15px">
+        <sw-field
+                type="select"
+                validation="required"
+                required
+                v-model="store.countryId"
+                :label="$t('neti-store-locator.baseInfo.labelCountry')"
+                :error="storeCountryIdError"
+        >
+            <option v-for="country in countries" :key="country.id" :value="country.id">
+                {{ country.translated.name }}
+            </option>
+        </sw-field>
+
+        <sw-field
+                type="select"
+                v-model="store.countryStateId"
+                :label="$t('neti-store-locator.baseInfo.labelCountryState')"
+                v-if="selectedCountry && selectedCountry.states.length > 0"
+        >
+            <option v-for="state in selectedCountry.states" :key="state.id" :value="state.id">
+                {{ state.translated.name }}
+            </option>
+        </sw-field>
+    </sw-container>
+
+    <sw-container columns="1fr 1fr auto auto" gap="15px">
+        <neti-store-locator-number-field
+                v-model="store.latitude"
+                :label="$t('neti-store-locator.baseInfo.labelLatitude')"
+                :placeholder="$t('neti-store-locator.card.placeholderLatitude')"
+                :digits="32"
+        ></neti-store-locator-number-field>
+
+        <neti-store-locator-number-field
+                v-model="store.longitude"
+                :label="$t('neti-store-locator.baseInfo.labelLongitude')"
+                :placeholder="$t('neti-store-locator.card.placeholderLongitude')"
+                :digits="32"
+        ></neti-store-locator-number-field>
+
+        <sw-button-process
+                class="neti-store-locator-detail__locate-action"
+                :disabled="isLocating"
+                :isLoading="isLocating"
+                :processSuccess="isLocatingSuccessful"
+                @click.prevent="onLocateAddress"
+                @process-finish="isLocatingSuccessful = false"
+        >
+            {{ $t('neti-store-locator.detail.buttonLocate') }}
+        </sw-button-process>
+
+        <neti-store-locator-map-preview-modal
+                :store="store"
+        ></neti-store-locator-map-preview-modal>
+    </sw-container>
+</sw-card>

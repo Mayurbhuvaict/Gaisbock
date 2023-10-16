@@ -1,0 +1,346 @@
+{
+    "neno-marketing-essentials": {
+        "general": {
+            "menuTitle": "Marketing Essentials",
+            "cancelButtonText": "Abbrechen",
+            "saveButtonText": "Speichern",
+            "errorTitle": "Fehler"
+        },
+
+        "newsletter-popup": {
+            "general": {
+                "addPopupButtonText": "Popup hinzufügen"
+            },
+            "list": {
+                "columnName": "Name",
+                "columnVisibleSettings": "Zugewiesen",
+                "columnIsGlobal": "Global",
+                "columnPromotionActiveLabel": "Rabatt"
+            },
+            "detail": {
+                "nameLabel": "Name",
+                "storageTypeLabel": "Storage Type",
+                "storageTypeOptionSessionStorageLabel": "Session-Storage",
+                "storageTypeOptionLocalStorageLabel": "Local-Storage",
+                "devModeLabel": "Entwicklungsmodus (Storage deaktivieren)",
+                "isGlobalLabel": "Global aktivieren",
+                "visibleSettingsLabel": "Sichtbarkeitseinstellungen",
+                "visibleSettingsOptionCategoryLabel": "Sichtbar in Kategorie",
+                "visibleSettingsOptionProductLabel": "Sichtbar auf Produktseiten",
+                "assignCategoryLabel": "Katgeorie zuweisen",
+                "assignProductLabel": "Produkt Seite zuweisen",
+                "popupTriggerLabel": "Popup öffnen",
+                "popupTriggerOptionTime": "Durch Zeit (Sekunden)",
+                "popupTriggerOptionScroll": "Durch Scrollen (Pixel)",
+                "popupTimeLabel": "Nach Sekunden öffnen",
+                "popupScrollLabel": "Nach gescrollten Pixeln öffnen",
+                "heightMobileLabel": "Höhe des Popup für Mobil in Pixel (0px - 480px)",
+                "heightDesktopLabel": "Höhe des Popup für Desktop in Pixel (481px - )",
+                "showFirstNameLabel": "Feld für Vornamen anzeigen",
+                "showLastNameLabel": "Feld für Nachnamen anzeigen",
+
+                "promotionHelpText": "Bitte wählen Sie einen vorher angelegte Rabattaktion. Es ist empfohlen eine eigene Rabattaktion für das Popup zu erstellen.",
+                "promotionActiveLabel": "Aktiv",
+                "promotionAssignLabel": "Rabatt auswählen",
+                "promotionShowValidUntilLabel": "Aktiv bis anzeigen",
+                "promotionTextValidUntilLabel": "Präfix-Text",
+
+                "placeholderBackgroundColorLabel": "Hintergrundfarbe (Platzhalter)",
+                "imageLabel": "Bild",
+                "imagePositionLabel": "Position der Bild Box für Desktop (481px - )",
+                "imagePositionOptionLeft": "Links",
+                "imagePositionOptionRight": "Rechts",
+                "imagePositionOptionBackground": "Als Hintergrund nutzen",
+                "imageMobileSettingsLabel": "Position der Bild Box für Mobil (0px - 480px)",
+                "imageMobileSettingsOptionBackground": "Bild als Hintergrund anzeigen",
+                "imageMobileSettingsOptionLeft": "Bild links anzeigen",
+                "imageMobileSettingsOptionRight": "Bild rechts anzeigen",
+                "imageMobileSettingsOptionNone": "Bild nicht anzeigen",
+                "imageFitLabel": "Anpassung des Bildes",
+                "imageFitLabelOptionFill": "Fill",
+                "imageFitLabelOptionContain": "Contain",
+                "imageFitLabelOptionCover": "Cover",
+                "imageAlignmentLabel": "Ausrichtung des Bildes",
+                "imageAlignmentLabelOptionCenter": "Zentriert",
+                "imageAlignmentLabelOptionLeft": "Links",
+                "imageAlignmentLabelOptionRight": "Rechts",
+                "imageAlignmentLabelOptionTop": "Oben",
+                "imageAlignmentLabelOptionBottom": "Unten",
+
+                "headlineLabel": "Headline",
+                "sublineLabel": "Subline",
+                "firstNamePlaceholderLabel": "Placeholder Text im Vorname Feld",
+                "lastNamePlaceholderLabel": "Placeholder Text im Nachname Feld",
+                "mailPlaceholderLabel": "Placeholder Text im Email Feld",
+                "subscribeButtonLabel": "Text im Abonnieren Button",
+                "notSubscribeLabel": "Text für nicht Abonnieren",
+                "contentAlignmentLabel": "Ausrichtung der Elemente",
+                "contentAlignmentLabelOptionCenter": "Zentriert",
+                "contentAlignmentLabelOptionTop": "Oben",
+                "contentAlignmentLabelOptionBottom": "Unten",
+
+
+                "headlineFontFamilyLabel": "Schriftart der Headline (Standard überschreiben)",
+                "sublineFontFamilyLabel": "Schriftart der Subline (Standard überschreiben)",
+                "promotionFontFamilyLabel": "Rabatt der Subline (Standard überschreiben)",
+                "mobileHeadlineFontSizeLabel": "Schriftgröße der Headline - Mobil (0 - 480px)",
+                "mobileSublineFontSizeLabel": "Schriftgröße der Subline - Mobil (0 - 480px)",
+                "tabletHeadlineFontSizeLabel": "Schriftgröße der Headline - Tablet (481px - 1279px)",
+                "tabletSublineFontSizeLabel": "Schriftgröße der Subline - Tablet (481px - 1279px)",
+                "desktopHeadlineFontSizeLabel": "Schriftgröße der Headline - Desktop ( > 1280px)",
+                "desktopSublineFontSizeLabel": "Schriftgröße der Subline - Desktop ( > 1280px)",
+                "mobileHeadlineLineHeightLabel": "Zeilenabstand der Headline - Mobil (0 - 480px)",
+                "mobileSublineLineHeightLabel": "Zeilenabstand der Subline - Mobil (0 - 480px)",
+                "tabletHeadlineLineHeightLabel": "Zeilenabstand der Headline - Tablet (481px - 1279px)",
+                "tabletSublineLineHeightLabel": "Zeilenabstand der Subline - Tablet (481px - 1279px)",
+                "desktopHeadlineLineHeightLabel": "Zeilenabstand der Headline - Desktop ( > 1280px)",
+                "desktopSublineLineHeightLabel": "Zeilenabstand der Subline - Desktop ( > 1280px)",
+                "mobilePromotionFontSizeLabel": "Schriftgröße des Rabatt - Mobil (0 - 480px)",
+                "mobilePromotionLineHeightLabel": "Zeilenabstand des Rabatt - Mobil (0 - 480px)",
+                "tabletPromotionFontSizeLabel": "Schriftgröße des Rabatt - Tablet (481px - 1279px)",
+                "tabletPromotionLineHeightLabel": "Zeilenabstand des Rabatt - Tablet (481px - 1279px)",
+                "desktopPromotionFontSizeLabel": "Schriftgröße des Rabatt - Desktop ( > 1280px)",
+                "desktopPromotionLineHeightLabel": "Zeilenabstand des Rabatt - Desktop ( > 1280px)",
+
+                "popupBorderRadiusLabel": "Border Radius des Popups",
+                "firstNameFieldBorderRadiusLabel": "Border Radius für das Vorname Feld",
+                "lastNameFieldBorderRadiusLabel": "Border Radius für das Nachname Feld",
+                "mailFieldBorderRadiusLabel": "Border Radius des Email Feld",
+                "subscribeButtonBorderRadiusLabel": "Border Radius des Abonnieren Button",
+
+                "backgroundColorLabel": "Hintergrundfarbe",
+                "closeButtonColorLabel": "Schließen Button",
+                "closeButtonHoverColorLabel": "Schließen Button beim Hovern",
+                "promotionColorLabel": "Rabatt",
+                "firstNameFieldBorderColorLabel": "Border Farbe für das Vorname Feld",
+                "lastNameFieldBorderColorLabel": "Border Farbe für das Nachname Feld",
+                "mailFieldBorderColorLabel": "Border Farbe des Email Feld",
+                "subscribeButtonBackgroundColorLabel": "Hintergrundfarbe des Abonnieren Button",
+                "subscribeButtonHoverBackgroundColorLabel": "Hintergrundfarbe des Abonnieren Button beim Hovern",
+                "subscribeButtonTextColorLabel": "Text Farbe des Abonnieren Button",
+                "subscribeButtonTextHoverColorLabel": "Text Farbe des Abonnieren Button beim Hovern",
+                "notSubscribeTextColorLabel": "Nicht Abonnieren Text",
+                "notSubscribeTextHoverColorLabel": "Nicht Abonnieren Text beim Hovern",
+
+                "generalCardLabel": "Generell",
+                "promotionCardLabel": "Rabatt",
+                "mediaCardLabel": "Medien",
+                "textCardLabel": "Text",
+                "typographyCardLabel": "Typografie",
+                "edgesCardLabel": "Ecken",
+                "colorCardLabel": "Farben",
+
+                "promotionIndividualCodesNotice": "Individuelle Rabatt-Codes werden automatisch erweitert, sobald erschöpft."
+            }
+        },
+
+        "register-popup": {
+            "general": {
+                "addPopupButtonText": "Popup hinzufügen"
+            },
+            "list": {
+                "columnName": "Name",
+                "columnVisibleSettings": "Zugewiesen",
+                "columnIsGlobal": "Global",
+                "columnPromotionActiveLabel": "Rabatt"
+            },
+            "detail": {
+                "nameLabel": "Name",
+                "storageTypeLabel": "Storage Type",
+                "storageTypeOptionSessionStorageLabel": "Session-Storage",
+                "storageTypeOptionLocalStorageLabel": "Local-Storage",
+                "devModeLabel": "Entwicklungsmodus (Session-Storage deaktivieren)",
+                "isGlobalLabel": "Global aktivieren",
+                "visibleSettingsLabel": "Sichtbarkeitseinstellungen",
+                "visibleSettingsOptionCategoryLabel": "Sichtbar in Kategorie",
+                "visibleSettingsOptionProductLabel": "Sichtbar auf Produktseiten",
+                "assignCategoryLabel": "Katgeorie zuweisen",
+                "assignProductLabel": "Produkt Seite zuweisen",
+                "popupTriggerLabel": "Popup öffnen",
+                "popupTriggerOptionTime": "Durch Zeit (Sekunden)",
+                "popupTriggerOptionScroll": "Durch Scrollen (Pixel)",
+                "popupTimeLabel": "Nach Sekunden öffnen",
+                "popupScrollLabel": "Nach gescrollten Pixeln öffnen",
+                "heightMobileLabel": "Höhe des Popup für Mobil in Pixel (0px - 480px)",
+                "heightDesktopLabel": "Höhe des Popup für Desktop in Pixel (481px - )",
+
+                "promotionHelpText": "Bitte wählen Sie einen vorher angelegte Rabattaktion. Es ist empfohlen einen eigenen Rabatt Code für das Popup zu erstellen",
+                "promotionActiveLabel": "Aktiv",
+                "promotionActiveHelpTextLabel": "Bitte dafür den Double-Opt-In für Registrierungen aktivieren",
+                "promotionAssignLabel": "Rabatt auswählen",
+                "promotionShowValidUntilLabel": "Aktiv bis anzeigen",
+                "promotionTextValidUntilLabel": "Präfix-Text",
+
+                "placeholderBackgroundColorLabel": "Hintergrundfarbe (Platzhalter)",
+                "imageLabel": "Bild",
+                "imagePositionLabel": "Position der Bild Box für Desktop (481px - )",
+                "imagePositionOptionLeft": "Links",
+                "imagePositionOptionRight": "Rechts",
+                "imagePositionOptionBackground": "Als Hintergrund nutzen",
+                "imageMobileSettingsLabel": "Position der Bild Box für Mobil (0px - 480px)",
+                "imageMobileSettingsOptionBackground": "Bild als Hintergrund anzeigen",
+                "imageMobileSettingsOptionLeft": "Bild links anzeigen",
+                "imageMobileSettingsOptionRight": "Bild rechts anzeigen",
+                "imageMobileSettingsOptionNone": "Bild nicht anzeigen",
+                "imageFitLabel": "Anpassung des Bildes",
+                "imageFitLabelOptionFill": "Fill",
+                "imageFitLabelOptionContain": "Contain",
+                "imageFitLabelOptionCover": "Cover",
+                "imageAlignmentLabel": "Ausrichtung des Bildes",
+                "imageAlignmentLabelOptionCenter": "Zentriert",
+                "imageAlignmentLabelOptionLeft": "Links",
+                "imageAlignmentLabelOptionRight": "Rechts",
+                "imageAlignmentLabelOptionTop": "Oben",
+                "imageAlignmentLabelOptionBottom": "Unten",
+
+                "headlineLabel": "Headline",
+                "sublineLabel": "Subline",
+                "textLabel": "Text",
+                "submitButtonLabel": "Text im Bestätigen Button",
+                "notSubmitLabel": "Text für nicht Bestätigen",
+                "contentAlignmentLabel": "Ausrichtung der Elemente",
+                "contentAlignmentLabelOptionCenter": "Zentriert",
+                "contentAlignmentLabelOptionTop": "Oben",
+                "contentAlignmentLabelOptionBottom": "Unten",
+
+                "headlineFontFamilyLabel": "Schriftart der Headline (Standard überschreiben)",
+                "sublineFontFamilyLabel": "Schriftart der Subline (Standard überschreiben)",
+                "promotionFontFamilyLabel": "Rabatt der Subline (Standard überschreiben)",
+                "mobileHeadlineFontSizeLabel": "Schriftgröße der Headline - Mobil (0 - 480px)",
+                "mobileSublineFontSizeLabel": "Schriftgröße der Subline - Mobil (0 - 480px)",
+                "tabletHeadlineFontSizeLabel": "Schriftgröße der Headline - Tablet (481px - 1279px)",
+                "tabletSublineFontSizeLabel": "Schriftgröße der Subline - Tablet (481px - 1279px)",
+                "desktopHeadlineFontSizeLabel": "Schriftgröße der Headline - Desktop ( > 1280px)",
+                "desktopSublineFontSizeLabel": "Schriftgröße der Subline - Desktop ( > 1280px)",
+                "mobileHeadlineLineHeightLabel": "Zeilenabstand der Headline - Mobil (0 - 480px)",
+                "mobileSublineLineHeightLabel": "Zeilenabstand der Subline - Mobil (0 - 480px)",
+                "tabletHeadlineLineHeightLabel": "Zeilenabstand der Headline - Tablet (481px - 1279px)",
+                "tabletSublineLineHeightLabel": "Zeilenabstand der Subline - Tablet (481px - 1279px)",
+                "desktopHeadlineLineHeightLabel": "Zeilenabstand der Headline - Desktop ( > 1280px)",
+                "desktopSublineLineHeightLabel": "Zeilenabstand der Subline - Desktop ( > 1280px)",
+                "mobilePromotionFontSizeLabel": "Schriftgröße des Rabatt - Mobil (0 - 480px)",
+                "mobilePromotionLineHeightLabel": "Zeilenabstand des Rabatt - Mobil (0 - 480px)",
+                "tabletPromotionFontSizeLabel": "Schriftgröße des Rabatt - Tablet (481px - 1279px)",
+                "tabletPromotionLineHeightLabel": "Zeilenabstand des Rabatt - Tablet (481px - 1279px)",
+                "desktopPromotionFontSizeLabel": "Schriftgröße des Rabatt - Desktop ( > 1280px)",
+                "desktopPromotionLineHeightLabel": "Zeilenabstand des Rabatt - Desktop ( > 1280px)",
+
+                "popupBorderRadiusLabel": "Border Radius des Popups",
+                "submitButtonBorderRadiusLabel": "Border Radius des Bestätigen Button",
+
+                "backgroundColorLabel": "Hintergrundfarbe",
+                "closeButtonColorLabel": "Schließen Button",
+                "closeButtonHoverColorLabel": "Schließen Button beim Hovern",
+                "promotionColorLabel": "Rabatt",
+                "submitButtonBackgroundColorLabel": "Hintergrundfarbe des bestätigen Button",
+                "submitButtonHoverBackgroundColorLabel": "Hintergrundfarbe des bestätigen Button beim Hovern",
+                "submitButtonTextColorLabel": "Text Farbe des bestätigen Button",
+                "submitButtonTextHoverColorLabel": "Text Farbe des bestätigen Button beim Hovern",
+                "notSubmitTextColorLabel": "Nicht bestätigen Text",
+                "notSubmitTextHoverColorLabel": "Nicht bestätigen Text beim Hovern",
+
+                "generalCardLabel": "General",
+                "promotionCardLabel": "Rabatt",
+                "mediaCardLabel": "Medien",
+                "textCardLabel": "Text",
+                "typographyCardLabel": "Typografie",
+                "edgesCardLabel": "Ecken",
+                "colorCardLabel": "Farben",
+
+                "promotionIndividualCodesNotice": "Individuelle Rabatt-Codes werden automatisch erweitert, sobald erschöpft."
+            }
+        },
+
+        "tabs": {
+            "general": {
+                "addTabText": "Tab hinzufügen"
+            },
+            "list": {
+                "columnName": "Name",
+                "columnDisplay": "Zugewiesen",
+                "columnIsGlobal": "Global"
+            },
+            "detail": {
+                "nameLabel": "Name",
+                "isGlobalLabel": "Global aktivieren",
+                "displaySettingsLabel": "Sichtbarkeitseinstellungen",
+                "displaySettingsOptionCategory": "Sichtbar in Kategorie",
+                "displaySettingsOptionProduct": "Sichtbar auf Produktseiten",
+                "assignCategoryPageLabel": "Kategorie zuweisen",
+                "assignProductPageLabel": "Produkt Seite zuweisen",
+                "textLabel": "Text",
+                "faviconLabel": "Favicon",
+
+                "generalCardLabel": "Generell",
+                "contentCardLabel": "Inhalt"
+            }
+        },
+
+        "conversion-bar": {
+            "detail": {
+                "conversionBarActiveLabel": "Conversion Bar Aktiv",
+                "sliderMaxWidthLabel": "Maximale Bildschirmbreite um Inhalte als Slider darzustellen (in pixel)",
+
+                "backgroundColorLabel": "Hintergrund",
+                "textColorLabel": "Text",
+                "linkColorLabel": "Link text",
+
+                "text1Label": "Text",
+                "Text1ClickableLabel": "Text anklickbar machen",
+                "Text1ClickableUrlLabel": "Link url",
+                "Text1PrimaryActionLabel": "Primäre Aktion",
+                "Text1PrimaryActionTextLabel": "Text",
+                "Text1PrimaryActionUrlLabel": "Link url",
+                "Text1IconLabel": "Icon",
+
+                "text2Label": "Text",
+                "Text2ClickableLabel": "Text anklickbar machen",
+                "Text2ClickableUrlLabel": "Link url",
+                "Text2PrimaryActionLabel": "Primäre Aktion",
+                "Text2PrimaryActionTextLabel": "Text",
+                "Text2PrimaryActionUrlLabel": "Link url",
+                "Text2IconLabel": "Icon",
+
+                "text3Label": "Text",
+                "Text3ClickableLabel": "Text anklickbar machen",
+                "Text3ClickableUrlLabel": "Link url",
+                "Text3PrimaryActionLabel": "Primäre Aktion",
+                "Text3PrimaryActionTextLabel": "Text",
+                "Text3PrimaryActionUrlLabel": "Link url",
+                "Text3IconLabel": "Icon",
+
+                "generalCardLabel": "Generell",
+                "ColorCardLabel": "Farben",
+                "text1CardLabel": "Text 1",
+                "text2CardLabel": "Text 2",
+                "text3CardLabel": "Text 3"
+            }
+        },
+
+        "free-shipping-bar": {
+            "detail": {
+                "activeLabel": "Free Shipping Bar Aktiv",
+                "onlyShowIfProductAddedLabel": "Nur anzeigen wenn mindestens ein Produkt im Warenkorb ist",
+                "positionLabel": "Position",
+                "positionOptionTopLabel": "Über der Conversion Bar",
+                "positionOptionBottomLabel": "Unter der Conversion Bar",
+                "goalLabel": "Zielbetrag für freien Versand",
+                "includeShippingCostsLabel": "Versandkosten mit berechnen",
+                "includeShippingCostsHelpLabel": "Fügst du ein Produkt zum Warenkorb hinzu, werden Versandkosten bis zum Zielbetrag mit berechnet bzw. abgezogen.",
+
+                "backgroundColorLabel": "Hintergrund",
+                "textColorLabel": "Text",
+
+                "iconLabel": "Icon",
+
+                "messageButtonLabel": "Zu den Snippets",
+                "messageInfoLabel": "Die Texte werden mittels der Shopware Snippets erstellt",
+
+                "generalCardLabel": "Generell",
+                "colorCardLabel": "Farben",
+                "iconCardLabel": "Icon",
+                "messagesCardLabel": "Nachrichten"
+            }
+        }
+    }
+}

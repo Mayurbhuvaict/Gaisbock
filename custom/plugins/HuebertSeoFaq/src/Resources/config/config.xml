@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/shopware/platform/master/src/Core/System/SystemConfig/Schema/config.xsd">
+
+    <card>
+        <title>Accessories Directly to Shopping Cart</title>
+        <title lang="de-DE">Zubehör in den Warenkorb</title>
+        <input-field type="bool">
+            <name>disableFaqLink</name>
+            <label>Disable FAQ Link in Footer</label>
+            <label lang="de-DE">FAQ Link im Footer deaktivieren</label>
+        </input-field>
+        <input-field type="text">
+            <name>faqMetaTitle</name>
+            <label>Meta title</label>
+            <label lang="de-DE">Meta Title</label>
+            <helpText>Meta title for faq overview-page</helpText>
+            <helpText lang="de-DE">Meta Title für die FAQ Übersichts-Seite</helpText>
+        </input-field>
+        <input-field type="textarea">
+            <name>faqMetaDescription</name>
+            <label>Meta description</label>
+            <label lang="de-DE">Meta Description</label>
+            <defaultValue>This is an FAQ Page</defaultValue>
+            <defaultValue lang="de-DE">Das ist eine FAQ Seite</defaultValue>
+            <helpText>Meta description for faq overview-page</helpText>
+            <helpText lang="de-DE">Meta Description für die FAQ Übersichts-Seite</helpText>
+        </input-field>
+    </card>
+
+</config>

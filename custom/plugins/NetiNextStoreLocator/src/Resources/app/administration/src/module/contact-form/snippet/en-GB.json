@@ -1,0 +1,67 @@
+{
+    "neti-store-locator-contact-form": {
+        "title": "Contact Form",
+        "description": "Manage contact form fields here.",
+
+        "list": {
+            "title": "Contact Form Fields",
+            "messageEmpty": "No fields yet",
+            "button": {
+                "create": "Add field",
+                "cancel": "Cancel",
+                "delete": "Delete",
+                "refresh": "Refresh"
+            },
+            "column": {
+                "active": "Active",
+                "label": "Label",
+                "type": "Type",
+                "required": "Required",
+                "position": "Position"
+            },
+            "contextMenu": {
+                "view": "View",
+                "delete": "Delete",
+                "duplicate": "Duplicate",
+                "edit": "Edit"
+            },
+            "deleteForm": {
+                "title": "Delete field",
+                "confirmText": "Are you sure you want to delete the field \"{name}\"?"
+            }
+        },
+        "create": {
+            "title": "New field"
+        },
+        "detail": {
+            "button": {
+                "edit": "Edit",
+                "cancel": "Cancel",
+                "save": "Save"
+            },
+            "card": {
+                "generalBasic": {
+                    "title": "Field Configuration",
+                    "labelActive": "Active",
+                    "labelLabel": "Label",
+                    "labelRequired": "Required",
+                    "labelType": "Type",
+                    "labelPosition": "Position",
+                    "labelValue": "Value",
+                    "labelsType": {
+                        "textfield": "Text",
+                        "textarea": "Text area",
+                        "checkbox": "Checkbox",
+                        "radio": "Radio buttons",
+                        "select": "Select field",
+                        "subject": "Subject field",
+                        "email": "E-Mail address",
+                        "email_copy": "E-Mail address for copy",
+                        "file_upload": "File attachment"
+                    },
+                    "placeholderType": "Select type"
+                }
+            }
+        }
+    }
+}

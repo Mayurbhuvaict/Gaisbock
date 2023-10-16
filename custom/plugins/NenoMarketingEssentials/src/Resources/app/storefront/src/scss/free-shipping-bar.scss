@@ -1,0 +1,21 @@
+.nme-free-shipping-bar {
+    height: 42px;
+    width: 100%;
+    overflow: hidden;
+
+    &--item {
+        height: inherit;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        p {
+            margin: 0;
+        }
+    }
+
+    &--icon {
+        width: 1.5rem;
+        margin-right: 0.5rem;
+    }
+}

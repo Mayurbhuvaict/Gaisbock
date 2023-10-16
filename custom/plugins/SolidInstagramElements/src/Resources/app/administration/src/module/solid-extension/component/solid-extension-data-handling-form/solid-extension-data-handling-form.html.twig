@@ -1,0 +1,24 @@
+<div
+    class="solid-extension-data-handling-form"
+>
+    <h2>{{ $tc('sw-extension.component.solid-extension-data-handling-form.title') }}</h2>
+
+    <sw-alert>
+        <div v-html="$tc('sw-extension.component.solid-extension-data-handling-form.alert')"></div>
+    </sw-alert>
+
+    <sw-switch-field
+        :label="$tc('sw-extension.component.solid-extension-data-handling-form.label')"
+        bordered
+        :value="value"
+        @change="onChange"
+    />
+
+    <sw-button
+        :disabled="fetchAndStoreLatestPostsDisabled"
+        block
+        @click="onClickFetchAndStoreLatestPosts"
+    >
+        {{ $t('sw-extension.component.solid-extension-data-handling-form.fetchAndStoreLatestPosts') }}
+    </sw-button>
+</div>

@@ -1,0 +1,33 @@
+<?xml version="1.0" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <services>
+        <defaults public="true" />
+
+        <service id="NetInventors\NetiNextStoreLocator\Storefront\Route\GetStoreRoute">
+            <argument type="service"
+                      id="NetInventors\NetiNextStoreLocator\Storefront\Page\Store\Detail\StoreDetailPageLoader"/>
+        </service>
+
+        <service id="NetInventors\NetiNextStoreLocator\Storefront\Route\ContactRoute">
+            <argument type="service" id="NetInventors\NetiNextStoreLocator\Components\ContactForm\ContactForm"/>
+            <argument type="service" id="neti_store_locator.repository"/>
+            <argument type="service" id="event_dispatcher"/>
+        </service>
+
+        <service id="NetInventors\NetiNextStoreLocator\Storefront\Route\ConfigRoute">
+            <argument type="service"
+                      id="NetInventors\NetiNextStoreLocator\Storefront\Page\Store\Listing\StoreListingPageLoader"/>
+        </service>
+
+        <service id="NetInventors\NetiNextStoreLocator\Storefront\Route\GetStoresRoute">
+            <argument type="service"
+                      id="NetInventors\NetiNextStoreLocator\Storefront\Page\Store\Listing\StoreListingPageLoader"/>
+            <argument type="service" id="NetInventors\NetiNextStoreLocator\Service\StoreBusinessHoursService"/>
+            <argument type="service" id="event_dispatcher" />
+        </service>
+    </services>
+</container>

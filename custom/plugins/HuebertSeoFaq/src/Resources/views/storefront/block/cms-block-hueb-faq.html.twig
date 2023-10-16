@@ -1,0 +1,10 @@
+{% block block_hueb_faq %}
+	{% set element = block.slots.getSlot('huebFaqEl') %}
+	{% block block_faq %}
+			<div data-cms-element-id="{{ element.id }}" class="cms-element-hueb-faq">
+				{% block block_hueb_faq_inner %}
+					{% sw_include "@Storefront/storefront/element/cms-element-" ~ element.type ~ ".html.twig" ignore missing %}
+				{% endblock %}
+			</div>
+	{% endblock %}
+{% endblock %}

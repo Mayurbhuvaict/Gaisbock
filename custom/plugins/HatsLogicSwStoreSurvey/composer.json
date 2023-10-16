@@ -1,0 +1,34 @@
+{
+    "name": "hatslogic/hatslogic-store-survey",
+    "description": "Gather information from the user about the shopping experience",
+    "version": "2.0.0",
+    "type": "shopware-platform-plugin",
+    "license": "proprietary",
+    "require": {
+        "shopware/core": ">=6.5",
+        "shopware/administration": ">=6.5",
+        "shopware/storefront": ">=6.5"
+    },
+    "authors": [{
+        "name": "2Hats Logic Solutions"
+    }],
+    "extra": {
+        "shopware-plugin-class": "HatsLogic\\HatsLogicSwStoreSurvey\\HatsLogicSwStoreSurvey",
+        "label": {
+            "de-DE": "Umfrage speichern",
+            "en-GB": "Store Survey"
+        },
+        "description": {
+            "de-DE": "Sammeln Sie Informationen vom Benutzer über das Einkaufserlebnis",
+            "en-GB": "Gather information from the user about the shopping experience"
+        }
+    },
+    "autoload": {
+        "psr-4": {
+            "HatsLogic\\HatsLogicSwStoreSurvey\\": "src/"
+        }
+    },
+    "minimum-stability": "RC",
+    "prefer-stable": true
+}
+

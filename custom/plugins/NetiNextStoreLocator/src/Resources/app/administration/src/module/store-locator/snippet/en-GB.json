@@ -1,0 +1,282 @@
+{
+    "neti-store-locator": {
+        "bool": {
+            "0": "No",
+            "1": "Yes"
+        },
+        "custom-fields": {
+            "linkTitle": "Edit custom fields",
+            "noFields": "You have not yet assigned any custom fields for the StoreLocator."
+        },
+        "notification": {
+            "requiredFields": "Please fill in all required fields."
+        },
+        "general": {
+            "mainMenuItemGeneral": "StoreLocator",
+            "mainMenuItemList": "Overview",
+            "mainMenuItemAdd": "Add Store",
+            "descriptionTextModule": "Manage Stores here.",
+            "placeholderSearchBar": "Search all stores",
+            "newStore": "New Store"
+        },
+        "list": {
+            "textStores": "Stores",
+            "textStoresTotal": "No Store | One Store | {count} Stores",
+            "buttonAddStore": "Add Store",
+            "columnLabel": "Name",
+            "columnActive": "Active",
+            "columnSalesChannel": "Sales Channels",
+            "columnFeatured": "Featured",
+            "columnStreet": "Street",
+            "columnStreetNumber": "Nr.",
+            "columnZipCode": "Zip Code",
+            "columnCity": "City",
+            "columnCountry": "Country",
+            "columnActions": "Action(s)",
+            "contextMenuView": "View",
+            "contextMenuDelete": "Delete",
+            "contextMenuDuplicate": "Duplicate",
+            "contextMenuEdit": "Edit",
+            "messageEmpty": "No stores yet",
+            "modalTitleDelete": "Delete store",
+            "textDeleteConfirm": "Are you sure you want to delete the store \"{name}\"?",
+            "buttonCancel": "Cancel",
+            "buttonDelete": "Delete",
+            "titleSidebarItemRefresh": "Refresh",
+            "buttonCreate": "Add store",
+            "titleSidebarFilter": "Filter"
+        },
+        "detail": {
+            "buttonEdit": "Edit",
+            "buttonCancel": "Cancel",
+            "buttonSave": "Save",
+            "buttonLocate": "Locate address",
+            "tabGeneral": "General",
+            "tabAddress": "Address",
+            "tabDetails": "Details",
+            "tabContact": "Contact",
+            "tabBusinessHours": "Business hours",
+            "titleSaveError": "Error",
+            "titleSaveSuccess": "Success",
+            "messageSaveError": "Store could not be saved.",
+            "messageBusinessTimeSaveError": "Could not save store because the time is missing for business hours.",
+            "messageSaveSuccess": "Store \"{name}\" has been saved.",
+            "titleLocateError": "Address could not be located.",
+            "messageLocateError": "Please check your address and try again or contact your system administrator.",
+            "contentTypeLabel": "Content Type",
+            "contentTypeHTML": "HTML / WYSIWYG-Editor",
+            "contentTypeCMS": "Shopping Experience",
+            "contentTypeHelp": "",
+            "contentDescriptionLabel": "Content",
+            "contentDescriptionHelp": "Paste your content here to be displayed.",
+            "cmsPageLabel": "Shopping Experiences",
+            "cmsPageHelp": "Select a Shopping Experience already created here (Contents > Shopping Experience > Store Locator).",
+            "cmsPageLinkInfo": "Show Shopping Experiences",
+            "labelDetailsPictureMedia": "Alternative details picture"
+        },
+        "cms-stores": {
+            "cardFieldSets": "CMS pages",
+            "buttonFieldSetsAdd": "Add CMS pages",
+            "context-menu": {
+                "openCmsPage": "Open CMS page",
+                "removeCmsPage": "Remove CMS page",
+                "moveCmsPageUp": "Move CMS page up",
+                "moveCmsPageDown": "Move CMS page down"
+            },
+            "modal": {
+                "removeCmsPageTitle": "Remove CMS page",
+                "modalConfirmText": "Do you really want to remove CMS page {name}?",
+                "buttonCancel": "Cancel",
+                "buttonDelete": "Remove assignment",
+                "modalTitleMassDelete": "Remove selected CMS pages",
+                "textMassDeleteConfirm": "Do you really want to remove selected CMS pages?"
+            },
+            "column": {
+                "name": "Name",
+                "position": "Position"
+            },
+            "assignment-modal": {
+                "buttonCancel": "Cancel",
+                "buttonSave": "Assign CMS pages",
+                "cmsPageLabel": "CMS page",
+                "title": "Assign CMS pages",
+                "successTitle": "Success",
+                "successMessage": "CMS pages have been successfully assigned.",
+                "errorTitle": "Error",
+                "errorMessage": "CMS pages could not be assigned."
+            }
+        },
+        "detailBase": {
+            "labelBasicCard": "Basic",
+            "labelMiscCard": "Misc",
+            "labelMediaCard": "Media"
+        },
+        "detailAddress": {
+            "labelBasicCard": "Basic",
+            "labelMiscCard": "Misc",
+            "labelGooglePlacesCard": "Google Places"
+        },
+        "detailDetails": {
+            "labelBasicCard": "Basic",
+            "labelContentCard": "Content",
+            "labelSeoCard": "Seo"
+        },
+        "detailContact": {
+            "labelBasicCard": "Basic"
+        },
+        "baseInfo": {
+            "labelActive": "Active",
+            "labelDetailPageEnabled": "Enable detail page",
+            "labelSalesChannel": "Sales Channel",
+            "labelSeoUrl": "SEO URL",
+            "labelShowAlways": "Show always",
+            "labelShowAlwaysHelp": "Select the position of the store in the listing. Top' = The store is always displayed at the top of the listing / 'Bottom' = The store is always displayed at the bottom of the listing.",
+            "labelShowAlwaysValues": {
+                "no": "Default",
+                "top": "Top",
+                "bottom": "Bottom"
+            },
+            "labelContactFormEnabled": "Contact form enabled",
+            "labelContactFormEnabledHelp": "If you enable the contact form, you need to fill the notification email address too. Otherwise a customer will not be able to contact the store.",
+            "labelContactFormDetail": "Contact form on detail",
+            "labelHidden": "Hide store",
+            "labelNotificationMail": "Notification email address",
+            "labelMapZoom": "Zoom",
+            "labelExcludeFromSync": "Exclude from google places sync",
+            "labelGooglePlaceID": "Google Place ID",
+            "labelFeatured": "Featured",
+            "labelFeaturedHelp": "The store is always visually highlighted.",
+            "labelRadius": "Radius",
+            "labelStreet": "Street",
+            "labelStreetNumber": "Street Number",
+            "labelZipCode": "Zip Code",
+            "labelCity": "City",
+            "labelLongitude": "Longitude",
+            "labelLatitude": "Latitude",
+            "labelCountry": "Country",
+            "labelCountryState": "Country State",
+            "labelPhone": "Phone",
+            "labelFax": "Fax",
+            "labelUrl": "URL",
+            "labelEmail": "E-Mail",
+            "labelAdditionalInformation": "Additional Information",
+            "labelDescription": "Description",
+            "labelPictureMedia": "Preview Picture",
+            "labelIconMedia": "Alternative Map Icon",
+            "helpAdditionalInformation": "e.g. Opening Times, etc.",
+            "labelSeoTitle": "SEO Title",
+            "labelSeoDescription": "SEO Description",
+            "labelDetailTitle": "Title",
+            "labelTags": "Tags",
+            "labelOpeningTimes": "Opening Times"
+        },
+        "card": {
+            "labelLabel": "Name",
+            "placeholderLabel": "Name of the Store",
+            "placeholderStreet": "Street name",
+            "placeholderStreetNumber": "Street number",
+            "placeholderCity": "City",
+            "placeholderZipCode": "Zip Code",
+            "placeholderLatitude": "Filled automatically if empty",
+            "placeholderLongitude": "Filled automatically if empty",
+            "placeholderSeoUrl": "Your custom seo url",
+            "helpSeoUrl": "Important note: Slashes will be translated to dashes.",
+            "placeholderNotificationMail": "Notification email address",
+            "placeholderMapZoom": "Zoom",
+            "placeholderGooglePlaceID": "Google Place ID",
+            "placeholderRadius": "Radius",
+            "placeholderSeoTitle": "SEO Title",
+            "externalIdLabel": "External id",
+            "placeholderExternalId": "External id..."
+        },
+        "updateCoordinatesModal": {
+            "title": "Update coordinates",
+            "infoText": "This process fetches the coordinates for all stores without coordinates.",
+            "timezoneErrorText": "It seems that the timezone API is not enabled for your Google API key.",
+            "errorTitle": "Error",
+            "errorText": "Unfortunately something went wrong. Please try again later.",
+            "step1Text": "Loading records",
+            "step2Text": "Processing",
+            "step3Text": "Finished",
+            "buttonAbort": "Abort",
+            "buttonRun": "Run",
+            "buttonClose": "Close",
+            "chunkSizeLabel": "Chunk size",
+            "chunkSizeHelpText": "The amount of stores that will be fetched per request."
+        },
+        "mapPreviewModal": {
+            "button": "Map Preview",
+            "title": "Map preview",
+            "labelLatitude": "Latitude",
+            "labelLongitude": "Longitude",
+            "abortBtn": "Abort",
+            "applyBtn": "Apply"
+        },
+        "sidebar-filter": {
+            "activeLabel": "Active",
+            "featuredLabel": "Featured",
+            "showAlwaysLabel": "Show always",
+            "detailPageEnabledLabel": "Detail page enabled",
+            "contactFormEnabledLabel": "Contact form enabled",
+            "tagLabel": "Tags",
+            "salesChannelLabel": "Sales channels",
+            "active": {
+                "none": "All",
+                "true": "Yes",
+                "false": "No"
+            },
+            "featured": {
+                "none": "All",
+                "true": "Yes",
+                "false": "No"
+            },
+            "detailPageEnabled": {
+                "none": "All",
+                "true": "Yes",
+                "false": "No"
+            },
+            "contactFormEnabled": {
+                "none": "All",
+                "true": "Yes",
+                "false": "No"
+            },
+            "showAlways": {
+                "none": "All",
+                "no": "No",
+                "top": "Top",
+                "bottom": "Bottom"
+            },
+            "streetLabel": "Street",
+            "streetPlaceholder": "Street...",
+            "streetNumberLabel": "Street no.",
+            "streetNumberPlaceholder": "Street no....",
+            "zipCodeLabel": "Zip code",
+            "zipCodePlaceholder": "Zip code...",
+            "cityLabel": "City",
+            "cityPlaceholder": "City...",
+            "countryLabel": "Country",
+            "externalIdLabel": "External ID",
+            "externalIdPlaceholder": "External ID...",
+            "mediaLabel": "Has media",
+            "media": {
+                "none": "All",
+                "true": "Yes",
+                "false": "No"
+            }
+        },
+        "business-hours": {
+            "labelWeekdaysCard": "Weekdays",
+            "extraClosedDaysCard": "Extra closed hours",
+            "extraOpenDaysCard": "Extra open hours",
+            "addTime": "Add time",
+            "removeTime": "Remove time",
+            "labelFrom": "From",
+            "labelTo": "To",
+            "labelDescription": "Description",
+            "labelAnnual": "Annual",
+            "labelDate": "Date",
+            "timezoneWarning": "This store does not have a time zone. To manage the opening hours, activate the time zones in the plug-in configuration and update the coordinates. To do this, click on the <strong>Update coordinates</strong> button in the overview of the stores.",
+            "timezoneInfo": "Remember that times are managed in the store's time zone."
+        }
+    }
+}

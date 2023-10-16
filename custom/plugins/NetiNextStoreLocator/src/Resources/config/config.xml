@@ -1,0 +1,712 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/shopware/platform/master/src/Core/System/SystemConfig/Schema/config.xsd">
+
+    <card>
+        <title>Configuration</title>
+        <title lang="de-DE">Konfiguration</title>
+        <input-field type="bool">
+            <name>active</name>
+            <label>Active in this subshop</label>
+            <label lang="de-DE">Aktiv in diesem Subshop</label>
+            <label lang="nl-NL">Actief in deze subwinkel</label>
+            <defaultValue>true</defaultValue>
+        </input-field>
+        <input-field type="text">
+            <name>seoUrl</name>
+            <label>Alternative URL path</label>
+            <label lang="de-DE">Alternativer URL-Pfad</label>
+            <label lang="nl-NL">Alternatief URL-pad</label>
+            <helpText>The StoreLocator can be reached by an alternative URL (e.g. "https://www.shop.de/Filialfinder"
+                instead of "https://www.shop.de/StoreLocator")
+            </helpText>
+            <helpText lang="de-DE">Dadurch wird der StoreLocator über eine Wunsch-URL aufrufbar sein (z.B.
+                "https://www.shop.de/Filialfinder" anstatt "https://www.shop.de/StoreLocator")
+            </helpText>
+            <helpText lang="nl-NL">Dit maakt het mogelijk om de StoreLocator op te roepen via een gewenste URL (bijv.
+                "https://www.shop.de/Filialfinder" in plaats van "https://www.shop.de/StoreLocator")
+            </helpText>
+            <defaultValue>Filialfinder</defaultValue>
+        </input-field>
+        <input-field type="single-select">
+            <name>detailPage</name>
+            <label>Enable store detail pages</label>
+            <label lang="de-DE">Filial-Detailseiten aktivieren</label>
+            <label lang="nl-NL">Activeer detailpagina's van filialen</label>
+            <options>
+                <option>
+                    <id>disabled</id>
+                    <name>No</name>
+                    <name lang="de-DE">Nein</name>
+                    <name lang="nl-NL">Geen</name>
+                </option>
+                <option>
+                    <id>enabled</id>
+                    <name>Yes</name>
+                    <name lang="de-DE">Ja</name>
+                    <name lang="nl-NL">Ja</name>
+                </option>
+                <option>
+                    <id>store</id>
+                    <name>Configure separately in each store</name>
+                    <name lang="de-DE">In jeder Filiale separat konfigurieren</name>
+                    <name lang="nl-NL">Afzonderlijk configureren in elk filiaal</name>
+                </option>
+            </options>
+            <defaultValue>store</defaultValue>
+            <required>true</required>
+        </input-field>
+        <input-field type="single-select">
+            <name>getGeolocation</name>
+            <label>Use the browser function for automatic location identification</label>
+            <label lang="de-DE">Browser-Funktion zur automatischen Standortermittlung nutzen</label>
+            <label lang="nl-NL">Gebruik de browserfunctie voor automatische plaatsbepaling</label>
+            <helpText>Only works if page is called using HTTPS.</helpText>
+            <helpText lang="de-DE">Funktioniert nur, wenn die Seite per HTTPS aufgerufen wird.</helpText>
+            <helpText lang="nl-NL">Werkt alleen als de pagina via HTTPS wordt benaderd.</helpText>
+            <defaultValue>always</defaultValue>
+            <options>
+                <option>
+                    <id>always</id>
+                    <name>Yes, always</name>
+                    <name lang="de-DE">Ja, immer</name>
+                    <name lang="nl-NL">Ja, altijd.</name>
+                </option>
+                <option>
+                    <id>mobile</id>
+                    <name>Only on mobile devices</name>
+                    <name lang="de-DE">Nur auf mobilen Endgeräten</name>
+                    <name lang="nl-NL">Alleen op mobiele apparaten</name>
+                </option>
+                <option>
+                    <id>pc</id>
+                    <name>Only on desktop PC</name>
+                    <name lang="de-DE">Nur am PC</name>
+                    <name lang="nl-NL">Alleen op de PC</name>
+                </option>
+                <option>
+                    <id>none</id>
+                    <name>Never</name>
+                    <name lang="de-DE">Nein, gar nicht</name>
+                    <name lang="nl-NL">Nee, helemaal niet.</name>
+                </option>
+            </options>
+        </input-field>
+        <input-field type="textarea">
+            <name>contactSubjectOptions</name>
+            <label>Subject lines for contact forms</label>
+            <label lang="de-DE">Betreffzeilen für Kontaktformulare</label>
+            <label lang="nl-NL">Onderwerpregels voor contactformulieren</label>
+            <helpText>One subject each line. If the field is left blank, the customer can enter a subject. In order to
+                show the contact form, the option "Contact form" in the store details has to be enabled.
+            </helpText>
+            <helpText lang="de-DE">Pro Zeile ein Betreff. Wenn das Feld leer gelassen wird, kann der Kunde selbst einen
+                Betreff eingeben. Damit das Kontaktformular angezeigt wird, muss zudem die Option "Kontaktformular" in
+                den Filialdetails aktiviert werden.
+            </helpText>
+            <helpText lang="nl-NL">Eén onderwerp per regel. Als het veld leeg is gelaten, kan de klant zelf een
+                onderwerp invoeren. Om het contactformulier te kunnen tonen, moet de optie "Contactformulier" ook
+                geactiveerd zijn in de winkeldetails.
+            </helpText>
+        </input-field>
+        <input-field type="bool">
+            <name>restrictFeaturedStoresToCountry</name>
+            <label>Restrict "featured stores" to selected country</label>
+            <label lang="de-DE">"Featured Stores" auf gewähltes Land beschränken</label>
+            <label lang="nl-NL">"Beperk "Aanbevolen winkels" tot het geselecteerde land</label>
+            <helpText>When this option is activated, the stores marked as "featured" won't be displayed cross-border
+            </helpText>
+            <helpText lang="de-DE">Bei aktivierter Option werden die als "featured" markierten Stores nicht mehr
+                grenzüberschreitend angezeigt
+            </helpText>
+            <helpText lang="nl-NL">Als deze optie geactiveerd is, worden de winkels die als "uitgelicht" gemarkeerd
+                zijn, niet langer grensoverschrijdend weergegeven.
+            </helpText>
+            <defaultValue>false</defaultValue>
+        </input-field>
+        <input-field type="bool">
+            <name>autoloadStores</name>
+            <label>Initially list all stores</label>
+            <label lang="de-DE">Initial alle Stores auflisten</label>
+            <label lang="nl-NL">Oorspronkelijke lijst van alle winkels</label>
+            <helpText>Activate / Deactivate the listing of all stores if no search has been started</helpText>
+            <helpText lang="de-DE">Aktiviert / Deaktiviert die Auflistung aller Stores, wenn noch keine Suche gestartet wurde</helpText>
+            <helpText lang="nl-NL">Activeert / deactiveert de lijst van alle winkels als er nog geen zoekopdracht is gestart.</helpText>
+            <defaultValue>true</defaultValue>
+        </input-field>
+        <input-field type="bool">
+            <name>routeOnGoogleMaps</name>
+            <label>Show route directly on Google Maps</label>
+            <label lang="de-DE">Route direkt auf Google-Maps anzeigen</label>
+            <label lang="nl-NL">Toon route direct op Google Maps</label>
+            <defaultValue>false</defaultValue>
+        </input-field>
+        <component name="sw-entity-single-select">
+            <name>topCmsPage</name>
+            <entity>cms_page</entity>
+            <label>Shopping Experience above the StoreLocator</label>
+            <label lang="de-DE">Erlebniswelt über dem StoreLocator</label>
+            <label lang="nl-NL">Wereld van ervaring boven de Filiaalzoeker</label>
+            <helpText>The selected shopping experience will be shown above the StoreLocator</helpText>
+            <helpText lang="de-DE">Die ausgewählte Erlebniswelt wird über dem StoreLocator angezeigt</helpText>
+            <helpText lang="nl-NL">De geselecteerde belevingswereld wordt weergegeven boven de Filiaalzoeker</helpText>
+        </component>
+        <component name="sw-entity-single-select">
+            <name>bottomCmsPage</name>
+            <entity>cms_page</entity>
+            <label>Shopping Experience below the StoreLocator</label>
+            <label lang="de-DE">Erlebniswelt unter dem StoreLocator</label>
+            <label lang="nl-NL">Wereld van ervaring onder de Filiaalzoeker</label>
+            <helpText>The selected shopping experience will be shown below the StoreLocator</helpText>
+            <helpText lang="de-DE">Die ausgewählte Erlebniswelt wird unter dem StoreLocator angezeigt</helpText>
+            <helpText lang="nl-NL">De geselecteerde belevingswereld wordt weergegeven onder de Filiaalzoeker</helpText>
+        </component>
+        <component name="sw-entity-single-select">
+            <name>breadcrumbCategory</name>
+            <entity>category</entity>
+            <label>Category (for Breadcrumb)</label>
+            <label lang="de-DE">Kategorie (für Breadcrumb)</label>
+            <label lang="nl-NL">Categorie (voor Breadcrumb)</label>
+            <helpText>The selected category will be shown as breadcrumb on the store locator page.</helpText>
+            <helpText lang="de-DE">Die ausgewählte Kategorie wird als Breadcrumb im StoreLocator angezeigt.</helpText>
+            <helpText lang="nl-NL">De geselecteerde categorie wordt als een Breadcrumb weergegeven in de Filiaalzoeker.</helpText>
+        </component>
+    </card>
+
+    <card>
+        <title>Search</title>
+        <title lang="de-DE">Suche</title>
+        <title lang="nl-NL">Zoek op</title>
+        <input-field type="bool">
+            <name>forceAjaxSearch</name>
+            <label>Force ajax search</label>
+            <label lang="de-DE">Ajax-Suche erzwingen</label>
+            <label lang="nl-NL">Forceer ajax zoeken</label>
+            <helpText>If you have a big amount of stores, this feature can help improve the performance of the search in the storefront. If enabled, the stores will only be loaded once a location and radius was selected.</helpText>
+            <helpText lang="de-DE">Wenn Sie eine große Anzahl von Filialen haben, kann diese Funktion dazu beitragen, die Performance der Suche in der Storefront zu verbessern. Wenn diese Funktion aktiviert ist, werden die Filialen nur geladen, wenn ein Ort und ein Umkreis ausgewählt wurden.</helpText>
+            <helpText lang="nl-NL">Als je een groot aantal winkels hebt, kan deze functie de prestaties van het zoeken in de winkelruimte verbeteren. Indien ingeschakeld, worden de winkels pas geladen nadat een locatie en straal zijn geselecteerd.</helpText>
+            <defaultValue>false</defaultValue>
+        </input-field>
+        <input-field type="text">
+            <name>searchRadiusValues</name>
+            <label>Search radius</label>
+            <label lang="de-DE">Suchradius</label>
+            <label lang="nl-NL">Zoekradius</label>
+            <helpText>Seperated by semicolons (25;100)</helpText>
+            <helpText lang="de-DE">Mit Semikolon trennen (25;100)</helpText>
+            <helpText lang="nl-NL">Scheiden met puntkomma (25;100)</helpText>
+            <defaultValue>25;50;100;250;500</defaultValue>
+            <required>true</required>
+        </input-field>
+        <input-field type="int">
+            <name>defaultSearchRadius</name>
+            <label>Default search radius</label>
+            <label lang="de-DE">Standard Suchradius</label>
+            <label lang="nl-NL">Standaard zoekradius</label>
+            <defaultValue>25</defaultValue>
+            <required>true</required>
+        </input-field>
+        <input-field type="bool">
+            <name>filterHighlightedStoresByRadiusFirst</name>
+            <label>Filter highlighted stores by radius first</label>
+            <label lang="de-DE">Filtere hervorgehobene Filialen erst nach Radius</label>
+            <label lang="nl-NL">Filter gemarkeerde winkels eerst op straal</label>
+            <default>false</default>
+        </input-field>
+        <input-field type="bool">
+            <name>searchKeywordRequired</name>
+            <label>Allow search only with keywords</label>
+            <label lang="de-DE">Suche nur mit Eingabe erlauben</label>
+            <label lang="nl-NL">Alleen zoeken met invoer toestaan</label>
+            <helpText>If enabled the user is only allowed to search / see stores if he entered keywords.</helpText>
+            <helpText lang="de-DE">Wenn aktiv, werden nur Filialen angezeigt sobald ein Suchbegriff eingegeben wurde.</helpText>
+            <helpText lang="nl-NL">Indien actief, worden alleen takken getoond zodra een zoekterm wordt ingevoerd.</helpText>
+            <defaultValue>false</defaultValue>
+        </input-field>
+        <input-field type="multi-select">
+            <name>searchKeywordEntityFields</name>
+            <label>Store fields for search input</label>
+            <label lang="de-DE">Filialen-Felder für Suche</label>
+            <label lang="nl-NL">Tak zoekvelden</label>
+            <helpText>Select the fields of a store that should be searched in when entering a search keyword.</helpText>
+            <helpText lang="de-DE">Wähle die Felder der Filiale, die bei einer Sucheingabe durchsucht werden sollen.</helpText>
+            <helpText lang="nl-NL">Selecteer de velden van de tak waarnaar moet worden gezocht bij het invoeren van een zoekopdracht.</helpText>
+            <defaultValue>["label"]</defaultValue>
+            <options>
+                <option>
+                    <id>label</id>
+                    <name>Label</name>
+                    <name lang="de-DE">Name</name>
+                    <name lang="nl-NL">Naam</name>
+                </option>
+                <option>
+                    <id>street</id>
+                    <name>Street</name>
+                    <name lang="de-DE">Straße</name>
+                    <name lang="nl-NL">Straat</name>
+                </option>
+                <option>
+                    <id>zipCode</id>
+                    <name>ZIP Code</name>
+                    <name lang="de-DE">PLZ</name>
+                    <name lang="nl-NL">POSTCODE</name>
+                </option>
+                <option>
+                    <id>city</id>
+                    <name>City</name>
+                    <name lang="de-DE">Stadt</name>
+                    <name lang="nl-NL">Stad</name>
+                </option>
+            </options>
+        </input-field>
+        <input-field type="bool">
+            <name>disableAutocomplete</name>
+            <label>Disable Google Auto-Complete</label>
+            <label lang="de-DE">"Auto-Complete"-Funktion deaktivieren</label>
+            <label lang="nl-NL">"Deactiveer "auto-aanvullen" functie</label>
+            <helpText>This will disable the auto complete functionality of Google Maps in the search bar.</helpText>
+            <helpText lang="de-DE">Hier können Sie die "Auto-Complete"-Funktion von Google Maps deaktivieren.</helpText>
+            <helpText lang="nl-NL">Hier kunt u de "Auto-Complete" functie van Google Maps uitschakelen.</helpText>
+            <defaultValue>false</defaultValue>
+        </input-field>
+        <input-field type="single-select">
+            <name>autocompleteResultPriority</name>
+            <label>Order of search results</label>
+            <label lang="de-DE">Reihenfolge der Suchergebnisse</label>
+            <label lang="nl-NL">Volgorde van de zoekresultaten</label>
+            <defaultValue>places_before_stores</defaultValue>
+            <options>
+                <option>
+                    <id>stores_before_places</id>
+                    <name>Stores before Places</name>
+                    <name lang="de-DE">erst Filialen, dann Orte</name>
+                    <name lang="nl-NL">Eerst filialen, dan locaties</name>
+                </option>
+                <option>
+                    <id>places_before_stores</id>
+                    <name>Places before Stores</name>
+                    <name lang="de-DE">erst Orte, dann Filialen</name>
+                    <name lang="nl-NL">eerst plaatsen, dan takken</name>
+                </option>
+            </options>
+        </input-field>
+        <input-field type="int">
+            <name>searchResultLimit</name>
+            <label>Maximum search results</label>
+            <label lang="de-DE">Maximale Suchergebnisse</label>
+            <label lang="nl-NL">Maximale zoekresultaten</label>
+            <defaultValue>100</defaultValue>
+        </input-field>
+        <input-field type="bool">
+            <name>showCountryFilter</name>
+            <label>Show country filter</label>
+            <label lang="de-DE">Aktiviere Länder-Filter</label>
+            <label lang="nl-NL">Activeer landfilter</label>
+            <helpText>If enabled you can filter the available countries in the store locator.</helpText>
+            <helpText lang="de-DE">Wenn aktiviert, können die verfügbaren Länder in der Händlersuche mittels Eingabefeld gefiltert werden.</helpText>
+            <helpText lang="nl-NL">Indien geactiveerd, kunnen de beschikbare landen bij het zoeken naar een dealer met behulp van het invoerveld worden gefilterd.</helpText>
+            <defaultValue>false</defaultValue>
+        </input-field>
+        <input-field type="single-select">
+            <name>countrySortBy</name>
+            <label>Sort countries by</label>
+            <label lang="de-DE">Sortierung der Länder</label>
+            <label lang="nl-NL">De landen sorteren</label>
+            <helpText>Here you can define how the countries should be sorted in the store locator.</helpText>
+            <helpText lang="de-DE">Hier kann eingestellt werden nach welcher Art die Länder in der Händlersuche sortiert werden sollen.</helpText>
+            <helpText lang="nl-NL">Hier kunt u instellen welk soort landen gesorteerd moet worden bij het zoeken naar een dealer.</helpText>
+            <defaultValue>name_asc</defaultValue>
+            <options>
+                <option>
+                    <id>name_asc</id>
+                    <name>Name (ascending, a - z)</name>
+                    <name lang="de-DE">Name (aufsteigend, a - z)</name>
+                    <name lang="nl-NL">Naam (oplopend, a - z)</name>
+                </option>
+                <option>
+                    <id>name_desc</id>
+                    <name>Name (descending, z - a)</name>
+                    <name lang="de-DE">Name (absteigend, z - a)</name>
+                    <name lang="nl-NL">Naam (aflopend, z - a)</name>
+                </option>
+                <option>
+                    <id>position_asc</id>
+                    <name>Position (ascending, 0 - 9)</name>
+                    <name lang="de-DE">Position (aufsteigend, 0 - 9)</name>
+                    <name lang="nl-NL">Positie (oplopend, 0 - 9)</name>
+                </option>
+                <option>
+                    <id>position_desc</id>
+                    <name>Position (descending, 9 - 0)</name>
+                    <name lang="de-DE">Position (absteigend, 9 - 0)</name>
+                    <name lang="nl-NL">Positie (aflopend, 0 - 9)</name>
+                </option>
+            </options>
+        </input-field>
+        <component name="sw-entity-single-select">
+            <name>preselectedCountryId</name>
+            <entity>country</entity>
+            <label>Pre-selected country for the filter</label>
+            <label lang="de-DE">Standardsuchland</label>
+            <label lang="nl-NL">Standaard zoekland</label>
+            <helpText>Defines the country that will be pre-selected in the store filter, if available.</helpText>
+            <helpText lang="de-DE">Wenn verfügbar, wird das hier ausgewählte Land im Filialen-Filter vorausgewählt.</helpText>
+            <helpText lang="nl-NL">Indien beschikbaar, wordt het hier geselecteerde land voorgeselecteerd in het filiaalfilter.</helpText>
+        </component>
+    </card>
+
+    <card>
+        <title>Opening times</title>
+        <title lang="de-DE">Öffnungszeiten</title>
+        <title lang="nl-NL">Openingstijden</title>
+        <input-field type="bool">
+            <name>showOpeningTimesOnListing</name>
+            <label>Show opening times on listing</label>
+            <label lang="de-DE">Zeige Öffnungszeiten im Listing</label>
+            <label lang="nl-NL">Toon openingstijden in lijst</label>
+            <defaultValue>false</defaultValue>
+        </input-field>
+        <input-field type="bool">
+            <name>showOpeningTimesOnMarkerWindow</name>
+            <label>Show opening times on marker window</label>
+            <label lang="de-DE">Zeige Öffnungszeiten im Info-Fenster eines Markers</label>
+            <label lang="nl-NL">Toon openingstijden in het infovenster van een marker</label>
+            <defaultValue>false</defaultValue>
+        </input-field>
+    </card>
+
+    <card>
+        <title>Google API Configuration</title>
+        <title lang="de-DE">Google API Konfiguration</title>
+        <title lang="nl-NL">Google API Configuratie</title>
+        <input-field>
+            <name>googleApiKey</name>
+            <label>Google API Key (Maps Javascript API)</label>
+            <label lang="de-DE">Google API Schlüssel (für Maps Javascript API)</label>
+            <label lang="nl-NL">Google API Sleutel (voor Maps Javascript API)</label>
+            <helpText>This key is used for the Google Maps JavaScript API.</helpText>
+            <helpText lang="de-DE">Dieser Schlüssel wird für die Google Maps JavaScript API verwendet.</helpText>
+            <helpText lang="nl-NL">Deze sleutel wordt gebruikt voor de Google Maps JavaScript API.</helpText>
+            <required>true</required>
+        </input-field>
+        <input-field>
+            <name>googleWorkApiKey</name>
+            <label>Google API Key (Geocoding, Places, Timezone, ...)</label>
+            <label lang="de-DE">Google API Schlüssel (für Geocoding, Places, Timezone ...)</label>
+            <label lang="nl-NL">Google API sleutel (voor geocodering, Plaatsen, Tijdzones...)</label>
+            <helpText>This key is used for Google Maps Geocoding, Places etc.</helpText>
+            <helpText lang="de-DE">Dieser Schlüssel wird für die Google Maps Geocoding, Places(, ...) API verwendet.</helpText>
+            <helpText lang="nl-NL">Deze sleutel wordt gebruikt voor de Google Maps Geocoding, Places(, ...) API.</helpText>
+            <required>true</required>
+        </input-field>
+        <input-field>
+            <name>googleApiLang</name>
+            <label>Google Maps Language (de_DE, en_EN...)</label>
+            <label lang="de-DE">Google Maps Sprache (de_DE, en_EN...)</label>
+            <label lang="nl-NL">Google Maps Taal (de_DE, en_EN...)</label>
+            <helpText>The language submitted in the API request to Google Maps.</helpText>
+            <helpText lang="de-DE">Die Sprache die der API von Google Maps übergeben wird.</helpText>
+            <helpText lang="nl-NL">De taal die wordt doorgegeven aan de Google Maps API.</helpText>
+            <required>false</required>
+        </input-field>
+        <input-field type="bool">
+            <name>googleApiLangInheritFromDomain</name>
+            <label>Inherit language from sales channel domain</label>
+            <label lang="de-DE">Karten-Sprache von Verkaufskanal vererben</label>
+            <label lang="nl-NL">Map-taal erven van verkoopkanaal</label>
+            <helpText>The language that is saved in the current domain will be used.</helpText>
+            <helpText lang="de-DE">Wenn aktiv, wird die Sprache des Shops übernommen.</helpText>
+            <helpText lang="nl-NL">Indien actief, wordt de taal van de winkel overgenomen.</helpText>
+            <defaultValue>false</defaultValue>
+        </input-field>
+        <input-field type="bool">
+            <name>googleApiTimezoneEnabled</name>
+            <label>Timezone API enabled</label>
+            <label lang="de-DE">Zeitzonen API aktiviert</label>
+            <label lang="nl-NL">Tijdzones API ingeschakeld</label>
+            <helpText>Enable this configuration if you have enabled the timezone API which is required for business hours.</helpText>
+            <helpText lang="de-DE">Aktiviere diesen Punkt, wenn die Zeitzonen API für den zweiten Google API Key aktiviert ist. Diese Funktion wird für BusinessHours benötigt.</helpText>
+            <helpText lang="nl-NL">Activeer dit item als de tijdzone-API is geactiveerd voor de tweede Google API-sleutel. Deze functie is vereist voor BusinessHours.</helpText>
+        </input-field>
+    </card>
+
+    <card>
+        <title>Google Maps</title>
+
+        <input-field type="bool">
+            <name>googleMarkerClustering</name>
+            <label>Cluster markers</label>
+            <label lang="de-DE">Marker Clustering</label>
+            <label lang="nl-NL">Marker clustering</label>
+            <helpText>If activated, colliding markers are displayed in a clustered manner depending on the zoom level.
+            </helpText>
+            <helpText lang="de-DE">Falls aktiviert, werden kollidierende Marker abhängig vom Zoomlevel zusammengefasst
+                dargestellt (geclustert).
+            </helpText>
+            <helpText lang="nl-NL">Indien geactiveerd, worden botsende markers samen weergegeven (geclusterd),
+                afhankelijk van het zoomniveau.
+            </helpText>
+            <defaultValue>false</defaultValue>
+        </input-field>
+        <input-field type="text">
+            <name>googleMapID</name>
+            <label>Google Map ID</label>
+            <helpText>
+                <![CDATA[ StoreLocator supports cloud-based map content design. You can find more information <a href="https://developers.google.com/maps/documentation/cloud-customization/overview?hl=en" target="_blank">here</a>.]]></helpText>
+            <helpText lang="de-DE">
+                <![CDATA[StoreLocator unterstützt cloudbasiertes Gestalten von Karteninhalten. Mehr Informationen findest du <a href="https://developers.google.com/maps/documentation/cloud-customization/overview?hl=de" target="_blank">hier</a>.]]></helpText>
+            <helpText lang="nl-NL">
+                <![CDATA[StoreLocator ondersteunt cloud-based ontwerp van kaartinhoud. U vindt meer informatie  <a href="https://developers.google.com/maps/documentation/cloud-customization/overview?hl=en" target="_blank">hier</a>.]]></helpText>
+        </input-field>
+        <input-field type="textarea">
+            <name>googleMapOptions</name>
+            <label>StyledMapType object</label>
+            <label lang="de-DE">StyledMapType-Objekt</label>
+            <label lang="nl-NL">StyledMapType object</label>
+            <helpText>
+                <![CDATA[Enter a <b>valid</b> JavaScript object, which will be passed to StyledMapType. More information <a href="https://developers.google.com/maps/documentation/javascript/styling" target="_blank">here</a>.]]></helpText>
+            <helpText lang="de-DE">
+                <![CDATA[Geben sie ein <b>gültiges</b> JavaScript-Objekt ein, welches dem StyledMapType übergeben wird. Informationen <a href="https://developers.google.com/maps/documentation/javascript/styling" target="_blank">hier</a>.]]></helpText>
+            <helpText lang="nl-NL">
+                <![CDATA[Voer een <b>geldig</b> JavaScript-object in dat wordt doorgegeven aan het StyledMapType. Informatie <a href="https://developers.google.com/maps/documentation/javascript/styling" target="_blank">hier</a>.]]></helpText>
+        </input-field>
+        <input-field type="text">
+            <name>googleMapIconSize</name>
+            <label>Size of the icon</label>
+            <label lang="de-DE">Größe des Icons</label>
+            <label lang="nl-NL">Icoongrootte</label>
+            <helpText><![CDATA[Enter the size of the GoogleMpas icon in pixel here. Example: 50x50<br/>
+Note: For this you have to use your own icon.]]></helpText>
+            <helpText lang="de-DE"><![CDATA[Geben Sie hier die Größe des GoogleMaps-Icons in Pixeln an. Beispiel: 50x50<br/>
+Hinweis: Hierfür müssen Sie ein eigenes Icon verwenden.]]></helpText>
+            <helpText lang="nl-NL"><![CDATA[Voer hier de grootte van het GoogleMaps-pictogram in pixels in. Voorbeeld: 50x50<br/>
+Opmerking: U moet hiervoor uw eigen pictogram gebruiken.]]></helpText>
+        </input-field>
+        <input-field type="textarea">
+            <name>googleMapConfig</name>
+            <label>Individual google map parameters</label>
+            <label lang="de-DE">Individuelle Google-Map Konfiguration</label>
+            <label lang="nl-NL">Individuele configuratie van de Google-kaart</label>
+            <helpText>
+                <![CDATA[Enter a <b>valid</b> JavaScript object, which will be passed to map options. More information <a href="https://developers.google.com/maps/documentation/javascript/reference/map#MapOptions" target="_blank">here</a>.]]></helpText>
+            <helpText lang="de-DE">
+                <![CDATA[Geben sie ein <b>gültiges</b> JavaScript-Objekt ein, welches der Map übergeben wird. Informationen <a href="https://developers.google.com/maps/documentation/javascript/reference/map#MapOptions" target="_blank">hier</a>.]]></helpText>
+            <helpText lang="nl-NL">
+                <![CDATA[Voer een <b>geldig</b> JavaScript-object in dat wordt doorgegeven aan het. Informatie <a href="https://developers.google.com/maps/documentation/javascript/reference/map#MapOptions" target="_blank">hier</a>.]]></helpText>
+        </input-field>
+        <input-field type="single-select">
+            <name>distanceUnit</name>
+            <label>Distance unit</label>
+            <label lang="de-DE">Entfernungseinheit</label>
+            <label lang="nl-NL">Afstandseenheid</label>
+            <options>
+                <option>
+                    <id>miles</id>
+                    <name>Miles</name>
+                    <name lang="de-DE">Meilen</name>
+                    <name lang="nl-NL">Miles</name>
+                </option>
+                <option>
+                    <id>km</id>
+                    <name>Kilometres</name>
+                    <name lang="de-DE">Kilometer</name>
+                    <name lang="nl-NL">Kilometer</name>
+                </option>
+            </options>
+            <defaultValue>km</defaultValue>
+            <required>true</required>
+        </input-field>
+        <input-field type="bool">
+            <name>showLocalMarker</name>
+            <label>Show local marker</label>
+            <label lang="de-DE">Zeige eigene Position auf der Karte</label>
+            <label lang="nl-NL">Eigen positie op de kaart weergeven</label>
+            <helpText>Adds a marker to the map on the desired location (either by browser location or manual input)</helpText>
+            <helpText lang="de-DE">Wenn aktiv, wird die eigene Position als Marker auf der Karte ausgegeben</helpText>
+            <helpText lang="nl-NL">Indien actief, wordt de eigen positie weergegeven als een marker op de kaart.</helpText>
+        </input-field>
+        <input-field type="bool">
+            <name>focusLocalMarker</name>
+            <label>Focus local marker on search</label>
+            <label lang="de-DE">Fokussiere eigene Position bei Suche</label>
+            <label lang="nl-NL">Focus eigen positie in zoekopdrachten</label>
+            <helpText>When the search is executed, the local marker will be also fitted within the other markers.</helpText>
+            <helpText lang="de-DE">Wenn aktiv, wird die eigene Position in das Zoomen der gesamten Marker einbezogen.</helpText>
+            <helpText lang="nl-NL">Indien actief, wordt de eigen positie meegenomen in het zoomen van de volledige markers.</helpText>
+        </input-field>
+        <component name="sw-media-field">
+            <name>googleMapIcon</name>
+            <label>Custom icon</label>
+            <label lang="de-DE">Benutzerdefiniertes Icon</label>
+            <label lang="nl-NL">Aangepast Pictogram</label>
+            <helpText>Custom icon in the map - empty for default</helpText>
+            <helpText lang="de-DE">Ein alternatives Icon in der Karte - leer lassen für Standard</helpText>
+            <helpText lang="nl-NL">Een alternatief pictogram in de kaart - leeg laten voor standaard</helpText>
+        </component>
+    </card>
+
+    <card>
+        <title>GDPR</title>
+        <title lang="de-DE">DSGVO</title>
+        <title lang="nl-NL">GDPR</title>
+        <input-field type="bool">
+            <name>requireCookieForGoogleMaps</name>
+            <label>Require user confirmation to use google maps</label>
+            <label lang="de-DE">Benutzerbestätigung für die Verwendung von Google Maps erforderlich</label>
+            <label lang="nl-NL">Gebruikersbevestiging vereist voor het gebruik van Google Maps</label>
+            <helpText>The user must confirm the loading of Google maps before he can use any Google services (like the Map on the StoreLocator)</helpText>
+            <helpText lang="de-DE">Der Kunde muss bestätigen, dass die Google Maps API geladen werden darf bevor dieser beispielsweise den Filialfinder verwenden kann.</helpText>
+            <helpText lang="nl-NL">De klant moet bevestigen dat de Google Maps API mag worden geladen voordat hij bijvoorbeeld de winkelzoeker kan gebruiken.</helpText>
+            <defaultValue>false</defaultValue>
+        </input-field>
+        <input-field type="int">
+            <name>cookieLifetime</name>
+            <label>Cookie lifetime (in days)</label>
+            <label lang="de-DE">Cookie Laufzeit (in Tagen)</label>
+            <label lang="nl-NL">Duur van het cookie (in dagen)</label>
+            <defaultValue>30</defaultValue>
+        </input-field>
+    </card>
+
+    <card>
+        <title>Filter</title>
+        <title lang="de-DE">Filter</title>
+        <title lang="nl-NL">Filter</title>
+
+        <input-field type="bool">
+            <name>enableFilterOnlyFeatured</name>
+            <label>Enable filter "Show only featured stores"</label>
+            <label lang="de-DE">Aktiviere Filter "Nur hervorgehobene Filialien anzeigen"</label>
+            <label lang="nl-NL">Activeer filter "Toon alleen gemarkeerde filialen".</label>
+            <helpText>Defines if the filter is shown in the storefront. The filter can still be used using GET-Parameters.</helpText>
+            <helpText lang="de-DE">Definiert ob der Filter in der Storefront angezeigt wird. Der Filter kann weiterhin mittels GET-Parameter gesteuert werden.</helpText>
+            <helpText lang="nl-NL">Bepaalt of het filter wordt weergegeven in de winkelpui. Het filter kan nog steeds worden geregeld door middel van GET-parameters.</helpText>
+            <defaultValue>false</defaultValue>
+        </input-field>
+
+        <input-field type="bool">
+            <name>showIndividualFiltersInOffCanvas</name>
+            <label>Show custom filters in off canvas</label>
+            <label lang="de-DE">Individuelle Filter werden im OffCanvas angezeigt</label>
+            <label lang="nl-NL">Individuele filters worden weergegeven in het OffCanvas.</label>
+            <helpText>If enabled and custom filters are configured, the filters are shown in offcanvas.</helpText>
+            <helpText lang="de-DE">Wenn aktiviert und eigene Filter konfiguriert sind, werden die Filter im OffCanvas angezeigt.</helpText>
+            <helpText lang="nl-NL">Indien geactiveerd en aangepaste filters zijn geconfigureerd, worden de filters weergegeven in het OffCanvas.</helpText>
+            <defaultValue>false</defaultValue>
+        </input-field>
+
+        <input-field type="single-select">
+            <name>filterTagMode</name>
+            <label>Filter mode for tags</label>
+            <label lang="de-DE">Filter-Modus für Tags</label>
+            <label lang="nl-NL">Filtermodus voor tags</label>
+            <helpText>Selection of the filter mode for tags. Either all selected tags must match the store or only at least one.</helpText>
+            <helpText lang="de-DE">Auswahl des Filter-Modus für Tags. Entweder müssen alle ausgewählten Tags der Filiale entsprechen oder nur mindestens einer.</helpText>
+            <helpText lang="nl-NL">Selectie van de filtermodus voor tags. Ofwel moeten alle geselecteerde tags overeenkomen met de tak, ofwel slechts één.</helpText>
+            <defaultValue>one</defaultValue>
+            <options>
+                <option>
+                    <id>one</id>
+                    <name>At least one tag must match</name>
+                    <name lang="de-DE">Mindestens ein Tag muss passen</name>
+                    <name lang="nl-NL">Ten minste één dag moet passen</name>
+                </option>
+                <option>
+                    <id>all</id>
+                    <name>All tags must match</name>
+                    <name lang="de-DE">Alle Tags müssen passen</name>
+                    <name lang="nl-NL">Alle tags moeten passen</name>
+                </option>
+            </options>
+        </input-field>
+
+        <input-field type="bool">
+            <name>clearSearchOnCountryChange</name>
+            <label>Clear search input when selected country is changed</label>
+            <label lang="de-DE">Leere Suchfeld wenn das Suchland geändert wird</label>
+            <label lang="nl-NL">Leeg zoekveld wanneer het zoekland wordt gewijzigd</label>
+            <defaultValue>false</defaultValue>
+        </input-field>
+
+        <input-field type="bool">
+            <name>filterShowAlways</name>
+            <label>Show filters permanently</label>
+            <label lang="de-DE">Filter dauerhaft anzeigen</label>
+            <label lang="nl-NL">Filters permanent tonen</label>
+            <helpText>If enabled, the filter be shown always. The option "Show custom filters in off canvas" will overwrite this behavior.</helpText>
+            <helpText lang="de-DE">Wenn aktiv, wird der Filter dauerhaft angezeigt. Die Option "Individuelle Filter werden im OffCanvas angezeigt" überschreibt diese Funktion.</helpText>
+            <helpText lang="nl-NL">Indien actief, wordt het filter permanent weergegeven. De optie "Individuele filters worden weergegeven in het OffCanvas" heft deze functie op.</helpText>
+            <defaultValue>false</defaultValue>
+        </input-field>
+    </card>
+
+    <card>
+        <title>Order finish page</title>
+        <title lang="de-DE">Bestellbestätigungsseite</title>
+        <title lang="nl-NL">Pagina voor orderbevestiging</title>
+
+        <input-field type="bool">
+            <name>showStoresOnOrderFinish</name>
+            <label>Show stores on order finish page</label>
+            <label lang="de-DE">Stores auf Bestellbestätigungsseite anzeigen</label>
+            <label lang="nl-NL">Toon winkels op orderbevestigingspagina</label>
+            <helpText>The nearest stores according to the customers shipping/billing address will be displayed below the order summary.</helpText>
+            <helpText lang="de-DE">Zeigt die nächstgelegenten Filialen entsprechend der Liefer-/Rechnungsadresse unter der Bestellübersicht an.</helpText>
+            <helpText lang="nl-NL">De dichtstbijzijnde winkels volgens het aflever-/factuuradres van de klant worden onder het besteloverzicht weergegeven.</helpText>
+            <defaultValue>false</defaultValue>
+        </input-field>
+
+        <input-field type="int">
+            <name>orderFinishStoreCount</name>
+            <label>Number of stores</label>
+            <label lang="de-DE">Anzahl der Stores</label>
+            <label lang="nl-NL">Aantal winkels</label>
+            <defaultValue>5</defaultValue>
+            <placeholder>5</placeholder>
+        </input-field>
+
+        <input-field type="single-select">
+            <name>orderFinishAddressType</name>
+            <label>Address type</label>
+            <label lang="de-DE">Berücksichtigung der Adresse</label>
+            <label lang="nl-NL">Adres overweging</label>
+            <options>
+                <option>
+                    <id>shipping</id>
+                    <name>Shipping address</name>
+                    <name lang="de-DE">Lieferadresse</name>
+                    <name lang="nl-NL">Afleveradres</name>
+                </option>
+                <option>
+                    <id>billing</id>
+                    <name>Billing address</name>
+                    <name lang="de-DE">Rechnungsadresse</name>
+                    <name lang="nl-NL">Factuuradres</name>
+                </option>
+            </options>
+            <defaultValue>shipping</defaultValue>
+            <placeholder>Shipping address</placeholder>
+            <placeholder lang="de-DE">Lieferadresse</placeholder>
+            <placeholder lang="nl-NL">Afleveradres</placeholder>
+        </input-field>
+
+        <input-field type="single-select">
+            <name>orderFinishDisplayType</name>
+            <label>Display type</label>
+            <label lang="de-DE">Darstellung</label>
+            <label lang="nl-NL">Vertegenwoordiging</label>
+            <options>
+                <option>
+                    <id>list</id>
+                    <name>List</name>
+                    <name lang="de-DE">Liste</name>
+                    <name lang="nl-NL">Lijst</name>
+                </option>
+            </options>
+            <defaultValue>list</defaultValue>
+            <placeholder>List</placeholder>
+            <placeholder lang="de-DE">Liste</placeholder>
+            <placeholder lang="nl-NL">Lijst</placeholder>
+        </input-field>
+    </card>
+</config>

@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/shopware/platform/trunk/src/Core/System/SystemConfig/Schema/config.xsd">
+
+    <card>
+        <title>Basic settings</title>
+        <title lang="de-DE">Grundeinstellungen</title>
+        <input-field>
+            <name>pixelIds</name>
+            <label>Facebook Pixel ID's</label>
+            <required>true</required>
+            <helpText>Insert your Facebook Pixel ID's here. Separate multiple ID's with a comma.</helpText>
+            <helpText lang="de-DE">Fügen Sie hier Ihre Facebook Pixel ID's ein. Trennen Sie mehrere ID's mit einem Komma.</helpText>
+            <copyable>true</copyable>
+        </input-field>
+        <input-field type="bool">
+            <name>autoConfig</name>
+            <label>Automatic Configuration</label>
+            <label lang="de-DE">Automatische Konfiguration</label>
+            <defaultValue>true</defaultValue>
+            <helpText>With the automatic configuration, the Facebook pixel sends button click data and page metadata (such as structured data according to the Opengraph or Schema.org formats) from the web page to improve ad delivery and metering, and to further automate the pixel setup. The automatic configuration is enabled by Facebook by default. (Recommended)</helpText>
+            <helpText lang="de-DE">Mit der automatischen Konfiguration sendet der Facebook Pixel Button-Klick-Daten und Seiten-Metadaten (wie z. B. entsprechend der Opengraph- oder Schema.org-Formate strukturierte Daten) von der Webseite, um die Anzeigenauslieferung und -messung zu verbessern und das Pixel-Setup zu automatisieren. Die automatische Konfiguration ist seitens Facebook standardmäßig aktiviert. (Empfohlen)</helpText>
+        </input-field>
+    </card>
+    <card>
+        <title>Data transmission</title>
+        <title lang="de-DE">Datenübermittlung</title>
+        <input-field type="bool">
+            <name>includeShippingCosts</name>
+            <label>Include shipping costs in shopping cart and order sums</label>
+            <label lang="de-DE">Versandkosten bei Warenkorb- und Bestellsummen einrechnen</label>
+            <defaultValue>true</defaultValue>
+        </input-field>
+        <input-field type="bool">
+            <name>advancedMatching</name>
+            <label>Advanced Matching</label>
+            <label lang="de-DE">Erweiterter Datenabgleich</label>
+            <defaultValue>false</defaultValue>
+            <helpText>Advanced data matching transmits (if available) customer data such as e-mail address, first name, name, gender, birth date, zip code and billing address location encrypted to Facebook. To do this, the customer must be logged in to his account in the shop. With the data, Facebook can recognize users who were not logged in to Facebook at the time of the visit.</helpText>
+            <helpText lang="de-DE">Der erweiterte Datenabgleich übermittelt (sofern vorhanden) Kundendaten wie E-Mailadresse, Vorname, Name, Geschlecht, Geb.-Datum, PLZ und Ort der Rechnungsadresse verschlüsselt an Facebook. Dazu muss der Kunde in seinem Konto im Shop eingeloggt sein. Mit den Daten kann Facebook Nutzer erkennen, die zum Zeitpunkt des Besuchs nicht auf Facebook eingeloggt waren.</helpText>
+        </input-field>
+        <input-field type="bool">
+            <name>disablePushState</name>
+            <label>Disable automatic PageView events</label>
+            <label lang="de-DE">Automatische PageView Ereignisse deaktivieren</label>
+            <defaultValue>false</defaultValue>
+            <helpText>Recommendation: if conversion API is used = yes, if no conversion API is used = no. You can find out more about this option in our documentation.</helpText>
+            <helpText lang="de-DE">Empfehlung: wenn Conversion API genutzt wird = Ja, wenn keine Conversion API genutzt wird = Nein. Mehr zu dieser Option finden Sie in unserer Dokumentation.</helpText>
+        </input-field>
+    </card>
+</config>

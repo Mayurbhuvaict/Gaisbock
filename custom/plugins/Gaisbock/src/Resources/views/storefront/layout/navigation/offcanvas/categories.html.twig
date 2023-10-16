@@ -1,0 +1,38 @@
+{% sw_extends '@Storefront/storefront/layout/navigation/offcanvas/categories.html.twig' %}
+{# @var navigation \Shopware\Core\Content\Category\Tree\Tree #}
+{% set activeId = navigation.active.id ?? context.salesChannel.navigationCategoryId %}
+{% set isRoot = activeId == context.salesChannel.navigationCategoryId %}
+{% set children = navigation.getChildren(activeId) %}
+{% set active = navigation.active %}
+
+{% block layout_navigation_offcanvas_navigation_categories %}
+    <div class="navigation-offcanvas-container js-navigation-offcanvas">
+        <div class="navigation-offcanvas-overlay-content js-navigation-offcanvas-overlay-content">
+            <ul class="list-unstyled navigation-offcanvas-list">
+                {# @var item \Shopware\Core\Content\Category\Tree\TreeItem #}
+                {% for item in navigation.tree %}
+                    {% sw_include '@Storefront/storefront/layout/navigation/offcanvas/item-link.html.twig' with { item: item, activeId: activeId } %}
+                {% endfor %}
+                <li class="navigation-offcanvas-list-item">
+                    <div class="gaisbock-category-accordion accordion accordion-flush" id="gaisbockAccordion">
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="gaisbock-heading">
+                                {% if context.customer == null %}
+                                    <a href="{{ path('frontend.account.login.page') }}"
+                                       itemprop="url">{{ "account.loginSubmit"|trans|sw_sanitize }}</a>
+                                {% else %}
+                                    <a href="{{ path('frontend.account.logout.page') }}" itemprop="url">
+                                        {{ "account.logout"|trans|sw_sanitize }}
+                                    </a>
+                                {% endif %}
+                                <div class="accordion-button collapsed" type="button">
+
+                                </div>
+                            </h2>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+{% endblock %}

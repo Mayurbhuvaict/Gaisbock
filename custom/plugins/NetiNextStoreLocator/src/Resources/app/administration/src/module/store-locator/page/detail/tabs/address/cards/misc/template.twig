@@ -1,0 +1,27 @@
+<sw-card
+        :title="$t('neti-store-locator.detailAddress.labelMiscCard')"
+        :isLoading="isLoading"
+        position-identifier="neti-store-locator-detail-address-card-misc"
+>
+    <sw-container columns="1fr 1fr" gap="15px">
+        <sw-text-field
+                v-model="store.phone"
+                :label="$t('neti-store-locator.baseInfo.labelPhone')"
+        ></sw-text-field>
+
+        <sw-text-field
+                v-model="store.fax"
+                :label="$t('neti-store-locator.baseInfo.labelFax')"
+        ></sw-text-field>
+    </sw-container>
+
+    <sw-text-field
+            v-model="store.url"
+            :label="$t('neti-store-locator.baseInfo.labelUrl')"
+    ></sw-text-field>
+
+    <sw-text-field
+        v-model="store.email"
+        :label="$t('neti-store-locator.baseInfo.labelEmail')"
+    ></sw-text-field>
+</sw-card>

@@ -1,0 +1,10 @@
+{% sw_extends '@Storefront/storefront/layout/meta.html.twig' %}
+
+{% block layout_head_javascript_tracking %}
+    {{ parent() }}
+    {% if config('mediameetsFbPixelApp.config.pixelIds') and config('mediameetsFbPixelApp.config.pixelIds') is not empty %}
+        <script>
+            window.mediameetsFacebookPixelData = new Map();
+        </script>
+    {% endif %}
+{% endblock %}

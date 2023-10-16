@@ -1,0 +1,75 @@
+{% block neno_marketing_essentials_newsletter_popup_detail %}
+<div class="neno-marketing-essentials-tabs-detail">
+    <sw-card v-if="tab" position-identifier="nme-tabs-language">
+        <sw-button :routerLink="{ name: 'neno.marketing.essentials.overview.tabsList' }">
+            {{ $t('neno-marketing-essentials.general.cancelButtonText') }}
+        </sw-button>
+        <sw-button-process
+            :isLoading="isLoading"
+            :processSuccess="processSuccess"
+            @process-finish="saveFinish"
+            variant="primary"
+            @click="onClickSave"
+        >
+            {{ $t('neno-marketing-essentials.general.saveButtonText') }}
+        </sw-button-process>
+    </sw-card>
+    <sw-card
+        v-if="tab"
+        :title="$t('neno-marketing-essentials.tabs.detail.generalCardLabel')"
+        position-identifier="nme-tabs-general"
+    >
+        <sw-text-field
+            :label="$t('neno-marketing-essentials.tabs.detail.nameLabel')"
+            v-model="tab.name"
+            :required="true"
+        >
+        </sw-text-field>
+
+        <sw-switch-field
+            :label="$t('neno-marketing-essentials.tabs.detail.isGlobalLabel')"
+            v-model="tab.isGlobal"
+        >
+        </sw-switch-field>
+
+        <sw-select-field
+            :label="$t('neno-marketing-essentials.tabs.detail.displaySettingsLabel')"
+            v-model="tab.display"
+        >
+            <option value="category">{{ $t('neno-marketing-essentials.tabs.detail.displaySettingsOptionCategory') }}</option>
+            <option value="product">{{ $t('neno-marketing-essentials.tabs.detail.displaySettingsOptionProduct') }}</option>
+        </sw-select-field>
+
+        <sw-entity-single-select
+            :label="$t('neno-marketing-essentials.tabs.detail.assignCategoryPageLabel')"
+            v-model="tab.categoryId"
+            entity="category"
+        >
+        </sw-entity-single-select>
+
+        <sw-entity-single-select
+            :label="$t('neno-marketing-essentials.tabs.detail.assignProductPageLabel')"
+            v-model="tab.productId"
+            entity="product"
+        >
+        </sw-entity-single-select>
+    </sw-card>
+    <sw-card
+        v-if="tab"
+        :title="$t('neno-marketing-essentials.tabs.detail.contentCardLabel')"
+        position-identifier="nme-tabs-content"
+    >
+        <sw-text-field
+            :label="$t('neno-marketing-essentials.tabs.detail.textLabel')"
+            v-model="tab.text"
+        >
+        </sw-text-field>
+
+        <sw-media-field
+            :label="$t('neno-marketing-essentials.tabs.detail.faviconLabel')"
+            v-model="tab.faviconId"
+        >
+        </sw-media-field>
+    </sw-card>
+</div>
+{% endblock %}

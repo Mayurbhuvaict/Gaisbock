@@ -1,0 +1,23 @@
+<?xml version="1.0" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services https://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <services>
+
+        <service id="ProxaBasketCrossSellingSW6\Service\GetSliderProductsService">
+            <argument type="service" id="Shopware\Core\System\SystemConfig\SystemConfigService" />
+            <argument type="service" id="sales_channel.product.repository"/>
+            <argument type="service" id="product_cross_selling.repository"/>
+            <argument type="service" id="product_stream.repository"/>
+            <argument type="service" id="Shopware\Core\Content\ProductStream\Service\ProductStreamBuilder"/>
+            <argument type="service" id="Doctrine\DBAL\Connection"/>
+        </service>
+
+        <service class="ProxaBasketCrossSellingSW6\Subscriber\Storefront\EventSubscriber" id="proxa_basket_cross_selling_sw6.subscriber.storefront.event_subscriber">
+            <argument type="service" id="ProxaBasketCrossSellingSW6\Service\GetSliderProductsService"/>
+            <tag name="kernel.event_subscriber"/>
+        </service>
+    </services>
+</container>

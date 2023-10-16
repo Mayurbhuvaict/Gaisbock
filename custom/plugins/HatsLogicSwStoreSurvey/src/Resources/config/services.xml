@@ -1,0 +1,34 @@
+<?xml version="1.0" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <services>
+        <service id="HatsLogic\HatsLogicSwStoreSurvey\Storefront\Controller\ShoppingExperienceController" public="true">
+             <argument type="service" id="s_plugin_hatslogic_shopping_experiences.repository" />
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+            <call method="setTwig">
+                <argument type="service" id="twig"/>
+            </call>
+        </service>
+
+        <service id="HatsLogic\HatsLogicSwStoreSurvey\Resources\snippet\en_GB\SnippetFile_en_GB" public="true">
+            <tag name="shopware.snippet.file"/>
+        </service>
+
+        <service id="HatsLogic\HatsLogicSwStoreSurvey\Resources\snippet\de_DE\SnippetFile_de_DE" public="true">
+            <tag name="shopware.snippet.file"/>
+        </service>
+
+        <service id="HatsLogic\HatsLogicSwStoreSurvey\Core\Content\StoreSurvey\ShoppingExperienceDefinition">
+            <tag name="shopware.entity.definition" entity="s_plugin_hatslogic_shopping_experiences" />
+        </service>
+
+        <service id="HatsLogic\HatsLogicSwStoreSurvey\Subscriber\ShoppingExperienceSubscriber">
+            <tag name="kernel.event_subscriber"/>
+            <argument id="Shopware\Core\System\SystemConfig\SystemConfigService" type="service" />
+        </service> 
+    </services>
+</container>

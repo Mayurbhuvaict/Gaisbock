@@ -1,0 +1,19 @@
+{% sw_extends '@Storefront/storefront/component/account/register.html.twig' %}
+
+{% block component_account_register_form_action %}
+    {% if registerPopupId %}
+    <input type="hidden" name="registerPopupId" value="{{ registerPopupId }}" />
+    {% if formViolations.getViolations().count() > 0 %}
+    <!-- __neno-register-form-has-errors -->
+    {% endif %}
+    <script>
+        (function () {
+            window.addEventListener('DOMContentLoaded', function () {
+                var f = document.querySelector('.register-form');
+                f.action = '{{ path('frontend.account.register.withPromotion') }}';
+            });
+        })();
+    </script>
+    {% endif %}
+    {{ parent() }}
+{% endblock %}

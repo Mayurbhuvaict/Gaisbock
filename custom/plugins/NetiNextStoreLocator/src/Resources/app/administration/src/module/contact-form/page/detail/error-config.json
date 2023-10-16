@@ -1,0 +1,8 @@
+{
+    "neti.store_locator.contact_form.detail.base": {
+        "entity": [
+            "label",
+            "type"
+        ]
+    }
+}

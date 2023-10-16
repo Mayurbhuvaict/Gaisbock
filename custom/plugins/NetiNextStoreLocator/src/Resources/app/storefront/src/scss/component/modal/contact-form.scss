@@ -1,0 +1,29 @@
+.modal.contact-form {
+  input.form-control.invalid-file-type {
+    border-color: red;
+  }
+  
+  span.invalid-file-type-error {
+    color: red;
+  }
+  
+  .modal-content {
+    &:after {
+      display: block;
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0, 0, 0, 0.5);
+      opacity: 0;
+      transition: opacity .45s cubic-bezier(.3, 0, .15, 1), visibility .45s linear;
+      pointer-events: none;
+    }
+  }
+  
+  &.child-modal-shown .modal-content:after {
+    opacity: 0.5;
+  }
+}

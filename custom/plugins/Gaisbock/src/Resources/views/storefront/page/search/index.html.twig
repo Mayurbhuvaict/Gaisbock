@@ -1,0 +1,30 @@
+{% sw_extends '@Storefront/storefront/base.html.twig' %}
+
+{% block base_content %}
+    <div class="search" domain="{{ activeRoute }}">
+
+    </div>
+    {% block page_search %}
+        <div class="cms-page search-page">
+            <div class="row">
+                <div class="col-md-2 search-left">
+                    {% block page_search_headline %}
+                        <h1 class="search-headline mt-5">
+                            {% block page_search_headline_text %}
+
+                                {% if page.listing.total == 0 %}
+                                    {{ "search.noCount"|trans }}
+                                {% else %}
+                                    {{ "search.headline"|trans|sw_sanitize }}
+                                {% endif %}
+                            {% endblock %}
+                        </h1>
+                    {% endblock %}
+                </div>
+                <div class="col-md-10 search-right">
+                    {% sw_include '@Storefront/storefront/page/search/search-pagelet.html.twig' with { page: page } %}
+                </div>
+            </div>
+        </div>
+    {% endblock %}
+{% endblock %}

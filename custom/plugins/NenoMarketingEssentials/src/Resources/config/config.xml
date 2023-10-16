@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/shopware/platform/master/src/Core/System/SystemConfig/Schema/config.xsd">
+    <card>
+        <title>Info</title>
+        <title lang="de-DE">Info</title>
+
+        <component name="neno-info-config-field">
+            <name>nenoInfoConfigField</name>
+        </component>
+
+        <component name="neno-hidden-config-field">
+            <name>freeShippingBarActive</name>
+            <defaultValue>false</defaultValue>
+        </component>
+
+        <component name="neno-hidden-config-field">
+            <name>onlyShowIfProductAdded</name>
+            <defaultValue>false</defaultValue>
+        </component>
+
+        <component name="neno-hidden-config-field">
+            <name>freeShippingBarPosition</name>
+            <options>
+                <option>
+                    <id>top</id>
+                    <name>top</name>
+                </option>
+                <option>
+                    <id>bottom</id>
+                    <name>bottom</name>
+                </option>
+            </options>
+            <defaultValue>top</defaultValue>
+        </component>
+
+        <component name="neno-hidden-config-field">
+            <name>freeShippingBarGoal</name>
+        </component>
+
+        <component name="neno-hidden-config-field">
+            <name>includeShippingCosts</name>
+            <defaultValue>false</defaultValue>
+        </component>
+
+        <component name="neno-hidden-config-field">
+            <name>freeShippingBarBackgroundColor</name>
+            <defaultValue>#000000</defaultValue>
+            <disabled>true</disabled>
+        </component>
+
+        <component name="neno-hidden-config-field">
+            <name>freeShippingBarTextColor</name>
+            <defaultValue>#ffffff</defaultValue>
+            <disabled>true</disabled>
+        </component>
+
+        <component name="neno-hidden-config-field">
+            <name>freeShippingBarIcon</name>
+        </component>
+    </card>
+</config>

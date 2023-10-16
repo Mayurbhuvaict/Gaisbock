@@ -1,0 +1,99 @@
+{
+    "neti-next-store-locator": {
+        "index": {
+            "title": "Händlersuche",
+            "description": "Händlersuche - finden Sie Ihre Stores in der Nähe.",
+            "localMarkerTitle": "Sie sind hier.",
+            "search": {
+                "autocompleteNoResults": "Keine Ergebnisse",
+                "filterNoResults": "Leider gibt es keine Ergebnisse für Ihre Suchanfrage.",
+                "filterNoResultsManualLoading": "Es wurden noch keine Filialen geladen. Starten Sie eine Suche, damit hier Filialen angezeigt werden.",
+                "filterNoResultsKeywordsRequired": "Bitte geben Sie einen Suchbegriff ein um Ergebnisse zu sehen.",
+                "filterHeader": "Filter",
+                "fieldRadius": "Radius",
+                "fieldRadiusPlaceholder": "Radius auswählen",
+                "fieldOrder": "Reihenfolge",
+                "buttonReset": "Zurücksetzen",
+                "buttonSearch": "Suchen",
+                "placeholder": "Filiale finden...",
+                "onlyFeatured": "Nur hervorgehobene Filialien anzeigen",
+                "placeholderCountryFilter": "Suche...",
+                "noCountriesText": "Keine Länder gefunden.",
+                "filterSelectPlaceholder": "Keine Auswahl",
+                "allCountriesLabel": "Alle Länder",
+                "order": {
+                    "distance": "Entfernung",
+                    "country": "Land",
+                    "name": "Name",
+                    "random": "Zufällig"
+                },
+                "filterLabels": {
+                    "bool": {
+                        "false": "Nein",
+                        "true": "Ja"
+                    }
+                }
+            },
+            "contact": {
+                "title": "Kontakt zu {{ store.label }}",
+                "selectPlaceholder": "Bitte wählen Sie",
+                "emailCopyLabel": "Möchten Sie eine Kopie erhalten?",
+                "buttonAbort": "Abbrechen",
+                "buttonSubmit": "Absenden",
+                "loadingText": "Lade...",
+                "successText": "Ihre Nachricht wurde erfolgreich gesendet.",
+                "errorText": "Etwas ist schief gelaufen. Bitte versuchen Sie es noch einmal.",
+                "invalidFileTypeError": "Es sind nur folgende Datei-Typen erlaubt: "
+            },
+            "print": {
+                "title": "Route zu {{ store.label }}",
+                "loadingText": "Lade...",
+                "labelFrom": "Start",
+                "labelTo": "Ziel",
+                "labelDistance": "Entfernung",
+                "labelDuration": "Dauer",
+                "buttonPrint": "Drucken",
+                "error": "Leider konnten wir keine Route zu diesem Ort finden."
+            },
+            "store": {
+                "loadingText": "Lade...",
+                "labelTelephone": "Tel.",
+                "labelFax": "Fax.",
+                "labelEmail": "E-Mail:",
+                "labelAllCountries": "Alle Länder",
+                "labelDistance": "Entfernung:",
+                "labelOpeningTimes": "Öffnungszeiten",
+                "buttonContact": "Kontakt",
+                "buttonDetails": "Details",
+                "buttonRoute": "Route",
+                "buttonSelect": "Auswählen",
+                "buttonSelected": "Ausgewählt",
+                "open": "Geöffnet",
+                "closed": "Geschlossen",
+                "differentTimeZone": "Die Öffnungszeiten werden in der Zeitzone der Filiale(%storeTimezone%) angezeigt. Sie haben eine andere Zeitzone(%userTimezone%)."
+            }
+        },
+        "detail": {
+            "backToOverview": "zurück zur Übersicht",
+            "openDays": "Spezielle Öffnungszeiten:",
+            "closeDays": "Spezielle Schließzeiten:"
+        },
+        "cookie": {
+            "google-consent": {
+                "name": "StoreLocator",
+                "description": "Erlaubt das Laden von Google Maps auf dieser Seite."
+            }
+        },
+        "cookie-consent": {
+            "header": "Google Maps-Zustimmung",
+            "notAllowedText": "Sie haben die Store Locator Cookies noch nicht aktiviert. Klicken Sie dazu auf \"Cookie-Konfigurator öffnen\", aktivieren Sie \"Store Locator\" im Off-Canvas und klicken Sie auf \"Speichern\".",
+            "allowedText": "Diese Seite benötigt Google Maps, um richtig zu funktionieren. Klicken Sie auf \"Weiter\", um zuzustimmen.",
+            "configuratorButton": "Cookie-Konfigurator öffnen",
+            "continueButton": "Weiter",
+            "abortButton": "Abbrechen"
+        },
+        "checkout-stores": {
+            "header": "Nächstgelegene Filialen"
+        }
+    }
+}

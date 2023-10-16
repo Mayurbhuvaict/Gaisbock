@@ -1,0 +1,21 @@
+<sw-card
+        :title="$t('neti-store-locator.detailBase.labelMiscCard')"
+        :isLoading="isLoading"
+        position-identifier="neti-store-locator-detail-misc"
+>
+    <sw-text-editor
+            :label="$t('neti-store-locator.baseInfo.labelDescription')"
+            v-model="store.description"
+    ></sw-text-editor>
+
+    <sw-text-editor
+        v-model="store.additionalInformation"
+        :label="$t('neti-store-locator.baseInfo.labelAdditionalInformation')"
+        :helpText="$t('neti-store-locator.baseInfo.helpAdditionalInformation')"
+    ></sw-text-editor>
+
+    <sw-text-editor
+            :label="$t('neti-store-locator.baseInfo.labelOpeningTimes')"
+            v-model="store.openingTimes"
+    ></sw-text-editor>
+</sw-card>

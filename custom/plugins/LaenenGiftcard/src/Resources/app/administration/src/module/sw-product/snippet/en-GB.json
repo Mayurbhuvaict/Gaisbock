@@ -1,0 +1,19 @@
+{
+    "lae-giftcard": {
+        "sw-product-detail-base": {
+            "enabled": "Is Giftcard product",
+            "valuesTitle": "Giftcard amounts",
+            "valuesIntro": "Your customer can choose the amount of the giftcard. You can limit amounts by setting the minimum and maximum.",
+            "minValue": "Minimum amount",
+            "defaultValue": "Default amount",
+            "maxValue": "Maximum amount",
+            "designTitle": "Design",
+            "designIntro": "Configure the options below to tweak the look and feel of your giftcard. Choose the Template you want to use first, as every template can have different configuration fields.",
+            "designTemplate": "Template",
+            "simpleDesign": "Design (Optimal size: 1040 x 650 px)"
+        },
+        "designType": {
+            "simple": "Simple"
+        }
+    }
+}

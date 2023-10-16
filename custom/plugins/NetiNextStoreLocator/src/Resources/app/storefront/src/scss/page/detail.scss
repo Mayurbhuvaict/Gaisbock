@@ -1,0 +1,65 @@
+.is-ctl-storelocator.is-act-detail {
+  .content-main > .container {
+    padding: 0;
+  }
+  
+  .neti-next-store-locator-detail {
+    .map-container {
+      @media screen and (min-width: 1024px) {
+        position: absolute;
+        left: 0;
+        right: 0;
+      }
+      
+      #map {
+        height: 150px;
+        
+        @media screen and (min-width: 1024px) {
+          height: 250px;
+        }
+      }
+    }
+    
+    .header {
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+      margin: 10px 0;
+      
+      @media screen and (min-width: 1024px) {
+        padding-top: 250px;
+      }
+      
+      .label {
+        padding: 20px 0 15px;
+        font-size: 20px;
+        white-space: nowrap;
+        flex: 1;
+      }
+      
+      .logo {
+        img {
+          max-height: 50px;
+          max-width: 200px;
+        }
+      }
+    }
+    
+    .description,
+    .address,
+    .neti-store-locator-detail__buiness-hours-week,
+    .neti-store-locator-detail__business-hours-open-special,
+    .neti-store-locator-detail__business-hours-closed-special,
+    .additional-info,
+    .additional-text {
+      padding-bottom: 1rem;
+    }
+    
+    .back-button {
+      margin: 15px auto;
+      display: block;
+      max-width: 200px;
+    }
+  }
+}

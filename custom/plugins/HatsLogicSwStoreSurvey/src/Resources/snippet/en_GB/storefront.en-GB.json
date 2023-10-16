@@ -1,0 +1,15 @@
+{
+    "hlStoreSurvey": {
+        "shopExperience": {
+            "submitButtonText": "Submit",
+            "cancelButtonText": "Cancel",
+            "successMessage": "Thank you for submitting your review!",
+            "errorMessage" : "There was an error in your review. Please try again!"
+        },
+        "general":{
+            "required" : "*",
+            "checkoutLinkText" : "Please click here to improve your shopping experience",
+            "treeHeadSelected": "{count} selected"
+        }
+    }
+}

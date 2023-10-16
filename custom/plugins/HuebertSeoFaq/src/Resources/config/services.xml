@@ -1,0 +1,47 @@
+<?xml version="1.0" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <services>
+        <service id="Huebert\SeoFaq\Core\Content\SeoFaqGroup\SeoFaqGroupDefinition">
+            <tag name="shopware.entity.definition" entity="hueb_seo_faq_group"/>
+        </service>
+
+        <service id="Huebert\SeoFaq\Core\Content\SeoFaqGroup\Aggregate\SeoFaqGroupTranslation\SeoFaqGroupTranslationDefinition">
+            <tag name="shopware.entity.definition" entity="hueb_seo_faq_group_translation"/>
+        </service>
+
+        <service id="Huebert\SeoFaq\Core\Content\SeoFaqQuestions\SeoFaqQuestionsDefinition">
+            <tag name="shopware.entity.definition" entity="hueb_seo_faq_questions"/>
+        </service>
+
+        <service id="Huebert\SeoFaq\Core\Content\SeoFaqQuestions\Aggregate\SeoFaqQuestionsTranslation\SeoFaqQuestionsTranslationDefinition">
+            <tag name="shopware.entity.definition" entity="hueb_seo_faq_questions_translation"/>
+        </service>
+
+        <service id="Huebert\SeoFaq\Storefront\Controller\SeoFaqController" public="true">
+            <argument type="service" id="Shopware\Storefront\Page\GenericPageLoader"/>
+            <argument type="service" id="hueb_seo_faq_questions.repository"/>
+            <argument type="service" id="hueb_seo_faq_group.repository"/>
+
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+            <call method="setTwig">
+                <argument type="service" id="twig"/>
+            </call>
+        </service>
+
+        <service id="Huebert\SeoFaq\Subscriber\FooterPageletSubscriber">
+            <argument type="service" id="Shopware\Core\System\SystemConfig\SystemConfigService"/>
+            <tag name="kernel.event_subscriber"/>
+        </service>
+
+        <service id="Huebert\SeoFaq\DataResolver\HuebFaqCmsElementResolver">
+            <argument type="service" id="hueb_seo_faq_questions.repository"/>
+            <tag name="shopware.cms.data_resolver" />
+        </service>
+    </services>
+</container>

@@ -1,0 +1,41 @@
+{
+  "name": "studiosolid/product-hover-cover",
+  "description": "Add hover images to products in Shopware 6 easily",
+  "version": "2.0.2",
+  "type": "shopware-platform-plugin",
+  "license": "proprietary",
+  "authors": [
+    {
+      "name": "Studio Solid",
+      "homepage": "https://www.studio-solid.de"
+    }
+  ],
+  "require": {
+    "shopware/core": "6.5.x"
+  },
+  "autoload": {
+    "psr-4": {
+      "StudioSolid\\ProductHoverCover\\": "src/"
+    }
+  },
+  "extra": {
+    "shopware-plugin-class": "StudioSolid\\ProductHoverCover\\SolidProductHoverCover",
+    "copyright": "(c) by Studio Solid",
+    "label": {
+      "de-DE": "Produkt Hover-Cover | Hover-Bilder für Produkte",
+      "en-GB": "Product hover cover | Add hover images to products"
+    },
+    "description" : {
+      "de-DE": "Produkt Hover-Bilder ganz einfach in Shopware 6 einbinden",
+      "en-GB": "Add hover images to products in Shopware 6 easily"
+    },
+    "manufacturerLink" : {
+      "de-DE" : "https://www.studio-solid.de/",
+      "en-GB" : "https://www.studio-solid.de/"
+    },
+    "supportLink" : {
+      "de-DE" : "https://www.studio-solid.de/",
+      "en-GB" : "https://www.studio-solid.de/"
+    }
+  }
+}

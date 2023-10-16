@@ -1,0 +1,75 @@
+{% if page.extensions.netiStores %}
+    <div class="neti-store-locator-checkout-stores-container">
+        <div class="container-header">
+            {{ "neti-next-store-locator.checkout-stores.header"|trans }}
+        </div>
+
+        {% for store in page.extensions.netiStores.stores %}
+            <div class="container-store">
+                <div class="header">
+                    <div class="label">
+                        <a href="{{ url('frontend.store_locator.detail', { id: store.id }) }}">
+                            {{ store.label }}
+                        </a>
+                    </div>
+                    {% if store.pictureMedia.url %}
+                        <div class="logo">
+                            <img src="{{ store.pictureMedia.url }}" alt="{{ store.label }}">
+                        </div>
+                    {% endif %}
+
+                    <span class="badge badge-info value">
+                        {{ store.extensions.netiDistance.value|round }} {{ config('NetiNextStoreLocator.config.distanceUnit') }}
+                    </span>
+                </div>
+
+                <div class="address">
+                    {{ store.street }} {{ store.streetNumber }}<br />
+                    {{ store.zipCode }} {{ store.city }}<br />
+                    {% if store.country %}
+                        {{ store.country.name }}
+                    {% endif %}
+                </div>
+
+                {% if store.translated.openingTimes %}
+                    <div class="opening-times">
+                        <strong>
+                            {{ "neti-next-store-locator.index.store.labelOpeningTimes"|trans }}
+                        </strong>
+                        <div>
+                            {{ store.translated.openingTimes|sw_sanitize }}
+                        </div>
+                    </div>
+                {% endif %}
+
+                <div class="additional-info">
+                    {% if store.phone %}
+                        <strong>{{ "neti-next-store-locator.index.store.labelTelephone"|trans }}</strong>
+                        <a href="tel:{{ store.phone|escape }}">
+                            {{ store.phone }}
+                        </a>
+                        <br />
+                    {% endif %}
+                    {% if store.fax %}
+                        <strong>{{ "neti-next-store-locator.index.store.labelFax"|trans }}</strong>
+                        {{ store.fax }}
+                        <br />
+                    {% endif %}
+                    {% if store.email %}
+                        <strong>{{ "neti-next-store-locator.index.store.labelEmail"|trans }}</strong>
+                        <a href="mailto:{{ store.email|escape }}">
+                            {{ store.email }}
+                        </a>
+                        <br />
+                    {% endif %}
+                    {% if store.url %}
+                        <a href="{{ store.url|escape }}" target="_blank">
+                            {{ store.url }}
+                        </a>
+                        <br />
+                    {% endif %}
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+{% endif %}

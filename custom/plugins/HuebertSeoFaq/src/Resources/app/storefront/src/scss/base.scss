@@ -1,0 +1,75 @@
+.hueb-seo-faq__question {
+    margin-bottom: 0;
+    font-size: large;
+}
+
+.hueb-seo-faq__answer {
+    display: none;
+    font-size: large;
+    margin-top: 1em;
+    &.--active {
+        display: block;
+    }
+}
+
+.hueb-seo-faq__answer-content {
+    position: relative;
+}
+
+.hueb-seo-faq__box {
+    width: 100%;
+    scroll-margin: 40px;
+    background-color: #f7f7f7;
+    margin: 1em 0 1em 0;
+    padding: 1em;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    position: relative;
+    padding-left: 40px;
+}
+
+.hueb-seo-faq__flex-element {
+    display: flex;
+    justify-content: space-between;
+}
+
+.hueb-seo-faq__flex {
+    display: flex;
+    justify-content: space-between;
+}
+
+.hueb-seo-faq__toggle{
+    position: absolute;
+    transform: translateX(-150%);
+    margin-bottom: 1em;
+    font-size: x-large;
+    font-weight: bolder;
+    line-height: 1em;
+    color: $sw-color-brand-primary;
+    display: none;
+    &.--active {
+        display: block;
+        position: absolute;
+        transform: translateX(-150%);
+    }
+    &.minus.--active {
+        display: block;
+        position: absolute;
+        transform: translateX(-210%);
+    }
+}
+
+.hueb-seo-faq__box-element {
+    background-color: #f7f7f7;
+    margin: 0 0 1em 0;
+    padding: 1em;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    position: relative;
+    padding-left: 40px;
+}
+
+
+.hueb-seo-faq__group {
+    text-align: center;
+}

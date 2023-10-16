@@ -1,0 +1,99 @@
+{
+    "neti-next-store-locator": {
+        "index": {
+            "title": "StoreLocator",
+            "description": "StoreLocator - Find nearby dealers.",
+            "localMarkerTitle": "You are here.",
+            "search": {
+                "autocompleteNoResults": "No results",
+                "filterNoResults": "Unfortunately there are no results for your search query.",
+                "filterNoResultsManualLoading": "No stores have been loaded yet. Start a search so that stores are displayed here.",
+                "filterNoResultsKeywordsRequired": "Please enter search keywords to see results.",
+                "filterHeader": "Filter",
+                "fieldRadius": "Radius",
+                "fieldRadiusPlaceholder": "Select radius",
+                "fieldOrder": "Order",
+                "buttonReset": "Reset",
+                "buttonSearch": "Search",
+                "placeholder": "Search for a store...",
+                "onlyFeatured": "Show only featured stores",
+                "placeholderCountryFilter": "Filter countries...",
+                "noCountriesText": "No countries found.",
+                "filterSelectPlaceholder": "No selection",
+                "allCountriesLabel": "All countries",
+                "order": {
+                    "distance": "Distance",
+                    "country": "Country",
+                    "name": "Name",
+                    "random": "Random"
+                },
+                "filterLabels": {
+                    "bool": {
+                        "false": "No",
+                        "true": "Yes"
+                    }
+                }
+            },
+            "contact": {
+                "title": "Contact to {{ store.label }}",
+                "selectPlaceholder": "Please select",
+                "emailCopyLabel": "Would you like to receive a copy?",
+                "buttonAbort": "Abort",
+                "buttonSubmit": "Submit",
+                "loadingText": "Loading...",
+                "successText": "Your message has been sent successfully.",
+                "errorText": "Something went wrong. Please try again.",
+                "invalidFileTypeError": "Allowed file types: "
+            },
+            "print": {
+                "title": "Route to {{ store.label }}",
+                "loadingText": "Loading...",
+                "labelFrom": "From",
+                "labelTo": "To",
+                "labelDistance": "Distance",
+                "labelDuration": "Duration",
+                "buttonPrint": "Print",
+                "error": "Unfortunately we could not find a route to this location."
+            },
+            "store": {
+                "loadingText": "Loading...",
+                "labelTelephone": "Phone",
+                "labelFax": "Fax",
+                "labelEmail": "Email:",
+                "labelAllCountries": "All countries",
+                "labelDistance": "Distance:",
+                "labelOpeningTimes": "Opening times",
+                "buttonContact": "Contact",
+                "buttonDetails": "Details",
+                "buttonRoute": "Route",
+                "buttonSelect": "Select",
+                "buttonSelected": "Selected",
+                "open": "Open",
+                "closed": "Closed",
+                "differentTimeZone": "Opening times are shown in the store's time zone(%storeTimezone%). You have a different time zone(%userTimezone%)."
+            }
+        },
+        "detail": {
+            "backToOverview": "go back to overview",
+            "openDays": "Special open days:",
+            "closeDays": "Special closed days:"
+        },
+        "cookie": {
+            "google-consent": {
+                "name": "StoreLocator",
+                "description": "Allows Google Maps to be loaded on this page."
+            }
+        },
+        "cookie-consent": {
+            "header": "Google Maps Consent",
+            "notAllowedText": "You don't have enabled the store locator cookies yet. To do so, click on \"Open cookie configurator\", enable \"Store Locator\" in the off canvas and click \"Save\".",
+            "allowedText": "This page requires Google Maps to work properly. Click on \"Continue\" to agree.",
+            "configuratorButton": "Open cookie configurator",
+            "continueButton": "Continue",
+            "abortButton": "Abort"
+        },
+        "checkout-stores": {
+            "header": "Nearest stores"
+        }
+    }
+}

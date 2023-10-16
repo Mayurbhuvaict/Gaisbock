@@ -1,0 +1,56 @@
+{% sw_extends '@Storefront/storefront/layout/meta.html.twig' %}
+
+{% block layout_head_stylesheet %}
+    {{ parent() }}
+
+    {% block solid_instagram_elements_style %}
+        {% if page.cmsPage %}
+            {% for section in page.cmsPage.sections %}
+                {% for block in section.blocks %}
+                    {% for element in block.slots.elements %}
+                        {% if element.type == 'solid-ie-feed' %}
+                            {% block solid_ie_feed_style_config %}
+                                {% set config = element.translated.config %}
+
+                                {% block solid_ie_feed_style_tag %}
+                                    <style>
+                                        {% block solid_ie_feed_style_gutter %}
+                                            {% if config.gutter.value == 'custom' and config.gutterWidthValue.value != '' %}
+                                                .solid-ie-feed.solid-ie-feed-{{ element.id }} .feed-row {
+                                                    {% if config.gutterWidthValue.value != '0' %}
+                                                        {% if config.theme.value != 'instagram' %}
+                                                            margin-top: -{{ config.gutterWidthValue.value ~ config.gutterWidthUnit.value }};
+                                                        {% endif %}
+
+                                                        margin-right: -{{ config.gutterWidthValue.value / 2 ~ config.gutterWidthUnit.value }};
+                                                        margin-left: -{{ config.gutterWidthValue.value / 2 ~ config.gutterWidthUnit.value }};
+                                                    {% else %}
+                                                        {% if config.theme.value != 'instagram' %}
+                                                            margin-top: {{ config.gutterWidthValue.value ~ config.gutterWidthUnit.value }};
+                                                        {% endif %}
+
+                                                        margin-right: {{ config.gutterWidthValue.value / 2 ~ config.gutterWidthUnit.value }};
+                                                        margin-left: {{ config.gutterWidthValue.value / 2 ~ config.gutterWidthUnit.value }};
+                                                    {% endif %}
+                                                }
+
+                                                .solid-ie-feed.solid-ie-feed-{{ element.id }} .feed-col {
+                                                    {% if config.theme.value != 'instagram' %}
+                                                        margin-top: {{ config.gutterWidthValue.value ~ config.gutterWidthUnit.value }};
+                                                    {% endif %}
+
+                                                    padding-right: {{ config.gutterWidthValue.value / 2 ~ config.gutterWidthUnit.value }};
+                                                    padding-left: {{ config.gutterWidthValue.value / 2 ~ config.gutterWidthUnit.value }};
+                                                }
+                                            {% endif %}
+                                        {% endblock %}
+                                    </style>
+                                {% endblock %}
+                            {% endblock %}
+                        {% endif %}
+                    {% endfor %}
+                {% endfor %}
+            {% endfor %}
+        {% endif %}
+    {% endblock %}
+{% endblock %}

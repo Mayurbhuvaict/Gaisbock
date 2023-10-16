@@ -1,0 +1,125 @@
+{% block cms_element_gaisbock_custom_text_image_slider %}
+    {% set sliderConfig = element.fieldConfig.elements %}
+    {% set baseSliderOptions = {
+        slider: {
+            navPosition: 'bottom',
+            speed: 300,
+            autoplayTimeout: 5000,
+            autoplay: false,
+            autoplayButtonOutput: false,
+            nav: true,
+            controls: true,
+            autoHeight: true
+        }
+    } %}
+<div class="cms-element-{{ element.type }} has-vertical-alignment">
+    <div class="col gaisbock-custom-text-image-slider-component-cover-image-block">
+        <div class="col gaisbock-custom-text-image-slider-component-cover-image-block-media">
+            <img src="{{ element.config.coverUrl.value }}" alt="coverImage"/>
+        </div>
+    </div>
+    <div class="col gaisbock-custom-text-image-slider-component-text-block">
+        <div class="gaisbock-custom-text-image-slider-component-text-block-contentTitle">
+            <b>{{ element.config.contentTitle.value }}</b>
+        </div>
+
+        <div class="gaisbock-custom-text-image-slider-component-text-block-subTitle">
+            <b>{{ element.config.subTitle.value }}</b>
+        </div>
+
+        <div class="gaisbock-custom-text-image-slider-component-text-block-detailTitle">
+            {{ element.config.detailTitle.value|raw }}
+        </div>
+        <div class="gaisbock-custom-text-image-slider-component-text-block-readMore">
+            {% set columns = 1 %}
+            <div id="gaisbock-custom-text-image-slider-{{ element.id }}">
+            <div class="gaisbock-hideContent-contain">
+                {{ element.config.hideContent.value|raw }}
+            </div>
+                {% if element.data.sliderItems != [] %}
+            {% block cms_element_gaisbock_custom_text_image_slider_alignment %}
+                <div class="base-slider image-slider has-dots-inside" id="gaisbock-slider"
+                     data-base-slider="true"
+                     data-base-slider-options='{{ baseSliderOptions|json_encode }}' style="height: 400px; max-width:400px;" >
+
+                    {% block cms_element_gaisbock_custom_text_image_slider_inner %}
+                        <div class="image-slider-container"
+                             data-base-slider-container="true">
+
+                            {% for image in element.data.sliderItems %}
+
+                                {% set imageElement %}
+                                    <div class="image-slider-item{% if loop.first != true %} is-not-first{% endif %} is-standard">
+                                        {% set attributes = {
+                                            'class': 'img-fluid image-slider-image',
+                                            'alt': (image.media.translated.alt ?: ''),
+                                            'title': (image.media.translated.title ?: '')
+                                        } %}
+
+                                        {% if element.config.displayMode.value == 'cover' or element.config.displayMode.value == 'contain' %}
+                                            {% set attributes = attributes|merge({ 'data-object-fit': element.config.displayMode.value }) %}
+                                        {% endif %}
+
+                                        {% sw_thumbnails 'cms-image-slider-thumbnails' with {
+                                            media: image.media
+                                        } %}
+                                    </div>
+                                {% endset %}
+
+                                {% block cms_element_gaisbock_custom_text_image_slider_inner_item %}
+                                    <div class="image-slider-item-container">
+                                        {% if image.url %}
+                                            <a href="{{ image.url }}"
+                                               class="image-slider-link"
+                                               {% if image.newTab %}target="_blank" rel="noopener"{% endif %}>
+                                                {{ imageElement }}
+                                            </a>
+                                        {% else %}
+                                            {{ imageElement }}
+                                        {% endif %}
+                                    </div>
+                                {% endblock %}
+                            {% endfor %}
+                        </div>
+
+                        {% block cms_element_gaisbock_custom_text_image_slider_controls %}
+                            <div class="image-slider-controls-container">
+                                <div class="base-slider-controls"
+                                     data-base-slider-controls="true">
+                                    {% block cms_element_gaisbock_custom_text_image_slider_controls_items %}
+                                        {% block cms_element_gaisbock_custom_text_image_slider_controls_items_arrows %}
+                                            <button class="base-slider-controls-prev image-slider-controls-prev is-nav-prev-inside">
+                                                {% block cms_element_gaisbock_custom_text_image_slider_controls_items_prev_icon %}
+                                                    {% sw_icon 'arrow-head-left' %}
+                                                {% endblock %}
+                                            </button>
+                                            <button class="base-slider-controls-next image-slider-controls-next is-nav-next-inside">
+                                                {% block cms_element_gaisbock_custom_text_image_slider_controls_items_next_icon %}
+                                                    {% sw_icon 'arrow-head-right' %}
+                                                {% endblock %}
+                                            </button>
+                                        {% endblock %}
+                                    {% endblock %}
+                                </div>
+                            </div>
+                        {% endblock %}
+                    {% endblock %}
+                </div>
+            {% endblock %}
+                {% endif %}
+            <div class="gaisbock-after-slider-text">
+                {{ element.config.afterSliderText.value|raw }}
+            </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+    <style>
+        .visibility {
+            visibility: hidden;
+            max-height: 0;
+        }
+    </style>
+{% endblock %}
+

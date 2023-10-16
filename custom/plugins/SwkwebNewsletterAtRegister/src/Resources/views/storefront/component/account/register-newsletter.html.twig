@@ -1,0 +1,24 @@
+{% block swkweb_newsletter_at_register_newsletter %}
+    {% set shopName = config('core.basicInformation.shopName') %}
+
+    <div class="register-newsletter">
+        {% block swkweb_newsletter_at_register_newsletter_control %}
+            <div class="form-check">
+                {% block swkweb_newsletter_at_register_newsletter_label %}
+                    <input type="checkbox"
+                           class="form-check-input"
+                           id="newsletter"
+                           name="newsletter"
+                           value="1"
+                           {% if data.get('newsletter') or data.get('newsletter') is empty and isCheckedByDefault %}checked{% endif %}>
+                {% endblock %}
+
+                {% block swkweb_newsletter_at_register_newsletter_checkbox %}
+                    <label class="custom-control-label no-validation" for="newsletter">
+                        {{ 'swkweb-newsletter-at-register.account.registerNewsletter'|trans({'%shopname%': shopName})|sw_sanitize }}
+                    </label>
+                {% endblock %}
+            </div>
+        {% endblock %}
+    </div>
+{% endblock %}

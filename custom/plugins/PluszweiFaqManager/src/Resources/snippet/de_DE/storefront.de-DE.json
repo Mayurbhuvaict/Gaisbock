@@ -1,0 +1,29 @@
+{
+    "pluszweiFaqManager": {
+        "index": {
+            "heading": "Hilfe-Artikel durchsuchen"
+        },
+        "search": {
+            "searchHeading": "Wie können wir Ihnen heute helfen?",
+            "searchPlaceholder": "Alle Kategorien durchsuchen...",
+            "noResult": "Keine Ergebnisse gefunden."
+        },
+        "article": {
+            "labelFeatured": "Featured Artikel",
+            "readingTime": "Lesedauer: %min% min",
+            "relatedTitle": "Beiträge in dieser Sektion",
+            "findOther": "Verwandte Themen",
+            "otherArticles": "See other articles in:",
+            "moreQuestion": "Haben Sie weitere Fragen?",
+            "submitRequestBtnTitle": "Anfrage einreichen",
+            "suggestTitle": "Vielleicht interessiert Sie außerdem:"
+        },
+        "category": {
+            "seeMore": "%num% weitere Artikel aufrufen"
+        },
+        "footer": {
+            "questionTitle": "Haben Sie nicht gefunden wonach Sie gesucht haben?",
+            "searchFaqBtnTitle": "FAQ durchsuchen"
+        }
+    }
+}

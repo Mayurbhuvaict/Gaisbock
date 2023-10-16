@@ -1,0 +1,16 @@
+.product-box {
+  &.box-cart {
+    .product-image-wrapper {
+      height: 120px;
+    }
+
+    .product-image {
+      max-height: 100%;
+    }
+
+    .product-price-unit {
+      display: none;
+    }
+
+  }
+}

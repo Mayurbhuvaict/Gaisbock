@@ -1,0 +1,96 @@
+{
+    "pluszwei-faq-manager": {
+        "general": {
+            "mainMenuItemGeneral": "FAQ Manager Pro",
+            "descriptionTextModule": "FAQ Manager Pro",
+            "typeSearchBar": "FAQ Manager Pro",
+            "placeholderSearchBar": "Dursuche FAQ Artikel, Kategorien...",
+            "buttonCreate": "Kategorie hinzufügen"
+        },
+        "notification": {
+            "titleSaveSuccess": "Eintrag gespeichert.",
+            "messageSaveSuccess": "Änderungen erfolgreich gespeichert.",
+            "titleDeleteSuccess": "Eintrag gelöscht.",
+            "missingCategoryError": "Fehlende FAQ Kategorie",
+            "missingSubcategoryError": "Fehlende FAQ Subkategorie",
+            "missingSalesChannelError": "Fehlende Verkaufskanal"
+        },
+        "index": {
+            "messageEmpty": "Noch keine Daten vorhanden.",
+            "headline": "FAQ Manager Pro",
+            "titleSidebarItemRefresh": "Aktuaisieren.",
+            "buttonAddArticleEntry": "Artikel erstellen",
+            "tabArticle": "Artikel",
+            "tabCategory": "Kategorien"
+        },
+        "article": {
+            "messageEmpty": "Noch keine Daten vorhanden.",
+            "headline": "FAQ Artikel",
+            "titleSidebarItemRefresh": "Aktuaisieren.",
+            "index": {
+                "columnTitle": "Artikel",
+                "columnCategory": "Kategorie",
+                "columnSubcategory": "Subkategorie",
+                "columnActive": "Sichtbar",
+                "columnFeatured": "Featured",
+                "columnDateUpdated": "Zuletzt aktualisiert"
+            },
+            "detail": {
+                "textHeadline": "New Artikel",
+                "buttonCancel": "Abbrechen",
+                "saveArticleEntry": "Speichern",
+                "cardArticleTitle": "Allgemeine Informationen",
+                "base": {
+                    "titleLabel": "Artikel-Titel",
+                    "titlePlaceholder": "Artikel-Titel eingeben",
+                    "editorLabel": "Beschreibung",
+                    "teaserLabel": "Artikel-Teaser",
+                    "editorPlaceholder": "FAQ Artikel",
+                    "visibilityLabel": "Sichtbar",
+                    "featuredLabel": "Featured Artikel",
+                    "titleCategory": "FAQ Kategorie",
+                    "titleSubcategory": "FAQ Subkategorie",
+                    "placeholderCategory": "Kategorie auswählen"
+                },
+                "cardSeoTitle": "SEO Informationen",
+                "seo": {
+                    "metaTitleLabel": "Meta title",
+                    "metaTitlePlaceholder": "Meta title eingeben",
+                    "metaDescriptionLabel": "Meta description",
+                    "metaDescriptionPlaceholder": "Meta description eingeben",
+                    "metaKeywordsLabel": "Meta keywords",
+                    "metaKeywordsPlaceholder": "Meta keywords eingeben",
+                    "urlLabel": "SEO Url",
+                    "urlPlaceholder": "SEO Url eingeben"
+                },
+                "titleMetaTitle": "Meta title",
+                "titleMetaDescription": "Meta description"
+            }
+        },
+        "category": {
+            "general": {
+                "buttonCreate": "Kategorie hinzufügen",
+                "emptyStateHeadline": "Keine Kategorie ausgewählt",
+                "headlineInformationCard": "Allgemein",
+                "categoryNameLabel": "Kategorie Titel",
+                "isCategoryActiveLabel": "Aktiv"
+            },
+            "detail": {
+                "textHeadline": "Neue Kategorie",
+                "cardSeoTitle": "SEO Informationen",
+                "buttonCancel": "Abbrechen",
+                "saveCategoryEntry": "Speichern",
+                "seo": {
+                    "metaTitleLabel": "Meta title",
+                    "metaTitlePlaceholder": "Meta title eingeben",
+                    "metaDescriptionLabel": "Meta description",
+                    "metaDescriptionPlaceholder": "Meta description eingeben",
+                    "metaKeywordsLabel": "Meta keywords",
+                    "metaKeywordsPlaceholder": "Meta keywords eingeben",
+                    "urlLabel": "SEO Url",
+                    "urlPlaceholder": "SEO Url eingeben"
+                }
+            }
+        }
+    }
+}

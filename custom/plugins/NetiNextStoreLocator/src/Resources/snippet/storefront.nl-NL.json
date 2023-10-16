@@ -1,0 +1,94 @@
+{
+    "neti-next-store-locator": {
+        "index": {
+            "title": "Handelaar zoeken",
+            "description": "Verkooppunten zoeken - vind uw lokale winkels.",
+            "localMarkerTitle": "U bevindt zich hier.",
+            "search": {
+                "autocompleteNoResults": "Geen resultaten",
+                "filterNoResults": "Helaas, er zijn geen resultaten voor uw zoekopdracht.",
+                "filterNoResultsManualLoading": "Er zijn nog geen takken geladen. Start een zoekactie zodat takken hier worden weergegeven.",
+                "filterNoResultsKeywordsRequired": "Voer een zoekterm in om de resultaten te zien.",
+                "filterHeader": "Filter",
+                "fieldRadius": "Radius",
+                "fieldRadiusPlaceholder": "Selecteer radius",
+                "fieldOrder": "Bestel",
+                "buttonReset": "Reset",
+                "buttonSearch": "Zoeken",
+                "placeholder": "Zoek een filiaal...",
+                "onlyFeatured": "Toon alleen gemarkeerde filiaal",
+                "placeholderCountryFilter": "Zoeken...",
+                "noCountriesText": "Geen landen gevonden.",
+                "filterSelectPlaceholder": "Geen selectie",
+                "allCountriesLabel": "Alle landen",
+                "order": {
+                    "distance": "Entfernung",
+                    "country": "Land",
+                    "name": "Naam",
+                    "random": "Willekeurig"
+                },
+                "filterLabels": {
+                    "bool": {
+                        "false": "Geen",
+                        "true": "Ja"
+                    }
+                }
+            },
+            "contact": {
+                "title": "Neem contact op met {{ store.label }}",
+                "selectPlaceholder": "Gelieve te kiezen",
+                "emailCopyLabel": "Wilt u een exemplaar ontvangen?",
+                "buttonAbort": "Annuleren",
+                "buttonSubmit": "Indienen",
+                "loadingText": "Lade...",
+                "successText": "Uw bericht is succesvol verzonden.",
+                "errorText": "Er is iets fout gegaan. Probeer het nog eens.",
+                "invalidFileTypeError": "Alleen de volgende bestandstypen zijn toegestaan: "
+            },
+            "print": {
+                "title": "Route naar {{ store.label }}",
+                "loadingText": "Lade...",
+                "labelFrom": "Start",
+                "labelTo": "Doel",
+                "labelDistance": "Afstand",
+                "labelDuration": "Duur",
+                "buttonPrint": "Afdrukken",
+                "error": "Helaas konden we geen route naar deze plek vinden."
+            },
+            "store": {
+                "loadingText": "Lade...",
+                "labelTelephone": "Tel.",
+                "labelFax": "Fax",
+                "labelEmail": "E-mail:",
+                "labelAllCountries": "Alle landen",
+                "labelDistance": "Afstand:",
+                "labelOpeningTimes": "Openingstijden",
+                "buttonContact": "Contact",
+                "buttonDetails": "Details",
+                "buttonRoute": "Route",
+                "buttonSelect": "Selecteer",
+                "buttonSelected": "Geselecteerde"
+            }
+        },
+        "detail": {
+            "backToOverview": "terug naar het overzicht"
+        },
+        "cookie": {
+            "google-consent": {
+                "name": "Filiaalzoeker",
+                "description": "Maakt het mogelijk Google Maps op deze pagina te laden."
+            }
+        },
+        "cookie-consent": {
+            "header": "Google Maps toestemming",
+            "notAllowedText": "U hebt de Filiaalzoeker-cookies nog niet geactiveerd. Klik hiervoor op \"Open Cookie Configurator\", activeer \"Store Locator\" in het off-canvas en klik op \"Opslaan\".",
+            "allowedText": "Voor een goede werking van deze pagina is Google Maps vereist. Klik op \"Verder\" om akkoord te gaan.",
+            "configuratorButton": "Cookieconfigurator openen",
+            "continueButton": "Verder",
+            "abortButton": "Afbreken"
+        },
+        "checkout-stores": {
+            "header": "Dichtstbijzijnde filialen"
+        }
+    }
+}

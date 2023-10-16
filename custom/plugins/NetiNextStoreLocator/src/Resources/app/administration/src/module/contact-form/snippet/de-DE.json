@@ -1,0 +1,67 @@
+{
+    "neti-store-locator-contact-form": {
+        "title": "Kontakt-Formular",
+        "description": "Kontakt-Formulare Felder hier Verwalten",
+
+        "list": {
+            "title": "Kontakt-Formular Felder",
+            "messageEmpty": "Noch keine Felder",
+            "button": {
+                "create": "Feld hinzufügen",
+                "cancel": "Abbrechen",
+                "delete": "Löschen",
+                "refresh": "Aktualisieren"
+            },
+            "column": {
+                "active": "Aktiv",
+                "label": "Label",
+                "type": "Typ",
+                "required": "Pflichtfeld",
+                "position": "Position"
+            },
+            "contextMenu": {
+                "view": "Ansicht",
+                "delete": "Löschen",
+                "duplicate": "Duplizieren",
+                "edit": "Bearbeiten"
+            },
+            "deleteForm": {
+                "title": "Feld löschen",
+                "confirmText": "Sind Sie sicher, dass Sie das Feld \"{name}\" löschen möchten?"
+            }
+        },
+        "create": {
+            "title": "Neues Feld"
+        },
+        "detail": {
+            "button": {
+                "edit": "Bearbeiten",
+                "cancel": "Abbrechen",
+                "save": "Speichern"
+            },
+            "card": {
+                "generalBasic": {
+                    "title": "Feld Einstellungen",
+                    "labelActive": "Aktiv",
+                    "labelLabel": "Label",
+                    "labelRequired": "Pflichtfeld",
+                    "labelType": "Typ",
+                    "labelPosition": "Position",
+                    "labelValue": "Standard-Wert",
+                    "labelsType": {
+                        "textfield": "Text",
+                        "textarea": "Textfeld",
+                        "checkbox": "Checkbox",
+                        "radio": "Radio buttons / Optionsfelder",
+                        "select": "Auswahlfeld",
+                        "subject": "Betreff",
+                        "email": "E-Mail-Adresse",
+                        "email_copy": "E-Mail-Adressen Kopie",
+                        "file_upload": "Datei-Anhang"
+                    },
+                    "placeholderType": "Typ auswählen"
+                }
+            }
+        }
+    }
+}

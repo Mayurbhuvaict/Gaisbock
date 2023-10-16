@@ -1,0 +1,34 @@
+<div class="neti-store-locator-cookie-consent-modal modal" data-url="{{ url('frontend.home.page') }}">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">
+                    {{ "neti-next-store-locator.cookie-consent.header"|trans }}
+                </h5>
+
+                <button type="button" class="close" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p class="cookies-not-allowed">
+                    {{ "neti-next-store-locator.cookie-consent.notAllowedText"|trans }}
+                </p>
+                <p class="cookies-allowed">
+                    {{ "neti-next-store-locator.cookie-consent.allowedText"|trans }}
+                </p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary abort-button">
+                    {{ "neti-next-store-locator.cookie-consent.abortButton"|trans }}
+                </button>
+                <button type="button" class="btn btn-primary cookies-not-allowed-button">
+                    {{ "neti-next-store-locator.cookie-consent.configuratorButton"|trans }}
+                </button>
+                <button type="button" class="btn btn-primary cookies-allowed-button">
+                    {{ "neti-next-store-locator.cookie-consent.continueButton"|trans }}
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

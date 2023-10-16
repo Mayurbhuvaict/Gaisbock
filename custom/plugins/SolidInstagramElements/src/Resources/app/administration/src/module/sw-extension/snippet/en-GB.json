@@ -1,0 +1,28 @@
+{
+  "sw-extension": {
+    "component": {
+      "solid-instagram-access-token-form": {
+        "title": "Access token",
+        "info": "Wondering how to get an access token? See <a href=\"https://www.studio-solid.de/blog/instagram-access-token-erzeugen-so-verbindest-du-dich-mit-der-api\" target=\"_blank\" rel=\"noopener noreferrer\">our manual</a> in the Shopware Store.",
+        "accessToken": "Access token",
+        "testAccessToken": "Test access token",
+        "refreshAccessToken": "Refresh access token",
+        "username": "Username of linked account: <strong>{username}</strong>",
+        "expiresIn": "Access token expires in: <strong>{days} day(s)</strong>",
+        "lastRefreshed": "Access token last refreshed on: <strong>{date}</strong>",
+        "alert": {
+          "errorTesting": "Error while testing access token.",
+          "errorRefreshing": "Error while refreshing access token.",
+          "statusCode": "Status code {status}",
+          "successTesting": "Yee-haw! Your access token is valid.",
+          "successRefreshing": "Refreshing! Successfully renewed your access token. Don't forget to <strong>Save</strong>!",
+          "refreshHint": "To finish the setup and activate the automatic renewal of your token you have to refresh it once manually. To do so, click <strong>Refresh access token</strong> and <strong>Save</strong> afterwards.",
+          "status": {
+            "400": "Your acceess token does not seem to be valid.",
+            "404": "Instagram API is not available."
+          }
+        }
+      }
+    }
+  }
+}

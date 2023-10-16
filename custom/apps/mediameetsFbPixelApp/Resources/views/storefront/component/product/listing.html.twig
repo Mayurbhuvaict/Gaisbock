@@ -1,0 +1,44 @@
+{% sw_extends '@Storefront/storefront/component/product/listing.html.twig' %}
+
+{% block element_product_listing_row %}
+    {{ parent() }}
+
+    {% if config('mediameetsFbPixelApp.config.pixelIds') and config('mediameetsFbPixelApp.config.pixelIds') is not empty %}
+        {# Products #}
+        {% set _mmfbProducts = [] %}
+        {% if searchResult.total > 0 %}
+            {% for product in searchResult %}
+                {% set _mmfbProducts = _mmfbProducts|merge([{ productNumber: product.productNumber }]) %}
+            {% endfor %}
+        {% endif %}
+
+        {# ID, Name #}
+        {% set activeCategory = page.header.navigation.active %}
+
+        {% set _mmfbLabel = '' %}
+        {% if activeRoute is same as('frontend.navigation.page') or activeRoute is same as('frontend.home.page') %}
+            {% set _mmfbLabel = activeCategory.name %}
+        {% elseif activeRoute is same as('frontend.search.page') %}
+            {% set _mmfbLabel = 'Search' %}
+        {% endif %}
+
+        {# Path #}
+        {% set _mmfbPath = [] %}
+        {% if activeRoute is same as('frontend.navigation.page') %}
+            {% for category in activeCategory.breadcrumb %}
+                {% if loop.first is same as (false) %}
+                    {% set _mmfbPath = _mmfbPath|merge([category]) %}
+                {% endif %}
+            {% endfor %}
+        {% endif %}
+
+        <script>
+            window.mediameetsFacebookPixelData.set('listing', {
+                name: '{{ _mmfbLabel|e('js') }}',
+                id: '{{ activeCategory.id }}',
+                path: '{{ _mmfbPath|join(' > ')|e('js') }}',
+                products: {{ _mmfbProducts|json_encode()|raw }}
+            });
+        </script>
+    {% endif %}
+{% endblock %}

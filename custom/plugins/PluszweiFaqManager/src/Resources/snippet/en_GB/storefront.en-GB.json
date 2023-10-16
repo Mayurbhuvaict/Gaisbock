@@ -1,0 +1,29 @@
+{
+    "pluszweiFaqManager": {
+        "index": {
+            "heading": "Browse Help Articles"
+        },
+        "search": {
+            "searchHeading": "How can we help you today?",
+            "searchPlaceholder": "Search all categories...",
+            "noResult": "No results found."
+        },
+        "article": {
+            "labelFeatured": "Featured article",
+            "readingTime": "%min% min article",
+            "relatedTitle": "Articles in this section",
+            "findOther": "Related help topics",
+            "otherArticles": "See other articles in:",
+            "moreQuestion": "Any more questions?",
+            "submitRequestBtnTitle": "Submit request",
+            "suggestTitle": "You might also be interested in:"
+        },
+        "category": {
+            "seeMore": "See %num% more articles"
+        },
+        "footer": {
+            "questionTitle": "Didn't find what you are looking for?",
+            "searchFaqBtnTitle": "Search FAQ"
+        }
+    }
+}

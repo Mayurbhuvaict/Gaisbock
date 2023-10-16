@@ -1,0 +1,60 @@
+{% block sw_product_detail_base_basic_info_card %}
+    {% parent %}
+
+    {% block acris_product_customer_group_customer_group_card %}
+        <sw-card :isLoading="isLoading" v-if="product && product.extensions"
+                 :title="$tc('acris-product-customer-group.cardCustomerGroup')"
+                 class="acris-product-customer-group">
+
+            {% block acris_product_customer_group_many_to_many_select %}
+                <sw-inherit-wrapper v-model="product.extensions.acrisBlockCustomerGroup"
+                                    v-if="parentProduct.extensions || !hasParent"
+                                    is-association
+                                    ref="customerGroupsInheritation"
+                                    :inherited-value="parentProduct.extensions ? parentProduct.extensions.acrisBlockCustomerGroup : product.extensions.acrisBlockCustomerGroup"
+                                    :has-parent="hasParent"
+                                    :helpText="$tc('acris-product-customer-group.fieldHelpTextCustomerGroup')"
+                                    :label="$tc('acris-product-customer-group.fieldLabelCustomerGroup')">
+
+                    <template #content="{ currentValue, isInherited, updateCurrentValue }">
+                        <sw-entity-tag-select
+                            v-if="product.extensions.acrisBlockCustomerGroup && !isLoading"
+                            :disabled="isInherited"
+                            :key="isInherited"
+                            :placeholder="$tc('acris-product-customer-group.fieldPlaceholderCustomerGroup')"
+                            @change="updateCurrentValue"
+                            :entityCollection="currentValue ? currentValue : {}">
+                        </sw-entity-tag-select>
+                    </template>
+                </sw-inherit-wrapper>
+            {% endblock %}
+
+            {% block acris_product_customer_group_exclude_sitemap_exclude %}
+            <sw-container
+                columns="1fr"
+                gap="0px 30px"
+            >
+                <sw-inherit-wrapper v-model="product.customFields.acris_product_customer_group_exclude_sitemap"
+                                    v-if="(parentProduct.customFields || !hasParent) && product.customFields"
+                                    ref="sitemapExcludeInheritation"
+                                    :inherited-value="parentProduct.customFields ? parentProduct.customFields.acris_product_customer_group_exclude_sitemap : product.customFields.acris_product_customer_group_exclude_sitemap"
+                                    :has-parent="hasParent"
+                                    :custom-remove-inheritance-function="sitemapExcludeRemoveInheritanceFunction"
+                                    :custom-restore-inheritance-function="sitemapExcludeRestoreInheritanceFunction">
+
+                    <template #content="props">
+                        <sw-field :value="props.currentValue"
+                                  @change="props.updateCurrentValue"
+                                  :disabled="props.isInherited"
+                                  type="switch"
+                                  :map-inheritance="props"
+                                  :label="$tc('acris-product-customer-group.fieldLabelExcludeSitemap')"
+                                  name="sw-field--product-is-closeout">
+                        </sw-field>
+                    </template>
+                </sw-inherit-wrapper>
+            </sw-container>
+            {% endblock %}
+        </sw-card>
+    {% endblock %}
+{% endblock %}

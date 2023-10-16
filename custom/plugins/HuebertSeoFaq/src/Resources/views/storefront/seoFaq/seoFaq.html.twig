@@ -1,0 +1,70 @@
+{% sw_extends '@Storefront/storefront/base.html.twig' %}
+
+{% block base_content %}
+    {{ parent() }}
+
+    {% block seo_faq_json %}
+        <template js-SeoFaq></template>
+        <script type="application/ld+json">
+                {
+                    "@context" : "http://schema.org",
+                    "@type" : "FAQPage",
+                    "mainEntity": [
+                    {% if page.questionSpecific %}
+                    {
+                        "@type": "Question",
+                        "name": "{{ page.questionSpecific.question }}",
+                        "acceptedAnswer": {
+                            "@type": "Answer",
+                            "text": "{{ page.questionSpecific.answer }}"
+                            }
+                    }
+                    {% else %}
+            {% for entry in page.question %}
+                    {
+                        "@type": "Question",
+                        "name": "{{ entry.question }}",
+                        "acceptedAnswer": {
+                            "@type": "Answer",
+                            "text": "{{ entry.answer }}"
+                            }
+                    }
+            {% if not loop.last %},{% endif %}
+            {% endfor %}
+            {% endif %}
+                    ]
+                }
+
+        </script>
+    {% endblock %}
+
+    {% block seo_faq_qa %}
+        {% for entryGroup in page.group %}{% if entryGroup.salesChannelId == context.salesChannel.id or not entryGroup.salesChannelId %}
+            {% set showHeadline = true %}
+
+            {% for entry in page.question|sort((a, b) => a.elements.first.questionPosition <=> b.elements.first.questionPosition) %}
+                {#                {{ dump(entry) }}#}
+                {% if entry.translated.question and entry.group == entryGroup.id and entryGroup.active %}
+                    {% if showHeadline %}
+                        <h3 class="hueb-seo-faq__group">{{ entryGroup.translated.name }}</h3>
+                        {% set showHeadline = false %}
+                    {% endif %}
+
+                    <div id="{{ entry.extensions.questionUrl }}_box" class="hueb-seo-faq__box">
+                        <div class="hueb-seo-faq__question col-md-12">
+                            <a class="faq-link" href="{{ path('frontend.seoFaq.question', {'question': entry.extensions.questionUrl})|replace({"%3F": "?", '%27': "'", '%28' : "(", '%29' : ')', '%3B':';',  '%3A':':', '%26':'&', '%3D' : '=',  '%24' : '$', '%2C': ',', '%2F' : '', '%25':'%', '%23' : '#', '%5B' : '[', '%5D' : ']', '%5E': '^', '%7B':'{', "%7D":'}'}) }}" title="{{ entry.translated.question }}">
+                                <span class="hueb-seo-faq__toggle --active" id="{{ entry.extensions.questionUrl }}_plus">+</span>
+                                <span class="hueb-seo-faq__toggle minus" id="{{ entry.extensions.questionUrl }}_minus">-</span>
+                                {{ entry.translated.question }}
+                            </a>
+                        </div>
+                        <div id="{{ entry.extensions.questionUrl }}" class="hueb-seo-faq__answer col-md-12">
+                            <div class="hueb-seo-faq__answer-content">{{ entry.translated.answer|raw }}</div>
+                        </div>
+                    </div>
+                {% endif %}
+            {% endfor %}
+        {% endif %}{% endfor %}
+    {% endblock %}
+
+{% endblock %}

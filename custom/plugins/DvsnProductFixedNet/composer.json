@@ -1,0 +1,44 @@
+{
+    "name": "dvsn/product-fixed-net",
+    "description": "Feste Artikel Netto Preise in ausgewählten Ländern trotz anderer MwSt.-Sätze",
+    "version": "2.0.0",
+    "license": "proprietary",
+    "type": "shopware-platform-plugin",
+    "authors": [
+        {
+            "name": "digitvision",
+            "homepage": "https://www.digitvision.de"
+        }
+    ],
+    "require": {
+        "shopware/core": "^6.5",
+        "shopware/storefront": "^6.5",
+        "shopware/administration": "^6.5"
+    },
+    "autoload": {
+        "psr-4": {
+            "Dvsn\\ProductFixedNet\\": "src/"
+        }
+    },
+    "extra": {
+        "shopware-plugin-class": "Dvsn\\ProductFixedNet\\DvsnProductFixedNet",
+        "copyright": "digitvision",
+        "plugin-icon": "src/Resources/plugin.png",
+        "label": {
+            "de-DE": "Feste Artikel Netto Preise in ausgewählten Ländern trotz anderer MwSt.-Sätze",
+            "en-GB": "Fixed article net prices in selected countries despite different VAT rates"
+        },
+        "description": {
+            "de-DE": "Immer die gleichen / fixierten Netto Preise für Artikel - auch in Ländern mit anderen MwSt.-Sätzen. Seien Sie auf der sicheren Seite und machen Sie keine Verluste!",
+            "en-GB": " Always the same / fixed net prices for items - even in countries with different VAT rates. Be on the safe side and don't make any losses without charging less."
+        },
+        "manufacturerLink": {
+            "de-DE": "https://www.digitvision.de",
+            "en-GB": "https://www.digitvision.de"
+        },
+        "supportLink": {
+            "de-DE": "https://www.digitvision.de",
+            "en-GB": "https://www.digitvision.de"
+        }
+    }
+}

@@ -1,0 +1,153 @@
+<sw-card
+    :title="$t('neti-store-locator.detail.cms-stores.cardFieldSets')"
+    class="sw-property-option-list neti-store-locator_detail_cms_pages"
+    position-identifier="sw-property-option-list"
+    :isLoading="isLoading"
+>
+    <div class="sw-property-option-list__toolbar">
+        <sw-container
+            columns="1fr 32px minmax(100px, 200px)"
+            gap="0 10px"
+        >
+
+            <sw-simple-search-field
+                v-model="cmsPageTerm"
+                size="small"
+                variant="form"
+                @search-term-change="onFieldSetTermChanged"
+            />
+
+            <sw-button
+                :disabled="deleteFieldSetButtonDisabled"
+                square
+                size="small"
+                class="sw-property-option-list__delete-button"
+                @click="onMassDelete"
+            >
+                <sw-icon
+                    name="regular-trash"
+                    small
+                />
+            </sw-button>
+
+            <sw-container>
+                <sw-button
+                    size="small"
+                    class="sw-property-option-list__add-button"
+                    @click="onAddFieldSetButtonClicked"
+                >
+                    {{ $t('neti-store-locator.detail.cms-stores.buttonFieldSetsAdd') }}
+                </sw-button>
+            </sw-container>
+        </sw-container>
+    </div>
+
+    <template #grid>
+        <sw-entity-listing
+            ref="cmsStoreGrid"
+            :allowDelete="false"
+            :items="store.cmsPages"
+            :columns="storeCmsColumns"
+            :repository="storeCmsRepository"
+            :isLoading="isLoading"
+            :fullPage="false"
+            :showSettings="false"
+            @selection-change="onCmsPageGridSelectionChanged"
+            @page-change="onPageChange"
+            @column-sort="onSortColumn"
+        >
+            <template #column-cmsPage.name="{ item, compact }">
+                <router-link
+                    :to="{ name: 'sw.cms.detail', params: { id: item.cmsPageId } }"
+                    class="sw-internal-link"
+                    target="_blank"
+                >
+                    {{ item.cmsPage.translated.name || item.cmsPage.name }}
+                </router-link>
+            </template>
+
+            <template #actions="{ item, itemIndex }">
+                <sw-context-menu-item
+                    :routerLink="{ name: 'sw.cms.detail', params: { id: item.cmsPageId } }"
+                    class="sw-internal-link"
+                    target="_blank"
+                >
+                    {{ $t('neti-store-locator.detail.cms-stores.context-menu.openCmsPage') }}
+                </sw-context-menu-item>
+
+                <sw-context-menu-item variant="danger" @click="onDelete(item.id)">
+                    {{ $t('neti-store-locator.detail.cms-stores.context-menu.removeCmsPage') }}
+                </sw-context-menu-item>
+
+                <sw-context-menu-item :disabled="isFirstField(itemIndex)" @click="moveFieldUp(item, itemIndex)">
+                    {{ $t('neti-store-locator.detail.cms-stores.context-menu.moveCmsPageUp') }}
+                </sw-context-menu-item>
+
+                <sw-context-menu-item :disabled="isLastField(itemIndex)" @click="moveFieldDown(item, itemIndex)">
+                    {{ $t('neti-store-locator.detail.cms-stores.context-menu.moveCmsPageDown') }}
+                </sw-context-menu-item>
+            </template>
+
+            <template #action-modals="{ item }">
+                <sw-modal
+                    v-if="showDeleteModal === item.id"
+                    @modal-close="onCloseDeleteModal"
+                    :title="$t('neti-store-locator.detail.cms-stores.modal.removeCmsPageTitle')"
+                    variant="small"
+                >
+                    <p class="neti-easy-coupon-list__confirm-delete-text">
+                        {{ $t('neti-store-locator.detail.cms-stores.modal.modalConfirmText', 0, {name: item.cmsPage.name}) }}
+                    </p>
+
+                    <template #modal-footer>
+                        <sw-button @click="onCloseDeleteModal" size="small">
+                            {{ $t('neti-store-locator.detail.cms-stores.modal.buttonCancel') }}
+                        </sw-button>
+
+                        <sw-button @click="onConfirmDeleteSet(item)" variant="primary" size="small">
+                            {{ $t('neti-store-locator.detail.cms-stores.modal.buttonDelete') }}
+                        </sw-button>
+                    </template>
+                </sw-modal>
+            </template>
+
+            <template #pagination>
+                <sw-pagination
+                    :page="page"
+                    :limit="limit"
+                    :total="total"
+                    :total-visible="7"
+                    @page-change="onPageChange"
+                ></sw-pagination>
+            </template>
+        </sw-entity-listing>
+    </template>
+
+    <sw-modal
+        v-if="showMassDeleteModal"
+        @modal-close="onCloseDeleteModal"
+        :title="$t('neti-store-locator.detail.cms-stores.modal.modalTitleMassDelete')"
+        variant="small"
+    >
+        <p>
+            {{ $t('neti-store-locator.detail.cms-stores.modal.textMassDeleteConfirm') }}
+        </p>
+
+        <template #modal-footer>
+            <sw-button @click="onCloseDeleteModal" size="small">
+                {{ $t('neti-store-locator.detail.cms-stores.modal.buttonCancel') }}
+            </sw-button>
+
+            <sw-button @click="onDeleteSets" variant="primary" size="small">
+                {{ $t('neti-store-locator.detail.cms-stores.modal.buttonDelete') }}
+            </sw-button>
+        </template>
+    </sw-modal>
+
+    <neti-store-locator-details-cms-card-add-cms-modal
+        v-if="showAddCmsPageModal"
+        :store="store"
+        @save-fields="getList"
+        @modal-close="onAssigmentModalClose"
+    ></neti-store-locator-details-cms-card-add-cms-modal>
+</sw-card>

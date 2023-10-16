@@ -1,0 +1,31 @@
+.neti-store-locator-checkout-stores-container {
+  width: 66.6% !important;
+  margin: 0 0 0 16.66666667%;
+  
+  .container-header {
+    border-bottom: 1px solid #bcc1c7;
+    padding-bottom: 10px;
+    color: #4a545b;
+    font-size: 1rem;
+    font-weight: 700;
+    line-height: 1.2;
+  }
+  
+  .container-store {
+    padding: 10px;
+    border-bottom: 1px solid #ccc;
+    
+    &:last-child {
+      border: 0 none;
+    }
+    
+    .header {
+      display: flex;
+    }
+    
+    .opening-times,
+    .additional-info {
+      margin: 10px 0 0 0;
+    }
+  }
+}

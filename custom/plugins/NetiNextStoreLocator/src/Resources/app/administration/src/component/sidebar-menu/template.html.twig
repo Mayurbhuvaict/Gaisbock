@@ -1,0 +1,22 @@
+<div class="neti-store-locator-sidebar-menu">
+    <div class="menu-holder">
+        <div
+                class="menu-item"
+                v-for="(item, key) in items"
+                :key="key"
+                :class="{ active: hasActiveChildren(item.children) }"
+        >
+            <div class="menu-item-name">{{ item.title }}</div>
+            <div
+                    class="menu-item-children"
+                    v-for="(child, childKey) in item.children"
+                    :key="childKey"
+                    :class="{ active: isActive(child) }"
+            >
+                <div class="menu-item-name">
+                    <router-link :to="{ name: child.route }">{{ child.title }}</router-link>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

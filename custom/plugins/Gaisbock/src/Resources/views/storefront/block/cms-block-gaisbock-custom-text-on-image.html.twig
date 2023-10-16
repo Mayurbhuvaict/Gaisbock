@@ -1,0 +1,35 @@
+{% block block_ict_custom_text_on_image %}
+    {% set element = block.slots.getSlot('gaisbockTextOnImage') %}
+    {% set elementForBgConfig = element.fieldConfig.elements %}
+    {% set bgMedia = elementForBgConfig.media.value %}
+    {% if bgMedia != null %}
+        {% set mediaCollection = searchMedia([bgMedia], context.context) %}
+        {% set imageMedia = mediaCollection.get(bgMedia) %}
+    {% endif %}
+    {% set columns = 1 %}
+    <div class="block-ict-custom-text-on-image-banner" {% if imageMedia %} style="background-image: url('{{ imageMedia.url }}');background-repeat: no-repeat; background-size: cover;" {% endif %}>
+        <div class="col-12" data-cms-element-id="{{ element.id }}">
+            {% block block_text_inner %}
+                {% sw_include "@Storefront/storefront/element/cms-element-" ~ element.type ~ ".html.twig" ignore missing %}
+            {% endblock %}
+        </div>
+    </div>
+    {% set config = element.fieldConfig.elements %}
+    <div class="cms-element-{{ element.type }}{% if config.verticalAlign.value %} has-vertical-alignment{% endif %}" data-gaisbock-scroll-section>
+        {% block element_text_alignment %}
+            {% if config.verticalAlign.value %}
+
+                <div class="cms-element-alignment{% if config.verticalAlign.value == "center" %} align-self-center{% elseif config.verticalAlign.value == "flex-end" %} align-self-end{% else %} align-self-start{% endif %}">
+            {% endif %}
+            {% block element_text_inner %}
+                {{ element.config.content.value|raw }}
+                <a href="#" id="gaisbock-down-arrow">
+                    {% sw_icon 'gaisbock-chevron-down' style {'pack': 'gaisbock','class':'gaisbock-down-icon'} %}
+                </a>
+            {% endblock %}
+            {% if config.verticalAlign.value %}
+                </div>
+            {% endif %}
+        {% endblock %}
+    </div>
+{% endblock %}

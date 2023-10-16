@@ -1,0 +1,1071 @@
+.gailbock-faq-section.static-faq-section {
+    @media(min-width:768px){
+        padding-bottom: 120px;
+    }
+}
+.is-act-home .gaisbock-benefits .gaisbock-element-image-titles-button .title-image-button-section,
+.store-section.gaisbock-benefits .gaisbock-element-image-titles-button .title-image-button-section,
+body .gaisbock-benefits .gaisbock-element-image-titles-button .title-image-button-section{
+    transform: translate(0%, 50%);
+    @media(max-width:1024px) {
+        transform: translate(-50%, 0%);
+    }
+}
+// .is-act-home .gaisbock-benefits.reveal.active .title-image-button-section,
+// .store-section.gaisbock-benefits.reveal.active .title-image-button-section,
+// body .gaisbock-benefits.reveal.active .title-image-button-section{
+//     transform: translateY(-50%) !important;
+//     @media(max-width:1024px) {
+//         transform: translate(-50%, -50%) !important;
+//     }
+// }
+.is-act-home .natural-section .gaisbock-element-image-titles-button.reveals .title-image-button-section.left,
+.is-act-home .natural-section .gaisbock-element-image-titles-button.reveals.active .title-image-button-section.left {
+    transform: revert !important;
+}
+
+.home-banner .base-slider {
+    position: fixed;
+    top: 0;
+}
+
+.insta-link {
+    margin: 30px auto 0;
+    color: #FFFFFF;
+    background: #c9ac77 0% 0% no-repeat padding-box;
+    display: block;
+    border-radius: 15px;
+    text-align: center;
+    width: auto;
+    max-width: 154px;
+    a {
+        font-family: $sw-font-family-base;
+        font-weight: 800;
+        font-size: 13px;
+        letter-spacing: 0.78px;
+        color: #FFFFFF;
+        text-transform: uppercase;
+        line-height: 14px;
+        padding: 10px 21px;
+        display: block;
+        &:hover{
+            text-decoration: none;
+        }
+    }
+}
+
+.home-banner {
+    .cms-element-gaisbock-text-image-slider .base-slider, .tns-outer, .tns-ovh, .tns-inner, .image-slider-container, .image-slider-item-container,
+    .cms-block-container-row, .col-12, .cms-element-gaisbock-text-image-slider, .cms-block-container  {
+        height: 100% !important;
+    }
+    .image-slider-item {
+        background-repeat: no-repeat !important;
+        background-size: cover !important;
+        height: 100%;
+        &:after {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            // background-color: rgba(0,0,0,0.5);
+        }
+    }
+    // margin-top: -201px;
+    margin-top:0;
+    img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+    .base-slider.has-nav-outside,
+    .image-slider.has-nav-outside .image-slider-item-container {
+        padding: 0;
+    }
+    .banner-conext.left {
+        transform: translate(0%,-50%);
+        left: 190px;
+    }
+    .banner-conext.center {
+        transform: translate(-50%, -50%);
+        left: 50%;
+    }
+    .banner-conext.right {
+        transform: translate(0%,-50%);
+        left: auto;
+        right:190px;
+    }
+    .banner-conext {
+        position: absolute;
+        top: 50%;
+        transform: translate(0%,-50%);
+        left: 190px;
+        max-width: 500px;
+            z-index: 9;
+        @media(max-width:1299px) {
+            top: 63%;
+        }
+        @media(max-width:1024px) {
+
+        }
+        h2 {
+            font-size: 70px;
+            letter-spacing: 0.35px;
+            line-height: 76px;
+            text-shadow: 0px 0px 40px #00000029;
+            color: #fff;
+            font-weight: 900;
+            @media(max-width:1024px) {
+                font-size: 50px;
+                line-height: 56px;
+            }
+            @media(max-width:992px) {
+                font-size: 40px;
+                line-height: 43px;
+                letter-spacing: 0.2px;
+            }
+        }
+        p {
+            font-size: 18px;
+            letter-spacing: 1.08px;
+            line-height: 25px;
+            text-shadow: 0px 0px 15px #00000029;
+            text-transform: uppercase;
+            max-width: 224px;
+            color: #fff;
+            font-weight: $fontWeight700;
+            margin-bottom: 25px;
+            margin-top: 15px;
+            @media(max-width:1024px) {
+                font-size: 15px;
+                line-height: 22px;
+            }
+            @media(max-width:992px) {
+                font-size: 13px;
+                line-height: 17px;
+                letter-spacing: 0.91px;
+            }
+        }
+        a {
+            background: #DE1010;
+            color: #fff;
+            border-radius: 15px;
+            font-size: 13px;
+            display: inline-block;
+            letter-spacing: 0.78px;
+            text-transform: uppercase;
+            font-weight: $fontWeight700;
+            height: 30px;
+            padding: 0 12px;
+            line-height: 30px;
+            text-decoration: none;
+        }
+    }
+    .image-slider-item {
+        @media(min-width:768px){
+            background-image: none !important;
+        }
+    }
+    .tns-nav {
+        bottom: 23px !important;
+        button {
+            background: #E8E8E8;
+            padding: 4px;
+            margin: 0 10px;
+        }
+        .tns-nav-active {
+            background-color: #C9AC77 !important;
+            
+        }
+    }
+}
+.is-act-home {
+    .breadcrumb {
+        margin: 0;
+    }
+}
+
+.Gaisbock-category-images {
+    background: $sw-color-brand-primary;
+    margin-top: -1px;
+    .gaisbock-title{
+        padding-top: 46px;
+        padding-bottom: 25px;
+        margin: 0 auto;
+        h2 {
+            color: #FFFFFF;
+            letter-spacing: 0.17px;
+            font-family: $sw-font-family-headline;
+            font-weight: $sw-headings-font-weight;
+            font-size: 34px;
+            line-height: 42px;
+        }
+    }
+    .gaisbock-images {
+        text-align: center;
+        width: 16.667%;
+        @media(max-width:992px) {
+            width: 33.33%;
+        }
+        .cms-element-gaisbock-text{
+            margin-top: 11px;
+            margin-bottom: 46px;
+            h2 {
+                letter-spacing: 0.9px;
+                color: $sw-color-brand-secondary;                ;
+                font-size: 15px;
+                font-family: $sw-font-family-base;
+                line-height: 17px;
+            }
+        }
+        .cms-element-gaisbock-image{
+            // border: 4px solid $sw-color-brand-secondary;
+            // background: #FFFFFF 0% 0% no-repeat padding-box;
+            opacity: 1;
+            border-radius: 50%;
+            width: 106px;
+            height: 106px;
+            margin: 0 auto;
+            .cms-image-container {
+                height: 100%;
+                display: flex;
+                align-items: center;
+                width: 100%;
+                display: block;
+                img {
+                    width: 100%;
+                    height: 100%;
+                    object-fit: contain;
+                }
+            }
+        }
+    }
+    
+}
+
+
+.gailbock-faq-section{
+    color: #FFFFFF;
+    padding: 50px 0;
+    @media(max-width:767px) {
+        padding: 30px 0 50px; 
+    }
+    .gaisbock-element-switch-image-text {
+        margin: 0 auto;
+        text-align: center;
+    }
+    .Faq-title {
+        border-bottom: 2px solid $sw-border-color;
+        display: inline-block;
+        font-family: 'Rama-Slab';
+        font-size: 47px;
+        color: $sw-color-brand-primary;
+        text-transform: uppercase;
+        width: auto;
+        letter-spacing: 3.29px;
+        line-height: 55px;
+        padding-bottom: 5px;
+    }
+    h2 {
+        line-height: 42px;
+        letter-spacing: 0.17px;
+        color: #000000;
+        padding-top: 35px;
+        font-family: $sw-font-family-headline;
+        font-weight: $sw-headings-font-weight;
+        margin-bottom: 0px;
+        font-size: 34px;
+        @media(max-width:767px) {
+            font-size: 29px; 
+            line-height: 32px;
+            letter-spacing: 0.14px;
+        }
+    }
+    p{
+        color: $sw-color-brand-primary;
+        font-size: 24px;
+        letter-spacing: 0px;
+        line-height: 29px;
+        text-align: center;
+        font-family: $sw-font-family-base;
+        font-weight: $fontWeight500;
+        margin-top: 5px;
+        margin-bottom: 8px;
+        a {
+            text-decoration: underline;
+            text-decoration-color: $sw-border-color;
+            text-decoration-thickness: 1.2px;
+        }
+    }
+    img {
+        max-width: 158px;
+        width: 100%;
+        height: auto;
+        margin-top: 15px;
+    }
+}
+
+.three-product-section {
+    padding-top: 67px;
+    @media(min-width:768px){
+        padding-bottom: 19px;
+    }
+    h2 {
+        font-size: 48px;
+        text-align: center;
+        line-height: 61px;
+        letter-spacing: 0.24px;
+        color: $sw-color-brand-primary;
+        margin-bottom: 0;
+    }
+    .star {
+        text-align: center;
+        padding-top: 5px;
+        span {
+            color: $sw-color-brand-secondary;
+            font-size: 25px;
+            @media(max-wdith:767px) {
+                font-size: 15px;
+            }
+        }
+    }
+    .product-box .card-body {
+        padding-top: 0;
+    }
+}
+
+// Natural Cosmatic Section
+
+
+.gaisbock-benefits{
+    height: 720px;
+    margin-top: 60px;
+    // background-attachment: fixed;
+    // transition: background-color 0.5s ease;
+    .cms-section-default, .cms-block, .cms-block-container, .cms-block-container-row {
+        height: 100%;
+    }
+    .cms-element-gaisbock-image-titles-button img {
+        width: 100%;
+    }
+    .gaisbock-element-image-titles-button {
+        position: relative;
+        height: 100%;
+    max-width: 1440px;
+    margin: 0 auto;
+    }    
+    .title-image-button-section{
+        text-align: center;
+        position: absolute;
+        width: 100%;
+        max-width: 558px;
+        right: auto;
+        left:50%;
+        top: 50%;
+        transform: translate(0%, -50%);
+        height: 100%;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-content: center;
+        @media(min-width: 768px) and (max-width: 1199px){
+            transform: translate(-50%, -50%);
+        }
+        .main-title {
+            text-align: center;
+            font-size: 70px;
+            line-height: 76px;
+            letter-spacing: 0.35px;
+            color: $sw-color-brand-primary;
+            font-family: $sw-font-family-headline;
+            font-weight: $sw-headings-font-weight;
+            // font-family: $sw-font-family-base;
+        }
+        .cms-image-container{
+            padding-top: 32px;
+            img {
+                max-width: 177px;
+                height: auto;
+                width: 100%;
+            }
+        }
+        .cms-element-text-container{
+            padding-top: 27px;
+            letter-spacing: 0px;
+            font-size: 24px;
+            line-height: 32px;
+            color: $sw-color-brand-primary;
+            font-family: $sw-font-family-headline;
+            font-weight: 500;
+            font-family: 'Blacker-display-regular';
+            // font-family: $sw-font-family-base;
+        }
+        .gaisbock-image-button{
+            margin: 30px auto 0;
+            color: #FFFFFF;
+            background: #DE1010 0% 0% no-repeat padding-box;
+            border-radius: 15px;
+            padding: 6px 21px;  
+            a {
+                font-family: $sw-font-family-base;
+                font-weight: $sw-headings-font-weight;
+                font-size: 13px;
+                letter-spacing: 0.78px;
+                color: #FFFFFF;
+                text-transform: uppercase;
+                line-height: 14px;
+                &:hover{
+                    text-decoration: none;
+                }
+            }
+        }
+    }
+    .image-text-container {
+        display: none;
+    }
+}
+// .three-product-section{
+//     .tns-outer .tns-outer .tns-outer .tns-controls {
+//         display: block;
+//     }
+//     .product-slider-container .tns-controls {
+//         display: none;
+//     }
+// }
+// .three-sections-two{
+//     .tns-outer .tns-outer .tns-controls {
+//         display: block;
+//     }
+//     .product-slider-container .tns-controls {
+//         display: none;
+//     }
+// }
+
+.gift-slider-section{
+    .product-box{
+        .product-price-unit {
+            display: none;
+        }
+        .product-description {
+            min-height: auto !important;
+        }
+    }
+}
+
+.gift-code-section {
+    padding-top: 58px;
+    .image-text-container {
+        position: relative;
+        text-align: center;
+        .text-image {
+            max-width: 761px;
+            margin: 0 auto;
+            width: 100%;
+        }
+        h2 {
+            font-size: 48px;
+            letter-spacing: 0.24px;
+            line-height: 61px;
+            color: $sw-color-brand-primary;
+        }
+        p {
+            font-family: $sw-font-family-headline;
+            font-weight: $fontWeight500;
+            font-family: 'Blacker-display-regular';
+            font-size: 26px;
+            line-height: 35px;
+            margin-bottom: 0;
+        }
+        .cms-element-gaisbock-switch-image-text {
+            position: absolute;
+            right: 63px;
+            top: 26px;
+            @media(max-width:1200px) {
+                top: -15px;
+                right: -10px;
+            }
+            @media(max-width:767px) {
+                display: block;
+            }
+        }
+    }
+}
+.solid-ie-feed{
+    .feed-row {
+        margin-left: auto;
+        margin-right: auto;
+    }
+}
+
+.natural-section {
+    height: 660px;
+    margin-top: 40px;
+    background-size: contain !important;
+    .cms-section-default, .cms-block, .cms-block-container, .cms-block-container-row,
+    .gaisbock-element-image-titles-button {
+        height: 100%;
+    }
+    .title-image-button-section.left {
+        text-align: center;
+        max-width: 702px;
+        margin: 0 auto;
+        color: #fff;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-content: center;
+        height: 100%;
+        .sub-title {
+            width: 100%;
+            font-weight: 700;
+            letter-spacing: 1.08px;
+            line-height: 25px;
+            text-transform: uppercase;
+            font-size: 20px;
+        }
+        .main-title {
+            letter-spacing: 0.24px;
+            width: 100%;
+            font-size: 48px;
+            line-height: 61px;
+            font-family: $sw-font-family-headline;
+            font-weight: 900;
+            margin: 10px 0;
+            max-width: 566px;
+            text-shadow: 0px 0px 12px #00000029;
+        }
+        img {
+            max-width: 177px;
+            margin-bottom: 20px;
+            margin-top: 10px;
+        }
+        .cms-element-text-container {
+            font-size: 24px;
+            font-family: $sw-font-family-headline;
+            font-family: 'Blacker-display-regular';
+            line-height: 32px;
+            text-shadow: 0px 0px 12px #00000029;
+        }
+        a {
+            background: #DE1010;
+            color: #fff;
+            border-radius: 15px;
+            font-size: 13px;
+            display: inline-block;
+            letter-spacing: 0.78px;
+            text-transform: uppercase;
+            font-weight: $fontWeight700;
+            height: 30px;
+            padding: 0 21px;
+            line-height: 30px;
+            text-decoration: none;
+            margin-top: 45px;
+        }
+    }
+}
+.gift-code-section.headdline-gift-code .image-text-container .cms-element-gaisbock-switch-image-text {
+    right: auto;
+    top: -18px;
+    left: 70px;
+    img {
+        width: 91%;
+    }
+}
+.gaisbock-benefits.founder-section {
+    height: 790px;
+    @media(max-width:767px) {
+        height: 520px;
+    }
+    .title-image-button-section {
+        
+            right: auto;
+            left: 0;
+            @media(max-width:1024px){
+                right: auto;
+                left: 50%;
+            }
+            @media(max-width:767px){
+                max-width: 320px;
+            }
+        .main-title {
+            font-size: 48px;
+            line-height: 61px;
+            letter-spacing: 0.24px;
+            color: #fff;
+        }
+        .cms-image-container {
+            padding-top: 10px;
+        }
+        .cms-element-text-container {
+            padding-top: 27px;
+            letter-spacing: 0px;
+            font-size: 24px;
+            line-height: 32px;
+            color: #fff;
+            text-shadow: 0px 0px 20px #00000029;
+            font-family: 'Blacker-display-regular';
+        }
+    }
+}
+.instagram-feed-section {
+    margin-top: 70px;
+    .insta-heading {
+        text-align: center;
+        .insta-svg {
+            position: relative;
+            &:after {
+                content:'';
+                position: static;
+                background-image: url('../../../bundles/gaisbock/storefront/assets/icon-pack/gaisbock/insta-svg-blck.svg');
+                width: 31px;
+                height: 30px;
+                background-repeat: no-repeat;
+                display: block;
+                text-align: center;
+                margin: 0 auto 25px;
+            }
+        }
+        .hr {
+            background: #707070;
+            height: 2px;
+            width: 100%;
+            max-width: 73px;
+            margin: 0 auto 40px;
+        }
+        h2 {
+            font-size: 48px;
+            line-height: 61px;
+            letter-spacing: 0.24px;
+            color: $sw-color-brand-primary;
+        }
+        p {
+            color: $sw-color-brand-primary;
+            font-size: 24px;
+            line-height: 29px;
+        }
+    }
+}
+.gailbock-faq-section{
+    .gaisbock-element-switch-image-text {
+        padding-bottom: 4px;
+    }
+}
+
+@include media-breakpoint-up(md) {
+    .is-act-home{
+        .bg-image.gaisbock-benefits {
+            margin-top: 20px;
+        }
+        .three-sections-two {
+            padding-bottom: 19px;
+        }
+        .gift-code-section.headdline-gift-code{
+            padding-top: 58px;
+        }
+        .three-sections-three {
+            padding-bottom: 58px;
+        }
+    }
+    .instagram-feed-section{
+        .insta-heading {
+            padding-top: 4px;
+        }
+    }
+}
+@media(max-width:1024px) { 
+    .gift-code-section.headdline-gift-code{
+        .image-text-container{
+            .cms-element-gaisbock-switch-image-text{
+                left: 50px;
+            }
+        }
+    }
+    .gift-code-section{
+        .image-text-container{
+            .cms-element-gaisbock-switch-image-text{
+                img{
+                    width: 80px !important;
+                }
+            }
+        }
+    }
+}
+
+@media (min-width: 992px) and (max-width: 1266px){
+    .bg-image.gaisbock-benefits.founder-section {
+        background-position: 80%;
+    }
+}
+@media (min-width: 992px) and (max-width: 1199px){
+    .gaisbock-benefits .gaisbock-element-image-titles-button .title-image-button-section.right{
+        transform: translate(-15%, -50%) !important;
+    }
+}
+
+@media(max-width:992px) {
+    .is-act-home .bg-image.gaisbock-benefits.founder-section {
+        background-position: 50% -13%;
+    }
+    .sw-cms-element-gaisbock-custom-category-extension__images ul {
+        margin-top: 0 !important;
+    }
+    .natural-section {
+        height: 860px;
+    }
+    .home-banner .image-slider-container .image-slider-image {
+        // display: none;
+        height:100%;
+        object-fit: cover;
+        padding-top: 0px;
+    }
+    .home-banner {
+        .image-slider-item {
+            background-position: center;
+            background-size: cover;
+            background-repeat: no-repeat;
+            width: 100%;
+            height: 100%;
+            background: none;
+        }
+    }
+    .home-banner .banner-conext {
+        top: 55%;
+    }
+    .home-banner .banner-conext,
+    .home-banner .banner-conext.left
+     {
+        left: 16px;
+        max-width: 203px;
+    }
+    .home-banner .banner-conext.right  {
+        left: auto;
+        right: 16px;
+        max-width: 203px;
+    }
+    .home-banner .banner-conext p {
+        max-width: 131px;
+        margin-bottom: 13px;
+        margin-top: 5px;
+    }
+    .home-banner .banner-conext a {
+        font-size: 10px;
+        height: 23px;
+        padding: 0 10px;
+        line-height: 23px;
+            font-size: 10px;
+    }
+    .home-banner .tns-nav {
+        bottom: 8px !important;
+    }
+    .home-banner .tns-nav button {
+        margin: 0 7px;
+    }
+    .gaisbock-benefits{
+        .title-image-button-section{
+            .main-title{
+                color: #FFFFFF;
+                // color:$sw-color-brand-primary;
+                text-shadow: 0px 0px 12px #00000029;
+            }
+            .cms-element-text-container{
+                letter-spacing: 0px;
+                color: #FFFFFF;
+                // color:$sw-color-brand-primary;
+                text-shadow: 0px 0px 12px #00000029;
+            }
+        }
+    }
+    .instagram-feed-section .feed-row .feed-col {
+        width: 33.33%;
+        padding: 0 4px;
+        display:block !important;
+    }
+}
+
+@include media-breakpoint-down(md){
+    .Gaisbock-category-images .gaisbock-images .cms-element-gaisbock-image .cms-image-container img {
+            width: auto;
+    height: auto;
+    }
+    .cms-block-product-slider .col-12 {
+        padding: 0;
+    }
+    .Gaisbock-category-images .gaisbock-images .cms-element-gaisbock-text {
+        margin-top: 4px;
+    }
+    // .Gaisbock-category-images .gaisbock-images .cms-element-gaisbock-image {
+    //     border: 2px solid $sw-color-brand-secondary;
+    // }
+    .natural-section + .gift-code-section .image-text-container .cms-element-gaisbock-switch-image-text {
+        left: 0 !important;
+        top: 0px !important;
+        right: auto !important;
+        display: block;
+    }
+    .insta-link {
+        
+        margin: 15px auto 0;
+        a{
+            font-size: 10px;
+            letter-spacing: 0.6px;
+            padding: 8px 13px 8px;
+        }
+    }
+    .gift-code-section{
+        .cms-block-gaisbock-switch-image-text {
+            position: relative;
+        }
+        .cms-section-default{
+            .cms-block-container {
+                padding-bottom: 0px !important;
+            }
+        }
+        .image-text-container {
+            position: static;
+            .cms-element-gaisbock-switch-image-text {
+                left: auto !important;
+                top: 0px !important;
+                right: 18px !important;
+                display: block;
+                img {
+                    max-width: 80px;
+                }
+            }
+        }
+    }
+    .is-act-home .three-product-section {
+        .cms-block-text .cms-block-container {
+            padding-bottom: 0 !important;
+        }
+        .hidden-desktop.hidden-tablet.cms-block-product-slider  {
+            .cms-block-container {
+                padding-bottom: 0 !important;
+            }
+        }
+    }
+    .Gaisbock-category-images{
+        padding-bottom: 20px;
+        .gaisbock-title{
+            padding-bottom: 5px;
+            h2 {
+                font-size: 21px;
+                line-height: 25px;
+            }
+        }
+        .gaisbock-images{
+            width: 33.33%;
+            .cms-element-gaisbock-text{
+                margin-bottom: 0;
+                padding-bottom: 6px;
+            }
+            .cms-element-gaisbock-text{
+                h2 {
+                    font-size: $sw-font-size-xs;
+                    line-height: 13px;
+                }
+            }
+            .cms-element-gaisbock-image{
+                width: auto;
+                height: auto;
+            }
+        }
+    }
+    .gailbock-faq-section{
+        .Faq-title{
+            font-size: 42px;
+            line-height: 46px;
+            letter-spacing: 2.94px;
+            padding-bottom: 7px;
+        }
+        h2{
+            letter-spacing: 0.14px;
+            font-size: 29px;
+            line-height: 32px;
+            padding-top: 12px;
+        }
+        p{
+            font-size: $sw-font-size-heading;
+            line-height: 19px;
+        }
+        img {
+            max-width: 109px;
+            width: 100%;
+            height: auto;
+            margin-top: 10px;
+        }
+    } 
+
+    .gaisbock-benefits{
+        height: 510px;
+        margin-top: 45px;
+        background-position: 22% 65% !important;
+        background-attachment: revert !important;
+        .title-image-button-section{
+            max-width: 312px;
+            margin: 0 auto;
+            right: auto;
+            transform: translate(-50%, -50%);
+            left: 50%;
+            @media(max-width:1024px) {
+                transform: translate(0%, 50%);
+            }
+            .main-title{
+                font-size: 40px;
+                line-height: 43px;
+                letter-spacing: 0.2px;
+                color: #FFFFFF;
+                // color:$sw-color-brand-primary;
+                text-shadow: 0px 0px 12px #00000029;
+            }
+            .cms-element-text-container{
+                letter-spacing: 0px;
+                color: #FFFFFF;
+                // color:$sw-color-brand-primary;
+                text-shadow: 0px 0px 12px #00000029;
+                font-size: 14px;
+                line-height: 18px;
+                font-family: $sw-font-family-headline;
+                font-weight: $fontWeight500;
+            }
+            .cms-image-container {
+                padding-top: 15px;
+                img {
+                    max-width: 108px;   
+                }
+            }
+        }
+        .cms-element-gaisbock-image-titles-button{
+            display: none;
+        }
+        .image-text-container{
+            height: 501px;
+        }
+    }
+    .gaisbock-benefits .title-image-button-section .gaisbock-image-button {
+        padding: 0px 13px 2px;
+        margin: 15px auto 0;
+        a {
+            font-size: 10px;
+            letter-spacing: 0.6px;
+            line-height: 10px;
+        }
+    }
+    .three-product-section h2 {
+        font-size: 29px;
+        line-height: 32px;
+        letter-spacing: 0.14px;
+    }
+    .three-product-section {
+        padding-top: 20px;
+        font-size: 14px;
+    }
+    .container, .cms-section .boxed {
+        padding: 0 17px;
+    }
+    .gift-code-section {
+        padding-top: 30px;
+    }
+    .gift-code-section .image-text-container h2 {
+        font-size: 29px;
+        letter-spacing: 0.14px;
+        line-height: 32px;
+    }
+    .gift-code-section .image-text-container p {
+        font-size: 16px;
+        line-height: 19px;
+    }   
+    .natural-section {
+        height: 510px;
+        // background-image: none !important;
+        margin-top: 45px;
+    }
+    .natural-section .title-image-button-section.left .sub-title {
+        font-size: 13px;
+        letter-spacing: 0.91px;
+        line-height: 17px;
+    }
+    .natural-section .title-image-button-section.left .main-title {
+        letter-spacing: 0.14px;
+        font-size: 29px;
+        line-height: 32px;
+        max-width: 600px;
+    }
+    .natural-section .title-image-button-section.left img {
+        max-width: 108px;
+    }
+    .natural-section .title-image-button-section.left .cms-element-text-container {
+        line-height: 18px;
+        font-size: 14px;
+    }
+    .natural-section .title-image-button-section.left a {
+        font-size: 10px;
+        letter-spacing: 0.6px;
+        height: 23px;
+        padding: 0 10px;
+        line-height: 23px;
+        margin-top: 16px;
+    }
+    .gaisbock-benefits.founder-section {
+        background-position: 76% 35% !important;
+        .title-image-button-section  {
+            left: 50%;
+        }
+        .title-image-button-section .main-title  {
+            font-size: 40px;
+            line-height: 43px;
+            letter-spacing: 0.2px;
+        }
+        .title-image-button-section .cms-element-text-container {
+            font-size: 14px;
+            line-height: 18px;
+            padding-top: 22px;
+        }
+    }
+    .instagram-feed-section {
+        margin-top: 45px;
+        .insta-heading {
+            .hr {
+                max-width: 46px;
+                margin: 0 auto 25px;
+            }
+            h2 {
+                font-size: 29px;
+                line-height: 32px;
+                letter-spacing: 0.14px;
+            }
+            p {
+                color: $sw-color-brand-primary;
+                font-size: 16px;
+                line-height: 19px;
+            }
+        }
+    }
+}
+@media (min-width: 576px) and (max-width: 767px){
+    .gift-code-section{
+        .image-text-container{
+            p{
+                max-width: 70%;
+                margin: 0 auto;
+            }
+        }
+    }
+}
+
+
+@media (max-width:576px){
+    .gift-code-section{
+        .image-text-container{
+            .text-image{
+                padding-top: 40px;
+            }
+            .cms-element-gaisbock-switch-image-text{
+                img {
+                    max-width: 60px;
+                }
+            }
+        }
+    }
+}

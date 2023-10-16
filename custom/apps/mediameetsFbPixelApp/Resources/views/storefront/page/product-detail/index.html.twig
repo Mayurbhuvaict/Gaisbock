@@ -1,0 +1,24 @@
+{% sw_extends '@Storefront/storefront/page/product-detail/index.html.twig' %}
+
+{% block base_body_script %}
+    {% if config('mediameetsFbPixelApp.config.pixelIds') and config('mediameetsFbPixelApp.config.pixelIds') is not empty %}
+        {% if page.product.calculatedPrices|length > 1 %}
+            {% set _mmfbProductPrice = page.product.calculatedPrices|first %}
+        {% else %}
+            {% set _mmfbProductPrice = page.product.calculatedPrice %}
+            {% if page.product.calculatedPrices|length == 1 %}
+                {% set _mmfbProductPrice = page.product.calculatedPrices.first %}
+            {% endif %}
+        {% endif %}
+        {% set _mmfbProductCategory = page.header.navigation.getChildren(page.product.categoryTree|last) %}
+        <script>
+            window.mediameetsFacebookPixelData.set('product', {
+                name: '{{ page.product.translated.name|e('js') }}',
+                productNumber: '{{ page.product.productNumber|e('js') }}',
+                price: {{ _mmfbProductPrice.unitPrice|number_format(2, '.', '')|e('js') }},
+                category: '{{ _mmfbProductCategory.active.translated.name|e('js') }}'
+            });
+        </script>
+    {% endif %}
+    {{ parent() }}
+{% endblock %}

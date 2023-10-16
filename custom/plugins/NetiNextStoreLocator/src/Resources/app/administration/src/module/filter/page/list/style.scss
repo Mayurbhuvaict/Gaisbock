@@ -1,0 +1,40 @@
+.sw-page.neti-sl-filter-list {
+    .smart-bar__actions {
+        .sw-button {
+            margin-right: 8px !important;
+            margin-left: 0 !important;
+        }
+    }
+    .neti-sl-filter-list__content {
+        margin: 30px 0 0 0;
+        .edit-info-alert {
+            margin: 0 auto 15px auto;
+            max-width: 800px;
+        }
+        .empty-info-alert {
+            margin: 0 auto;
+            max-width: 800px;
+            .sw-alert__message {
+                display: flex;
+                .alert-content {
+                    flex: 1;
+                }
+                .add-filter-button {
+                    align-self: flex-end;
+                }
+            }
+        }
+        .filter-item {
+            .filter-actions {
+                display: flex;
+                margin: 0 -5px;
+                .sw-button {
+                    margin: 0 5px;
+                }
+                .spacer {
+                    flex: 1;
+                }
+            }
+        }
+    }
+}

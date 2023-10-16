@@ -1,0 +1,43 @@
+{% sw_extends '@Storefront/storefront/page/checkout/cart/index.html.twig' %}
+
+
+ {% block page_checkout_aside %}
+     {{ parent() }}
+
+     {% if page.cart.extensions.sliderProducts.all %}
+         {% set config = {
+             'title': {
+                 'value':  'proxa-basket-cross-selling.cart-slider-title'|trans
+             },
+             'border': {
+                 'value': false
+             },
+             'rotate': {
+                 'value': false
+             },
+             'boxLayout': {
+                 'value': 'cart'
+             },
+             'elMinWidth': {
+                 'value': '300px'
+             },
+             'navigation': {
+                 'value': true
+             },
+             'displayMode': {
+                 'value': 'minimal'
+             },
+             'position' :{
+                 'value': page.cart.extensions.sliderType.get(0)
+             }
+         } %}
+         <div class="checkout-product-slider">
+             <div class="col-12">
+                 {% sw_include '@Storefront/storefront/element/cms-element-cart-product-slider.html.twig' with {
+                     elements: page.cart.extensions.sliderProducts.all ,
+                     sliderConfig: config,
+                 } %}
+             </div>
+         </div>
+     {% endif %}
+ {% endblock %}

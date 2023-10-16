@@ -1,0 +1,44 @@
+{
+  "name": "ictech/newsletter-with-promotion",
+  "description": "Newsletter Popup With Promotions",
+  "type": "shopware-platform-plugin",
+  "license": "proprietary",
+  "version": "v1.0.1",
+  "authors": [
+    {
+      "name": "iCreative Technologies"
+    }
+  ],
+  "autoload": {
+    "psr-4": {
+      "ICTECHNewsletterWithPromotion\\": "src/"
+    }
+  },
+  "require": {
+    "shopware/core": "~6.5.0",
+    "shopware/storefront": "~6.5.0",
+    "shopware/administration": "~6.5.0"
+  },
+  "extra": {
+    "shopware-plugin-class": "ICTECHNewsletterWithPromotion\\ICTECHNewsletterWithPromotion",
+    "label": {
+      "de-DE": "Newsletter-Popup mit Werbeaktionen",
+      "en-GB": "Newsletter Popup With Promotions",
+      "fr-FR": "Newsletter Popup avec promotions"
+    },
+    "manufacturerLink": {
+      "de-DE": "https://www.icreativetechnologies.com",
+      "en-GB": "https://www.icreativetechnologies.com",
+      "fr-FR": "https://www.icreativetechnologies.com"
+    }
+  },
+  "require-dev": {
+    "nunomaduro/phpinsights": "^2.8"
+  },
+  "config": {
+    "allow-plugins": {
+      "symfony/runtime": true,
+      "dealerdirect/phpcodesniffer-composer-installer": true
+    }
+  }
+}

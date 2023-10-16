@@ -1,0 +1,80 @@
+{% block page_product_detail_suggested_products_tabs_content_container %}
+    {% if config is defined and config|length > 0 %}
+
+        {% set config = {
+            'title': {
+                'value': "acrisSuggestedProducts.product.detail.productsSameCategory"|trans|sw_sanitize
+            },
+            'border': {
+                'value': false
+            },
+            'rotate': {
+                'value': false
+            },
+            'products': {
+                'value': products
+            },
+            'boxLayout': {
+                'value': config.boxLayout.value ?? sliderConfig.boxLayout.value
+            },
+            'elMinWidth': {
+                'value': config.elMinWidth.value ?? sliderConfig.elMinWidth.value
+            },
+            'navigation': {
+                'value': true
+            },
+            'displayMode': {
+                'value': config.displayMode.value ?? sliderConfig.displayMode.value
+            },
+            'verticalAlign': {
+                'value': center
+            },
+        } %}
+
+
+    {% else %}
+
+        {% set config = {
+            'title': {
+                'value': "acrisSuggestedProducts.product.detail.productsSameCategory"|trans|sw_sanitize
+            },
+            'border': {
+                'value': false
+            },
+            'rotate': {
+                'value': false
+            },
+            'products': {
+                'value': products
+            },
+            'boxLayout': {
+                'value': sliderConfig.boxLayout.value ?? 'standard'
+            },
+            'elMinWidth': {
+                'value': sliderConfig.elMinWidth.value ?? '300px'
+            },
+            'navigation': {
+                'value': true
+            },
+            'displayMode': {
+                'value': sliderConfig.displayMode.value ?? 'minimal'
+            },
+            'verticalAlign': {
+                'value': center
+            },
+        } %}
+
+    {% endif %}
+
+    {% sw_include "@Storefront/storefront/element/cms-element-product-slider.html.twig" with {
+        sliderConfig: config,
+        element: {
+            'data': {
+                'products': {
+                    elements: products
+                }
+            },
+            type: 'product-slider'
+        }
+    } %}
+{% endblock %}

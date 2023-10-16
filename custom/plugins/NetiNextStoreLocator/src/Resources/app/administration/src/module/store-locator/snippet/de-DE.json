@@ -1,0 +1,235 @@
+{
+    "neti-store-locator": {
+        "bool": {
+            "0": "Nein",
+            "1": "Ja"
+        },
+        "custom-fields": {
+            "linkTitle": "Zusatzfelder bearbeiten",
+            "noFields": "Sie haben noch keine Zusatzfelder für den StoreLocator zugewiesen."
+        },
+        "notification": {
+            "requiredFields": "Bitte füllen Sie alle Pflichtfelder aus."
+        },
+        "general": {
+            "mainMenuItemGeneral": "StoreLocator",
+            "mainMenuItemList": "Übersicht",
+            "mainMenuItemAdd": "Filiale hinzufügen",
+            "descriptionTextModule": "Filialen hier verwalten.",
+            "placeholderSearchBar": "Alle Filialen durchsuchen",
+            "newStore": "Neue Filiale"
+        },
+        "list": {
+            "textStores": "Filialen",
+            "textStoresTotal": "Keine Filialen | Eine Filiale | {count} Filialen",
+            "buttonAddStore": "Filiale hinzufügen",
+            "columnLabel": "Name",
+            "columnActive": "Aktiv",
+            "columnSalesChannel": "Vertriebskanäle",
+            "columnFeatured": "Hervorgehoben",
+            "columnStreet": "Straße",
+            "columnStreetNumber": "Hausnummer",
+            "columnZipCode": "Postleitzahl",
+            "columnCity": "Stadt",
+            "columnCountry": "Land",
+            "columnActions": "Aktion(en)",
+            "contextMenuView": "Ansicht",
+            "contextMenuDelete": "Löschen",
+            "contextMenuDuplicate": "Duplizieren",
+            "contextMenuEdit": "Bearbeiten",
+            "messageEmpty": "Noch keine Filialen vorhanden",
+            "modalTitleDelete": "Filiale löschen",
+            "textDeleteConfirm": "Sind Sie sicher, dass Sie die Filiale \"{name}\" löschen möchten?",
+            "buttonCancel": "Abbrechen",
+            "buttonDelete": "Löschen",
+            "titleSidebarItemRefresh": "Aktualisieren",
+            "buttonCreate": "Filiale hinzufügen",
+            "titleSidebarFilter": "Filter"
+        },
+        "detail": {
+            "buttonEdit": "Bearbeiten",
+            "buttonCancel": "Abbrechen",
+            "buttonSave": "Speichern",
+            "buttonLocate": "Adresse lokalisieren",
+            "tabGeneral": "Allgemein",
+            "tabAddress": "Adresse",
+            "tabDetails": "Details",
+            "tabContact": "Kontakt",
+            "tabBusinessHours": "Öffnungszeiten",
+            "titleSaveError": "Fehler",
+            "titleSaveSuccess": "Erfolg",
+            "messageSaveError": "Die Filiale konnte nicht gespeichert werden.",
+            "messageBusinessTimeSaveError": "Die Filiale konnte nicht gespeichert werden, da die Zeit für die Öffnungszeiten nicht konfiguriert wurde.",
+            "messageSaveSuccess": "Die Filiale \"{name}\" wurde gespeichert.",
+            "titleLocateError": "Adresse konnte nicht gefunden werden.",
+            "messageLocateError": "Bitte überprüfen Sie Ihre Adresse und versuchen Sie es erneut oder wenden Sie sich an Ihren Systemadministrator.",
+            "contentTypeLabel": "Inhalts-Typ",
+            "contentTypeHTML": "HTML / WYSIWYG-Editor",
+            "contentTypeCMS": "Erlebniswelten",
+            "contentTypeHelp": "",
+            "contentDescriptionLabel": "Inhalt",
+            "contentDescriptionHelp": "Fügen Sie Ihren Inhalt hier ein, damit er angezeigt wird.",
+            "cmsPageLabel": "Erlebniswelt",
+            "cmsPageHelp": "Wählen Sie ein bereits erstellte Erlebniswelt aus (Inhalt > Erlebniswelten > Store Locator).",
+            "cmsPageLinkInfo": "Erlebniswelten anzeigen",
+            "labelDetailsPictureMedia": "Alternatives Detailbild",
+            "cms-stores": {
+                "cardFieldSets": "Erlebniswelten",
+                "buttonFieldSetsAdd": "Erlebniswelten hinzufügen",
+                "context-menu": {
+                    "openCmsPage": "Erlebniswelt öffnen",
+                    "removeCmsPage": "Erlebniswelt entfernen",
+                    "moveCmsPageUp": "Erlebniswelt nach oben bewegen",
+                    "moveCmsPageDown": "Erlebniswelt nach unten bewegen"
+                },
+                "modal": {
+                    "removeCmsPageTitle": "Erlebniswelt entfernen",
+                    "modalConfirmText": "Willst du wirklich die Zuweisung zu der Erlebniswelt {name} aufheben?",
+                    "buttonCancel": "Abbrechen",
+                    "buttonDelete": "Zuweisung aufheben",
+                    "modalTitleMassDelete": "Ausgewählte Erelbniswelten entfernen",
+                    "textMassDeleteConfirm": "Willst du wirklich die Zuweisung zu den ausgewählten Erlebniswelten aufheben?"
+                },
+                "column": {
+                    "name": "Name",
+                    "position": "Position"
+                },
+                "assignment-modal": {
+                    "buttonCancel": "Abbrechen",
+                    "buttonSave": "Erlebniswelten zuweisen",
+                    "cmsPageLabel": "Erlebniswelt",
+                    "title": "Erlebniswelten zuweisen",
+                    "successTitle": "Erfolg",
+                    "successMessage": "Erlebniswelten wurden erfolgreich zugewiesen.",
+                    "errorTitle": "Fehler",
+                    "errorMessage": "Erlebniswelten konnten nicht zugewiesen werden."
+                }
+            },
+            "labelContactFormEnabled": "Kontaktformular aktiviert",
+            "labelContactFormEnabledHelp": "Wenn Sie das Kontaktformular aktivieren, müssen Sie auch die E-Mail-Adresse für die Benachrichtigung angeben. Andernfalls kann ein Kunde die Filiale nicht kontaktieren.",
+            "labelContactFormDetail": "Kontaktformular auf Detailseite anzeigen",
+            "labelHidden": "Filiale ausblenden",
+            "labelNotificationMail": "Benachrichtigungs E-Mail-Adresse",
+            "labelMapZoom": "Zoom auf der Karte",
+            "labelExcludeFromSync": "Von Google Places Sync ausschließen",
+            "labelGooglePlaceID": "Google Place ID",
+            "labelFeatured": "Hervorgehoben",
+            "labelFeaturedHelp": "Der Store wird immer optisch hervorgehoben.",
+            "labelRadius": "Radius",
+            "labelStreet": "Straße",
+            "labelStreetNumber": "Hausnummer",
+            "labelZipCode": "Postleitzahl",
+            "labelCity": "Stadt",
+            "labelLongitude": "Längengrad",
+            "labelLatitude": "Breitengrad",
+            "labelCountry": "Land",
+            "labelCountryState": "Bundesland",
+            "labelPhone": "Telefonnummer",
+            "labelFax": "Fax",
+            "labelUrl": "URL",
+            "labelEmail": "E-Mail",
+            "labelAdditionalInformation": "Zusätzliche Informationen",
+            "labelDescription": "Beschreibung",
+            "labelPictureMedia": "Vorschau-Bild",
+            "labelIconMedia": "Alternatives Kartensymbol",
+            "helpAdditionalInformation": "z.B. Öffnungszeiten, etc.",
+            "labelSeoTitle": "SEO-Titel",
+            "labelSeoDescription": "SEO-Beschreibung",
+            "labelDetailTitle": "Titel",
+            "labelTags": "Tags / Schlagwörter",
+            "labelOpeningTimes": "Öffnungszeiten"
+        },
+        "card": {
+            "labelLabel": "Name",
+            "placeholderLabel": "Name der Filiale",
+            "placeholderStreet": "Straße",
+            "placeholderStreetNumber": "Hausnummer",
+            "placeholderCity": "Stadt",
+            "placeholderZipCode": "Postleitzahl",
+            "placeholderLatitude": "Wird automatisch gefüllt, wenn leer",
+            "placeholderLongitude": "Wird automatisch gefüllt, wenn leer",
+            "placeholderSeoUrl": "Ihre benutzerdefinierte SEO URL",
+            "helpSeoUrl": "Wichtiger Hinweis: Schrägstriche werden als Bindestriche interpretiert.",
+            "placeholderNotificationMail": "Benachrichtigungs E-Mail-Adresse",
+            "placeholderMapZoom": "Zoom auf der Karte",
+            "placeholderGooglePlaceID": "Google Place ID",
+            "placeholderRadius": "Radius",
+            "placeholderSeoTitle": "SEO Titel",
+            "externalIdLabel": "Externe Id",
+            "placeholderExternalId": "Externe Id..."
+        },
+        "updateCoordinatesModal": {
+            "title": "Koordinaten aktualisieren",
+            "infoText": "Dieser Prozess aktualisiert die Koordinaten aller Standorte ohne Koordinaten.",
+            "timezoneErrorText": "Es sieht so aus, als wäre die Timezone API im hinterlegen Google API Key nicht aktiviert.",
+            "errorTitle": "Fehler",
+            "errorText": "Leider ist etwas schief gelaufen. Bitte versuchen Sie es später noch einmal.",
+            "step1Text": "Filialen werden geladen",
+            "step2Text": "Verarbeitung",
+            "step3Text": "Abgeschlossen",
+            "buttonAbort": "Abbrechen",
+            "buttonRun": "Ausführen",
+            "buttonClose": "Schließen",
+            "chunkSizeLabel": "Elemente pro Anfrage",
+            "chunkSizeHelpText": "Die Anzahl der Filialen, welche pro Anfrage angefragt werden."
+        },
+        "mapPreviewModal": {
+            "button": "Map Vorschau",
+            "title": "Map Vorschau",
+            "labelLatitude": "Breitengrad",
+            "labelLongitude": "Längengrad",
+            "abortBtn": "Abbrechen",
+            "applyBtn": "Übernehmen"
+        },
+        "sidebar-filter": {
+            "activeLabel": "Aktiv",
+            "featuredLabel": "Hervorgehoben",
+            "showAlwaysLabel": "Immer anzeigen",
+            "detailPageEnabledLabel": "Detailseite aktiv",
+            "contactFormEnabledLabel": "Kontaktformular aktiv",
+            "tagLabel": "Tags",
+            "salesChannelLabel": "Verkaufskanäle",
+            "active": {
+                "none": "Alle",
+                "true": "Ja",
+                "false": "Nein"
+            },
+            "detailAddress": {
+                "labelBasicCard": "Allgemeines",
+                "labelMiscCard": "Sonstiges",
+                "labelGooglePlacesCard": "Google Places"
+            },
+            "detailDetails": {
+                "labelBasicCard": "Allgemeines",
+                "labelContentCard": "Inhalt",
+                "labelSeoCard": "Seo"
+            },
+            "detailContact": {
+                "labelBasicCard": "Allgemeines"
+            },
+            "showAlways": {
+                "none": "Alle",
+                "no": "Nein",
+                "top": "Oben",
+                "bottom": "Unten"
+            },
+            "streetLabel": "Straße",
+            "streetPlaceholder": "Straße...",
+            "streetNumberLabel": "Hausnr.",
+            "streetNumberPlaceholder": "Hausnr...",
+            "zipCodeLabel": "PLZ",
+            "zipCodePlaceholder": "PLZ...",
+            "cityLabel": "Ort",
+            "cityPlaceholder": "Ort...",
+            "countryLabel": "Land",
+            "externalIdLabel": "Externe ID",
+            "externalIdPlaceholder": "Externe ID...",
+            "mediaLabel": "Medien vorhanden",
+            "media": {
+                "none": "Alle",
+                "true": "Ja",
+                "false": "Nein"
+            }
+        }
+    }
+}

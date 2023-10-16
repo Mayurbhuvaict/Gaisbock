@@ -1,0 +1,10 @@
+{
+  "solid-product": {
+    "hoverCover": {
+      "title": "Hover cover",
+      "image": {
+        "label": "Image"
+      }
+    }
+  }
+}

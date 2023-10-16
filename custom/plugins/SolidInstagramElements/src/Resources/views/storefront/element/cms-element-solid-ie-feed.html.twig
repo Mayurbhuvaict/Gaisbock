@@ -1,0 +1,14 @@
+{% block element_solid_ie_feed %}
+    {% set accessToken = config('SolidInstagramElements.config.accessToken') %}
+    {% set useDatabaseAndFilesystem = config('SolidInstagramElements.config.useDatabaseAndFilesystem') %}
+
+    {% if not accessToken.isValid %}
+        {% sw_include '@Storefront/storefront/utilities/alert.html.twig' with {
+            type: "danger",
+            content: "solidInstagramElements.general.alert.missingAccessToken"|trans
+        } %}
+    {% endif %}
+
+    {% set config = element.fieldConfig.elements %}
+    {% sw_include '@SolidInstagramElements/storefront/element/cms-element-solid-ie-feed/feed-themes/' ~ config.theme.value ~ '.html.twig' %}
+{% endblock %}

@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/shopware/platform/master/src/Core/System/SystemConfig/Schema/config.xsd">
+
+    <card>
+        <title>Products from the same category</title>
+        <title lang="de-DE">Produkte aus der gleichen Kategorie</title>
+
+        <input-field type="bool">
+            <name>enableProductsSameCategory</name>
+            <label>Enabled</label>
+            <label lang="de-DE">Aktiviert</label>
+            <defaultValue>true</defaultValue>
+        </input-field>
+
+        <input-field type="int">
+            <name>maximumNumberOfProducts</name>
+            <label>Maximum number of products from the same category</label>
+            <label lang="de-DE">Maximale Anzahl an Produkten aus der gleichen Kategorie</label>
+            <defaultValue>12</defaultValue>
+        </input-field>
+
+        <input-field type="bool">
+            <name>enableParentProductView</name>
+            <label>Enable the view of the parent product in the slider.</label>
+            <label lang="de-DE">Anzeige des Eltern Artikels im Slider aktivieren.</label>
+            <helpText>When active the parent product on which detail page the customer is located will also be displayed in the suggested products.</helpText>
+            <helpText lang="de-DE">Wenn aktiv wird das Elternprodukt auf dessen Detailseite sich der Kunde befindet ebenfalls im Slider ausgegeben.</helpText>
+            <defaultValue>false</defaultValue>
+        </input-field>
+    </card>
+
+    <card>
+        <title>Recently viewed products</title>
+        <title lang="de-DE">Zuletzt angesehen Produkte</title>
+
+        <input-field type="bool">
+            <name>enableRecentlyViewedItems</name>
+            <label>Enabled</label>
+            <label lang="de-DE">Aktiviert</label>
+            <defaultValue>true</defaultValue>
+        </input-field>
+
+        <input-field type="int">
+            <name>recentlyViewedItemLimit</name>
+            <label>Maximum number of items shown in "Recently Viewed Products"</label>
+            <label lang="de-DE">Maximale Anzahl von Artikeln, die unter "Kürzlich angesehene Produkte" angezeigt werden</label>
+            <placeholder>7</placeholder>
+            <defaultValue>7</defaultValue>
+        </input-field>
+
+        <input-field type="int">
+            <name>recentlyViewedDuration</name>
+            <label>The duration of saving "Recently Viewed Product" cookie (in days)</label>
+            <label lang="de-DE">Die Speicherdauer des Cookies für kürzlich angesehene Produkte (in Tagen)</label>
+            <placeholder>365</placeholder>
+            <defaultValue>365</defaultValue>
+        </input-field>
+    </card>
+
+    <card>
+        <title>Customers also bought</title>
+        <title lang="de-DE">Kunden kauften auch</title>
+
+        <input-field type="bool">
+            <name>enableCustomersAlsoBought</name>
+            <label>Enabled</label>
+            <label lang="de-DE">Aktiviert</label>
+            <helpText>The products bought together most often are prioritised.</helpText>
+            <helpText lang="de-DE">Die am öftestens zusammen gekauften Produkte werden priorisiert.</helpText>
+            <defaultValue>true</defaultValue>
+        </input-field>
+
+        <input-field type="int">
+            <name>customersAlsoBoughtReadLimit</name>
+            <label>Maximum number of items shown in "Customers Also Bought"</label>
+            <label lang="de-DE">Maximale Anzahl von Artikeln, die in "Kunden kauften auch" angezeigt werden</label>
+            <placeholder>7</placeholder>
+            <defaultValue>7</defaultValue>
+        </input-field>
+
+        <input-field type="int">
+            <name>customersAlsoBoughtReadDays</name>
+            <label>Read out data of the last x days</label>
+            <label lang="de-DE">Daten der letzten x Tage auslesen</label>
+            <placeholder>365</placeholder>
+            <defaultValue>365</defaultValue>
+        </input-field>
+    </card>
+
+    <card>
+        <title>Customers also viewed</title>
+        <title lang="de-DE">Kunden haben sich ebenfalls angesehen</title>
+
+        <input-field type="bool">
+            <name>enableCustomersAlsoViewed</name>
+            <label>Enabled</label>
+            <label lang="de-DE">Aktiviert</label>
+            <defaultValue>false</defaultValue>
+        </input-field>
+
+        <input-field type="int">
+            <name>customersAlsoViewedReadLimit</name>
+            <label>Maximum number of items shown in "Customers Also Viewed"</label>
+            <label lang="de-DE">Maximale Anzahl von Artikeln, die in "Kunden haben sich auch angesehen" angezeigt werden</label>
+            <placeholder>7</placeholder>
+            <defaultValue>7</defaultValue>
+        </input-field>
+
+        <input-field type="int">
+            <name>customersAlsoViewedReadDays</name>
+            <label>Read out data of the last x days</label>
+            <label lang="de-DE">Daten der letzten x Tage auslesen</label>
+            <placeholder>90</placeholder>
+            <defaultValue>90</defaultValue>
+        </input-field>
+    </card>
+
+    <card>
+        <title>Tab Position</title>
+        <title lang="de-DE">Tab Position</title>
+
+        <input-field type="int">
+            <name>productsSameCategory</name>
+            <label>Similar products (products from same category)</label>
+            <label lang="de-DE">Ähnliche Produkte (Produkte aus der gleichen Kategorie)</label>
+            <helpText>The lower the position, the further forward the tab is ranked.</helpText>
+            <helpText lang="de-DE">Je niedriger die Position, desto weiter vorne wird der Tab gereiht.</helpText>
+            <placeholder>20</placeholder>
+            <defaultValue>20</defaultValue>
+        </input-field>
+
+        <input-field type="int">
+            <name>recentlyViewed</name>
+            <label>Recently Viewed Products</label>
+            <label lang="de-DE">Zuletzt angesehene Produkte</label>
+            <helpText>The lower the position, the further forward the tab is ranked.</helpText>
+            <helpText lang="de-DE">Je niedriger die Position, desto weiter vorne wird der Tab gereiht.</helpText>
+            <placeholder>10</placeholder>
+            <defaultValue>10</defaultValue>
+        </input-field>
+
+        <input-field type="int">
+            <name>customersAlsoBought</name>
+            <label>Customers Also Bought</label>
+            <label lang="de-DE">Kunden kauften auch</label>
+            <helpText>The lower the position, the further forward the tab is ranked.</helpText>
+            <helpText lang="de-DE">Je niedriger die Position, desto weiter vorne wird der Tab gereiht.</helpText>
+            <placeholder>30</placeholder>
+            <defaultValue>30</defaultValue>
+        </input-field>
+
+        <input-field type="int">
+            <name>customersAlsoViewed</name>
+            <label>Customers Also Viewed</label>
+            <label lang="de-DE">Kunden haben sich auch angesehen</label>
+            <helpText>The lower the position, the further forward the tab is ranked.</helpText>
+            <helpText lang="de-DE">Je niedriger die Position, desto weiter vorne wird der Tab gereiht.</helpText>
+            <placeholder>40</placeholder>
+            <defaultValue>40</defaultValue>
+        </input-field>
+    </card>
+</config>

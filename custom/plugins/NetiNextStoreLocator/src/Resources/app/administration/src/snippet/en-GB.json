@@ -1,0 +1,64 @@
+{
+    "sw-seo-url-template-card": {
+        "routeNames": {
+            "frontend-store_locator-detail": "Store Locator"
+        }
+    },
+    "global": {
+        "entities": {
+            "neti_store_locator": "Store Locator"
+        },
+        "businessEvents": {
+            "neti_store_locator_contact": "Contact form of a StoreLocator store",
+            "neti_store_locator_contact_copy": "Contact form of a StoreLocator store (send a copy to me)"
+        }
+    },
+    "neti-next-store-locator": {
+        "sidebar-menu": {
+            "store-locator": {
+                "title": "StoreLocator",
+                "stores": "Stores",
+                "contactForm": "Contact form",
+                "filter": "Filter"
+            }
+        },
+        "sw-cms": {
+            "sorting": {
+                "labelSortByStoreLocator": "Store Locator Detail"
+            },
+            "detail": {
+                "label": {
+                    "labelPageType": "Store Locator Detail"
+                }
+            },
+            "elements": {
+                "slSearchElement": {
+                    "label": "StoreLocator search element",
+                    "block": {
+                        "blockLabel": "StoreLocator block element",
+                        "form": "Form",
+                        "buttonSend": "Send",
+                        "zip": "ZIP / City"
+                    },
+                    "cms-element": {
+                        "slSearch": "StoreLocator search",
+                        "label": "Additional search parameters",
+                        "placeHolder": "Type parameters...",
+                        "componentPlaceholder": "ZIP / City",
+                        "buttonSend": "Send",
+                        "helpText": "These parameters are added to the customer's search. Type parameters in one line and connect them with &. For example distance=250&country=DE. You can find all parameters here https://shopware6.io.netinventors.de/plugins/NetiNextStoreLocator/de/features/get-parameter/"
+                    }
+                }
+            }
+        }
+    },
+    "sw-profile.tabSearchPreferences.modules.neti_store_locator.label": "Name",
+    "sw-flow": {
+        "triggers": {
+            "neti": "Net Inventors",
+            "storeLocator": "StoreLocator",
+            "contact": "Contact",
+            "contactCopy": "Contact (send copy)"
+        }
+    }
+}

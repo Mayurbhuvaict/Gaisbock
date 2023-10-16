@@ -1,0 +1,31 @@
+{% block neno_marketing_essentials_newsletter_popup_list %}
+    <div class="neno-marketing-essentials-newsletter-popup-list">
+        <sw-card position-identifier="nme-newsletter-pop-up-list">
+            <sw-container columns="1fr 1fr 1fr">
+                <sw-button
+                    :disabled="false"
+                    :square="false"
+                    :block="false"
+                    :isLoading="false"
+                    variant="primary"
+                    :routerLink="{ name: 'neno.marketing.essentials.overview.newsletterPopupCreate' }"
+                    style="text-align: center"
+                >
+                    {{ $t('neno-marketing-essentials.newsletter-popup.general.addPopupButtonText') }}
+                </sw-button>
+            </sw-container>
+            <sw-container class="neno-marketing-essentials-newsletter-popup-list--listing-container">
+                <sw-entity-listing
+                    class="neno-marketing-essentials-newsletter-popup-list--listing"
+                    v-if="popup"
+                    :items="popup"
+                    :repository="repository"
+                    :showSelection="false"
+                    :columns="columns"
+                    detailRoute="neno.marketing.essentials.overview.newsletterPopupDetail"
+                >
+                </sw-entity-listing>
+            </sw-container>
+        </sw-card>
+    </div>
+{% endblock %}

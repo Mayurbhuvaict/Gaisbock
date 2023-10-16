@@ -1,0 +1,265 @@
+<?xml version="1.0" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <imports>
+        <import resource="services/page/store.xml"/>
+        <import resource="services/routes.xml"/>
+    </imports>
+
+    <services>
+        <!-- Components / Services -->
+        <service id="NetInventors\NetiNextStoreLocator\Components\EntityFilter"/>
+
+        <service id="NetInventors\NetiNextStoreLocator\Components\GeoLocation\GeoLocation" public="true">
+            <argument id="Shopware\Core\System\SystemConfig\SystemConfigService" type="service"/>
+            <argument id="country.repository" type="service"/>
+            <argument type="service" id="logger"/>
+        </service>
+
+        <service id="NetInventors\NetiNextStoreLocator\Service\StoreBusinessHoursService" public="true">
+            <argument type="service" id="neti_store_business_hour.repository"/>
+            <argument type="service" id="neti_business_weekday.repository"/>
+        </service>
+
+        <service id="NetInventors\NetiNextStoreLocator\Components\ContactForm\ContactForm">
+            <argument id="neti_store_locator_contact_form.repository" type="service"/>
+        </service>
+
+        <service id="NetInventors\NetiNextStoreLocator\Components\CmsPageRenderer">
+            <argument type="service" id="Shopware\Core\Content\Cms\SalesChannel\SalesChannelCmsPageLoader"/>
+            <argument type="service" id="twig"/>
+            <argument type="service" id="cms_page.repository"/>
+        </service>
+
+        <service id="NetInventors\NetiNextStoreLocator\Service\PluginConfigFactory">
+            <argument type="service" id="Shopware\Core\System\SystemConfig\SystemConfigService" />
+            <argument type="service" id="request_stack" />
+        </service>
+
+        <service id="NetInventors\NetiNextStoreLocator\Service\PluginConfig">
+            <factory
+                    service="NetInventors\NetiNextStoreLocator\Service\PluginConfigFactory"
+                    method="createFallback"
+            />
+        </service>
+
+        <service
+                id="neti_store_locator.plugin_config"
+                class="NetInventors\NetiNextStoreLocator\Struct\PluginConfigStruct"
+        >
+            <factory
+                    service="NetInventors\NetiNextStoreLocator\Service\PluginConfigFactory"
+                    method="create"
+            />
+        </service>
+
+        <service id="NetInventors\NetiNextStoreLocator\Service\StorefrontConfigFactory">
+            <argument type="service" id="NetInventors\NetiNextStoreLocator\Service\PluginConfigFactory"/>
+            <argument type="service" id="media.repository"/>
+            <argument type="service" id="plugin.repository"/>
+            <argument type="service" id="Shopware\Core\System\SystemConfig\SystemConfigService"/>
+        </service>
+
+        <service id="NetInventors\NetiNextStoreLocator\Service\StoreFilterService">
+            <argument type="service" id="neti_sl_filter.repository"/>
+            <argument type="service" id="language.repository"/>
+            <argument type="service" id="translator"/>
+            <argument type="service" id="NetInventors\NetiNextStoreLocator\Service\StoreFilterValueService"/>
+        </service>
+
+        <service id="NetInventors\NetiNextStoreLocator\Service\StoreFilterValueService">
+            <argument type="service" id="neti_sl_filter.repository"/>
+            <argument type="service" id="neti_sl_filter_value.repository"/>
+            <argument type="service" id="Doctrine\DBAL\Connection"/>
+        </service>
+
+        <!-- Entities -->
+        <service id="NetInventors\NetiNextStoreLocator\Core\Content\Store\StoreDefinition">
+            <tag name="shopware.entity.definition" entity="neti_store_locator"/>
+        </service>
+
+        <service
+                id="NetInventors\NetiNextStoreLocator\Core\Content\Store\Aggregate\StoreTranslation\StoreTranslationDefinition">
+            <tag name="shopware.entity.definition" entity="neti_store_locator_translation"/>
+        </service>
+
+        <service id="NetInventors\NetiNextStoreLocator\Core\Content\ContactForm\ContactFormDefinition">
+            <tag name="shopware.entity.definition" entity="neti_store_locator_contact_form"/>
+        </service>
+
+        <service id="NetInventors\NetiNextStoreLocator\Core\Content\StoreSalesChannel\StoreSalesChannelDefinition">
+            <tag name="shopware.entity.definition" entity="neti_store_sales_channel"/>
+        </service>
+
+        <service id="NetInventors\NetiNextStoreLocator\Core\Content\Store\Aggregate\StoreTag\StoreTagDefinition">
+            <tag name="shopware.entity.definition" entity="neti_store_tag"/>
+        </service>
+
+        <service
+                id="NetInventors\NetiNextStoreLocator\Core\Content\ContactForm\Aggregate\ContactFormTranslation\ContactFormTranslationDefinition">
+            <tag name="shopware.entity.definition" entity="neti_store_locator_contact_form_translation"/>
+        </service>
+
+        <service id="NetInventors\NetiNextStoreLocator\Core\Content\Filter\FilterDefinition">
+            <tag name="shopware.entity.definition" entity="neti_sl_filter" />
+        </service>
+
+        <service id="NetInventors\NetiNextStoreLocator\Core\Content\Filter\Aggregate\FilterTranslation\FilterTranslationDefinition">
+            <tag name="shopware.entity.definition" entity="neti_sl_filter_translation" />
+        </service>
+
+        <service id="NetInventors\NetiNextStoreLocator\Core\Content\Filter\Aggregate\FilterTag\FilterTagDefinition">
+            <tag name="shopware.entity.definition" entity="neti_sl_filter_tag" />
+        </service>
+
+        <service id="NetInventors\NetiNextStoreLocator\Core\Content\Filter\Aggregate\FilterValue\FilterValueDefinition">
+            <tag name="shopware.entity.definition" entity="neti_sl_filter_value"/>
+        </service>
+
+        <service id="NetInventors\NetiNextStoreLocator\Core\Content\BusinessHour\BusinessHourDefinition">
+            <tag name="shopware.entity.definition" entity="neti_business_hour"/>
+        </service>
+
+        <service id="NetInventors\NetiNextStoreLocator\Core\Content\BusinessHour\Aggregate\BusinessHourTranslation\BusinessHourTranslationDefinition">
+            <tag name="shopware.entity.definition" entity="neti_business_hour_translation"/>
+        </service>
+
+        <service id="NetInventors\NetiNextStoreLocator\Core\Content\BusinessWeekday\BusinessWeekdayDefinition">
+            <tag name="shopware.entity.definition" entity="neti_business_weekday"/>
+        </service>
+
+        <service id="NetInventors\NetiNextStoreLocator\Core\Content\BusinessWeekday\Aggregate\BusinessWeekdayTranslation\BusinessWeekdayTranslationDefinition">
+            <tag name="shopware.entity.definition" entity="neti_business_weekday_translation"/>
+        </service>
+
+        <service id="NetInventors\NetiNextStoreLocator\Core\Content\StoreBusinessHour\StoreBusinessHourDefinition">
+            <tag name="shopware.entity.definition" entity="neti_store_business_hour"/>
+        </service>
+
+        <service id="NetInventors\NetiNextStoreLocator\Core\Content\StoreCms\StoreCmsDefinition">
+            <tag name="shopware.entity.definition" entity="neti_store_cms"/>
+        </service>
+
+        <!-- SEO -->
+        <service id="NetInventors\NetiNextStoreLocator\Storefront\Framework\Seo\SeoUrlRoute\StorePageSeoUrlRoute">
+            <argument id="NetInventors\NetiNextStoreLocator\Core\Content\Store\StoreDefinition" type="service"/>
+            <tag name="shopware.seo_url.route"/>
+        </service>
+
+        <!-- Subscribers -->
+        <service id="NetInventors\NetiNextStoreLocator\Subscriber\EntitySubscriber">
+            <argument id="NetInventors\NetiNextStoreLocator\Components\EntityFilter" type="service"/>
+            <argument id="NetInventors\NetiNextStoreLocator\Components\GeoLocation\GeoLocation" type="service"/>
+            <argument id="neti_store_locator.repository" type="service"/>
+            <argument type="service" id="logger"/>
+            <argument type="service" id="Shopware\Core\Content\Seo\SeoUrlUpdater"/>
+            <tag name="kernel.event_subscriber"/>
+        </service>
+
+        <service id="NetInventors\NetiNextStoreLocator\Subscriber\HeaderPageletLoaderSubscriber">
+            <argument type="service" id="neti_store_locator.plugin_config"/>
+            <argument type="service" id="category.repository"/>
+            <tag name="kernel.event_subscriber"/>
+        </service>
+
+        <service id="NetInventors\NetiNextStoreLocator\Subscriber\CheckoutFinishPageSubscriber">
+            <tag name="kernel.event_subscriber"/>
+            <argument type="service" id="neti_store_locator.plugin_config"/>
+            <argument type="service" id="NetInventors\NetiNextStoreLocator\Components\GeoLocation\GeoLocation"/>
+            <argument type="service" id="Doctrine\DBAL\Connection"/>
+            <argument type="service" id="neti_store_locator.repository"/>
+            <argument type="service" id="logger"/>
+            <argument type="service" id="cache.object"/>
+        </service>
+
+        <service id="NetInventors\NetiNextStoreLocator\Subscriber\ImportExportSubscriber">
+            <tag name="kernel.event_subscriber"/>
+
+            <argument type="service" id="NetInventors\NetiNextStoreLocator\Service\ImportExport\StoreImport"/>
+        </service>
+
+        <service id="NetInventors\NetiNextStoreLocator\Subscriber\BusinessEventSubscriber">
+            <tag name="kernel.event_subscriber"/>
+
+            <argument type="service" id="Shopware\Core\Framework\Event\BusinessEventCollector"/>
+        </service>
+
+        <service id="NetInventors\NetiNextStoreLocator\Events\Storer\ContactFormFilesStorer">
+            <tag name="flow.storer"/>
+        </service>
+
+        <!-- Controllers -->
+        <service id="NetInventors\NetiNextStoreLocator\Storefront\Controller\StoreLocatorController" public="true">
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+
+            <call method="setTwig">
+                <argument type="service" id="twig"/>
+            </call>
+
+            <argument type="service" id="NetInventors\NetiNextStoreLocator\Storefront\Page\Store\Detail\StoreDetailPageLoader"/>
+            <argument type="service" id="NetInventors\NetiNextStoreLocator\Storefront\Page\Store\Listing\StoreListingPageLoader"/>
+            <argument type="service" id="neti_store_locator.plugin_config"/>
+            <argument type="service" id="NetInventors\NetiNextStoreLocator\Storefront\Route\ContactRoute"/>
+            <argument type="service" id="NetInventors\NetiNextStoreLocator\Storefront\Route\GetStoresRoute"/>
+            <argument type="service" id="NetInventors\NetiNextStoreLocator\Service\StoreBusinessHoursService"/>
+        </service>
+
+        <service id="NetInventors\NetiNextStoreLocator\Controller\StoreLocator" public="true">
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+
+            <tag name="controller.service_arguments" />
+            <argument type="service" id="neti_store_locator.plugin_config"/>
+            <argument type="service" id="neti_store_locator.repository"/>
+            <argument type="service" id="NetInventors\NetiNextStoreLocator\Components\GeoLocation\GeoLocation"/>
+        </service>
+
+        <service id="NetInventors\NetiNextStoreLocator\Controller\Filter">
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+
+            <tag name="controller.service_arguments" />
+
+            <argument type="service" id="NetInventors\NetiNextStoreLocator\Service\StoreFilterValueService"/>
+        </service>
+
+        <!-- Commands -->
+        <service id="NetInventors\NetiNextStoreLocator\Commands\SeoCommand">
+            <tag name="console.command"/>
+
+            <argument>neti:store_locator:seo</argument>
+            <argument type="service" id="neti_store_locator.repository"/>
+            <argument type="service" id="Shopware\Core\Content\Seo\SeoUrlUpdater"/>
+        </service>
+
+        <!-- Decorators (anti-pattern) -->
+        <service id="NetInventors\NetiNextStoreLocator\Core\Content\Seo\SeoResolverDecorator"
+                 decorates="Shopware\Core\Content\Seo\SeoResolver"
+                 decoration-inner-name="NetInventors\NetiNextStoreLocator\Core\Content\Seo\SeoResolverDecorator.inner"
+        >
+            <argument id="NetInventors\NetiNextStoreLocator\Core\Content\Seo\SeoResolverDecorator.inner"
+                      type="service"/>
+            <argument id="Doctrine\DBAL\Connection" type="service"/>
+        </service>
+
+        <service id="NetInventors\NetiNextStoreLocator\Decorator\CookieProvider"
+                 decorates="Shopware\Storefront\Framework\Cookie\CookieProviderInterface">
+            <argument type="service" id="NetInventors\NetiNextStoreLocator\Decorator\CookieProvider.inner"/>
+            <argument type="service" id="neti_store_locator.plugin_config"/>
+        </service>
+
+        <service id="NetInventors\NetiNextStoreLocator\Service\ImportExport\StoreImport">
+            <argument type="service" id="neti_store_locator.repository"/>
+            <argument type="service" id="sales_channel.repository"/>
+            <argument type="service" id="country.repository"/>
+            <argument type="service" id="country_state.repository"/>
+        </service>
+    </services>
+</container>

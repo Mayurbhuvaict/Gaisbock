@@ -1,0 +1,202 @@
+<div class="neti-store-locator-detail-business-hours">
+
+    <template v-if="store.timezone === null">
+        <sw-card
+            :isLoading="isLoading"
+            position-identifier="neti-store-locator-business-hours-no-timezone"
+        >
+            <sw-alert variant="info">
+                <p v-html="$tc('neti-store-locator.business-hours.timezoneWarning')"></p>
+            </sw-alert>
+        </sw-card>
+    </template>
+
+    <template v-else>
+        <sw-card
+            :isLoading="isLoading"
+            position-identifier="neti-store-locator-business-hours-timezone-info"
+        >
+            <sw-alert variant="info">
+                {{ $t('neti-store-locator.business-hours.timezoneInfo') }}
+            </sw-alert>
+        </sw-card>
+        <sw-card
+            :title="$t('neti-store-locator.business-hours.labelWeekdaysCard')"
+            :isLoading="isLoading"
+            position-identifier="neti-store-locator-business-hours-weekdays-card"
+        >
+            <div v-for="weekDay in weekDays" :key="weekDay.id" class="neti-store-locator-weekdays-card">
+                <sw-container
+                    columns="1fr auto"
+                    gap="10px"
+                    class="neti-store-locator-new-weekday"
+                >
+                    {{ weekDay.name }}
+
+                    <sw-button
+                        size="small"
+                        variant="primary"
+                        @click="addDay(weekDay.id)"
+                    >
+                        {{ $t('neti-store-locator.business-hours.addTime') }}
+                    </sw-button>
+                </sw-container>
+
+                <div v-for="(businessHour, index) in businessHours[weekDay.id]" class="">
+                    <sw-container
+                        columns="1fr 1fr"
+                        gap="10px"
+                    >
+                        <sw-datepicker
+                            dateType="time"
+                            :label="$t('neti-store-locator.business-hours.labelFrom')"
+                            v-model="businessHour.start"
+                        ></sw-datepicker>
+
+                        <sw-datepicker
+                            dateType="time"
+                            :label="$t('neti-store-locator.business-hours.labelTo')"
+                            v-model="businessHour.end"
+                        ></sw-datepicker>
+                    </sw-container>
+
+                    <sw-button
+                        size="small"
+                        variant="danger"
+                        @click="removeBusinessHour(weekDay.id, index)"
+                    >
+                        {{ $t('neti-store-locator.business-hours.removeTime') }}
+                    </sw-button>
+                </div>
+            </div>
+        </sw-card>
+
+        <sw-card
+            :title="$t('neti-store-locator.business-hours.extraOpenDaysCard')"
+            :isLoading="isLoading"
+            class="neti-store-locator-opendays-card"
+            position-identifier="neti-store-locator-business-hours-opendays-card"
+        >
+            <sw-button
+                size="small"
+                variant="primary"
+                @click="addSpecialDay('openDays')"
+            >
+                {{ $t('neti-store-locator.business-hours.addTime') }}
+            </sw-button>
+
+            <div v-for="(specialOpenDay, index) in businessHours['openDays']" class="neti-store-locator-openday">
+                <sw-container
+                    columns="auto 1fr 1fr"
+                    gap="10px"
+                >
+                    <sw-field
+                        :label="$t('neti-store-locator.business-hours.labelAnnual')"
+                        v-model="specialOpenDay.annual"
+                        type="switch"
+                    ></sw-field>
+
+                    <sw-text-field
+                        :label="$t('neti-store-locator.business-hours.labelDescription')"
+                        v-model="specialOpenDay.description"
+                    ></sw-text-field>
+
+                    <sw-datepicker
+                        :label="$t('neti-store-locator.business-hours.labelDate')"
+                        v-model="specialOpenDay.specialDate"
+                    ></sw-datepicker>
+                </sw-container>
+
+                <sw-container
+                    columns="1fr 1fr"
+                    gap="10px"
+                >
+                    <sw-datepicker
+                        dateType="time"
+                        :label="$t('neti-store-locator.business-hours.labelFrom')"
+                        v-model="specialOpenDay.start"
+                    ></sw-datepicker>
+
+                    <sw-datepicker
+                        dateType="time"
+                        :label="$t('neti-store-locator.business-hours.labelTo')"
+                        v-model="specialOpenDay.end"
+                    ></sw-datepicker>
+                </sw-container>
+
+                <sw-button
+                    size="small"
+                    variant="danger"
+                    @click="removeBusinessHour('openDays', index)"
+                >
+                    {{ $t('neti-store-locator.business-hours.removeTime') }}
+                </sw-button>
+            </div>
+        </sw-card>
+
+        <sw-card
+            :title="$t('neti-store-locator.business-hours.extraClosedDaysCard')"
+            :isLoading="isLoading"
+            class="neti-store-locator-closedays-card"
+            position-identifier="neti-store-locator-business-hours-closedays-card"
+        >
+            <sw-button
+                size="small"
+                variant="primary"
+                @click="addSpecialDay('closedDays')"
+                menuHorizontalAlign="right"
+            >
+                {{ $t('neti-store-locator.business-hours.addTime') }}
+            </sw-button>
+
+            <div v-for="(specialClosedDay, index) in businessHours['closedDays']" class="neti-store-locator-closeday">
+                <sw-container
+                    columns="auto 1fr 1fr"
+                    gap="10px"
+                >
+                    <sw-field
+                        :label="$t('neti-store-locator.business-hours.labelAnnual')"
+                        v-model="specialClosedDay.annual"
+                        type="switch"
+                    ></sw-field>
+
+                    <sw-text-field
+                        :label="$t('neti-store-locator.business-hours.labelDescription')"
+                        v-model="specialClosedDay.description"
+                    ></sw-text-field>
+
+                    <sw-datepicker
+                        dateType="date"
+                        :label="$t('neti-store-locator.business-hours.labelDate')"
+                        v-model="specialClosedDay.specialDate"
+                    ></sw-datepicker>
+                </sw-container>
+
+                <sw-container
+                    columns="1fr 1fr"
+                    gap="10px"
+                >
+                    <sw-datepicker
+                        dateType="time"
+                        :label="$t('neti-store-locator.business-hours.labelFrom')"
+                        v-model="specialClosedDay.start"
+                    ></sw-datepicker>
+
+                    <sw-datepicker
+                        dateType="time"
+                        :label="$t('neti-store-locator.business-hours.labelTo')"
+                        v-model="specialClosedDay.end"
+                    ></sw-datepicker>
+                </sw-container>
+
+                <sw-button
+                    size="small"
+                    variant="danger"
+                    @click="removeBusinessHour('closedDays', index)"
+                >
+                    {{ $t('neti-store-locator.business-hours.removeTime') }}
+                </sw-button>
+            </div>
+        </sw-card>
+    </template>
+</div>

@@ -1,0 +1,28 @@
+<sw-card
+        :title="$t('neti-store-locator.detailContact.labelBasicCard')"
+        :isLoading="isLoading"
+        position-identifier="neti-store-locator-detail-contact-basic"
+>
+    <sw-container columns="1fr 1fr" gap="15px">
+        <sw-field
+                v-model="store.contactFormEnabled"
+                :label="$t('neti-store-locator.baseInfo.labelContactFormEnabled')"
+                :helpText="$t('neti-store-locator.baseInfo.labelContactFormEnabledHelp')"
+                type="switch"
+                bordered
+        ></sw-field>
+
+        <sw-field
+                :label="$t('neti-store-locator.baseInfo.labelContactFormDetail')"
+                v-model="store.contactFormDetail"
+                type="switch"
+                bordered
+        ></sw-field>
+    </sw-container>
+
+    <sw-text-field
+            v-model="store.notificationMailAddress"
+            :label="$t('neti-store-locator.baseInfo.labelNotificationMail')"
+            :placeholder="$t('neti-store-locator.card.placeholderNotificationMail')"
+    ></sw-text-field>
+</sw-card>

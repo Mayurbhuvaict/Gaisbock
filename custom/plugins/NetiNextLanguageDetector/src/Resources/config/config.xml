@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/shopware/platform/master/src/Core/System/SystemConfig/Schema/config.xsd">
+
+    <card>
+        <title>Configuration</title>
+        <title lang="de-DE">Konfiguration</title>
+        <input-field type="bool">
+            <name>active</name>
+            <label>Active for Sales Channel</label>
+            <label lang="de-DE">Aktiviert für Verkaufskanal</label>
+            <helpText>Enables the plugin for the current sales channel.</helpText>
+            <helpText lang="de-DE">Aktiviert das Plugin für den aktuellen Verkaufskanal.</helpText>
+            <defaultValue>true</defaultValue>
+        </input-field>
+
+        <input-field type="bool">
+            <name>allSalesChannels</name>
+            <label>Look for language in all sales channels?</label>
+            <label lang="de-DE">Nach passender Sprache in allen Verkaufskanälen suchen?</label>
+            <helpText>This option also searches for the language in all available sales channels.</helpText>
+            <helpText lang="de-DE">Mit dieser Option wird zusätzlich in allen verfügbaren Verkaufskanälen nach der Sprache gesucht.</helpText>
+            <defaultValue>false</defaultValue>
+        </input-field>
+
+        <input-field type="text">
+            <name>noCookieIps</name>
+            <label>Always show language selection for the following IP addresses</label>
+            <label lang="de-DE">Sprachauswahl für die folgenden IP-Adressen immer anzeigen</label>
+            <helpText>Only for test &amp; debug purposes. Input seperated with a comma.</helpText>
+            <helpText lang="de-DE">Nur für Debug- &amp; Testzwecke. IP Adressen mit einem Komma getrennt eingeben.</helpText>
+        </input-field>
+
+        <input-field type="text">
+            <name>logAddresses</name>
+            <label>IP addresses to be logged</label>
+            <label lang="de-DE">IP-Adressen, die geloggt werden sollen</label>
+            <helpText>Only for test &amp; debug purposes. Input seperated with a comma.</helpText>
+            <helpText lang="de-DE">Nur für Debug- &amp; Testzwecke. IP Adressen mit einem Komma getrennt eingeben. Die Logdaten befinden sich unter: var/log/neti_language_detector.log</helpText>
+        </input-field>
+
+        <component name="sw-entity-single-select">
+            <name>defaultLanguage</name>
+            <entity>language</entity>
+            <label>Default language</label>
+            <label lang="de-DE">Standardsprache</label>
+            <helpText>If the customer's language is not available in the shop, this language will be used.</helpText>
+            <helpText lang="de-DE">Wenn die Sprache des Kunden im Shop nicht vorhanden ist, dann wird diese Sprache benutzt.</helpText>
+        </component>
+    </card>
+</config>

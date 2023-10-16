@@ -1,0 +1,10 @@
+{
+    "neti-next-language-detector": {
+        "modal": {
+            "headline": "Configura lingua:",
+            "text": "Vuoi passare a <span>%LANG%</span>?",
+            "buttonAccept": "Sì",
+            "buttonDecline": "No"
+        }
+    }
+}

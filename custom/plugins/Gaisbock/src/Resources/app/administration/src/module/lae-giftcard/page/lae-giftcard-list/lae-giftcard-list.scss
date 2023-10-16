@@ -1,0 +1,24 @@
+@import "~scss/variables";
+
+.lae-giftcard-overview-card {
+    border-right: 1px solid $color-gray-300;
+    padding: 16px;
+    font-size: 48px;
+
+    strong {
+        display: block;
+        font-weight: normal;
+        margin-bottom: 8px;
+        font-size: 16px;
+    }
+}
+
+.lae-giftcard-list-card {
+    .sw-card__content {
+        padding: 0;
+    }
+}
+
+.lae-giftcard-list-grid--label-imported {
+    margin-left: 12px;
+}

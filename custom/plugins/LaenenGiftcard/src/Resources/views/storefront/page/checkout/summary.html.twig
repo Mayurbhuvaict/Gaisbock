@@ -1,0 +1,43 @@
+{% sw_extends '@Storefront/storefront/page/checkout/summary.html.twig' %}
+
+{% block page_checkout_summary_inner %}
+    {{ parent() }}
+
+    {% block page_checkout_summary_applied_giftcards %}
+        {% for appliedGiftcard in summary.extensions['lae-giftcards'] %}
+            {% block page_checkout_summary_applied_giftcard %}
+                {% block page_checkout_summary_applied_giftcard_label %}
+                    <dt class="col-7 checkout-aside-summary-label summary-applied-giftcard">
+                        {{ "checkout.summaryAppliedGiftcard"|trans({
+                            '%name%': appliedGiftcard.name
+                        })|sw_sanitize }}
+
+                        {% block page_checkout_summary_applied_giftcard_remove_form %}
+                            <form class="d-inline"
+                                  action="{{ path('frontend.checkout.giftcard.remove') }}"
+                                  method="post"
+                                  data-form-validation="true">
+
+                                {% block page_checkout_summary_applied_giftcard_remove_form_value %}
+                                    <input type="hidden" name="code" value="{{ appliedGiftcard.code|sw_sanitize }}"/>
+                                {% endblock %}
+
+                                {% block page_checkout_summary_applied_giftcard_remove_form_button %}
+                                    <button class="border-0 d-inline p-0 bg-transparent text-danger ml-2" title="{{ 'checkout.summaryAppliedGiftcardRemoveTitle'|trans|sw_sanitize }}">
+                                        {{ 'checkout.summaryAppliedGiftcardRemove'|trans|sw_sanitize }}
+                                    </button>
+                                {% endblock %}
+                            </form>
+                        {% endblock %}
+                    </dt>
+                {% endblock %}
+
+                {% block page_checkout_summary_applied_giftcard_value %}
+                    <dd class="col-5 checkout-aside-summary-value summary-applied-giftcard">
+                        {{ (-appliedGiftcard.appliedAmount)|currency }}
+                    </dd>
+                {% endblock %}
+            {% endblock %}
+        {% endfor %}
+    {% endblock %}
+{% endblock %}

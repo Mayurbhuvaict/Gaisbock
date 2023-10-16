@@ -1,0 +1,11 @@
+<div
+        class="search-result place"
+        v-for="(item, key) in autocompletedStores"
+        :key="'b' + key"
+        @click="onStoreClicked(item)"
+>
+    {% sw_icon 'shop' %}
+    <span class="result-text">
+        {{ '{{ item.label }}' }}
+    </span>
+</div>

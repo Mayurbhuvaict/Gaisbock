@@ -1,0 +1,62 @@
+{% if articles|length > 0 %}
+    {% set productSliderOptions = {
+        productboxMinWidth: '270',
+        slider: {
+            gutter: 30,
+            autoplayButtonOutput: false,
+            nav: false,
+            mouseDrag: false,
+            controls: true,
+            autoplay: false
+        }
+    } %}
+
+    {% block pluszwei_faq_manager_category_featured_article_slider %}
+        <div class="featured_slider">
+
+            {% block pluszwei_faq_manager_category_featured_article_slider_container %}
+                <div class="base-slider product-slider has-nav"
+                     data-product-slider="true"
+                     data-product-slider-options="{{ productSliderOptions | json_encode }}">
+                    <div class="product-slider-container"
+                         data-product-slider-container="true">
+                        {% for article in articles %}
+
+                            {% block pluszwei_faq_manager_category_featured_article_slider_item %}
+                                {% set readingTime = article.readingTimeInMin %}
+                                <div class="product-slider-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+                                    <a href="{{ seoUrl('pluszwei.faq.frontend.detail', {articleId: article.id}) }}">
+                                        <div class="columnHead" itemprop="name">{{ article.translated.title }}</div>
+                                        <div class="content" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+                                            <p itemprop="text">{{ article.translated.teaser }}</p>
+                                        </div>
+                                        <span class="footNote">{{ 'pluszweiFaqManager.article.readingTime'|trans({'%min%': readingTime})|sw_sanitize }}</span></a>
+                                </div>
+                            {% endblock %}
+
+                        {% endfor %}
+                    </div>
+
+                {% block pluszwei_faq_manager_category_featured_article_slider_control %}
+                    <div class="product-slider-controls-container">
+                        <div class="base-slider-controls"
+                             data-product-slider-controls="true">
+                            <button
+                                    class="base-slider-controls-prev product-slider-controls-prev  has-border">
+                                {% sw_icon 'arrow-head-left' %}
+                            </button>
+                            <button
+                                    class="base-slider-controls-next product-slider-controls-next has-border ">
+                                {% sw_icon 'arrow-head-right' %}
+                            </button>
+                        </div>
+                    </div>
+                {% endblock %}
+
+                </div>
+            {% endblock %}
+
+        </div>
+   {% endblock %}
+
+{% endif %}

@@ -1,0 +1,37 @@
+{% block page_checkout_shopping_experience_content %}
+	{% block page_checkout_hl_shopping_experience_modal %}
+		<div class="modal fade hl-shop-experience-modal" id="hlShopExperienceModal" tabindex="-1" role="dialog">
+			<div class="modal-dialog modal-lg modal-dialog-scrollable modal-dialog-centered" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<div class="modal-title h5">
+							{{ hatsLogicSwStoreSurveyConfig.checkoutRatingYourCommentsQuestion }}
+						</div>
+						<button type="button" class="modal-close close" data-dismiss="modal" aria-label="Close">
+							<span aria-hidden="true">
+								{% sw_icon 'x' style { 'size': 'sm' } %}
+							</span>
+						</button>
+					</div>
+					<div class="modal-body js-shopping-experience-ajax-response">
+
+						{% block page_checkout_shopping_experience_alert %}
+							{% if type == 'success' %}
+								{% sw_include '@Storefront/storefront/utilities/alert.html.twig' with {
+                                type: "success",
+                                content: message
+                            } %}
+							{% elseif type == 'error' %}
+								{% sw_include '@Storefront/storefront/utilities/alert.html.twig' with {
+										type: "danger",
+										content: "hlStoreSurvey.shopExperience.errorMessage"|trans|sw_sanitize
+									} %}
+							{% endif %}
+						{% endblock %}
+
+					</div>
+				</div>
+			</div>
+		</div>
+	{% endblock %}
+{% endblock %}

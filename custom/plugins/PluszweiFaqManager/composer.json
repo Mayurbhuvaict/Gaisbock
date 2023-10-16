@@ -1,0 +1,54 @@
+{
+  "name": "pluszwei/faq-manager",
+  "description": "Pluszwei FAQ Manager Pro plugin",
+  "version": "2.1.0",
+  "type": "shopware-platform-plugin",
+  "license": "proprietary",
+  "authors": [
+    {
+      "name": "pluszwei OÜ",
+      "role": "Manufacturer"
+    }
+  ],
+  "require": {
+    "shopware/core": "~v6.5.0",
+    "shopware/storefront": "~v6.5.0"
+  },
+  "minimum-stability": "RC",
+  "prefer-stable": true,
+  "config": {
+    "allow-plugins": {
+      "symfony/flex": true,
+      "symfony/runtime": true
+    },
+    "optimize-autoloader": true,
+    "sort-packages": true
+  },
+  "extra": {
+    "shopware-plugin-class": "Pluszwei\\FaqManager\\PluszweiFaqManager",
+    "label": {
+      "de-DE": "FAQ Manager Pro",
+      "en-GB": "FAQ Manager Pro"
+    },
+    "description": {
+      "en-GB": "pluszwei OÜ",
+      "de-DE": "pluszwei OÜ"
+    },
+    "manufacturerLink": {
+      "en-GB": "https://www.pluszwei.io",
+      "de-DE": "https://www.pluszwei.io"
+    },
+    "supportLink": {
+      "en-GB": "https://www.pluszwei.io",
+      "de-DE": "https://www.pluszwei.io"
+    }
+  },
+  "autoload": {
+    "psr-4": {
+      "Pluszwei\\FaqManager\\": "src/"
+    }
+  },
+  "require-dev": {
+    "phpunit/phpunit": "^9.6"
+  }
+}

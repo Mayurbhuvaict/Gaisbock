@@ -1,0 +1,77 @@
+{% sw_extends '@Storefront/storefront/component/product/card/box-standard.html.twig' %}
+
+{% block component_product_box_image %}
+    {% set productHoverCoverConfig = config('SolidProductHoverCover.config') %}
+
+    {% if productHoverCoverConfig and productHoverCoverConfig.enabled %}
+        {% if product.translated.customFields and product.translated.customFields.solidProductHoverCover and product.translated.customFields.solidProductHoverCover.imageId %}
+            {% set productHoverCoverId = product.translated.customFields.solidProductHoverCover.imageId %}
+            {% set mediaCollection = searchMedia([productHoverCoverId], context.context) %}
+            {% set productHoverCoverMedia = mediaCollection.get(productHoverCoverId) %}
+            {% set productHoverCoverEffectClass = '' %}
+
+            {% if productHoverCoverConfig.effect != 'custom' %}
+                {% set productHoverCoverEffectClass = 'solid-product-hover-cover-effect-' ~ productHoverCoverConfig.effect %}
+            {% endif %}
+
+            <div class="product-image-wrapper solid-product-hover-cover-image-wrapper">
+                {# fallback if display mode is not set #}
+                {% set displayMode = displayMode ?: 'standard' %}
+
+                {# set display mode 'cover' for box-image with standard display mode #}
+                {% if layout == 'image' and displayMode == 'standard' %}
+                    {% set displayMode = 'cover' %}
+                {% endif %}
+
+                <a href="{{ seoUrl('frontend.detail.page', {'productId': id}) }}" title="{{ name }}" class="product-image-link is-{{ displayMode }}">
+                    {% if cover.url %}
+                        {% set attributes = {
+                            'class': 'product-image is-'~displayMode,
+                            'alt': (cover.translated.alt ?: name),
+                            'title': (cover.translated.title ?: name)
+                        } %}
+
+                        {% if displayMode == 'cover' or displayMode == 'contain' %}
+                            {% set attributes = attributes|merge({ 'data-object-fit': displayMode }) %}
+                        {% endif %}
+
+                        {% block solid_product_hover_cover %}
+                            <div class="solid-product-cover {{ productHoverCoverEffectClass }}">
+                                {% sw_thumbnails 'product-image-thumbnails' with {
+                                    media: cover,
+                                    sizes: sizes
+                                } %}
+                            </div>
+
+                            <div class="solid-product-hover-cover {{ productHoverCoverEffectClass }}">
+                                {% sw_thumbnails 'product-image-thumbnails' with {
+                                    media: productHoverCoverMedia,
+                                    sizes: sizes
+                                } %}
+                            </div>
+                        {% endblock %}
+                    {% else %}
+                        <div class="product-image-placeholder">
+                            {% sw_icon 'placeholder' style {
+                                'size': 'fluid'
+                            } %}
+                        </div>
+                    {% endif %}
+                </a>
+
+                {% if config('core.cart.wishlistEnabled') %}
+                    {% block component_product_box_wishlist_action %}
+                        {% sw_include '@Storefront/storefront/component/product/card/wishlist.html.twig' with {
+                            appearance: 'circle',
+                            productId: id
+                        } %}
+                    {% endblock %}
+                {% endif %}
+            </div>
+        {% else %}
+            {{ parent() }}
+        {% endif %}
+    {% else %}
+        {{ parent() }}
+    {% endif %}
+{% endblock %}

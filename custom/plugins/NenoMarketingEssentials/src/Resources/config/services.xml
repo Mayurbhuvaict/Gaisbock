@@ -1,0 +1,181 @@
+<?xml version="1.0" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <services>
+        <service id="Neno\MarketingEssentials\Core\Content\NewsletterPopup\NewsletterPopupDefinition">
+            <tag name="shopware.entity.definition" entity="neno_marketing_essentials_newsletter_popup" />
+        </service>
+
+        <service id="Neno\MarketingEssentials\Core\Content\NewsletterPopup\Aggregate\NewsletterPopupTranslation\NewsletterPopupTranslationDefinition">
+            <tag name="shopware.entity.definition" entity="neno_marketing_essentials_newsletter_popup_translation" />
+        </service>
+
+        <service id="Neno\MarketingEssentials\Core\Content\RegisterPopup\RegisterPopupDefinition">
+            <tag name="shopware.entity.definition" entity="neno_marketing_essentials_register_popup" />
+        </service>
+
+        <service id="Neno\MarketingEssentials\Core\Content\RegisterPopup\Aggregate\RegisterPopupTranslation\RegisterPopupTranslationDefinition">
+            <tag name="shopware.entity.definition" entity="neno_marketing_essentials_register_popup_translation" />
+        </service>
+
+        <service id="Neno\MarketingEssentials\Core\Content\ReservedIndividualCode\ReservedIndividualCodeDefinition">
+            <tag name="shopware.entity.definition" entity="neno_nme_reserved_individual_code" />
+        </service>
+
+        <service id="Neno\MarketingEssentials\Core\Content\ConversionBar\ConversionBarDefinition">
+            <tag name="shopware.entity.definition" entity="neno_marketing_essentials_conversion_bar" />
+        </service>
+
+        <service id="Neno\MarketingEssentials\Core\Content\ConversionBar\Aggregate\ConversionBarTranslation\ConversionBarTranslationDefinition">
+            <tag name="shopware.entity.definition" entity="neno_marketing_essentials_conversion_bar_translation" />
+        </service>
+
+        <service id="Neno\MarketingEssentials\Storefront\Service\ConversionBarLoader">
+            <argument type="service" id="neno_marketing_essentials_conversion_bar.repository"/>
+        </service>
+
+        <service id="Neno\MarketingEssentials\Service\PromotionCodeHelper">
+            <argument type="service" id="promotion_individual_code.repository"/>
+            <argument type="service" id="neno_nme_reserved_individual_code.repository"/>
+            <argument type="service" id="Shopware\Core\Checkout\Promotion\Util\PromotionCodeService"/>
+        </service>
+
+        <service id="Neno\MarketingEssentials\Storefront\Subscriber\PopupNavigationPageLoadedSubscriber">
+            <argument type="service" id="neno_marketing_essentials_register_popup.repository"/>
+            <argument type="service" id="neno_marketing_essentials_newsletter_popup.repository"/>
+            <tag name="kernel.event_subscriber"/>
+        </service>
+
+        <service id="Neno\MarketingEssentials\Storefront\Subscriber\PopupProductPageLoadedSubscriber">
+            <argument type="service" id="neno_marketing_essentials_register_popup.repository"/>
+            <argument type="service" id="neno_marketing_essentials_newsletter_popup.repository"/>
+            <tag name="kernel.event_subscriber"/>
+        </service>
+
+        <service id="Neno\MarketingEssentials\Core\Content\Tabs\TabsDefinition">
+            <tag name="shopware.entity.definition" entity="neno_marketing_essentials_tabs" />
+        </service>
+
+        <service id="Neno\MarketingEssentials\Core\Content\Tabs\Aggregate\TabsTranslation\TabsTranslationDefinition">
+            <tag name="shopware.entity.definition" entity="neno_marketing_essentials_tabs_translation" />
+        </service>
+
+        <service id="Neno\MarketingEssentials\Storefront\Subscriber\TabsNavigationLoadedSubscriber">
+            <argument type="service" id="neno_marketing_essentials_tabs.repository"/>
+            <tag name="kernel.event_subscriber"/>
+        </service>
+
+        <service id="Neno\MarketingEssentials\Storefront\Subscriber\TabsProductPageLoadedSubscriber">
+            <argument type="service" id="neno_marketing_essentials_tabs.repository"/>
+            <tag name="kernel.event_subscriber"/>
+        </service>
+
+        <service id="Neno\MarketingEssentials\Storefront\Subscriber\ConversionBarNavigationLoadedSubscriber">
+            <argument type="service" id="Neno\MarketingEssentials\Storefront\Service\ConversionBarLoader"/>
+            <tag name="kernel.event_subscriber"/>
+        </service>
+
+        <service id="Neno\MarketingEssentials\Storefront\Subscriber\ConversionBarProductPageLoadedSubscriber">
+            <argument type="service" id="Neno\MarketingEssentials\Storefront\Service\ConversionBarLoader"/>
+            <tag name="kernel.event_subscriber"/>
+        </service>
+
+        <service id="Neno\MarketingEssentials\Storefront\Controller\FreeShippingBarController" public="true">
+            <argument type="service" id="Shopware\Storefront\Page\Checkout\Offcanvas\OffcanvasCartPageLoader" />
+
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+
+            <call method="setTwig">
+                <argument type="service" id="twig"/>
+            </call>
+        </service>
+
+        <service id="Neno\MarketingEssentials\Storefront\Controller\NewsletterPopupController" public="true">
+            <argument type="service" id="Shopware\Core\Content\Newsletter\SalesChannel\NewsletterSubscribeRoute" />
+            <argument type="service" id="Neno\MarketingEssentials\Service\NewsletterPopupHandlePromotionService" />
+
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+
+            <call method="setTwig">
+                <argument type="service" id="twig"/>
+            </call>
+        </service>
+
+        <service id="Neno\MarketingEssentials\Service\NewsletterPopupHandlePromotionService">
+            <argument type="service" id="newsletter_recipient.repository"/>
+            <argument type="service" id="neno_marketing_essentials_newsletter_popup.repository"/>
+        </service>
+
+        <service id="Neno\MarketingEssentials\Storefront\Subscriber\NewsletterConfirmedSubscriber">
+            <argument type="service" id="promotion.repository"/>
+            <argument type="service" id="Neno\MarketingEssentials\Service\PromotionCodeHelper" />
+            <argument type="service" id="Neno\MarketingEssentials\Service\SendPromotionMail" />
+            <tag name="kernel.event_subscriber"/>
+        </service>
+
+        <service id="Neno\MarketingEssentials\Service\SendPromotionMail" public="true">
+            <argument type="service" id="Shopware\Core\Content\Mail\Service\MailService"/>
+            <argument type="service" id="mail_template.repository"/>
+        </service>
+
+        <service id="Neno\MarketingEssentials\Storefront\Controller\CustomerRegisterController" public="true">
+            <argument type="service" id="event_dispatcher"/>
+            <argument type="service" id="neno_marketing_essentials_register_popup.repository"/>
+            <argument type="service" id="customer.repository"/>
+            <argument type="service" id="Shopware\Storefront\Controller\RegisterController" />
+
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+        </service>
+
+        <service id="Neno\MarketingEssentials\Storefront\Subscriber\CustomerRegisterSubscriber">
+            <argument type="service" id="promotion.repository"/>
+            <argument type="service" id="customer.repository"/>
+            <argument type="service" id="Neno\MarketingEssentials\Service\PromotionCodeHelper" />
+            <argument type="service" id="Neno\MarketingEssentials\Service\SendCustomerRegistrationPromotionMail" />
+            <tag name="kernel.event_subscriber"/>
+        </service>
+
+        <service id="Neno\MarketingEssentials\Service\SendCustomerRegistrationPromotionMail" public="true">
+            <argument type="service" id="Shopware\Core\Content\Mail\Service\MailService"/>
+            <argument type="service" id="mail_template.repository"/>
+        </service>
+
+        <service id="Neno\MarketingEssentials\Service\CustomCookieProvider" decorates="Shopware\Storefront\Framework\Cookie\CookieProviderInterface">
+            <argument type="service" id="Neno\MarketingEssentials\Service\CustomCookieProvider.inner" />
+        </service>
+
+        <service id="Neno\MarketingEssentials\Subscriber\SystemConfigChangedSubscriber">
+            <argument type="service" id="Shopware\Core\Framework\Adapter\Cache\CacheClearer"/>
+            <tag name="kernel.event_subscriber"/>
+        </service>
+
+        <service id="Neno\MarketingEssentials\Subscriber\NewsletterPopupEntitySubscriber">
+            <argument type="service" id="Shopware\Core\Framework\Adapter\Cache\CacheClearer"/>
+            <tag name="kernel.event_subscriber"/>
+        </service>
+
+        <service id="Neno\MarketingEssentials\Subscriber\RegisterPopupEntitySubscriber">
+            <argument type="service" id="Shopware\Core\Framework\Adapter\Cache\CacheClearer"/>
+            <tag name="kernel.event_subscriber"/>
+        </service>
+
+        <service id="Neno\MarketingEssentials\Subscriber\TabsEntitySubscriber">
+            <argument type="service" id="Shopware\Core\Framework\Adapter\Cache\CacheClearer"/>
+            <tag name="kernel.event_subscriber"/>
+        </service>
+
+        <service id="Neno\MarketingEssentials\Subscriber\ConversionBarEntitySubscriber">
+            <argument type="service" id="Shopware\Core\Framework\Adapter\Cache\CacheClearer"/>
+            <tag name="kernel.event_subscriber"/>
+        </service>
+    </services>
+</container>

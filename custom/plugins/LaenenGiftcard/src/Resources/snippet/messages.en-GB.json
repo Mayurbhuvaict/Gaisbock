@@ -1,0 +1,10 @@
+{
+    "checkout": {
+        "summaryAppliedGiftcard": "Giftcard %name%",
+        "summaryAppliedGiftcardRemove": "x",
+        "summaryAppliedGiftcardRemoveTitle": "Remove giftcard from cart"
+    },
+    "detail": {
+        "giftcardAmountLabel": "Giftcard amount"
+    }
+}

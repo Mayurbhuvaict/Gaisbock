@@ -1,0 +1,53 @@
+{% block sw_category_detail_menu %}
+    {% parent %}
+
+    {% block acris_category_customer_group_customer_group_card %}
+        <sw-card :isLoading="isLoading" v-if="category && (category.type === 'page' || category.type === 'folder')"
+                 :title="$tc('acris-category-customer-group.cardCustomerGroup')"
+                 class="acris-category-customer-group">
+
+            {% block acris_category_customer_group_many_to_many_select %}
+            <acris-entity-many-to-many-select
+                :localMode="true"
+                :placeholder="$tc('acris-category-customer-group.fieldPlaceholderCustomerGroup')"
+                v-model="category.extensions.customerGroup"
+                :valueLimit="50">
+            </acris-entity-many-to-many-select>
+            {% endblock %}
+
+            {% block acris_category_customer_group_exclude_sitemap_exclude %}
+            <sw-checkbox-field :label="$tc('acris-category-customer-group.fieldLabelExcludeSitemap')"
+                               @change="onChangeExcludeSitemapCheckbox"
+                               v-model="acris_category_customer_group_exclude_sitemap">
+            </sw-checkbox-field>
+            {% endblock %}
+        </sw-card>
+    {% endblock %}
+{% endblock %}
+
+{% block sw_category_detail_link %}
+    {% parent %}
+
+    {% block acris_category_customer_group_customer_group_card_link %}
+        <sw-card :isLoading="isLoading" v-if="category && category.type === 'link'"
+                 :title="$tc('acris-category-customer-group.cardCustomerGroup')"
+                 class="acris-category-customer-group">
+
+            {% block acris_category_customer_group_many_to_many_select_link %}
+                <acris-entity-many-to-many-select
+                    :localMode="true"
+                    :placeholder="$tc('acris-category-customer-group.fieldPlaceholderCustomerGroup')"
+                    v-model="category.extensions.customerGroup"
+                    :valueLimit="50">
+                </acris-entity-many-to-many-select>
+            {% endblock %}
+
+            {% block acris_category_customer_group_exclude_sitemap_exclude_link %}
+                <sw-checkbox-field :label="$tc('acris-category-customer-group.fieldLabelExcludeSitemap')"
+                                   @change="onChangeExcludeSitemapCheckbox"
+                                   v-model="acris_category_customer_group_exclude_sitemap">
+                </sw-checkbox-field>
+            {% endblock %}
+        </sw-card>
+    {% endblock %}
+{% endblock %}

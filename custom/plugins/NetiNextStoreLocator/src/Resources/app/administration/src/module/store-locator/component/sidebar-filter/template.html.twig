@@ -1,0 +1,143 @@
+<sw-sidebar-item
+        class="neti-store-locator-sidebar-filter-item"
+        icon="regular-filter"
+        :title="$t('neti-store-locator.list.titleSidebarFilter')"
+        :badge="filterCount"
+>
+    <template #headline-content>
+        <a
+                v-if="filterCount > 0"
+                @click="onResetFilters"
+        >
+            {{ $t('sw-sidebar-filter-panel.resetButton') }}
+        </a>
+    </template>
+
+    <div class="neti-store-locator-sidebar-filter">
+        <sw-select-field
+                v-model="filter.active"
+                :label="$t('neti-store-locator.sidebar-filter.activeLabel')"
+                @change="onUpdateFilters"
+        >
+            <option :value="null">{{ $t('neti-store-locator.sidebar-filter.active.none') }}</option>
+            <option value="true">{{ $t('neti-store-locator.sidebar-filter.active.true') }}</option>
+            <option value="false">{{ $t('neti-store-locator.sidebar-filter.active.false') }}</option>
+        </sw-select-field>
+
+        <sw-select-field
+                v-model="filter.featured"
+                :label="$t('neti-store-locator.sidebar-filter.featuredLabel')"
+                @change="onUpdateFilters"
+        >
+            <option :value="null">{{ $t('neti-store-locator.sidebar-filter.featured.none') }}</option>
+            <option value="true">{{ $t('neti-store-locator.sidebar-filter.featured.true') }}</option>
+            <option value="false">{{ $t('neti-store-locator.sidebar-filter.featured.false') }}</option>
+        </sw-select-field>
+
+        <sw-container columns="3fr 1fr" gap="15px">
+            <sw-field
+                type="text"
+                v-model="filter.street"
+                :label="$t('neti-store-locator.sidebar-filter.streetLabel')"
+                :placeholder="$t('neti-store-locator.sidebar-filter.streetPlaceholder')"
+                @change="onUpdateFilters"
+            ></sw-field>
+
+            <sw-field
+                type="text"
+                v-model="filter.streetNumber"
+                :label="$t('neti-store-locator.sidebar-filter.streetNumberLabel')"
+                :placeholder="$t('neti-store-locator.sidebar-filter.streetNumberPlaceholder')"
+                @change="onUpdateFilters"
+            ></sw-field>
+        </sw-container>
+
+        <sw-container columns="1fr 1fr" gap="15px">
+            <sw-field
+                type="text"
+                v-model="filter.zipCode"
+                :label="$t('neti-store-locator.sidebar-filter.zipCodeLabel')"
+                :placeholder="$t('neti-store-locator.sidebar-filter.zipCodePlaceholder')"
+                @change="onUpdateFilters"
+            ></sw-field>
+
+            <sw-field
+                type="text"
+                v-model="filter.city"
+                :label="$t('neti-store-locator.sidebar-filter.cityLabel')"
+                :placeholder="$t('neti-store-locator.sidebar-filter.cityPlaceholder')"
+                @change="onUpdateFilters"
+            ></sw-field>
+        </sw-container>
+
+        <sw-entity-multi-id-select
+            v-model="filter.countries"
+            :label="$t('neti-store-locator.sidebar-filter.countryLabel')"
+            :repository="countryRepository"
+            @change="onUpdateFilters"
+        ></sw-entity-multi-id-select>
+
+        <sw-field
+            type="text"
+            v-model="filter.externalId"
+            :label="$t('neti-store-locator.sidebar-filter.externalIdLabel')"
+            :placeholder="$t('neti-store-locator.sidebar-filter.externalIdPlaceholder')"
+            @change="onUpdateFilters"
+        ></sw-field>
+
+        <sw-select-field
+            v-model="filter.media"
+            :label="$t('neti-store-locator.sidebar-filter.mediaLabel')"
+            @change="onUpdateFilters"
+        >
+            <option :value="null">{{ $t('neti-store-locator.sidebar-filter.media.none') }}</option>
+            <option value="true">{{ $t('neti-store-locator.sidebar-filter.media.true') }}</option>
+            <option value="false">{{ $t('neti-store-locator.sidebar-filter.media.false') }}</option>
+        </sw-select-field>
+
+        <sw-select-field
+                v-model="filter.showAlways"
+                :label="$t('neti-store-locator.sidebar-filter.showAlwaysLabel')"
+                @change="onUpdateFilters"
+        >
+            <option :value="null">{{ $t('neti-store-locator.sidebar-filter.showAlways.none') }}</option>
+            <option value="no">{{ $t('neti-store-locator.sidebar-filter.showAlways.no') }}</option>
+            <option value="top">{{ $t('neti-store-locator.sidebar-filter.showAlways.top') }}</option>
+            <option value="bottom">{{ $t('neti-store-locator.sidebar-filter.showAlways.bottom') }}</option>
+        </sw-select-field>
+
+        <sw-select-field
+                v-model="filter.detailPageEnabled"
+                :label="$t('neti-store-locator.sidebar-filter.detailPageEnabledLabel')"
+                @change="onUpdateFilters"
+        >
+            <option :value="null">{{ $t('neti-store-locator.sidebar-filter.detailPageEnabled.none') }}</option>
+            <option value="true">{{ $t('neti-store-locator.sidebar-filter.detailPageEnabled.true') }}</option>
+            <option value="false">{{ $t('neti-store-locator.sidebar-filter.detailPageEnabled.false') }}</option>
+        </sw-select-field>
+
+        <sw-select-field
+                v-model="filter.contactFormEnabled"
+                :label="$t('neti-store-locator.sidebar-filter.contactFormEnabledLabel')"
+                @change="onUpdateFilters"
+        >
+            <option :value="null">{{ $t('neti-store-locator.sidebar-filter.contactFormEnabled.none') }}</option>
+            <option value="true">{{ $t('neti-store-locator.sidebar-filter.contactFormEnabled.true') }}</option>
+            <option value="false">{{ $t('neti-store-locator.sidebar-filter.contactFormEnabled.false') }}</option>
+        </sw-select-field>
+
+        <sw-entity-multi-id-select
+                v-model="filter.tags"
+                :label="$t('neti-store-locator.sidebar-filter.tagLabel')"
+                :repository="tagRepository"
+                @change="onUpdateFilters"
+        ></sw-entity-multi-id-select>
+
+        <sw-entity-multi-id-select
+                v-model="filter.salesChannels"
+                :label="$t('neti-store-locator.sidebar-filter.salesChannelLabel')"
+                :repository="salesChannelRepository"
+                @change="onUpdateFilters"
+        ></sw-entity-multi-id-select>
+    </div>
+</sw-sidebar-item>

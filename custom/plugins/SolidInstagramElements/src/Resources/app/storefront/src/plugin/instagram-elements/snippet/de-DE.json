@@ -1,0 +1,21 @@
+{
+  "seconds": "Vor ein paar Sekunden",
+  "minutes": {
+    "singular": "Vor %m Minute",
+    "plural": "Vor %m Minuten"
+  },
+  "hours": {
+    "singluar": "Vor %h Stunde",
+    "plural": "Vor %h Stunden"
+  },
+  "days": {
+    "singular": "Vor %d Tag",
+    "plural": "Vor %d Tagen"
+  },
+  "date": {
+    "months": ["Januar", "Februar", "März", "April", "Mai", "Juni", "Juli",
+      "August", "September", "Oktober", "November", "Dezember"],
+    "short": "%d. %mmmm",
+    "long": "%d. %mmmm %yyyy"
+  }
+}

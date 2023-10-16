@@ -1,0 +1,15 @@
+{% sw_extends '@Storefront/storefront/layout/meta.html.twig' %}
+
+{% block layout_head_meta_tags %}
+    {{ parent() }}
+    
+    {% set TanmarNgInfiniteScrollingData = context.context.extensions.TanmarNgInfiniteScrolling %}
+    {% if TanmarNgInfiniteScrollingData.active %}
+        <style>
+            .is-tanmar-infinite-scrolling.is-ctl-navigation {{ TanmarNgInfiniteScrollingData.customPaginationSelector }}, 
+            .is-tanmar-infinite-scrolling.is-ctl-search {{ TanmarNgInfiniteScrollingData.customPaginationSelector }}{
+                display: none;
+            }
+        </style>
+    {% endif %}
+{% endblock %}

@@ -1,0 +1,20 @@
+{% block cms_element_gaisbock_custom_category_extension %}
+    <div class="sw-cms-element-gaisbock-custom-category-extension">
+        <div class="sw-cms-element-gaisbock-custom-category-extension__images">
+            <ul>
+                {% for treeItem in page.header.navigation.tree %}
+                    {% for child in treeItem.children %}
+                        {% if child.category.parentId == page.extensions.categoryData.activeCategory %}
+                            <li class="nav-item">
+                                <a href="{{ category_url(child.category) }}"
+                                   class="sw-cms-element-gaisbock-custom-category-line{% if child.category.id == page.header.navigation.active.id or child.category.id in activePath %} active{% endif %}">
+                                    {{ child.category.translated.name }}
+                                </a>
+                            </li>
+                        {% endif %}
+                    {% endfor %}
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+{% endblock %}

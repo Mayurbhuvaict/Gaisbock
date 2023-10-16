@@ -1,0 +1,37 @@
+{% block page_product_detail_tabs_inner %}
+    {% block page_product_detail_tabs_navigation %}
+
+    {% endblock %}
+
+    {% block page_product_detail_tabs_content %}
+        {% block page_product_detail_tabs_content_container %}
+            {% block page_product_detail_tabs_content_description %}
+
+            {% endblock %}
+
+            {% block page_product_detail_tabs_content_review %}
+                {% if config('core.listing.showReview') %}
+                    {% set reviews = page.reviews %}
+                    {% set reviewsPerListPage = 10 %}
+
+                    {# TODO NEXT-16994 - replace current list page value #}
+                    {% set currentListPage = 1 %}
+
+                    {% set productReviewCount = reviews.totalReviews %}
+
+                    {% if productReviewCount > 0 %}
+                        {% set productAvgRating = reviews.matrix.averageRating|round(2, 'common') %}
+                    {% endif %}
+
+                    {# TODO NEXT-16994 - replace language flag #}
+                    {% set foreignReviewsCount = 150 %}
+                    <div class="product-detail-review product-detail-review-widget">
+                        <div class="col-sm-12 col-xl-6">
+                            {% sw_include '@Storefront/storefront/page/product-detail/review/review-widget.html.twig' %}
+                        </div>
+                    </div>
+                {% endif %}
+            {% endblock %}
+        {% endblock %}
+    {% endblock %}
+{% endblock %}

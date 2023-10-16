@@ -1,0 +1,75 @@
+<?xml version="1.0"?>
+<container
+    xmlns="http://symfony.com/schema/dic/services"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+    <services>
+        <service
+            id="StudioSolid\InstagramElements\Core\Content\Cms\ScheduledTask\RefreshAccessTokenTask">
+            <tag name="shopware.scheduled.task" />
+        </service>
+
+        <service
+            id="StudioSolid\InstagramElements\Core\Content\Cms\ScheduledTask\RefreshAccessTokenTaskHandler">
+            <argument type="service" id="scheduled_task.repository" />
+            <argument type="service" id="Shopware\Core\System\SystemConfig\SystemConfigService" />
+            <argument type="service" id="sales_channel.repository" />
+            <tag name="messenger.message_handler" />
+        </service>
+
+        <service
+            id="StudioSolid\InstagramElements\Core\Content\Cms\ScheduledTask\FetchAndStoreLatestPostsTask">
+            <tag name="shopware.scheduled.task" />
+        </service>
+
+        <service
+            id="StudioSolid\InstagramElements\Core\Content\Cms\ScheduledTask\FetchAndStoreLatestPostsTaskHandler">
+            <argument type="service" id="scheduled_task.repository" />
+            <argument type="service"
+                id="StudioSolid\InstagramElements\Core\Content\Cms\Service\CmsSlotInstagramPostService" />
+            <tag name="messenger.message_handler" />
+        </service>
+
+        <service id="StudioSolid\InstagramElements\Core\Content\Cms\Service\CmsSlotInstagramPostService">
+            <argument type="service" id="Shopware\Core\System\SystemConfig\SystemConfigService" />
+            <argument type="service" id="sales_channel.repository" />
+            <argument type="service" id="solid_ie_cms_slot_instagram_post.repository" />
+            <argument type="service" id="solid_instagram_elements.filesystem.public" />
+            <argument type="service" id="StudioSolid\InstagramElements\Core\Content\Cms\Service\CmsSlotInstagramPostMediaUrlGenerator" />
+        </service>
+
+        <service id="StudioSolid\InstagramElements\Core\Content\Cms\Service\CmsSlotInstagramPostMediaUrlGenerator">
+            <argument type="service" id="solid_instagram_elements.filesystem.public" />
+            <argument type="service" id="request_stack" />
+            <tag name="kernel.reset" method="reset" />
+        </service>
+
+        <service
+            id="StudioSolid\InstagramElements\Core\Content\Cms\Aggregate\CmsSlotInstagramPost\CmsSlotInstagramPostDefinition">
+            <tag name="shopware.entity.definition" entity="solid_ie_cms_slot_instagram_post" />
+        </service>
+
+        <service
+            id="StudioSolid\InstagramElements\Core\Content\Cms\Api\CmsSlotInstagramPostActionController"
+            public="true">
+            <argument type="service"
+                id="StudioSolid\InstagramElements\Core\Content\Cms\Service\CmsSlotInstagramPostService" />
+            <call method="setContainer">
+                <argument type="service" id="service_container" />
+            </call>
+        </service>
+
+        <service id="StudioSolid\InstagramElements\Core\Content\Cms\FeedCmsElementResolver">
+            <argument type="service" id="Shopware\Core\System\SystemConfig\SystemConfigService" />
+            <argument type="service" id="solid_ie_cms_slot_instagram_post.repository" />
+            <tag name="shopware.cms.data_resolver" />
+        </service>
+
+        <service
+            id="StudioSolid\InstagramElements\Storefront\Framework\Adapter\Twig\Extension\TwigExtensions">
+            <argument type="service"
+                id="StudioSolid\InstagramElements\Core\Content\Cms\Service\CmsSlotInstagramPostService" />
+            <tag name="twig.extension" />
+        </service>
+    </services>
+</container>

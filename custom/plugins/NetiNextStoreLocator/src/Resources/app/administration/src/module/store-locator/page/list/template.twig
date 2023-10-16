@@ -1,0 +1,144 @@
+<sw-page class="neti-store-locator-list has--store-locator--sidebar-menu">
+    <template #search-bar>
+        <sw-search-bar
+                initialSearchType="neti_store_locator"
+                :initialSearch="term"
+                @search="onSearch"
+        >
+        </sw-search-bar>
+    </template>
+
+    <template #smart-bar-header>
+        <h2>
+            {{ $t('neti-store-locator.list.textStores') }}
+
+            <span v-if="!isLoading" class="sw-page__smart-bar-amount">
+                ({{ total }})
+            </span>
+        </h2>
+    </template>
+
+    <template #smart-bar-actions>
+        <neti-store-locator-update-coordinates-modal />
+
+        <sw-button variant="primary" :routerLink="{ name: 'neti.store_locator.create' }">
+            {{ $t('neti-store-locator.list.buttonCreate') }}
+        </sw-button>
+    </template>
+
+    <template #language-switch>
+        <sw-language-switch @on-change="onChangeLanguage"></sw-language-switch>
+    </template>
+
+    <template #content>
+        <neti-store-locator-sidebar-menu></neti-store-locator-sidebar-menu>
+
+        <div class="neti-store-locator-list__content">
+
+            <sw-entity-listing
+                    ref="netiStoreLocatorGrid"
+                    v-if="data"
+                    class="neti-store-locator-list-grid"
+                    :items="data"
+                    :columns="columns"
+                    :repository="repository"
+                    :showSelection="true"
+                    :isLoading="isLoading"
+            >
+                <template #column-active="{ item, compact }">
+                    <sw-checkbox-field :value="item.active" disabled></sw-checkbox-field>
+                </template>
+
+                <template #column-label="{ item, compact }">
+                    <span v-if="item.longitude === null || item.latitude === null" style="margin: 0 5px 0 0;">
+                        <sw-icon name="regular-exclamation-circle" small color="#f39c12"></sw-icon>
+                    </span>
+
+                    <router-link :to="{ name: 'neti.store_locator.detail.base', params: { id: item.id } }">
+                        {{ item.label }}
+                    </router-link>
+                </template>
+
+                <template #column-featured="{ item, compact }">
+                    <sw-checkbox-field :value="item.featured" disabled></sw-checkbox-field>
+                </template>
+
+                <template #column-salesChannel="{ item, compact }">
+                    {{ item.salesChannels ? item.salesChannels.map(s => s.translated.name).join(', ') : '' }}
+                </template>
+
+                <template #column-country="{ item, compact }">
+                    {{ item.country ? item.country.translated.name : '-' }}
+                </template>
+
+                <template #actions="{ item }">
+                    <sw-context-menu-item :routerLink="{ name: 'neti.store_locator.detail.base', params: { id: item.id }}">
+                        {{ $t('neti-store-locator.list.contextMenuEdit') }}
+                    </sw-context-menu-item>
+
+                    <sw-context-menu-item @click="onDuplicate(item)">
+                        {{ $t('neti-store-locator.list.contextMenuDuplicate') }}
+                    </sw-context-menu-item>
+
+                    <sw-context-menu-item variant="danger" @click="onDelete(item.id)">
+                        {{ $t('neti-store-locator.list.contextMenuDelete') }}
+                    </sw-context-menu-item>
+                </template>
+
+                <template #action-modals="{ item }">
+                    <sw-modal
+                            v-if="showDeleteModal === item.id"
+                            @modal-close="onCloseDeleteModal"
+                            :title="$t('neti-store-locator.list.modalTitleDelete')"
+                            variant="small"
+                    >
+                        <p class="neti-store-locator-list__confirm-delete-text">
+                            {{ $t('neti-store-locator.list.textDeleteConfirm', 0, { name: `${item.label}` }) }}
+                        </p>
+
+                        <template #modal-footer>
+                            <sw-button @click="onCloseDeleteModal" size="small">
+                                {{ $t('neti-store-locator.list.buttonCancel') }}
+                            </sw-button>
+
+                            <sw-button @click="onConfirmDelete(item.id)" variant="primary" size="small">
+                                {{ $t('neti-store-locator.list.buttonDelete') }}
+                            </sw-button>
+                        </template>
+                    </sw-modal>
+                </template>
+
+                <template #pagination>
+                    <sw-pagination
+                            :page="page"
+                            :limit="limit"
+                            :total="total"
+                            :total-visible="7"
+                            @page-change="onPageChange"
+                    >
+                    </sw-pagination>
+                </template>
+            </sw-entity-listing>
+
+            <sw-empty-state
+                    v-if="!isLoading && !total"
+                    :title="$t('neti-store-locator.list.messageEmpty')"
+            ></sw-empty-state>
+        </div>
+    </template>
+
+    <template #sidebar>
+        <sw-sidebar>
+            <sw-sidebar-item
+                    icon="regular-undo"
+                    :title="$t('neti-store-locator.list.titleSidebarItemRefresh')"
+                    @click="onRefresh"
+            >
+            </sw-sidebar-item>
+
+            <neti-store-locator-sidebar-filter
+                    @change="onFilterChanged"
+            ></neti-store-locator-sidebar-filter>
+        </sw-sidebar>
+    </template>
+</sw-page>

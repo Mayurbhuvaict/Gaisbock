@@ -1,0 +1,9 @@
+{% block block_solid_ie_feed %}
+    {% set element = block.slots.getSlot('feed') %}
+
+    <div class="col-12" data-cms-element-id="{{ element.id }}">
+        {% block block_solid_ie_feed_inner %}
+            {% sw_include "@SolidInstagramElements/storefront/element/cms-element-" ~ element.type ~ ".html.twig" ignore missing %}
+        {% endblock %}
+    </div>
+{% endblock %}

@@ -1,0 +1,102 @@
+<sw-page class="neti-store-locator-detail has--store-locator--sidebar-menu">
+
+    <template #smart-bar-header>
+        <h2 v-if="store">{{ store.label }}</h2>
+        <h2 v-else>
+            Neue Filiale
+        </h2>
+    </template>
+
+    <template #smart-bar-actions>
+        <sw-button :disabled="isLoading" @click="onAbortButtonClick">
+            {{ $t('neti-store-locator.detail.buttonCancel') }}
+        </sw-button>
+
+        <sw-button-process
+                class="neti-store-locator-detail__save-action"
+                :isLoading="isLoading"
+                :processSuccess="isSaveSuccessful"
+                :disabled="isLoading"
+                variant="primary"
+                @process-finish="saveFinish"
+                @click.prevent="onSave"
+        >
+            {{ $t('neti-store-locator.detail.buttonSave') }}
+        </sw-button-process>
+    </template>
+
+    <template #language-switch>
+        <sw-language-switch
+                :disabled="storeId == null"
+                :saveChangesFunction="saveOnLanguageChange"
+                :abortChangeFunction="abortOnLanguageChange"
+                @on-change="onChangeLanguage"
+        ></sw-language-switch>
+    </template>
+
+    <template #content>
+        <neti-store-locator-sidebar-menu></neti-store-locator-sidebar-menu>
+
+        <sw-card-view>
+            <sw-language-info
+                    :entityDescription="placeholder(store, 'label')"
+                    style="margin-top: 15px"
+            ></sw-language-info>
+
+            {% block neti_store_locator_detail_tabs %}
+                <sw-tabs
+                        class="neti-store-locator-detail-page__tabs"
+                        position-identifier="neti-store-locator-detail-tabs"
+                >
+                    <sw-tabs-item
+                            class="neti-store-locator-detail__tab-general"
+                            route="base"
+                            :title="$t('neti-store-locator.detail.tabGeneral')"
+                    >
+                        {{ $t('neti-store-locator.detail.tabGeneral') }}
+                    </sw-tabs-item>
+                    <sw-tabs-item
+                            class="neti-store-locator-detail__tab-address"
+                            route="address"
+                            :title="$t('neti-store-locator.detail.tabAddress')"
+                    >
+                        {{ $t('neti-store-locator.detail.tabAddress') }}
+                    </sw-tabs-item>
+                    <sw-tabs-item
+                            class="neti-store-locator-detail__tab-details"
+                            route="details"
+                            :title="$t('neti-store-locator.detail.tabDetails')"
+                    >
+                        {{ $t('neti-store-locator.detail.tabDetails') }}
+                    </sw-tabs-item>
+                    <sw-tabs-item
+                            class="neti-store-locator-detail__tab-contact"
+                            route="contact"
+                            :title="$t('neti-store-locator.detail.tabContact')"
+                    >
+                        {{ $t('neti-store-locator.detail.tabContact') }}
+                    </sw-tabs-item>
+                    <sw-tabs-item
+                            class="neti-store-locator-detail__tab-business-hours"
+                            route="business_hours"
+                            :title="$t('neti-store-locator.detail.tabBusinessHours')"
+                            :disabled="isCreateMode"
+                    >
+                        {{ $t('neti-store-locator.detail.tabBusinessHours') }}
+                    </sw-tabs-item>
+                    {% block neti_store_locator_detail_tabs_items %}{% endblock %}
+                </sw-tabs>
+            {% endblock %}
+
+            <router-view
+                    :store="store"
+                    :businessHours="businessHours"
+                    :isLoading="isLoading || isSaveSuccessful"
+                    :countries="countries"
+                    :salesChannels="salesChannels"
+                    :isCreateMode="isCreateMode"
+                    v-if="!isLoading"
+            ></router-view>
+        </sw-card-view>
+    </template>
+</sw-page>

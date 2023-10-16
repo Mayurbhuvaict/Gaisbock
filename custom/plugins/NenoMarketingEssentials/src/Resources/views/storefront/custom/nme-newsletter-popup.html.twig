@@ -1,0 +1,319 @@
+{% block neno_marketing_essentials_newsletter_popup %}
+    {% if page.extensions.newsletter_popup %}
+
+        {% set popups = page.extensions.newsletter_popup.elements %}
+
+        {% for popup in popups %}
+            <div class="nme-newsletter-popup--bg-layer"></div>
+            <div class="nme-newsletter-popup
+                {{ popup.imagePosition == 'background' ? 'has-background-image' : '' }}
+                {{ popup.imageMobileSettings == 'background' ? 'has-mobile-background-image' : '' }}"
+                data-newsletter-popup
+                data-popup-trigger="{{ popup.popupTrigger }}"
+                data-popup-time="{{ popup.popupTime }}"
+                data-popup-scroll="{{ popup.popupScroll }}"
+                data-dev-mode="{{ popup.devMode }}"
+                data-popup-id="{{ popup.id }}"
+                data-storage-type="{{ popup.storageType }}"
+            >
+                <div class="nme-newsletter-popup--close-btn-wrapper">
+                    <div class="nme-newsletter-popup--close-btn"></div>
+                </div>
+
+                {% if popup.imagePosition == 'left' or popup.imagePosition == 'right' %}
+                    <div class="nme-newsletter-popup--column-image is-{{ popup.imagePosition }}">
+                        {% if popup.mediaImage %}
+                            <img
+                                src=" {{ popup.mediaImage|sw_encode_media_url }}"
+                                class="nme-newsletter-popup--image"
+                                alt="{{ popup.mediaImage.fileName }}"
+                            >
+                        {% endif %}
+                    </div>
+                {% endif %}
+                <div class="nme-newsletter-popup--column-image-mobile is-{{ popup.imageMobileSettings }}">
+                    {% if popup.mediaImage %}
+                        <img
+                            src=" {{ popup.mediaImage|sw_encode_media_url }}"
+                            class="nme-newsletter-popup--image"
+                            alt="{{ popup.mediaImage.fileName }}"
+                        >
+                    {% endif %}
+                </div>
+
+                <div class="nme-newsletter-popup--column-content image-is-{{ popup.imagePosition }} mobile-image-is-{{ popup.imageMobileSettings }}">
+                    <div class="nme-newsletter-popup--content-inner">
+                        <div class="nme-newsletter-popup--headline">{{ ((popup.headline|trans|raw) ?: '')|sw_sanitize }}</div>
+                        <div class="nme-newsletter-popup--subline">{{ ((popup.subline|trans|raw) ?: '')|sw_sanitize }}</div>
+                        <form action="{{ path('frontend.neno.form.newsletter.popup.register.handle') }}"
+                              method="post"
+                              data-newsletter-popup-form="true"
+                              data-form-csrf-handler="true"
+                              data-form-validation="true"
+                              class="nme-newsletter-popup--form"
+                        >
+
+                            {% if popup.showFirstName or popup.showLastName %}
+                                <div class="nme-newsletter-popup--form-row">
+                                    {% if popup.showFirstName %}
+                                    <input
+                                        name="firstName"
+                                        value="{{ data.get('firstName') }}"
+                                        placeholder="{{ popup.firstNameFieldPlaceholder|trans }}"
+                                        class="nme-newsletter-popup--first-name-input
+                                        {% if popup.showLastName %} has-margin{% endif %}
+                                        form-control{% if formViolations.getViolations( '/' ~ fieldName ) %} is-invalid{% endif %}"
+                                    />
+                                    {% endif %}
+                                    {% if popup.showLastName %}
+                                    <input
+                                        name="lastName"
+                                        value="{{ data.get('lastName') }}"
+                                        placeholder="{{ popup.lastNameFieldPlaceholder|trans }}"
+                                        class="nme-newsletter-popup--last-name-input
+                                        {% if popup.showFirstName %} has-margin{% endif %}
+                                        form-control{% if formViolations.getViolations( '/' ~ fieldName ) %} is-invalid{% endif %}"
+                                    />
+                                    {% endif %}
+                                </div>
+                            {% endif %}
+
+                            <input type="hidden" name="option" value="{{ constant('Shopware\\Storefront\\Controller\\FormController::SUBSCRIBE') }}"/>
+
+                            <input
+                                name="email"
+                                type="email"
+                                value="{{ data.get('email') }}"
+                                placeholder="E-Mail Adresse"
+                                autocomplete="section-personal email"
+                                required="required"
+                                class="nme-newsletter-popup--mail-input form-control{% if formViolations.getViolations('/email') is not empty %} is-invalid{% endif %}"
+                            >
+
+                            {% if popup.promotionActive and popup.promotionShowValidUntil %}
+                                <div class="nme-newsletter-popup--promotion-until">
+                                    <p>
+                                        {% if popup.promotionTextValidUntil %}
+                                            {{ popup.promotionTextValidUntil|trans }}
+                                        {% endif %}
+                                        {% if popup.promotion.validUntil %}
+                                            <span>{{ popup.promotion.validUntil|format_date('short', locale=app.request.locale) }}</span>
+                                        {% endif %}
+                                    </p>
+                                </div>
+                            {% endif %}
+
+                            <div class="nme-newsletter-popup--captcha-container">
+                                {% sw_include '@Storefront/storefront/component/captcha/base.html.twig' with { 'captchas': shopware.config.core.basicInformation.activeCaptchas } %}
+                            </div>
+                            <div class="nme-newsletter-popup--captcha-error-container"></div>
+
+                            <button type="submit" class="nme-newsletter-popup--submit-btn btn">
+                                {{ popup.textSubscribeButton|trans }}
+                            </button>
+
+                            <div class="form-hidden-fields">
+                                <input type="submit" class="submit--hidden d-none" />
+                                <input type="hidden" name="popupId" value="{{ popup.id }}" />
+                            </div>
+
+                            {% if popup.textNonSubscribe %}
+                                <button class="nme-newsletter-popup--non-subscribe-btn">
+                                    {{ popup.textNonSubscribe|trans }}
+                                </button>
+                            {% endif %}
+
+                            <div class="nme-newsletter-popup--privacy">
+                                {% sw_include '@Storefront/storefront/element/cms-element-form/form-components/cms-element-form-privacy.html.twig' %}
+                            </div>
+                        </form>
+                        <div class="nme-newsletter-popup--error-container"></div>
+                    </div>
+                    <div class="nme-newsletter-popup--response-wrapper">
+                        <div class="nme-newsletter-popup--response-icon">
+                            {% sw_icon 'checkmark-circle' %}
+                        </div>
+                        <p class="nme-newsletter-popup--response-text"></p>
+                    </div>
+                </div>
+            </div>
+            <style>
+                .nme-newsletter-popup {
+                {% if popup.backgroundColor %}
+                    background-color: {{ popup.backgroundColor }};
+                {% endif %}
+                    border-radius: {{ popup.popupBorderRadius }}px;
+                }
+
+                @media all and (max-width: 480px) {
+
+                    .nme-newsletter-popup {
+                    {% if popup.heightMobile %}
+                        min-height: {{ popup.heightMobile }}px;
+                    {% endif %}
+                    }
+
+                    .nme-newsletter-popup.has-mobile-background-image {
+                        background-image: url("{{ popup.mediaImage|sw_encode_media_url }}");
+                        background-repeat: no-repeat;
+                        background-size: {{ popup.imageFit }};
+                        background-position: {{ popup.imageAlignment }};
+                    }
+                }
+
+                @media all and (min-width: 481px) {
+
+                    .nme-newsletter-popup {
+                    {% if popup.heightDesktop %}
+                        min-height: {{ popup.heightDesktop }}px;
+                    {% endif %}
+                    }
+
+                    .nme-newsletter-popup.has-background-image {
+                        background-image: url("{{ popup.mediaImage|sw_encode_media_url }}");
+                        background-repeat: no-repeat;
+                        background-size: {{ popup.imageFit }};
+                        background-position: {{ popup.imageAlignment }};
+                    }
+                }
+
+                .nme-newsletter-popup--close-btn:before,
+                .nme-newsletter-popup--close-btn:after {
+                {% if popup.closeButtonColor %}
+                    background-color: {{ popup.closeButtonColor }};
+                {% endif %}
+                }
+
+                .nme-newsletter-popup--close-btn:hover:before,
+                .nme-newsletter-popup--close-btn:hover:after {
+                {% if popup.closeButtonHoverColor %}
+                    background-color: {{ popup.closeButtonHoverColor }};
+                {% endif %}
+                }
+
+                .nme-newsletter-popup--column-content {
+                {% if popup.contentAlignment %}
+                    justify-content: {{ popup.contentAlignment }};
+                {% endif %}
+                }
+
+                .nme-newsletter-popup--column-image {
+                {% if popup.mediaBackgroundColor %}
+                    background-color: {{ popup.mediaBackgroundColor }};
+                {% endif %}
+                {% if popup.imageFit %}
+                    object-fit: {{ popup.imageFit }};
+                {% endif %}
+                }
+
+                .nme-newsletter-popup--image {
+                {% if popup.imageFit %}
+                    object-fit: {{ popup.imageFit }};
+                    object-position: {{ popup.imageAlignment }};
+                {% endif %}
+                }
+
+                .nme-newsletter-popup--first-name-input {
+                    border-radius: {{ popup.firstNameFieldBorderRadius }}px;
+                    border-color: {{ popup.firstNameFieldBorderColor }};
+                }
+
+                .nme-newsletter-popup--last-name-input {
+                    border-radius: {{ popup.lastNameFieldBorderRadius }}px;
+                    border-color: {{ popup.lastNameFieldBorderColor }};
+                }
+
+                .nme-newsletter-popup--mail-input {
+                    border-radius: {{ popup.mailFieldBorderRadius }}px;
+                    border-color: {{ popup.mailFieldBorderColor }};
+                }
+
+                .nme-newsletter-popup--submit-btn {
+                {% if popup.subscribeButtonBackgroundColor %}
+                    background-color: {{ popup.subscribeButtonBackgroundColor }};
+                {% endif %}
+                {% if popup.subscribeButtonTextColor is not empty %}
+                    color: {{ popup.subscribeButtonTextColor }};
+                {% endif %}
+                    border-radius: {{ popup.subscribeButtonBorderRadius }}px;
+                }
+
+                .nme-newsletter-popup--submit-btn:hover {
+                {% if popup.subscribeButtonBackgroundHoverColor %}
+                    background-color: {{ popup.subscribeButtonBackgroundHoverColor }};
+                {% endif %}
+                {% if popup.subscribeButtonTextHoverColor %}
+                    color: {{ popup.subscribeButtonTextHoverColor }};
+                {% endif %}
+                }
+
+                .nme-newsletter-popup--non-subscribe-btn {
+                {% if popup.nonSubscribeTextColor %}
+                    color: {{ popup.nonSubscribeTextColor }};
+                {% endif %}
+                }
+
+                .nme-newsletter-popup--non-subscribe-btn:hover {
+                {% if popup.nonSubscribeTextHoverColor %}
+                    color: {{ popup.nonSubscribeTextHoverColor }};
+                {% endif %}
+                }
+
+                .nme-newsletter-popup--headline {
+                    font-size: {{ popup.headlineFontSizeMobile }}px;
+                    font-family: {{ popup.headlineFontFamily }};
+                    line-height: {{ popup.headlineLineHeightMobile }}px;
+                }
+
+                .nme-newsletter-popup--subline {
+                    font-size: {{ popup.sublineFontSizeMobile }}px;
+                    font-family: {{ popup.sublineFontFamily }};
+                    line-height: {{ popup.sublineLineHeightMobile }}px;
+                }
+
+                .nme-newsletter-popup--promotion-until {
+                    font-size: {{ popup.promotionFontSizeMobile }}px;
+                    font-family: {{ popup.promotionFontFamily }};
+                    line-height: {{ popup.promotionLineHeightMobile }}px;
+                    color: {{ popup.promotionColor }};
+                }
+
+                /* Tablet */
+                @media all and (min-width: 481px) {
+                    .nme-newsletter-popup--headline {
+                        font-size: {{ popup.headlineFontSizeTablet }}px;
+                        line-height: {{ popup.headlineLineHeightTablet }}px;
+                    }
+
+                    .nme-newsletter-popup--subline {
+                        font-size: {{ popup.sublineFontSizeTablet }}px;
+                        line-height: {{ popup.sublineLineHeightTablet }}px;
+                    }
+
+                    .nme-newsletter-popup--promotion-until {
+                        font-size: {{ popup.promotionFontSizeTablet }}px;
+                        line-height: {{ popup.promotionLineHeightTablet }}px;
+                    }
+                }
+
+                /* Desktop */
+                @media all and (min-width: 1280px) {
+                    .nme-newsletter-popup--headline {
+                        font-size: {{ popup.headlineFontSizeDesktop}}px;
+                        line-height: {{ popup.headlineLineHeightDesktop }}px;
+                    }
+
+                    .nme-newsletter-popup--subline {
+                        font-size: {{ popup.sublineFontSizeDesktop }}px;
+                        line-height: {{ popup.sublineLineHeightDesktop }}px;
+                    }
+
+                    .nme-newsletter-popup--promotion-until {
+                        font-size: {{ popup.promotionFontSizeDesktop }}px;
+                        line-height: {{ popup.promotionLineHeightDesktop }}px;
+                    }
+                }
+            </style>
+        {% endfor %}
+    {% endif %}
+{% endblock %}

@@ -1,0 +1,252 @@
+{% block neno_marketing_essentials_register_popup %}
+    {% if not context.customer %}
+        {% if page.extensions.register_popup %}
+
+            {% set popups = page.extensions.register_popup.elements %}
+
+            {% for popup in popups %}
+                <div class="nme-register-popup--bg-layer"></div>
+                <div class="nme-register-popup
+                    {{ popup.imagePosition == 'background' ? 'has-background-image' : '' }}
+                    {{ popup.imageMobileSettings == 'background' ? 'has-mobile-background-image' : '' }}"
+                    data-register-popup
+                    data-register-popup-trigger="{{ popup.popupTrigger }}"
+                    data-register-popup-time="{{ popup.popupTime }}"
+                    data-register-popup-scroll="{{ popup.popupScroll }}"
+                    data-dev-mode="{{ popup.devMode }}"
+                    data-popup-id="{{ popup.id }}"
+                    data-storage-type="{{ popup.storageType }}"
+                >
+                    <div class="nme-register-popup--close-btn-wrapper">
+                        <div class="nme-register-popup--close-btn"></div>
+                    </div>
+
+                    {% if popup.imagePosition == 'left' or popup.imagePosition == 'right' %}
+                        <div class="nme-register-popup--column-image is-{{ popup.imagePosition }}">
+                            {% if popup.registerMediaImage %}
+                                <img
+                                    src=" {{ popup.registerMediaImage|sw_encode_media_url }}"
+                                    class="nme-register-popup--image"
+                                    alt="{{ popup.registerMediaImage.fileName }}"
+                                >
+                            {% endif %}
+                        </div>
+                    {% endif %}
+                    <div class="nme-register-popup--column-image-mobile is-{{ popup.imageMobileSettings }}">
+                        {% if popup.registerMediaImage %}
+                            <img
+                                src=" {{ popup.registerMediaImage|sw_encode_media_url }}"
+                                class="nme-register-popup--image"
+                                alt="{{ popup.registerMediaImage.fileName }}"
+                            >
+                        {% endif %}
+                    </div>
+
+                    <div class="nme-register-popup--column-content image-is-{{ popup.imagePosition }} mobile-image-is-{{ popup.imageMobileSettings }}">
+                        <div class="nme-register-popup--content-inner">
+                            {% if popup.headline %}
+                                <div class="nme-register-popup--headline">{{ ((popup.headline|trans|raw) ?: '')|sw_sanitize }}</div>
+                            {% endif %}
+                            {% if popup.subline %}
+                                <div class="nme-register-popup--subline">{{ ((popup.subline|trans|raw) ?: '')|sw_sanitize }}</div>
+                            {% endif %}
+                            {% if popup.text %}
+                                <div class="nme-register-popup--text">{{ ((popup.text|trans|raw) ?: '')|sw_sanitize }}</div>
+                            {% endif %}
+
+                            {% if popup.promotionActive and popup.promotionShowValidUntil %}
+                                <div class="nme-register-popup--promotion-until">
+                                    <p>
+                                        {% if popup.promotionTextValidUntil %}
+                                            {{ popup.promotionTextValidUntil|trans }}
+                                        {% endif %}
+                                        {% if popup.promotion.validUntil %}
+                                            <span>{{ popup.promotion.validUntil|format_date('short', locale=app.request.locale) }}</span>
+                                        {% endif %}
+                                    </p>
+                                </div>
+                            {% endif %}
+
+                            {% if popup.promotionActive %}
+                                <a class="nme-register-popup--submit-btn btn" href="{{ path('frontend.account.login.page', { 'neno-register-popup-id': popup.id }) }}">
+                                    {{ popup.textSubmitButton|trans }}
+                                </a>
+                            {% else %}
+                                <a class="nme-register-popup--submit-btn btn" href="{{ path('frontend.account.login.page') }}">
+                                    {{ popup.textSubmitButton|trans }}
+                                </a>
+                            {% endif %}
+                            {% if popup.textNonSubmit %}
+                                <button class="nme-register-popup--non-submit-btn">
+                                    {{ popup.textNonSubmit|trans }}
+                                </button>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+                <style>
+                    .nme-register-popup {
+                    {% if popup.backgroundColor %}
+                        background-color: {{ popup.backgroundColor }};
+                    {% endif %}
+                        border-radius: {{ popup.popupBorderRadius }}px;
+                    }
+
+                    @media all and (max-width: 480px) {
+
+                        .nme-register-popup {
+                        {% if popup.heightMobile %}
+                            height: {{ popup.heightMobile }}px;
+                        {% endif %}
+                        }
+
+                        .nme-register-popup.has-mobile-background-image {
+                            background-image: url("{{ popup.registerPopupMediaImage|sw_encode_media_url }}");
+                            background-repeat: no-repeat;
+                            background-size: {{ popup.imageFit }};
+                            background-position: {{ popup.imageAlignment }};
+                        }
+                    }
+
+                    @media all and (min-width: 481px) {
+
+                        .nme-register-popup {
+                        {% if popup.heightDesktop %}
+                            height: {{ popup.heightDesktop }}px;
+                        {% endif %}
+                        }
+
+                        .nme-register-popup.has-background-image {
+                            background-image: url("{{ popup.registerMediaImage|sw_encode_media_url }}");
+                            background-repeat: no-repeat;
+                            background-size: {{ popup.imageFit }};
+                            background-position: {{ popup.imageAlignment }};
+                        }
+                    }
+
+                    .nme-register-popup--close-btn:before,
+                    .nme-register-popup--close-btn:after {
+                    {% if popup.closeButtonColor %}
+                        background-color: {{ popup.closeButtonColor }};
+                    {% endif %}
+                    }
+
+                    .nme-register-popup--close-btn:hover:before,
+                    .nme-register-popup--close-btn:hover:after {
+                    {% if popup.closeButtonHoverColor %}
+                        background-color: {{ popup.closeButtonHoverColor }};
+                    {% endif %}
+                    }
+
+                    .nme-register-popup--column-content {
+                    {% if popup.contentAlignment %}
+                        justify-content: {{ popup.contentAlignment }};
+                    {% endif %}
+                    }
+
+                    .nme-register-popup--column-image {
+                    {% if popup.mediaBackgroundColor %}
+                        background-color: {{ popup.mediaBackgroundColor }};
+                    {% endif %}
+                    {% if popup.imageFit %}
+                        object-fit: {{ popup.imageFit }};
+                    {% endif %}
+                    }
+
+                    .nme-register-popup--image {
+                    {% if popup.imageFit %}
+                        object-fit: {{ popup.imageFit }};
+                        object-position: {{ popup.imageAlignment }};
+                    {% endif %}
+                    }
+
+                    .nme-register-popup--submit-btn {
+                    {% if popup.submitButtonBackgroundColor %}
+                        background-color: {{ popup.submitButtonBackgroundColor }};
+                    {% endif %}
+                    {% if popup.submitButtonTextColor is not empty %}
+                        color: {{ popup.submitButtonTextColor }};
+                    {% endif %}
+                        border-radius: {{ popup.submitButtonBorderRadius }}px;
+                    }
+
+                    .nme-register-popup--submit-btn:hover {
+                    {% if popup.submitButtonBackgroundHoverColor %}
+                        background-color: {{ popup.submitButtonBackgroundHoverColor }};
+                    {% endif %}
+                    {% if popup.submitButtonTextHoverColor %}
+                        color: {{ popup.submitButtonTextHoverColor }};
+                    {% endif %}
+                    }
+
+                    .nme-register-popup--non-submit-btn {
+                    {% if popup.nonSubmitTextColor %}
+                        color: {{ popup.nonSubmitTextColor }}
+                    {% endif %}
+                    }
+
+                    .nme-register-popup--non-submit-btn:hover {
+                    {% if popup.nonSubmitTextHoverColor %}
+                        color: {{ popup.nonSubmitTextHoverColor }}
+                    {% endif %}
+                    }
+
+                    .nme-register-popup--headline {
+                        font-size: {{ popup.headlineFontSizeMobile }}px;
+                        font-family: {{ popup.headlineFontFamily }};
+                        line-height: {{ popup.headlineLineHeightMobile }}px;
+                    }
+
+                    .nme-register-popup--subline {
+                        font-size: {{ popup.sublineFontSizeMobile }}px;
+                        font-family: {{ popup.sublineFontFamily }};
+                        line-height: {{ popup.sublineLineHeightMobile }}px;
+                    }
+
+                    .nme-register-popup--promotion-until {
+                        font-size: {{ popup.promotionFontSizeMobile }}px;
+                        font-family: {{ popup.promotionFontFamily }};
+                        line-height: {{ popup.promotionLineHeightMobile }}px;
+                        color: {{ popup.promotionColor }};
+                    }
+
+                    /* Tablet */
+                    @media all and (min-width: 481px) {
+                        .nme-register-popup--headline {
+                            font-size: {{ popup.headlineFontSizeTablet }}px;
+                            line-height: {{ popup.headlineLineHeightTablet }}px;
+                        }
+
+                        .nme-register-popup--subline {
+                            font-size: {{ popup.sublineFontSizeTablet }}px;
+                            line-height: {{ popup.sublineLineHeightTablet }}px;
+                        }
+
+                        .nme-register-popup--promotion-until {
+                            font-size: {{ popup.promotionFontSizeTablet }}px;
+                            line-height: {{ popup.promotionLineHeightTablet }}px;
+                        }
+                    }
+
+                    /* Desktop */
+                    @media all and (min-width: 1280px) {
+                        .nme-register-popup--headline {
+                            font-size: {{ popup.headlineFontSizeDesktop}}px;
+                            line-height: {{ popup.headlineLineHeightDesktop }}px;
+                        }
+
+                        .nme-register-popup--subline {
+                            font-size: {{ popup.sublineFontSizeDesktop }}px;
+                            line-height: {{ popup.sublineLineHeightDesktop }}px;
+                        }
+
+                        .nme-register-popup--promotion-until {
+                            font-size: {{ popup.promotionFontSizeDesktop }}px;
+                            line-height: {{ popup.promotionLineHeightDesktop }}px;
+                        }
+                    }
+                </style>
+            {% endfor %}
+        {% endif %}
+    {% endif %}
+{% endblock %}

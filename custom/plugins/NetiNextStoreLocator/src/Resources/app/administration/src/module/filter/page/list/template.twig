@@ -1,0 +1,170 @@
+<sw-page class="neti-sl-filter-list has--store-locator--sidebar-menu">
+    <template #smart-bar-header>
+        <h2>
+            {{ $t('neti-store-locator.filter.title') }}
+        </h2>
+    </template>
+
+    <template #language-switch>
+        <sw-language-switch
+                :saveChangesFunction="saveOnLanguageChange"
+                @on-change="onChangeLanguage"
+                :disabled="hasNewFilters"
+        ></sw-language-switch>
+    </template>
+
+    <template #smart-bar-actions>
+        <sw-button @click="onRefreshIndex">
+            {{ $t('neti-store-locator.filter.buttonRefreshIndex') }}
+        </sw-button>
+
+        <sw-button @click="loadFilters">
+            {{ $t('neti-store-locator.filter.buttonAbort') }}
+        </sw-button>
+
+        <sw-button-process
+                :isLoading="isLoading"
+                :processSuccess="isSaveSuccessful"
+                :disabled="isLoading"
+                variant="primary"
+                @process-finish="onSaveFinish"
+                @click.prevent="onSave"
+        >
+            {{ $t('neti-store-locator.filter.buttonSave') }}
+        </sw-button-process>
+    </template>
+
+    <template #content>
+        <neti-store-locator-sidebar-menu></neti-store-locator-sidebar-menu>
+
+        <div class="neti-sl-filter-list__content">
+            <sw-alert v-if="!isDefaultLanguage" class="edit-info-alert">
+                {{ $t('neti-store-locator.filter.editInfoAlternativeLanguage') }}
+            </sw-alert>
+
+            <sw-alert v-if="hasNewFilters" class="edit-info-alert">
+                {{ $t('neti-store-locator.filter.editInfoNewFilter') }}
+            </sw-alert>
+
+            <template v-if="!filters.length">
+                <sw-alert class="empty-info-alert">
+                    <div class="alert-content">
+                        {{ $t('neti-store-locator.filter.emptyInfo') }}
+                    </div>
+
+                    <sw-button @click="onAddFilter" variant="primary" size="small" class="add-filter-button" :disabled="!isDefaultLanguage">
+                        {{ $t('neti-store-locator.filter.buttonAdd') }}
+                    </sw-button>
+                </sw-alert>
+            </template>
+
+            <template v-else>
+                <sw-language-info :entityDescription="$t('neti-store-locator.filter.title')"></sw-language-info>
+
+                <sw-card
+                        class="filter-item"
+                        v-for="(filter, key) in sortedFilters"
+                        :key="key"
+                        :title="placeholder(filter, 'title', $t('neti-store-locator.filter.titlePlaceholder'))"
+                        position-identifier="neti-store-locator-filter-item"
+                >
+                    <sw-container columns="1fr auto" gap="15px">
+                        <sw-text-field
+                                v-model="filter.title"
+                                :label="$t('neti-store-locator.filter.detail.titleLabel')"
+                                :placeholder="placeholder(filter, 'title')"
+                        ></sw-text-field>
+
+                        <sw-switch-field
+                                v-model="filter.active"
+                                :label="$t('neti-store-locator.filter.detail.activeLabel')"
+                                bordered
+                        ></sw-switch-field>
+                    </sw-container>
+
+                    <sw-container columns="auto 1fr auto" gap="15px">
+                        <sw-select-number-field
+                                v-model="filter.valueType"
+                                :label="$t('neti-store-locator.filter.detail.valueTypeLabel')"
+                        >
+                            <option v-for="valueType in valueTypes" :key="valueType.key" :value="valueType.key">
+                                {{ valueType.label }}
+                            </option>
+                        </sw-select-number-field>
+
+
+                        <!-- Value Type: Tag -->
+                        <template v-if="filter.valueType === 1">
+                            <sw-entity-multi-select
+                                    entityName="tag"
+                                    v-model="filter.tags"
+                                    :label="$t('neti-store-locator.filter.detail.tagsLabel')"
+                            ></sw-entity-multi-select>
+                        </template>
+
+                        <!-- Value Type: Custom Field -->
+                        <template v-if="filter.valueType === 2">
+                            <sw-entity-single-select
+                                    v-model="filter.customFieldId"
+                                    entity="custom_field"
+                                    :label="$t('neti-store-locator.filter.detail.customFieldLabel')"
+                                    :criteria="customFieldCriteria"
+                            >
+                                <template #selection-label-property="{ item }">
+                                <span class="sw-select-result__result-item-text">
+                                    {{ item.config.label[locale] || item.config.label[fallbackLocale] }} ({{ item.name }})
+                                </span>
+                                </template>
+
+                                <template #result-label-property="{ item, index }">
+                                <span class="sw-select-result__result-item-text">
+                                    {{ item.config.label[locale] || item.config.label[fallbackLocale] }} ({{ item.name }})
+                                </span>
+                                </template>
+                            </sw-entity-single-select>
+                        </template>
+
+                        <sw-select-number-field
+                                v-model="filter.displayType"
+                                :label="$t('neti-store-locator.filter.detail.displayTypeLabel')"
+                        >
+                            <option v-for="displayType in displayTypes" :key="displayType.key" :value="displayType.key">
+                                {{ displayType.label }}
+                            </option>
+                        </sw-select-number-field>
+                    </sw-container>
+
+                    <div class="filter-actions">
+                        <sw-button size="small" @click="onMoveUp(filter)" :disabled="key === 0">
+                            <sw-icon name="regular-chevron-up"></sw-icon>
+                        </sw-button>
+
+                        <sw-button
+                                size="small"
+                                @click="onMoveDown(filter)"
+                                :disabled="key === sortedFilters.length - 1"
+                        >
+                            <sw-icon name="regular-chevron-down"></sw-icon>
+                        </sw-button>
+
+                        <div class="spacer"></div>
+
+                        <sw-button variant="danger" size="small" @click="onRemoveFilter(filter)">
+                            {{ $t('neti-store-locator.filter.buttonRemove') }}
+                        </sw-button>
+
+                        <sw-button variant="primary" size="small" @click="onAddFilter" :disabled="!isDefaultLanguage">
+                            {{ $t('neti-store-locator.filter.buttonAdd') }}
+                        </sw-button>
+                    </div>
+                </sw-card>
+            </template>
+
+        </div>
+
+        <neti-store-locator-filter-refresh-index-modal
+            v-if="refreshIndexModal"
+            @close="refreshIndexModal = false"
+        ></neti-store-locator-filter-refresh-index-modal>
+    </template>
+</sw-page>

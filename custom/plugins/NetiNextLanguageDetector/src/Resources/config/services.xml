@@ -1,0 +1,68 @@
+<?xml version="1.0" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xmlns:monolog="http://symfony.com/schema/dic/monolog"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <monolog:config>
+        <monolog:handler
+            name="language_detector"
+            type="stream"
+            path="%kernel.logs_dir%/neti_language_detector.log">
+            <monolog:channels>
+                <monolog:channel>language_detector</monolog:channel>
+            </monolog:channels>
+        </monolog:handler>
+    </monolog:config>
+
+    <services>
+        <service id="NetInventors\NetiNextLanguageDetector\Service\PluginConfigFactory">
+            <argument type="service" id="Shopware\Core\System\SystemConfig\SystemConfigService" />
+            <argument type="service" id="request_stack" />
+        </service>
+
+        <service
+            id="neti_language_detector.plugin_config"
+            class="NetInventors\NetiNextLanguageDetector\Struct\PluginConfigStruct"
+        >
+            <factory
+                service="NetInventors\NetiNextLanguageDetector\Service\PluginConfigFactory"
+                method="create"
+            />
+        </service>
+
+        <service id="NetInventors\NetiNextLanguageDetector\Service\LanguageDetectorService">
+            <argument type="service" id="language.repository"/>
+            <argument type="service" id="sales_channel_domain.repository"/>
+            <argument type="service" id="product_visibility.repository"/>
+            <argument type="service" id="locale.repository"/>
+        </service>
+
+        <service id="NetInventors\NetiNextLanguageDetector\Storefront\Controller\LanguageDetectorController" public="true">
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+            <call method="setTwig">
+                <argument type="service" id="twig"/>
+            </call>
+            <argument type="service" id="sales_channel_domain.repository"/>
+            <argument type="service" id="NetInventors\NetiNextLanguageDetector\Service\PluginConfigFactory"/>
+            <argument type="service" id="NetInventors\NetiNextLanguageDetector\Service\LanguageDetectorService"/>
+            <argument type="service" id="NetInventors\NetiNextLanguageDetector\Service\LogService"/>
+            <argument type="service" id="Shopware\Core\Framework\Adapter\Translation\Translator"/>
+        </service>
+
+        <service id="NetInventors\NetiNextLanguageDetector\Decorator\CookieProvider"
+                 decorates="Shopware\Storefront\Framework\Cookie\CookieProviderInterface">
+            <argument type="service"
+                      id="NetInventors\NetiNextLanguageDetector\Decorator\CookieProvider.inner"/>
+        </service>
+
+        <service id="NetInventors\NetiNextLanguageDetector\Service\LogService">
+            <argument type="service" id="logger"/>
+            <tag name="monolog.logger" channel="language_detector" path="/var/log/language_detector.log"/>
+        </service>
+
+    </services>
+</container>

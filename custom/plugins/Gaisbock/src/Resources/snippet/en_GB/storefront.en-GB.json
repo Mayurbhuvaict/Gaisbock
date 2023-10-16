@@ -1,0 +1,103 @@
+{
+  "store": {
+    "title": "Stores <br> ipsum dolor sit ametin"
+  },
+  "header": {
+    "searchPlaceholder": "Enter search term"
+  },
+  "footer": {
+    "newsletter" : {
+      "titleOne": "GAISBOCK <br>PREMIUM-MEMBER BECOMING",
+      "descriptionText" : "The first 300 get free socks, benefit from exclusive offers and discounts"
+    },
+    "customText": {
+      "customTextOne": "347",
+      "customTextTwo": "Number <br>of resellers",
+      "customTextThree": "<1000",
+      "customTextFour": "Number of<br> customers",
+      "customTextFive": "XXX",
+      "customTextSix": "Lorem<br> Sipdum dol"
+    },
+    "tryIt": {
+      "tryItItext": "WANT TO <br> TRY IT?",
+      "tryItDescription": "Lorem ipsum dolor sit amet, consectetur adipiscing elit"
+    },
+    "handler": {
+      "handlerTitle": "BECOME A GAISBOCK- <br>HANDLAR NOW",
+      "handlerTitleDescription": "Händler Login Anfragen consectetuer adipisci lorem ipsuam dolor esang elit<a href=\"#\"> Aenean massa. Cum sociis.</a>"
+    },
+    "hotline": {
+      "hotlineOne": "Gaisbock GmbH",
+      "hotlineTwo": "Bahnhafasse 10",
+      "hotlineThree": "CH-6065 kagiswill",
+      "hotlineMobile": "+41 41 6620 89 88",
+      "hotlineEmail": "info@gaisbock.ch",
+      "hotlineOpeningInfo": "Offnungzeiten Showroom",
+      "hotlineOpenTiming": "Mo-fr 08-12h / 13.30-17.00"
+    }
+  },
+  "listingPage": {
+    "product": {
+      "card": {
+        "saleBadges": "sale"
+      }
+    }
+  },
+  "productDetailPage": {
+    "contents": "contents",
+    "benefits": "benefits",
+    "effect": "effect",
+    "application": "application",
+    "integral": "integral",
+    "shipping": "shipping",
+    "ratings": "ratings",
+    "viewRatings": "View ratings",
+    "addProduct": "Add to cart"
+  },
+  "address": {
+    "companyPlaceholder": "COMPANY*",
+    "departmentPlaceholder": "DEPARTMENT",
+    "vatPlaceholder": "VAT ID",
+    "street": "STREET",
+    "zipcode": "POSTAL CODE",
+    "city": "CITY",
+    "countryState": "STATE",
+    "privacyNotice": "I accept the <a data-ajax-modal=\"true\" data-url=\"%privacyUrl%\" href=\"%privacyUrl%\" title=\"Data protection information\">Privacy Policy</a> and agree to the <a data-ajax-modal=\"true\" data-url=\"%tosUrl%\" href=\"%tosUrl%\" title=\"general terms and conditions\">Terms & Conditions</a>"
+  },
+  "account": {
+    "mobileLoginSubmit": "Login",
+    "loginTitle": "Login",
+    "registerTitle": "Register",
+    "registrationTitle": "Registration",
+    "patner": "Become partner",
+    "loginMail":"EMAIL",
+    "loginPassword": "PASSWORD",
+    "loginRecover": "Password forgotten?",
+    "firstNamePlaceholder": "FIRST NAME*",
+    "lastNamePlaceholder": "LAST NAME*",
+    "mailPlaceholder": "EMAIL*",
+    "passwordLabel":"PASSWORD*",
+    "passwordConfirmationPlaceholder": "PASSWORD REPEAT*",
+    "passwordDescription": "(Must be at least %minLength% characters with 1 symbol)",
+    "salutationPlaceholder": "ADDRESS",
+    "register": "REGISTER",
+    "partnerLoginTitle": "I am already a partner",
+    "home": {
+      "title": "Shop"
+    },
+    "header": {
+      "name": "Registered Customers",
+      "customerGroup": "Partner werden<br> ipsum dolor sit ametin"
+    }
+  },
+  "search": {
+    "headline": "Product Matches: ",
+    "noCount": "No found product Matches: "
+  },
+  "customer-group-register": {
+    "data": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit.<br>  Aenean commodo ligula eget dolor."
+  },
+  "review": {
+    "validation": "Please enter at least 5 character in title & 40 character in review for submitting review."
+  }
+}

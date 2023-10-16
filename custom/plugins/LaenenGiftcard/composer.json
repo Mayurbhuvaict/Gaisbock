@@ -1,0 +1,44 @@
+{
+    "name": "laenen/sw6-giftcard-plugin",
+    "description": "Giftcard plugin",
+    "type": "shopware-platform-plugin",
+    "license": "proprietary",
+    "version": "1.1.4",
+    "autoload": {
+        "psr-4": {
+            "Laenen\\Giftcard\\": "src/"
+        }
+    },
+    "extra": {
+        "shopware-plugin-class": "Laenen\\Giftcard\\LaenenGiftcard",
+        "label": {
+            "de-DE": "Giftcard plugin",
+            "en-GB": "Giftcard plugin",
+            "nl-NL": "Cadeaubonnen plugin"
+        },
+        "description": {
+            "de-DE": "Verkaufen (und einlösen) Sie Geschenkkarten / Gutscheine in Ihrem Shopware-Shop. Machen Sie es Ihren Kunden möglich, die Liebe für Ihr Geschäft zu verbreiten!",
+            "en-GB": "Sell (and redeem) giftcards / vouchers from within your Shopware store, or any Sales Channel. Make it possible for clients to spread the love for your store!",
+            "nl-NL": "Verkoop (en verwerk) cadeaubonnen van in je Shopware winkel, of via eender welk kanaal. Laat je klanten de liefde voor je shop verspreiden!"
+        },
+        "manufacturerLink": {
+            "de-DE": "https://kraftware.be",
+            "en-GB": "https://kraftware.be"
+        },
+        "supportLink": {
+            "de-DE": "https://kraftware.be",
+            "en-GB": "https://kraftware.be"
+        }
+
+    },
+    "authors": [
+        {
+            "name": "Kraftware",
+            "email": "hello@kraftware.be",
+            "homepage": "https://www.kraftware.be"
+        }
+    ],
+    "require": {
+        "shopware/core": "~6.5.0"
+    }
+}

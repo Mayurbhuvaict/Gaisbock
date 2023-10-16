@@ -1,0 +1,21 @@
+{
+  "solidInstagramElements": {
+    "general": {
+      "alert": {
+        "missingAccessToken": "Please provide a valid Instagram access token in the plugin configuration.",
+        "errorWhileFetching": "An error occurred while trying to fetch your Instagram data."
+      },
+      "date": {
+        "secondsAgo": "A few seconds ago",
+        "minutesAgo": "{1} 1 minute ago|]1,Inf[ %count% minutes ago",
+        "hoursAgo": "{1} 1 hour ago|]1,Inf[ %count% hours ago",
+        "daysAgo": "{1} 1 day ago|]1,Inf[ %count% days ago",
+        "formatMonthAndDay": "MMMM d",
+        "formatFull": "MMMM d Y"
+      }
+    },
+    "feed": {
+      "viewOnInstagram": "View on Instagram"
+    }
+  }
+}

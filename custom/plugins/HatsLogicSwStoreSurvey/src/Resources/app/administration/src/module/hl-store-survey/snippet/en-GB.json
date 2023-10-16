@@ -1,0 +1,29 @@
+{
+    "hl-store-survey": {
+        "titles": {
+            "menuName": "Store Survey",
+            "pluginName": "Store Survey"
+        },
+        "experiences": {
+            "menuLabel": "Store Survey",
+            "customerNameLabel": "Customer",
+            "ratingLabel": "Rating",
+            "commentLabel": "Comment",
+            "columnCreated": "Created",
+            "columnSalesChannel": "Sales Channel",
+            "labelDetails": "View"
+        },
+        "experience": {
+            "menuLabel": "Shopping Experience",
+            "customerNameLabel": "Customer",
+            "ratingLabel": "Rating",
+            "commentLabel": "Comment",
+            "createdLabel": "Created",
+            "cancelButtonText": "Cancel",
+            "labelSalesChannel": "Sales Channel"
+        },
+        "contents": {
+            "menuDescription": "Store Survey"
+        }
+    }
+}

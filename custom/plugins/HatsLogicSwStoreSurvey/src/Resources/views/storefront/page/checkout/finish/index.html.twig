@@ -1,0 +1,14 @@
+{% sw_extends '@Storefront/storefront/page/checkout/finish/index.html.twig' %}
+
+{% block page_checkout_finish_product_table %}
+	{{ parent() }}
+	{% if context.customer is defined and not context.customer.guest %}
+		{% if(hatsLogicSwStoreSurveyConfig.enableShoppingExperienceSurvey) %}
+			<small class="text-muted"><a style="color:#555" href="#hlShopExperienceModal" data-toggle="modal" data-target="#hlShopExperienceModal">
+			{{ "hlStoreSurvey.general.checkoutLinkText"|trans|sw_sanitize }}</a></small>
+			<div id="shoppingExperienceBody" data-hl-store-survey="true" data-hl-emotion-rating="true" >
+				{% sw_include "@Storefront/storefront/page/checkout/finish/shop-experience-modal.html.twig" with { "success": '', "messages": '' } %}
+			</div>
+		{% endif %}
+	{% endif %}
+{% endblock %}

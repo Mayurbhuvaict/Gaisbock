@@ -1,0 +1,68 @@
+{% block hl_shop_experiences_details %}
+	<sw-page class="hl-shop-experiences-detail">
+		<template slot="smart-bar-actions">
+			<sw-button :routerLink="{ name: 'hl.store.survey.experiences' }">
+				{{ $t('hl-store-survey.experience.cancelButtonText') }}
+			</sw-button>
+		</template>
+
+		<template>
+			<sw-card-view slot="content">
+				{% block hl_shop_experience_detail_basic_info_card %}
+					<sw-card v-if="shopExperienceDetails" :title="$tc('hl-store-survey.experience.menuLabel')" :isloading="isLoading">
+
+						<sw-container slot="grid" rows="auto auto">
+							<sw-card-section divider="bottom">
+								<sw-container>
+									<div class="sw-review-detail__metadata">
+										<div class="sw-review-detail__metadata-review-headline">
+											<div class="sw-review-detail__metadata-review-title">&nbsp;</div>
+											<div class="hl-ss-review-stars">
+                                                <span v-html="getRatingHtml(shopExperienceDetails.points)"></span>
+											</div>
+										</div>
+										<p class="sw-review-detail__metadata-review-content">
+											{{ shopExperienceDetails.comment }}
+										</p>
+									</div>
+								</sw-container>
+							</sw-card-section>
+
+							{% block hl_shop_experience_detail_card_row_secondary %}
+								<sw-card-section secondary slim>
+									<slot name="default">
+										<sw-container class="sw-review-base-info" columns="repeat(auto-fit, minmax(250px, 1fr)" gap="0px 15px">
+											<sw-loader v-if="isLoading"></sw-loader>
+											<div v-if="!isLoading" class="sw-review-base-info-columns">
+
+												<sw-description-list>
+													<dt class="hl-ss-experience-dt">
+														{{ $tc('hl-store-survey.experience.createdLabel') }}</dt>
+													<dd class="hl-ss-experience-dd">{{ shopExperienceDetails.createdAt | date({hour: '2-digit', minute: '2-digit', second: '2-digit'}) }}</dd>
+												</sw-description-list>
+
+												<sw-description-list>
+
+													<dt class="hl-ss-experience-dt">{{ $tc('hl-store-survey.experience.labelSalesChannel') }}</dt>
+													<dd class="hl-ss-experience-dd">{{ shopExperienceDetails.salesChannel.name }}</dd>
+												</sw-description-list>
+
+											</div>
+											<div v-if="!isLoading" class="sw-review-base-info-columns">
+												<sw-description-list>
+													<dt class="hl-ss-experience-dt">{{ $t('hl-store-survey.experience.customerNameLabel')}}</dt>
+													<dd class="hl-ss-experience-dd">{{ shopExperienceDetails.customer.firstName }} {{ shopExperienceDetails.customer.lastName }}</dd>
+												</sw-description-list>
+											</div>
+										</sw-container>
+									</slot>
+								</sw-card-section>
+							{% endblock %}
+						</sw-container>
+					</sw-card>
+				{% endblock %}
+
+			</sw-card-view>
+		</template>
+	</sw-page>
+{% endblock %}

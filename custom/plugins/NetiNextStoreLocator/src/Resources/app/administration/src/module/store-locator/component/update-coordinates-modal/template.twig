@@ -1,0 +1,98 @@
+<div class="neti-store-locator-update-coordinates">
+    <sw-button variant="ghost" style="margin-right: 10px;" @click="open">
+        {{ $t('neti-store-locator.updateCoordinatesModal.title') }}
+    </sw-button>
+
+    <sw-modal
+            v-show="isOpen"
+            :title="$t('neti-store-locator.updateCoordinatesModal.title')"
+            :closable="!isRunning"
+            @modal-close="onClose"
+            class="neti-store-locator-update-coordinates-modal"
+    >
+        <sw-container gap="10px">
+            <sw-alert variant="info">
+                {{ $t('neti-store-locator.updateCoordinatesModal.infoText') }}
+            </sw-alert>
+
+            <sw-alert
+                    v-if="failedAt !== null"
+                    variant="error"
+                    appearance="default"
+                    :title="$t('neti-store-locator.updateCoordinatesModal.errorTitle')"
+                    :showIcon="true"
+                    :closable="false"
+            >
+                <template v-if="error">
+                    {{ error }}
+                </template>
+                <template v-else>
+                    {{ $t('neti-store-locator.updateCoordinatesModal.errorText') }}
+                </template>
+            </sw-alert>
+
+            <sw-alert v-if="hasTimezoneError" variant="warning">
+                {{ $t('neti-store-locator.updateCoordinatesModal.timezoneErrorText') }}
+                <br />
+                <br />
+                <a href="https://developers.google.com/maps/documentation/timezone/cloud-setup">
+                    https://developers.google.com/maps/documentation/timezone/cloud-setup
+                </a>
+            </sw-alert>
+
+            <sw-step-display :itemIndex="itemIndex" :itemVariant="itemVariant" ref="stepDisplay">
+                <sw-step-item>
+                    {{ $t('neti-store-locator.updateCoordinatesModal.step1Text') }}
+                    <span v-if="progress.total > 0">({{ progress.total }})</span>
+                </sw-step-item>
+
+                <sw-step-item>
+                    {{ $t('neti-store-locator.updateCoordinatesModal.step2Text') }}
+                    <span v-if="progress.value > 0">({{ Math.round(progress.value / progress.total * 100) }} %)</span>
+                </sw-step-item>
+
+                <sw-step-item>
+                    {{ $t('neti-store-locator.updateCoordinatesModal.step3Text') }}
+                </sw-step-item>
+            </sw-step-display>
+            <sw-progress-bar
+                    v-if="progress.total > 0"
+                    :value="progress.value"
+                    :maxValue="progress.total"
+            ></sw-progress-bar>
+            
+            <div class="modal-footer">
+                <div class="modal-config">
+                    <sw-number-field
+                        v-model="chunkSize"
+                        number-type="int"
+                        :label="$t('neti-store-locator.updateCoordinatesModal.chunkSizeLabel')"
+                        :helpText="$t('neti-store-locator.updateCoordinatesModal.chunkSizeHelpText')"
+                        :disabled="isRunning"
+                        :min="1"
+                    ></sw-number-field>
+                </div>
+                
+                <div class="modal-actions">
+                    <sw-button @click="abort" v-if="isRunning" size="small">
+                        {{ $t('neti-store-locator.updateCoordinatesModal.buttonAbort') }}
+                    </sw-button>
+
+                    <sw-button
+                            variant="primary"
+                            size="small"
+                            :isLoading="isRunning"
+                            @click="run"
+                            v-if="isFinished === false"
+                    >
+                        {{ $t('neti-store-locator.updateCoordinatesModal.buttonRun') }}
+                    </sw-button>
+
+                    <sw-button variant="primary" size="small" @click="onClose" v-if="isFinished">
+                        {{ $t('neti-store-locator.updateCoordinatesModal.buttonClose') }}
+                    </sw-button>
+                </div>
+            </div>
+        </sw-container>
+    </sw-modal>
+</div>

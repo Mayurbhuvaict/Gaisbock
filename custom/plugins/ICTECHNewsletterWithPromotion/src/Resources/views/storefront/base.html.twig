@@ -1,0 +1,7 @@
+{% sw_extends '@Storefront/storefront/base.html.twig' %}
+
+{% block base_body %}
+    {{ dump('news letter') }}
+    {% sw_include '@ICTECHNewsletterWithPromotion/storefront/custom/ict-newsletter-popup.html.twig' %}
+    {{ parent() }}
+{% endblock %}

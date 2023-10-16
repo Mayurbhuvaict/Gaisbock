@@ -1,0 +1,9 @@
+{% block sw_promotion_v2_individual_codes_behavior_grid_redeemed_icon_true %}
+    <p
+        v-if="!item.payload && !!reservedCodes[item.id]"
+        class="neno-nme-individual-code-label"
+    >
+        Reserved by Marketing Essentials
+    </p>
+    {% parent %}
+{% endblock %}

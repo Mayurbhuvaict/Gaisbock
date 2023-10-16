@@ -1,0 +1,11 @@
+.neno-marketing-essentials-conversion-bar-detail {
+
+    &--sales-channel-switch {
+        max-width: 800px;
+        margin: 0 auto;
+
+        @media all and (max-width: 1360px) {
+            max-width: 770px;
+        }
+    }
+}

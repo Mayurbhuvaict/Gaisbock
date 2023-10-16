@@ -1,0 +1,21 @@
+{
+  "seconds": "A few seconds ago",
+  "minutes": {
+    "singular": "%m minute ago",
+    "plural": "%m minutes ago"
+  },
+  "hours": {
+    "singluar": "%h hour ago",
+    "plural": "%h hours ago"
+  },
+  "days": {
+    "singular": "%d day ago",
+    "plural": "%d days ago"
+  },
+  "date": {
+    "months": ["January", "February", "March", "April", "May", "June", "July",
+      "August", "September", "October", "November", "December"],
+    "short": "%mmmm %do",
+    "long": "%mmmm %do %yyyy"
+  }
+}

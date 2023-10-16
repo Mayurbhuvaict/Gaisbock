@@ -1,0 +1,30 @@
+<sw-card
+    :title="$t('solid-product.hoverCover.title')"
+    position-identifier="sw-product-detail-base-solid-phc"
+>
+    <sw-upload-listener
+        :upload-tag="uploadTag"
+        auto-upload
+        @media-upload-finish="onUploadFinished"
+    />
+
+    <sw-media-upload-v2
+        v-if="acl.can('product.editor')"
+        :source="imageId"
+        :label="$t('solid-product.hoverCover.image.label')"
+        :upload-tag="uploadTag"
+        :allow-multi-select="false"
+        :default-folder="product.getEntityName()"
+        @media-upload-sidebar-open="onOpenMedia"
+        @media-upload-remove-image="onRemoveMedia"
+    />
+
+    <sw-media-modal-v2
+        v-if="showMediaModal"
+        @media-modal-selection-change="onAddMedia"
+        :initial-folder-id="mediaDefaultFolderId"
+        :entity-context="product.getEntityName()"
+        :allow-multi-select="false"
+        @modal-close="onCloseMediaModal"
+    />
+</sw-card>

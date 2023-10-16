@@ -1,0 +1,28 @@
+{
+  "sw-extension": {
+    "component": {
+      "solid-instagram-access-token-form": {
+        "title": "Access Token",
+        "info": "Du fragst dich, wie man an einen Access Token kommt? Sieh dir <a href=\"https://www.studio-solid.de/blog/instagram-access-token-erzeugen-so-verbindest-du-dich-mit-der-api\" target=\"_blank\" rel=\"noopener noreferrer\">unsere Anleitung</a> im Shopware Store an.",
+        "accessToken": "Access Token",
+        "testAccessToken": "Access Token testen",
+        "refreshAccessToken": "Access Token erneuern",
+        "username": "Benutzername des verknüpften Accounts: <strong>{username}</strong>",
+        "expiresIn": "Access Token gültig für: <strong>{days} Tag(e)</strong>",
+        "lastRefreshed": "Access Token zuletzt erneuert am: <strong>{date}</strong>",
+        "alert": {
+          "errorTesting": "Fehler beim Testen deines Access Token.",
+          "errorRefreshing": "Fehler beim Erneuern deines Access Token.",
+          "statusCode": "Status code {status}",
+          "successTesting": "Juhu! Dein Access Token is gültig.",
+          "successRefreshing": "Erfrischend! Dein Access Token wurde erfolgreich erneuert. Vergiss nicht zu <strong>Speichern</strong>!",
+          "refreshHint": "Um die Einrichtung abzuschließen und die automatische Erneuerung deines Access Token zu aktivieren, musst du ihn einmal manuell erneuern. Klicke dazu auf <strong>Access Token erneuern</strong> und danach auf <strong>Speichern</strong>.",
+          "status": {
+            "400": "Dein Acceess Token scheint nicht gültig zu sein.",
+            "404": "Die Instagram API ist nicht verfügbar."
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,69 @@
+<?xml version="1.0" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <services>
+        <!-- Extending the cookie consent manager -->
+        <service id="Acris\SuggestedProducts\Framework\Cookie\RecentlyViewedCookieProvider"
+                 decorates="Shopware\Storefront\Framework\Cookie\CookieProviderInterface">
+            <argument type="service" id="Acris\SuggestedProducts\Framework\Cookie\RecentlyViewedCookieProvider.inner" />
+        </service>
+
+        <service id="Acris\SuggestedProducts\Framework\Cookie\CustomersAlsoViewedCookieProvider"
+                 decorates="Shopware\Storefront\Framework\Cookie\CookieProviderInterface">
+            <argument type="service" id="Acris\SuggestedProducts\Framework\Cookie\CustomersAlsoViewedCookieProvider.inner" />
+        </service>
+
+        <service id="Acris\SuggestedProducts\Storefront\Controller\RecentlyViewedController" public="true">
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+            <call method="setTwig">
+                <argument type="service" id="twig"/>
+            </call>
+            <argument id="Acris\SuggestedProducts\Storefront\Page\RecentlyViewed\RecentlyViewedPageLoader" type="service" />
+        </service>
+
+        <service id="Acris\SuggestedProducts\Storefront\Page\RecentlyViewed\RecentlyViewedPageLoader" public="true">
+            <argument type="service" id="Shopware\Storefront\Page\GenericPageLoader"/>
+            <argument type="service" id="event_dispatcher"/>
+            <argument type="service" id="Acris\SuggestedProducts\Core\Content\Product\SalesChannel\RecentlyViewedProducts\RecentlyViewedProductsRoute"/>
+            <argument type="service" id="Shopware\Core\Content\Product\SalesChannel\Price\ProductPriceCalculator"/>
+        </service>
+
+        <service id="Acris\SuggestedProducts\Core\Content\Product\SalesChannel\RecentlyViewedProducts\RecentlyViewedProductsRoute" public="true">
+            <argument type="service" id="event_dispatcher"/>
+            <argument type="service" id="Shopware\Core\Content\Product\SalesChannel\Listing\ProductListingLoader"/>
+        </service>
+
+        <!-- Subscriber -->
+        <service id="Acris\SuggestedProducts\Storefront\Subscriber\SuggestedProductsSubscriber">
+            <argument type="service" id="Shopware\Core\Content\ProductStream\Service\ProductStreamBuilder"/>
+            <argument type="service" id="Shopware\Core\Content\Product\SalesChannel\Listing\ProductListingLoader"/>
+            <argument type="service" id="event_dispatcher"/>
+            <argument type="service" id="Shopware\Core\System\SystemConfig\SystemConfigService"/>
+            <argument type="service" id="Doctrine\DBAL\Connection"/>
+            <argument type="service" id="acris_customers_also_viewed.repository"/>
+            <argument type="service" id="product_sorting.repository"/>
+            <tag name="kernel.event_subscriber"/>
+        </service>
+
+        <service id="Acris\SuggestedProducts\Custom\CustomersAlsoViewedDefinition">
+            <tag name="shopware.entity.definition" entity="acris_customers_also_viewed" />
+        </service>
+
+        <service id="Acris\SuggestedProducts\ScheduledTask\CustomersAlsoViewedIndexTask">
+            <tag name="shopware.scheduled.task" />
+        </service>
+
+        <service id="Acris\SuggestedProducts\ScheduledTask\CustomersAlsoViewedIndexTaskHandler">
+            <argument type="service" id="scheduled_task.repository" />
+            <argument type="service" id="Doctrine\DBAL\Connection"/>
+            <argument type="service" id="Shopware\Core\System\SystemConfig\SystemConfigService"/>
+            <tag name="messenger.message_handler" />
+        </service>
+
+    </services>
+</container>

@@ -1,0 +1,14 @@
+<div style="font-family:arial; font-size:12px;">
+    <p>
+        Hello {{ store.label }},<br />
+        <br />
+        You have a new contact request. See information below.<br />
+        <br />
+        {% for key, value in values %}
+            {{ key }}: {{ value }}<br />
+        {% endfor %}
+        <br/>
+        Yours sincerely<br />
+        Your {{ shopName }} team
+    </p>
+</div>

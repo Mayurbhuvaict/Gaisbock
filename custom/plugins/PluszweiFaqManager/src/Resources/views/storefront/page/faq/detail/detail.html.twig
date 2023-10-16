@@ -1,0 +1,69 @@
+{% sw_extends '@Storefront/storefront/base.html.twig' %}
+
+{% block base_content %}
+    {% sw_include '@PluszweiFaqManager/storefront/page/faq/detail/breadcrumb.html.twig' with {article: article} %}
+
+    {% block pluszwei_faq_manager_detail %}
+        <div itemscope itemtype="http://schema.org/NewsArticle">
+            <meta itemscope itemprop="mainEntityOfPage"  itemType="https://schema.org/WebPage" itemid="{{ seoUrl('pluszwei.faq.frontend.detail', {articleId: article.id}) }}"/>
+            <meta itemprop="datePublished" content="{{ article.createdAt|format_date('short', locale=app.request.locale) }}"/>
+            <meta itemprop="dateModified" content="{{ article.updatedAt|format_date('short', locale=app.request.locale) }}"/>
+
+            <div class="articleContent">
+
+                {% block pluszwei_faq_manager_detail_header %}
+                    <div class="article_header">
+                        <span class="readTime">{{ 'pluszweiFaqManager.article.readingTime'|trans({'%min%': article.readingTimeInMin})|sw_sanitize }}</span>
+                        <h1 class="article_title" itemprop="headline">{{ article.translated.title }}</h1>
+                    </div>
+                {% endblock%}
+
+                <div class="article_diving"></div>
+
+            </div>
+
+        {% block pluszwei_faq_manager_detail_main %}
+            <div class="faq-article-content row">
+                <div class="faq-article-side-content col-md-3 col-sm-12">
+                    {% sw_include '@PluszweiFaqManager/storefront/page/faq/detail/related-articles.html.twig' with {articles: relatedArticles} %}
+                </div>
+                <div class="faq-article-main-content col-md-9 col-sm-12">
+
+                {% block pluszwei_faq_manager_detail_content %}
+                    <div class="faq-article-detail">
+                        <div class="faq-article-detail__content" itemprop="description">
+                            {{ article.translated.content | raw }}
+                        </div>
+                    </div>
+                {% endblock %}
+
+                {% block pluszwei_faq_manager_detail_help %}
+                    {% set contactEmail = config('PluszweiFaqManager.config.contactEmail') %}
+                    {% if not contactEmail %}
+                        {% set contactEmail = config('core.basicInformation.email') %}
+                    {% endif %}
+
+                    <div class="faq-article-ask-question">
+                        <div class="h3">{{ 'pluszweiFaqManager.article.moreQuestion'|trans|sw_sanitize }}</div>
+                        <a href="mailto:{{ contactEmail }}" class="btn btn-primary btn-lg btn-submit-request">
+                            {{ 'pluszweiFaqManager.article.submitRequestBtnTitle'|trans|sw_sanitize }}
+                        </a>
+                    </div>
+                {% endblock %}
+
+                {% block pluszwei_faq_manager_detail_relate %}
+                    <div class="article_relate">
+                        {% sw_include '@PluszweiFaqManager/storefront/page/faq/detail/related-sections.html.twig' %}
+
+                        {% sw_include '@PluszweiFaqManager/storefront/page/faq/detail/featured-articles.html.twig' with {articles: featuredArticles} %}
+                    </div>
+                {% endblock %}
+
+                </div>
+            </div>
+        {% endblock %}
+
+        </div>
+    {% endblock %}
+
+{% endblock %}

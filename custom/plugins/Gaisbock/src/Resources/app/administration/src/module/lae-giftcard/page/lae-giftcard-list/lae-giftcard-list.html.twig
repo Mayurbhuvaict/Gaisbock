@@ -1,0 +1,98 @@
+<sw-page
+    class="lae-giftcard-list"
+>
+    <template slot="search-bar">
+        <sw-search-bar
+            initial-search-type="lae_giftcard"
+            :placeholder="$tc('lae-giftcard.general.placeholderSearchBar')"
+            :initial-search="term"
+            @search="onSearch"
+        />
+    </template>
+    <sw-card-view
+        slot="content"
+        class="sw-dashboard-index__content"
+    >
+
+        <sw-card :large="true" :isLoading="overviewLoading">
+            <template #grid>
+                <sw-container columns="1fr 1fr 1fr 1fr">
+                    <div class="lae-giftcard-overview-card">
+                        <strong v-text="$tc('lae-giftcard.list.overview.activeCards')"></strong>
+                        {{ overviewData.activeCards }}
+                    </div>
+                    <div class="lae-giftcard-overview-card">
+                        <strong v-text="$tc('lae-giftcard.list.overview.boughtLastMonth')"></strong>
+                        {{ overviewData.boughtLastMonth | currency(systemCurrencyISOCode, 2) }}
+                    </div>
+                    <div class="lae-giftcard-overview-card">
+                        <strong v-text="$tc('lae-giftcard.list.overview.redeemedLastMonth')"></strong>
+                        {{ overviewData.redeemedLastMonth | currency(systemCurrencyISOCode, 2) }}
+                    </div>
+                    <div class="lae-giftcard-overview-card">
+                        <strong v-text="$tc('lae-giftcard.list.overview.totalUnredeemed')"></strong>
+                        {{ overviewData.totalUnredeemed | currency(systemCurrencyISOCode, 2) }}
+                    </div>
+                </sw-container>
+            </template>
+        </sw-card>
+
+        <sw-card v-if="!isLoading" class="lae-giftcard-list-card">
+            <template #grid>
+                <sw-entity-listing
+                    class="lae-giftcard-list-grid"
+                    ref="laeGiftcardListGrid"
+                    :items="giftcards"
+                    :columns="getColumns()"
+                    :repository="repository"
+                    :showSelection="false"
+                    :showSettings="true"
+                    :fullPage="false"
+                    :sortBy="sortBy"
+                    :sortDirection="sortDirection"
+                    :isLoading="isLoading"
+                    :allowView="true"
+                    :allowDelete="false"
+                    :allowColumnEdit="false"
+                    :compactMode="false"
+                    detailRoute="lae.giftcard.detail"
+                    identifier="lae-giftcard-list-grid"
+                    @column-sort="onSortColumn">
+                    <template #column-orderNumber="{item}">
+
+                        <router-link :to="{ name: 'sw.order.detail', params: { id: item.originOrderId } }">
+                            {{ item.orderNumber }}
+                        </router-link>
+                    </template>
+                    <template #column-code="{item}">
+                        <router-link :to="{ name: 'lae.giftcard.detail', params: { id: item.id } }">
+                            {{ giftcardLabel(item) }}
+
+                            <sw-label
+                                v-if="!item.originOrderId"
+                                appearance="pill"
+                                size="small"
+                                class="lae-giftcard-list-grid--label-imported"
+                            >
+                                {{ $tc('lae-giftcard.list.badgeImported') }}
+                            </sw-label>
+                        </router-link>
+                    </template>
+
+                    <template #column-balance="{ item }">
+                        {{ item.balance | currency(item.currency.translated.shortName) }}
+                    </template>
+
+                    <template #column-initialAmount="{ item }">
+                        {{ item.initialAmount | currency(item.currency.translated.shortName) }}
+                    </template>
+
+                    <template #column-createdAt="{item}">
+                        {{ item.createdAt|date({hour: '2-digit', minute: '2-digit'}) }}
+                    </template>
+
+                </sw-entity-listing>
+            </template>
+        </sw-card>
+    </sw-card-view>
+</sw-page>

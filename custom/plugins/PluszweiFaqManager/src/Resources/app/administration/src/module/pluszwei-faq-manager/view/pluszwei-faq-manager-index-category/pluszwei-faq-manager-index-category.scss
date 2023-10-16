@@ -1,0 +1,36 @@
+@import "~scss/variables";
+
+.pluszwei-faq-manager-index-category {
+  height: auto !important;
+  min-height: 100%;
+  border: 1px solid #d1d9e0;
+  .pluszwei-faq-manager-index-category-content-view {
+    padding: 40px;
+    .sw-card {
+      .sw-card__title {
+        width: inherit;
+        position: inherit;
+        left: inherit;
+        top: inherit;
+        text-align: inherit;
+      }
+    }
+  }
+  .pluszwei-faq-manager-index-category-side-content {
+    background: #fff;
+    .sw-category-tree {
+      height: auto;
+    }
+    &__add-button {
+      padding: 30px;
+    }
+  }
+  .pluszwei-faq-manager-index-category-action {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    .sw-button--primary {
+      margin-left: 8px;
+    }
+  }
+}

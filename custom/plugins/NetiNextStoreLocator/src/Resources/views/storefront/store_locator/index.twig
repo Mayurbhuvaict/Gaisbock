@@ -1,0 +1,89 @@
+{% sw_extends '@Storefront/storefront/base.html.twig' %}
+
+{% block base_breadcrumb %}
+    <div class="breadcrumb cms-breadcrumb container">
+        {% sw_include '@Storefront/storefront/layout/breadcrumb.html.twig' with {
+            context: context,
+            category: page.header.navigation.active
+        } only %}
+    </div>
+{% endblock %}
+
+{% block base_content %}
+    {% block neti_store_locator_index_top_cms_page_html %}
+        {% if page.topCmsPageHtml %}
+            {{ page.topCmsPageHtml|raw }}
+        {% endif %}
+    {% endblock %}
+
+    {% block neti_store_locator_index_app %}
+        <div class="neti-next-store-locator mb-5" v-cloak :class="{ 'off-canvas-opened': filterOffCanvasOpened }">
+            {% block neti_store_locator_index_app_config %}
+                <input type="hidden" value="{{ page.config|json_encode|escape }}" ref="config">
+                <input type="hidden" value="{{ url('frontend.store_locator.detail', { id: 'storeId' }) }}" ref="storeUrl">
+                <input type="hidden" value="{{ url('frontend.store_locator.get_stores') }}" ref="getStoresUrl">
+                <input type="hidden" value="{{ page.countries|json_encode|escape }}" ref="countries">
+                <input type="hidden" value="{{ page.orderTypes|json_encode|escape }}" ref="orderTypes">
+                <input type="hidden" value="{{ page.filters|json_encode|escape }}" ref="filters">
+                <input type="hidden" value="{{ 'neti-next-store-locator.index.localMarkerTitle'|trans }}" ref="localMarkerTitle">
+
+                {% if page.config._storePickupEnabled == true %}
+                    <input type="hidden" value="{{ url('frontend.store_pickup.select_store') }}" ref="selectStoreUrl">
+                {% endif %}
+            {% endblock %}
+
+            {% block neti_store_locator_index_app_map_overlay %}
+                <div class="map-overlay d-flex flex-column" ref="mapOverlay">
+                    {% sw_include '@Storefront/storefront/store_locator/search.twig' %}
+
+                    {% sw_include '@Storefront/storefront/store_locator/list/index.twig' %}
+                </div>
+            {% endblock %}
+
+            {% sw_include '@Storefront/storefront/store_locator/map.twig' %}
+
+            {% block neti_store_locator_index_contact_form %}
+                <neti-store-locator-contact-form :store="selectedStore"></neti-store-locator-contact-form>
+            {% endblock %}
+
+            {% block neti_store_locator_index_route %}
+                <neti-store-locator-route
+                        v-if="selectedStore && map && currentLocation"
+                        :store="selectedStore"
+                        :map="map"
+                        :location="currentLocation"
+                ></neti-store-locator-route>
+            {% endblock %}
+
+            {% block neti_store_locator_info_window %}
+                <neti-store-locator-info-window v-if="selectedStore" :store="selectedStore" :config="config"></neti-store-locator-info-window>
+            {% endblock %}
+        </div>
+    {% endblock %}
+
+    {% block neti_store_locator_index_bottom_cms_page_html %}
+        {% if page.bottomCmsPageHtml %}
+            {{ page.bottomCmsPageHtml|raw }}
+        {% endif %}
+    {% endblock %}
+
+    <script type="text/x-template" id="neti-store-locator-store">
+        {% sw_include '@Storefront/storefront/store_locator/list/store.twig' %}
+    </script>
+
+    <script type="text/x-template" id="neti-store-locator-contact-form">
+        {% sw_include '@Storefront/storefront/store_locator/contact-form.twig' %}
+    </script>
+
+    <script type="text/x-template" id="neti-store-locator-route">
+        {% sw_include '@Storefront/storefront/store_locator/vue-components/route.twig' %}
+    </script>
+
+    <script type="text/x-template" id="neti-store-locator-info-window">
+        {% sw_include '@Storefront/storefront/store_locator/vue-components/info-window.twig' %}
+    </script>
+
+    {% block neti_store_locator_cookie_consent %}
+        {% sw_include '@Storefront/storefront/store_locator/cookie-consent.html.twig' %}
+    {% endblock %}
+{% endblock %}

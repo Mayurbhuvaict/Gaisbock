@@ -1,0 +1,13 @@
+{
+  "popup": {
+    "zipCodeFieldPlaceholder": "Zipcode",
+    "label": {
+      "firstName": "First Name",
+      "email": "Email"
+    },
+    "success": "You have just subscribed to our newsletter. To complete the sign-up process, search your inbox for our confirmation email and click on the link provided with it. your promotion code is "
+  },
+  "error": {
+    "message-default": "This email already exists"
+  }
+}

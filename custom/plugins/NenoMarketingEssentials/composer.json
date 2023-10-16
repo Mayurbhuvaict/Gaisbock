@@ -1,0 +1,45 @@
+{
+    "name": "neno/marketing-essentials",
+    "description": "Marketing Essentials",
+    "version": "v1.5.1",
+    "license": "proprietary",
+    "authors": [
+        {
+            "name": "neno",
+            "role": "Manufacturer",
+            "homepage": "https://neno-digital.io"
+        }
+    ],
+    "type": "shopware-platform-plugin",
+    "autoload": {
+        "psr-4": {
+            "Neno\\MarketingEssentials\\": "src/"
+        }
+    },
+    "require": {
+        "shopware/core": ">=6.5.0.0",
+        "shopware/administration":">=6.5.0.0",
+        "shopware/storefront": ">=6.5.0.0"
+    },
+    "extra": {
+        "shopware-plugin-class": "Neno\\MarketingEssentials\\NenoMarketingEssentials",
+        "plugin-icon": "src/Resources/config/plugin.png",
+        "copyright": "(c) by neno GbR",
+        "label": {
+            "de-DE": "Marketing Essentials",
+            "en-GB": "Marketing Essentials"
+        },
+        "description": {
+            "de-DE": "Booste deine Sales mit einer Vielzahl an Marketing-Tools",
+            "en-GB": "Boost your sales with a variety of marketing tools"
+        },
+        "manufacturerLink": {
+            "de-DE": "https://neno-digital.io",
+            "en-GB": "https://neno-digital.io"
+        },
+        "supportLink": {
+            "de-DE": "https://neno-digital.io/contact",
+            "en-GB": "https://neno-digital.io/contact"
+        }
+    }
+}

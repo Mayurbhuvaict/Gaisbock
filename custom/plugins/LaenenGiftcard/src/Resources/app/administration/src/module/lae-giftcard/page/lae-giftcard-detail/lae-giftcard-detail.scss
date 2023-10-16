@@ -1,0 +1,38 @@
+@import "~scss/variables";
+
+.lae-giftcard-detail {
+    .smart-bar__header {
+        h2 {
+            display: inline;
+        }
+        .sw-icon {
+            margin-left: 16px;
+            color: $color-gray-500;
+        }
+    }
+}
+
+.lae-giftcard-detail--detail-card {
+    .sw-card__content {
+        padding: 0;
+    }
+
+    .lae-giftcard--progress-bar--amounts {
+        font-size: 24px;
+        margin-top: 12px;
+
+        &--initial {
+            color: $color-gray-500;
+        }
+    }
+}
+
+.lae-giftcard-detail--transaction-card {
+    .sw-card__content {
+        padding: 0;
+    }
+}
+
+.lae-giftcard-detail--transaction-modal {
+
+}

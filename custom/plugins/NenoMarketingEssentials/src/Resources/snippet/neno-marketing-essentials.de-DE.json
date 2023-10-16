@@ -1,0 +1,9 @@
+{
+    "neno-marketing-essentials": {
+        "freeShippingBar": {
+            "textInitial": "Versandkostenfreie Lieferung für Bestellungen über $goal",
+            "textProgress": "Noch $goal bis zur versandkostenfreien Lieferung",
+            "textGoal": "Herzlichen Glückwunsch! Ihre Lieferung ist Versandkostenfrei"
+        }
+    }
+}

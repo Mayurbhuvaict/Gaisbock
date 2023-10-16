@@ -1,0 +1,64 @@
+<div>
+    <sw-card
+            class="neti-store-locator-card"
+            :title="$t('neti-store-locator.detailDetails.labelContentCard')"
+            :isLoading="isLoading"
+    >
+        <sw-field
+                v-model="store.detailTitle"
+                :label="$t('neti-store-locator.baseInfo.labelDetailTitle')"
+        ></sw-field>
+
+        <sw-select-field
+                :label="$t('neti-store-locator.detail.contentTypeLabel')"
+                v-model="store.detailContentType"
+        >
+            <option value="html">
+                {{ $t('neti-store-locator.detail.contentTypeHTML') }}
+            </option>
+            <option value="cms">
+                {{ $t('neti-store-locator.detail.contentTypeCMS') }}
+            </option>
+        </sw-select-field>
+
+        <template v-if="store.detailContentType === 'html'">
+            <sw-text-editor
+                    :label="$t('neti-store-locator.detail.contentDescriptionLabel')"
+                    :helpText="$t('neti-store-locator.detail.contentDescriptionHelp')"
+                    v-model="store.detailDescription"
+            ></sw-text-editor>
+        </template>
+        {#<template v-if="store.detailContentType === 'cms'">#}
+        {#    <sw-entity-single-select#}
+        {#            entity="cms_page"#}
+        {#            :label="$t('neti-store-locator.detail.cmsPageLabel')"#}
+        {#            :helpText="$t('neti-store-locator.detail.cmsPageHelp')"#}
+        {#            v-model="store.cmsPageId"#}
+        {#            :criteria="cmsPageCriteria"#}
+        {#    >#}
+        {#    </sw-entity-single-select>#}
+
+        {#    <sw-container columns="1fr" justify="end">#}
+        {#        <router-link :to="{ name: 'sw.cms.index'}" class="sw-card__quick-link" target="_blank">#}
+        {#            {{ $t('neti-store-locator.detail.cmsPageLinkInfo') }}#}
+        {#            <sw-icon name="default-arrow-simple-right" small></sw-icon>#}
+        {#        </router-link>#}
+        {#    </sw-container>#}
+        {#</template>#}
+
+        <neti-media-upload
+            uploadTag="details_picture_media"
+            :source="store.detailsPictureMedia"
+            :sourceId="store.detailsPictureMediaId"
+            :label="$t('neti-store-locator.detail.labelDetailsPictureMedia')"
+            @change="onDetailsPictureMediaSelected"
+            defaultFolder="neti_store_locator"
+        ></neti-media-upload>
+    </sw-card>
+
+    <neti-store-locator-details-cms-card
+        v-if="store.detailContentType === 'cms'"
+        :store="store"
+        :isLoading="store.isLoading"
+    ></neti-store-locator-details-cms-card>
+</div>

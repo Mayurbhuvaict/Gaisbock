@@ -1,0 +1,162 @@
+<?xml version="1.0" ?>
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <imports>
+        <import resource="packages/*.xml"/>
+    </imports>
+
+    <services>
+        <service id="Laenen\Giftcard\Api\Controller\OverviewController" public="true">
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+            <argument type="service" id="Doctrine\DBAL\Connection"/>
+        </service>
+
+        <service id="Laenen\Giftcard\Api\Controller\DownloadController" public="true">
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+            <argument type="service" id="Laenen\Giftcard\Service\GiftcardGateway"/>
+            <argument type="service" id="Laenen\Giftcard\Document\GiftcardDocumentGenerator"/>
+            <argument type="service" id="Shopware\Core\System\SalesChannel\Context\CachedSalesChannelContextFactory"/>
+            <argument type="service" id="lae_giftcard.repository"/>
+        </service>
+
+        <service id="Laenen\Giftcard\Command\CalculateBalanceCommand">
+            <tag name="console.command"/>
+            <argument type="service" id="Doctrine\DBAL\Connection"/>
+        </service>
+
+        <service id="Laenen\Giftcard\Content\Giftcard\GiftcardDefinition">
+            <tag name="shopware.entity.definition"/>
+        </service>
+
+        <service id="Laenen\Giftcard\Content\Giftcard\Aggregate\GiftcardTransaction\GiftcardTransactionDefinition">
+            <tag name="shopware.entity.definition"/>
+        </service>
+
+        <service id="Laenen\Giftcard\Core\Checkout\RedeemGiftcardCollector">
+            <tag name="shopware.cart.collector" priority="4950"/>
+            <tag name="shopware.cart.processor" priority="-5000"/>
+            <argument type="service" id="Laenen\Giftcard\Service\GiftcardGateway"/>
+        </service>
+
+        <service id="Laenen\Giftcard\Core\Checkout\BuyGiftcardCollector">
+            <tag name="shopware.cart.collector"/>
+            <tag name="shopware.cart.processor"/>
+            <argument type="service" id="Shopware\Core\Content\Product\Cart\ProductGateway"/>
+        </service>
+
+        <service id="Laenen\Giftcard\Service\GiftcardGateway">
+            <argument type="service" id="lae_giftcard.repository"/>
+            <argument type="service" id="lae_giftcard_transaction.repository"/>
+            <argument type="service" id="Laenen\Giftcard\Service\GiftcardCodeService"/>
+        </service>
+
+        <service id="Laenen\Giftcard\Core\Checkout\GiftcardProcessor"
+                 decorates="Shopware\Core\Checkout\Cart\Processor">
+            <argument type="service" id="Laenen\Giftcard\Core\Checkout\GiftcardProcessor.inner"/>
+            <argument type="service" id="Shopware\Core\Checkout\Cart\Validator"/>
+            <argument type="service" id="Shopware\Core\Checkout\Cart\Price\AmountCalculator"/>
+            <argument type="service" id="Shopware\Core\Checkout\Cart\Transaction\TransactionProcessor"/>
+            <argument type="tagged" tag="shopware.cart.processor"/>
+            <argument type="tagged" tag="shopware.cart.collector"/>
+            <argument type="service" id="Shopware\Core\Framework\Script\Execution\ScriptExecutor"/>
+        </service>
+
+        <service id="Laenen\Giftcard\Storefront\Controller\CheckoutController" public="true">
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+            <argument type="service" id="Laenen\Giftcard\Core\Checkout\GiftcardCartService"/>
+        </service>
+
+        <service id="Laenen\Giftcard\Core\Checkout\GiftcardCartService">
+            <argument type="service" id="Laenen\Giftcard\Core\Checkout\GiftcardRemoveRoute"/>
+        </service>
+
+        <service id="Laenen\Giftcard\Core\Checkout\GiftcardRemoveRoute" public="true">
+            <argument type="service" id="event_dispatcher"/>
+            <argument type="service" id="Shopware\Core\Checkout\Cart\CartCalculator"/>
+            <argument type="service" id="Shopware\Core\Checkout\Cart\CartPersister"/>
+        </service>
+
+        <service id="Laenen\Giftcard\Core\Checkout\Rule\LineItemOfTypeRule" decorates="Shopware\Core\Checkout\Cart\Rule\LineItemOfTypeRule">
+            <tag name="shopware.rule.definition"/>
+        </service>
+
+        <service id="Laenen\Giftcard\Core\Checkout\Subscriber\BuyGiftcardSubscriber">
+            <tag name="kernel.event_subscriber"/>
+            <argument type="service" id="request_stack"/>
+            <argument type="service" id="Shopware\Core\System\SystemConfig\SystemConfigService"/>
+            <argument type="service" id="Laenen\Giftcard\Service\GiftcardCreateService"/>
+        </service>
+
+        <service id="Laenen\Giftcard\Core\Checkout\Subscriber\CancelOrderSubscriber">
+            <tag name="kernel.event_subscriber"/>
+            <argument type="service" id="order.repository"/>
+            <argument type="service" id="lae_giftcard_transaction.repository"/>
+            <argument type="service" id="Laenen\Giftcard\Service\GiftcardGateway"/>
+        </service>
+
+        <service id="Laenen\Giftcard\Core\Checkout\Subscriber\PlaceOrderSubscriber">
+            <tag name="kernel.event_subscriber"/>
+            <argument type="service" id="Laenen\Giftcard\Service\GiftcardGateway"/>
+            <argument type="service" id="event_dispatcher"/>
+        </service>
+
+        <service id="Laenen\Giftcard\Content\Giftcard\Subscriber\GiftcardTransactionSubscriber">
+            <tag name="kernel.event_subscriber"/>
+            <argument type="service" id="Doctrine\DBAL\Connection"/>
+        </service>
+
+        <service id="Laenen\Giftcard\Subscriber\GiftcardGenerateSubscriber">
+            <tag name="kernel.event_subscriber"/>
+            <argument type="service" id="messenger.bus.shopware"/>
+        </service>
+
+        <service id="Laenen\Giftcard\Subscriber\GiftcardTemplateDataSubscriber">
+            <tag name="kernel.event_subscriber"/>
+            <argument type="service" id="media.repository"/>
+        </service>
+
+        <service id="Laenen\Giftcard\Service\GiftcardCodeService">
+            <argument type="service" id="Shopware\Core\System\SystemConfig\SystemConfigService"/>
+        </service>
+
+        <service id="Laenen\Giftcard\Service\GiftcardCreateService">
+            <argument type="service" id="order.repository"/>
+            <argument type="service" id="monolog.logger.lae_giftcard"/>
+            <argument type="service" id="Laenen\Giftcard\Service\GiftcardGateway"/>
+            <argument type="service" id="Shopware\Core\System\SalesChannel\Context\SalesChannelContextService"/>
+            <argument type="service" id="event_dispatcher"/>
+            <argument type="service" id="Shopware\Core\System\SystemConfig\SystemConfigService"/>
+        </service>
+
+        <service id="Laenen\Giftcard\Message\GenerateGiftcardMessageHandler">
+            <tag name="messenger.message_handler"/>
+            <argument type="service" id="Shopware\Core\Content\Mail\Service\MailService"/>
+            <argument type="service" id="Laenen\Giftcard\Service\GiftcardGateway"/>
+            <argument type="service" id="order.repository"/>
+            <argument type="service" id="Laenen\Giftcard\Document\GiftcardDocumentGenerator"/>
+            <argument type="service" id="Shopware\Core\System\SystemConfig\SystemConfigService"/>
+            <argument type="service" id="mail_template.repository"/>
+            <argument type="service" id="Shopware\Core\Framework\Adapter\Translation\Translator"/>
+            <argument type="service" id="Shopware\Core\System\Locale\LanguageLocaleCodeProvider"/>
+            <argument type="service" id="monolog.logger.lae_giftcard"/>
+        </service>
+
+        <service id="Laenen\Giftcard\Document\GiftcardDocumentGenerator">
+            <argument type="service" id="Shopware\Core\Checkout\Document\Twig\DocumentTemplateRenderer"/>
+            <argument type="service" id="Shopware\Core\Checkout\Document\Service\PdfRenderer"/>
+            <argument type="service" id="Shopware\Core\System\SystemConfig\SystemConfigService"/>
+            <argument type="service" id="media.repository"/>
+            <argument type="service" id="product.repository"/>
+            <argument type="service" id="language.repository"/>
+            <argument type="service" id="event_dispatcher"/>
+        </service>
+    </services>
+</container>

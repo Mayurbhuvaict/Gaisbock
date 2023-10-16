@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/shopware/platform/trunk/src/Core/System/SystemConfig/Schema/config.xsd">
+
+    <card>
+        <title>Buy Giftcard Configuration</title>
+        <title lang="nl-NL">Cadeaubon aankopen instellingen</title>
+
+        <input-field type="single-select">
+            <name>buyGiftcardActivateAction</name>
+            <label>Activation action</label>
+            <label lang="nl-NL">Activatiemoment</label>
+            <helpText>At what point in the ordering process should the giftcard be created?</helpText>
+            <helpText lang="nl-NL">Op welke moment in het bestelproces moet de cadeaubon aangemaakt worden?</helpText>
+            <defaultValue>paymentPaid</defaultValue>
+
+            <options>
+                <option>
+                    <id>paymentPaid</id>
+                    <name>Payment status: paid</name>
+                    <name lang="nl-NL">Betalingstatus: Betaald</name>
+                </option>
+                <option>
+                    <id>orderPlaced</id>
+                    <name>Order placed</name>
+                    <name lang="nl-NL">Bestelling geplaatst</name>
+                </option>
+            </options>
+        </input-field>
+    </card>
+
+    <card>
+        <title>Giftcard Code Configuration</title>
+        <title lang="nl-NL">Cadeaubon code instellingen</title>
+
+        <input-field>
+            <name>giftcardCodeLength</name>
+            <label>Code length</label>
+            <label lang="nl-NL">Code length</label>
+            <defaultValue>16</defaultValue>
+        </input-field>
+    </card>
+
+    <card>
+        <title>Giftcard Email and PDF</title>
+        <title lang="nl-NL">Cadeaubon Email en PDF</title>
+
+        <component name="sw-entity-single-select">
+            <name>giftcardEmailTemplate</name>
+            <entity>mail_template</entity>
+            <label>Giftcard email template</label>
+            <label lang="nl-NL">Giftcard email template</label>
+            <defaultValue>eef3e9e522054e9abe2f63961470b1d4</defaultValue>
+            <labelProperty>description</labelProperty>
+        </component>
+
+        <component name="sw-media-field">
+            <name>giftcardPdfLogo</name>
+            <label>PDF Logo</label>
+            <label lang="nl-NL">PDF Logo</label>
+            <defaultFolder>lae_giftcard</defaultFolder>
+        </component>
+    </card>
+</config>

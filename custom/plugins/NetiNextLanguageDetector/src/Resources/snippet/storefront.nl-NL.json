@@ -1,0 +1,10 @@
+{
+    "neti-next-language-detector": {
+        "modal": {
+            "headline": "Taal configureren:",
+            "text": "Wilt u overschakelen naar de taal <span>%LANG%</span>?",
+            "buttonAccept": "Ja",
+            "buttonDecline": "Nee"
+        }
+    }
+}

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/shopware/platform/master/src/Core/System/SystemConfig/Schema/config.xsd">
+
+    <card>
+        <title>Basic Configuration</title>
+        <title lang="de-DE">Grundeinstellungen</title>
+
+        <input-field type="single-select">
+            <name>blockProductsIfNoCustomerGroupAssigned</name>
+            <label>Behaviour when no customer group has been selected for block</label>
+            <label lang="de-DE">Verhalten wenn keine Kundengruppe zur Freigabe ausgewählt wurde</label>
+            <helpText>If there are no customer groups assigned for the product, then the product will be blocked in Storefront.</helpText>
+            <helpText lang="de-DE">Wenn für das Produkt keine Kundengruppen zugewiesen sind, wird das Produkt in Storefront gesperrt.</helpText>
+            <defaultValue>default</defaultValue>
+            <options>
+                <option>
+                    <id>default</id>
+                    <name>ACRIS Standard (block of products only if customer group is entered in designated field)</name>
+                    <name lang="de-DE">ACRIS Standard (Produktblock nur, wenn Kundengruppe im dafür vorgesehenen Feld eingetragen ist)</name>
+                </option>
+                <option>
+                    <id>blockIfEmpty</id>
+                    <name>Block without customer group assignment (If no customer group is entered in the intended field, then automatically block product for ALL customer groups)</name>
+                    <name lang="de-DE">Sperren ohne Kundengruppenzuordnung (Wenn im vorgesehenen Feld keine Kundengruppe eingetragen ist, dann wird das Produkt automatisch für ALLE Kundengruppen gesperrt)</name>
+                </option>
+            </options>
+        </input-field>
+
+        <input-field type="bool">
+            <name>truncateProductCustomerGroup</name>
+            <label>Truncate the existing blocked customer groups on product import</label>
+            <label lang="de-DE">Schneiden Sie die vorhandenen gesperrten Kundengruppen beim Produktimport ab</label>
+            <helpText>If active, then on product import with assigned blocked customer groups the existing blocked customer groups in the database will be replaced with the new entries.</helpText>
+            <helpText lang="de-DE">Wenn aktiv, dann werden beim Produktimport mit zugewiesenen gesperrten Kundengruppen die bestehenden gesperrten Kundengruppen in der Datenbank durch die neuen Einträge ersetzt.</helpText>
+            <defaultValue>false</defaultValue>
+        </input-field>
+    </card>
+</config>

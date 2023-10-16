@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+    {% block document_head %}
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+        {% if config.title %}
+            <title>{% block document_title_tag %}{% endblock %}</title>
+        {% endif %}
+
+        {% block document_font_links %}
+            <link
+                href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:ital,wght@0,200;0,300;0,400;0,600;0,700;0,900;1,200;1,300;1,400;1,600;1,700;1,900&display=swap"
+                rel="stylesheet">
+        {% endblock %}
+
+        {% sw_include '@Framework/documents/style_base_landscape.css.twig' %}
+
+        <style>
+            * {
+                box-sizing: border-box;
+            }
+
+            html {
+                margin: 64px 32px;
+                padding: 0;
+            }
+        </style>
+
+    {% endblock %}
+</head>
+
+<body>
+<div>
+    <div style="display: inline-block; width: 45%; margin-right: 3%; box-sizing: border-box;">
+        <img src="{{ templateConfig.coverMedia.url ?? asset('bundles/laenengiftcard/giftcard.png', 'asset') }}" style="max-width: 100%; border-radius: 12px;">
+    </div>
+    <div style="display: inline-block; width: 45%; height: 180px; padding: 12px; border: 1px solid black; border-radius: 12px; box-sizing: border-box; text-align: center; font-size: 16px;">
+        <img src="{{ config.logo.url }}" style="margin-bottom: 16px; width: 120px"/><br/>
+        <strong>Gift code</strong><br/>
+        {% apply spaceless %}
+            {% for char in giftcard.code|split('') %}
+                {{ char }}
+                {% if loop.index % 4 == 0 %}&nbsp;{% endif %}
+            {% endfor %}
+        {% endapply %}
+    </div>
+</div>
+</body>
+</html>
+

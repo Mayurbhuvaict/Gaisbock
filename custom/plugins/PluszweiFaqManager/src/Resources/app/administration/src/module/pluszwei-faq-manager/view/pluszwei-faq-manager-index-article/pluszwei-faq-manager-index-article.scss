@@ -1,0 +1,15 @@
+@import "~scss/variables";
+
+.pluszwei-faq-manager-index-article {
+  border: 1px solid #d1d9e0;
+}
+
+.pluszwei-faq-manager-index-article-grid {
+  &.is--compact {
+    .sw-data-grid__wrapper {
+      input {
+        padding: 4px 16px;
+      }
+    }
+  }
+}

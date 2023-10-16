@@ -1,0 +1,9 @@
+{% sw_extends '@Storefront/storefront/component/product/card/action.html.twig' %}
+
+{% block component_product_box_action_inner %}
+    {% if product.customFields.laeGiftcardEnabled %}
+        {{ block('component_product_box_action_detail') }}
+    {% else %}
+        {{ parent() }}
+    {% endif %}
+{% endblock %}

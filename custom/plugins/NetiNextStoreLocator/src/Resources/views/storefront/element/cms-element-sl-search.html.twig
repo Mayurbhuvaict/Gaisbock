@@ -1,0 +1,33 @@
+{% block neti_store_locator_cms_search_form %}
+    <div class="cms-element-sl-search">
+        <form
+            action="{{ path('frontend.store_locator.cms') }}"
+            data-form-csrf-handler="true"
+            method="post"
+        >
+            {% block neti_store_locator_cms_search_input_field %}
+                <input
+                        type="text" name="search"
+                        placeholder="{{ "neti-next-store-locator.index.search.placeholder"|trans }}"
+                        class="form-control flex-fill cms-element-sl-search-input"
+                />
+
+                {% if element.config.searchParams %}
+                    <input
+                            type="hidden"
+                            name="additionalParams"
+                            value="{{ element.config.searchParams.value }}"
+                    />
+                {% endif %}
+            {% endblock %}
+
+            {% block neti_store_locator_cms_search_buttons %}
+                <div class="buttons d-flex flex-row justify-content-between">
+                    <button type="submit" class="btn btn-primary btn-sm">
+                        {{ "neti-next-store-locator.index.search.buttonSearch"|trans }}
+                    </button>
+                </div>
+            {% endblock %}
+        </form>
+    </div>
+{% endblock %}
