@@ -188,6 +188,11 @@ class SuggestedProductsSubscriber implements EventSubscriberInterface
             new ProductAvailableFilter($context->getSalesChannel()->getId(), ProductVisibilityDefinition::VISIBILITY_ALL)
         );
 
+        if($this->systemConfigService->get('AcrisSuggestedProductsCS.config.loadMoreCrossSellingMedia', $context->getSalesChannelId())){
+            $criteria->addAssociation('media');
+            $criteria->getAssociation('media')->setLimit(2);
+        }
+
         return $criteria;
     }
 
@@ -252,6 +257,10 @@ class SuggestedProductsSubscriber implements EventSubscriberInterface
                 $criteria->addFilter(
                     new ProductAvailableFilter($context->getSalesChannel()->getId(), ProductVisibilityDefinition::VISIBILITY_ALL)
                 );
+                if($this->systemConfigService->get('AcrisSuggestedProductsCS.config.loadMoreCrossSellingMedia', $context->getSalesChannelId())){
+                    $criteria->addAssociation('media');
+                    $criteria->getAssociation('media')->setLimit(2);
+                }
                 try {
                     $customersAlsoBoughtProducts = $this->productListingLoader->load($criteria, $context)->getEntities()->getElements();
                 } catch (\Exception $e) {
@@ -330,6 +339,10 @@ class SuggestedProductsSubscriber implements EventSubscriberInterface
             $criteria->addFilter(
                 new ProductAvailableFilter($context->getSalesChannel()->getId(), ProductVisibilityDefinition::VISIBILITY_ALL)
             );
+            if($this->systemConfigService->get('AcrisSuggestedProductsCS.config.loadMoreCrossSellingMedia', $context->getSalesChannelId())){
+                $criteria->addAssociation('media');
+                $criteria->getAssociation('media')->setLimit(2);
+            }
             try {
                 $customersAlsoViewedProducts = $this->productListingLoader->load($criteria, $context)->getEntities()->getElements();
             } catch (\Exception $e) {

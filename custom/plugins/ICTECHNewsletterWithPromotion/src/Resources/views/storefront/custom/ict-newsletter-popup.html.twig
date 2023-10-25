@@ -16,7 +16,6 @@
                  data-popup-id="{{ popup.id }}"
                  data-storage-type="{{ popup.storageType }}"
                  id="newsletter-popup"
-                 data-promotion-id="<?= $promotion->getId() ?>"
             >
                 <div class="ict-newsletter-popup--close-btn-wrapper">
                     <div class="ict-newsletter-popup--close-btn"></div>
@@ -138,14 +137,6 @@
                                 </div>
                             </div>
 
-
-{#                            <div style="overflow:auto;">#}
-{#                                <div style="float:right;">#}
-{#                                    <button type="button" id="prevBtn" onclick="nextPrev(-1)">Previous</button>#}
-{#                                    <button type="button" id="nextBtn" onclick="nextPrev(1)">Next</button>#}
-{#                                </div>#}
-{#                            </div>#}
-
                             {% if popup.promotionActive and popup.promotionShowValidUntil %}
                                 <div class="ict-newsletter-popup--promotion-until">
                                     <p>
@@ -170,7 +161,7 @@
                                     {{ popup.textNonSubscribe|trans }}
                                 </button>
                             {% endif %}
-                            <div style="text-align:center;margin-top:40px;">
+                            <div style="text-align:center;">
                                 <span class="step"></span>
                                 <span class="step"></span>
                             </div>
@@ -358,6 +349,7 @@
     <script>
         var currentTab = 0;
         showTab(currentTab);
+
         function showTab(n) {
 
             var x = document.getElementsByClassName("tab");
@@ -368,7 +360,7 @@
                 if (n == (x.length - 1)) {
                     document.getElementById("nextBtn").innerHTML = "Submit";
                 } else {
-                    document.getElementById("nextBtn").innerHTML = "Next";
+                    document.getElementById("nextBtn").innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="8.159" height="12.157" viewBox="0 0 8.159 12.157"> <g id="Gruppe_1351" data-name="Gruppe 1351" transform="translate(0.673 11.417) rotate(-90)"> <path id="Pfad_4" data-name="Pfad 4" d="M-6.937-.115l-5.221,5.741-5.456-6" transform="translate(17.614 0.374)" fill="none" stroke="#C9AC77" stroke-width="2"></path></g></svg>'
                 }
                 fixStepIndicator(n)
             }

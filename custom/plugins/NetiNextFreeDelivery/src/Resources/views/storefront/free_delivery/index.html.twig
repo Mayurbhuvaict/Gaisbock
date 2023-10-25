@@ -1,0 +1,6 @@
+<div
+    class="neti-ajax-reload neti-free-delivery-info"
+    data-neti-ajax-reload-options='{ "url": "{{ path('frontend.free_delivery.snippet') }}" }'
+>
+    {% sw_include 'storefront/free_delivery/snippet.html.twig' with { result: result } %}
+</div>

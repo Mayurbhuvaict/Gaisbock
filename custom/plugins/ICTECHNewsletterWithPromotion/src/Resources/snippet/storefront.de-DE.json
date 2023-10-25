@@ -1,13 +1,14 @@
 {
   "popup": {
     "zipCodeFieldPlaceholder": "PLZ",
+    "streetFieldPlaceholder": "Straße",
+    "cityFieldPlaceholder": "Stadt",
     "label": {
       "firstName": "Vorname",
+      "lastName": "Familienname",
       "email": "Email"
     },
+    "message-default": "Diese E-Mail existiert bereits",
     "success": "Sie haben sich gerade für unseren Newsletter angemeldet. Um den Anmeldevorgang abzuschließen, durchsuchen Sie Ihren Posteingang nach unserer Bestätigungs-E-Mail und klicken Sie auf den darin enthaltenen Link. Ihr Aktionscode lautet "
-  },
-  "error": {
-    "message-default": "Diese E-Mail existiert bereits"
   }
 }

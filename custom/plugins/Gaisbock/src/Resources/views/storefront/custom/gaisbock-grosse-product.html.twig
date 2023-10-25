@@ -1,0 +1,321 @@
+{% block gaisbock_grosse_product %}
+    <div class="product-detail-configurator gross-sections">
+        <div class="gaisbock-variant-header-section d-flex flex-wrap align-items-center">
+            
+                <a class=""><input type="radio"
+                       class="gaisbock-main-product"
+                       name="{{ page.product.id }}"
+                       value="{{ page.product.id }}"
+                       title="{{ page.product.id }}"
+                       id="{{ page.product.id }}"
+                       checked="checked">
+
+                <label class=""
+                       title="{{ page.product.translated.name }}"
+                       for="{{ page.product.id }}">
+                    {{ "productDetailPage.singlePurchase"|trans|sw_sanitize }}
+                </label></a>
+                <div class="gaisbock-price-view-section">
+                {% set price = page.product.calculatedPrice %}
+
+                {% if page.product.calculatedPrices|length == 1 %}
+                    {% set price = page.product.calculatedPrices.first %}
+                {% endif %}
+
+                <meta itemprop="price"
+                      content="{{ price.unitPrice }}">
+
+                {% block page_product_detail_price_content1 %}
+                    {% set listPrice = price.listPrice %}
+                    {% set isListPrice = listPrice.percentage > 0 %}
+                    {% set isRegulationPrice = price.regulationPrice != null %}
+                    {% if isListPrice %}
+                        {% block page_product_detail_was_price1 %}
+
+                            {% block page_product_detail_was_price_badge1 %}
+                            {% endblock %}
+
+                            {% set afterListPriceSnippetExists = "listing.afterListPrice"|trans|length > 0 %}
+                            {% set beforeListPriceSnippetExists = "listing.beforeListPrice"|trans|length > 0 %}
+
+                            {% block page_product_detail_was_price_wrapper1 %}
+                                <span class="product-detail-list-price-wrapper">
+                        {% if beforeListPriceSnippetExists %}{{ "listing.beforeListPrice"|trans|trim }}{% endif %}
+
+                        <span{% if not (afterListPriceSnippetExists or beforeListPriceSnippetExists) %} class="list-price-price"{% endif %}>{{ listPrice.price|currency }}</span>
+
+                        {% if afterListPriceSnippetExists %}
+                            {{ "listing.afterListPrice"|trans|trim }}
+                        {% endif %}
+                        </span>
+                            {% endblock %}
+                        {% endblock %}
+                    {% endif %}
+                    <p class="product-detail-price{% if isListPrice %} with-list-price{% endif %}{% if isRegulationPrice %} with-regulation-price{% endif %}">
+                        {{ price.unitPrice|currency }}
+                    </p>
+
+
+                    {% if isRegulationPrice %}
+                        <span class="product-detail-list-price-wrapper">
+                                <span class="regulation-price">{{ "general.listPricePreviously"|trans({'%price%': price.regulationPrice.price|currency }) }}</span>
+                            </span>
+                    {% endif %}
+                {% endblock %}
+            </div>
+        </div>
+
+
+        <div class="gaisbock-variant-header-section d-flex flex-wrap align-items-center">
+            <a class="">
+                <input type="radio"
+                       class="gaisbock-main-product-two"
+                       name="{{ page.product.id }}"
+                       value="{{ variantProducts.id }}"
+                       title="{{ variantProducts.id }}"
+                       id="{{ page.product.id }}"
+                       {% if page.product.id == variantProducts.id %}checked="checked"{% endif %}>
+                <label class=""
+                       title="{{ variantProducts.translated.name }}"
+                       for="{{ parentId.id }}">
+                    {{ "productDetailPage.withBoxers"|trans|sw_sanitize }}
+                </label>
+            </a>
+                <div class="gaisbock-price-view-section">
+                <sapn class="gaisbock-gross-price" id="grosse-products"><a href="javascript:void(0)"
+                         >{{ "productDetailPage.size"|trans|sw_sanitize }}
+                        {% sw_icon 'Gruppe-4' style {'pack': 'gaisbock'} %}</a></sapn>
+{% set firstProductId = page.extensions.products.grosseProduct|first %}
+                {% for variantProducts in page.extensions.products.grosseProduct %}
+                    <span class="gaisbock-product-price-loop" id="{{ variantProducts.id }}" {% if firstProductId.id == variantProducts.id %}style="display: block;"{% else %}style="display: none;"{% endif %}>
+                        <!-- <span>{% sw_icon 'gaisbock-plus' style {'pack': 'gaisbock','class':'grosse-pluse'} %}</span> -->
+                        {% set price = variantProducts.calculatedPrice %}
+
+                        {% if variantProducts.calculatedPrices|length == 1 %}
+                            {% set price = variantProducts.calculatedPrices.first %}
+                        {% endif %}
+
+                        <meta itemprop="price"
+                              content="{{ price.unitPrice }}">
+
+                        {% block page_product_detail_price_content_price %}
+                            {% set listPrice = price.listPrice %}
+                            {% set isListPrice = listPrice.percentage > 0 %}
+                            {% set isRegulationPrice = price.regulationPrice != null %}
+                            {% if isListPrice %}
+                                {% block page_product_detail_was_price_price %}
+
+                                    {% block page_product_detail_was_price_badge_price %}
+                                    {% endblock %}
+
+                                    {% set afterListPriceSnippetExists = "listing.afterListPrice"|trans|length > 0 %}
+                                    {% set beforeListPriceSnippetExists = "listing.beforeListPrice"|trans|length > 0 %}
+
+                                    {% block page_product_detail_was_price_wrapper_price %}
+                                        <span class="product-detail-list-price-wrapper">
+                                        {% if beforeListPriceSnippetExists %}{{ "listing.beforeListPrice"|trans|trim }}{% endif %}
+
+                                        <span{% if not (afterListPriceSnippetExists or beforeListPriceSnippetExists) %} class="list-price-price"{% endif %}>{{ listPrice.price|currency }}</span>
+
+                                        {% if afterListPriceSnippetExists %}
+                                            {{ "listing.afterListPrice"|trans|trim }}
+                                        {% endif %}
+                                        </span>
+                                    {% endblock %}
+                                {% endblock %}
+                            {% endif %}
+                            <p class="product-detail-price{% if isListPrice %} with-list-price{% endif %}{% if isRegulationPrice %} with-regulation-price{% endif %}">+
+                                <span>{{ price.unitPrice|currency }}</span>
+                            </p>
+                            {% if isRegulationPrice %}
+                            <span class="product-detail-list-price-wrapper">
+                                                <span class="regulation-price">{{ "general.listPricePreviously"|trans({'%price%': price.regulationPrice.price|currency }) }}</span>
+                                            </span>
+                        {% endif %}
+                        {% endblock %}
+                    </span>
+                {% endfor %}
+            </div>
+        </div>
+        {% set firstProduct = page.extensions.products.grosseProduct|first %}
+        <div class="gaisbock-get-product-list" style="display:none;">
+            <ul>
+                {% for variantProducts in page.extensions.products.grosseProduct %}
+
+                    <li>
+                        <div class="gaisbock-variant-header-section d-flex flex-wrap align-items-center">
+                           
+                                <a class=""><input type="radio"
+                                       class="gaisbock-child-product"
+                                       name="{{ variantProducts.parentId }}"
+                                       value="{{ variantProducts.id }}"
+                                       title="{{ variantProducts.id }}"
+                                       id="{{ variantProducts.parentId }}"
+                                       {% if firstProduct.id == variantProducts.id %}checked="checked"{% endif %}>
+
+                                <label class=""
+                                       title="{{ variantProducts.translated.name }}"
+                                       for="{{ parentId.id }}">
+                                    {% set varinatName = variantProducts.options|first %}
+                                    {{ variantProducts.translated.name }}
+
+                                    {{ varinatName.translated.name }}
+                                </label></a>
+                                 <div class="gaisbock-price-view-section">
+                                {% set price = variantProducts.calculatedPrice %}
+
+                                {% if variantProducts.calculatedPrices|length == 1 %}
+                                    {% set price = variantProducts.calculatedPrices.first %}
+                                {% endif %}
+
+                                <meta itemprop="price"
+                                      content="{{ price.unitPrice }}">
+
+                                {% block page_product_detail_price_content %}
+                                    {% set listPrice = price.listPrice %}
+                                    {% set isListPrice = listPrice.percentage > 0 %}
+                                    {% set isRegulationPrice = price.regulationPrice != null %}
+                                    {% if isListPrice %}
+                                        {% block page_product_detail_was_price %}
+
+                                            {% block page_product_detail_was_price_badge %}
+                                            {% endblock %}
+
+                                            {% set afterListPriceSnippetExists = "listing.afterListPrice"|trans|length > 0 %}
+                                            {% set beforeListPriceSnippetExists = "listing.beforeListPrice"|trans|length > 0 %}
+
+                                            {% block page_product_detail_was_price_wrapper %}
+                                                <span class="product-detail-list-price-wrapper">
+                        {% if beforeListPriceSnippetExists %}{{ "listing.beforeListPrice"|trans|trim }}{% endif %}
+
+                        <span{% if not (afterListPriceSnippetExists or beforeListPriceSnippetExists) %} class="list-price-price"{% endif %}>{{ listPrice.price|currency }}</span>
+
+                        {% if afterListPriceSnippetExists %}
+                            {{ "listing.afterListPrice"|trans|trim }}
+                        {% endif %}
+                        </span>
+                                            {% endblock %}
+                                        {% endblock %}
+                                    {% endif %}
+                                    <p class="product-detail-price{% if isListPrice %} with-list-price{% endif %}{% if isRegulationPrice %} with-regulation-price{% endif %}">
+                                        {{ price.unitPrice|currency }}
+                                    </p>
+
+
+                                    {% if isRegulationPrice %}
+                                        <span class="product-detail-list-price-wrapper">
+                                <span class="regulation-price">{{ "general.listPricePreviously"|trans({'%price%': price.regulationPrice.price|currency }) }}</span>
+                            </span>
+                                    {% endif %}
+                                {% endblock %}
+                            </div>
+                        </div>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+
+    <script>
+        document.querySelector('.gaisbock-main-product')
+            .addEventListener('change',function(){
+                document.querySelector('.gaisbock-quantity').setAttribute('name','lineItems[{{ page.product.id }}][quantity]');
+                document.querySelector('.gaisbock-redirectParameters').value = '{"productId": "{{ page.product.id }}"}';
+                document.querySelector('.gaisbock-id').setAttribute('name','lineItems[{{ page.product.id }}][id]');
+                document.querySelector('.gaisbock-id').value = '{{ page.product.id }}';
+                document.querySelector('.gaisbock-type').setAttribute('name','lineItems[{{ page.product.id }}][type]');
+                document.querySelector('.gaisbock-referencedId').setAttribute('name','lineItems[{{ page.product.id }}][referencedId]');
+                document.querySelector('.gaisbock-referencedId').value = '{{ page.product.id }}'
+                document.querySelector('.gaisbock-stackable').setAttribute('name','lineItems[{{ page.product.id }}][stackable]');
+                document.querySelector('.gaisbock-removable').setAttribute('name','lineItems[{{ page.product.id }}][removable]');
+                document.querySelector('.gaisbock-product-name').value = '{{ page.product.translated.name }}';
+                document.querySelector('.gaisbock-manufacturer-name').value= '{{ page.product.manufacturer.getName() }}';
+            })
+        let variantIds = document.querySelectorAll('.gaisbock-child-product');
+
+        variantIds.forEach(function(element,index) {
+            let productId = element.value;
+
+            element.addEventListener('change', function () {
+                document.querySelector('.gaisbock-quantity').setAttribute('name','lineItems['+productId+'][quantity]');
+                document.querySelector('.gaisbock-redirectParameters').value = '{"productId": "${productId}"}';
+                document.querySelector('.gaisbock-id').setAttribute('name','lineItems['+productId+'][id]');
+                document.querySelector('.gaisbock-id').value = productId;
+                document.querySelector('.gaisbock-type').setAttribute('name','lineItems['+productId+'][type]');
+                document.querySelector('.gaisbock-referencedId').setAttribute('name','lineItems['+productId+'][referencedId]');
+                document.querySelector('.gaisbock-referencedId').value = productId;
+                document.querySelector('.gaisbock-stackable').setAttribute('name','lineItems['+productId+'][stackable]');
+                document.querySelector('.gaisbock-removable').setAttribute('name','lineItems['+productId+'][removable]');
+                document.querySelector('.gaisbock-product-name').value = '{{ page.product.translated.name }}';
+                document.querySelector('.gaisbock-manufacturer-name').value= '{{ page.product.manufacturer.getName() }}';
+            })
+        })
+        function checkedRadioButton() {
+            let variantIds = document.querySelectorAll('.gaisbock-child-product');
+            variantIds.forEach(function (element, index) {
+                if (element.checked == true) {
+                    let productId = element.value;
+
+                    document.querySelector('.gaisbock-quantity').setAttribute('name', 'lineItems[' + productId + '][quantity]');
+                    document.querySelector('.gaisbock-redirectParameters').value = '{"productId": "${productId}"}';
+                    document.querySelector('.gaisbock-id').setAttribute('name', 'lineItems[' + productId + '][id]');
+                    document.querySelector('.gaisbock-id').value = productId;
+                    document.querySelector('.gaisbock-type').setAttribute('name', 'lineItems[' + productId + '][type]');
+                    document.querySelector('.gaisbock-referencedId').setAttribute('name', 'lineItems[' + productId + '][referencedId]');
+                    document.querySelector('.gaisbock-referencedId').value = productId;
+                    document.querySelector('.gaisbock-stackable').setAttribute('name', 'lineItems[' + productId + '][stackable]');
+                    document.querySelector('.gaisbock-removable').setAttribute('name', 'lineItems[' + productId + '][removable]');
+                    document.querySelector('.gaisbock-product-name').value = '{{ page.product.translated.name }}';
+                    document.querySelector('.gaisbock-manufacturer-name').value = '{{ page.product.manufacturer.getName() }}';
+
+                    let variantPrice = document.querySelectorAll('.gaisbock-product-price-loop');
+                    variantPrice.forEach(function (value, key){
+                        if (value.getAttribute('id') == productId)
+                        {
+                            value.style.display="block";
+                        }else
+                        {
+                            value.style.display = "none";
+                        }
+                    });
+
+                }
+            });
+        }
+
+        document.getElementById("grosse-products").addEventListener('click', function () {
+            if (document.querySelector(".gaisbock-get-product-list").style.display == 'block') {
+                document.querySelector(".gaisbock-get-product-list").style.display = "none";
+            } else {
+                document.querySelector(".gaisbock-get-product-list").style.display = "block";
+                parentRadio.checked = true;
+                checkedRadioButton();
+            }
+        });
+
+        const parentRadio = document.querySelector(".gaisbock-main-product-two");
+        const subRadio = document.querySelectorAll(".gaisbock-child-product");
+        document.querySelector(".gaisbock-main-product").addEventListener("change", function () {
+            document.querySelector(".gaisbock-get-product-list").style.display = "none";
+            // let variantPrice = document.querySelectorAll('.gaisbock-product-price-loop');
+            // variantPrice.forEach(function (value, key){
+            //     value.style.display="none";
+            // });
+        });
+        parentRadio.addEventListener("change", function () {
+            document.querySelector(".gaisbock-get-product-list").style.display = "block";
+            checkedRadioButton();
+        })
+        subRadio.forEach(function (element, index) {
+            element.addEventListener("change", function () {
+                if (element.checked) {
+                    // If the sub radio button is checked, check the parent radio button
+                    parentRadio.checked = true;
+                    checkedRadioButton();
+                }
+            });
+        });
+
+
+    </script>
+{% endblock %}

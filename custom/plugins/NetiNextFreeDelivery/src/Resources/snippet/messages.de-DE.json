@@ -1,0 +1,8 @@
+{
+  "neti-freedelivery": {
+    "shippingText": {
+      "valueReached": "Für Ihre aktuelle Bestellung fallen keine Versandkosten an.",
+      "missingValue": "Bestellen Sie für weitere <strong>remainingValue</strong> und Sie erhalten Ihre Bestellung versandkostenfrei."
+    }
+  }
+}

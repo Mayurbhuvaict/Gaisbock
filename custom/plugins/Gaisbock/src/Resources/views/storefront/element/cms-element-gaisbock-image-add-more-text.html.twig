@@ -1,7 +1,7 @@
 {% block element_gaisbock_image_addmore_text %}
     {% set config = element.fieldConfig.elements %}
     {% set active = '' %}
-    <div class="element-gaisbock-image-add-more-text" id="{{ element.config.heading.value|replace({' ': ''}) }}">
+    <div data-aos="fade-up" data-aos-delay="0" class="element-gaisbock-image-add-more-text aos-init" id="{{ element.config.heading.value|replace({' ': ''}) }}">
         {% if element.fieldConfig.elements.position.value == true %}
             {% set active = 'active' %}
         {% endif %}

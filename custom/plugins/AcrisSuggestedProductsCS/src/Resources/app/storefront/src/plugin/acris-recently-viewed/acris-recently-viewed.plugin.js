@@ -1,6 +1,7 @@
 import Plugin from 'src/plugin-system/plugin.class';
 import HttpClient from 'src/service/http-client.service';
 import CookieStorage from 'src/helper/storage/cookie-storage.helper';
+import ViewportDetection from 'src/helper/viewport-detection.helper';
 
 const RECENTLY_VIEWED_LI_ID = "acris-suggested-recentlyViewed";
 const RECENTLY_VIEWED_CONTENT_CONTAINER_ID = "recently-viewed-products-container";
@@ -13,7 +14,12 @@ export default class AcrisRecentlyViewedPlugin extends Plugin {
         recentlyViewedContainerSelector: '.recently-viewed-products-container',
         recentlyViewedItemLimit: 7,
         recentlyViewedDuration: 365,
-        sliderConfig: []
+        productSliderSelector: '[data-product-slider="true"]',
+        sliderConfig: [],
+        displayModeDesktop: '',
+        displayModeTablet: '',
+        displayModeMobile: '',
+
     };
 
     init() {
@@ -51,10 +57,21 @@ export default class AcrisRecentlyViewedPlugin extends Plugin {
         if (!!recentlyViewedLiElement && !!recentlyViewedContentElement) {
             recentlyViewedLiElement.classList.remove('d-none');
             recentlyViewedContentElement.classList.remove('d-none');
-            if (this.isRecentlyViewedFirst()) {
+           if (this.isRecentlyViewedFirst() ||
+                (ViewportDetection.getCurrentViewport() === 'XS' && this.options.displayModeMobile === 'among') ||
+                (ViewportDetection.getCurrentViewport() === 'SM' && this.options.displayModeMobile === 'among') ||
+                (ViewportDetection.getCurrentViewport() === 'MD' && this.options.displayModeTablet === 'among') ||
+                (ViewportDetection.getCurrentViewport() === 'LG' && this.options.displayModeTablet === 'among')||
+                (ViewportDetection.getCurrentViewport() === 'XL' && this.options.displayModeDesktop === 'among') ||
+                (ViewportDetection.getCurrentViewport() === 'XXL' && this.options.displayModeDesktop === 'among')
+            ) {
                 this.activateRecentlyViewedTab();
             }
         }
+    }
+
+    rebuildSlider(){
+        const slider = DomAccess.querySelector(correspondingContent, this.options.productSliderSelector, false);
     }
 
     initiateCookie() {

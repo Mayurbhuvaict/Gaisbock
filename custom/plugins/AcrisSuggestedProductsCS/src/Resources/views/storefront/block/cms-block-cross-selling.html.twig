@@ -10,8 +10,19 @@
         {% set sliderConfig = element.fieldConfig.elements %}
     {% endif %}
 
-    <div class="col-12" data-cms-element-id="{{ element.id }}">
-        <div class="product-detail-cross-selling">
+    <div class="col-12 acris-suggested-products" data-cms-element-id="{{ element.id }}">
+        <div class="
+                {% if config('AcrisSuggestedProductsCS.config').displayModeDesktop is same as ('among') %}
+                    acris-product-cross-selling-tabs-desktop
+                {% endif %}
+                {% if config('AcrisSuggestedProductsCS.config').displayModeTablet is same as ('among') %}
+                    acris-product-cross-selling-tabs-tablet
+                {% endif %}
+                {% if config('AcrisSuggestedProductsCS.config').displayModeMobile is same as ('tab') %}
+                    acris-product-cross-selling-tabs-mobile
+                {% else %}
+                    product-detail-cross-selling
+                {% endif %}">
             {% sw_include '@Storefront/storefront/component/acris-suggested-products-tabs/acris-suggested-products-tabs.html.twig' with {
                 sliderConfig: sliderConfig,
             } %}

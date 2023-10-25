@@ -18,6 +18,10 @@ body {
         }
     }
 }
+.hovered-header .gaisbock-search-button-for-css.collapsed + div#searchCollapse {
+    display: block !important;
+}
+
 
 .search-suggest .search-suggest-container {
         max-height: 400px;
@@ -157,7 +161,12 @@ body {
     }
 
     @include media-breakpoint-down(md){  
-
+        .is-ctl-search header#mainNavigationHover * {
+            color: #fff;
+        }
+        body.header-hover.ict-cookie .search-toggle {
+            display:none;
+        }
         .is-ctl-search {
             .content-main{
                 .container{

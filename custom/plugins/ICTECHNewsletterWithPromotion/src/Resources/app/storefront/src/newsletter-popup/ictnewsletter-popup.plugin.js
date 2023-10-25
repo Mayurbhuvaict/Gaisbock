@@ -2,7 +2,7 @@ import Plugin from 'src/plugin-system/plugin.class';
 import setBoolSessionValue from "../utils/setBoolSessionValue";
 import setBoolLocalValue from "../utils/setBoolLocalValue";
 
-export default class IctNewsletterPopup extends Plugin {
+export default class NewsletterPopup extends Plugin {
     init() {
         this._popupId = this.el.getAttribute('data-popup-id');
         const devMode = this.el.getAttribute('data-dev-mode');

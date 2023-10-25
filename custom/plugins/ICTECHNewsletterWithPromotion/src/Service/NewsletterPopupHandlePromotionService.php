@@ -68,6 +68,7 @@ class NewsletterPopupHandlePromotionService
         );
 
         $newPromotionCode = $this->fetchPromotionById($promotion->getId(), $context);
+        $individualPromoCode = $this->promotionCodeHelper->handleIndividualPromotionCodes($newPromotionCode, $context);
 
         $this->newsletterRecipientRepository->update([
             [

@@ -1,6 +1,8 @@
 {% sw_extends '@Storefront/storefront/base.html.twig' %}
 
 {% block base_body %}
-    {% sw_include '@ICTECHNewsletterWithPromotion/storefront/custom/ict-newsletter-popup.html.twig' %}
+    {% if (page.extensions.newsletter_popup.elements !== []) %}
+        {% sw_include '@Storefront/storefront/custom/ict-newsletter-popup.html.twig' %}
+    {% endif %}
     {{ parent() }}
 {% endblock %}

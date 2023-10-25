@@ -1,0 +1,8 @@
+{
+  "neti-freedelivery": {
+    "shippingText": {
+      "valueReached": "There are no shipping costs for your current order.",
+      "missingValue": "Order for more <strong>remainingValue</strong> and you will receive your order free of shipping costs."
+    }
+  }
+}

@@ -52,7 +52,10 @@
     "shipping": "VERSAND",
     "ratings": "bewertungen",
     "viewRatings": "Bewertungen anschauen",
-    "addProduct": "In den Warenkorb"
+    "addProduct": "In den Warenkorb",
+    "singlePurchase": "EINZELKAUF",
+    "withBoxers": "MIT BOXERSHORTS KAUFEN",
+    "size": "GRÖSSE"
   },
   "address": {
     "companyPlaceholder": "UNTERNEHMEN*",
@@ -99,5 +102,11 @@
   },
   "review": {
     "validation": "Bitte geben Sie mindestens 5 Zeichen im Titel und 40 Zeichen in der Bewertung ein, um eine Bewertung abzugeben."
+  },
+  "neti-freedelivery": {
+    "shippingText": {
+      "valueReached": "Für Ihre aktuelle Bestellung fallen keine Versandkosten an.",
+      "missingValue": "Ab <strong>remainingValue</strong>- ist der Versand sogar gratis. Es lohnt sich immer, beim Gaisbock noch eins draufzulegen."
+    }
   }
 }

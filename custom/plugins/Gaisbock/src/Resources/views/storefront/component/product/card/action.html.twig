@@ -1,0 +1,16 @@
+{% sw_extends '@Storefront/storefront/component/product/card/action.html.twig' %}
+{% block component_product_box_action_inner %}
+
+            {% if product.customFields.gaisbockProducts|length > 0 %}
+                <div class="d-grid">
+                    <a href="{{ seoUrl('frontend.detail.page', {'productId': id}) }}"
+                       class="btn btn-light"
+                       title="{{ "listing.boxProductDetails"|trans|striptags }}">
+                        {{ "listing.boxProductDetails"|trans|sw_sanitize }}
+                    </a>
+                </div>
+            {% else %}
+                {{ parent() }}
+            {% endif %}
+
+{% endblock %}

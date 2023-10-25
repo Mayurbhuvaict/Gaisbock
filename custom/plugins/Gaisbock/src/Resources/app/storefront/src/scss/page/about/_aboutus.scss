@@ -1,3 +1,6 @@
+
+
+
 body .nme-newsletter-popup--close-btn:hover:before, .nme-newsletter-popup--close-btn:hover:after {
     background-color: #fff;
 }
@@ -5,6 +8,23 @@ body {
     .nme-newsletter-popup--close-btn:hover:before, .nme-newsletter-popup--close-btn:hover:after {
         background-color: #fff;
     }
+}
+.static-banner-section {
+    .cms-section-default.full-width,
+    .cms-block-gaisbock-custom-text-on-image,
+    .cms-block-container,
+    .cms-block-container-row,
+    .block-ict-custom-text-on-image-banner {
+        height:100% !important;
+    }
+}
+b.br-tag-space {
+    display: block;
+        margin-bottom: 8px;
+        margin-top: 20px;
+                @media(max-width:767px) {
+            margin-top:0px;
+        }
 }
 body .hide-on-scroll ~ .content-main .about-us-title-page .cms-block-gaisbock-listpage-text-image,
 body .show-on-scroll ~ .content-main .about-us-title-page .cms-block-gaisbock-listpage-text-image{
@@ -217,31 +237,32 @@ body .nme-newsletter-popup.has-background-image {
         background-color: rgba(0, 0, 0, 0); /* Initial transparent background */
         transition: background-color 0.5s ease; /* Smooth transition */
         pointer-events: all; /* Allow clicks to pass through */
-        // background: transparent !important;
+        background: transparent !important;
       }
     .block-ict-custom-text-on-image-banner {
         height: 605px;
         width: 100%;
-        // background-attachment: fixed;
+        // background-attachment: revert;
         z-index: -1;
         position: relative;
         background-position: center;
-        @media(max-width:992px) {
+        @media(max-width:1025px) {
             background-attachment: revert;
         }
         @media(max-width:767px) {
             background-position: center;
-            height: 553px;
+            height: 481px;
 
         }
     }
     .cms-element-gaisbock-custom-text-on-image {
         position: absolute;
         bottom: auto;
-        top: 60%;
+        // top: 60%;
         left: 50%;
         transform: translate(-50%,-50%);
         text-align: center;
+            bottom: 100px;
         h2 {
             font-size: 25px;
             letter-spacing: 0.13px;
@@ -551,7 +572,7 @@ body .nme-newsletter-popup.has-background-image {
                 font-family: $sw-font-family-base;
                 // letter-spacing: 0.17px;
                 letter-spacing: 0.78px;
-                margin-bottom: 30px;
+                margin-bottom: 0px;
                 text-transform: revert;
                 @media (min-width:992px){
                     padding-top: 40px;
@@ -579,12 +600,12 @@ body .nme-newsletter-popup.has-background-image {
                 font-size: 18px;
                 letter-spacing: 1.08px;
                 line-height: 25px;
-                margin-bottom: 20px;
+                margin-bottom: 10px;
             }
         }
     }
     .gaisbock-custom-text-image-slider-component-text-block-readMore {
-        margin-top: 20px;
+        margin-top: 0px;
     }
     .readmore-btn-slider {
         letter-spacing: 0.78px;
@@ -630,6 +651,9 @@ body .nme-newsletter-popup.has-background-image {
     // background-attachment: fixed;
     @media(max-width:992px) {
         background-attachment: revert;
+    }
+    @media(max-width:767px) {
+         height: 504px;
     }
     .cms-block-gaisbock-image-titles-button {
         transition: background-color 0.5s ease;
@@ -680,6 +704,27 @@ body .nme-newsletter-popup.has-background-image {
     }
 }
 
+@media(min-width:992px) {
+    .cms-block-product-listing {
+        margin-bottom: 55px;
+    }
+    .is-ctl-product .footer-main {
+        margin-top: 56px;
+    }
+    .about-left-right-section {
+        margin-bottom: 126px;
+    }
+    .is-act-loginpage footer.footer-main {
+        margin-top: 100px;
+    } 
+    .cms-section.gailbock-faq-section.faq-contents.pos-1.cms-section-default {
+        padding-bottom: 144px;
+    }  
+    body.is-ctl-storelocator footer.footer-main {
+        margin-top: 136px;
+    }
+}
+
 @media (max-width:1440px){
     .is-act-index{
         .bg-image.gaisbock-benefits{
@@ -704,6 +749,29 @@ body .nme-newsletter-popup.has-background-image {
     }
 }
 @include media-breakpoint-down(lg) { 
+    .is-act-home{
+        .gailbock-faq-section{
+            padding-bottom: 78px
+        }
+    }
+    .is-ctl-navigation{
+        .cms-block-product-listing{
+            .cms-element-product-listing {
+                padding-bottom: 48px;
+            }
+        }
+    }
+    .is-ctl-product{
+        .product-detail {
+            margin-bottom: 4px;
+        }
+    }
+    .cms-block-gaisbock-image-add-more-text:last-child{
+        margin-bottom: 72px;
+    }
+    .static-faq-section.gailbock-faq-section{
+        padding-bottom: 60px
+    }
     .cms-block-gaisbock-image-add-more-text .cms-block-container {
         padding: 0 !important;
         
@@ -753,14 +821,14 @@ body .nme-newsletter-popup.has-background-image {
         font-size: 13px;
         letter-spacing: .91px;
         line-height: 17px;
-        margin-bottom: 15px;
+        margin-bottom: 10px;
     }
     .about-left-right-section .gaisbock-hideContent-contain, .about-left-right-section .gaisbock-custom-text-image-slider-component-text-block-detailTitle, .about-left-right-section .gaisbock-after-slider-text {
         font-size: 16px;
         line-height: 19px;
     }
     .about-left-right-section .gaisbock-custom-text-image-slider-component-text-block-readMore {
-        margin-top: 10px;
+        margin-top: 0px;
     }
     .about-left-right-section .cms-block-gaisbock-custom-text-image-slider .cms-element-gaisbock-custom-text-image-slider {
         margin-bottom: 0;
@@ -813,6 +881,33 @@ body .nme-newsletter-popup.has-background-image {
     }
 }
 @include media-breakpoint-down(md) {
+    .is-ctl-product{
+        .product-detail{
+            .cms-element-product-slider.gaisbock-product-slider{
+                margin-bottom: 85px;
+            }
+        }
+    }
+    .cms-block-gaisbock-image-add-more-text:last-child{
+        margin-bottom: 60px;
+    }
+    .static-faq-section.gailbock-faq-section{
+        padding-bottom: 78px;
+    }
+    .about-left-right-section{
+        .cms-block-gaisbock-custom-text-image-slider{
+            .gaisbock-custom-text-image-slider-component-text-block{
+                .gaisbock-custom-text-image-slider-component-text-block-contentTitle{
+                    margin-bottom: 5px;
+                }
+            }
+        }
+        .gaisbock-hideContent-contain{
+            .br-tag-space {
+                padding: 15px 0 5px;
+            }            
+        }
+    }
     .about-left-right-section .cms-block-gaisbock-custom-text-image-slider .gaisbock-custom-text-image-slider-component-cover-image-block img {
         max-width:206px;
     }
@@ -911,6 +1006,9 @@ body .nme-newsletter-popup.has-background-image {
 }
 
 @include media-breakpoint-down(md) {
+    body .cms-section-sidebar-mobile-hidden .cms-section-sidebar-sidebar-content {
+        display: block;
+    }
     .about-us-title-page .cms-block-gaisbock-listpage-text-image .cms-element-gaisbock-listing-image img {
         display: block;
     }
@@ -958,4 +1056,14 @@ body .nme-newsletter-popup.has-background-image {
     // .cms-page {
     //     overflow-x: hidden;
     // }
+}
+
+@include media-breakpoint-down(sm) {
+    .is-ctl-product{
+        .product-detail{
+            .cms-element-product-slider.gaisbock-product-slider{
+                margin-bottom: 60px;
+            }
+        }
+    }
 }

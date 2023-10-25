@@ -1,0 +1,20 @@
+{% if result is not null %}
+    <div class="neti-free-delivery--snippet">
+        {% if result.difference > 0 %}
+            {% sw_include 'storefront/free_delivery/alert.html.twig' with {
+                content: 'neti-freedelivery.shippingText.missingValue'|trans({ remainingValue: result.difference|currency })
+            } %}
+
+            {% if config('NetiNextFreeDelivery.config.showProgressBar') === true %}
+                <div class="progress-bar" style="width: {{ result.percentage }}%"></div>
+            {% endif %}
+        {% elseif
+            config('NetiNextFreeDelivery').config.hideDisplayForShippingFree is not defined
+            or config('NetiNextFreeDelivery').config.hideDisplayForShippingFree is false
+        %}
+            {% sw_include 'storefront/free_delivery/alert.html.twig' with {
+                content: 'neti-freedelivery.shippingText.valueReached'|trans
+            } %}
+        {% endif %}
+    </div>
+{% endif %}

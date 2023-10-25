@@ -1,6 +1,20 @@
+
+.gaisbook-style{
+        .product-price{
+            white-space: nowrap;
+        }
+    }
+.is-act-home .product-box {
+    background:transparent;
+}
 body .pagination {
     margin-bottom: 50px;
 }
+// .gaisbock-018a4a94a8a870138cf15a19ac87d550{
+//     .cms-element-gaisbock-listing-heading-image p {
+//         margin: auto;
+//     }
+// }
 .gaisbook-style p.product-price-unit,
 .gaisbock-018a92897f407047bd8839e939413b76 p.product-price-unit,
 .gaisbock-018a92897f417393a127cac25b6cf534 p.product-price-unit, 
@@ -301,7 +315,16 @@ body {
         }
     }
 }
-
+// @media (min-width: 768px) {
+//     .gaisbock-018a4a94a8a870138cf15a19ac87d550{
+//         .cms-block-gaisbock-custom-category-extension {
+//             margin-top: 92px;
+//        }
+//        .cms-element-gaisbock-listing-heading-image p {
+//             padding-bottom:10px;
+//         }
+//     }
+// }
 
 //  Listing Image Section
 
@@ -380,6 +403,13 @@ body {
         }
     }
 }
+// @media (max-width: 1100px) {
+//     .gaisbock-018a4a94a8a870138cf15a19ac87d550{
+//         .cms-element-gaisbock-listing-heading-image p {
+//             max-width: 490px;
+//        }
+//     }
+// }
 @include media-breakpoint-down(lg){ 
     .is-ctl-search  {
         .search-toggle div#searchCollapse {

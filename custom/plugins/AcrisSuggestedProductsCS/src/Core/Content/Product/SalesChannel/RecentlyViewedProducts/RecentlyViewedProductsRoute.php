@@ -11,6 +11,7 @@ use Shopware\Core\Framework\Plugin\Exception\DecorationPatternException;
 use Shopware\Core\Framework\Routing\Annotation\Entity;
 use Shopware\Core\Framework\Routing\Annotation\Since;
 use Shopware\Core\System\SalesChannel\SalesChannelContext;
+use Shopware\Core\System\SystemConfig\SystemConfigService;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Contracts\EventDispatcher\EventDispatcherInterface;
@@ -20,22 +21,11 @@ use Symfony\Contracts\EventDispatcher\EventDispatcherInterface;
  */
 class RecentlyViewedProductsRoute extends AbstractRecentlyViewedProductsRoute
 {
-    /**
-     * @var EventDispatcherInterface
-     */
-    private $eventDispatcher;
-
-    /**
-     * @var ProductListingLoader
-     */
-    private $productListingLoader;
-
     public function __construct(
-        EventDispatcherInterface $eventDispatcher,
-        ProductListingLoader $productListingLoader
+        private EventDispatcherInterface $eventDispatcher,
+        private ProductListingLoader $productListingLoader,
+        private SystemConfigService $systemConfigService
     ) {
-        $this->eventDispatcher = $eventDispatcher;
-        $this->productListingLoader = $productListingLoader;
     }
 
     public function getDecorated(): AbstractRecentlyViewedProductsRoute
@@ -45,8 +35,12 @@ class RecentlyViewedProductsRoute extends AbstractRecentlyViewedProductsRoute
 
     public function load(Request $request, SalesChannelContext $salesChannelContext, Criteria $criteria = null): RecentlyViewedProductsRouteResponse
     {
-
+        if($this->systemConfigService->get('AcrisSuggestedProductsCS.config.loadMoreCrossSellingMedia', $salesChannelContext->getSalesChannelId())){
+            $criteria->addAssociation('media');
+            $criteria->getAssociation('media')->setLimit(2);
+        }
         $collection = $this->productListingLoader->load($criteria, $salesChannelContext)->getEntities();
+
         $this->eventDispatcher->dispatch(
             new ProductSearchCriteriaEvent($request, $criteria, $salesChannelContext)
         );

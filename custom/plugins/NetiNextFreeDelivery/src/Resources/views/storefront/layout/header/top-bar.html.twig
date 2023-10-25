@@ -1,0 +1,11 @@
+{% sw_extends '@Storefront/storefront/layout/header/top-bar.html.twig' %}
+
+{% block layout_header_top_bar %}
+    {{ parent() }}
+
+    {% if controllerAction != 'cartPage' and page.header.extensions.netiNextFreeDelivery %}
+        {% sw_include 'storefront/free_delivery/index.html.twig' with {
+            result: page.header.extensions.netiNextFreeDelivery
+        } %}
+    {% endif %}
+{% endblock %}

@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/shopware/platform/master/src/Core/System/SystemConfig/Schema/config.xsd">
+
+    <card>
+        <title>Minimal configuration</title>
+        <title lang="de-DE">Minimale Konfiguration</title>
+        <input-field type="bool">
+            <name>subshopActivated</name>
+            <label>Enabled</label>
+            <label lang="de-DE">Aktiviert</label>
+            <helpText>Enables this plugin for the current sales channel</helpText>
+            <helpText lang="de-DE">Aktiviert das Plugin für den aktuellen Sales Channel</helpText>
+        </input-field>
+        <input-field type="float">
+            <name>displayFrom</name>
+            <required>true</required>
+            <label>Only display past remaining value to free shipping</label>
+            <label lang="de-DE">Erst ab folgendem Restwert anzeigen</label>
+            <helpText>0 = display always</helpText>
+            <helpText lang="de-DE">0 = immer anzeigen</helpText>
+            <defaultValue>0</defaultValue>
+        </input-field>
+        <input-field type="bool">
+            <name>showInArticle</name>
+            <label>Display in article page</label>
+            <label lang="de-DE">Anzeige auf der Artikel-Seite</label>
+        </input-field>
+        <input-field type="single-select">
+            <name>articlePosition</name>
+            <label>Output position on product detail page</label>
+            <label lang="de-DE">Ausgabeposition auf Produktdetailseite</label>
+            <options>
+                <option>
+                    <id>abovePrice</id>
+                    <name>Above price</name>
+                    <name lang="de-DE">Über dem Preis</name>
+                </option>
+                <option>
+                    <id>beforeCartButton</id>
+                    <name>Before cart button</name>
+                    <name lang="de-DE">Vor "In den Warenkorb"</name>
+                </option>
+                <option>
+                    <id>afterCartButton</id>
+                    <name>After cart button</name>
+                    <name lang="de-DE">Nach "In den Warenkorb"</name>
+                </option>
+                <option>
+                    <id>lastPosition</id>
+                    <name>Last position</name>
+                    <name lang="de-DE">Letzte Position</name>
+                </option>
+            </options>
+            <helpText>Will only be considered if the display option in article is activated</helpText>
+            <helpText lang="de-DE">Wird nur berücksichtigt, wenn die Anzeigeoption im Artikel aktiviert ist</helpText>
+            <defaultValue>lastPosition</defaultValue>
+        </input-field>
+        <input-field type="bool">
+            <name>showInHeader</name>
+            <label>Display in header</label>
+            <label lang="de-DE">Anzeige im Shop-Header</label>
+        </input-field>
+        <input-field type="bool">
+            <name>showInModal</name>
+            <label>Display when adding to basket</label>
+            <label lang="de-DE">Anzeige beim Hinzufügen zum Warenkorb</label>
+        </input-field>
+        <input-field type="bool">
+            <name>showProgressBar</name>
+            <label>Show progress bar</label>
+            <label lang="de-DE">Fortschrittsbalken anzeigen</label>
+            <helpText>A progress bar will be shown</helpText>
+            <helpText lang="de-DE">Zeigt zusätzlich einen Fortschrittsbalken an</helpText>
+        </input-field>
+        <input-field type="bool">
+            <name>hideDisplayForShippingFree</name>
+            <label>Hide display for free shipping?</label>
+            <label lang="de-DE">Anzeige bei kostenlosem Versand ausblenden?</label>
+            <defaultValue>false</defaultValue>
+        </input-field>
+    </card>
+</config>

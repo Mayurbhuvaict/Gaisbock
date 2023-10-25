@@ -30,11 +30,15 @@ class NewsletterPopupController extends StorefrontController
     final public const SUBSCRIBE = 'subscribe';
 
     public function __construct(
-        private readonly AbstractNewsletterSubscribeRoute $subscribeRoute,
+        private readonly AbstractNewsletterSubscribeRoute      $subscribeRoute,
         private readonly NewsletterPopupHandlePromotionService $handlePromotion,
-        private readonly PromotionCodeHelper $promotionCodeHelper,
-    ) {
+        private readonly PromotionCodeHelper                   $promotionCodeHelper,
+        private readonly EntityRepository                                       $newsletterRepository
+    )
+    {
+//        $this->newsletterRepository = $newsletterRepository;
     }
+
 
     #[Route(path: '/form/campaign/newsletter-coupon', name: 'frontend.ict.form.newsletter.popup.register.handle', defaults: ['XmlHttpRequest' => true, '_captcha' => true], methods: ['POST'])]
     public function handleSubscribe(Request $request, RequestDataBag $data, SalesChannelContext $context): JsonResponse
@@ -42,26 +46,39 @@ class NewsletterPopupController extends StorefrontController
         $response = array();
         try {
             $data->set('storefrontUrl', $request->attributes->get(RequestTransformer::STOREFRONT_URL));
-            $this->subscribeRoute->subscribe($data, $context, false);
 
-            $email = $data->get('email');
-            $popupId = $data->get('popupId');
+            // Check if the email is already subscribed
+            $existingSubscriber = $this->checkIfEmailExists($data->get('email'), $context);
 
-            $recipientCriteria = new Criteria();
-            $recipientCriteria->addFilter(new EqualsFilter('email', $email));
-            $promoCode = $this->handlePromotion->handlePromotion($email, $popupId, $context->getContext());
-            $response[] = [
-                'type' => 'success',
-                'alert' => [($this->trans('popup.success') . ' ' . $promoCode)]
-            ];
-            $response[] = [
-                'type' => 'info',
-                'alert' => $this->renderView('@Storefront/storefront/utilities/alert.html.twig', [
+            if ($existingSubscriber) {
+                // If the email already exists, add an error message
+                $response[] = [
+                    'type' => 'danger',
+                    'alert' => $this->renderView('@Storefront/storefront/utilities/alert.html.twig', [
+                        'type' => 'danger',
+                        'list' => [$this->trans('popup.message-default')],
+                    ]),
+                ];
+            } else {
+                // If the email is not subscribed, proceed with subscription
+                $this->subscribeRoute->subscribe($data, $context, false);
+
+                $email = $data->get('email');
+                $popupId = $data->get('popupId');
+
+                $promoCode = $this->handlePromotion->handlePromotion($email, $popupId, $context->getContext());
+                $response[] = [
+                    'type' => 'success',
+                    'alert' => [($this->trans('popup.success') . ' ' . $promoCode)]
+                ];
+                $response[] = [
                     'type' => 'info',
-                    'list' => [$this->trans('newsletter.subscriptionPersistedInfo')],
-                ]),
-            ];
-
+                    'alert' => $this->renderView('@Storefront/storefront/utilities/alert.html.twig', [
+                        'type' => 'info',
+                        'list' => [$this->trans('newsletter.subscriptionPersistedInfo')],
+                    ]),
+                ];
+            }
         } catch (ConstraintViolationException $exception) {
             $errors = [];
             foreach ($exception->getViolations() as $error) {
@@ -84,5 +101,16 @@ class NewsletterPopupController extends StorefrontController
             ];
         }
         return new JsonResponse($response);
+    }
+
+    private function checkIfEmailExists(string $email, SalesChannelContext $context): bool
+    {
+        $criteria = new Criteria();
+        $criteria->addFilter(new EqualsFilter('email', $email));
+        $criteria->setLimit(1);
+
+        $existingSubscriber = $this->newsletterRepository->search($criteria, $context->getContext());
+
+        return $existingSubscriber->getTotal() > 0;
     }
 }

@@ -130,11 +130,13 @@ class gaisbockCategoryNavigationSubscriber implements EventSubscriberInterface
         }
         $variantProducts = $this->variantProductImages($event, $event->getSalesChannelContext());
         $productNumber = $this->findProductNumber($event, $event->getSalesChannelContext());
+        $grosseProducts = $this->findGrosseProduct($event, $event->getSalesChannelContext());
         $event->getPage()->addArrayExtension('products', [
             'variants' => $variantProducts['products'],
             'VariantImage' => $variantProducts['images'],
             'productName' => $productName,
-            'productNumber' => $productNumber
+            'productNumber' => $productNumber,
+//            'grosseProduct' => $grosseProducts
         ]);
     }
 
@@ -235,5 +237,19 @@ class gaisbockCategoryNavigationSubscriber implements EventSubscriberInterface
         $criteria->addFilter(new EqualsFilter('id',$paraentId));
         $product = $this->salesChannelProductRepository->search($criteria,$context)->first();
         return $product->getTranslated()['name'];
+    }
+    private function findGrosseProduct($event, $context)
+    {
+        if (array_key_exists('gaisbockProducts',$event->getPage()->getProduct()->getTranslated()['customFields'])) {
+            $grosseProduct = $event->getPage()->getProduct()->getTranslated()['customFields']['gaisbockProducts'];
+            if($grosseProduct != null){
+                $productCriteria = new Criteria();
+                $productCriteria->addFilter(new EqualsFilter('parentId', $grosseProduct));
+                $productCriteria->addAssociation('options');
+                $product = $this->salesChannelProductRepository->search($productCriteria, $context)->getElements();
+                return $product;
+            }
+
+        }
     }
 }

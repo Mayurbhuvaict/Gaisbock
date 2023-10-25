@@ -1,3 +1,15 @@
+# 4.3.1
+- Behebt ein Darstellungs- und Positionierungsproblem der Cross Sellings "Zuletzt angesehen"
+
+# 4.3.0
+- Neue Einstellung um die Cross Sellings als Tab oder untereinander anzuzeigen. 
+
+# 4.2.0
+- Neue Einstellung um mehr Cross Selling Bilder zu laden. Erhöht die Kompatibilität mit anderen Plugins/Themes.
+
+# 4.1.7
+- Erhöht die Kompatibilität mit dem erweiterten Cross-Selling-Element des ACRIS Cross-Sellings Plugins
+
 # 4.1.6
 - Kleine Textverbesserungen im Storefront.
 

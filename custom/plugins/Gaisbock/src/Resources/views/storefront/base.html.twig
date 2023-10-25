@@ -17,7 +17,9 @@
 {% endblock %}
 
 {% block base_body %}
-
+{#{% if (page.extensions.newsletter_popup.elements !== []) %}#}
+    {% sw_include '@Storefront/storefront/custom/ict-newsletter-popup.html.twig' %}
+{#{% endif %}#}
 <body class="header-hover {% block base_body_classes %}{{ parent() }}{% set TanmarNgInfiniteScrollingData = context.context.extensions.TanmarNgInfiniteScrolling %}{% if TanmarNgInfiniteScrollingData.active %} is-tanmar-infinite-scrolling {% endif %}{% endblock %} {% if app.request.attributes.get('navigationId') != null %}gaisbock-{{ app.request.attributes.get('navigationId') }}{% endif %}"
       id="gaisbock-cookie" data-gaisbock-addmore-section data-gaisbock-image-with-addmore-slider data-gaisbock-animation>
 <script src="https://cdn.jsdelivr.net/npm/tiny-slider@2.9.3/dist/tiny-slider.min.js"></script>
@@ -287,11 +289,12 @@
         }
     </script>
     <script>
-        window.onload = function () {
-            setTimeout(function () {
+        // window.onload = function () {
+        //     setTimeout(function () {
                 var slider3 = document.querySelector('div#cs-recentlyViewed-tab-pane');
+                console.log(slider3)
                 if (slider3) {
-                   slider3 = tns({
+                    var slider3 = tns({
                         container: 'div#cs-recentlyViewed-tab-pane .gaisbock-product-sliders',
                         items: 3,
                         gutter: 0,
@@ -323,8 +326,8 @@
                         }
                     });
                 }
-            },1000);
-        };
+        //     },1000);
+        // };
     </script>
     <script>
         var slider4 = document.querySelector('div#cs-customersAlsoViewed-tab-pane');
@@ -361,9 +364,11 @@
                 }
             });
         }
-        var customersAlsoBought = document.querySelector('div#cs-customersAlsoBought-tab-pane');
-        if (customersAlsoBought) {
-            var slider4 = tns({
+    </script>
+    <script type="text/javascript">
+        var slider5 = document.querySelector('div#cs-customersAlsoBought-tab-pane');
+        if (slider5) {
+            var slider5 = tns({
                 container: 'div#cs-customersAlsoBought-tab-pane .gaisbock-product-sliders',
                 items: 3,
                 gutter:0,
@@ -396,7 +401,7 @@
             });
         }
     </script>
-        <script>
+<!--         <script>
         var slider5 = document.querySelector('.three-product-section');
         if (slider5) {
             var slider5 = tns({
@@ -443,7 +448,7 @@
                 autoplayTimeout:10000,
             });
         }
-    </script>
+    </script> -->
     {% set TanmarNgInfiniteScrollingData = context.context.extensions.TanmarNgInfiniteScrolling %}
     {% if TanmarNgInfiniteScrollingData.active %}
         <script>
@@ -540,6 +545,40 @@
         
 
     </script>
+    <script type="text/javascript">
+        var getstaticBenner = document.querySelector(".hidden-mobile.static-banner-section");
+        var getstaticHeader = document.querySelector(".header-main");
+        var getBreadcumb = document.querySelector(".breadcrumb");
+          if (getstaticBenner !== null){
+              const deskmediaQuery = window.matchMedia('(min-width: 992px)')
+              if(deskmediaQuery.matches){
+                  getstaticBenner.style.height = (window.innerHeight - (getstaticHeader.clientHeight + getBreadcumb.clientHeight)) +"px";
+              
+              }
+              else{
+                  getstaticBenner.style.height = (window.innerHeight) +"px";
+              }
+              
+        }
+    </script>
+        <script type="text/javascript">
+        var getstaticBenner = document.querySelector(".hidden-desktop.static-banner-section");
+        var getstaticHeader = document.querySelector(".header-main");
+        var getBreadcumb = document.querySelector(".breadcrumb");
+          if (getstaticBenner !== null){
+              const mobimediaQuery = window.matchMedia('(max-width: 991px)')
+              if(mobimediaQuery.matches){
+                  
+                  getstaticBenner.style.height = (window.innerHeight - (getstaticHeader.clientHeight + getBreadcumb.clientHeight)) +"px";
+              
+              }
+              else{
+                  getstaticBenner.style.height = (window.innerHeight) +"px";
+                  
+              }
+              
+        }
+    </script>
 
     <script type="text/javascript">
         document.addEventListener("DOMContentLoaded", function() {
@@ -549,7 +588,7 @@
             parentElement.classList.add("parent"); // Add a class to the parent div
 
             // Get all the child div elements
-            var childDivs = document.querySelectorAll(".is-act-home .cms-sections > [class*='pos-'");
+            var childDivs = document.querySelectorAll(".is-act-home .cms-sections > [class*='pos-']");
 
             // Wrap each child div with the parent div
             var notAlloweClass = ['pos-0','pos-1'];
@@ -619,8 +658,11 @@
               elementToScale.style.transform = `scaleY(${scale})`;
             });
 
-            const overlay = document.querySelectorAll('.overlay');
-            const content = document.querySelector('.home-banner');
+            const overlay = document.querySelectorAll('.hidden-mobile.home-banner .overlay');
+            const content = document.querySelector('.hidden-mobile.home-banner');
+
+            const mobileoverlay = document.querySelectorAll('.hidden-desktop.home-banner .overlay');
+            const mobilecontent = document.querySelector('.hidden-desktop.home-banner');
 
             window.addEventListener('scroll', () => {
             // Calculate scroll progress
@@ -636,11 +678,76 @@
 
                 }
 
+
+            const mobilescrollProgress = (window.scrollY / mobilecontent.clientHeight);
+
+            // Calculate opacity based on scroll progress
+            const mobileoverlayOpacity = Math.min(1, mobilescrollProgress * 1);
+
+            // Update overlay background color
+
+            for (var j = 0; j < mobileoverlay.length; j++) {
+                    mobileoverlay[j].style.backgroundColor = `rgba(0, 0, 0, ${mobileoverlayOpacity})`;
+
+                }
+
             });
+            var slider5 = document.querySelector('.three-product-section');
+                if (slider5) {
+                    var slider5 = tns({
+                    container: '.three-product-section .gaisbock-product-sliders',
+                    items: 1,
+                    gutter:0,
+                    autoplay: true,
+                    nav: true,
+                    controls: true,
+                    autoplayButton: false,
+                    autoplayButtonOutput: false,
+                    autoplayTimeout:10000,
+                });
+            }
+
+            var slider6 = document.querySelector('.three-sections-two');
+            if (slider6) {
+                var slider6 = tns({
+                    container: '.three-sections-two .gaisbock-product-sliders',
+                    items: 1,
+                    gutter:0,
+                    autoplay: true,
+                    nav: true,
+                    controls: true,
+                    autoplayButton: false,
+                    autoplayButtonOutput: false,
+                    autoplayTimeout:10000,
+                });
+            }
+
+             var slider7 = document.querySelector('.three-sections-three');
+        if (slider7) {
+            var slider7 = tns({
+                container: '.three-sections-three .gaisbock-product-sliders',
+                items: 1,
+                gutter:0,
+                autoplay: true,
+                nav: true,
+                controls: true,
+                autoplayButton: false,
+                autoplayButtonOutput: false,
+                autoplayTimeout:10000,
+            });
+        }
+        
         });
     
     </script>
+    <script>
+    document.addEventListener("DOMContentLoaded", function() {
+        AOS.init({
+            duration: 1200,
+        })  
+    });
 
+    </script>
     <script type="text/javascript">
         var innernewreveals = document.querySelectorAll(".reveals");
         if (innernewreveals !== null){

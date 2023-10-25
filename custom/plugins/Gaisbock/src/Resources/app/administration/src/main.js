@@ -33,3 +33,4 @@ import './module/sw-cms/elements/gaisbock-custom-text-on-image';
 import './module/sw-cms/elements/gaisbock-custom-text-image-slider';
 
 import './module/lae-giftcard';
+import './module/sw-product';

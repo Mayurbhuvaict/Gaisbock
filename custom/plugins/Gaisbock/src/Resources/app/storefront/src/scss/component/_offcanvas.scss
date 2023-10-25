@@ -1,3 +1,18 @@
+.cart-offcanvas {
+    .offcanvas-close {
+        display: flex;
+        align-items: center;
+        flex-direction: row-reverse;
+    }
+    .neti-free-delivery--snippet {
+        margin-bottom: 0;
+        .alert-content {
+            color: #fff;
+            white-space: normal;
+            line-height: 20px;
+        }
+    }
+}
 .offcanvas-cart{
     .nme-free-shipping-bar {
         margin-bottom: 15px;

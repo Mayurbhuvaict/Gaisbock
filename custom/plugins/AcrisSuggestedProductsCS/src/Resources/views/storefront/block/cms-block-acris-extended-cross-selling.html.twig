@@ -1,0 +1,36 @@
+{% sw_extends '@AcrisSuppliesUpselling/storefront/block/cms-block-acris-extended-cross-selling.html.twig' %}
+
+{% block block_acris_product_cross_selling %}
+    {{ parent() }}
+
+    {% set element = block.slots.getSlot('content') %}
+    {% set columns = 1 %}
+
+    {% if not sliderConfig %}
+        {% set sliderConfig = element.fieldConfig.elements %}
+    {% endif %}
+
+    <div class="col-12" data-cms-element-id="{{ element.id }}">
+        <div class="acris-product-cross-selling">
+            <div class="
+                {% if element.config.displayModeDesktop.value is same as ('among') %}
+                    acris-product-cross-selling-tabs-desktop
+                {% endif %}
+                {% if element.config.displayModeTablet.value is same as ('among') %}
+                    acris-product-cross-selling-tabs-tablet
+                {% endif %}
+                {% if element.config.displayModeMobile.value is same as ('tab') %}
+                    acris-product-cross-selling-tabs-mobile
+                {% else %}
+                    product-detail-cross-selling
+                {% endif %}"
+                 data-acris-product-cross-selling-cms-type="{{ displayOption }}"
+                 data-acris-product-cross-selling-cms-id="{{ element.id }}">
+                {% sw_include '@Storefront/storefront/component/acris-suggested-products-tabs/acris-suggested-products-tabs.html.twig' with {
+                    sliderConfig: sliderConfig,
+                    isAcrisExtendedCrossSellingElement: true
+                } %}
+            </div>
+        </div>
+    </div>
+{% endblock %}

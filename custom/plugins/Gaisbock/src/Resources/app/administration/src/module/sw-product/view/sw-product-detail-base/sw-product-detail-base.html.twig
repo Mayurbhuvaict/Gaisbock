@@ -1,0 +1,39 @@
+{% block sw_product_detail_base_basic_info_card %}
+    {% parent %}
+
+    {% block w_product_detail_base_basic_info_card_gaisbock_product_select %}
+        <sw-card
+                :title="$tc('gaisbock-product-select.tabTitle')"
+                position-identifier="gaisbock-product-select"
+        >
+            <sw-single-select
+                    {% if VUE3 %}
+                        v-model:value="productIds"
+                    {% else %}
+                        v-model="productIds"
+                    {% endif %}
+                    v-bind="$attrs"
+                    :options="gaisbockProducts"
+                    value-property="id"
+                    label-property="name"
+                    show-clearable-button
+            >
+
+                <!-- eslint-disable-next-line sw-deprecation-rules/no-twigjs-blocks -->
+                {% block sw_promotion_v2_sales_channel_selection_label %}
+                    <template #selection-label-property="{ item }">
+                        {{ item.name || item.translated.name }}
+                    </template>
+                {% endblock %}
+
+                <!-- eslint-disable-next-line sw-deprecation-rules/no-twigjs-blocks -->
+                {% block sw_promotion_v2_sales_channel_selection_result_label %}
+                    <template #result-label-property="{ item }">
+                        {{ item.name || item.translated.name }}
+                    </template>
+                {% endblock %}
+
+            </sw-single-select>
+        </sw-card>
+    {% endblock %}
+{% endblock %}

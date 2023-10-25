@@ -52,7 +52,10 @@
     "shipping": "shipping",
     "ratings": "ratings",
     "viewRatings": "View ratings",
-    "addProduct": "Add to cart"
+    "addProduct": "Add to cart",
+    "singlePurchase": "Single Purchase",
+    "withBoxers": "Buy with boxer shorts",
+    "size": "size"
   },
   "address": {
     "companyPlaceholder": "COMPANY*",
@@ -99,5 +102,11 @@
   },
   "review": {
     "validation": "Please enter at least 5 character in title & 40 character in review for submitting review."
+  },
+  "neti-freedelivery": {
+    "shippingText": {
+      "valueReached": "There are no shipping costs for your current order.",
+      "missingValue": "From <strong>remainingValue</strong>- shipping is even free. It's always worth going the extra mile with Gaisbock."
+    }
   }
 }

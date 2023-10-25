@@ -27,6 +27,13 @@
                     </button>
                 {% else %}
                 <button class="btn btn-light offcanvas-close js-offcanvas-close gaisbock-close" onclick="closeButton()">
+                    {% block component_offcanvas_cart_neti_free_delivery_info %}
+                        {% if page.netiNextFreeDelivery %}
+                            {% sw_include 'storefront/free_delivery/index.html.twig' with {
+                                result: page.netiNextFreeDelivery
+                            } %}
+                        {% endif %}
+                    {% endblock %}
                     {% block utilities_offcanvas_close_icon %}
                         {% sw_icon 'x' style { 'size': 'sm' } %}
                     {% endblock %}
@@ -34,6 +41,13 @@
                 {% endif %}
             {% endblock %}
         </div>
+{#        {% block component_offcanvas_cart_neti_free_delivery_info %}#}
+{#            {% if page.netiNextFreeDelivery %}#}
+{#                {% sw_include 'storefront/free_delivery/index.html.twig' with {#}
+{#                    result: page.netiNextFreeDelivery#}
+{#                } %}#}
+{#            {% endif %}#}
+{#        {% endblock %}#}
     {% endblock %}
 
     {% block utilities_offcanvas_content_container %}

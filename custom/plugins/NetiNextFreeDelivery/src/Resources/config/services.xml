@@ -1,0 +1,56 @@
+<?xml version="1.0" ?>
+
+<container xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xmlns="http://symfony.com/schema/dic/services"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <services>
+        <!-- Controllers -->
+        <service id="NetInventors\NetiNextFreeDelivery\Storefront\Controller\FreeDeliveryController" public="true">
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+
+            <call method="setTwig">
+                <argument type="service" id="twig"/>
+            </call>
+
+            <argument id="NetInventors\NetiNextFreeDelivery\Components\ShippingFreeService" type="service"/>
+        </service>
+
+        <!-- Components -->
+        <service id="NetInventors\NetiNextFreeDelivery\Components\ShippingFreeService">
+            <argument type="service" id="neti_free_delivery.plugin_config"/>
+            <argument id="Shopware\Core\Checkout\Cart\SalesChannel\CartService" type="service"/>
+            <argument type="service" id="NetInventors\NetiNextFreeDelivery\Components\DeliveryCalculator"/>
+            <argument type="string">%kernel.shopware_version%</argument>
+        </service>
+
+        <service id="NetInventors\NetiNextFreeDelivery\Components\DeliveryCalculator">
+            <argument type="service" id="Doctrine\DBAL\Connection"/>
+        </service>
+
+        <!-- Subscribers -->
+        <service id="NetInventors\NetiNextFreeDelivery\Subscriber\Frontend">
+            <argument id="neti_free_delivery.plugin_config" type="service"/>
+            <argument id="NetInventors\NetiNextFreeDelivery\Components\ShippingFreeService" type="service"/>
+            <tag name="kernel.event_subscriber"/>
+        </service>
+
+        <!-- Services -->
+        <service id="NetInventors\NetiNextFreeDelivery\Service\PluginConfigFactory">
+            <argument type="service" id="Shopware\Core\System\SystemConfig\SystemConfigService" />
+            <argument type="service" id="request_stack" />
+        </service>
+
+        <service
+                id="neti_free_delivery.plugin_config"
+                class="NetInventors\NetiNextFreeDelivery\Struct\PluginConfigStruct"
+        >
+            <factory
+                    service="NetInventors\NetiNextFreeDelivery\Service\PluginConfigFactory"
+                    method="create"
+            />
+        </service>
+    </services>
+</container>

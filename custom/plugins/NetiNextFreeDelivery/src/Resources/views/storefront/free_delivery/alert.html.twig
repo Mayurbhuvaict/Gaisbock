@@ -1,0 +1,22 @@
+{% sw_extends '@Storefront/storefront/utilities/alert.html.twig' %}
+
+{% block utilities_alert_content %}
+    {% block utilities_alert_icon %}
+
+    {% endblock %}
+    <div class="alert-content">
+        {% if list|length > 1 %}
+            <ul class="alert-list">
+                {% for entry in list %}
+                    <li>{{ entry|raw }}</li>
+                {% endfor %}
+            </ul>
+        {% elseif list|length == 1 %}
+            {% for entry in list %}
+                {{ entry }}
+            {% endfor %}
+        {% else %}
+            {{ content|raw }}
+        {% endif %}
+    </div>
+{% endblock %}

@@ -1,3 +1,15 @@
+# 4.3.1
+- Fixes a display and positioning problem of the "Recently viewed" cross sellings
+
+# 4.3.0
+- New setting to display the cross sellings as tab or among each other.
+
+# 4.2.0
+- New setting to load more cross selling images. Increases compatibility with other plugins/themes.
+
+# 4.1.7
+- Increases compatibility with the extended cross selling element of the ACRIS Supplies Upselling plugin.
+
 # 4.1.6
 - Small storefront snippet optimisation.
 

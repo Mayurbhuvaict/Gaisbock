@@ -52,7 +52,10 @@
     "shipping": "EXPÉDITION",
     "ratings": "avis",
     "viewRatings": "Voir les évaluations",
-    "addProduct": "Ajouter au panier"
+    "addProduct": "Ajouter au panier",
+    "singlePurchase": "ACHATS DÉTAILLÉS",
+    "withBoxers": "ACHETER AVEC UN BOXER",
+    "size": "TAILLE"
   },
   "address": {
     "companyPlaceholder": "SOCIÉTÉ*",
@@ -98,5 +101,11 @@
   },
   "review": {
     "validation": "Veuillez saisir au moins 5 caractères dans le titre et 40 caractères dans l'avis pour soumettre l'avis."
+  },
+  "neti-freedelivery": {
+    "shippingText": {
+      "valueReached": "Er zijn geen verzendkosten voor uw huidige bestelling.",
+      "missingValue": "Vanaf <strong>remainingValue</strong> is de verzending zelfs gratis. Het is altijd de moeite waard om een stap verder te gaan met Gaisbock."
+    }
   }
 }

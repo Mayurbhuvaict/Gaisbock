@@ -117,8 +117,8 @@
     </card>
 
     <card>
-        <title>Tab Position</title>
-        <title lang="de-DE">Tab Position</title>
+        <title>Position and Display Mode</title>
+        <title lang="de-DE">Position und Anzeige Modus</title>
 
         <input-field type="int">
             <name>productsSameCategory</name>
@@ -158,6 +158,74 @@
             <helpText lang="de-DE">Je niedriger die Position, desto weiter vorne wird der Tab gereiht.</helpText>
             <placeholder>40</placeholder>
             <defaultValue>40</defaultValue>
+        </input-field>
+
+        <input-field type="single-select">
+            <name>displayModeDesktop</name>
+            <defaultValue>tab</defaultValue>
+            <options>
+                <option>
+                    <id>tab</id>
+                    <name>As Tab</name>
+                    <name lang="de-DE">Als Tab</name>
+                </option>
+                <option>
+                    <id>among</id>
+                    <name>Among each other</name>
+                    <name lang="de-DE">Untereinander</name>
+                </option>
+            </options>
+            <label>Desktop display mode of cross selling</label>
+            <label lang="de-DE">Desktop Anzeige Modus der Cross Sellings</label>
+        </input-field>
+
+        <input-field type="single-select">
+            <name>displayModeTablet</name>
+            <defaultValue>tab</defaultValue>
+            <options>
+                <option>
+                    <id>tab</id>
+                    <name>As Tab</name>
+                    <name lang="de-DE">Als Tab</name>
+                </option>
+                <option>
+                    <id>among</id>
+                    <name>Among each other</name>
+                    <name lang="de-DE">Untereinander</name>
+                </option>
+            </options>
+            <label>Tablet display mode of cross selling</label>
+            <label lang="de-DE">Tablet Anzeige Modus der Cross Sellings</label>
+        </input-field>
+
+        <input-field type="single-select">
+            <name>displayModeMobile</name>
+            <defaultValue>among</defaultValue>
+            <options>
+                <option>
+                    <id>tab</id>
+                    <name>As Tab</name>
+                    <name lang="de-DE">Als Tab</name>
+                </option>
+                <option>
+                    <id>among</id>
+                    <name>Among each other</name>
+                    <name lang="de-DE">Untereinander</name>
+                </option>
+            </options>
+            <label>Mobile display mode of cross selling</label>
+            <label lang="de-DE">Mobiler Anzeige Modus der Cross Sellings</label>
+        </input-field>
+    </card>
+
+    <card>
+    <title>Cross Selling Media</title>
+    <title lang="de-DE">Cross Selling Medien</title>
+        <input-field type="bool">
+            <name>loadMoreCrossSellingMedia</name>
+            <label>Load more media for products from Cross Sellings (compatibility for other plugins / themes)</label>
+            <label lang="de-DE">Weitere Medien für Produkte aus Cross Sellings laden (Kompatibilität für andere Plugins / Themes)</label>
+            <defaultValue>false</defaultValue>
         </input-field>
     </card>
 </config>

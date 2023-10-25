@@ -1,7 +1,7 @@
 import Plugin from 'src/plugin-system/plugin.class';
 import HttpClient from 'src/service/http-client.service';
 
-export default class IctNewsletterPopupForm extends Plugin {
+export default class NewsletterPopupForm extends Plugin {
     static options = {
         // let captcha plugins know, we are an ajax form
         useAjax: true,

@@ -11,7 +11,7 @@ class AcrisSuggestedProductsCS extends Plugin
 {
     public function getTemplatePriority(): int
     {
-        return 100;
+        return 120;
     }
 
     public function uninstall(UninstallContext $context): void

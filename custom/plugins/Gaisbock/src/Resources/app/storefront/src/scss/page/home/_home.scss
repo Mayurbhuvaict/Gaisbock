@@ -19,14 +19,29 @@ body .gaisbock-benefits .gaisbock-element-image-titles-button .title-image-butto
 //         transform: translate(-50%, -50%) !important;
 //     }
 // }
-.is-act-home .natural-section .gaisbock-element-image-titles-button.reveals .title-image-button-section.left,
-.is-act-home .natural-section .gaisbock-element-image-titles-button.reveals.active .title-image-button-section.left {
-    transform: revert !important;
-}
+// .is-act-home .natural-section .gaisbock-element-image-titles-button.reveals .title-image-button-section.left,
+// .is-act-home .natural-section .gaisbock-element-image-titles-button.reveals.active .title-image-button-section.left {
+//     transform: revert !important;
+// }
 
+.is-act-home .natural-section .gaisbock-element-image-titles-button.reveals .title-image-button-section {
+    transform:translate(0%, 50%);
+}
+.is-act-home .natural-section .gaisbock-element-image-titles-button.reveals.active .title-image-button-section {
+        transform: translateY(0%) !important;
+}
 .home-banner .base-slider {
     position: fixed;
     top: 0;
+}
+.parent {
+    padding-bottom: 210px;
+    @media(max-width:767px) {
+        padding-bottom: 144px;
+    }
+}
+.is-act-home footer.footer-main {
+    z-index:9;
 }
 
 .insta-link {
@@ -573,10 +588,15 @@ body .gaisbock-benefits .gaisbock-element-image-titles-button .title-image-butto
         width: 91%;
     }
 }
-.gaisbock-benefits.founder-section {
-    height: 790px;
+.gaisbock-benefits.founder-section.store-section {
     @media(max-width:767px) {
-        height: 520px;
+        height: 504px;
+    }
+}
+.gaisbock-benefits.founder-section {
+    height: 770px;
+    @media(max-width:767px) {
+        height: 500px;
     }
     .title-image-button-section {
         
@@ -795,12 +815,15 @@ body .gaisbock-benefits .gaisbock-element-image-titles-button .title-image-butto
     .Gaisbock-category-images .gaisbock-images .cms-element-gaisbock-text {
         margin-top: 4px;
     }
+       .gift-code-section .image-text-container .cms-element-gaisbock-switch-image-text{
+        top: 20px !important;
+    }  
     // .Gaisbock-category-images .gaisbock-images .cms-element-gaisbock-image {
     //     border: 2px solid $sw-color-brand-secondary;
     // }
     .natural-section + .gift-code-section .image-text-container .cms-element-gaisbock-switch-image-text {
         left: 0 !important;
-        top: 0px !important;
+        top: 10px !important;
         right: auto !important;
         display: block;
     }
@@ -898,7 +921,7 @@ body .gaisbock-benefits .gaisbock-element-image-titles-button .title-image-butto
     } 
 
     .gaisbock-benefits{
-        height: 510px;
+        height: 501px;
         margin-top: 45px;
         background-position: 22% 65% !important;
         background-attachment: revert !important;
@@ -977,7 +1000,7 @@ body .gaisbock-benefits .gaisbock-element-image-titles-button .title-image-butto
         line-height: 19px;
     }   
     .natural-section {
-        height: 510px;
+        height: 501px;
         // background-image: none !important;
         margin-top: 45px;
     }
@@ -1066,6 +1089,33 @@ body .gaisbock-benefits .gaisbock-element-image-titles-button .title-image-butto
                     max-width: 60px;
                 }
             }
+        }
+    }
+    .gift-code-section .image-text-container h2{
+        max-width: 236px;
+        margin: auto auto 10px
+    }
+    .gift-code-section .image-text-container .cms-element-gaisbock-switch-image-text,
+    .natural-section + .gift-code-section .image-text-container .cms-element-gaisbock-switch-image-text{
+        top: 62px !important;
+    }
+}
+
+@media(max-width:420px){
+    // .gift-code-section .image-text-container .cms-element-gaisbock-switch-image-text {
+    //     top: 30px !important;
+    // }
+    .gift-code-section .image-text-container h2{
+        max-width: 216px;
+    }
+     .natural-section + .gift-code-section .image-text-container .cms-element-gaisbock-switch-image-text {
+        top: 70px !important;
+    }
+    body .gift-code-section .image-text-container .cms-element-gaisbock-switch-image-text {
+        right: 0px !important;
+         top: 60px !important;
+        @media(max-width:370px){
+            top: 35px !important;
         }
     }
 }

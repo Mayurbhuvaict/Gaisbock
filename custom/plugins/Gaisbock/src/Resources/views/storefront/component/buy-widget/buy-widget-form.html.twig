@@ -24,6 +24,7 @@
                                     {% block page_product_detail_buy_quantity_input %}
                                         <input
                                                 type="hidden"
+                                                class="gaisbock-quantity"
                                                 name="lineItems[{{ product.id }}][quantity]"
                                                 value="1"
                                         />
@@ -41,24 +42,30 @@
 
                         <input type="hidden"
                                name="redirectParameters"
+                               class="gaisbock-redirectParameters"
                                data-redirect-parameters="true"
                                value='{"productId": "{{ product.id }}"}'>
                     {% endblock %}
 
                     {% block buy_widget_buy_product_buy_info %}
                         <input type="hidden"
+                               class="gaisbock-id"
                                name="lineItems[{{ product.id }}][id]"
                                value="{{ product.id }}">
                         <input type="hidden"
+                               class="gaisbock-type"
                                name="lineItems[{{ product.id }}][type]"
                                value="product">
                         <input type="hidden"
+                               class="gaisbock-referencedId"
                                name="lineItems[{{ product.id }}][referencedId]"
                                value="{{ product.id }}">
                         <input type="hidden"
+                               class="gaisbock-stackable"
                                name="lineItems[{{ product.id }}][stackable]"
                                value="1">
                         <input type="hidden"
+                               class="gaisbock-removable"
                                name="lineItems[{{ product.id }}][removable]"
                                value="1">
                     {% endblock %}
@@ -66,9 +73,11 @@
                     {% block buy_widget_product_buy_meta %}
                         <input type="hidden"
                                name="product-name"
+                               class="gaisbock-product-name"
                                value="{{ product.translated.name }}">
                         <input type="hidden"
                                name="brand-name"
+                               class="gaisbock-manufacturer-name"
                                value="{{ product.manufacturer.getName() }}">
                     {% endblock %}
 

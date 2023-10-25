@@ -1,3 +1,111 @@
+.is-ctl-product.modal-open .header-main {
+    z-index: 0;
+}
+.gross-sections {
+    .gaisbock-variant-header-section {
+        position:relative;
+        a {
+                text-decoration: none;
+        }
+        input {
+            width:250px;
+        }
+    }
+}
+#grosse-products {
+    border: 1px solid #707070;
+    border-radius: 15px;
+    height: 30px;
+    line-height: 28px;
+    a{
+        font-size: 13px;
+        color: #C9AC77;
+        letter-spacing: 0.78px;
+        text-transform: uppercase;
+        font-weight: 700;
+        padding:0 5px 0 15px;
+        svg {
+            width: 14px;
+            height: 10px;
+            top:0;
+        }
+        path {
+            fill: #fff;
+        }
+    }
+}
+.gaisbock-get-product-list ul {
+    list-style: none;
+    border: 1px solid #707070;
+    padding: 14px 12px 6px;
+    border-radius: 4px;
+}
+
+.gaisbock-product-price-loop {
+    padding-left: 15px;
+    .product-detail-price {
+        direction: ltr !important;
+        
+        span {
+            direction: rtl;
+            padding-left: 6px;
+        }
+    }
+    p.product-detail-price.with-list-price {
+        padding-left:0 !important;
+    }
+    span.product-detail-list-price-wrapper {
+        width: 100%;
+        span.list-price-price {
+            width: 100%;
+            justify-content: flex-start !important;
+            padding-right:0 !important;
+        }
+    }
+}
+.product-detail-tabs{
+    .product-detail-review{
+        .product-detail-review-share{
+            p {
+                width: 10%;
+                text-align: center;
+                display: flex;
+                justify-content: center;
+            }
+        }
+        .product-detail-review-checkbox{
+            .custom-control-label{
+                justify-content: flex-start !important;
+            }
+            label{
+                small{
+                    width: 10%;
+                }
+            }
+        }
+        .product-detail-review-teaser{
+            .modal .btn{
+                padding: 5px 15px !important;
+            }
+        }
+    }
+}
+.product-detail-media {
+    @media(min-width:992px) {
+        max-width: 478.5px;
+    }
+}
+.row.product-detail-main {
+     @media(min-width:992px) {
+        justify-content: center;
+    }
+}
+.product-detail-tabs {
+    @media(min-width:992px) {
+        max-width: 1185px;
+        margin: 0 auto;
+    }
+}
 .gaisbock-data {
     padding-top: 20px;
 }
@@ -451,6 +559,7 @@ span.product-detail-list-price-wrapper span.list-price-price {
         .product-detail-price-unit {
             width: 50%;
             text-align: center;
+            min-height:20px;
             .price-unit-label {
                 font-size: 18px;
                 line-height: 27px;
@@ -590,6 +699,7 @@ span.product-detail-list-price-wrapper span.list-price-price {
         .gasibook-variant-img {
             text-align: center;
             position: relative;
+                margin-bottom: 15px;
             width: 33.33%;
             img {
                 height: 100px;
@@ -794,6 +904,27 @@ span.product-detail-list-price-wrapper span.list-price-price {
 }
 
 @include media-breakpoint-down(md){  
+      .product-detail-review-form-actions{
+        .btn {
+            margin: 10px 0;
+        }
+        .btn-review-submit {
+            margin-left: 5px;
+        }
+    }
+        .is-ctl-product{
+        .product-detail-headline {
+            margin: 0;
+        }
+        .breadcrumb{
+            margin-bottom: 5px;
+        }
+        .product-detail-buy{
+            .gaisbock-product-description{
+                margin-top: 18px;
+            }
+        }
+    }
         .product-detail-tabs{
         .product-detail-review{
             .product-detail-review-share{
@@ -802,7 +933,7 @@ span.product-detail-list-price-wrapper span.list-price-price {
         }
     }
      html body .product-detail-content{
-        margin-bottom: 40px;
+        margin-bottom: 15px;
     }
     .gaisbock-description-contain-title-description {
         font-size:16px;

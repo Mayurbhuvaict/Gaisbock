@@ -37,4 +37,5 @@ custom/plugins.tar.gz
 /install.lock
 public/asset-manifest.json
 files/asset-manifest.json
+releases/*
 ###< shopware/core ###

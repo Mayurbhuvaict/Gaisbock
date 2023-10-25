@@ -1,0 +1,13 @@
+{% sw_extends '@Storefront/storefront/page/checkout/cart/index.html.twig' %}
+
+{% block page_checkout_container %}
+    {% block page_product_detail_neti_free_delivery_info %}
+        {% if page.netiNextFreeDelivery %}
+            {% sw_include 'storefront/free_delivery/index.html.twig' with {
+                result: page.netiNextFreeDelivery
+            } %}
+        {% endif %}
+    {% endblock %}
+
+    {{ parent() }}
+{% endblock %}

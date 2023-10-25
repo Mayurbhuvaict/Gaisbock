@@ -1,0 +1,14 @@
+{% sw_extends '@Storefront/storefront/component/checkout/offcanvas-cart.html.twig' %}
+
+{% block component_offcanvas_cart_flashbags %}
+    {{ parent() }}
+    <div style="display: none">
+        {% block component_offcanvas_cart_neti_free_delivery_info %}
+            {% if page.netiNextFreeDelivery %}
+                {% sw_include 'storefront/free_delivery/index.html.twig' with {
+                    result: page.netiNextFreeDelivery
+                } %}
+            {% endif %}
+        {% endblock %}
+    </div>
+{% endblock %}

@@ -1,0 +1,76 @@
+{
+  "name": "netinventors/next-free-delivery",
+  "description": "FreeDelivery",
+  "version": "5.1.1",
+  "type": "shopware-platform-plugin",
+  "license": "proprietary",
+  "authors": [
+    {
+      "name": "Net Inventors GmbH",
+      "homepage": "https://www.netinventors.de",
+      "role": "Manufacturer"
+    }
+  ],
+  "config": {
+    "gitlab-domains": [
+      "gitlab.netinventors.de"
+    ],
+    "allow-plugins": {
+      "bamarni/composer-bin-plugin": true,
+      "symfony/runtime": true
+    }
+  },
+  "minimum-stability": "RC",
+  "prefer-stable": false,
+  "require": {
+    "php": ">=8.1",
+    "shopware/core": ">=6.5.1.0 <6.6.0.0",
+    "shopware/storefront": ">=6.5.1.0 <6.6.0.0"
+  },
+  "require-dev": {
+    "bamarni/composer-bin-plugin": "^1.8",
+    "roave/security-advisories": "dev-latest"
+  },
+  "extra": {
+    "bamarni-bin": {
+      "bin-links": false,
+      "forward-command": true,
+      "target-directory": "dev-ops"
+    },
+    "shopware-plugin-class": "NetInventors\\NetiNextFreeDelivery\\NetiNextFreeDelivery",
+    "copyright": "(c) by Net Inventors GmbH",
+    "label": {
+      "de-DE": "Anzeige bis zur versandkostenfreien Lieferung - FreeDelivery",
+      "en-GB": "Free Shipping Indicator - FreeDelivery"
+    },
+    "description": {
+      "de-DE": "Zeigt deinen Kunden ganz einfach, übersichtlich und in Echtzeit an, welcher Betrag noch bis zur versandkostenfreien Lieferung fehlt und steigert so deinen Umsatz.",
+      "en-GB": "This Plugin shows your customers easily, clearly and in real time what amount is still missing until free shipping and increases your sales automaticly."
+    },
+    "manufacturerLink": {
+      "de-DE": "https://www.netinventors.de/",
+      "en-GB": "https://www.netinventors.de/"
+    },
+    "supportLink": {
+      "de-DE": "https://support.netinventors.de/hc/de",
+      "en-GB": "https://support.netinventors.de/hc/de"
+    }
+  },
+  "autoload": {
+    "psr-4": {
+      "NetInventors\\NetiNextFreeDelivery\\": "src/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "NetInventors\\NetiNextFreeDelivery\\Tests\\": "tests/"
+    }
+  },
+  "scripts": {
+    "bin": "echo 'bin not installed'",
+    "rector": "@php dev-ops/rector/vendor/bin/rector",
+    "ecs": "@php dev-ops/ecs/vendor/bin/ecs",
+    "psalm": "@php dev-ops/psalm/vendor/bin/psalm",
+    "phpunit": "@php dev-ops/phpunit/vendor/bin/phpunit"
+  }
+}

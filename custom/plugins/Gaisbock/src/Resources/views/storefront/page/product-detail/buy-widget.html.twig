@@ -165,6 +165,10 @@
                         <div class="product-detail-configurator-container">
                             {% sw_include '@Storefront/storefront/page/product-detail/configurator.html.twig' %}
                         </div>
+                    {% elseif page.product.parentId == null and page.extensions.products.grosseProduct|length > 0 %}
+                        <div class="product-detail-configurator-container">
+                            {% sw_include '@Storefront/storefront/custom/gaisbock-grosse-product.html.twig' %}
+                        </div>
                     {% endif %}
                 {% endblock %}
 
@@ -256,9 +260,9 @@
                                             <p class="gaisbock-product-image-text">{{ page.product.translated.customFields.gaisbock_product_detail_description_set_image3_text }}</p>
                                         </div>
                                     {% endif %}
+
                                     {% if page.product.extensions.images.customImage.4 %}
                                         <div class="gasibook-variant-img">
-                                            {% sw_icon 'gaisbock-plus' style {'pack': 'gaisbock','class':'gaisbock-image-text-middle'} %}
                                             <img src="{{ page.product.extensions.images.customImage.4.url }}" alt="">
                                             <p class="gaisbock-product-image-text">{{ page.product.translated.customFields.gaisbock_product_detail_description_set_image4_text }}</p>
                                         </div>
@@ -277,9 +281,9 @@
                                             <p class="gaisbock-product-image-text">{{ page.product.translated.customFields.gaisbock_product_detail_description_set_image6_text }}</p>
                                         </div>
                                     {% endif %}
+
                                     {% if page.product.extensions.images.customImage.7 %}
                                         <div class="gasibook-variant-img">
-                                            {% sw_icon 'gaisbock-plus' style {'pack': 'gaisbock','class':'gaisbock-image-text-middle'} %}
                                             <img src="{{ page.product.extensions.images.customImage.7.url }}" alt="">
                                             <p class="gaisbock-product-image-text">{{ page.product.translated.customFields.gaisbock_product_detail_description_set_image7_text }}</p>
                                         </div>
@@ -451,10 +455,10 @@
         document.addEventListener('DOMContentLoaded', function() {
             const accordionItems = document.querySelectorAll('.gaisbock-accordion');
             const accordionItem = document.querySelectorAll('.gaisbock-collapse');
-
-            console.log(accordionItem[0])
-            accordionItems[0].classList.remove('collapsed');
-            accordionItem[0].classList.add('show');
+            if(accordionItems.length > 0 ){
+                accordionItems[0].classList.remove('collapsed');
+                accordionItem[0].classList.add('show');
+            }
         });
     </script>
 {% endblock %}

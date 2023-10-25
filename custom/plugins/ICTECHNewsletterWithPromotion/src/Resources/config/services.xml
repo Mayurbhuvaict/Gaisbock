@@ -55,6 +55,7 @@
             <argument type="service" id="Shopware\Core\Content\Newsletter\SalesChannel\NewsletterSubscribeRoute" />
             <argument type="service" id="ICTECHNewsletterWithPromotion\Service\NewsletterPopupHandlePromotionService" />
             <argument type="service" id="ICTECHNewsletterWithPromotion\Service\PromotionCodeHelper" />
+            <argument type="service" id="newsletter_recipient.repository"/>
             <call method="setContainer">
                 <argument type="service" id="service_container"/>
             </call>

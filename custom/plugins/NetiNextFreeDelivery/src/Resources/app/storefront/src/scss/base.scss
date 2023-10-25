@@ -1,0 +1,17 @@
+.neti-free-delivery--snippet {
+  margin-bottom: 1rem;
+  position: relative;
+  
+  .alert {
+    margin: 0;
+  }
+  
+  .progress-bar {
+    background: #000;
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    opacity: 0.1;
+  }
+}
